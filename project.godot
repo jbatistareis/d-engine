@@ -1,0 +1,199 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=4
+
+_global_script_classes=[ {
+"base": "Equipment",
+"class": "Armor",
+"language": "GDScript",
+"path": "res://mechanics/items/armor.gd"
+}, {
+"base": "Entity",
+"class": "Character",
+"language": "GDScript",
+"path": "res://mechanics/characters/character.gd"
+}, {
+"base": "Reference",
+"class": "Command",
+"language": "GDScript",
+"path": "res://mechanics/commands/command.gd"
+}, {
+"base": "EntityArrayHelper",
+"class": "CommandArrayHelper",
+"language": "GDScript",
+"path": "res://mechanics/utils/command_array_helper.gd"
+}, {
+"base": "Reference",
+"class": "Entity",
+"language": "GDScript",
+"path": "res://mechanics/database/entity.gd"
+}, {
+"base": "Reference",
+"class": "EntityArrayHelper",
+"language": "GDScript",
+"path": "res://mechanics/utils/entity_array_helper.gd"
+}, {
+"base": "Node",
+"class": "EntityDatabase",
+"language": "GDScript",
+"path": "res://mechanics/database/repositories/entity_database.gd"
+}, {
+"base": "Entity",
+"class": "Equipment",
+"language": "GDScript",
+"path": "res://mechanics/items/equipment.gd"
+}, {
+"base": "EntityArrayHelper",
+"class": "EquipmentArrayHelper",
+"language": "GDScript",
+"path": "res://mechanics/utils/equipment_array_helper.gd"
+}, {
+"base": "Reference",
+"class": "ExecuteMoveCommand",
+"language": "GDScript",
+"path": "res://mechanics/commands/execute_move_command.gd"
+}, {
+"base": "Reference",
+"class": "Fact",
+"language": "GDScript",
+"path": "res://mechanics/ai/fact.gd"
+}, {
+"base": "Reference",
+"class": "Health",
+"language": "GDScript",
+"path": "res://mechanics/properties/health.gd"
+}, {
+"base": "Entity",
+"class": "Item",
+"language": "GDScript",
+"path": "res://mechanics/items/item.gd"
+}, {
+"base": "Reference",
+"class": "Level",
+"language": "GDScript",
+"path": "res://mechanics/properties/level.gd"
+}, {
+"base": "Entity",
+"class": "Location",
+"language": "GDScript",
+"path": "res://mechanics/regions/location.gd"
+}, {
+"base": "Entity",
+"class": "LocationSpawn",
+"language": "GDScript",
+"path": "res://mechanics/regions/location_spawn.gd"
+}, {
+"base": "Entity",
+"class": "Move",
+"language": "GDScript",
+"path": "res://mechanics/characters/move.gd"
+}, {
+"base": "Reference",
+"class": "MoveResult",
+"language": "GDScript",
+"path": "res://mechanics/characters/move_result.gd"
+}, {
+"base": "Reference",
+"class": "Moves",
+"language": "GDScript",
+"path": "res://mechanics/properties/moves.gd"
+}, {
+"base": "Entity",
+"class": "Portal",
+"language": "GDScript",
+"path": "res://mechanics/regions/portal.gd"
+}, {
+"base": "Entity",
+"class": "Room",
+"language": "GDScript",
+"path": "res://mechanics/regions/room.gd"
+}, {
+"base": "Reference",
+"class": "Stat",
+"language": "GDScript",
+"path": "res://mechanics/properties/stat.gd"
+}, {
+"base": "Entity",
+"class": "Verdict",
+"language": "GDScript",
+"path": "res://mechanics/ai/verdict.gd"
+}, {
+"base": "Command",
+"class": "VerdictCommand",
+"language": "GDScript",
+"path": "res://mechanics/commands/verdict_command.gd"
+}, {
+"base": "Reference",
+"class": "WaitCommand",
+"language": "GDScript",
+"path": "res://mechanics/commands/wait_command.gd"
+}, {
+"base": "Equipment",
+"class": "Weapon",
+"language": "GDScript",
+"path": "res://mechanics/items/weapon.gd"
+} ]
+_global_script_class_icons={
+"Armor": "",
+"Character": "",
+"Command": "",
+"CommandArrayHelper": "",
+"Entity": "",
+"EntityArrayHelper": "",
+"EntityDatabase": "",
+"Equipment": "",
+"EquipmentArrayHelper": "",
+"ExecuteMoveCommand": "",
+"Fact": "",
+"Health": "",
+"Item": "",
+"Level": "",
+"Location": "",
+"LocationSpawn": "",
+"Move": "",
+"MoveResult": "",
+"Moves": "",
+"Portal": "",
+"Room": "",
+"Stat": "",
+"Verdict": "",
+"VerdictCommand": "",
+"WaitCommand": "",
+"Weapon": ""
+}
+
+[application]
+
+config/name="MUD"
+run/main_scene="res://root.tscn"
+config/icon="res://icon.png"
+
+[autoload]
+
+Signals="*res://mechanics/signals.gd"
+Dice="*res://mechanics/dice.gd"
+CharacterScriptParser="*res://mechanics/scripts/character_script_parser.gd"
+ScriptTool="*res://mechanics/scripts/script_tool.gd"
+Enums="*res://mechanics/enums.gd"
+ArmorsDatabase="*res://mechanics/database/repositories/armors_database.gd"
+WeaponsDatabase="*res://mechanics/database/repositories/weapons_database.gd"
+ItemsDatabase="*res://mechanics/database/repositories/items_database.gd"
+MovesDatabase="*res://mechanics/database/repositories/moves_database.gd"
+CharactersDatabase="*res://mechanics/database/repositories/characters_database.gd"
+LocationSpawnsDatabase="*res://mechanics/database/repositories/location_spawns_database.gd"
+PortalsDatabase="*res://mechanics/database/repositories/portals_database.gd"
+RoomsDatabase="*res://mechanics/database/repositories/rooms_database.gd"
+LocationsDatabase="*res://mechanics/database/repositories/locations_database.gd"
+CommandManager="*res://mechanics/managers/command_manager.gd"
+InventoryManager="*res://mechanics/managers/inventory_manager.gd"
+QueryManager="*res://mechanics/managers/query_manager.gd"
+
+[rendering]
+
+environment/default_environment="res://default_env.tres"
