@@ -1,32 +1,16 @@
 class_name Level
 
-var current : int setget ,getCurrent
-var experience : int setget ,getExperience
-var sparePoints : int setget ,get_sparePoints
+var current : int
+var experience : int
+var sparePoints : int
 
-var spawnId : int setget setSpawnId
+var spawnId : int
 
 
 func _init(level : int, experience : int, sparePoints : int) -> void:
 	self.current = level
 	self.experience = experience
 	self.sparePoints = sparePoints
-
-
-func getCurrent() -> int:
-	return current
-
-
-func getExperience() -> int:
-	return experience
-
-
-func get_sparePoints() -> int:
-	return sparePoints
-
-
-func setSpawnId(value : int) -> void:
-	spawnId = value
 
 
 func canLevelUp() -> bool:

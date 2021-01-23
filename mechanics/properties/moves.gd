@@ -1,15 +1,11 @@
 class_name Moves
 
-var moveIds : Array = [] setget ,getMoveIds
+var moveIds : Array = []
 
 
 func _init(moveIds : Array) -> void:
 	self.moveIds = moveIds
 	self.moveIds.sort()
-
-
-func getMoveIds() -> Array:
-	return moveIds
 
 
 func addMove(moveId) -> void:

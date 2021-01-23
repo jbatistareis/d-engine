@@ -1,10 +1,10 @@
 class_name Location
 extends Entity
 
-var name : String setget ,getName
-var description : String setget ,getDescription
+var name : String
+var description : String
 
-var portals : Array setget ,getPortals
+var portals : Array
 
 var currentRoomId : int
 
@@ -13,18 +13,6 @@ func _init(id : int, name : String, description : String, portals : Array, chara
 	self.name = name
 	self.description = description
 	self.portals = portals
-
-
-func getName() -> String:
-	return name
-
-
-func getDescription() -> String:
-	return description
-
-
-func getPortals() -> Array:
-	return portals
 
 
 func enter(characterId : int, fromPortalId : int) -> void:
@@ -36,7 +24,10 @@ func enter(characterId : int, fromPortalId : int) -> void:
 	var locationSpawn = LocationSpawnsDatabase.getEntityByLocationAndPortal(id, fromPortalId)
 	
 	Signals.emit_signal("characterArrivedLocation", characterSpawnId, id)
-	ScriptTool.execute(characterAproachesScript, characterSpawnId)
+	
+	var node = ScriptTool.getNode(characterAproachesScript)
+	node.execute(characterSpawnId)
+	node.free()
 	
 	currentRoomId = locationSpawn.roomId
 	RoomsDatabase.spawnEntity(currentRoomId, true).enter(characterSpawnId)
@@ -44,7 +35,10 @@ func enter(characterId : int, fromPortalId : int) -> void:
 
 func exit(characterSpawnId : int, fromPortalId : int) -> void:
 	Signals.emit_signal("characterLeftLocation", characterSpawnId, id)
-	ScriptTool.execute(characterLeavesScript, characterSpawnId)
+	
+	var node = ScriptTool.getNode(characterLeavesScript)
+	node.execute(characterSpawnId)
+	node.free()
 	
 	var portal = PortalsDatabase.getEntity(fromPortalId)
 	var newLocation = LocationsDatabase.spawnEntity(portal.pointA if (portal.pointA != id) else portal.pointB, true)

@@ -1,13 +1,15 @@
 class_name Weapon
 extends Equipment
 
-var damage : int setget ,getDamage
-var modifierDice : int setget ,getModifierDice
-var modifierRollType : int setget ,getModifierRollType
-var modifier : int setget ,getModifier
-var cdPre : int setget ,getCdPre
-var cdPost : int setget ,getCdPost
+var damage : int
+var modifierDice : int # returns Dice.Type enum
+var modifierRollType : int # returns Dice.RollType enum
+var modifier : int # returns Character.Modifier enum
+var cdPre : int
+var cdPost : int
 
+
+# TODO fix expressions
 func _init(id : int, itemId : int, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, itemId, characterAproachesScript, characterLeavesScript) -> void:
 	self.damage = damage
 	self.modifierDice = modifierDice
@@ -16,20 +18,6 @@ func _init(id : int, itemId : int, damage : int = 1, modifierDice : int = Enums.
 	self.cdPre = cdPre
 	self.cdPost = cdPost
 
-func getDamage() -> int:
-	return damage
-
-# returns Dice.Type enum
-func getModifierDice() -> int:
-	return modifierDice
-
-# returns Dice.RollType enum
-func getModifierRollType() -> int:
-	return modifierRollType
-
-# returns Character.Modifier enum
-func getModifier() -> int:
-	return modifier
 
 func getModifierExpression() -> String:
 	match modifier:
@@ -54,11 +42,6 @@ func getModifierExpression() -> String:
 		_: # Character.Modifier.NONE
 			return '0'
 
-func getCdPre() -> int:
-	return cdPre
-
-func getCdPost() -> int:
-	return cdPost
 
 func getDamageExpression() -> String:
 	if (modifierDice == null):

@@ -8,7 +8,7 @@ var locationSpawns : Array = [
 # TODO get from DB
 func getEntityByLocationAndPortal(locationId : int, portalId : int) -> LocationSpawn:
 	for locationSpawn in locationSpawns:
-		if ((locationSpawn.getLocationId() == locationId) && (locationSpawn.getPortalId() == portalId)):
+		if ((locationSpawn.locationId == locationId) && (locationSpawn.portalId == portalId)):
 			return locationSpawn
 	
 	print('Location spawn not found (' + str(locationId) + ', ' + str(portalId) + ')')

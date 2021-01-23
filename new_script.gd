@@ -35,17 +35,21 @@ func _ready():
 func _process(delta):
 	var to_fill = playback.get_frames_available()
 	while to_fill > 0:
-		sample2 = sin(phase2 * TAU) * amp
-		sample1 = sin(phase1 * TAU + sample2) * amp
+		sample1 = (sin(phase1 * TAU) 
+		+ (sin(phase1 * TAU * 2) / 2)
+		+ (sin(phase1 * TAU * 3) / 3)
+		+ (sin(phase1 * TAU * 4) / 4)
+		+ (sin(phase1 * TAU * 5) / 5)
+		+ (sin(phase1 * TAU * 6) / 6)
+		+ (sin(phase1 * TAU * 7) / 7)
+		+ (sin(phase1 * TAU * 8) / 8)
+		+ (sin(phase1 * TAU * 9) / 9))
 		
 		playback.push_frame(Vector2(sample1, sample1)) # Audio frames are stereo.
 		
 		phase1 = fmod(phase1 + increment1, 1.0)
-		phase2 = fmod(phase2 + increment2, 1.0)
 		
 		to_fill -= 1
-	
-	if (amp < 1): amp += delta / 100
 
 func printEntering(characterSpawnId, locationId) -> void:
 	self.characterSpawnId = characterSpawnId
@@ -53,7 +57,7 @@ func printEntering(characterSpawnId, locationId) -> void:
 	var location = LocationsDatabase.getEntitySpawn(locationId)
 	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
 	
-	print('Character \'' + character.getName() + '\' entering location \'' + location.getName() + '\'')
+	print('Character \'' + character.name + '\' entering location \'' + location.name + '\'')
 
 func printTraveling(characterSpawnId, direction, currentRoomId, newRoomId) -> void:
 	var directionStr
@@ -71,5 +75,5 @@ func printTraveling(characterSpawnId, direction, currentRoomId, newRoomId) -> vo
 		_:
 			directionStr = ''
 	
-	print('Character \'' + character.getName() + '\' moving to the ' + directionStr + ' of room ' + str(currentRoomId) + ', into room ' + str(newRoomId))
+	print('Character \'' + character.name + '\' moving to the ' + directionStr + ' of room ' + str(currentRoomId) + ', into room ' + str(newRoomId))
 

@@ -27,7 +27,7 @@ _global_script_classes=[ {
 "base": "EntityArrayHelper",
 "class": "CommandArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/command_array_helper.gd"
+"path": "res://mechanics/utils/commandArrayHelper.gd"
 }, {
 "base": "Reference",
 "class": "Entity",
@@ -37,12 +37,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "EntityArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/entity_array_helper.gd"
+"path": "res://mechanics/utils/entityArrayHelper.gd"
 }, {
 "base": "Node",
 "class": "EntityDatabase",
 "language": "GDScript",
-"path": "res://mechanics/database/repositories/entity_database.gd"
+"path": "res://mechanics/database/entityDatabase.gd"
 }, {
 "base": "Entity",
 "class": "Equipment",
@@ -52,14 +52,14 @@ _global_script_classes=[ {
 "base": "EntityArrayHelper",
 "class": "EquipmentArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/equipment_array_helper.gd"
+"path": "res://mechanics/utils/equipmentArrayHelper.gd"
 }, {
-"base": "Reference",
+"base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/execute_move_command.gd"
+"path": "res://mechanics/commands/executeMoveCommand.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Fact",
 "language": "GDScript",
 "path": "res://mechanics/ai/fact.gd"
@@ -87,7 +87,7 @@ _global_script_classes=[ {
 "base": "Entity",
 "class": "LocationSpawn",
 "language": "GDScript",
-"path": "res://mechanics/regions/location_spawn.gd"
+"path": "res://mechanics/regions/locationSpawn.gd"
 }, {
 "base": "Entity",
 "class": "Move",
@@ -97,7 +97,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "MoveResult",
 "language": "GDScript",
-"path": "res://mechanics/characters/move_result.gd"
+"path": "res://mechanics/characters/moveResult.gd"
 }, {
 "base": "Reference",
 "class": "Moves",
@@ -127,12 +127,12 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "VerdictCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/verdict_command.gd"
+"path": "res://mechanics/commands/verdictCommand.gd"
 }, {
-"base": "Reference",
+"base": "Command",
 "class": "WaitCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/wait_command.gd"
+"path": "res://mechanics/commands/waitCommand.gd"
 }, {
 "base": "Equipment",
 "class": "Weapon",
@@ -178,21 +178,21 @@ config/icon="res://icon.png"
 
 Signals="*res://mechanics/signals.gd"
 Dice="*res://mechanics/dice.gd"
-CharacterScriptParser="*res://mechanics/scripts/character_script_parser.gd"
-ScriptTool="*res://mechanics/scripts/script_tool.gd"
+CharacterScriptParser="*res://mechanics/scripts/characterScriptParser.gd"
+ScriptTool="*res://mechanics/scripts/scriptTool.gd"
 Enums="*res://mechanics/enums.gd"
-ArmorsDatabase="*res://mechanics/database/repositories/armors_database.gd"
-WeaponsDatabase="*res://mechanics/database/repositories/weapons_database.gd"
-ItemsDatabase="*res://mechanics/database/repositories/items_database.gd"
-MovesDatabase="*res://mechanics/database/repositories/moves_database.gd"
-CharactersDatabase="*res://mechanics/database/repositories/characters_database.gd"
-LocationSpawnsDatabase="*res://mechanics/database/repositories/location_spawns_database.gd"
-PortalsDatabase="*res://mechanics/database/repositories/portals_database.gd"
-RoomsDatabase="*res://mechanics/database/repositories/rooms_database.gd"
-LocationsDatabase="*res://mechanics/database/repositories/locations_database.gd"
-CommandManager="*res://mechanics/managers/command_manager.gd"
-InventoryManager="*res://mechanics/managers/inventory_manager.gd"
-QueryManager="*res://mechanics/managers/query_manager.gd"
+ArmorsDatabase="*res://mechanics/database/repositories/armorsDatabase.gd"
+WeaponsDatabase="*res://mechanics/database/repositories/weaponsDatabase.gd"
+ItemsDatabase="*res://mechanics/database/repositories/itemsDatabase.gd"
+MovesDatabase="*res://mechanics/database/repositories/movesDatabase.gd"
+CharactersDatabase="*res://mechanics/database/repositories/charactersDatabase.gd"
+LocationSpawnsDatabase="*res://mechanics/database/repositories/locationSpawnsDatabase.gd"
+PortalsDatabase="*res://mechanics/database/repositories/portalsDatabase.gd"
+RoomsDatabase="*res://mechanics/database/repositories/roomsDatabase.gd"
+LocationsDatabase="*res://mechanics/database/repositories/locationsDatabase.gd"
+CommandManager="*res://mechanics/managers/commandManager.gd"
+InventoryManager="*res://mechanics/managers/inventoryManager.gd"
+QueryManager="*res://mechanics/managers/queryManager.gd"
 
 [rendering]
 

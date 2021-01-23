@@ -1,14 +1,14 @@
 class_name Move
 extends Entity
 
-const INTERNAL_SCRIPT : String = 'func get_value(character : Character) -> int:\n\treturn %s\nfunc get_outcome(character : Character) -> int:\n\treturn Dice.get_outcome(%s)'
+const _INTERNAL_SCRIPT : String = 'extends Node\nfunc getValue(character : Character) -> int:\n\treturn %s\nfunc getOutcome(character : Character) -> int:\n\treturn Dice.getOutcome(%s)'
 
-var name : String setget ,getName
-var description : String setget ,getDescription
+var name : String
+var description : String
 var _valueExpression : String
 var _outcomeExpression : String
-var cdPre : int setget ,getCdPre
-var cdPost : int setget ,getCdPost
+var cdPre : int
+var cdPost : int
 
 
 func _init(id : int, name : String, description : String, valueExpression : String, outcomeExpression : String, cdPre : int, cdPost : int).(id) -> void:
@@ -20,26 +20,10 @@ func _init(id : int, name : String, description : String, valueExpression : Stri
 	self.cdPost = cdPost
 
 
-func getName() -> String:
-	return name
-
-
-func getDescription() -> String:
-	return description
-
-
-func getCdPre() -> int:
-	return cdPre
-
-
-func getCdPost() -> int:
-	return cdPost
-
-
 func getResult(character : Character) -> MoveResult:
-	var reference = ScriptTool.get_reference(INTERNAL_SCRIPT % [CharacterScriptParser.parse(_valueExpression), CharacterScriptParser.parse(_outcomeExpression)])
-	var result = MoveResult.new(reference.getValue(character), reference.getOutcome(character))
-	
-	reference.free()
+	var node = ScriptTool.getNode(_INTERNAL_SCRIPT % [CharacterScriptParser.parse(_valueExpression), CharacterScriptParser.parse(_outcomeExpression)])
+	var result = MoveResult.new(node.getValue(character), node.getOutcome(character))
+	node.free()
 	
 	return result
+

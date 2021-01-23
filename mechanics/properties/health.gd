@@ -1,24 +1,16 @@
 class_name Health
 
-var baseHp : int setget ,getBaseHp
-var currentHp : int setget ,getCurrentHp
+var baseHp : int
+var currentHp : int
 var maxHp : int setget ,getMaxHp
 
-var spawnId : int setget setSpawnId
-var constitution : int setget setConstitution
+var spawnId : int
+var constitution : int
 
 
 func _init(baseHp : int, currentHp : int) -> void:
 	self.baseHp = baseHp
 	self.currentHp = currentHp
-
-
-func getBaseHp() -> int:
-	return currentHp
-
-
-func getCurrentHp() -> int:
-	return currentHp
 
 
 func getMaxHp() -> int:
@@ -40,12 +32,4 @@ func change_hp(amount : int) -> void:
 			currentHp = 0
 			
 			Signals.emit_signal("characterDied", spawnId)
-
-
-func setSpawnId(value : int) -> void:
-	spawnId = value
-
-
-func setConstitution(value : int) -> void:
-	constitution = value
 

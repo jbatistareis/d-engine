@@ -1,42 +1,45 @@
 class_name Verdict
 extends Entity
 
-var factIds : Array = [] setget ,getFactIds
+var concreteFacts : Array = []
 
 
-func getFactIds() -> Array:
-	return factIds
+# TODO store as a string, parse into int array
+func _init(id : int, concreteFacts : Array).(id) -> void:
+	for concreteFactStr in concreteFacts:
+		self.concreteFacts.append(Array(concreteFactStr.split(';')))
 
 
-# TODO get from db
 func decision(auditorSpawnId : int, suspectsSpawnIds : Array) -> void:
 	var result
+	var fact
 	
-	for factId in factIds:
-		var fact
-		result = fact.analyze(auditorSpawnId, suspectsSpawnIds)
-		if result != null:
-			CommandManager.publishCommand(result)
+	for concreteFact in concreteFacts:
+		# TODO get from facts database
+		fact = load('res://mechanics/ai/fact.gd')
+		result = fact.analyze(suspectsSpawnIds)
+		if !result.empty():
+			CommandManager.publishCommand(ExecuteMoveCommand.new(auditorSpawnId, result, concreteFact[1]))
 			return
 	
 	CommandManager.publishCommand(VerdictCommand.new(auditorSpawnId))
 
 
-func addFact(factId : Fact, index : int) -> void:
-	factIds.insert(index, factId)
+func addConcreteFact(index : int, factId : int, moveId : int) -> void:
+	concreteFacts.insert(index, [factId, moveId])
 
 
-func removeFact(factId : Fact) -> void:
-	factIds.erase(factId)
+func removeConcreteFact(index : int) -> void:
+	concreteFacts.remove(index)
 
 
-func swapFacts(chosenFactId : Fact, targetFactId : Fact) -> void:
-	var fromIndex = factIds.find(chosenFactId)
-	var toIndex = factIds.find(targetFactId)
+func swapConcreteFacts(chosenConcreteFactIndex : int, targetConcreteFactIndex : int) -> void:
+	var chosen = concreteFacts[chosenConcreteFactIndex]
+	var target = concreteFacts[targetConcreteFactIndex]
 	
-	factIds.remove(fromIndex)
-	factIds.remove(toIndex)
+	concreteFacts.remove(chosenConcreteFactIndex)
+	concreteFacts.remove(targetConcreteFactIndex)
 	
-	factIds.insert(toIndex, chosenFactId)
-	factIds.insert(fromIndex, targetFactId)
+	concreteFacts.insert(targetConcreteFactIndex, chosen)
+	concreteFacts.insert(chosenConcreteFactIndex, target)
 

@@ -2,15 +2,16 @@ extends Node
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-func randomizeResult(matches : Array) -> int:
-	return matches[rng.randi_range(1, matches.size()) - 1] if !matches.empty() else null
+
+func randomizeResult(matches : Array) -> Array:
+	return [matches[rng.randi_range(1, matches.size()) - 1]] if !matches.empty() else []
 
 
 #
 # multi queries
 #
 
-func findByHighestHp(characterSpawnIds : Array) -> int:
+func findByHighestHp(characterSpawnIds : Array) -> Array:
 	var matches = []
 	
 	var character
@@ -25,7 +26,7 @@ func findByHighestHp(characterSpawnIds : Array) -> int:
 	
 	return randomizeResult(matches)
 
-func findByLowestHp(characterSpawnIds : Array) -> int:
+func findByLowestHp(characterSpawnIds : Array) -> Array:
 	var matches = []
 	
 	var character
@@ -41,7 +42,7 @@ func findByLowestHp(characterSpawnIds : Array) -> int:
 	return randomizeResult(matches)
 
 # use Enums.CharacterAbility
-func findByHighestAbilityScore(characterSpawnIds : Array, ability : int) -> int:
+func findByHighestAbilityScore(characterSpawnIds : Array, ability : int) -> Array:
 	var matches = []
 	
 	var character
@@ -57,7 +58,7 @@ func findByHighestAbilityScore(characterSpawnIds : Array, ability : int) -> int:
 	return randomizeResult(matches)
 
 # use Enums.CharacterAbility
-func findByLowestAbilityScore(characterSpawnIds : Array, ability : int) -> int:
+func findByLowestAbilityScore(characterSpawnIds : Array, ability : int) -> Array:
 	var matches = []
 	
 	var character
@@ -73,7 +74,7 @@ func findByLowestAbilityScore(characterSpawnIds : Array, ability : int) -> int:
 	return randomizeResult(matches)
 
 # percentage is normalized, 0-1
-func findByPctHp(characterSpawnIds : Array, hpPctTarget : int) -> int:
+func findByPctHp(characterSpawnIds : Array, hpPctTarget : int) -> Array:
 	var matches = []
 	
 	for characterSpawnId in characterSpawnIds:
@@ -83,7 +84,7 @@ func findByPctHp(characterSpawnIds : Array, hpPctTarget : int) -> int:
 
 # TODO
 # use Enums.AfflictionType
-func findByAfflictionType(characterSpawnIds : Array, type : int) -> int:
+func findByAfflictionType(characterSpawnIds : Array, type : int) -> Array:
 	var matches = []
 	
 	for characterSpawnId in characterSpawnIds:

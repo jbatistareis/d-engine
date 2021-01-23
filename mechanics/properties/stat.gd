@@ -1,6 +1,6 @@
 class_name Stat
 
-var score : int setget ,getscore
+var score : int
 var modifier : int setget ,getModifier
 var canIncrease : bool setget ,getCanIncrease
 var canDecrease : bool setget ,getCanDecrease
@@ -8,10 +8,6 @@ var canDecrease : bool setget ,getCanDecrease
 
 func _init(score : int) -> void:
 	self.score = score
-
-
-func getscore() -> int:
-	return score
 
 
 func getModifier() -> int:

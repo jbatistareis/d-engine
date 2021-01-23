@@ -1,11 +1,11 @@
 extends Node
 
-var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 # use Dice.Type enum
 func rollNormal(type : int, modifier : int = 0) -> int:
-	rng.randomize()
-	return rng.randi_range(1, type) + modifier
+	_rng.randomize()
+	return _rng.randi_range(1, type) + modifier
 
 # use Dice.Type enum
 func rollBest(type : int, modifier : int = 0) -> int:

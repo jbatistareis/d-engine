@@ -14,24 +14,24 @@ func getEntity(id : int):
 
 func spawnEntity(id : int, useSameId : bool = false):
 	var entity = getEntity(id)
-	entity.setSpawnId(spawnCount if !useSameId else id)
+	entity.spawnId = spawnCount if !useSameId else id
 	
-	if (!useSameId): spawnCount += 1
+	spawnCount += 1
 	
 	spawnedEntities.append(entity)
 	spawnedEntities.sort_custom(EntityArrayHelper, 'spawnSort')
 	
 	return entity
 
-func deSpawnEntity(id : int) -> void:
-	var index = spawnedEntities.bsearch_custom(id, EntityArrayHelper, 'spawnFind')
+func deSpawnEntity(spawnId : int) -> void:
+	var index = spawnedEntities.bsearch_custom(spawnId, EntityArrayHelper, 'spawnFind')
 	
 	if (index < spawnedEntities.size()):
 		spawnedEntities.remove(index)
 		spawnedEntities.sort_custom(EntityArrayHelper, 'spawnSort')
 
-func getEntitySpawn(id : int):
-	var index = spawnedEntities.bsearch_custom(id, EntityArrayHelper, 'spawnFind')
+func getEntitySpawn(spawnId : int):
+	var index = spawnedEntities.bsearch_custom(spawnId, EntityArrayHelper, 'spawnFind')
 	
 	if (index < spawnedEntities.size()):
 		return spawnedEntities[index]

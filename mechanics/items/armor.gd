@@ -1,23 +1,15 @@
 class_name Armor
 extends Equipment
 
-var protection : int setget ,getProtection
-var plateValue : int setget ,getPlateValue
-var currentProtection : int setget ,getCurrentProtection
+var protection : int
+var plateValue : int
+var currentProtection : int
 
 func _init(id : int, itemId : int, protection : int = 5, currentProtection : int = 5, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, itemId, characterAproachesScript, characterLeavesScript) -> void:
 	self.protection = protection if (protection >= 5) else 5
 	self.currentProtection = currentProtection
 	self.plateValue = floor(protection / 5)
 
-func getProtection() -> int:
-	return protection
-
-func getPlateValue() -> int:
-	return plateValue
-
-func getCurrentProtection() -> int:
-	return currentProtection
 
 func repair() -> void:
 	var oldProtection = currentProtection

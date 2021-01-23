@@ -5,6 +5,11 @@ var characters : Array = [
 	Character.new(2, Enums.CharacterType.FOE_NPC, 'Dummy 2')
 ]
 
+
+func _ready():
+	Signals.connect("characterDied", self, 'deSpawnEntity')
+
+
 # TODO save on DB
 func saveEntity(id : int) -> void:
 	pass
@@ -19,8 +24,10 @@ func spawnEntity(id : int, useSameId : bool = false):
 	
 	return entity as Character
 
-func deSpawnEntity(id : int) -> void:
-	var entity = .getEntitySpawn(id)
-	Signals.emit_signal("characterDespawned", entity.spawnId, entity.id)
-	.deSpawnEntity(id)
+func deSpawnEntity(spawnId : int) -> void:
+	var entity = .getEntitySpawn(spawnId)
+	
+	if entity != null:
+		Signals.emit_signal("characterDespawned", entity.spawnId, entity.id)
+		.deSpawnEntity(spawnId)
 

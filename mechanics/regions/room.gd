@@ -1,7 +1,7 @@
 class_name Room
 extends Entity
 
-var location : int setget ,getLocation
+var location : int
 
 var northPortal : int
 var southPortal : int
@@ -18,10 +18,10 @@ var friendlyIds : Array # npc ids
 var foeIds : Array # enemy ids
 
 # use this for queries
-var characterSpawns : Array = [] setget ,getCharacterSpawns # spawned players ids
-var itemSpawns : Array = [] setget ,getItemSpawns # spawned item ids
-var friendSpawns : Array = [] setget ,getFriendSpawns # spawned npcs ids
-var foeSpawns : Array = [] setget ,getFoeSpawns # spawned enemies ids
+var characterSpawns : Array = [] # spawned players ids
+var itemSpawns : Array = [] # spawned item ids
+var friendSpawns : Array = [] # spawned npcs ids
+var foeSpawns : Array = [] # spawned enemies ids
 
 var visited : bool
 
@@ -61,26 +61,6 @@ func tick() -> void:
 		ScriptTool.execute(characterNearbyScript, id)
 
 
-func getLocation() -> int:
-	return location
-
-
-func getCharacterSpawns() -> Array:
-	return characterSpawns
-
-
-func getItemSpawns() -> Array:
-	return itemSpawns
-
-
-func getFriendSpawns() -> Array:
-	return friendSpawns
-
-
-func getFoeSpawns() -> Array:
-	return foeSpawns
-
-
 # Enums.RoomDirection
 func getPortal(direction : int) -> int:
 	match direction:
@@ -113,65 +93,57 @@ func setPortal(direction : int, portalId : int) -> void:
 
 func enter(characterSpawnId : int) -> void:
 	Signals.emit_signal("characterArrivedRoom", characterSpawnId, spawnId)
-	ScriptTool.execute(characterAproachesScript, characterSpawnId)
+	executeScript(characterAproachesScript, characterSpawnId)
 	
-	CharactersDatabase.getEntitySpawn(characterSpawnId).setCurrentRoomId(id)
+	CharactersDatabase.getEntitySpawn(characterSpawnId).currentRoomId = id
 	characterSpawns.append(characterSpawnId)
 	characterSpawns.sort()
 	
 	for id in itemIds:
 		var item = ItemsDatabase.spawnEntity(id)
-		ScriptTool.execute(item.characterAproachesScript, characterSpawnId)
+		executeScript(item.characterAproachesScript, characterSpawnId)
 		itemSpawns.append(item.spawnId)
 	itemSpawns.sort()
 	
 	for id in friendlyIds:
 		var character = CharactersDatabase.spawnEntity(id)
 		character.setCurrentRoom(id)
-		ScriptTool.execute(character.characterAproachesScript, characterSpawnId)
+		executeScript(character.characterAproachesScript, characterSpawnId)
 		friendSpawns.append(character.spawnId)
 	friendSpawns.sort()
 	
 	for id in foeIds:
 		var character = CharactersDatabase.spawnEntity(id)
 		character.setCurrentRoom(id)
-		ScriptTool.execute(character.characterAproachesScript, characterSpawnId)
+		executeScript(character.characterAproachesScript, characterSpawnId)
 		foeSpawns.append(character.spawnId)
 	foeSpawns.sort()
 
 
 func exit(characterSpawnId : int) -> void:
 	Signals.emit_signal("characterLeftRoom", characterSpawnId, spawnId)
-	ScriptTool.execute(characterLeavesScript, characterSpawnId)
+	executeScript(characterLeavesScript, characterSpawnId)
 	
-	for itemSpawnId in itemSpawns:
-		ScriptTool.execute(
-				ItemsDatabase.getEntitySpawn(itemSpawnId).characterAproachesScript,
-				characterSpawnId)
-		ItemsDatabase.deSpawnEntity(itemSpawnId)
+	for spawnId in itemSpawns:
+		executeScript(ItemsDatabase.getEntitySpawn(spawnId).characterLeavesScript, characterSpawnId)
+		ItemsDatabase.deSpawnEntity(spawnId)
 	itemSpawns.clear()
 	
-	for npcId in friendSpawns:
-		ScriptTool.execute(
-				CharactersDatabase.getEntitySpawn(npcId).characterAproachesScript,
-				characterSpawnId)
-		CharactersDatabase.deSpawnEntity(npcId)
+	for spawnId in friendSpawns:
+		executeScript(CharactersDatabase.getEntitySpawn(spawnId).characterLeavesScript, characterSpawnId)
+		CharactersDatabase.deSpawnEntity(spawnId)
 	friendSpawns.clear()
 	
-	for enemyId in foeSpawns:
-		ScriptTool.execute(
-				CharactersDatabase.getEntitySpawn(enemyId).characterAproachesScript,
-				characterSpawnId)
-		CharactersDatabase.deSpawnEntity(enemyId)
+	for spawnId in foeSpawns:
+		executeScript(CharactersDatabase.getEntitySpawn(spawnId).characterLeavesScript, characterSpawnId)
+		CharactersDatabase.deSpawnEntity(spawnId)
 	foeSpawns.clear()
 	
 	characterSpawns.erase(characterSpawnId)
 
 
-func onEnemyDeath(spawnId : int) -> void:
-	if (foeSpawns.find(spawnId) > -1):
-		foeIds.erase(CharactersDatabase.getEntitySpawn(spawnId).id)
-		foeSpawns.erase(spawnId)
-		foeSpawns.sort()
-		CharactersDatabase.deSpawnEntity(spawnId)
+func executeScript(script : String, spawnId : int) -> void:
+	var node = ScriptTool.getNode(script)
+	node.execute(spawnId)
+	node.free()
 

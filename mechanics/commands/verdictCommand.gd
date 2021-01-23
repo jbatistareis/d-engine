@@ -1,17 +1,18 @@
 class_name VerdictCommand
 extends Command
 
-var auditorSpawnId : int
+var _auditorSpawnId : int
 
 func _init(auditorSpawnId : int) -> void:
-	self.auditorSpawnId = auditorSpawnId
+	self._auditorSpawnId = auditorSpawnId
 
 func execute() -> void:
-	# TODO get verdict from database
-	var verdict = load("res://ai/verdict.gd")
-	var auditor = CharactersDatabase.getEntitySpawn(auditorSpawnId)
+	var auditor = CharactersDatabase.getEntitySpawn(_auditorSpawnId)
 	var room = RoomsDatabase.getEntitySpawn(auditor.currentRoom)
 	var suspectsSpawnIds
+	
+	# TODO get character verdict from database
+	var verdict = load("res://mechanics/ai/verdict.gd")
 	
 	match auditor.getType():
 		Enums.CharacterType.PC:
@@ -23,5 +24,5 @@ func execute() -> void:
 		_:
 			suspectsSpawnIds = []
 	
-	verdict.decision(auditorSpawnId, suspectsSpawnIds)
+	verdict.decision(_auditorSpawnId, suspectsSpawnIds)
 
