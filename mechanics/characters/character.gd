@@ -23,7 +23,7 @@ var moves : Moves
 var currentRoomId : int
 
 
-func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : int = 1, baseDamage : int = Enums.DiceType.D4, level : int = 1, experience : int = 0, sparePoints : int = 0, strengthScore : int = 1, dexterityScore : int = 1, constitutionScore : int = 1, intelligenceScore : int = 1, wisdomScore : int = 1, charismaScore : int = 1, weaponId : int = 1, armorId : int = 1, moveIds : Array = [], currentRoomId : int = 0, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript):
+func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : int = 1, baseDamage : int = Enums.DiceType.D4, level : int = 1, experience : int = 0, sparePoints : int = 0, strengthScore : int = 1, dexterityScore : int = 1, constitutionScore : int = 1, intelligenceScore : int = 1, wisdomScore : int = 1, charismaScore : int = 1, weaponId : int = 1, armorId : int = 1, moveIds : Array = [], currentRoomId : int = 0, characterAproachesScript : String = '', characterLeavesScript : String = '', characterNearbyScript : String = '').(id, characterAproachesScript, characterLeavesScript, characterNearbyScript):
 	self.type = type
 	
 	self.name = name
