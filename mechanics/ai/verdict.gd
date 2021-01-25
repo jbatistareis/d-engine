@@ -1,7 +1,8 @@
 class_name Verdict
 extends Entity
 
-var concreteFacts : Array = []
+var active : bool
+var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT ID>, <MOVE ID>]
 
 
 # TODO store as a string, parse into int array
@@ -11,18 +12,17 @@ func _init(id : int, concreteFacts : Array).(id) -> void:
 
 
 func decision(auditorSpawnId : int, suspectsSpawnIds : Array) -> void:
-	var result
-	var fact
+	var auditor = CharactersDatabase.getEntitySpawn(auditorSpawnId)
 	
-	for concreteFact in concreteFacts:
-		# TODO get from facts database
-		fact = load('res://mechanics/ai/fact.gd')
-		result = fact.analyze(suspectsSpawnIds)
-		if !result.empty():
-			CommandManager.publishCommand(ExecuteMoveCommand.new(auditorSpawnId, result, concreteFact[1]))
-			return
-	
-	CommandManager.publishCommand(VerdictCommand.new(auditorSpawnId))
+	if auditor != null:
+		var result
+		var fact
+		
+		for concreteFact in concreteFacts:
+			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspectsSpawnIds)
+			if !result.empty():
+				CommandManager.publishCommand(ExecuteMoveCommand.new(auditor.spawnId, result, concreteFact[1]))
+				return
 
 
 func addConcreteFact(index : int, factId : int, moveId : int) -> void:

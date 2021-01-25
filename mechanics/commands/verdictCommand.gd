@@ -8,21 +8,20 @@ func _init(auditorSpawnId : int) -> void:
 
 func execute() -> void:
 	var auditor = CharactersDatabase.getEntitySpawn(_auditorSpawnId)
-	var room = RoomsDatabase.getEntitySpawn(auditor.currentRoom)
-	var suspectsSpawnIds
 	
-	# TODO get character verdict from database
-	var verdict = load("res://mechanics/ai/verdict.gd")
-	
-	match auditor.getType():
-		Enums.CharacterType.PC:
-			suspectsSpawnIds = room.foeSpawns
+	if (auditor != null) && auditor.verdictActive:
+		var room = RoomsDatabase.getEntitySpawn(auditor.currentRoom)
+		var suspectsSpawnIds
 		
-		Enums.CharacterType.FOE_NPC:
-			suspectsSpawnIds = room.characterSpawns
+		match auditor.getType():
+			Enums.CharacterType.PC:
+				suspectsSpawnIds = room.foeSpawns
+			
+			Enums.CharacterType.FOE_NPC:
+				suspectsSpawnIds = room.characterSpawns
+			
+			_:
+				suspectsSpawnIds = []
 		
-		_:
-			suspectsSpawnIds = []
-	
-	verdict.decision(_auditorSpawnId, suspectsSpawnIds)
+		VerdictsDatabase.getEntity(auditor.verdictId).decision(auditor.spawnId, suspectsSpawnIds)
 

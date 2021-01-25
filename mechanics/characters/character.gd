@@ -18,12 +18,15 @@ var charisma : Stat
 var weaponId : int
 var armorId : int
 
-var moves : Moves
+var moveIds : Moves
+
+var verdictId : int
+var verdictActive : bool
 
 var currentRoomId : int
 
 
-func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : int = 1, baseDamage : int = Enums.DiceType.D4, level : int = 1, experience : int = 0, sparePoints : int = 0, strengthScore : int = 1, dexterityScore : int = 1, constitutionScore : int = 1, intelligenceScore : int = 1, wisdomScore : int = 1, charismaScore : int = 1, weaponId : int = 1, armorId : int = 1, moveIds : Array = [], currentRoomId : int = 0, characterAproachesScript : String = '', characterLeavesScript : String = '', characterNearbyScript : String = '').(id, characterAproachesScript, characterLeavesScript, characterNearbyScript):
+func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : int = 1, baseDamage : int = Enums.DiceType.D4, level : int = 1, experience : int = 0, sparePoints : int = 0, strengthScore : int = 1, dexterityScore : int = 1, constitutionScore : int = 1, intelligenceScore : int = 1, wisdomScore : int = 1, charismaScore : int = 1, weaponId : int = 1, armorId : int = 1, moveIds : Array = [], verdictId : int = 0, currentRoomId : int = 0, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript):
 	self.type = type
 	
 	self.name = name
@@ -42,9 +45,12 @@ func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : in
 	self.weaponId = weaponId
 	self.armorId = armorId
 	
-	self.moves = Moves.new(moveIds)
+	self.moveIds = Moves.new(moveIds)
 	
 	self.currentRoomId = currentRoomId
+	
+	self.verdictId = verdictId
+	self.verdictActive = type > 0
 
 
 func getHealth() -> Health:

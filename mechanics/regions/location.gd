@@ -24,7 +24,7 @@ func enter(characterId : int, fromPortalId : int) -> void:
 	Signals.emit_signal("characterArrivedLocation", characterSpawnId, id)
 	
 	var node = ScriptTool.getNode(characterAproachesScript)
-	node.execute(characterSpawnId)
+	node.execute(id, characterSpawnId)
 	node.free()
 	
 	RoomsDatabase.spawnEntity(locationSpawn.roomId, true).enter(characterSpawnId)
@@ -34,7 +34,7 @@ func exit(characterSpawnId : int, fromPortalId : int) -> void:
 	Signals.emit_signal("characterLeftLocation", characterSpawnId, id)
 	
 	var node = ScriptTool.getNode(characterLeavesScript)
-	node.execute(characterSpawnId)
+	node.execute(id, characterSpawnId)
 	node.free()
 	
 	var portal = PortalsDatabase.getEntity(fromPortalId)

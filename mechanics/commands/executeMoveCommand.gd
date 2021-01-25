@@ -28,19 +28,21 @@ func execute() -> void:
 			Dice.Outcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
 				damageCharacter(
 					target,
-					max(1, floor(moveResult.value / max(1, ((target.getModifier(Enums.CharacterModifier.STR) + target.getModifier(Enums.CharacterModifier.DEX) + target.getModifier(Enums.CharacterModifier.WIS)) / 3)))))
+					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 			
 			_: # Dice.Outcome.WORST
 				pass # TODO miss
 	
-	# TODO publish next command prompt / AI verdict
-	# CommandManager.publishCommand(WaitCommand.new(move.getCdPost(), Command.new()))
+	if executor.verdictActive:
+		CommandManager.publishCommand(VerdictCommand.new(executor.spawnId))
+	else:
+		return # TODO publish next command prompt
 
 
 func damageCharacter(character : Character, amount : int, bypassArmor : bool = false) -> void:
 	if (!bypassArmor && (amount < 0) && (character.armor != null)):
 		# TODO get from inventory database
-		amount = ArmorsDatabase.getEntitySpawn(character.armor).takeHit(amount)
+		amount = ArmorsDatabase.getEntitySpawn(character.armorId).takeHit(amount)
 	
 	character.changeHp(amount)
 
