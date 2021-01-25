@@ -13,9 +13,9 @@ var exitLogic : String
 var stayLogic : String
 var cd : float
 
-var itemIds : Array # item ids
-var friendlyIds : Array # npc ids
-var foeIds : Array # enemy ids
+var itemIds : Array # present item ids
+var friendlyIds : Array # present npc ids
+var foeIds : Array # present enemy ids
 
 # use this for queries
 var characterSpawns : Array = [] # spawned players ids
@@ -28,7 +28,7 @@ var visited : bool
 var elapsed : float = 0
 
 
-func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, itemIds : Array = [], friendlyIds : Array = [], foeIds : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '', characterNearbyScript : String = '').(id, characterAproachesScript, characterLeavesScript, characterNearbyScript) -> void:
+func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, itemIds : Array = [], friendlyIds : Array = [], foeIds : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript) -> void:
 	self.location = location
 	
 	self.northPortal = northPortal
@@ -46,49 +46,6 @@ func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 
 	self.foeIds = foeIds
 	
 	self.visited = visited
-
-
-func _process(delta : float) -> void:
-	elapsed += delta
-	
-	if (elapsed >= cd):
-		elapsed = 0
-		tick()
-
-
-func tick() -> void:
-	for id in characterSpawns:
-		ScriptTool.execute(characterNearbyScript, id)
-
-
-# Enums.RoomDirection
-func getPortal(direction : int) -> int:
-	match direction:
-		0:
-			return northPortal
-		1:
-			return southPortal
-		2:
-			return eastPortal
-		3:
-			return westPortal
-		_:
-			return 0
-
-
-# Enums.RoomDirection
-func setPortal(direction : int, portalId : int) -> void:
-	match direction:
-		0:
-			northPortal = portalId
-		1:
-			southPortal = portalId
-		2:
-			eastPortal = portalId
-		3:
-			westPortal = portalId
-		_:
-			pass
 
 
 func enter(characterSpawnId : int) -> void:
@@ -118,6 +75,8 @@ func enter(characterSpawnId : int) -> void:
 		executeScript(character.characterAproachesScript, characterSpawnId)
 		foeSpawns.append(character.spawnId)
 	foeSpawns.sort()
+	
+	visited = true
 
 
 func exit(characterSpawnId : int) -> void:
@@ -146,4 +105,18 @@ func executeScript(script : String, spawnId : int) -> void:
 	var node = ScriptTool.getNode(script)
 	node.execute(spawnId)
 	node.free()
+
+
+func getPortal(direction : int) -> int:
+	match direction:
+		0:
+			return northPortal
+		1:
+			return southPortal
+		2:
+			return eastPortal
+		3:
+			return westPortal
+		_:
+			return 0
 

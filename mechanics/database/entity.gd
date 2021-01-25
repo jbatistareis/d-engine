@@ -7,14 +7,12 @@ var spawnId : int = 0
 
 var characterAproachesScript : String
 var characterLeavesScript : String
-var characterNearbyScript : String
 var interactScript : String
 
 
-func _init(id : int, characterAproachesScript : String = '', characterLeavesScript : String = '', characterNearbyScript : String = '', interactScript : String = '') -> void:
+func _init(id : int, characterAproachesScript : String = '', characterLeavesScript : String = '', interactScript : String = '') -> void:
 	self.id = id
 	self.characterAproachesScript = characterAproachesScript if !characterAproachesScript.empty() else _INTERNAL_SCRIPT_NOOP
 	self.characterLeavesScript = characterLeavesScript if !characterLeavesScript.empty() else _INTERNAL_SCRIPT_NOOP
-	self.characterNearbyScript = characterNearbyScript if !characterNearbyScript.empty() else _INTERNAL_SCRIPT_NOOP
 	self.interactScript = interactScript if !interactScript.empty() else _INTERNAL_SCRIPT_NOOP
 

@@ -49,12 +49,12 @@ func travel(characterSpawnId : int, direction : int) -> void:
 	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
 	var portalId = RoomsDatabase.getEntitySpawn(character.currentRoomId).getPortal(direction)
 	
-	if (portalId != 0):
+	if portalId != 0:
 		var portal = PortalsDatabase.getEntity(portalId)
 		var exitPoint = portal.pointA if (portal.pointA != character.currentRoomId) else portal.pointB
 		
-		if (portal.enter(characterSpawnId, id, character.currentRoomId)):
-			if(exitPoint > 0):
+		if portal.enter(characterSpawnId, id, character.currentRoomId):
+			if exitPoint > 0:
 				RoomsDatabase.getEntitySpawn(character.currentRoomId).exit(characterSpawnId)
 				RoomsDatabase.spawnEntity(exitPoint, true).enter(characterSpawnId)
 				Signals.emit_signal("characterTravelledLocation", characterSpawnId, direction, character.currentRoomId, exitPoint)
