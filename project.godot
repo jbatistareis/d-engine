@@ -176,7 +176,7 @@ _global_script_class_icons={
 
 [application]
 
-config/name="MUD"
+config/name="D Engine"
 run/main_scene="res://root.tscn"
 config/icon="res://icon.png"
 
