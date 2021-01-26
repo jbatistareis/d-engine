@@ -14,13 +14,13 @@ It will work some day.
 - [x] Dynamic script system  
 - [x] Ai system  
 - [x] Command system  
-- [] Inventory system  
-- [] Message system  
-- [] Dialog system
-- [] Event system  
-- [] Battle system
-- [] Database system  
-- [] Save system  
-- [] Controls system
-- [] Visuals ~~system~~  
+- [ ] Inventory system  
+- [ ] Message system  
+- [ ] Dialog system
+- [ ] Event system  
+- [ ] Battle system
+- [ ] Database system  
+- [ ] Save system  
+- [ ] Controls system
+- [ ] Visuals ~~system~~  
 
