@@ -32,3 +32,9 @@ signal characterArrivedLocation(characterSpawnId, locationId)
 signal characterLeftLocation(characterSpawnId, locationId)
 signal characterTravelledLocation(characterSpawnId, direction, currentRoomId, newRoomId)
 
+# commands
+signal publishedCommand(command)
+
+# messages
+
+

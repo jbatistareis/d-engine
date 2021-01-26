@@ -21,7 +21,7 @@ func decision(auditorSpawnId : int, suspectsSpawnIds : Array) -> void:
 		for concreteFact in concreteFacts:
 			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspectsSpawnIds)
 			if !result.empty():
-				CommandManager.publishCommand(ExecuteMoveCommand.new(auditor.spawnId, result, concreteFact[1]))
+				Signals.emit_signal("publishedCommand", ExecuteMoveCommand.new(auditor.spawnId, result, concreteFact[1]))
 				return
 
 

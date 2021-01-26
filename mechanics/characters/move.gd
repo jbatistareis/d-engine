@@ -25,7 +25,7 @@ func _init(id : int, name : String, description : String, valueExpression : Stri
 func getResult(character : Character) -> MoveResult:
 	var node = ScriptTool.getNode(_INTERNAL_MOVE_SCRIPT % [valueExpression, valueExpression])
 	var result = MoveResult.new(node.getValue(character), node.getOutcome(character))
-	node.free()
+	node.queue_free()
 	
 	return result
 

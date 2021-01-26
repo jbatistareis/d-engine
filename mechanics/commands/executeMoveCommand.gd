@@ -34,9 +34,9 @@ func execute() -> void:
 				pass # TODO miss
 	
 	if executor.verdictActive:
-		CommandManager.publishCommand(VerdictCommand.new(executor.spawnId))
+		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor.spawnId))
 	else:
-		return # TODO publish next command prompt
+		return # TODO show next command prompt
 
 
 func damageCharacter(character : Character, amount : int, bypassArmor : bool = false) -> void:

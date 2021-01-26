@@ -104,7 +104,7 @@ func exit(characterSpawnId : int) -> void:
 func executeScript(script : String, executorSpawnId : int, targetSpawnId : int) -> void:
 	var node = ScriptTool.getNode(script)
 	node.execute(executorSpawnId, targetSpawnId)
-	node.free()
+	node.queue_free()
 
 
 func getPortal(direction : int) -> int:

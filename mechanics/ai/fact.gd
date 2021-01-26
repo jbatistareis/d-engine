@@ -10,11 +10,10 @@ func _init(id : int, analyzeScript : String = '').(id) -> void:
 	self.analyzeScript = analyzeScript if !analyzeScript.empty() else _NOOP
 
 
-# TODO test if it works with arrays
 func analyze(suspectsSpawnIds : Array) -> Array:
 	var node = ScriptTool.getNode(analyzeScript)
 	var result = node.result(suspectsSpawnIds)
-	node.free()
+	node.queue_free()
 	
 	return result
 

@@ -22,20 +22,14 @@ func enter(characterId : int, fromPortalId : int) -> void:
 	var locationSpawn = LocationSpawnsDatabase.getEntityByLocationAndPortal(id, fromPortalId)
 	
 	Signals.emit_signal("characterArrivedLocation", characterSpawnId, id)
-	
-	var node = ScriptTool.getNode(characterAproachesScript)
-	node.execute(id, characterSpawnId)
-	node.free()
+	executeScript(characterAproachesScript, id)
 	
 	RoomsDatabase.spawnEntity(locationSpawn.roomId, true).enter(characterSpawnId)
 
 
 func exit(characterSpawnId : int, fromPortalId : int) -> void:
+	executeScript(characterLeavesScript, id)
 	Signals.emit_signal("characterLeftLocation", characterSpawnId, id)
-	
-	var node = ScriptTool.getNode(characterLeavesScript)
-	node.execute(id, characterSpawnId)
-	node.free()
 	
 	var portal = PortalsDatabase.getEntity(fromPortalId)
 	var newLocation = LocationsDatabase.spawnEntity(-(portal.pointA if (-portal.pointA != id) else portal.pointB), true)
@@ -53,7 +47,7 @@ func travel(characterSpawnId : int, direction : int) -> void:
 		var portal = PortalsDatabase.getEntity(portalId)
 		var exitPoint = portal.pointA if (portal.pointA != character.currentRoomId) else portal.pointB
 		
-		if portal.enter(characterSpawnId, id, character.currentRoomId):
+		if portal.enter(characterSpawnId, character.currentRoomId):
 			if exitPoint > 0:
 				RoomsDatabase.getEntitySpawn(character.currentRoomId).exit(characterSpawnId)
 				RoomsDatabase.spawnEntity(exitPoint, true).enter(characterSpawnId)
@@ -64,4 +58,10 @@ func travel(characterSpawnId : int, direction : int) -> void:
 		
 	else: # not an exit
 		return
+
+
+func executeScript(script : String, characterSpawnId : int) -> void:
+	var node = ScriptTool.getNode(script)
+	node.execute(id, characterSpawnId)
+	node.queue_free()
 
