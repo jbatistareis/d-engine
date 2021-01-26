@@ -1,10 +1,6 @@
 class_name Command
 
 var totalTicks : int setget setTotalTicks
-var executorCharSpawnId : int
-var targetCharSpawnId : int
-var entityId : int
-
 var remainingTicks : int
 var executed : bool = false
 

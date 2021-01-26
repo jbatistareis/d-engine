@@ -16,3 +16,5 @@ enum PortalType { ROOM, LOCATION }
 
 enum AfflictionType { TODO }
 
+enum MessageType { AUTO_TOP, AUTO_BOTTOM, DIALOG }
+

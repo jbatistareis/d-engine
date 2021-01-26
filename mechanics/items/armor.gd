@@ -16,11 +16,11 @@ func repair() -> void:
 	var newProtection = currentProtection + plateValue
 	currentProtection = newProtection if (newProtection < protection) else protection
 	
-	Signals.emit_signal("armorRepaired", spawnId, currentProtection - oldProtection)
+	Signals.emit_signal("armorRepaired", self, currentProtection - oldProtection)
 
 # returns the amount of damage to the character body
 func takeHit(value : int) -> int:
-	Signals.emit_signal("armorTookHit", spawnId, value)
+	Signals.emit_signal("armorTookHit", self, value)
 	
 	if (currentProtection > 0):
 		currentProtection = max(0, currentProtection + value)

@@ -19,41 +19,40 @@ func _init(id : int, itemId : int, damage : int = 1, modifierDice : int = Enums.
 	self.cdPost = cdPost
 
 
-func getModifierExpression() -> String:
+func calculateDamage(character : Character) -> int:
+	var modifierValue
 	match modifier:
 		Enums.CharacterModifier.STR:
-			return '$CHARACTER.STR'
+			modifierValue = character.strength.modifier
 		
 		Enums.CharacterModifier.DEX:
-			return '$CHARACTER.DEX'
+			modifierValue = character.dexterity.modifier
 		
 		Enums.CharacterModifier.CON:
-			return '$CHARACTER.CON'
+			modifierValue = character.constitution.modifier
 		
 		Enums.CharacterModifier.INT:
-			return '$CHARACTER.INT'
+			modifierValue = character.intelligence.modifier
 		
 		Enums.CharacterModifier.WIS:
-			return '$CHARACTER.WIS'
+			modifierValue = character.wisdom.modifier
 		
 		Enums.CharacterModifier.CHA:
-			return '$CHARACTER.CHA'
+			modifierValue = character.charisma.modifier
 			
 		_: # Character.Modifier.NONE
-			return '0'
-
-
-func getDamageExpression() -> String:
+			modifierValue = 0
+	
 	if (modifierDice == null):
-		return '(' + str(damage) + ' + ' + getModifierExpression() + ')'
+		return damage + modifierValue
 	
 	match modifierRollType:
 		Enums.DiceRollType.BEST:
-			return '(' + str(Dice.rollBest(modifierDice) + damage) + ' + ' + getModifierExpression() + ')'
+			return Dice.rollBest(modifierDice) + damage + modifierValue
 		
 		Enums.DiceRollType.WORST:
-			return '(' + str(Dice.rollWorst(modifierDice) + damage) + ' + ' + getModifierExpression() + ')'
+			return Dice.rollWorst(modifierDice) + damage + modifierValue
 		
 		_: # Dice.RollType.NORMAL
-			return '(' + str(Dice.rollNormal(modifierDice) + damage) + ' + ' + getModifierExpression() + ')'
+			return Dice.rollNormal(modifierDice) + damage + modifierValue
 

@@ -4,7 +4,7 @@ var current : int
 var experience : int
 var sparePoints : int
 
-var spawnId : int
+var characterSpawnId : int
 
 
 func _init(level : int, experience : int, sparePoints : int) -> void:
@@ -27,11 +27,11 @@ func level_up() -> void:
 		sparePoints += 1
 		current += 1
 		
-		Signals.emit_signal("characterLeveledUp", spawnId, current)
+		Signals.emit_signal("characterLeveledUp", CharactersDatabase.getEntitySpawn(characterSpawnId))
 
 
 func gainExperience(amount : int) -> void:
 	experience += amount
 	
-	Signals.emit_signal("characterGotExperience", spawnId, amount)
+	Signals.emit_signal("characterGotExperience", CharactersDatabase.getEntitySpawn(characterSpawnId), amount)
 

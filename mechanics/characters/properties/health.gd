@@ -4,7 +4,7 @@ var baseHp : int
 var currentHp : int
 var maxHp : int setget ,getMaxHp
 
-var spawnId : int
+var characterSpawnId : int
 var constitution : int
 
 
@@ -18,10 +18,12 @@ func getMaxHp() -> int:
 
 
 func change_hp(amount : int) -> void:
+	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
+	
 	if amount >= 0:
-		Signals.emit_signal("characterGainedHp", spawnId, amount)
+		Signals.emit_signal("characterGainedHp", character, amount)
 	else:
-		Signals.emit_signal("characterLostHp", spawnId, amount)
+		Signals.emit_signal("characterLostHp", character, amount)
 	
 	if amount != 0:
 		var result = currentHp + amount
@@ -31,5 +33,5 @@ func change_hp(amount : int) -> void:
 		else:
 			currentHp = 0
 			
-			Signals.emit_signal("characterDied", spawnId)
+			Signals.emit_signal("characterDied", character)
 

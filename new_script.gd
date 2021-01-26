@@ -1,68 +1,31 @@
 extends Node
 
-var characterSpawnId : int
-
-var playback : AudioStreamPlayback
-var sample_hz : float = 44100.0
-var amp : float = 0
-
-var pulse_hz1 : float = 440.0
-var phase1 : float = 0.0
-var increment1 = pulse_hz1 / sample_hz
-var sample1 : float
-
-var pulse_hz2 : float = 440.0
-var phase2 : float = 0.0
-var increment2 = pulse_hz2 / sample_hz
-var sample2 : float
+var character : Character
+var location : Location
 
 func _ready():
 	print('TEST START')
 	
-	var location = LocationsDatabase.spawnEntity(1, true)
-	
 	Signals.connect("characterArrivedLocation", self, 'printEntering')
 	Signals.connect("characterTravelledLocation", self, 'printTraveling')
 	
-	location.enter(1, 1)
+	LocationsDatabase.spawnEntity(1, true).enter(1, 1)
 	
-	location.travel(characterSpawnId, Enums.RoomDirection.NORTH)
-	location.travel(characterSpawnId, Enums.RoomDirection.SOUTH)
-	location.travel(characterSpawnId, Enums.RoomDirection.WEST)
-	
-	playback = $Player.get_stream_playback()
+	location.travel(character, Enums.RoomDirection.NORTH)
+	location.travel(character, Enums.RoomDirection.SOUTH)
+	location.travel(character, Enums.RoomDirection.WEST)
 
 func _process(delta):
-#	var to_fill = playback.get_frames_available()
-#	while to_fill > 0:
-#		sample1 = (sin(phase1 * TAU) 
-#		+ (sin(phase1 * TAU * 2) / 2)
-#		+ (sin(phase1 * TAU * 3) / 3)
-#		+ (sin(phase1 * TAU * 4) / 4)
-#		+ (sin(phase1 * TAU * 5) / 5)
-#		+ (sin(phase1 * TAU * 6) / 6)
-#		+ (sin(phase1 * TAU * 7) / 7)
-#		+ (sin(phase1 * TAU * 8) / 8)
-#		+ (sin(phase1 * TAU * 9) / 9))
-#
-#		playback.push_frame(Vector2(sample1, sample1)) # Audio frames are stereo.
-#
-#		phase1 = fmod(phase1 + increment1, 1.0)
-#
-#		to_fill -= 1
 	pass
 
-func printEntering(characterSpawnId, locationId) -> void:
-	self.characterSpawnId = characterSpawnId
-	
-	var location = LocationsDatabase.getEntitySpawn(locationId)
-	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
+func printEntering(character : Character, location : Location) -> void:
+	self.character = character
+	self.location = location
 	
 	print('Character \'' + character.name + '\' entering location \'' + location.name + '\'')
 
-func printTraveling(characterSpawnId, direction, currentRoomId, newRoomId) -> void:
+func printTraveling(character : Character, direction : int, fromRoom : Room, toRoom : Room) -> void:
 	var directionStr
-	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
 	
 	match direction:
 		0:
@@ -76,5 +39,5 @@ func printTraveling(characterSpawnId, direction, currentRoomId, newRoomId) -> vo
 		_:
 			directionStr = ''
 	
-	print('Character \'' + character.name + '\' moving to the ' + directionStr + ' of room ' + str(currentRoomId) + ', into room ' + str(newRoomId))
+	print('Character \'' + character.name + '\' moving to the ' + directionStr + ' of room ' + str(fromRoom.id) + ', into room ' + str(fromRoom.id))
 

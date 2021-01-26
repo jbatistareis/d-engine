@@ -1,36 +1,36 @@
 extends Node
 
 # character
-signal characterSpawned(spawnId, characterId)
-signal characterDespawned(spawnId, characterId)
-signal characterLeveledUp(spawnId, currentLevel)
-signal characterGotExperience(spawnId, amount)
-signal characterGainedHp(spawnId, amount)
-signal characterLostHp(spawnId, amount)
-signal characterDied(spawnId)
+signal characterSpawned(character)
+signal characterDespawned(character)
+signal characterLeveledUp(character)
+signal characterGotExperience(character, amount)
+signal characterGainedHp(character, amount)
+signal characterLostHp(character, amount)
+signal characterDied(character)
 
 # armor
-signal armorSpawned(spawnId, armorId)
-signal armorDespawned(spawnId, armorId)
-signal armorTookHit(spawnId, amount)
-signal armorRepaired(spawnId, amount)
+signal armorSpawned(armor)
+signal armorDespawned(armor)
+signal armorTookHit(armor, amount)
+signal armorRepaired(armor, amount)
 
 # weapon
-signal weaponSpawned(spawnId, weaponId)
-signal weaponDespawned(spawnId, weaponId)
+signal weaponSpawned(weapon)
+signal weaponDespawned(weapon)
 
 # items
-signal itemSpawned(spawnId, itemId)
-signal itemDespawned(spawnId, itemId)
+signal itemSpawned(item)
+signal itemDespawned(item)
 
 # room
-signal characterArrivedRoom(characterSpawnId, roomSpawnId)
-signal characterLeftRoom(characterSpawnId, roomSpawnId)
+signal characterArrivedRoom(character, room)
+signal characterLeftRoom(character, room)
 
 # location
-signal characterArrivedLocation(characterSpawnId, locationId)
-signal characterLeftLocation(characterSpawnId, locationId)
-signal characterTravelledLocation(characterSpawnId, direction, currentRoomId, newRoomId)
+signal characterArrivedLocation(character, location)
+signal characterLeftLocation(character, oldLocation, newLocation)
+signal characterTravelledLocation(character, direction, fromRoom, toRoom)
 
 # commands
 signal publishedCommand(command)

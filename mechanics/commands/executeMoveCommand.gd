@@ -6,13 +6,10 @@ var targets : Array = []
 var move : Move
 
 
-func _init(executorSpawnId : int, targetSpawnIds : Array, moveId : int) -> void:
-	self.executor = CharactersDatabase.getEntitySpawn(executorSpawnId)
-	
-	for targetSpawnId in targetSpawnIds:
-		self.targets.append(CharactersDatabase.getEntitySpawn(targetSpawnId))
-		
-	self.move = MovesDatabase.getEntity(moveId)
+func _init(executor : Character, targets : Array, move : Move) -> void:
+	self.executor = executor
+	self.targets = targets
+	self.move = move
 	self.totalTicks = self.move.cdPre
 
 
@@ -21,7 +18,7 @@ func execute() -> void:
 	for target in targets:
 		moveResult = move.getResult(executor)
 		
-		match moveResult.getOutcome():
+		match moveResult.outcome:
 			Dice.Outcome.BEST:
 				damageCharacter(target, moveResult.value)
 			
@@ -34,9 +31,9 @@ func execute() -> void:
 				pass # TODO miss
 	
 	if executor.verdictActive:
-		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor.spawnId))
+		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor))
 	else:
-		return # TODO show next command prompt
+		return # TODO show command prompt
 
 
 func damageCharacter(character : Character, amount : int, bypassArmor : bool = false) -> void:

@@ -1,23 +1,9 @@
 class_name CharacterQuery
-
-
-static func getCharacters(characterSpawnIds : Array) -> Array:
-	characterSpawnIds.shuffle()
-	
-	var characters = []
-	for characterSpawnId in characterSpawnIds:
-		characters.append(CharactersDatabase.getEntitySpawn(characterSpawnId))
-	
-	return characters
-
-
 #
 # multi queries
 #
 
-static func findByHighestHp(characterSpawnIds : Array) -> Array:
-	var characters = getCharacters(characterSpawnIds)
-	
+static func findByHighestHp(characters : Array) -> Array:
 	var highest = 0
 	for character in characters:
 		if character.currentHp > highest:
@@ -30,9 +16,7 @@ static func findByHighestHp(characterSpawnIds : Array) -> Array:
 	return []
 
 
-static func findByLowestHp(characterSpawnIds : Array) -> Array:
-	var characters = getCharacters(characterSpawnIds)
-	
+static func findByLowestHp(characters : Array) -> Array:
 	var lowest = 9999
 	for character in characters:
 		if character.currentHp < lowest:
@@ -46,9 +30,7 @@ static func findByLowestHp(characterSpawnIds : Array) -> Array:
 
 
 # use Enums.CharacterAbility
-static func findByHighestAbilityScore(characterSpawnIds : Array, ability : int) -> Array:
-	var characters = getCharacters(characterSpawnIds)
-	
+static func findByHighestAbilityScore(characters : Array, ability : int) -> Array:
 	var highest = 0
 	for character in characters:
 		if character.getScore(ability) > highest:
@@ -62,9 +44,7 @@ static func findByHighestAbilityScore(characterSpawnIds : Array, ability : int) 
 
 
 # use Enums.CharacterAbility
-static func findByLowestAbilityScore(characterSpawnIds : Array, ability : int) -> Array:
-	var characters = getCharacters(characterSpawnIds)
-	
+static func findByLowestAbilityScore(characters : Array, ability : int) -> Array:
 	var lowest = 9999
 	for character in characters:
 		if character.getScore(ability) < lowest:
@@ -78,24 +58,24 @@ static func findByLowestAbilityScore(characterSpawnIds : Array, ability : int) -
 
 
 # percentage is normalized, 0-1
-static func findByPctHp(characterSpawnIds : Array, hpPctTarget : int) -> Array:
+static func findByPctHp(characters : Array, hpPctTarget : int) -> Array:
 	var matches = []
 	
-	for characterSpawnId in characterSpawnIds:
-		if isCharacterAtPctHp(characterSpawnId, hpPctTarget):
-			matches.append(characterSpawnId)
+	for character in characters:
+		if max(0, min(1, hpPctTarget)) <= ((character.getCurrentHp() * 100) / character.maxHp):
+			matches.append(character)
 	
 	return matches
 
 
 # TODO
 # use Enums.AfflictionType
-static func findByAfflictionType(characterSpawnIds : Array, type : int) -> Array:
+static func findByAfflictionType(characters : Array, type : int) -> Array:
 	var matches = []
 	
-	for characterSpawnId in characterSpawnIds:
-		if characterHasAfflictionType(characterSpawnId, type):
-			matches.append(characterSpawnId)
+	for character in characters:
+		if characterHasAfflictionType(character, type):
+			matches.append(character)
 	
 	return matches
 
@@ -103,14 +83,6 @@ static func findByAfflictionType(characterSpawnIds : Array, type : int) -> Array
 #
 # individual queries
 #
-
-# percentage is normalized, 0-1
-static func isCharacterAtPctHp(characterSpawnId : int, hpPctTarget : int) -> bool:
-	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
-	
-	return max(0, min(1, hpPctTarget)) <= ((character.getCurrentHp() * 100) / character.maxHp)
-
-
 # TODO
 # use Enums.AfflictionType
 static func characterHasAfflictionType(characterSpawnId : int, type : int) -> bool:

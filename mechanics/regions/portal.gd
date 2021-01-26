@@ -16,12 +16,12 @@ func _init(id : int, pointA : int, pointB : int, entranceLogic : String = '').(i
 	self.entranceLogic = entranceLogic if !entranceLogic.empty() else _NOOP
 
 
-func enter(characterSpawnId : int, fromRoomId : int) -> bool:
+func enter(character : Character, fromRoom : Room) -> bool:
 	var node = ScriptTool.getNode(entranceLogic)
 	var result = node.execute(
-			CharactersDatabase.getEntitySpawn(characterSpawnId),
-			RoomsDatabase.getEntitySpawn(fromRoomId),
-			RoomsDatabase.getEntitySpawn(pointA if fromRoomId == pointB else pointB)
+			character,
+			fromRoom,
+			RoomsDatabase.getEntitySpawn(pointA if fromRoom.id == pointB else pointB)
 	)
 	node.queue_free()
 	

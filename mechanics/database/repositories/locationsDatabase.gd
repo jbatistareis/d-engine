@@ -6,6 +6,6 @@ var locations : Array = [
 ]
 
 # TODO get from DB
-func getEntity(id : int) -> Portal:
+func getEntity(id : int) -> Location:
 	return locations[id - 1]
 

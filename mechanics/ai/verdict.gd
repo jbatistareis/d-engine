@@ -11,17 +11,18 @@ func _init(id : int, concreteFacts : Array).(id) -> void:
 		self.concreteFacts.append(Array(concreteFactStr.split(';')))
 
 
-func decision(auditorSpawnId : int, suspectsSpawnIds : Array) -> void:
-	var auditor = CharactersDatabase.getEntitySpawn(auditorSpawnId)
-	
+func decision(auditor : Character, suspects : Array) -> void:
 	if auditor != null:
 		var result
 		var fact
 		
 		for concreteFact in concreteFacts:
-			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspectsSpawnIds)
+			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspects)
 			if !result.empty():
-				Signals.emit_signal("publishedCommand", ExecuteMoveCommand.new(auditor.spawnId, result, concreteFact[1]))
+				Signals.emit_signal(
+						"publishedCommand",
+						ExecuteMoveCommand.new(auditor, result, MovesDatabase.getEntity(concreteFact[1]))
+				)
 				return
 
 

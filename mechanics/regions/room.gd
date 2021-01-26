@@ -18,10 +18,10 @@ var friendlyIds : Array # present npc ids
 var foeIds : Array # present enemy ids
 
 # use this for queries
-var characterSpawns : Array = [] # spawned players ids
-var itemSpawns : Array = [] # spawned item ids
-var friendSpawns : Array = [] # spawned npcs ids
-var foeSpawns : Array = [] # spawned enemies ids
+var characterSpawns : Array = [] # spawned players 
+var itemSpawns : Array = [] # spawned item
+var friendSpawns : Array = [] # spawned npcs
+var foeSpawns : Array = [] # spawned enemies
 
 var visited : bool
 
@@ -48,74 +48,71 @@ func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 
 	self.visited = visited
 
 
-func enter(characterSpawnId : int) -> void:
-	Signals.emit_signal("characterArrivedRoom", characterSpawnId, spawnId)
-	executeScript(characterAproachesScript, id, characterSpawnId)
+func enter(character : Character) -> void:
+	Signals.emit_signal("characterArrivedRoom", character, self)
+	executeScript(characterAproachesScript, character)
 	
-	CharactersDatabase.getEntitySpawn(characterSpawnId).currentRoomId = id
-	characterSpawns.append(characterSpawnId)
+	character.currentRoomId = id
+	characterSpawns.append(character)
 	characterSpawns.sort()
 	
 	for id in itemIds:
 		var item = ItemsDatabase.spawnEntity(id)
-		executeScript(item.characterAproachesScript, item.spawnId, characterSpawnId)
-		itemSpawns.append(item.spawnId)
-	itemSpawns.sort()
+		executeScript(item.characterAproachesScript, character)
+		itemSpawns.append(item)
 	
 	for id in friendlyIds:
-		var character = CharactersDatabase.spawnEntity(id)
-		character.setCurrentRoom(id)
-		executeScript(character.characterAproachesScript, character.spawnId, characterSpawnId)
-		friendSpawns.append(character.spawnId)
-	friendSpawns.sort()
+		var npc = CharactersDatabase.spawnEntity(id)
+		npc.currentRoomId = id
+		executeScript(character.characterAproachesScript, npc)
+		friendSpawns.append(npc)
 	
 	for id in foeIds:
-		var character = CharactersDatabase.spawnEntity(id)
-		character.setCurrentRoom(id)
-		executeScript(character.characterAproachesScript, character.spawnId, characterSpawnId)
-		foeSpawns.append(character.spawnId)
-	foeSpawns.sort()
+		var npc = CharactersDatabase.spawnEntity(id)
+		npc.currentRoomId = id
+		executeScript(character.characterAproachesScript, npc)
+		foeSpawns.append(npc)
 	
 	visited = true
 
 
-func exit(characterSpawnId : int) -> void:
-	Signals.emit_signal("characterLeftRoom", characterSpawnId, spawnId)
-	executeScript(characterLeavesScript, id, characterSpawnId)
-	
-	for spawnId in itemSpawns:
-		executeScript(ItemsDatabase.getEntitySpawn(spawnId).characterLeavesScript, spawnId, characterSpawnId)
-		ItemsDatabase.deSpawnEntity(spawnId)
+func exit(character : Character) -> void:
+	for item in itemSpawns:
+		executeScript(item.characterLeavesScript, character)
+		ItemsDatabase.deSpawnEntity(item.spawnId)
 	itemSpawns.clear()
 	
-	for spawnId in friendSpawns:
-		executeScript(CharactersDatabase.getEntitySpawn(spawnId).characterLeavesScript, spawnId, characterSpawnId)
-		CharactersDatabase.deSpawnEntity(spawnId)
+	for npc in friendSpawns:
+		executeScript(npc.characterLeavesScript, character)
+		CharactersDatabase.deSpawnEntity(npc.spawnId)
 	friendSpawns.clear()
 	
-	for spawnId in foeSpawns:
-		executeScript(CharactersDatabase.getEntitySpawn(spawnId).characterLeavesScript, spawnId, characterSpawnId)
-		CharactersDatabase.deSpawnEntity(spawnId)
+	for npc in foeSpawns:
+		executeScript(npc.characterLeavesScript, character)
+		CharactersDatabase.deSpawnEntity(npc.spawnId)
 	foeSpawns.clear()
 	
-	characterSpawns.erase(characterSpawnId)
+	characterSpawns.erase(character)
+	
+	executeScript(characterLeavesScript, character)
+	Signals.emit_signal("characterLeftRoom", character, self)
 
 
-func executeScript(script : String, executorSpawnId : int, targetSpawnId : int) -> void:
+func executeScript(script : String, character : Character) -> void:
 	var node = ScriptTool.getNode(script)
-	node.execute(executorSpawnId, targetSpawnId)
+	node.execute(character)
 	node.queue_free()
 
 
 func getPortal(direction : int) -> int:
 	match direction:
-		0:
+		Enums.RoomDirection.NORTH:
 			return northPortal
-		1:
+		Enums.RoomDirection.SOUTH:
 			return southPortal
-		2:
+		Enums.RoomDirection.EAST:
 			return eastPortal
-		3:
+		Enums.RoomDirection.WEST:
 			return westPortal
 		_:
 			return 0
