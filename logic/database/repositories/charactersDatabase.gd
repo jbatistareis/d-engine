@@ -18,11 +18,11 @@ func saveEntity(id : int) -> void:
 func getEntity(id : int) -> Character:
 	return characters[id - 1]
 
-func spawnEntity(id : int, useSameId : bool = false):
-	var entity = .spawnEntity(id, useSameId)
-	Signals.emit_signal("characterSpawned", entity.spawnId, entity.id)
+func spawnEntity(id : int) -> Character:
+	var character = .spawnEntity(id)
+	Signals.emit_signal("characterSpawned", character)
 	
-	return entity as Character
+	return character
 
 func deSpawnEntity(spawnId : int) -> void:
 	var entity = .getEntitySpawn(spawnId)

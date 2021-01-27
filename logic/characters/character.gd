@@ -6,7 +6,7 @@ var type : int # Enums.CharacterType
 var name : String
 var health : Health setget ,getHealth
 var baseDamage : int
-var level : Level setget ,getLevel
+var level : Level
 
 var strength : Stat
 var dexterity : Stat
@@ -47,15 +47,14 @@ func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : in
 	self.verdictActive = type > 0
 
 
-func getHealth() -> Health:
+func setSpawnId(value : int) -> void:
+	.setSpawnId(value)
 	health.characterSpawnId = spawnId
+	level.characterSpawnId = spawnId
+
+
+func getHealth() -> Health:
 	health.constitution = constitution.score
 	
 	return health
-
-
-func getLevel() -> Level:
-	health.characterSpawnId = spawnId
-	
-	return level
 

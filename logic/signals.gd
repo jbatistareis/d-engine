@@ -28,8 +28,8 @@ signal characterArrivedRoom(character, room)
 signal characterLeftRoom(character, room)
 
 # location
-signal characterArrivedLocation(character, location)
-signal characterLeftLocation(character, oldLocation, newLocation)
+signal characterArrivedLocation(character, location, fromPortal)
+signal characterLeftLocation(character, oldLocation, newLocation, fromPortal)
 signal characterTravelledLocation(character, direction, fromRoom, toRoom)
 
 # commands

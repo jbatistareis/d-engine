@@ -12,137 +12,137 @@ _global_script_classes=[ {
 "base": "Equipment",
 "class": "Armor",
 "language": "GDScript",
-"path": "res://mechanics/items/armor.gd"
+"path": "res://logic/items/armor.gd"
 }, {
 "base": "Entity",
 "class": "Character",
 "language": "GDScript",
-"path": "res://mechanics/characters/character.gd"
+"path": "res://logic/characters/character.gd"
 }, {
 "base": "Reference",
 "class": "CharacterQuery",
 "language": "GDScript",
-"path": "res://mechanics/utils/characterQuery.gd"
+"path": "res://logic/utils/characterQuery.gd"
 }, {
 "base": "Reference",
 "class": "Command",
 "language": "GDScript",
-"path": "res://mechanics/commands/command.gd"
+"path": "res://logic/commands/command.gd"
 }, {
 "base": "EntityArrayHelper",
 "class": "CommandArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/commandArrayHelper.gd"
+"path": "res://logic/utils/commandArrayHelper.gd"
 }, {
 "base": "Reference",
 "class": "Entity",
 "language": "GDScript",
-"path": "res://mechanics/database/entity.gd"
+"path": "res://logic/database/entity.gd"
 }, {
 "base": "Reference",
 "class": "EntityArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/entityArrayHelper.gd"
+"path": "res://logic/utils/entityArrayHelper.gd"
 }, {
 "base": "Node",
 "class": "EntityDatabase",
 "language": "GDScript",
-"path": "res://mechanics/database/entityDatabase.gd"
+"path": "res://logic/database/entityDatabase.gd"
 }, {
 "base": "Entity",
 "class": "Equipment",
 "language": "GDScript",
-"path": "res://mechanics/items/equipment.gd"
+"path": "res://logic/items/equipment.gd"
 }, {
 "base": "EntityArrayHelper",
 "class": "EquipmentArrayHelper",
 "language": "GDScript",
-"path": "res://mechanics/utils/equipmentArrayHelper.gd"
+"path": "res://logic/utils/equipmentArrayHelper.gd"
 }, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/executeMoveCommand.gd"
+"path": "res://logic/commands/executeMoveCommand.gd"
 }, {
 "base": "Entity",
 "class": "Fact",
 "language": "GDScript",
-"path": "res://mechanics/ai/fact.gd"
+"path": "res://logic/ai/fact.gd"
 }, {
 "base": "Reference",
 "class": "Health",
 "language": "GDScript",
-"path": "res://mechanics/characters/properties/health.gd"
+"path": "res://logic/characters/properties/health.gd"
 }, {
 "base": "Entity",
 "class": "Item",
 "language": "GDScript",
-"path": "res://mechanics/items/item.gd"
+"path": "res://logic/items/item.gd"
 }, {
 "base": "Reference",
 "class": "Level",
 "language": "GDScript",
-"path": "res://mechanics/characters/properties/level.gd"
+"path": "res://logic/characters/properties/level.gd"
 }, {
 "base": "Entity",
 "class": "Location",
 "language": "GDScript",
-"path": "res://mechanics/regions/location.gd"
+"path": "res://logic/regions/location.gd"
 }, {
 "base": "Entity",
 "class": "LocationSpawn",
 "language": "GDScript",
-"path": "res://mechanics/regions/locationSpawn.gd"
+"path": "res://logic/regions/locationSpawn.gd"
 }, {
 "base": "Entity",
 "class": "Move",
 "language": "GDScript",
-"path": "res://mechanics/characters/move.gd"
+"path": "res://logic/characters/move.gd"
 }, {
 "base": "Reference",
 "class": "MoveResult",
 "language": "GDScript",
-"path": "res://mechanics/characters/moveResult.gd"
+"path": "res://logic/characters/moveResult.gd"
 }, {
 "base": "Reference",
 "class": "Moves",
 "language": "GDScript",
-"path": "res://mechanics/characters/properties/moves.gd"
+"path": "res://logic/characters/properties/moves.gd"
 }, {
 "base": "Entity",
 "class": "Portal",
 "language": "GDScript",
-"path": "res://mechanics/regions/portal.gd"
+"path": "res://logic/regions/portal.gd"
 }, {
 "base": "Entity",
 "class": "Room",
 "language": "GDScript",
-"path": "res://mechanics/regions/room.gd"
+"path": "res://logic/regions/room.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
 "language": "GDScript",
-"path": "res://mechanics/characters/properties/stat.gd"
+"path": "res://logic/characters/properties/stat.gd"
 }, {
 "base": "Entity",
 "class": "Verdict",
 "language": "GDScript",
-"path": "res://mechanics/ai/verdict.gd"
+"path": "res://logic/ai/verdict.gd"
 }, {
 "base": "Command",
 "class": "VerdictCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/verdictCommand.gd"
+"path": "res://logic/commands/verdictCommand.gd"
 }, {
 "base": "Command",
 "class": "WaitCommand",
 "language": "GDScript",
-"path": "res://mechanics/commands/waitCommand.gd"
+"path": "res://logic/commands/waitCommand.gd"
 }, {
 "base": "Equipment",
 "class": "Weapon",
 "language": "GDScript",
-"path": "res://mechanics/items/weapon.gd"
+"path": "res://logic/items/weapon.gd"
 } ]
 _global_script_class_icons={
 "Armor": "",
@@ -186,23 +186,23 @@ default_bus_layout=""
 
 [autoload]
 
-Signals="*res://mechanics/signals.gd"
-Dice="*res://mechanics/dice.gd"
-ScriptTool="*res://mechanics/utils/scriptTool.gd"
-Enums="*res://mechanics/enums.gd"
-ArmorsDatabase="*res://mechanics/database/repositories/armorsDatabase.gd"
-WeaponsDatabase="*res://mechanics/database/repositories/weaponsDatabase.gd"
-ItemsDatabase="*res://mechanics/database/repositories/itemsDatabase.gd"
-MovesDatabase="*res://mechanics/database/repositories/movesDatabase.gd"
-CharactersDatabase="*res://mechanics/database/repositories/charactersDatabase.gd"
-LocationSpawnsDatabase="*res://mechanics/database/repositories/locationSpawnsDatabase.gd"
-PortalsDatabase="*res://mechanics/database/repositories/portalsDatabase.gd"
-RoomsDatabase="*res://mechanics/database/repositories/roomsDatabase.gd"
-LocationsDatabase="*res://mechanics/database/repositories/locationsDatabase.gd"
-FactsDatabase="*res://mechanics/database/repositories/factsDatabase.gd"
-VerdictsDatabase="*res://mechanics/database/repositories/verdictsDatabase.gd"
-CommandManager="*res://mechanics/managers/commandManager.gd"
-InventoryManager="*res://mechanics/managers/inventoryManager.gd"
+Signals="*res://logic/signals.gd"
+Dice="*res://logic/dice.gd"
+ScriptTool="*res://logic/utils/scriptTool.gd"
+Enums="*res://logic/enums.gd"
+ArmorsDatabase="*res://logic/database/repositories/armorsDatabase.gd"
+WeaponsDatabase="*res://logic/database/repositories/weaponsDatabase.gd"
+ItemsDatabase="*res://logic/database/repositories/itemsDatabase.gd"
+MovesDatabase="*res://logic/database/repositories/movesDatabase.gd"
+CharactersDatabase="*res://logic/database/repositories/charactersDatabase.gd"
+LocationSpawnsDatabase="*res://logic/database/repositories/locationSpawnsDatabase.gd"
+PortalsDatabase="*res://logic/database/repositories/portalsDatabase.gd"
+RoomsDatabase="*res://logic/database/repositories/roomsDatabase.gd"
+LocationsDatabase="*res://logic/database/repositories/locationsDatabase.gd"
+FactsDatabase="*res://logic/database/repositories/factsDatabase.gd"
+VerdictsDatabase="*res://logic/database/repositories/verdictsDatabase.gd"
+CommandManager="*res://logic/managers/commandManager.gd"
+InventoryManager="*res://logic/managers/inventoryManager.gd"
 
 [rendering]
 

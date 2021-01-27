@@ -21,20 +21,23 @@ func enter(characterId : int, fromPortalId : int) -> void:
 	var portal = PortalsDatabase.getEntity(fromPortalId)
 	var locationSpawn = LocationSpawnsDatabase.getEntityByLocationAndPortal(id, fromPortalId)
 	
-	Signals.emit_signal("characterArrivedLocation", character, self)
+	Signals.emit_signal("characterArrivedLocation", character, self, portal)
 	executeScript(characterAproachesScript, character)
 	
-	RoomsDatabase.spawnEntity(locationSpawn.roomId, true).enter(character)
+	RoomsDatabase.spawnEntity(locationSpawn.roomId).enter(character)
 
 
-func exit(characterSpawnId : int, fromPortalId : int) -> void:
-	var character = CharactersDatabase.getEntitySpawn(characterSpawnId)
+func exit(character : Character, fromPortal : Portal) -> void:
 	executeScript(characterLeavesScript, character)
+	character.currentRoomId = 0
 	
-	var portal = PortalsDatabase.getEntity(fromPortalId)
-	var newLocation = LocationsDatabase.getEntity(-(portal.pointA if (-portal.pointA != id) else portal.pointB), true)
-	
-	Signals.emit_signal("characterLeftLocation", character, self, newLocation)
+	Signals.emit_signal(
+			"characterLeftLocation",
+			character,
+			self,
+			LocationsDatabase.getEntity(-(fromPortal.pointA if (-fromPortal.pointA != id) else fromPortal.pointB)),
+			fromPortal
+	)
 
 
 # if points A or B are negative, its a location portal
@@ -47,14 +50,14 @@ func travel(character : Character, direction : int) -> void:
 		
 		if portal.enter(character, fromRoom):
 			if exitPoint > 0:
-				var toRoom = RoomsDatabase.spawnEntity(exitPoint, true)
+				var toRoom = RoomsDatabase.spawnEntity(exitPoint)
 				fromRoom.exit(character)
 				toRoom.enter(character)
 				
 				Signals.emit_signal("characterTravelledLocation", character, direction, fromRoom, toRoom)
 				
 			else:
-				exit(character.spawnId, portal.id)
+				exit(character, portal)
 		
 	else: # not an exit
 		return
