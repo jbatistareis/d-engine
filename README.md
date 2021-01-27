@@ -1,11 +1,11 @@
 # D Engine  
 ###### It is suposed to be a single player RPG engine made with Godot  
-Inspired by Ron Penton's MUD Game Programming, oldie but goodie.  
+Inspired by Dungeon World and Ron Penton's MUD Game Programming, oldie but goodie.  
 It almost works, nothing to show *for now*.  
 
 
 ## Note  
-It will work some day.  
+It is going to work some day.  
 
 
 ## TODO  
@@ -23,4 +23,5 @@ It will work some day.
 - [ ] Save system  
 - [ ] Controls system
 - [ ] Visuals ~~system~~  
+- [ ] Development ~~s~~tools  
 
