@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/person_normal_shop.png-bcfadc50557f75bddb4eb26741837190.stex"
+path="res://.import/4_exit_room.png-e49a2a6cfcfb447be47ba66d87d5fab2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://person_normal_shop.png"
-dest_files=[ "res://.import/person_normal_shop.png-bcfadc50557f75bddb4eb26741837190.stex" ]
+source_file="res://assets/4_exit_room.png"
+dest_files=[ "res://.import/4_exit_room.png-e49a2a6cfcfb447be47ba66d87d5fab2.stex" ]
 
 [params]
 

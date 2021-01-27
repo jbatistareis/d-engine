@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/1_exit_room.png-548a8e5d2f9371ee6e5b3fe0097a0b76.stex"
+path="res://.import/enemy_strong.png-cc42b40d45af67d8e87eb39f7987669f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://1_exit_room.png"
-dest_files=[ "res://.import/1_exit_room.png-548a8e5d2f9371ee6e5b3fe0097a0b76.stex" ]
+source_file="res://assets/enemy_strong.png"
+dest_files=[ "res://.import/enemy_strong.png-cc42b40d45af67d8e87eb39f7987669f.stex" ]
 
 [params]
 

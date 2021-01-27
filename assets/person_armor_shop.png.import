@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/person.png-eb0a173b1fa7decb4c9863cfd513b7a5.stex"
+path="res://.import/person_armor_shop.png-acbeb9eb0936b4f39b3a20f1dcdfc3de.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://person.png"
-dest_files=[ "res://.import/person.png-eb0a173b1fa7decb4c9863cfd513b7a5.stex" ]
+source_file="res://assets/person_armor_shop.png"
+dest_files=[ "res://.import/person_armor_shop.png-acbeb9eb0936b4f39b3a20f1dcdfc3de.stex" ]
 
 [params]
 

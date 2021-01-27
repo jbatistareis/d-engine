@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/0_exit_room.png-2d805ee5897e5e4263a5d8ed186c2c3f.stex"
+path="res://.import/person.png-9fd20e7498a019c8e5c21c8348d84856.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://0_exit_room.png"
-dest_files=[ "res://.import/0_exit_room.png-2d805ee5897e5e4263a5d8ed186c2c3f.stex" ]
+source_file="res://assets/person.png"
+dest_files=[ "res://.import/person.png-9fd20e7498a019c8e5c21c8348d84856.stex" ]
 
 [params]
 

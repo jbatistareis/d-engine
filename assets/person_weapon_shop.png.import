@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/4_exit_room.png-b2ef81250464d0f405d394cbf6d53556.stex"
+path="res://.import/person_weapon_shop.png-cea3638158c4875e54c7d056d931cc9a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://4_exit_room.png"
-dest_files=[ "res://.import/4_exit_room.png-b2ef81250464d0f405d394cbf6d53556.stex" ]
+source_file="res://assets/person_weapon_shop.png"
+dest_files=[ "res://.import/person_weapon_shop.png-cea3638158c4875e54c7d056d931cc9a.stex" ]
 
 [params]
 
