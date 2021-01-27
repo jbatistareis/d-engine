@@ -23,5 +23,5 @@ It is going to work some day.
 - [ ] Save system  
 - [ ] Controls system
 - [ ] Visuals ~~system~~  
-- [ ] Development ~~s~~tools  
+- [ ] Development tools  
 
