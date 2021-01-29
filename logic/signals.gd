@@ -43,10 +43,12 @@ signal commandsResumed()
 signal publishedCommand(command)
 
 # battle
+signal battleStart(player, enemies)
 signal charaterTimerSet(character, ticks)
 signal charaterTimerPaused(character)
 signal charaterTimerResumed(character)
-signal askedPlayerInput(character)
+signal askedPlayerInput(character) # use to show a command window
+signal playerConfirmedInput(command) # used when the command window confirms a command
 
 # messages
 

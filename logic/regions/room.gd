@@ -12,23 +12,22 @@ var entranceLogic : String
 var exitLogic : String
 var stayLogic : String
 var cd : float
+var danger : float # from 0 to 1, controls the possibility of a battle ocurring
 
 var itemIds : Array # present item ids
 var friendlyIds : Array # present npc ids
-var foeIds : Array # present enemy ids
+var foeIdGroups : Array # 2D array representing enemy groups
 
 # use this for queries
-var characterSpawns : Array = [] # spawned players 
 var itemSpawns : Array = [] # spawned item
 var friendSpawns : Array = [] # spawned npcs
-var foeSpawns : Array = [] # spawned enemies
 
 var visited : bool
 
 var elapsed : float = 0
 
 
-func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, itemIds : Array = [], friendlyIds : Array = [], foeIds : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript) -> void:
+func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, danger : float = 0,  itemIds : Array = [], friendlyIds : Array = [], foeIdGroups : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript) -> void:
 	self.location = location
 	
 	self.northPortal = northPortal
@@ -40,10 +39,11 @@ func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 
 	self.exitLogic = exitLogic
 	self.stayLogic = stayLogic
 	self.cd = cd
+	self.danger = danger
 	
 	self.itemIds = itemIds
 	self.friendlyIds = friendlyIds
-	self.foeIds = foeIds
+	self.foeIdGroups = foeIdGroups
 	
 	self.visited = visited
 
@@ -53,47 +53,46 @@ func enter(character : Character) -> void:
 	executeScript(characterAproachesScript, character)
 	
 	character.currentRoomId = id
-	characterSpawns.append(character)
-	characterSpawns.sort()
 	
-	for id in itemIds:
-		var item = ItemsDatabase.spawnEntity(id)
-		executeScript(item.characterAproachesScript, character)
-		itemSpawns.append(item)
-	
-	for id in friendlyIds:
-		var npc = CharactersDatabase.spawnEntity(id)
-		npc.currentRoomId = id
-		executeScript(character.characterAproachesScript, npc)
-		friendSpawns.append(npc)
-	
-	for id in foeIds:
-		var npc = CharactersDatabase.spawnEntity(id)
-		npc.currentRoomId = id
-		executeScript(character.characterAproachesScript, npc)
-		foeSpawns.append(npc)
-	
-	visited = true
+	if character.type == Enums.CharacterType.PC:
+		for id in itemIds:
+			var item = ItemsDatabase.spawnEntity(id)
+			executeScript(item.characterAproachesScript, character)
+			itemSpawns.append(item)
+		
+		for id in friendlyIds:
+			var npc = CharactersDatabase.spawnEntity(id)
+			npc.currentRoomId = id
+			executeScript(character.characterAproachesScript, npc)
+			friendSpawns.append(npc)
+		
+		if (danger > 0) && (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger)):
+			var enemies = []
+			
+			for id in foeIdGroups[Dice.rollNormal(foeIdGroups.size() - 1)]: # picks a spawn combination
+				var enemy = CharactersDatabase.spawnEntity(id)
+				enemy.currentRoomId = id
+				enemies.append(enemy)
+				
+				executeScript(characterAproachesScript, enemy)
+			
+			Signals.emit_signal("battleStart", character, enemies)
+		
+		visited = true
 
 
 func exit(character : Character) -> void:
-	for item in itemSpawns:
-		executeScript(item.characterLeavesScript, character)
-		ItemsDatabase.deSpawnEntity(item.spawnId)
-	itemSpawns.clear()
-	
-	for npc in friendSpawns:
-		executeScript(npc.characterLeavesScript, character)
-		CharactersDatabase.deSpawnEntity(npc.spawnId)
-	friendSpawns.clear()
-	
-	for npc in foeSpawns:
-		executeScript(npc.characterLeavesScript, character)
-		CharactersDatabase.deSpawnEntity(npc.spawnId)
-	foeSpawns.clear()
-	
-	characterSpawns.erase(character)
-	
+	if character.type == Enums.CharacterType.PC:
+		for item in itemSpawns:
+			executeScript(item.characterLeavesScript, character)
+			ItemsDatabase.deSpawnEntity(item.spawnId)
+		itemSpawns.clear()
+		
+		for npc in friendSpawns:
+			executeScript(npc.characterLeavesScript, character)
+			CharactersDatabase.deSpawnEntity(npc.spawnId)
+		friendSpawns.clear()
+		
 	executeScript(characterLeavesScript, character)
 	Signals.emit_signal("characterLeftRoom", character, self)
 
