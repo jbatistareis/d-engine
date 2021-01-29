@@ -18,7 +18,7 @@ It is going to work some day.
 - [ ] Message system  
 - [ ] Dialog system
 - [ ] Event system  
-- [ ] Battle system
+- [x] Battle system
 - [ ] Database system  
 - [ ] Save system  
 - [ ] Controls system
