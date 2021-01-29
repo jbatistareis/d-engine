@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/items/armor.gd"
 }, {
+"base": "Command",
+"class": "AskPlayerInputCommand",
+"language": "GDScript",
+"path": "res://logic/commands/askPlayerInputCommand.gd"
+}, {
 "base": "Entity",
 "class": "Character",
 "language": "GDScript",
@@ -146,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Armor": "",
+"AskPlayerInputCommand": "",
 "Character": "",
 "CharacterQuery": "",
 "Command": "",
@@ -203,6 +209,7 @@ FactsDatabase="*res://logic/database/repositories/factsDatabase.gd"
 VerdictsDatabase="*res://logic/database/repositories/verdictsDatabase.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
+RegionManager="*res://logic/managers/regionManager.gd"
 
 [rendering]
 

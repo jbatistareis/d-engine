@@ -13,7 +13,8 @@ func _init(id : int, name : String, description : String, portals : Array, chara
 	self.portals = portals
 
 
-func enter(characterId : int, fromPortalId : int) -> void:
+# used only by the player
+func enter(characterId : int, fromPortalId : int) -> int:
 	CharactersDatabase.clearEntitySpawns()
 	RoomsDatabase.clearEntitySpawns()
 	
@@ -21,10 +22,12 @@ func enter(characterId : int, fromPortalId : int) -> void:
 	var portal = PortalsDatabase.getEntity(fromPortalId)
 	var locationSpawn = LocationSpawnsDatabase.getEntityByLocationAndPortal(id, fromPortalId)
 	
-	Signals.emit_signal("characterArrivedLocation", character, self, portal)
+	Signals.emit_signal("playerArrivedLocation", self, portal)
 	executeScript(characterAproachesScript, character)
 	
 	RoomsDatabase.spawnEntity(locationSpawn.roomId).enter(character)
+	
+	return character.spawnId
 
 
 func exit(character : Character, fromPortal : Portal) -> void:
@@ -32,8 +35,7 @@ func exit(character : Character, fromPortal : Portal) -> void:
 	character.currentRoomId = 0
 	
 	Signals.emit_signal(
-			"characterLeftLocation",
-			character,
+			"playerLeftLocation",
 			self,
 			LocationsDatabase.getEntity(-(fromPortal.pointA if (-fromPortal.pointA != id) else fromPortal.pointB)),
 			fromPortal
@@ -54,10 +56,11 @@ func travel(character : Character, direction : int) -> void:
 				fromRoom.exit(character)
 				toRoom.enter(character)
 				
-				Signals.emit_signal("characterTravelledLocation", character, direction, fromRoom, toRoom)
+				Signals.emit_signal("characterTravelled", character, direction, fromRoom, toRoom)
 				
 			else:
-				exit(character, portal)
+				if character.type == Enums.CharacterType.PC:
+					exit(character, portal)
 		
 	else: # not an exit
 		return

@@ -5,7 +5,7 @@ var nextCommand : Command
 
 
 func _init(ticks : int, nextCommand : Command) -> void:
-	setTotalTicks(ticks)
+	self.totalTicks = ticks
 	self.nextCommand = nextCommand
 
 

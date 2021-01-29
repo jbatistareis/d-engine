@@ -3,8 +3,11 @@ extends Command
 
 var auditor : Character
 
-func _init(auditor : Character) -> void:
+func _init(ticks : int, auditor : Character) -> void:
+	self.totalTicks = ticks
 	self.auditor = auditor
+	
+	Signals.emit_signal("charaterTimerSet", self.auditor, self.totalTicks)
 
 func execute() -> void:
 	if (auditor != null) && auditor.verdictActive:

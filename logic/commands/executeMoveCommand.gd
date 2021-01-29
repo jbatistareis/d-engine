@@ -11,6 +11,8 @@ func _init(executor : Character, targets : Array, move : Move) -> void:
 	self.targets = targets
 	self.move = move
 	self.totalTicks = self.move.cdPre
+	
+	Signals.emit_signal("charaterTimerSet", self.character, self.totalTicks)
 
 
 func execute() -> void:
@@ -31,9 +33,9 @@ func execute() -> void:
 				pass # TODO miss
 	
 	if executor.verdictActive:
-		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor))
+		Signals.emit_signal("publishedCommand", VerdictCommand.new(move.cdPost, executor))
 	else:
-		return # TODO show command prompt
+		Signals.emit_signal("publishedCommand", AskPlayerInputCommand.new(move.cdPost, executor))
 
 
 func damageCharacter(character : Character, amount : int, bypassArmor : bool = false) -> void:
