@@ -43,7 +43,7 @@ func exit(character : Character, fromPortal : Portal) -> void:
 
 
 # if points A or B are negative, its a location portal
-func travel(character : Character, direction : int) -> void:
+func move(character : Character, direction : int) -> void:
 	var fromRoom = RoomsDatabase.getEntitySpawn(character.currentRoomId)
 	
 	if fromRoom.getPortal(direction) != 0:

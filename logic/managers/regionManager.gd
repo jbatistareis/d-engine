@@ -21,9 +21,9 @@ func changeLocation(oldLocation : Location, newLocation : Location, fromPortal :
 
 
 func movePlayer(direction : int) -> void:
-	location.travel(CharactersDatabase.getEntitySpawn(playerSpawnId), direction)
+	location.move(CharactersDatabase.getEntitySpawn(playerSpawnId), direction)
 
 
-func moveCharacter(character, direction, fromRoom, toRoom) -> void:
-	location.travel(character, direction)
+func moveCharacter(character, direction) -> void:
+	location.move(character, direction)
 
