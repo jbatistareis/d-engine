@@ -28,7 +28,7 @@ func tick() -> void:
 	
 	for command in commandsQueue:
 		command.tick()
-		if command.wasExecuted():
+		if command.executed:
 			executedCommands.append(command)
 	
 	for executedCommand in executedCommands:
@@ -44,6 +44,8 @@ func resume() -> void:
 
 
 func publishCommand(command : Command) -> void:
+	Signals.emit_signal("charaterTimerSet", command.executor, command.totalTicks)
+	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')
 

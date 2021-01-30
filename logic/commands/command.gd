@@ -1,8 +1,14 @@
 class_name Command
 
+var executor : Character
 var totalTicks : int setget setTotalTicks
 var remainingTicks : int
 var executed : bool = false
+
+
+func _init(executor : Character, ticks : int) -> void:
+	self.executor = executor
+	self.totalTicks = ticks
 
 
 func execute() -> void:
@@ -15,9 +21,12 @@ func setTotalTicks(value : int) -> void:
 
 
 func tick() -> void:
+	if executor.health.currentHp == 0:
+		executed = true
+	
 	remainingTicks -= 1
 	
-	if((remainingTicks <= 0) && !executed):
+	if(remainingTicks <= 0) && !executed:
 		executed = true
 		execute()
 

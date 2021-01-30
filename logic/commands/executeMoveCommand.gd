@@ -1,18 +1,13 @@
 class_name ExecuteMoveCommand
 extends Command
 
-var executor : Character
 var targets : Array = []
 var move : Move
 
 
-func _init(executor : Character, targets : Array, move : Move) -> void:
-	self.executor = executor
+func _init(executor : Character, targets : Array, move : Move).(executor, move.cdPre) -> void:
 	self.targets = targets
 	self.move = move
-	self.totalTicks = self.move.cdPre
-	
-	Signals.emit_signal("charaterTimerSet", self.character, self.totalTicks)
 
 
 func execute() -> void:
@@ -33,9 +28,9 @@ func execute() -> void:
 				pass # TODO miss
 	
 	if executor.verdictActive:
-		Signals.emit_signal("publishedCommand", VerdictCommand.new(move.cdPost, executor))
+		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor, move.cdPost))
 	else:
-		Signals.emit_signal("publishedCommand", AskPlayerBattleInputCommand.new(move.cdPost, executor))
+		Signals.emit_signal("publishedCommand", AskPlayerBattleInputCommand.new(executor, move.cdPost))
 
 
 func changeHp(character : Character, amount : int, bypassArmor : bool = false) -> void:

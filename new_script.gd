@@ -21,6 +21,8 @@ func _input(event) -> void:
 		Signals.emit_signal("playerMoved", Enums.RoomDirection.EAST)
 	elif event.is_action_pressed("ui_right"):
 		Signals.emit_signal("playerMoved", Enums.RoomDirection.WEST)
+	elif event.is_action_pressed("ui_accept"):
+		pass
 
 
 func _process(delta) -> void:
