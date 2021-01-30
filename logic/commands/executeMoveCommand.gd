@@ -22,10 +22,10 @@ func execute() -> void:
 		
 		match moveResult.outcome:
 			Dice.Outcome.BEST:
-				damageCharacter(target, moveResult.value)
+				changeHp(target, moveResult.value)
 			
 			Dice.Outcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
-				damageCharacter(
+				changeHp(
 					target,
 					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 			
@@ -38,7 +38,7 @@ func execute() -> void:
 		Signals.emit_signal("publishedCommand", AskPlayerInputCommand.new(move.cdPost, executor))
 
 
-func damageCharacter(character : Character, amount : int, bypassArmor : bool = false) -> void:
+func changeHp(character : Character, amount : int, bypassArmor : bool = false) -> void:
 	if (!bypassArmor && (amount < 0) && (character.armor != null)):
 		# TODO get from inventory database
 		amount = ArmorsDatabase.getEntitySpawn(character.armorId).takeHit(amount)

@@ -43,7 +43,8 @@ signal commandsResumed()
 signal publishedCommand(command)
 
 # battle
-signal battleStart(player, enemies)
+signal battleStart(players, enemies)
+signal battleEnd(loot) # TODO
 signal charaterTimerSet(character, ticks)
 signal charaterTimerPaused(character)
 signal charaterTimerResumed(character)

@@ -16,7 +16,7 @@ var danger : float # from 0 to 1, controls the possibility of a battle ocurring
 
 var itemIds : Array # present item ids
 var friendlyIds : Array # present npc ids
-var foeIdGroups : Array # 2D array representing enemy groups
+var foeIdGroups : Array # 2D array representing possible enemy groups
 
 # use this for queries
 var itemSpawns : Array = [] # spawned item
@@ -66,7 +66,7 @@ func enter(character : Character) -> void:
 			executeScript(character.characterAproachesScript, npc)
 			friendSpawns.append(npc)
 		
-		if (danger > 0) && (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger)):
+		if !foeIdGroups.empty() && (danger > 0) && (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger)):
 			var enemies = []
 			
 			for id in foeIdGroups[Dice.rollNormal(foeIdGroups.size() - 1)]: # picks a spawn combination
@@ -76,7 +76,7 @@ func enter(character : Character) -> void:
 				
 				executeScript(characterAproachesScript, enemy)
 			
-			Signals.emit_signal("battleStart", character, enemies)
+			Signals.emit_signal("battleStart", [character], enemies) # TODO form a player party
 		
 		visited = true
 
