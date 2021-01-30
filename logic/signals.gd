@@ -48,8 +48,8 @@ signal battleEnd(loot) # TODO
 signal charaterTimerSet(character, ticks)
 signal charaterTimerPaused(character)
 signal charaterTimerResumed(character)
-signal askedPlayerInput(character) # use to show a command window
-signal playerConfirmedInput(command) # used when the command window confirms a command
+signal askedPlayerBattleInput(character) # use to show a command window
+signal playerConfirmedBattleInput(command) # used when the command window confirms a command
 
 # messages
 

@@ -35,7 +35,7 @@ func execute() -> void:
 	if executor.verdictActive:
 		Signals.emit_signal("publishedCommand", VerdictCommand.new(move.cdPost, executor))
 	else:
-		Signals.emit_signal("publishedCommand", AskPlayerInputCommand.new(move.cdPost, executor))
+		Signals.emit_signal("publishedCommand", AskPlayerBattleInputCommand.new(move.cdPost, executor))
 
 
 func changeHp(character : Character, amount : int, bypassArmor : bool = false) -> void:

@@ -1,4 +1,4 @@
-class_name AskPlayerInputCommand
+class_name AskPlayerBattleInputCommand
 extends Command
 
 var player : Character
@@ -12,5 +12,5 @@ func _init(ticks : int, player : Character) -> void:
 
 
 func execute() -> void:
-	Signals.emit_signal("askedPlayerInput", player)
+	Signals.emit_signal("askedPlayerBattleInput", player)
 

@@ -7,8 +7,8 @@ var inBattle : bool = false
 
 func _ready():
 	Signals.connect("battleStart", self, "start")
-	Signals.connect("askedPlayerInput", self, "pauseCommands")
-	Signals.connect("playerConfirmedInput", self, "confirmInput")
+	Signals.connect("askedPlayerBattleInput", self, "pauseCommands")
+	Signals.connect("playerConfirmedBattleInput", self, "confirmInput")
 
 
 func start(players : Array, enemies : Array) -> void:
@@ -29,10 +29,14 @@ func _process(delta):
 
 
 func end() -> void:
-	for enemy in enemies:
-		CharactersDatabase.deSpawnEntity(enemy.spawnId)
-	
 	inBattle = false
+	
+	for enemy in enemies:
+		if enemy.health.currentHp == 0:
+			pass # TODO loot
+		else:
+			CharactersDatabase.deSpawnEntity(enemy.spawnId)
+	
 	enemies.clear()
 	Signals.emit_signal("battleEnd", {}) # TODO loot
 

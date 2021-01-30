@@ -15,9 +15,9 @@ _global_script_classes=[ {
 "path": "res://logic/items/armor.gd"
 }, {
 "base": "Command",
-"class": "AskPlayerInputCommand",
+"class": "AskPlayerBattleInputCommand",
 "language": "GDScript",
-"path": "res://logic/commands/askPlayerInputCommand.gd"
+"path": "res://logic/commands/askPlayerBattleInputCommand.gd"
 }, {
 "base": "Entity",
 "class": "Character",
@@ -151,7 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Armor": "",
-"AskPlayerInputCommand": "",
+"AskPlayerBattleInputCommand": "",
 "Character": "",
 "CharacterQuery": "",
 "Command": "",
