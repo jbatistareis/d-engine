@@ -1,25 +1,25 @@
 class_name VerdictCommand
 extends Command
 
-var auditor : Character
 
-func _init(auditor : Character) -> void:
-	self.auditor = auditor
+func _init(executor : Character, ticks : int).(executor, ticks) -> void:
+	return
+
 
 func execute() -> void:
-	if (auditor != null) && auditor.verdictActive:
-		var room = RoomsDatabase.getEntitySpawn(auditor.currentRoom)
+	if (executor != null) && executor.verdictActive:
+		var room = RoomsDatabase.getEntitySpawn(executor.currentRoom)
 		var suspects
 		
-		match auditor.getType():
+		match executor.getType():
 			Enums.CharacterType.PC:
-				suspects = room.foeSpawns
+				suspects = BattleManager.enemies
 			
 			Enums.CharacterType.FOE_NPC:
-				suspects = room.characterSpawns
+				suspects = BattleManager.players
 			
 			_:
 				suspects = []
 		
-		VerdictsDatabase.getEntity(auditor.verdictId).decision(auditor, suspects)
+		VerdictsDatabase.getEntity(executor.verdictId).decision(executor, suspects)
 

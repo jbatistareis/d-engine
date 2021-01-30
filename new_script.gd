@@ -1,40 +1,36 @@
 extends Node
 
-var character : Character
-var location : Location
-
 
 func _ready() -> void:
 	set_process_input(true)
 	
 	print('TEST START')
 	
-	Signals.connect("characterArrivedLocation", self, 'printEntering')
-	Signals.connect("characterTravelledLocation", self, 'printTraveling')
+	Signals.connect("playerArrivedLocation", self, 'printEntering')
+	Signals.connect("characterTravelled", self, 'printTraveling')
 	
-	LocationsDatabase.getEntity(1).enter(1, 1)
+	Signals.emit_signal("playerStartedAtLocation", 1, 1, 1)
 
 
 func _input(event) -> void:
 	if event.is_action_pressed("ui_up"):
-		location.travel(character, Enums.RoomDirection.NORTH)
+		Signals.emit_signal("playerMoved", Enums.RoomDirection.NORTH)
 	elif event.is_action_pressed("ui_down"):
-		location.travel(character, Enums.RoomDirection.SOUTH)
+		Signals.emit_signal("playerMoved", Enums.RoomDirection.SOUTH)
 	elif event.is_action_pressed("ui_left"):
-		location.travel(character, Enums.RoomDirection.EAST)
+		Signals.emit_signal("playerMoved", Enums.RoomDirection.EAST)
 	elif event.is_action_pressed("ui_right"):
-		location.travel(character, Enums.RoomDirection.WEST)
+		Signals.emit_signal("playerMoved", Enums.RoomDirection.WEST)
+	elif event.is_action_pressed("ui_accept"):
+		pass
 
 
 func _process(delta) -> void:
 	pass
 
 
-func printEntering(character : Character, location : Location, fromPortal : Portal) -> void:
-	self.character = character
-	self.location = location
-	
-	print('Character \'' + character.name + '\' entering location \'' + location.name + '\'')
+func printEntering(location : Location, fromPortal : Portal) -> void:
+	print('Entering location \'' + location.name + '\'')
 
 
 func printTraveling(character : Character, direction : int, fromRoom : Room, toRoom : Room) -> void:

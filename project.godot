@@ -14,6 +14,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/items/armor.gd"
 }, {
+"base": "Command",
+"class": "AskPlayerBattleInputCommand",
+"language": "GDScript",
+"path": "res://logic/commands/askPlayerBattleInputCommand.gd"
+}, {
 "base": "Entity",
 "class": "Character",
 "language": "GDScript",
@@ -146,6 +151,7 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Armor": "",
+"AskPlayerBattleInputCommand": "",
 "Character": "",
 "CharacterQuery": "",
 "Command": "",
@@ -186,10 +192,10 @@ default_bus_layout=""
 
 [autoload]
 
+Enums="*res://logic/enums.gd"
 Signals="*res://logic/signals.gd"
 Dice="*res://logic/dice.gd"
 ScriptTool="*res://logic/utils/scriptTool.gd"
-Enums="*res://logic/enums.gd"
 ArmorsDatabase="*res://logic/database/repositories/armorsDatabase.gd"
 WeaponsDatabase="*res://logic/database/repositories/weaponsDatabase.gd"
 ItemsDatabase="*res://logic/database/repositories/itemsDatabase.gd"
@@ -201,8 +207,10 @@ RoomsDatabase="*res://logic/database/repositories/roomsDatabase.gd"
 LocationsDatabase="*res://logic/database/repositories/locationsDatabase.gd"
 FactsDatabase="*res://logic/database/repositories/factsDatabase.gd"
 VerdictsDatabase="*res://logic/database/repositories/verdictsDatabase.gd"
-CommandManager="*res://logic/managers/commandManager.gd"
+RegionManager="*res://logic/managers/regionManager.gd"
+BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
+CommandManager="*res://logic/managers/commandManager.gd"
 
 [rendering]
 

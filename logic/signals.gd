@@ -1,5 +1,19 @@
 extends Node
 
+# location
+# these are used to move around
+signal playerStartedAtLocation(characterId, locationId, fromPortalId) # used to spawn a player and start the simulation at a location
+signal playerMoved(direction) # used to move the player arround rooms
+signal characterMoved(character, direction) # used to move any other character arround rooms
+# these are fired as information
+signal playerArrivedLocation(location, fromPortal) # fired when a player spawns, every spawn is cleared
+signal playerLeftLocation(oldLocation, newLocation, fromPortal) # fired when a player leaves a location, spawns are left intact
+signal characterTravelled(character, direction, fromRoom, toRoom) # fired when any character moves
+
+# rooms
+signal characterArrivedRoom(character, room)
+signal characterLeftRoom(character, room)
+
 # character
 signal characterSpawned(character)
 signal characterDespawned(character)
@@ -23,17 +37,19 @@ signal weaponDespawned(weapon)
 signal itemSpawned(item)
 signal itemDespawned(item)
 
-# room
-signal characterArrivedRoom(character, room)
-signal characterLeftRoom(character, room)
-
-# location
-signal characterArrivedLocation(character, location, fromPortal)
-signal characterLeftLocation(character, oldLocation, newLocation, fromPortal)
-signal characterTravelledLocation(character, direction, fromRoom, toRoom)
-
 # commands
+signal commandsPaused()
+signal commandsResumed()
 signal publishedCommand(command)
+
+# battle
+signal battleStart(players, enemies)
+signal battleEnd(loot) # TODO
+signal charaterTimerSet(character, ticks)
+signal charaterTimerPaused(character)
+signal charaterTimerResumed(character)
+signal askedPlayerBattleInput(character) # use to show a command window
+signal playerConfirmedBattleInput(command) # used when the command window confirms a command
 
 # messages
 

@@ -1,12 +1,11 @@
 class_name Verdict
 extends Entity
 
-var active : bool
 var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT ID>, <MOVE ID>]
 
 
 # TODO store as a string, parse into int array
-func _init(id : int, concreteFacts : Array).(id) -> void:
+func _init(id : int, concreteFacts : Array = []).(id) -> void:
 	for concreteFactStr in concreteFacts:
 		self.concreteFacts.append(Array(concreteFactStr.split(';')))
 

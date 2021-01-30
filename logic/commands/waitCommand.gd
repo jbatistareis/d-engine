@@ -4,8 +4,7 @@ extends Command
 var nextCommand : Command
 
 
-func _init(ticks : int, nextCommand : Command) -> void:
-	setTotalTicks(ticks)
+func _init(nextCommand : Command, ticks : int).(nextCommand.executor, ticks) -> void:
 	self.nextCommand = nextCommand
 
 
