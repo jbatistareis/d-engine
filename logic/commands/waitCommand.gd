@@ -9,5 +9,5 @@ func _init(nextCommand : Command, ticks : int).(nextCommand.executor, ticks) -> 
 
 
 func execute() -> void:
-	Signals.emit_signal("publishedCommand", nextCommand)
+	Signals.emit_signal("commandPublished", nextCommand)
 

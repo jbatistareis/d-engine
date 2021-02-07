@@ -40,7 +40,7 @@ signal itemDespawned(item)
 # commands
 signal commandsPaused()
 signal commandsResumed()
-signal publishedCommand(command)
+signal commandPublished(command)
 
 # battle
 signal battleStart(players, enemies)

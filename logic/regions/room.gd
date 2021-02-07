@@ -49,6 +49,7 @@ func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 
 
 
 func enter(character : Character) -> void:
+	visited = true
 	Signals.emit_signal("characterArrivedRoom", character, self)
 	executeScript(characterAproachesScript, character)
 	
@@ -77,8 +78,6 @@ func enter(character : Character) -> void:
 				executeScript(characterAproachesScript, enemy)
 			
 			Signals.emit_signal("battleStart", [character], enemies) # TODO form a player party
-		
-		visited = true
 
 
 func exit(character : Character) -> void:

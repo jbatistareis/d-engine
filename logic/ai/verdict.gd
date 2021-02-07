@@ -19,7 +19,7 @@ func decision(auditor : Character, suspects : Array) -> void:
 			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspects)
 			if !result.empty():
 				Signals.emit_signal(
-						"publishedCommand",
+						"commandPublished",
 						ExecuteMoveCommand.new(auditor, result, MovesDatabase.getEntity(concreteFact[1]))
 				)
 				return

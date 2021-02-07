@@ -28,9 +28,9 @@ func execute() -> void:
 				pass # TODO miss
 	
 	if executor.verdictActive:
-		Signals.emit_signal("publishedCommand", VerdictCommand.new(executor, move.cdPost))
+		Signals.emit_signal("commandPublished", VerdictCommand.new(executor, move.cdPost))
 	else:
-		Signals.emit_signal("publishedCommand", AskPlayerBattleInputCommand.new(executor, move.cdPost))
+		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executor, move.cdPost))
 
 
 func changeHp(character : Character, amount : int, bypassArmor : bool = false) -> void:

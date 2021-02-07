@@ -11,7 +11,7 @@ var executedCommands : Array = []
 func _ready():
 	Signals.connect("commandsPaused", self, 'pause')
 	Signals.connect("commandsResumed", self, 'resume')
-	Signals.connect("publishedCommand", self, 'publishCommand')
+	Signals.connect("commandPublished", self, 'publishCommand')
 
 
 func _process(delta : float) -> void:

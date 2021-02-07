@@ -12,15 +12,20 @@ func _ready():
 
 
 func start(players : Array, enemies : Array) -> void:
-	self.players = players
-	self.enemies = enemies
-	self.inBattle = true
-	
-	for enemy in enemies:
-		var node = ScriptTool.getNode(enemy.characterAproachesScript)
-		for player in players:
-			node.execute(player)
-		node.queue_free()
+	if !inBattle:
+		inBattle = true
+		
+		self.players = players
+		self.enemies = enemies
+		
+		for enemy in enemies:
+			var node = ScriptTool.getNode(enemy.characterAproachesScript)
+			for player in players:
+				node.execute(player)
+			node.queue_free()
+			
+			if enemy.verdictActive:
+				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 1))
 
 
 func _process(delta):
@@ -29,16 +34,17 @@ func _process(delta):
 
 
 func end() -> void:
-	inBattle = false
-	
-	for enemy in enemies:
-		if enemy.health.currentHp == 0:
-			pass # TODO loot
-		else:
-			CharactersDatabase.deSpawnEntity(enemy.spawnId)
-	
-	enemies.clear()
-	Signals.emit_signal("battleEnd", {}) # TODO loot
+	if inBattle:
+		inBattle = false
+		
+		for enemy in enemies:
+			if enemy.health.currentHp == 0:
+				pass # TODO loot
+			else:
+				CharactersDatabase.deSpawnEntity(enemy.spawnId)
+		
+		enemies.clear()
+		Signals.emit_signal("battleEnd", {}) # TODO loot
 
 
 func pauseCommands(player : Character, enemies : Array) -> void:
@@ -46,14 +52,14 @@ func pauseCommands(player : Character, enemies : Array) -> void:
 
 
 func confirmInput(command : Command) -> void:
-	Signals.emit_signal("publishedCommand", command)
+	Signals.emit_signal("commandPublished", command)
 	Signals.emit_signal("commandsResumed")
 
 
 func enemiesAlive() -> int:
 	var result = 0
 	for enemy in enemies:
-		if enemy.health.currentHp == 0:
+		if enemy.health.currentHp > 0:
 			result += 1
 	
 	return result
