@@ -2,7 +2,6 @@ class_name EntityDatabase
 extends Node
 
 var spawnedEntities : Array = []
-var spawnCount : int = 1
 var useSameId : bool = false
 
 
@@ -17,9 +16,13 @@ func getEntity(id : int):
 
 
 func spawnEntity(id : int):
+	var lastSpanwId = 0
+	for entity in spawnedEntities:
+		if entity.spanwId > lastSpanwId:
+			lastSpanwId = entity.spanwId
+	
 	var entity = getEntity(id)
-	entity.spawnId = spawnCount if !useSameId else id
-	spawnCount += 1
+	entity.spawnId = (lastSpanwId + 1) if !useSameId else id
 	
 	spawnedEntities.append(entity)
 	spawnedEntities.sort_custom(EntityArrayHelper, 'spawnSort')
@@ -46,5 +49,4 @@ func getEntitySpawn(spawnId : int):
 
 func clearEntitySpawns() -> void:
 	spawnedEntities.clear()
-	spawnCount = 1
 
