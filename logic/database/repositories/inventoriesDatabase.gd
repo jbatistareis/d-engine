@@ -1,7 +1,7 @@
 extends EntityDatabase
 
 # TODO remove
-var armors : Array = [Armor.new(1, 'Leather jacket')]
+var inventories : Array = [Inventory.new(1, false)]
 
 
 # TODO save on DB
@@ -10,6 +10,6 @@ func saveEntity(id : int) -> void:
 
 
 # TODO get from DB
-func getEntity(itemId : int) -> Armor:
-	return armors[itemId - 1]
+func getEntity(id : int) -> Inventory:
+	return inventories[id - 1]
 

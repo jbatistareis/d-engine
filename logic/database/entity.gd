@@ -23,3 +23,8 @@ func setSpawnId(value : int) -> void:
 
 func getSpawnId() -> int:
 	return spawnId
+
+
+func serialize() -> String:
+	return ''
+

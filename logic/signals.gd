@@ -51,6 +51,11 @@ signal charaterTimerResumed(character)
 signal askedPlayerBattleInput(character) # use to show a command window
 signal playerConfirmedBattleInput(command) # used when the command window confirms a command
 
-# messages
-
+# inventory
+signal characterEquipedWeapon(character, weaponIndex)
+signal characterEquipedArmor(character, armor)
+signal characterUsedItem(character, itemIndex)
+signal characterReceivedItemOrWeapon(character, entity)
+signal characterDroppedItem(character, itemIndex)
+signal characterDroppedWeapon(character, weaponIndex)
 

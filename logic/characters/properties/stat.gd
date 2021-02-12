@@ -1,6 +1,7 @@
 class_name Stat
 
 var score : int
+
 var modifier : int setget ,getModifier
 var canIncrease : bool setget ,getCanIncrease
 var canDecrease : bool setget ,getCanDecrease

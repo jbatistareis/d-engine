@@ -16,13 +16,13 @@ func getEntity(id : int):
 
 
 func spawnEntity(id : int):
-	var lastSpanwId = 0
+	var lastSpawnId = 0
 	for entity in spawnedEntities:
-		if entity.spanwId > lastSpanwId:
-			lastSpanwId = entity.spanwId
+		if entity.spawnId > lastSpawnId:
+			lastSpawnId = entity.spawnId
 	
 	var entity = getEntity(id)
-	entity.spawnId = (lastSpanwId + 1) if !useSameId else id
+	entity.spawnId = (lastSpawnId + 1) if !useSameId else id
 	
 	spawnedEntities.append(entity)
 	spawnedEntities.sort_custom(EntityArrayHelper, 'spawnSort')

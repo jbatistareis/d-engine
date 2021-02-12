@@ -89,7 +89,10 @@ static func characterHasAfflictionType(characterSpawnId : int, type : int) -> bo
 	return RandomNumberGenerator.new().randi_range(0, 1) == 0
 
 
-# TODO
-static func characterHasItem(characterSpawnId : int, itemId : int) -> bool:
-	return RandomNumberGenerator.new().randi_range(0, 1) == 0
+static func characterHasItem(character : Character, item : Item) -> bool:
+	for presentItem in character.inventory.items:
+		if presentItem.id == item.id:
+			return true
+	
+	return false
 

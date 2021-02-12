@@ -14,7 +14,7 @@ It is going to work some day.
 - [x] Dynamic script system  
 - [x] Ai system  
 - [x] Command system  
-- [ ] Inventory system  
+- [x] Inventory system  
 - [ ] Message system  
 - [ ] Dialog system
 - [ ] Event system  

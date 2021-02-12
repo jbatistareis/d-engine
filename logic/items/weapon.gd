@@ -1,5 +1,7 @@
 class_name Weapon
-extends Equipment
+extends Entity
+
+var name : String
 
 var damage : int
 var modifierDice : int # returns Dice.Type enum
@@ -9,8 +11,9 @@ var cdPre : int
 var cdPost : int
 
 
-# TODO fix expressions
-func _init(id : int, itemId : int, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, itemId, characterAproachesScript, characterLeavesScript) -> void:
+#weapon items equip the character when interacted
+func _init(id : int, name : String, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1).(id) -> void:
+	self.name = name
 	self.damage = damage
 	self.modifierDice = modifierDice
 	self.modifierRollType = modifierRollType
@@ -19,7 +22,9 @@ func _init(id : int, itemId : int, damage : int = 1, modifierDice : int = Enums.
 	self.cdPost = cdPost
 
 
-func calculateDamage(character : Character) -> int:
+#TODO find a better way to do it
+#the type of the character parameter is not specified to avoid a cyclic reference error
+func calculateDamage(character) -> int:
 	var modifierValue
 	match modifier:
 		Enums.CharacterModifier.STR:

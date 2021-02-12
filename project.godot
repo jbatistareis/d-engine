@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Equipment",
+"base": "Entity",
 "class": "Armor",
 "language": "GDScript",
 "path": "res://logic/items/armor.gd"
@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/database/entityDatabase.gd"
 }, {
-"base": "Entity",
-"class": "Equipment",
-"language": "GDScript",
-"path": "res://logic/items/equipment.gd"
-}, {
 "base": "EntityArrayHelper",
 "class": "EquipmentArrayHelper",
 "language": "GDScript",
@@ -78,6 +73,11 @@ _global_script_classes=[ {
 "class": "Health",
 "language": "GDScript",
 "path": "res://logic/characters/properties/health.gd"
+}, {
+"base": "Entity",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://logic/characters/inventory.gd"
 }, {
 "base": "Entity",
 "class": "Item",
@@ -144,7 +144,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/commands/waitCommand.gd"
 }, {
-"base": "Equipment",
+"base": "Entity",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://logic/items/weapon.gd"
@@ -159,11 +159,11 @@ _global_script_class_icons={
 "Entity": "",
 "EntityArrayHelper": "",
 "EntityDatabase": "",
-"Equipment": "",
 "EquipmentArrayHelper": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
 "Health": "",
+"Inventory": "",
 "Item": "",
 "Level": "",
 "Location": "",
@@ -199,6 +199,7 @@ ScriptTool="*res://logic/utils/scriptTool.gd"
 ArmorsDatabase="*res://logic/database/repositories/armorsDatabase.gd"
 WeaponsDatabase="*res://logic/database/repositories/weaponsDatabase.gd"
 ItemsDatabase="*res://logic/database/repositories/itemsDatabase.gd"
+InventoriesDatabase="*res://logic/database/repositories/inventoriesDatabase.gd"
 MovesDatabase="*res://logic/database/repositories/movesDatabase.gd"
 CharactersDatabase="*res://logic/database/repositories/charactersDatabase.gd"
 LocationSpawnsDatabase="*res://logic/database/repositories/locationSpawnsDatabase.gd"

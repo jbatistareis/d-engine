@@ -2,8 +2,8 @@ class_name Health
 
 var baseHp : int
 var currentHp : int
-var maxHp : int setget ,getMaxHp
 
+var maxHp : int setget ,getMaxHp
 var characterSpawnId : int
 var constitution : int
 

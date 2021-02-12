@@ -1,7 +1,7 @@
 extends EntityDatabase
 
 # TODO remove
-var weapons : Array = [Weapon.new(1, 2)]
+var weapons : Array = [Weapon.new(1, 'Metal pipe')]
 
 
 # TODO get from DB
