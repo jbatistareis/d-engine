@@ -1,7 +1,7 @@
 class_name Fact
 extends Entity
 
-const _NOOP : String = 'extends Node\nfunc result(suspects : Array) -> Array:\n\treturn []'
+const _NOOP : String = 'func execute(suspects : Array) -> Array:\n\treturn []'
 
 var analyzeScript : String
 
@@ -11,9 +11,5 @@ func _init(id : int, analyzeScript : String = '').(id) -> void:
 
 
 func analyze(suspects : Array) -> Array:
-	var node = ScriptTool.getNode(analyzeScript)
-	var result = node.result(suspects)
-	node.queue_free()
-	
-	return result
+	return ScriptTool.getReference(analyzeScript).execute(suspects)
 

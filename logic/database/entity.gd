@@ -1,6 +1,6 @@
 class_name Entity
 
-const _INTERNAL_SCRIPT_NOOP : String = 'extends Node\nfunc execute(character : Character) -> void:\n\treturn'
+const _INTERNAL_SCRIPT_NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
 var id : int
 var spawnId : int = 0 setget setSpawnId,getSpawnId

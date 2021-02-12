@@ -1,7 +1,6 @@
 class_name Move
 extends Entity
 
-const _INTERNAL_MOVE_SCRIPT : String = 'extends Node\n%s\n%s'
 const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
 const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 1'
 
@@ -23,9 +22,8 @@ func _init(id : int, name : String, description : String, valueExpression : Stri
 
 
 func getResult(character : Character) -> MoveResult:
-	var node = ScriptTool.getNode(_INTERNAL_MOVE_SCRIPT % [valueExpression, valueExpression])
-	var result = MoveResult.new(node.getValue(character), node.getOutcome(character))
-	node.queue_free()
+	var reference = ScriptTool.getReference(valueExpression + '\n' + valueExpression)
+	var result = MoveResult.new(reference.getValue(character), reference.getOutcome(character))
 	
 	return result
 

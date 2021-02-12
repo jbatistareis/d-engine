@@ -67,7 +67,5 @@ func move(character : Character, direction : int) -> void:
 
 
 func executeScript(script : String, character : Character) -> void:
-	var node = ScriptTool.getNode(script)
-	node.execute(character)
-	node.queue_free()
+	ScriptTool.getReference(script).execute(character)
 
