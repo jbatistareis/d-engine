@@ -2,13 +2,12 @@ class_name LocationSpawn
 extends Entity
 
 var locationId : int
-var portalId : int
-var roomId : int
+var fromRoomId : int
+var toRoomId : int
 
-var entranceLogic : String
 
-func _init(id : int, locationId : int, portalId : int, roomId : int).(id) -> void:
+func _init(id : int, locationId : int, fromRoomId : int, toRoomId : int).(id) -> void:
 	self.locationId = locationId
-	self.portalId = portalId
-	self.roomId = roomId
+	self.fromRoomId = fromRoomId
+	self.toRoomId = toRoomId
 

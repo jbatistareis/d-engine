@@ -6,18 +6,19 @@ var location : Location
 
 func _ready():
 	Signals.connect("playerStartedAtLocation", self, "instantiateLocation")
-	Signals.connect("playerLeftLocation", self, "changeLocation")
+	Signals.connect("playerTransferLocation", self, "changeLocation")
 	Signals.connect("playerMoved", self, "movePlayer")
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func instantiateLocation(characterId : int, locationId : int, fromPortalId : int) -> void:
+func instantiateLocation(characterId : int, locationId : int, fromRoomId : int) -> void:
 	location = LocationsDatabase.getEntity(locationId)
-	playerSpawnId = location.enter(characterId, fromPortalId)
+	playerSpawnId = location.enter(characterId, fromRoomId)
 
 
-func changeLocation(oldLocation : Location, newLocation : Location, fromPortal : Portal) -> void:
-	instantiateLocation(CharactersDatabase.getEntitySpawn(playerSpawnId).id, newLocation.id, fromPortal.id)
+func changeLocation(oldLocationId : int, newLocationId : int, fromRoomId : int) -> void:
+	LocationsDatabase.deSpawnEntity(oldLocationId)
+	instantiateLocation(CharactersDatabase.getEntitySpawn(playerSpawnId).id, newLocationId, fromRoomId)
 
 
 func movePlayer(direction : int) -> void:

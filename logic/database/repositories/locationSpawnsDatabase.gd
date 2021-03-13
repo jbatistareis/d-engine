@@ -2,14 +2,14 @@ extends EntityDatabase
 
 # TODO remove
 var locationSpawns : Array = [
-	LocationSpawn.new(1, 1, 1, 1)
+	LocationSpawn.new(1, 1, 0, 1)
 ]
 
 # TODO get from DB
-func getEntityByLocationAndPortal(locationId : int, portalId : int) -> LocationSpawn:
+func getEntityByLocationIdAndFromRoomId(locationId : int, fromRoomId : int) -> LocationSpawn:
 	for locationSpawn in locationSpawns:
-		if ((locationSpawn.locationId == locationId) && (locationSpawn.portalId == portalId)):
+		if ((locationSpawn.locationId == locationId) && (locationSpawn.fromRoomId == fromRoomId)):
 			return locationSpawn
 	
-	print('Location spawn not found (' + str(locationId) + ', ' + str(portalId) + ')')
+	print('Location spawn not found (' + str(locationId) + ', ' + str(fromRoomId) + ')')
 	return null

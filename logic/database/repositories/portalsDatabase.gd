@@ -2,8 +2,8 @@ extends EntityDatabase
 
 # TODO remove
 var portals : Array = [
-	Portal.new(1, -1, -1),
-	Portal.new(2, 1, 2)
+	Portal.new(1),
+	Portal.new(2)
 ]
 
 # TODO get from DB

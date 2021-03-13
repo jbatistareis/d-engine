@@ -8,7 +8,7 @@ func _ready() -> void:
 # TODO remove
 var rooms : Array = [
 	Room.new(1, 1, 2),
-	Room.new(2, 1, 0, 2)
+	Room.new(2, 1, 0, 1, 0, 0, 0, 2)
 ]
 
 # TODO get from DB

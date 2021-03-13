@@ -3,6 +3,11 @@ extends Entity
 
 var location : int
 
+var northExitRoom : int
+var southExitRoom : int
+var eastExitRoom : int
+var westExitRoom : int
+
 var northPortal : int
 var southPortal : int
 var eastPortal : int
@@ -27,8 +32,13 @@ var visited : bool
 var elapsed : float = 0
 
 
-func _init(id : int, location : int, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, danger : float = 0,  itemIds : Array = [], friendlyIds : Array = [], foeIdGroups : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript) -> void:
+func _init(id : int, location : int, northExitRoom : int = 0, southExitRoom : int = 0, eastExitRoom : int = 0, westExitRoom : int = 0, northPortal : int = 0, southPortal : int = 0, eastPortal : int = 0, westPortal : int = 0, cd : float = 1, danger : float = 0,  itemIds : Array = [], friendlyIds : Array = [], foeIdGroups : Array = [], visited : bool = false, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript) -> void:
 	self.location = location
+	
+	self.northExitRoom = northExitRoom
+	self.southExitRoom = southExitRoom
+	self.eastExitRoom = eastExitRoom
+	self.westExitRoom = westExitRoom
 	
 	self.northPortal = northPortal
 	self.southPortal = southPortal
@@ -110,6 +120,20 @@ func getPortal(direction : int) -> int:
 			return eastPortal
 		Enums.RoomDirection.WEST:
 			return westPortal
+		_:
+			return 0
+
+
+func getExitRoom(direction : int) -> int:
+	match direction:
+		Enums.RoomDirection.NORTH:
+			return northExitRoom
+		Enums.RoomDirection.SOUTH:
+			return southExitRoom
+		Enums.RoomDirection.EAST:
+			return eastExitRoom
+		Enums.RoomDirection.WEST:
+			return westExitRoom
 		_:
 			return 0
 
