@@ -56,6 +56,14 @@ func _init(id : int, location : int, northExitRoom : int = 0, southExitRoom : in
 	self.foeIdGroups = foeIdGroups
 	
 	self.visited = visited
+	
+	for id in itemIds:
+		itemSpawns.append(ItemsDatabase.spawnEntity(id))
+	
+	for id in friendlyIds:
+		var npc = CharactersDatabase.spawnEntity(id)
+		npc.currentRoomId = id
+		friendSpawns.append(npc)
 
 
 func enter(character : Character) -> void:
@@ -66,16 +74,11 @@ func enter(character : Character) -> void:
 	character.currentRoomId = id
 	
 	if character.type == Enums.CharacterType.PC:
-		for id in itemIds:
-			var item = ItemsDatabase.spawnEntity(id)
+		for item in itemSpawns:
 			executeScript(item.characterAproachesScript, character)
-			itemSpawns.append(item)
 		
-		for id in friendlyIds:
-			var npc = CharactersDatabase.spawnEntity(id)
-			npc.currentRoomId = id
+		for npc in friendSpawns:
 			executeScript(character.characterAproachesScript, npc)
-			friendSpawns.append(npc)
 		
 		if !foeIdGroups.empty() && (danger > 0) && (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger)):
 			var enemies = []
@@ -94,13 +97,9 @@ func exit(character : Character) -> void:
 	if character.type == Enums.CharacterType.PC:
 		for item in itemSpawns:
 			executeScript(item.characterLeavesScript, character)
-			ItemsDatabase.deSpawnEntity(item.spawnId)
-		itemSpawns.clear()
 		
 		for npc in friendSpawns:
 			executeScript(npc.characterLeavesScript, character)
-			CharactersDatabase.deSpawnEntity(npc.spawnId)
-		friendSpawns.clear()
 		
 	executeScript(characterLeavesScript, character)
 	Signals.emit_signal("characterLeftRoom", character, self)

@@ -13,6 +13,7 @@ func _init(id : int, name : String, description : String, characterAproachesScri
 # used only by the player
 func enter(characterId : int, fromRoomId : int) -> int:
 	CharactersDatabase.clearEntitySpawns()
+	ItemsDatabase.clearEntitySpawns()
 	RoomsDatabase.clearEntitySpawns()
 	
 	var locationSpawn = LocationSpawnsDatabase.getEntityByLocationIdAndFromRoomId(id, fromRoomId)
