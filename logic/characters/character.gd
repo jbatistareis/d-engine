@@ -29,7 +29,8 @@ var inventory : Inventory = Inventory.new()
 var verdict : Verdict = Verdict.new()
 var verdictActive : bool = false
 
-var currentRoomId : int = 0
+var currentLocation : String = ''
+var currentRoom : int = 0
 
 
 func getMaxHp() -> int:

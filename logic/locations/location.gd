@@ -2,6 +2,7 @@ class_name Location
 extends Entity
 
 var name : String
+var shortName : String
 var description : String
 var rooms : Array = []
 var portals : Array = []
@@ -12,19 +13,17 @@ var exitLogic : String = _INTERNAL_SCRIPT_NOOP
 
 
 # used only by the player
-func enter(characterId : int, toSpawnId : int) -> int:
+func enter(player : Character, toSpawnId : int) -> void:
 	CharactersDatabase.clearEntitySpawns()
 	ItemsDatabase.clearEntitySpawns()
 	
 	var locationSpawn = spawns[toSpawnId]
-	var character = CharactersDatabase.spawnEntity(characterId)
 	
 	Signals.emit_signal("playerArrivedLocation", self)
-	executeScript(entranceLogic, character)
+	executeScript(entranceLogic, player)
 	
-	rooms[locationSpawn.toRoomId].enter(character)
-	
-	return character.spawnId
+	player.currentLocation = shortName
+	rooms[locationSpawn.toRoomId].enter(player)
 
 
 func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:

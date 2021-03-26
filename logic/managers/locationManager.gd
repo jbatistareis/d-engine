@@ -1,6 +1,6 @@
 extends Node
 
-var playerSpawnId : int
+var player : Character
 var location : Location
 
 
@@ -11,7 +11,7 @@ func _ready():
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func instantiateLocation(characterId : int, locationName : String, toSpawnId : int = 0) -> void:
+func instantiateLocation(player : Character, locationName : String, toSpawnId : int = 0) -> void:
 	var file = File.new()
 	file.open_compressed(
 		"res://data/locations/" + str(locationName),
@@ -20,16 +20,14 @@ func instantiateLocation(characterId : int, locationName : String, toSpawnId : i
 	)
 	location = file.get_var()
 	file.close()
-	
-	playerSpawnId = location.enter(characterId, toSpawnId)
 
 
 func changeLocation(newLocationName : String, toSpawnId : int) -> void:
-	instantiateLocation(CharactersDatabase.getEntitySpawn(playerSpawnId).id, newLocationName, toSpawnId)
+	instantiateLocation(player, newLocationName, toSpawnId)
 
 
 func movePlayer(direction : int) -> void:
-	location.move(CharactersDatabase.getEntitySpawn(playerSpawnId), direction)
+	location.move(player, direction)
 
 
 func moveCharacter(character, direction) -> void:

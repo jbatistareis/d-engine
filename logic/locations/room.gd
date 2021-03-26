@@ -1,6 +1,8 @@
 class_name Room
-extends Entity
 
+const _NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
+
+var id : int
 var x : int
 var y : int
 var type : int = 0
@@ -16,8 +18,8 @@ var southPortal : int = 0
 var eastPortal : int = 0
 var westPortal : int = 0
 
-var entranceLogic : String = _INTERNAL_SCRIPT_NOOP
-var exitLogic : String = _INTERNAL_SCRIPT_NOOP
+var entranceLogic : String = _NOOP
+var exitLogic : String = _NOOP
 var danger : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
 
 var itemIds : Array = [] # present item ids
@@ -30,10 +32,10 @@ var friendSpawns : Array = [] # spawned npcs
 
 var visited : bool = false
 
-#TODO
-var stayLogic : String = _INTERNAL_SCRIPT_NOOP
-var cd : float = 1
-var elapsed : float = 0
+# TODO
+#var stayLogic : String = _NOOP
+#var cd : float = 1
+#var elapsed : float = 0
 
 
 func _init() -> void:
@@ -51,7 +53,7 @@ func enter(character : Character) -> void:
 	Signals.emit_signal("characterArrivedRoom", character, self)
 	executeScript(entranceLogic, character)
 	
-	character.currentRoomId = id
+	character.currentRoom = id
 	
 	if character.type == Enums.CharacterType.PC:
 		for item in itemSpawns:
