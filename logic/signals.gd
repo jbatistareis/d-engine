@@ -2,14 +2,14 @@ extends Node
 
 # location
 # these are used to move around
-signal playerStartedAtLocation(characterId, locationId, fromRoomId) # used to spawn a player and start the simulation at a location
+signal playerStartedAtLocation(characterId, locationName, toSpawnId) # used to spawn a player and start the simulation at a location
 signal playerMoved(direction) # used to move the player arround rooms
 signal characterMoved(character, direction) # used to move any other character arround rooms
 # these are annoucements
 signal playerArrivedLocation(location) # fired when a player spawns, every spawn is cleared
 signal playerLeftLocation(location) # fired when a player leaves a location, spawns are left intact
 # these are fired as internal control
-signal playerTransferLocation(oldLocationId, newLocationId, fromRoomId) # fired when a player leaves a location, spawns are left intact
+signal playerTransferLocation(newLocationName, toSpawnId) # fired when a player leaves a location, spawns are left intact
 signal characterTravelled(character, direction, fromRoom, toRoom) # fired when any character moves
 
 # rooms

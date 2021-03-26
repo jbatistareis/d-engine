@@ -1,8 +1,8 @@
 extends EntityDatabase
 
 var characters : Array = [
-	Character.new(1, Enums.CharacterType.PC, 'Dummy 1'),
-	Character.new(2, Enums.CharacterType.FOE_NPC, 'Dummy 2')
+	Character.new(),
+	Character.new()
 ]
 
 

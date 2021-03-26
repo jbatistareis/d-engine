@@ -8,7 +8,7 @@ var type : int
 
 
 # TODO use script
-func _init(id : int, name : String, description : String, price : int, type : int, characterAproachesScript : String = '', characterLeavesScript : String = '', interactScript : String = '').(id, characterAproachesScript, characterLeavesScript, interactScript) -> void:
+func _init(id : int, name : String, description : String, price : int, type : int, characterAproachesScript : String = '', characterLeavesScript : String = '', interactScript : String = '') -> void:
 	self.name = name
 	self.description = description
 	self.price = price

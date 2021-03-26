@@ -1,0 +1,70 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://tools/location/gridItem.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/roomIcons.tres" type="SpriteFrames" id=2]
+
+[node name="gridItem" type="Container"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+hint_tooltip = "lll"
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="Control" parent="."]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+
+[node name="cover" type="ColorRect" parent="background"]
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+mouse_filter = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color( 0, 0, 0, 0.12549 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="roomIcon" type="AnimatedSprite" parent="background"]
+position = Vector2( 30, 30 )
+frames = ExtResource( 2 )
+
+[node name="buttons" type="Control" parent="."]
+modulate = Color( 1, 1, 1, 0 )
+margin_right = 60.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 60, 60 )
+mouse_filter = 1
+
+[node name="changeRoom" type="MenuButton" parent="buttons"]
+margin_left = 40.0
+margin_right = 60.0
+margin_bottom = 20.0
+text = "+"
+flat = false
+align = 2
+items = [ "None", null, 0, false, false, 0, 0, null, "", false, "1 exit", null, 0, false, false, 1, 0, null, "", false, "2 exits L", null, 0, false, false, 2, 0, null, "", false, "2 exits I", null, 0, false, false, 3, 0, null, "", false, "3 exits", null, 0, false, false, 4, 0, null, "", false, "4 exits", null, 0, false, false, 5, 0, null, "", false ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="rotateRoom" type="Button" parent="buttons"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 60.0
+margin_bottom = 60.0
+disabled = true
+text = ">"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="."]

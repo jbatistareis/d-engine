@@ -1,30 +1,13 @@
 class_name Inventory
-extends Entity
 
+var items : Array = []
+var weapons : Array = []
 
-var items : Array
-var weapons : Array
-var persistent : bool
-
-var weapon : Weapon
+var weapon : Weapon = null
 #armors are not meant to be caried, you can only have your equiped one, and you can change then only on specific places
-var armor : Armor
+var armor : Armor = null
 
-var money : int
-
-
-func _init(id : int, persistent : bool, itemIds : Array = [], weaponIds : Array = [], equipedWeaponId: int = 1, equipedArmorId : int = 1, armorProtection : int = 0, money : int = 0).(id) -> void:
-	self.persistent = persistent
-	
-	for id in itemIds:
-		items.append(ItemsDatabase.spawnEntity(id))
-	
-	for id in weaponIds:
-		weapons.append(WeaponsDatabase.spawnEntity(id))
-	
-	self.weapon = WeaponsDatabase.spawnEntity(equipedWeaponId) if equipedWeaponId > 0 else null
-	self.armor = ArmorsDatabase.spawnEntity(equipedArmorId) if equipedArmorId > 0 else null
-	self.armor.currentProtection = armorProtection
+var money : int = 0
 
 
 #TODO add some sort of consumable armor plate
@@ -67,7 +50,4 @@ func equipWeapon(index : int) -> void:
 
 func equipArmor(newArmor : Armor) -> void:
 	armor = newArmor
-
-
-#TODO produce armor status on serialize
 

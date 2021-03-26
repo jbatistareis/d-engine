@@ -40,9 +40,9 @@ func printTraveling(character : Character, direction : int, fromRoom : Room, toR
 		0:
 			directionStr = 'north'
 		1:
-			directionStr = 'south'
-		2:
 			directionStr = 'east'
+		2:
+			directionStr = 'south'
 		3:
 			directionStr = 'west'
 		_:

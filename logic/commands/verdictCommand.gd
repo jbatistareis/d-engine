@@ -2,16 +2,15 @@ class_name VerdictCommand
 extends Command
 
 
-func _init(executor : Character, ticks : int).(executor, ticks) -> void:
+func _init(executorCharacter, ticks : int).(executorCharacter, ticks) -> void:
 	return
 
 
 func execute() -> void:
-	if (executor != null) && executor.verdictActive:
-		var room = RoomsDatabase.getEntitySpawn(executor.currentRoom)
+	if (executorCharacter != null) && executorCharacter.verdictActive:
 		var suspects
 		
-		match executor.getType():
+		match executorCharacter.getType():
 			Enums.CharacterType.PC:
 				suspects = BattleManager.enemies
 			
@@ -21,5 +20,5 @@ func execute() -> void:
 			_:
 				suspects = []
 		
-		VerdictsDatabase.getEntity(executor.verdictId).decision(executor, suspects)
+		executorCharacter.verdict.decision(executorCharacter, suspects)
 

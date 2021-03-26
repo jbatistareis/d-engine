@@ -12,7 +12,7 @@ var cdPost : int
 
 
 #weapon items equip the character when interacted
-func _init(id : int, name : String, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1).(id) -> void:
+func _init(id : int, name : String, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1) -> void:
 	self.name = name
 	self.damage = damage
 	self.modifierDice = modifierDice

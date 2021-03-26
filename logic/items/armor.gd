@@ -9,7 +9,7 @@ var plateValue : int
 
 
 #armor items equip the character when interacted
-func _init(id : int, name : String, protection : int = 0).(id) -> void:
+func _init(id : int, name : String, protection : int = 0) -> void:
 	self.name = name
 	self.protection = protection if (protection >= 5) else 5
 	self.currentProtection = protection
