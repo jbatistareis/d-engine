@@ -3,7 +3,7 @@ extends Entity
 
 var type : int = Enums.CharacterType.FRIENDLY_NPC
 
-var name : String = 'Character'
+var name : String = 'Base Character'
 
 var baseHp : int = 1
 var currentHp : int = 1

@@ -11,15 +11,9 @@ func _ready():
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func instantiateLocation(player : Character, locationName : String, toSpawnId : int = 0) -> void:
-	var file = File.new()
-	file.open_compressed(
-		"res://data/locations/" + str(locationName),
-		File.READ,
-		File.COMPRESSION_ZSTD
-	)
-	location = file.get_var()
-	file.close()
+func instantiateLocation(player : Character, locationShortName : String, toSpawnId : int = 0) -> void:
+	location = load('res://data/locations/%s.gd' % locationShortName).new()
+	location.enter(player, toSpawnId)
 
 
 func changeLocation(newLocationName : String, toSpawnId : int) -> void:

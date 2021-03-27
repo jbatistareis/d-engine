@@ -13,10 +13,10 @@ var southExit : int = -1
 var eastExit : int = -1
 var westExit : int = -1
 
-var northPortal : int = 0
-var southPortal : int = 0
-var eastPortal : int = 0
-var westPortal : int = 0
+var northPortal : int = -1
+var southPortal : int = -1
+var eastPortal : int = -1
+var westPortal : int = -1
 
 var entranceLogic : String = _NOOP
 var exitLogic : String = _NOOP

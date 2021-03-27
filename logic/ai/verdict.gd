@@ -9,7 +9,7 @@ func decision(auditorCharacter, suspects : Array) -> void:
 		var fact
 		
 		for concreteFact in concreteFacts:
-			result = concreteFact[0].analyze(suspects)
+			result = concreteFact[0].analyze(auditorCharacter, suspects)
 			if !result.empty():
 				Signals.emit_signal(
 						"commandPublished",

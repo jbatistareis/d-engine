@@ -31,6 +31,5 @@ func deSpawnEntity(spawnId : int) -> void:
 	var entity = .getEntitySpawn(spawnId)
 	
 	if entity != null:
-		Signals.emit_signal("characterDespawned", entity.spawnId, entity.id)
 		.deSpawnEntity(spawnId)
 

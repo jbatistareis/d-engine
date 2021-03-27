@@ -30,17 +30,18 @@ func exit(character : Character, newLocationName : String, toSpawnId : int) -> v
 	executeScript(exitLogic, character)
 	
 	Signals.emit_signal("playerLeftLocation", self)
-	Signals.emit_signal("playerTransferLocation", id, newLocationName, toSpawnId)
+	Signals.emit_signal("playerTransferLocation", newLocationName, toSpawnId)
 
 
 func move(character : Character, direction : int) -> void:
 	var canPass = false
 	var fromRoom = rooms[character.currentRoomId]
+	var portalId = fromRoom.getPortal(direction)
 	
-	if fromRoom.getPortal(direction) == 0: # no portal, can pass
+	if portalId == -1: # no portal, can pass
 		canPass = true
 	else: # see if can pass
-		canPass = portals[fromRoom.getPortal(direction)].canPass(character)
+		canPass = portals[portalId].canPass(character)
 	
 	if canPass:
 		var exitPoint = fromRoom.getExitRoom(direction)
@@ -56,8 +57,8 @@ func move(character : Character, direction : int) -> void:
 			if character.type == Enums.CharacterType.PC:
 				exit(
 					character,
-					portals[fromRoom.getPortal(direction)].newLocationName,
-					portals[fromRoom.getPortal(direction)].toSpawnId
+					portals[portalId].newLocationName,
+					portals[portalId].toSpawnId
 				)
 
 

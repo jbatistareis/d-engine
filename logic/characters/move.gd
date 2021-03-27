@@ -1,7 +1,7 @@
 class_name Move
 
 const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
-const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 1'
+const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 0'
 
 var name : String = ''
 var description : String = ''
@@ -12,7 +12,7 @@ var cdPost : int = 0
 
 
 func getResult(character) -> MoveResult:
-	var reference = ScriptTool.getReference(valueExpression + '\n' + valueExpression)
+	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
 	var result = MoveResult.new(reference.getValue(character), reference.getOutcome(character))
 	
 	return result
