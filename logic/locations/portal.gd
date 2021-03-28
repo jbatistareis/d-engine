@@ -1,9 +1,9 @@
 class_name Portal
 extends Entity
 
-const PASS_NOOP : String = 'func execute(character : Character) -> bool:\n\treturn true'
+const NOOP : String = 'func execute(character : Character) -> bool:\n\treturn true'
 
-var passLogic : String = PASS_NOOP
+var passLogic : String = NOOP
 var newLocationName : String = ''
 var toSpawnId : int = -1
 

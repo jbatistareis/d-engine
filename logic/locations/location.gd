@@ -1,25 +1,27 @@
 class_name Location
 extends Entity
 
+const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
+
 var name : String
 var description : String
 var rooms : Array = []
 var portals : Array = []
 var spawns : Array = []
 
-var entranceLogic : String = _INTERNAL_SCRIPT_NOOP
-var exitLogic : String = _INTERNAL_SCRIPT_NOOP
+var entranceLogic : String = NOOP
+var exitLogic : String = NOOP
 
 
 # used only by the player
 func enter(player : Character, toSpawnId : int) -> void:
-	var locationSpawn = spawns[toSpawnId]
+	var spawn = spawns[toSpawnId]
 	
 	Signals.emit_signal("playerArrivedLocation", self)
 	executeScript(entranceLogic, player)
 	
 	player.currentLocation = shortName
-	rooms[locationSpawn.toRoomId].enter(player)
+	rooms[spawn.toRoomId].enter(player)
 
 
 func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:

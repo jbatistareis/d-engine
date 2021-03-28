@@ -54,11 +54,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/utils/entityArrayHelper.gd"
 }, {
-"base": "Node",
-"class": "EntityDatabase",
-"language": "GDScript",
-"path": "res://logic/database/entityDatabase.gd"
-}, {
 "base": "Reference",
 "class": "EntityLoader",
 "language": "GDScript",
@@ -87,7 +82,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GamePaths",
 "language": "GDScript",
-"path": "res://logic/utils/gamePaths.gd"
+"path": "res://logic/gamePaths.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -103,11 +98,6 @@ _global_script_classes=[ {
 "class": "Location",
 "language": "GDScript",
 "path": "res://logic/locations/location.gd"
-}, {
-"base": "Entity",
-"class": "LocationSpawn",
-"language": "GDScript",
-"path": "res://logic/locations/locationSpawn.gd"
 }, {
 "base": "Reference",
 "class": "Move",
@@ -138,6 +128,11 @@ _global_script_classes=[ {
 "class": "ScriptTool",
 "language": "GDScript",
 "path": "res://logic/utils/scriptTool.gd"
+}, {
+"base": "Entity",
+"class": "Spawn",
+"language": "GDScript",
+"path": "res://logic/locations/spawn.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
@@ -174,7 +169,6 @@ _global_script_class_icons={
 "Dice": "",
 "Entity": "",
 "EntityArrayHelper": "",
-"EntityDatabase": "",
 "EntityLoader": "",
 "EntitySaver": "",
 "Enums": "",
@@ -184,13 +178,13 @@ _global_script_class_icons={
 "Inventory": "",
 "Item": "",
 "Location": "",
-"LocationSpawn": "",
 "Move": "",
 "MoveResult": "",
 "Portal": "",
 "Room": "",
 "RoomDamageCommand": "",
 "ScriptTool": "",
+"Spawn": "",
 "Stat": "",
 "Verdict": "",
 "VerdictCommand": "",

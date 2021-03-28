@@ -1,7 +1,7 @@
 class_name Room
 extends Entity
 
-const _NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
+const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
 var x : int
 var y : int
@@ -18,13 +18,13 @@ var southPortal : int = -1
 var eastPortal : int = -1
 var westPortal : int = -1
 
-var entranceLogic : String = _NOOP
-var exitLogic : String = _NOOP
+var entranceLogic : String = NOOP
+var exitLogic : String = NOOP
 var danger : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
 
-var itemIds : Array = [] # present item ids
-var friendlyIds : Array = [] # present npc ids
-var foeIdGroups : Array = [] # 2D array representing possible enemy groups
+var itemShortNames : Array = [] # present item short names
+var friendlyShortNames : Array = [] # present npc short names
+var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
 
 # use this for queries
 var itemSpawns : Array = [] # spawned item
@@ -33,19 +33,18 @@ var friendSpawns : Array = [] # spawned npcs
 var visited : bool = false
 
 # TODO
-#var stayLogic : String = _NOOP
+#var stayLogic : String = NOOP
 #var cd : float = 1
 #var elapsed : float = 0
 
 
 func _init() -> void:
-	for id in itemIds:
-		#itemSpawns.append(ItemsDatabase.spawnEntity(id))
-		pass
+	# TODO filter out unique items
+	for shortName in itemShortNames:
+		itemSpawns.append(EntityLoader.loadItem(shortName))
 	
-	for id in friendlyIds:
-		#var npc = CharactersDatabase.spawnEntity(id)
-		var npc
+	for shortName in friendlyShortNames:
+		var npc = EntityLoader.loadCharacter(shortName)
 		npc.currentRoomId = id
 		friendSpawns.append(npc)
 
@@ -63,16 +62,15 @@ func enter(character : Character) -> void:
 		for npc in friendSpawns:
 			executeScript(character.characterAproachesScript, npc)
 		
-		if !foeIdGroups.empty() && (danger > 0) && (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger)):
+		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger))
+		if !foeShortNameGroups.empty() && battleTriggered:
 			var enemies = []
 			
-			for id in foeIdGroups[Dice.rollNormal(foeIdGroups.size() - 1)]: # picks a spawn combination
-				#var enemy = CharactersDatabase.spawnEntity(id)
-				var enemy
+			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size() - 1)]
+			for shortName in chosenGroup:
+				var enemy = EntityLoader.loadCharacter(shortName)
 				enemy.currentRoomId = id
 				enemies.append(enemy)
-				
-				executeScript(entranceLogic, enemy)
 			
 			Signals.emit_signal("battleStart", [character], enemies) # TODO form a player party
 

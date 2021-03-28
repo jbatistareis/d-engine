@@ -1,4 +1,4 @@
-class_name LocationSpawn
+class_name Spawn
 extends Entity
 
 var toRoomId : int

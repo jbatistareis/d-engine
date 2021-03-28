@@ -14,8 +14,6 @@ enum ItemType { ARMOR, WEAPON, CONSUMABLE, KEY }
 enum RoomType { _0_EXIT, _1_EXIT, _2_EXITS_L, _2_EXITS_I, _3_EXITS, _4_EXITS }
 enum RoomDirection { NORTH, EAST, SOUTH, WEST, UP, DOWN }
 
-enum PortalType { ROOM, LOCATION }
-
 enum AfflictionType { TODO }
 
 enum MessageType { AUTO_TOP, AUTO_BOTTOM, DIALOG }
