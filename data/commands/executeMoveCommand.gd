@@ -5,7 +5,7 @@ var targets : Array = []
 var move : Move
 
 
-func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre) -> void:
+func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre, move.executions, move.persistent) -> void:
 	self.targets = targets
 	self.move = move
 
@@ -27,10 +27,16 @@ func execute() -> void:
 			_: # Dice.Outcome.WORST
 				pass # TODO miss
 	
-	if executorCharacter.verdictActive:
-		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, move.cdPost))
+	# TODO a persistent move effect should be applyed only one time per character
+	if persistent && (executions > 0):
+		Signals.emit_signal("commandPublished", self)
+	elif persistent && (executions < 1):
+		return
 	else:
-		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
+		if executorCharacter.verdictActive:
+			Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, move.cdPost))
+		else:
+			Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
 
 
 func changeHp(character, amount : int, bypassArmor : bool = false) -> void:
