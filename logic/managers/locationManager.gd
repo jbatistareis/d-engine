@@ -6,7 +6,7 @@ var location : Location
 
 func _ready():
 	Signals.connect("playerStartedAtLocation", self, "instantiateLocation")
-	Signals.connect("playerTransferLocation", self, "changeLocation")
+	Signals.connect("playerTransferedLocation", self, "changeLocation")
 	Signals.connect("playerMoved", self, "movePlayer")
 	Signals.connect("characterMoved", self, "moveCharacter")
 

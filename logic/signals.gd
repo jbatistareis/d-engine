@@ -6,16 +6,12 @@ signal playerStartedAtLocation(playerCharacter, locationName, toSpawnId) # use t
 signal playerMoved(direction) # use to move the player arround rooms
 signal characterMoved(character, direction) # use to move any other character arround rooms
 # listen to get annoucements
-signal playerArrivedLocation(location) # fired when a player spawns, every spawn is cleared
-signal playerLeftLocation(location) # fired when a player leaves a location, spawns are left intact
+signal playerArrivedLocation(location) # fired when a player spawns
+signal playerLeftLocation(location) # fired when a player leaves a location
+signal playerChangedRoom() # fired when a player successfully moves, use to confirm room transitions
 # used as internal communication, dont fire, or listen to then
-signal playerTransferLocation(newLocationName, toSpawnId) # fired when a player leaves a location, spawns are left intact
-signal characterTravelled(character, direction, fromRoom, toRoom) # fired when any character moves
+signal playerTransferedLocation(newLocationName, toSpawnId) # fired when a player leaves a location
 
-# rooms
-# listen to get annoucements
-signal characterArrivedRoom(character, room)
-signal characterLeftRoom(character, room)
 
 # character
 # listen to get annoucements
@@ -25,6 +21,7 @@ signal characterGainedHp(character, amount)
 signal characterLostHp(character, amount)
 signal characterDied(character)
 
+
 # armor
 # listen to get annoucements
 signal armorTookHit(armor, amount)
@@ -32,10 +29,12 @@ signal armorRepaired(armor, amount)
 
 
 # commands
+# listen to get annoucements
+signal commandsPaused() # used to pause all timers
+signal commandsResumed() # used to resume all timers
 # used as internal communication, dont fire, or listen to then
-signal commandsPaused()
-signal commandsResumed()
-signal commandPublished(command) # use to when player picks an action
+signal commandPublished(command)
+
 
 # battle
 # use for flow control
@@ -45,7 +44,8 @@ signal charaterTimerSet(character, ticks)
 signal charaterTimerPaused(character)
 signal charaterTimerResumed(character)
 signal askedPlayerBattleInput(character) # use to show a command window
-signal playerConfirmedBattleInput(command) # use when the command window confirms a command
+signal playerConfirmedBattleInput(command) # use when the player picks a command
+
 
 # inventory
 signal characterEquipedWeapon(character, weaponIndex)

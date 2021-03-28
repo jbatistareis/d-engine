@@ -9,7 +9,7 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("characterTravelled", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", 1, 1, 0)
+	Signals.emit_signal("playerStartedAtLocation", Character.new(), 'test', 0)
 
 
 func _input(event) -> void:

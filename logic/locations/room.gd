@@ -50,7 +50,6 @@ func _init() -> void:
 
 func enter(character : Character) -> void:
 	visited = true
-	Signals.emit_signal("characterArrivedRoom", character, self)
 	executeScript(entranceLogic, character)
 	
 	character.currentRoom = id
@@ -83,7 +82,6 @@ func exit(character : Character) -> void:
 		for npc in friendSpawns:
 			executeScript(npc.characterLeavesScript, character)
 		
-	Signals.emit_signal("characterLeftRoom", character, self)
 	executeScript(exitLogic, character)
 
 
