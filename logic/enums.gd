@@ -1,4 +1,5 @@
-extends Node
+class_name Enums
+
 
 enum DiceType { D4 = 4, D6 = 6, D8 = 8, D10 = 10, D12 = 12, D20 = 20, D100 = 100 }
 enum DiceOutcome { BEST, WITH_CONSEQUENCE, WORST }
@@ -10,9 +11,8 @@ enum CharacterType { PC, FRIENDLY_NPC, FOE_NPC }
 
 enum ItemType { ARMOR, WEAPON, CONSUMABLE, KEY }
 
-enum RoomDirection { NORTH, SOUTH, EAST, WEST, UP, DOWN }
-
-enum PortalType { ROOM, LOCATION }
+enum RoomType { _0_EXIT, _1_EXIT, _2_EXITS_L, _2_EXITS_I, _3_EXITS, _4_EXITS }
+enum RoomDirection { NORTH, EAST, SOUTH, WEST, UP, DOWN }
 
 enum AfflictionType { TODO }
 

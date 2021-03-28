@@ -1,60 +1,78 @@
 class_name Character
 extends Entity
 
-var type : int # Enums.CharacterType
+var type : int = Enums.CharacterType.FRIENDLY_NPC
 
-var name : String
-var health : Health setget ,getHealth
-var baseDamage : int
-var level : Level
+var name : String = 'Base Character'
 
-var strength : Stat
-var dexterity : Stat
-var constitution : Stat
-var intelligence : Stat
-var wisdom : Stat
-var charisma : Stat
+var baseHp : int = 1
+var currentHp : int = 1
+var maxHp : int setget ,getMaxHp
 
-var moveIds : Moves
+var baseDamage : int = 1
 
-var verdictId : int
-var verdictActive : bool
+var currentLevel : int = 1
+var experiencePoints : int = 0
+var sparePoints : int = 0
 
-var currentRoomId : int
+var strength : Stat = Stat.new()
+var dexterity : Stat = Stat.new()
+var constitution : Stat = Stat.new()
+var intelligence : Stat = Stat.new()
+var wisdom : Stat = Stat.new()
+var charisma : Stat = Stat.new()
+
+var moves : Array = []
+
+var inventory : Inventory = Inventory.new()
+
+var verdict : Verdict = Verdict.new()
+var verdictActive : bool = false
+
+var currentLocation : String = ''
+var currentRoom : int = 0
 
 
-func _init(id : int, type : int, name : String, baseHp : int = 1, currentHp : int = 1, baseDamage : int = Enums.DiceType.D4, level : int = 1, experience : int = 0, sparePoints : int = 0, strengthScore : int = 1, dexterityScore : int = 1, constitutionScore : int = 1, intelligenceScore : int = 1, wisdomScore : int = 1, charismaScore : int = 1, moveIds : Array = [], verdictId : int = 0, currentRoomId : int = 0, characterAproachesScript : String = '', characterLeavesScript : String = '').(id, characterAproachesScript, characterLeavesScript):
-	self.type = type
+func getMaxHp() -> int:
+	return baseHp + constitution.score
+
+
+func change_hp(amount : int) -> void:
+	if amount >= 0:
+		Signals.emit_signal("characterGainedHp", self, amount)
+	else:
+		Signals.emit_signal("characterLostHp", self, amount)
 	
-	self.name = name
-	self.health = Health.new(baseHp, currentHp)
-	self.baseDamage = baseDamage
-	
-	self.level = Level.new(level, experience, sparePoints)
-	
-	self.strength = Stat.new(strengthScore)
-	self.dexterity = Stat.new(dexterityScore)
-	self.constitution = Stat.new(constitutionScore)
-	self.intelligence = Stat.new(intelligenceScore)
-	self.wisdom = Stat.new(wisdomScore)
-	self.charisma = Stat.new(charismaScore)
-	
-	self.moveIds = Moves.new(moveIds)
-	
-	self.currentRoomId = currentRoomId
-	
-	self.verdictId = verdictId
-	self.verdictActive = type > 0
+	if amount != 0:
+		var result = currentHp + amount
+		
+		if result > 0:
+			currentHp = result if (result < self.maxHp) else self.maxHp
+		else:
+			currentHp = 0
+			
+			Signals.emit_signal("characterDied", self)
 
 
-func setSpawnId(value : int) -> void:
-	.setSpawnId(value)
-	health.characterSpawnId = spawnId
-	level.characterSpawnId = spawnId
+func canLevelUp() -> bool:
+	return experiencePoints >= (currentLevel + 7)
 
 
-func getHealth() -> Health:
-	health.constitution = constitution.score
+func additional_levels() -> int:
+	return floor(experiencePoints / (currentLevel + 7)) as int
+
+
+func level_up() -> void:
+	if canLevelUp():
+		experiencePoints -= currentLevel + 7
+		sparePoints += 1
+		currentLevel += 1
+		
+		Signals.emit_signal("characterLeveledUp", self)
+
+
+func gainExperience(amount : int) -> void:
+	experiencePoints += amount
 	
-	return health
+	Signals.emit_signal("characterGotExperience", self, amount)
 

@@ -1,14 +1,18 @@
 class_name Command
 
-var executor : Character
+var executorCharacter
 var totalTicks : int setget setTotalTicks
 var remainingTicks : int
+var executions : int
+var persistent : bool
 var executed : bool = false
 
 
-func _init(executor : Character, ticks : int) -> void:
-	self.executor = executor
+func _init(executorCharacter, ticks : int, executions : int = 1, persistent : bool = false) -> void:
+	self.executorCharacter = executorCharacter
 	self.totalTicks = ticks
+	self.executions = executions
+	self.persistent = persistent
 
 
 func execute() -> void:
@@ -21,12 +25,13 @@ func setTotalTicks(value : int) -> void:
 
 
 func tick() -> void:
-	if executor.health.currentHp == 0:
+	if (executorCharacter != null) && (executorCharacter.currentHp == 0):
 		executed = true
 	
 	remainingTicks -= 1
 	
 	if(remainingTicks <= 0) && !executed:
-		executed = true
+		executions -= 1
+		executed = (executions <= 0)
 		execute()
 

@@ -1,5 +1,7 @@
 extends Node
 
+onready var timer : Timer = Timer.new()
+
 var gcd : float = 1 # TODO make external
 var elapsed : float = 0
 var paused : bool = false
@@ -11,16 +13,13 @@ var executedCommands : Array = []
 func _ready():
 	Signals.connect("commandsPaused", self, 'pause')
 	Signals.connect("commandsResumed", self, 'resume')
-	Signals.connect("publishedCommand", self, 'publishCommand')
-
-
-func _process(delta : float) -> void:
-	if !paused:
-		elapsed += delta
-		
-		if elapsed >= gcd:
-			elapsed = 0
-			tick()
+	Signals.connect("commandPublished", self, 'publishCommand')
+	Signals.connect("battleStarted", self, "reset")
+	Signals.connect("battleEnded", self, "reset")
+	
+	add_child(timer)
+	timer.connect("timeout", self, "tick")
+	reset()
 
 
 func tick() -> void:
@@ -36,11 +35,15 @@ func tick() -> void:
 
 
 func pause() -> void:
-	paused = true
+	timer.paused = true
 
 
 func resume() -> void:
-	paused = true
+	timer.paused = false
+
+
+func reset() -> void:
+	timer.start(gcd)
 
 
 func publishCommand(command : Command) -> void:

@@ -1,32 +1,25 @@
 class_name Verdict
-extends Entity
 
-var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT ID>, <MOVE ID>]
-
-
-# TODO store as a string, parse into int array
-func _init(id : int, concreteFacts : Array = []).(id) -> void:
-	for concreteFactStr in concreteFacts:
-		self.concreteFacts.append(Array(concreteFactStr.split(';')))
+var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT>, <MOVE>]
 
 
-func decision(auditor : Character, suspects : Array) -> void:
-	if auditor != null:
+func decision(auditorCharacter, suspects : Array) -> void:
+	if auditorCharacter != null:
 		var result
 		var fact
 		
 		for concreteFact in concreteFacts:
-			result = FactsDatabase.getEntity(concreteFact[0]).analyze(suspects)
+			result = concreteFact[0].analyze(auditorCharacter, suspects)
 			if !result.empty():
 				Signals.emit_signal(
-						"publishedCommand",
-						ExecuteMoveCommand.new(auditor, result, MovesDatabase.getEntity(concreteFact[1]))
+						"commandPublished",
+						ExecuteMoveCommand.new(auditorCharacter, result, concreteFact[1])
 				)
 				return
 
 
-func addConcreteFact(index : int, factId : int, moveId : int) -> void:
-	concreteFacts.insert(index, [factId, moveId])
+func addConcreteFact(index : int, fact : Fact, move : Move) -> void:
+	concreteFacts.insert(index, [fact, move])
 
 
 func removeConcreteFact(index : int) -> void:

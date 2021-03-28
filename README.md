@@ -14,14 +14,20 @@ It is going to work some day.
 - [x] Dynamic script system  
 - [x] Ai system  
 - [x] Command system  
-- [ ] Inventory system  
+- [x] Inventory system  
+- [x] Battle system  
 - [ ] Message system  
 - [ ] Dialog system
 - [ ] Event system  
-- [x] Battle system
 - [ ] Database system  
 - [ ] Save system  
 - [ ] Controls system
-- [ ] Visuals ~~system~~  
-- [ ] Development tools  
+- [ ] UI ~~system~~  
+- [ ] 3D map  
+- [ ] Maps dev tool  
+- [ ] Characters dev tool  
+- [ ] Battles dev tool 
+- [ ] Dialogs dev tool  
+- [ ] Events dev tool  
+- [ ] Items dev tool  
 

@@ -9,7 +9,7 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Equipment",
+"base": "Entity",
 "class": "Armor",
 "language": "GDScript",
 "path": "res://logic/items/armor.gd"
@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "AskPlayerBattleInputCommand",
 "language": "GDScript",
-"path": "res://logic/commands/askPlayerBattleInputCommand.gd"
+"path": "res://data/commands/askPlayerBattleInputCommand.gd"
 }, {
 "base": "Entity",
 "class": "Character",
@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://logic/utils/commandArrayHelper.gd"
 }, {
 "base": "Reference",
+"class": "Dice",
+"language": "GDScript",
+"path": "res://logic/dice.gd"
+}, {
+"base": "Reference",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://logic/database/entity.gd"
@@ -49,57 +54,52 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/utils/entityArrayHelper.gd"
 }, {
-"base": "Node",
-"class": "EntityDatabase",
+"base": "Reference",
+"class": "EntityLoader",
 "language": "GDScript",
-"path": "res://logic/database/entityDatabase.gd"
+"path": "res://logic/database/entityLoader.gd"
 }, {
-"base": "Entity",
-"class": "Equipment",
+"base": "Reference",
+"class": "EntitySaver",
 "language": "GDScript",
-"path": "res://logic/items/equipment.gd"
+"path": "res://logic/database/entitySaver.gd"
 }, {
-"base": "EntityArrayHelper",
-"class": "EquipmentArrayHelper",
+"base": "Reference",
+"class": "Enums",
 "language": "GDScript",
-"path": "res://logic/utils/equipmentArrayHelper.gd"
+"path": "res://logic/enums.gd"
 }, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
-"path": "res://logic/commands/executeMoveCommand.gd"
+"path": "res://data/commands/executeMoveCommand.gd"
 }, {
-"base": "Entity",
+"base": "Reference",
 "class": "Fact",
 "language": "GDScript",
 "path": "res://logic/ai/fact.gd"
 }, {
 "base": "Reference",
-"class": "Health",
+"class": "GamePaths",
 "language": "GDScript",
-"path": "res://logic/characters/properties/health.gd"
+"path": "res://logic/gamePaths.gd"
+}, {
+"base": "Reference",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://logic/characters/inventory.gd"
 }, {
 "base": "Entity",
 "class": "Item",
 "language": "GDScript",
 "path": "res://logic/items/item.gd"
 }, {
-"base": "Reference",
-"class": "Level",
-"language": "GDScript",
-"path": "res://logic/characters/properties/level.gd"
-}, {
 "base": "Entity",
 "class": "Location",
 "language": "GDScript",
-"path": "res://logic/regions/location.gd"
+"path": "res://logic/locations/location.gd"
 }, {
-"base": "Entity",
-"class": "LocationSpawn",
-"language": "GDScript",
-"path": "res://logic/regions/locationSpawn.gd"
-}, {
-"base": "Entity",
+"base": "Reference",
 "class": "Move",
 "language": "GDScript",
 "path": "res://logic/characters/move.gd"
@@ -109,27 +109,37 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/characters/moveResult.gd"
 }, {
-"base": "Reference",
-"class": "Moves",
-"language": "GDScript",
-"path": "res://logic/characters/properties/moves.gd"
-}, {
 "base": "Entity",
 "class": "Portal",
 "language": "GDScript",
-"path": "res://logic/regions/portal.gd"
+"path": "res://logic/locations/portal.gd"
 }, {
 "base": "Entity",
 "class": "Room",
 "language": "GDScript",
-"path": "res://logic/regions/room.gd"
+"path": "res://logic/locations/room.gd"
+}, {
+"base": "Command",
+"class": "RoomDamageCommand",
+"language": "GDScript",
+"path": "res://data/commands/roomDamageCommand.gd"
+}, {
+"base": "Reference",
+"class": "ScriptTool",
+"language": "GDScript",
+"path": "res://logic/utils/scriptTool.gd"
+}, {
+"base": "Entity",
+"class": "Spawn",
+"language": "GDScript",
+"path": "res://logic/locations/spawn.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
 "language": "GDScript",
-"path": "res://logic/characters/properties/stat.gd"
+"path": "res://logic/characters/stat.gd"
 }, {
-"base": "Entity",
+"base": "Reference",
 "class": "Verdict",
 "language": "GDScript",
 "path": "res://logic/ai/verdict.gd"
@@ -137,14 +147,14 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "VerdictCommand",
 "language": "GDScript",
-"path": "res://logic/commands/verdictCommand.gd"
+"path": "res://data/commands/verdictCommand.gd"
 }, {
 "base": "Command",
 "class": "WaitCommand",
 "language": "GDScript",
-"path": "res://logic/commands/waitCommand.gd"
+"path": "res://data/commands/waitCommand.gd"
 }, {
-"base": "Equipment",
+"base": "Entity",
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://logic/items/weapon.gd"
@@ -156,23 +166,25 @@ _global_script_class_icons={
 "CharacterQuery": "",
 "Command": "",
 "CommandArrayHelper": "",
+"Dice": "",
 "Entity": "",
 "EntityArrayHelper": "",
-"EntityDatabase": "",
-"Equipment": "",
-"EquipmentArrayHelper": "",
+"EntityLoader": "",
+"EntitySaver": "",
+"Enums": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
-"Health": "",
+"GamePaths": "",
+"Inventory": "",
 "Item": "",
-"Level": "",
 "Location": "",
-"LocationSpawn": "",
 "Move": "",
 "MoveResult": "",
-"Moves": "",
 "Portal": "",
 "Room": "",
+"RoomDamageCommand": "",
+"ScriptTool": "",
+"Spawn": "",
 "Stat": "",
 "Verdict": "",
 "VerdictCommand": "",
@@ -183,7 +195,7 @@ _global_script_class_icons={
 [application]
 
 config/name="D Engine"
-run/main_scene="res://root.tscn"
+run/main_scene="res://tools/location/locationEditor.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -192,25 +204,24 @@ default_bus_layout=""
 
 [autoload]
 
-Enums="*res://logic/enums.gd"
 Signals="*res://logic/signals.gd"
-Dice="*res://logic/dice.gd"
-ScriptTool="*res://logic/utils/scriptTool.gd"
-ArmorsDatabase="*res://logic/database/repositories/armorsDatabase.gd"
-WeaponsDatabase="*res://logic/database/repositories/weaponsDatabase.gd"
-ItemsDatabase="*res://logic/database/repositories/itemsDatabase.gd"
-MovesDatabase="*res://logic/database/repositories/movesDatabase.gd"
-CharactersDatabase="*res://logic/database/repositories/charactersDatabase.gd"
-LocationSpawnsDatabase="*res://logic/database/repositories/locationSpawnsDatabase.gd"
-PortalsDatabase="*res://logic/database/repositories/portalsDatabase.gd"
-RoomsDatabase="*res://logic/database/repositories/roomsDatabase.gd"
-LocationsDatabase="*res://logic/database/repositories/locationsDatabase.gd"
-FactsDatabase="*res://logic/database/repositories/factsDatabase.gd"
-VerdictsDatabase="*res://logic/database/repositories/verdictsDatabase.gd"
-RegionManager="*res://logic/managers/regionManager.gd"
+RegionManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
+
+[display]
+
+window/size/width=1280
+window/size/height=720
+
+[input]
+
+left_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
 
 [rendering]
 

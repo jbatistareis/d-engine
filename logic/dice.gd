@@ -1,22 +1,20 @@
-extends Node
+class_name Dice
 
-var _rng : RandomNumberGenerator = RandomNumberGenerator.new()
-
-# use Dice.Type enum
-func rollNormal(type : int, modifier : int = 0) -> int:
-	_rng.randomize()
-	return _rng.randi_range(1, type) + modifier
 
 # use Dice.Type enum
-func rollBest(type : int, modifier : int = 0) -> int:
+static func rollNormal(type : int, modifier : int = 0) -> int:
+	return RandomNumberGenerator.new().randi_range(1, type) + modifier
+
+# use Dice.Type enum
+static func rollBest(type : int, modifier : int = 0) -> int:
 	return max(rollNormal(type, modifier), rollNormal(type, modifier)) as int
 
 # use Dice.Type enum
-func rollWorst(type : int, modifier : int = 0) -> int:
+static func rollWorst(type : int, modifier : int = 0) -> int:
 	return min(rollNormal(type, modifier), rollNormal(type, modifier)) as int
 
 # returns Dice.Outcome enum
-func getOutcome(value : int, modifier : int = 0) -> int:
+static func getOutcome(value : int, modifier : int = 0) -> int:
 	value += modifier
 	
 	if (value >= 10):

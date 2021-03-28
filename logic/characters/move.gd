@@ -1,31 +1,21 @@
 class_name Move
-extends Entity
 
-const _INTERNAL_MOVE_SCRIPT : String = 'extends Node\n%s\n%s'
 const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
-const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 1'
+const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 0'
 
-var name : String
-var description : String
-var valueExpression : String
-var outcomeExpression : String
-var cdPre : int
-var cdPost : int
-
-
-func _init(id : int, name : String, description : String, valueExpression : String, outcomeExpression : String, cdPre : int, cdPost : int).(id) -> void:
-	self.name = name
-	self.description = description
-	self.valueExpression = valueExpression if !valueExpression.empty() else _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
-	self.outcomeExpression = outcomeExpression if !outcomeExpression.empty() else _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
-	self.cdPre = cdPre
-	self.cdPost = cdPost
+var name : String = ''
+var description : String = ''
+var valueExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
+var outcomeExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
+var cdPre : int = 0
+var cdPost : int = 0
+var executions : int = 1
+var persistent : bool = false
 
 
-func getResult(character : Character) -> MoveResult:
-	var node = ScriptTool.getNode(_INTERNAL_MOVE_SCRIPT % [valueExpression, valueExpression])
-	var result = MoveResult.new(node.getValue(character), node.getOutcome(character))
-	node.queue_free()
+func getResult(character) -> MoveResult:
+	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
+	var result = MoveResult.new(reference.getValue(character), reference.getOutcome(character))
 	
 	return result
 

@@ -9,7 +9,7 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("characterTravelled", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", 1, 1, 1)
+	Signals.emit_signal("playerStartedAtLocation", Character.new(), 'test', 0)
 
 
 func _input(event) -> void:
@@ -29,7 +29,7 @@ func _process(delta) -> void:
 	pass
 
 
-func printEntering(location : Location, fromPortal : Portal) -> void:
+func printEntering(location : Location) -> void:
 	print('Entering location \'' + location.name + '\'')
 
 
@@ -40,9 +40,9 @@ func printTraveling(character : Character, direction : int, fromRoom : Room, toR
 		0:
 			directionStr = 'north'
 		1:
-			directionStr = 'south'
-		2:
 			directionStr = 'east'
+		2:
+			directionStr = 'south'
 		3:
 			directionStr = 'west'
 		_:
