@@ -40,6 +40,11 @@ _global_script_classes=[ {
 "path": "res://logic/utils/commandArrayHelper.gd"
 }, {
 "base": "Reference",
+"class": "Dice",
+"language": "GDScript",
+"path": "res://logic/dice.gd"
+}, {
+"base": "Reference",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://logic/database/entity.gd"
@@ -54,6 +59,21 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/database/entityDatabase.gd"
 }, {
+"base": "Reference",
+"class": "EntityLoader",
+"language": "GDScript",
+"path": "res://logic/database/entityLoader.gd"
+}, {
+"base": "Reference",
+"class": "EntitySaver",
+"language": "GDScript",
+"path": "res://logic/database/entitySaver.gd"
+}, {
+"base": "Reference",
+"class": "Enums",
+"language": "GDScript",
+"path": "res://logic/enums.gd"
+}, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
@@ -63,6 +83,11 @@ _global_script_classes=[ {
 "class": "Fact",
 "language": "GDScript",
 "path": "res://logic/ai/fact.gd"
+}, {
+"base": "Reference",
+"class": "GamePaths",
+"language": "GDScript",
+"path": "res://logic/utils/gamePaths.gd"
 }, {
 "base": "Reference",
 "class": "Inventory",
@@ -99,7 +124,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/locations/portal.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Room",
 "language": "GDScript",
 "path": "res://logic/locations/room.gd"
@@ -108,6 +133,11 @@ _global_script_classes=[ {
 "class": "RoomDamageCommand",
 "language": "GDScript",
 "path": "res://data/commands/roomDamageCommand.gd"
+}, {
+"base": "Reference",
+"class": "ScriptTool",
+"language": "GDScript",
+"path": "res://logic/utils/scriptTool.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
@@ -141,11 +171,16 @@ _global_script_class_icons={
 "CharacterQuery": "",
 "Command": "",
 "CommandArrayHelper": "",
+"Dice": "",
 "Entity": "",
 "EntityArrayHelper": "",
 "EntityDatabase": "",
+"EntityLoader": "",
+"EntitySaver": "",
+"Enums": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
+"GamePaths": "",
 "Inventory": "",
 "Item": "",
 "Location": "",
@@ -155,6 +190,7 @@ _global_script_class_icons={
 "Portal": "",
 "Room": "",
 "RoomDamageCommand": "",
+"ScriptTool": "",
 "Stat": "",
 "Verdict": "",
 "VerdictCommand": "",
@@ -174,14 +210,7 @@ default_bus_layout=""
 
 [autoload]
 
-Enums="*res://logic/enums.gd"
 Signals="*res://logic/signals.gd"
-Dice="*res://logic/dice.gd"
-ScriptTool="*res://logic/utils/scriptTool.gd"
-ArmorsDatabase="*res://logic/database/repositories/armorsDatabase.gd"
-WeaponsDatabase="*res://logic/database/repositories/weaponsDatabase.gd"
-ItemsDatabase="*res://logic/database/repositories/itemsDatabase.gd"
-CharactersDatabase="*res://logic/database/repositories/charactersDatabase.gd"
 RegionManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"

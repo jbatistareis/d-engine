@@ -1,4 +1,4 @@
-extends Node
+class_name ScriptTool
 
 
 static func getReference(script : String) -> Reference:

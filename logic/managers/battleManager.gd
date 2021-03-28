@@ -41,7 +41,8 @@ func end() -> void:
 			if enemy.health.currentHp == 0:
 				pass # TODO loot
 			else:
-				CharactersDatabase.deSpawnEntity(enemy.spawnId)
+				#CharactersDatabase.deSpawnEntity(enemy.spawnId)
+				pass
 		
 		enemies.clear()
 		Signals.emit_signal("battleEnded", {}) # TODO loot

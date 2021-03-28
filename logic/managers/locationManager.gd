@@ -1,7 +1,5 @@
 extends Node
 
-const _LOCATION_BIN_PATH = 'res://data/locations/%s.zst'
-
 var player : Character
 var location : Location
 
@@ -14,7 +12,7 @@ func _ready():
 
 
 func instantiateLocation(player : Character, shortName : String, toSpawnId : int = 0) -> void:
-	location = readLocationFromFile(shortName)
+	location = EntityLoader.loadLocation(shortName)
 	location.enter(player, toSpawnId)
 
 
@@ -28,27 +26,4 @@ func movePlayer(direction : int) -> void:
 
 func moveCharacter(character, direction) -> void:
 	location.move(character, direction)
-
-
-func readLocationFromFile(shortName : String) -> Location:
-	var newLocation : Location
-	var file = File.new()
-	file.open_compressed(
-		_LOCATION_BIN_PATH % shortName,
-		File.READ,
-		File.COMPRESSION_ZSTD)
-	newLocation = bytes2var(file.get_buffer(file.get_len()))
-	file.close()
-	
-	return newLocation
-
-
-func saveLocationToFile(location : Location) -> void:
-	var file = File.new()
-	file.open_compressed(
-		_LOCATION_BIN_PATH % location.shortName,
-		File.WRITE,
-		File.COMPRESSION_ZSTD)
-	file.store_buffer(var2bytes(location))
-	file.close()
 

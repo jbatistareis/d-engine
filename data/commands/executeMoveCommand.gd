@@ -40,9 +40,8 @@ func execute() -> void:
 
 
 func changeHp(character, amount : int, bypassArmor : bool = false) -> void:
-	if (!bypassArmor && (amount < 0) && (character.armor != null)):
-		# TODO get from inventory database
-		amount = ArmorsDatabase.getEntitySpawn(character.armorId).takeHit(amount)
+	if (!bypassArmor && (amount < 0) && (character.inventory.armor != null)):
+		amount = character.inventory.armor.takeHit(amount)
 	
 	character.changeHp(amount)
 

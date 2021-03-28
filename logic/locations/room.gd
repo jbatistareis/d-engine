@@ -1,8 +1,8 @@
 class_name Room
+extends Entity
 
 const _NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
-var id : int
 var x : int
 var y : int
 var type : int = 0
@@ -40,10 +40,12 @@ var visited : bool = false
 
 func _init() -> void:
 	for id in itemIds:
-		itemSpawns.append(ItemsDatabase.spawnEntity(id))
+		#itemSpawns.append(ItemsDatabase.spawnEntity(id))
+		pass
 	
 	for id in friendlyIds:
-		var npc = CharactersDatabase.spawnEntity(id)
+		#var npc = CharactersDatabase.spawnEntity(id)
+		var npc
 		npc.currentRoomId = id
 		friendSpawns.append(npc)
 
@@ -65,7 +67,8 @@ func enter(character : Character) -> void:
 			var enemies = []
 			
 			for id in foeIdGroups[Dice.rollNormal(foeIdGroups.size() - 1)]: # picks a spawn combination
-				var enemy = CharactersDatabase.spawnEntity(id)
+				#var enemy = CharactersDatabase.spawnEntity(id)
+				var enemy
 				enemy.currentRoomId = id
 				enemies.append(enemy)
 				

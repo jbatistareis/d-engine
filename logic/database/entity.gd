@@ -4,6 +4,7 @@ const _INTERNAL_SCRIPT_NOOP : String = 'func execute(character : Character) -> v
 
 var id : int
 var spawnId : int = 0 setget setSpawnId,getSpawnId
+var shortName : String = ''
 
 
 func setSpawnId(value : int) -> void:
