@@ -6,7 +6,7 @@ var inBattle : bool = false
 
 
 func _ready():
-	Signals.connect("battleStart", self, "start")
+	Signals.connect("battleStarted", self, "start")
 	Signals.connect("askedPlayerBattleInput", self, "pauseCommands")
 	Signals.connect("playerConfirmedBattleInput", self, "confirmInput")
 
@@ -44,7 +44,7 @@ func end() -> void:
 				CharactersDatabase.deSpawnEntity(enemy.spawnId)
 		
 		enemies.clear()
-		Signals.emit_signal("battleEnd", {}) # TODO loot
+		Signals.emit_signal("battleEnded", {}) # TODO loot
 
 
 func pauseCommands(player : Character, enemies : Array) -> void:

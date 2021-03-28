@@ -14,7 +14,8 @@ func _ready():
 	Signals.connect("commandsPaused", self, 'pause')
 	Signals.connect("commandsResumed", self, 'resume')
 	Signals.connect("commandPublished", self, 'publishCommand')
-	Signals.connect("battleStart", self, "reset")
+	Signals.connect("battleStarted", self, "reset")
+	Signals.connect("battleEnded", self, "reset")
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")

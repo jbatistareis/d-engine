@@ -38,8 +38,8 @@ signal commandPublished(command)
 
 # battle
 # use for flow control
-signal battleStart(players, enemies)
-signal battleEnd(loot) # TODO
+signal battleStarted(players, enemies)
+signal battleEnded(loot) # TODO
 signal charaterTimerSet(character, ticks)
 signal charaterTimerPaused(character)
 signal charaterTimerResumed(character)
