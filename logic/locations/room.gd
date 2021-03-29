@@ -22,12 +22,10 @@ var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
 var danger : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
 
-var itemShortNames : Array = [] # present item short names
 var friendlyShortNames : Array = [] # present npc short names
 var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
 
 # use this for queries
-var itemSpawns : Array = [] # spawned item
 var friendSpawns : Array = [] # spawned npcs
 
 var visited : bool = false
@@ -39,10 +37,6 @@ var visited : bool = false
 
 
 func _init() -> void:
-	# TODO filter out unique items
-	for shortName in itemShortNames:
-		itemSpawns.append(EntityLoader.loadItem(shortName))
-	
 	for shortName in friendlyShortNames:
 		var npc = EntityLoader.loadCharacter(shortName)
 		npc.currentRoomId = id
@@ -56,9 +50,6 @@ func enter(character : Character) -> void:
 	character.currentRoom = id
 	
 	if character.type == Enums.CharacterType.PC:
-		for item in itemSpawns:
-			executeScript(item.characterAproachesScript, character)
-		
 		for npc in friendSpawns:
 			executeScript(character.characterAproachesScript, npc)
 		
@@ -77,9 +68,6 @@ func enter(character : Character) -> void:
 
 func exit(character : Character) -> void:
 	if character.type == Enums.CharacterType.PC:
-		for item in itemSpawns:
-			executeScript(item.characterLeavesScript, character)
-		
 		for npc in friendSpawns:
 			executeScript(npc.characterLeavesScript, character)
 		

@@ -37,11 +37,9 @@ func setRoomType(value : int) -> void:
 		$buttons/rotateRoom.modulate.a = 0
 	else:
 		if room == null:
-			room = Room.new()
-			room.x = x
-			room.y = y
+			setRoom(Room.new())
 		room.type = value
-		get_parent().emit_signal("selectedTile", self)
+		LocationEditorSignals.emit_signal("selectedTile", room)
 		
 		$buttons/rotateRoom.disabled = false
 		$buttons/rotateRoom.modulate.a = 1
@@ -51,7 +49,7 @@ func setRoomType(value : int) -> void:
 
 func openProperties(event : InputEvent) -> void:
 	if (room != null) && event.is_action_pressed("left_click"):
-		get_parent().emit_signal("selectedTile", self)
+		LocationEditorSignals.emit_signal("selectedTile", room)
 
 
 func setCoordinate(x : int, y : int) -> void:
@@ -69,7 +67,7 @@ func increaseOrientation() -> void:
 	room.orientation += 1
 	$background/roomIcon.rotate(PI / 2)
 	
-	get_parent().emit_signal("selectedTile", self)
+	LocationEditorSignals.emit_signal("selectedTile", room)
 
 
 func setRoom(value : Room) -> void:

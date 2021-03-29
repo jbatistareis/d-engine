@@ -4,20 +4,20 @@
 [ext_resource path="res://tools/location/properties.gd" type="Script" id=2]
 [ext_resource path="res://tools/location/grid.gd" type="Script" id=3]
 
-[node name="window" type="WindowDialog"]
+[node name="Panel" type="Panel"]
+self_modulate = Color( 1, 1, 1, 0.352941 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -512.0
-margin_top = -288.0
-margin_right = 512.0
-margin_bottom = 288.0
-rect_min_size = Vector2( 640, 480 )
+margin_left = -640.0
+margin_top = -360.0
+margin_right = -640.0
+margin_bottom = -360.0
+rect_min_size = Vector2( 1280, 720 )
 mouse_filter = 1
-popup_exclusive = true
-window_title = "Location editor"
-resizable = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -28,18 +28,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer"]
-margin_right = 764.0
-margin_bottom = 576.0
+margin_right = 950.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 0, 480 )
 mouse_filter = 1
 size_flags_horizontal = 11
 size_flags_vertical = 3
 
-[node name="GridContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer"]
-margin_right = 764.0
-margin_bottom = 576.0
+[node name="roomsContainer" type="GridContainer" parent="HSplitContainer/ScrollContainer"]
+margin_right = 950.0
+margin_bottom = 720.0
 rect_min_size = Vector2( 0, 480 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -47,20 +50,472 @@ columns = 32
 script = ExtResource( 3 )
 
 [node name="Panel" type="Panel" parent="HSplitContainer"]
-margin_left = 768.0
-margin_right = 1024.0
-margin_bottom = 576.0
-rect_min_size = Vector2( 256, 480 )
+margin_left = 954.0
+margin_right = 1280.0
+margin_bottom = 720.0
+rect_min_size = Vector2( 326, 0 )
 size_flags_vertical = 3
 
-[node name="properties" type="GridContainer" parent="HSplitContainer/Panel"]
-anchor_left = 1.0
+[node name="TabContainer" type="TabContainer" parent="HSplitContainer/Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_min_size = Vector2( 0, 480 )
+size_flags_horizontal = 3
 size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Location" type="Tabs" parent="HSplitContainer/Panel/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Location"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 80.0
+size_flags_horizontal = 3
 columns = 2
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_right = 79.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 79, 20 )
+size_flags_vertical = 1
+text = "Name"
+valign = 1
+
+[node name="txtName" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_left = 83.0
+margin_right = 318.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_top = 28.0
+margin_right = 79.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 79, 20 )
+size_flags_vertical = 1
+text = "Short name"
+valign = 1
+
+[node name="txtShortName" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_left = 83.0
+margin_top = 28.0
+margin_right = 318.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_top = 56.0
+margin_right = 79.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 79, 20 )
+size_flags_vertical = 1
+text = "Description"
+valign = 1
+
+[node name="txtDescription" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/GridContainer"]
+margin_left = 83.0
+margin_top = 56.0
+margin_right = 318.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer"]
+margin_top = 84.0
+margin_right = 318.0
+margin_bottom = 88.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer"]
+margin_top = 92.0
+margin_right = 318.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+text = "Entrance logic"
+valign = 1
+
+[node name="txtEntranceLogic" type="TextEdit" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/VBoxContainer"]
+margin_top = 24.0
+margin_right = 318.0
+margin_bottom = 290.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/VBoxContainer"]
+margin_top = 294.0
+margin_right = 318.0
+margin_bottom = 298.0
+
+[node name="Label2" type="Label" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/VBoxContainer"]
+margin_top = 302.0
+margin_right = 318.0
+margin_bottom = 322.0
+rect_min_size = Vector2( 0, 20 )
+text = "Exit logic"
+valign = 1
+
+[node name="txtExitLogic" type="TextEdit" parent="HSplitContainer/Panel/TabContainer/Location/VBoxContainer/VBoxContainer"]
+margin_top = 326.0
+margin_right = 318.0
+margin_bottom = 592.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
+
+[node name="Spawns" type="Tabs" parent="HSplitContainer/Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Spawns"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/Panel/TabContainer/Spawns/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="spawnsContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Spawns/VBoxContainer/ScrollContainer"]
+margin_right = 318.0
+size_flags_horizontal = 3
+
+[node name="btnNewSpawn" type="Button" parent="HSplitContainer/Panel/TabContainer/Spawns/VBoxContainer"]
+margin_top = 664.0
+margin_right = 318.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+text = "Create new spawn"
+
+[node name="Portals" type="Tabs" parent="HSplitContainer/Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Portals"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/Panel/TabContainer/Portals/VBoxContainer"]
+margin_right = 318.0
+margin_bottom = 660.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="portalsContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Portals/VBoxContainer/ScrollContainer"]
+margin_right = 318.0
+size_flags_horizontal = 3
+
+[node name="btnNewPortal" type="Button" parent="HSplitContainer/Panel/TabContainer/Portals/VBoxContainer"]
+margin_top = 664.0
+margin_right = 318.0
+margin_bottom = 684.0
+size_flags_horizontal = 3
+text = "Create new portal"
+
+[node name="Room" type="Tabs" parent="HSplitContainer/Panel/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/Panel/TabContainer/Room"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+scroll_horizontal_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer"]
+margin_right = 318.0
+margin_bottom = 872.0
+rect_min_size = Vector2( 233, 0 )
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="portals" type="GridContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_right = 306.0
+margin_bottom = 108.0
+columns = 2
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"northPortalItems",
+]]
+margin_top = 2.0
+margin_right = 82.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 82, 20 )
+text = "North portal"
+valign = 1
+
+[node name="txtNorthPortal" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"northPortalItems",
+]]
+margin_left = 86.0
+margin_right = 306.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter the short name of the portal"
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"eastPortalItems",
+]]
+margin_top = 30.0
+margin_right = 82.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 82, 20 )
+text = "East portal"
+valign = 1
+
+[node name="txtEastPortal" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"eastPortalItems",
+]]
+margin_left = 86.0
+margin_top = 28.0
+margin_right = 306.0
+margin_bottom = 52.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter the short name of the portal"
+size_flags_horizontal = 3
+
+[node name="Label3" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"southPortalItems",
+]]
+margin_top = 58.0
+margin_right = 82.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 82, 20 )
+text = "South portal"
+valign = 1
+
+[node name="txtSouthPortal" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"southPortalItems",
+]]
+margin_left = 86.0
+margin_top = 56.0
+margin_right = 306.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter the short name of the portal"
+size_flags_horizontal = 3
+
+[node name="Label4" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"westPortalItems",
+]]
+margin_top = 86.0
+margin_right = 82.0
+margin_bottom = 106.0
+rect_min_size = Vector2( 82, 20 )
+text = "West portal"
+valign = 1
+
+[node name="txtWestPortal" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/portals" groups=[
+"westPortalItems",
+]]
+margin_left = 86.0
+margin_top = 84.0
+margin_right = 306.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter the short name of the portal"
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 112.0
+margin_right = 306.0
+margin_bottom = 116.0
+
+[node name="danger" type="GridContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 120.0
+margin_right = 306.0
+margin_bottom = 140.0
+columns = 2
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/danger"]
+margin_right = 82.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 82, 20 )
+text = "Danger"
+valign = 1
+
+[node name="txtDanger" type="HSlider" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/danger"]
+margin_left = 86.0
+margin_right = 306.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+tick_count = 5
+
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 144.0
+margin_right = 306.0
+margin_bottom = 148.0
+
+[node name="enemies" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 152.0
+margin_right = 306.0
+margin_bottom = 234.0
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/enemies"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Enemy groups"
+
+[node name="txtEnemyGroups" type="TextEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/enemies"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 82.0
+rect_min_size = Vector2( 0, 64 )
+hint_tooltip = "Enter a comma separeted list, each line is a group"
+size_flags_horizontal = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
+
+[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 238.0
+margin_right = 306.0
+margin_bottom = 242.0
+
+[node name="friendNpcs" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 246.0
+margin_right = 306.0
+margin_bottom = 288.0
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/friendNpcs"]
+margin_right = 306.0
+margin_bottom = 14.0
+text = "Friend NPCs"
+
+[node name="txtFriendNpcs" type="LineEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/friendNpcs"]
+margin_top = 18.0
+margin_right = 306.0
+margin_bottom = 42.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter a comma separeted list, each line is a group"
+size_flags_horizontal = 3
+
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 292.0
+margin_right = 306.0
+margin_bottom = 296.0
+
+[node name="logic" type="VBoxContainer" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer"]
+margin_top = 300.0
+margin_right = 306.0
+margin_bottom = 872.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/logic"]
+margin_right = 306.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+text = "Entrance logic"
+valign = 1
+
+[node name="txtEntranceLogic" type="TextEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/logic"]
+margin_top = 24.0
+margin_right = 306.0
+margin_bottom = 280.0
+rect_min_size = Vector2( 0, 256 )
+size_flags_horizontal = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/logic"]
+margin_top = 284.0
+margin_right = 306.0
+margin_bottom = 288.0
+
+[node name="Label2" type="Label" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/logic"]
+margin_top = 292.0
+margin_right = 306.0
+margin_bottom = 312.0
+rect_min_size = Vector2( 0, 20 )
+text = "Exit logic"
+valign = 1
+
+[node name="txtExitLogic" type="TextEdit" parent="HSplitContainer/Panel/TabContainer/Room/ScrollContainer/VBoxContainer/logic"]
+margin_top = 316.0
+margin_right = 306.0
+margin_bottom = 572.0
+rect_min_size = Vector2( 0, 256 )
+size_flags_horizontal = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+highlight_all_occurrences = true
