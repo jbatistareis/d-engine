@@ -15,13 +15,13 @@ var exitLogic : String = NOOP
 
 # used only by the player
 func enter(player : Character, toSpawnId : int) -> void:
-	var spawn = spawns[toSpawnId]
+	var spawn = spawns[spawns.bsearch_custom(toSpawnId, EntityArrayHelper, 'idFind')]
 	
 	Signals.emit_signal("playerArrivedLocation", self)
 	executeScript(entranceLogic, player)
 	
 	player.currentLocation = shortName
-	rooms[spawn.toRoomId].enter(player)
+	rooms[rooms.bsearch_custom(spawn.toRoomId, EntityArrayHelper, 'idFind')].enter(player)
 
 
 func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:
@@ -33,29 +33,26 @@ func exit(character : Character, newLocationName : String, toSpawnId : int) -> v
 
 func move(character : Character, direction : int) -> void:
 	var canPass = false
-	var fromRoom = rooms[character.currentRoomId]
+	var fromRoom = rooms[rooms.bsearch_custom(character.currentRoom, EntityArrayHelper, 'idFind')]
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExitRoom(direction)
 	
 	if portalId == -1: # no portal, can pass
 		canPass = true
 	else: # see if can pass
-		canPass = portals[portalId].canPass(character)
+		canPass = portals[portals.bsearch_custom(portalId, EntityArrayHelper, 'idFind')].canPass(character)
 	
 	if canPass:
 		if exitPoint != -1: # its a room
-			var toRoom = rooms[exitPoint]
+			var toRoom = rooms[rooms.bsearch_custom(exitPoint, EntityArrayHelper, 'idFind')]
 			fromRoom.exit(character)
 			Signals.emit_signal("playerChangedRoom")
 			toRoom.enter(character)
 			
 		else: # its a location
 			if character.type == Enums.CharacterType.PC:
-				exit(
-					character,
-					portals[portalId].newLocationName,
-					portals[portalId].toSpawnId
-				)
+				var portal = portals[portals.bsearch_custom(portalId, EntityArrayHelper, 'idFind')]
+				exit(character, portal.newLocationName, portal.toSpawnId)
 
 
 func executeScript(script : String, character : Character) -> void:

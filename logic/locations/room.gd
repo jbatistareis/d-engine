@@ -39,7 +39,7 @@ var visited : bool = false
 func _init() -> void:
 	for shortName in friendlyShortNames:
 		var npc = EntityLoader.loadCharacter(shortName)
-		npc.currentRoomId = id
+		npc.currentRoom = id
 		friendSpawns.append(npc)
 
 
@@ -60,7 +60,7 @@ func enter(character : Character) -> void:
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size() - 1)]
 			for shortName in chosenGroup:
 				var enemy = EntityLoader.loadCharacter(shortName)
-				enemy.currentRoomId = id
+				enemy.currentRoom = id
 				enemies.append(enemy)
 			
 			Signals.emit_signal("battleStart", [character], enemies) # TODO form a player party

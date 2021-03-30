@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://tools/location/gridItem.gd" type="Script" id=1]
-[ext_resource path="res://tools/location/roomIcons.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://tools/location/rooms/roomIcons.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://tools/location/rooms/roomItem.gd" type="Script" id=2]
 
 [node name="gridItem" type="Container"]
 margin_right = 60.0
@@ -9,7 +9,7 @@ margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
 hint_tooltip = "lll"
 mouse_filter = 1
-script = ExtResource( 1 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -33,7 +33,7 @@ __meta__ = {
 
 [node name="roomIcon" type="AnimatedSprite" parent="background"]
 position = Vector2( 30, 30 )
-frames = ExtResource( 2 )
+frames = ExtResource( 1 )
 
 [node name="buttons" type="Control" parent="."]
 modulate = Color( 1, 1, 1, 0 )

@@ -1,5 +1,5 @@
 class_name Spawn
 extends Entity
 
-var toRoomId : int
+var toRoomId : int = 0
 

@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tools/location/spawns/spawnItem.gd" type="Script" id=1]
+
+[node name="spawnItem" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1139.0
+margin_bottom = -644.0
+rect_min_size = Vector2( 318, 80 )
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_right = 318.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="GridContainer"]
+margin_top = 2.0
+margin_right = 75.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 75, 20 )
+text = "Short name"
+valign = 1
+
+[node name="txtShortName" type="LineEdit" parent="GridContainer"]
+margin_left = 79.0
+margin_right = 318.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="GridContainer"]
+margin_top = 30.0
+margin_right = 75.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 75, 20 )
+text = "To room id"
+valign = 1
+
+[node name="txtToRoomId" type="LineEdit" parent="GridContainer"]
+margin_left = 79.0
+margin_top = 28.0
+margin_right = 318.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="lblId" type="Label" parent="GridContainer"]
+margin_top = 56.0
+margin_right = 75.0
+margin_bottom = 76.0
+rect_min_size = Vector2( 75, 20 )
+
+[node name="btnRemove" type="Button" parent="GridContainer"]
+margin_left = 79.0
+margin_top = 56.0
+margin_right = 318.0
+margin_bottom = 76.0
+size_flags_horizontal = 3
+text = "Remove"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+margin_top = 80.0
+margin_right = 318.0
+margin_bottom = 84.0
