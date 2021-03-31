@@ -5,68 +5,67 @@
 [node name="spawnItem" type="VBoxContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -1139.0
-margin_bottom = -644.0
-rect_min_size = Vector2( 318, 80 )
-size_flags_horizontal = 3
+margin_right = -970.0
+margin_bottom = -664.0
+rect_min_size = Vector2( 310, 56 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GridContainer" type="GridContainer" parent="."]
-margin_right = 318.0
-margin_bottom = 76.0
-size_flags_horizontal = 3
-columns = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_right = 310.0
+margin_bottom = 20.0
+alignment = 1
 
-[node name="Label" type="Label" parent="GridContainer"]
-margin_top = 2.0
-margin_right = 75.0
-margin_bottom = 22.0
+[node name="Heparator" type="HSeparator" parent="HBoxContainer"]
+margin_right = 113.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="lblId" type="Label" parent="HBoxContainer"]
+margin_left = 117.0
+margin_right = 192.0
+margin_bottom = 20.0
 rect_min_size = Vector2( 75, 20 )
-text = "Short name"
+align = 1
 valign = 1
 
-[node name="txtShortName" type="LineEdit" parent="GridContainer"]
-margin_left = 79.0
-margin_right = 318.0
-margin_bottom = 24.0
+[node name="Heparator2" type="HSeparator" parent="HBoxContainer"]
+margin_left = 196.0
+margin_right = 310.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="GridContainer" type="HBoxContainer" parent="."]
+margin_top = 24.0
+margin_right = 310.0
+margin_bottom = 48.0
 size_flags_horizontal = 3
 
 [node name="Label2" type="Label" parent="GridContainer"]
-margin_top = 30.0
+margin_top = 2.0
 margin_right = 75.0
-margin_bottom = 50.0
+margin_bottom = 22.0
 rect_min_size = Vector2( 75, 20 )
 text = "To room id"
 valign = 1
 
 [node name="txtToRoomId" type="LineEdit" parent="GridContainer"]
 margin_left = 79.0
-margin_top = 28.0
-margin_right = 318.0
-margin_bottom = 52.0
+margin_right = 242.0
+margin_bottom = 24.0
 size_flags_horizontal = 3
-
-[node name="lblId" type="Label" parent="GridContainer"]
-margin_top = 56.0
-margin_right = 75.0
-margin_bottom = 76.0
-rect_min_size = Vector2( 75, 20 )
 
 [node name="btnRemove" type="Button" parent="GridContainer"]
-margin_left = 79.0
-margin_top = 56.0
-margin_right = 318.0
-margin_bottom = 76.0
-size_flags_horizontal = 3
+margin_left = 246.0
+margin_right = 310.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
 text = "Remove"
 
-[node name="HSeparator" type="HSeparator" parent="."]
-margin_top = 80.0
-margin_right = 318.0
-margin_bottom = 84.0
+[node name="Control" type="Control" parent="."]
+margin_top = 52.0
+margin_right = 310.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 0, 10 )

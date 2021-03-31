@@ -37,13 +37,13 @@ func move(character : Character, direction : int) -> void:
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExitRoom(direction)
 	
-	if portalId == -1: # no portal, can pass
+	if portalId == 0: # no portal, can pass
 		canPass = true
 	else: # see if can pass
 		canPass = portals[portals.bsearch_custom(portalId, EntityArrayHelper, 'idFind')].canPass(character)
 	
 	if canPass:
-		if exitPoint != -1: # its a room
+		if exitPoint != 0: # its a room
 			var toRoom = rooms[rooms.bsearch_custom(exitPoint, EntityArrayHelper, 'idFind')]
 			fromRoom.exit(character)
 			Signals.emit_signal("playerChangedRoom")

@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-var spawn : Spawn setget setSpawn
+var spawn : Spawn setget setSpawn,getSpawn
 
 
 func _ready() -> void:
@@ -9,9 +9,14 @@ func _ready() -> void:
 
 func setSpawn(value : Spawn) -> void:
 	spawn = value
-	$GridContainer/txtShortName.text = spawn.shortName
 	$GridContainer/txtToRoomId.text = str(spawn.toRoomId)
-	$GridContainer/lblId.text = 'ID: ' + str(spawn.id)
+	$HBoxContainer/lblId.text = ('ID: %d' % spawn.id)
+
+
+func getSpawn() -> Spawn:
+	spawn.toRoomId = int($GridContainer/txtToRoomId.text)
+	
+	return spawn
 
 
 func remove() -> void:

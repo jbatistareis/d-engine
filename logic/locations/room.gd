@@ -3,20 +3,20 @@ extends Entity
 
 const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
-var x : int
-var y : int
+var x : int = 0
+var y : int = 0
 var type : int = 0
-var orientation : int = 0 setget setOrientation
+var orientation : int = Enums.RoomDirection.NORTH setget setOrientation
 
-var northExit : int = -1
-var southExit : int = -1
-var eastExit : int = -1
-var westExit : int = -1
+var northExit : int = 0
+var southExit : int = 0
+var eastExit : int = 0
+var westExit : int = 0
 
-var northPortal : int = -1
-var southPortal : int = -1
-var eastPortal : int = -1
-var westPortal : int = -1
+var northPortal : int = 0
+var southPortal : int = 0
+var eastPortal : int = 0
+var westPortal : int = 0
 
 var entranceLogic : String = NOOP
 var exitLogic : String = NOOP

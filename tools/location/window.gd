@@ -20,5 +20,5 @@ func saveLocation() -> void:
 
 
 func editRoom(room : Room) -> void:
-	$HSplitContainer/Panel/TabContainer.current_tab = 1
+	$HSplitContainer/Panel2/TabContainer.current_tab = 1
 

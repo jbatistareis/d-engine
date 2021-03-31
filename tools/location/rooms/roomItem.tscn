@@ -26,7 +26,7 @@ rect_min_size = Vector2( 60, 60 )
 mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-color = Color( 0, 0, 0, 0.12549 )
+color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

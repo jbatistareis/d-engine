@@ -5,7 +5,7 @@ const NOOP : String = 'func execute(character : Character) -> bool:\n\treturn tr
 
 var passLogic : String = NOOP
 var newLocationShortName : String = ''
-var toSpawnShortName : String = ''
+var toSpawnId : int = 0
 
 
 func canPass(character : Character) -> bool:

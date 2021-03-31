@@ -7,7 +7,11 @@ var room : Room = null setget setRoom
 
 
 func _ready():
+	deselect(null)
+	
 	connect("gui_input", self, "openProperties")
+	
+	LocationEditorSignals.connect("selectedRoom", self, "deselect")
 	
 	$buttons.connect("mouse_entered", self, "showButtons")
 	$buttons/changeRoom.connect("mouse_entered", self, "showButtons")
@@ -19,6 +23,17 @@ func _ready():
 	
 	$buttons/changeRoom.get_popup().connect("index_pressed", self, "setRoomType")
 	$buttons/rotateRoom.connect("button_down", self, "increaseOrientation")
+
+
+func deselect(room : Room) -> void:
+	$background/cover.color.b = 0
+	$background/cover.color.a = 0.1
+
+
+func select() -> void:
+	LocationEditorSignals.emit_signal("selectedRoom", room)
+	$background/cover.color.b = 1
+	$background/cover.color.a = 0.5
 
 
 func showButtons() -> void:
@@ -39,8 +54,11 @@ func setRoomType(value : int) -> void:
 		if room == null:
 			self.room = Room.new()
 			self.room.id = EditorIdGenerator.id
+			self.room.x = x
+			self.room.y = y
 		room.type = value
-		LocationEditorSignals.emit_signal("selectedRoom", room)
+		
+		select()
 		
 		$buttons/rotateRoom.disabled = false
 		$buttons/rotateRoom.modulate.a = 1
@@ -50,7 +68,7 @@ func setRoomType(value : int) -> void:
 
 func openProperties(event : InputEvent) -> void:
 	if (room != null) && event.is_action_pressed("left_click"):
-		LocationEditorSignals.emit_signal("selectedRoom", room)
+		select()
 
 
 func setCoordinate(x : int, y : int) -> void:
@@ -68,7 +86,7 @@ func increaseOrientation() -> void:
 	room.orientation += 1
 	$background/roomIcon.rotate(PI / 2)
 	
-	LocationEditorSignals.emit_signal("selectedRoom", room)
+	select()
 
 
 func setRoom(value : Room) -> void:

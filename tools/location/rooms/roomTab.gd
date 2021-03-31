@@ -5,4 +5,5 @@ func _ready() -> void:
 
 
 func editRoom(room : Room) -> void:
-	$ScrollContainer/VBoxContainer/lblId.text = 'ID: ' + str(room.id)
+	$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
+
