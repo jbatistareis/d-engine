@@ -7,7 +7,7 @@ static func saveCharacter(character : Character) -> void:
 		GamePaths.CHARACTER_DATA % character.shortName,
 		File.WRITE,
 		File.COMPRESSION_ZSTD)
-	file.store_buffer(character.serialize())
+	file.store_var(Serializer.character(character))
 	file.close()
 
 
@@ -17,22 +17,12 @@ static func saveItem(item : Item) -> void:
 		GamePaths.ITEM_DATA % item.shortName,
 		File.WRITE,
 		File.COMPRESSION_ZSTD)
-	file.store_buffer(item.serialize())
+	file.store_var(Serializer.item(item))
 	file.close()
 
 
 static func saveLocation(location : Location) -> void:
-	location.rooms.sort_custom(EntityArrayHelper, 'idSort')
-	location.portals.sort_custom(EntityArrayHelper, 'idSort')
-	location.spawns.sort_custom(EntityArrayHelper, 'idSort')
-	
-	var file = File.new()
-	file.open_compressed(
-		GamePaths.LOCATION_DATA % location.shortName,
-		File.WRITE,
-		File.COMPRESSION_ZSTD)
-	file.store_buffer(location.serialize())
-	file.close()
+	saveLocationOnPath(location, GamePaths.LOCATION_DATA % location.shortName)
 
 
 static func saveLocationOnPath(location : Location, path : String) -> void:
@@ -45,6 +35,6 @@ static func saveLocationOnPath(location : Location, path : String) -> void:
 		path,
 		File.WRITE,
 		File.COMPRESSION_ZSTD)
-	file.store_buffer(location.serialize())
+	file.store_var(Serializer.location(location))
 	file.close()
 
