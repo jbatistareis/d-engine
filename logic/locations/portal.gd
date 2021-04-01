@@ -4,6 +4,8 @@ extends Entity
 const NOOP : String = 'func execute(character : Character) -> bool:\n\treturn true'
 
 var passLogic : String = NOOP
+
+#transfer
 var newLocationShortName : String = ''
 var toSpawnId : int = 0
 

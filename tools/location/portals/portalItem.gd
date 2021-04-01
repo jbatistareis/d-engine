@@ -4,7 +4,7 @@ var portal : Portal setget setPortal,getPortal
 
 
 func _ready() -> void:
-	$HBoxContainer2/btnRemove.connect("button_up", self, "remove")
+	$HBoxContainer/btnRemove.connect("button_up", self, "remove")
 
 
 func setPortal(value : Portal) -> void:
@@ -12,13 +12,13 @@ func setPortal(value : Portal) -> void:
 	$HBoxContainer/lblId.text = ('ID: %d' % portal.id)
 	$txtPassLogic.text = portal.passLogic
 	$GridContainer/txtNewLocation.text = portal.newLocationShortName
-	$GridContainer/txtToSpawn.text = str(portal.toSpawnId)
+	$GridContainer/spnToSpawn.value = portal.toSpawnId
 
 
 func getPortal() -> Portal:
 	portal.passLogic = $txtPassLogic.text
 	portal.newLocationShortName = $GridContainer/txtNewLocation.text
-	portal.toSpawnId = int($GridContainer/txtToSpawn.text)
+	portal.toSpawnId = int($GridContainer/spnToSpawn.value)
 	
 	return portal
 

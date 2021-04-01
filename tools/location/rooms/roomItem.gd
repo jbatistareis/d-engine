@@ -50,6 +50,9 @@ func setRoomType(value : int) -> void:
 		
 		$buttons/rotateRoom.disabled = true
 		$buttons/rotateRoom.modulate.a = 0
+		
+		deselect(null)
+		LocationEditorSignals.emit_signal("selectedRoom", null)
 	else:
 		if room == null:
 			self.room = Room.new()

@@ -4,17 +4,20 @@ var spawn : Spawn setget setSpawn,getSpawn
 
 
 func _ready() -> void:
-	$GridContainer/btnRemove.connect("button_up", self, "remove")
+	$HBoxContainer/btnRemove.connect("button_up", self, "remove")
 
 
 func setSpawn(value : Spawn) -> void:
 	spawn = value
-	$GridContainer/txtToRoomId.text = str(spawn.toRoomId)
 	$HBoxContainer/lblId.text = ('ID: %d' % spawn.id)
+	$HBoxContainer2/spnToRoomId.value = spawn.toRoomId
+	$HBoxContainer2/optDirection.select(spawn.direction)
+	
 
 
 func getSpawn() -> Spawn:
-	spawn.toRoomId = int($GridContainer/txtToRoomId.text)
+	spawn.toRoomId = int($HBoxContainer2/spnToRoomId.value)
+	spawn.direction = $HBoxContainer2/optDirection.selected
 	
 	return spawn
 

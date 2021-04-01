@@ -77,6 +77,7 @@ __meta__ = {
 }
 
 [node name="Location" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -264,7 +265,6 @@ margin_bottom = 684.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="Room" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -317,141 +317,190 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer"]
-margin_right = 342.0
-margin_bottom = 910.0
+margin_right = 330.0
+margin_bottom = 906.0
 rect_min_size = Vector2( 233, 0 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="portals" type="GridContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="portals" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 330.0
-margin_bottom = 108.0
-columns = 2
+margin_bottom = 104.0
+alignment = 1
 
-[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"northPortalItems",
-]]
-margin_top = 2.0
-margin_right = 82.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 82, 20 )
-text = "North portal"
+[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
+margin_right = 330.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+text = "Portals"
+align = 1
 valign = 1
 
-[node name="txtNorthPortal" type="LineEdit" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"northPortalItems",
-]]
-margin_left = 86.0
+[node name="north" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
+margin_top = 24.0
 margin_right = 330.0
+margin_bottom = 48.0
+alignment = 1
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/north"]
+margin_left = 118.0
+margin_top = 2.0
+margin_right = 133.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 15, 20 )
+text = "N"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="spnNorthPortal" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/north"]
+margin_left = 137.0
+margin_right = 211.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Enter the short name of the portal"
-size_flags_horizontal = 3
+hint_tooltip = "Enter the ID of the portal"
+max_value = 1024.0
+align = 1
 
-[node name="Label2" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"eastPortalItems",
-]]
-margin_top = 30.0
-margin_right = 82.0
-margin_bottom = 50.0
-rect_min_size = Vector2( 82, 20 )
-text = "East portal"
-valign = 1
-
-[node name="txtEastPortal" type="LineEdit" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"eastPortalItems",
-]]
-margin_left = 86.0
-margin_top = 28.0
+[node name="eastWest" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
+margin_top = 52.0
 margin_right = 330.0
-margin_bottom = 52.0
-rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Enter the short name of the portal"
+margin_bottom = 76.0
 size_flags_horizontal = 3
+alignment = 1
 
-[node name="Label3" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"southPortalItems",
-]]
-margin_top = 58.0
-margin_right = 82.0
-margin_bottom = 78.0
-rect_min_size = Vector2( 82, 20 )
-text = "South portal"
+[node name="Label4" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest"]
+margin_left = 22.0
+margin_top = 2.0
+margin_right = 37.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 15, 20 )
+text = "W"
+align = 1
 valign = 1
+autowrap = true
 
-[node name="txtSouthPortal" type="LineEdit" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"southPortalItems",
-]]
-margin_left = 86.0
-margin_top = 56.0
-margin_right = 330.0
-margin_bottom = 80.0
+[node name="spnWestPortal" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest"]
+margin_left = 41.0
+margin_right = 115.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Enter the short name of the portal"
-size_flags_horizontal = 3
+hint_tooltip = "Enter the ID of the portal"
+max_value = 1024.0
+align = 1
 
-[node name="Label4" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"westPortalItems",
-]]
-margin_top = 86.0
-margin_right = 82.0
-margin_bottom = 106.0
-rect_min_size = Vector2( 82, 20 )
-text = "West portal"
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest"]
+margin_left = 119.0
+margin_right = 211.0
+margin_bottom = 24.0
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/HBoxContainer"]
+margin_right = 40.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="VSeparator" type="VSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/HBoxContainer"]
+margin_left = 44.0
+margin_right = 48.0
+margin_bottom = 24.0
+
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/HBoxContainer"]
+margin_left = 52.0
+margin_right = 92.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 40, 0 )
+
+[node name="Label2" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest"]
+margin_left = 215.0
+margin_top = 2.0
+margin_right = 230.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 15, 20 )
+text = "E"
+align = 1
 valign = 1
+autowrap = true
 
-[node name="txtWestPortal" type="LineEdit" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals" groups=[
-"westPortalItems",
-]]
-margin_left = 86.0
-margin_top = 84.0
-margin_right = 330.0
-margin_bottom = 108.0
+[node name="spnEastPortal" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest"]
+margin_left = 234.0
+margin_right = 308.0
+margin_bottom = 24.0
 rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Enter the short name of the portal"
+hint_tooltip = "Enter the ID of the portal"
+max_value = 1024.0
+align = 1
+
+[node name="south" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
+margin_top = 80.0
+margin_right = 330.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label3" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/south"]
+margin_left = 118.0
+margin_top = 2.0
+margin_right = 133.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 15, 20 )
+text = "S"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="spnSouthPortal" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals/south"]
+margin_left = 137.0
+margin_right = 211.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Enter the ID of the portal"
+max_value = 1024.0
+align = 1
 
 [node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 112.0
+margin_top = 108.0
 margin_right = 330.0
-margin_bottom = 122.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="danger" type="GridContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 126.0
+[node name="alert" type="GridContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 122.0
 margin_right = 330.0
-margin_bottom = 146.0
+margin_bottom = 142.0
 columns = 2
 
-[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/danger"]
+[node name="lblAlert" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/alert"]
 margin_right = 82.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 82, 20 )
-text = "Danger"
+text = "Alert: 0%"
 valign = 1
 
-[node name="txtDanger" type="HSlider" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/danger"]
+[node name="sldAlert" type="HSlider" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/alert"]
 margin_left = 86.0
 margin_right = 330.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Sets the probability of an enemy encounter"
 size_flags_horizontal = 3
 max_value = 1.0
 step = 0.01
 tick_count = 5
+ticks_on_borders = true
 
 [node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 150.0
+margin_top = 146.0
 margin_right = 330.0
-margin_bottom = 160.0
+margin_bottom = 156.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="enemies" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 164.0
+margin_top = 160.0
 margin_right = 330.0
-margin_bottom = 246.0
+margin_bottom = 242.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/enemies"]
 margin_right = 330.0
@@ -463,7 +512,7 @@ margin_top = 18.0
 margin_right = 330.0
 margin_bottom = 82.0
 rect_min_size = Vector2( 0, 64 )
-hint_tooltip = "Enter a comma separeted list, each line is a group"
+hint_tooltip = "Enter a comma separeted list of short names, each line is a group"
 size_flags_horizontal = 3
 highlight_current_line = true
 syntax_highlighting = true
@@ -472,15 +521,15 @@ draw_tabs = true
 highlight_all_occurrences = true
 
 [node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 250.0
+margin_top = 246.0
 margin_right = 330.0
-margin_bottom = 260.0
+margin_bottom = 256.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="friendNpcs" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 264.0
+margin_top = 260.0
 margin_right = 330.0
-margin_bottom = 306.0
+margin_bottom = 302.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/friendNpcs"]
 margin_right = 330.0
@@ -492,19 +541,19 @@ margin_top = 18.0
 margin_right = 330.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Enter a comma separeted list, each line is a group"
+hint_tooltip = "Enter a comma separeted list of short names"
 size_flags_horizontal = 3
 
 [node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 310.0
+margin_top = 306.0
 margin_right = 330.0
-margin_bottom = 320.0
+margin_bottom = 316.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="logic" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 324.0
+margin_top = 320.0
 margin_right = 330.0
-margin_bottom = 896.0
+margin_bottom = 892.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -553,9 +602,9 @@ draw_tabs = true
 highlight_all_occurrences = true
 
 [node name="Control" type="Control" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 900.0
+margin_top = 896.0
 margin_right = 330.0
-margin_bottom = 910.0
+margin_bottom = 906.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="Portals" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]

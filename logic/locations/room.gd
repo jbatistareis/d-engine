@@ -5,8 +5,8 @@ const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
 var x : int = 0
 var y : int = 0
-var type : int = 0
-var orientation : int = Enums.RoomDirection.NORTH setget setOrientation
+var type : int = Enums.RoomType._0_EXIT
+var orientation : int = Enums.Direction.NORTH setget setOrientation
 
 var northExit : int = 0
 var southExit : int = 0
@@ -20,7 +20,7 @@ var westPortal : int = 0
 
 var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
-var danger : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
+var alert : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
 
 var friendlyShortNames : Array = [] # present npc short names
 var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
@@ -53,7 +53,7 @@ func enter(character : Character) -> void:
 		for npc in friendSpawns:
 			executeScript(character.characterAproachesScript, npc)
 		
-		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * danger))
+		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * alert))
 		if !foeShortNameGroups.empty() && battleTriggered:
 			var enemies = []
 			
@@ -85,13 +85,13 @@ func setOrientation(value : int) -> void:
 
 func getPortal(direction : int) -> int:
 	match direction:
-		Enums.RoomDirection.NORTH:
+		Enums.Direction.NORTH:
 			return northPortal
-		Enums.RoomDirection.SOUTH:
+		Enums.Direction.SOUTH:
 			return southPortal
-		Enums.RoomDirection.EAST:
+		Enums.Direction.EAST:
 			return eastPortal
-		Enums.RoomDirection.WEST:
+		Enums.Direction.WEST:
 			return westPortal
 		_:
 			return 0
@@ -99,13 +99,13 @@ func getPortal(direction : int) -> int:
 
 func getExit(direction : int) -> int:
 	match direction:
-		Enums.RoomDirection.NORTH:
+		Enums.Direction.NORTH:
 			return northExit
-		Enums.RoomDirection.SOUTH:
+		Enums.Direction.SOUTH:
 			return southExit
-		Enums.RoomDirection.EAST:
+		Enums.Direction.EAST:
 			return eastExit
-		Enums.RoomDirection.WEST:
+		Enums.Direction.WEST:
 			return westExit
 		_:
 			return 0
