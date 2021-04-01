@@ -24,7 +24,7 @@ It is going to work some day.
 - [ ] Controls system
 - [ ] UI ~~system~~  
 - [ ] 3D map  
-- [ ] Maps dev tool  
+- [x] Maps dev tool  
 - [ ] Characters dev tool  
 - [ ] Battles dev tool 
 - [ ] Dialogs dev tool  
