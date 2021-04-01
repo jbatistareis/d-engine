@@ -690,3 +690,19 @@ text = "Create new spawn"
 margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 10 )
+
+[node name="openLocation" type="FileDialog" parent="."]
+margin_right = 640.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 640, 480 )
+popup_exclusive = true
+window_title = "Chose a location file"
+mode = 0
+filters = PoolStringArray( "*.loc ; Location data" )
+
+[node name="saveLocation" type="FileDialog" parent="."]
+margin_right = 640.0
+margin_bottom = 480.0
+rect_min_size = Vector2( 640, 480 )
+popup_exclusive = true
+filters = PoolStringArray( "*.loc ; Location data" )

@@ -34,3 +34,17 @@ static func saveLocation(location : Location) -> void:
 	file.store_buffer(location.serialize())
 	file.close()
 
+
+static func saveLocationOnPath(location : Location, path : String) -> void:
+	location.rooms.sort_custom(EntityArrayHelper, 'idSort')
+	location.portals.sort_custom(EntityArrayHelper, 'idSort')
+	location.spawns.sort_custom(EntityArrayHelper, 'idSort')
+	
+	var file = File.new()
+	file.open_compressed(
+		path,
+		File.WRITE,
+		File.COMPRESSION_ZSTD)
+	file.store_buffer(location.serialize())
+	file.close()
+

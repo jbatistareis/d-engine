@@ -8,6 +8,15 @@ func _ready() -> void:
 	
 	EditorIdGenerator.resetId()
 	LocationEditorSignals.connect("selectedRoom", self, "editRoom")
+	
+	$openLocation.current_dir = GamePaths.LOCATION
+	$saveLocation.current_dir = GamePaths.LOCATION
+	
+	$openLocation.connect("file_selected", self, "loadLocation")
+	$saveLocation.connect("file_selected", self, "saveLocation")
+	
+	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer/btnLoad.connect("button_up", self, "openLocationFile")
+	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer/btnSave.connect("button_up", self, "saveLocationFile")
 
 
 func setLocation(value : Location) -> void:
@@ -20,13 +29,22 @@ func setLocation(value : Location) -> void:
 	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/VBoxContainer/txtExitLogic.text = location.exitLogic
 
 
+func openLocationFile() -> void:
+	$openLocation.popup_centered()
 
-func loadLocation(shortName : String) -> void:
-	self.location = EntityLoader.loadLocation(shortName)
+
+func saveLocationFile() -> void:
+	$saveLocation.current_file = location.shortName + '.loc'
+	$saveLocation.popup_centered()
+
+
+func loadLocation(path : String) -> void:
+	self.location = EntityLoader.loadLocationFromPath(path)
 	EditorIdGenerator.adjustId(location)
 	LocationEditorSignals.emit_signal("loadedLocation", location)
 
-func saveLocation() -> void:
+
+func saveLocation(path : String) -> void:
 	location.name = $HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/GridContainer/txtName.text
 	location.shortName = $HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/GridContainer/txtShortName.text
 	location.description = $HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/GridContainer/txtDescription.text
@@ -34,7 +52,7 @@ func saveLocation() -> void:
 	location.exitLogic = $HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/VBoxContainer/txtExitLogic.text
 	
 	LocationEditorSignals.emit_signal("savedLocation", location)
-	EntitySaver.saveLocation(location)
+	EntitySaver.saveLocationOnPath(location, path)
 
 
 func editRoom(room : Room) -> void:
