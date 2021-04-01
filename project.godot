@@ -209,6 +209,8 @@ RegionManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
+LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
+EditorIdGenerator="*res://tools/editorIdGenerator.gd"
 
 [display]
 

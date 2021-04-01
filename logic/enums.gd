@@ -11,8 +11,8 @@ enum CharacterType { PC, FRIENDLY_NPC, FOE_NPC }
 
 enum ItemType { ARMOR, WEAPON, CONSUMABLE, KEY }
 
-enum RoomType { _0_EXIT, _1_EXIT, _2_EXITS_L, _2_EXITS_I, _3_EXITS, _4_EXITS }
-enum RoomDirection { NORTH, EAST, SOUTH, WEST, UP, DOWN }
+enum RoomType { _0_EXIT, _1_EXIT, _2_EXITS_I, _2_EXITS_L, _3_EXITS, _4_EXITS }
+enum Direction { NORTH, EAST, SOUTH, WEST, UP, DOWN }
 
 enum AfflictionType { TODO }
 

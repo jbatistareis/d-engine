@@ -1,6 +1,10 @@
 class_name GamePaths
 
-const CHARACTER_DATA = 'res://data/characters/%s.zst'
-const ITEM_DATA = 'res://data/items/%s.zst'
-const LOCATION_DATA = 'res://data/locations/%s.zst'
+const LOCATION = 'res://data/locations'
+const CHARACTER = 'res://data/characters'
+const ITEM = 'res://data/items'
+
+const CHARACTER_DATA = CHARACTER + '/%s.cha'
+const ITEM_DATA = ITEM + '/%s.itm'
+const LOCATION_DATA = LOCATION + '/%s.loc'
 
