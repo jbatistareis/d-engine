@@ -760,7 +760,7 @@ rect_min_size = Vector2( 0, 0 )
 popup_exclusive = true
 window_title = "Confirmation"
 dialog_text = "Do you want to save this location as is?
-I will overwrite any file with the same short name."
+Any file with the same short name is going to be overwritten."
 
 [node name="fileSavedInfo" type="AcceptDialog" parent="."]
 margin_right = 83.0

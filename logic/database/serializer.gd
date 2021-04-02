@@ -4,6 +4,33 @@ class_name Serializer
 static func character(character : Character) -> PoolByteArray:
 	var data : Dictionary = inst2dict(character)
 	
+	data.strength = inst2dict(character.strength)
+	data.dexterity = inst2dict(character.dexterity)
+	data.constitution = inst2dict(character.constitution)
+	data.intelligence = inst2dict(character.intelligence)
+	data.wisdom = inst2dict(character.wisdom)
+	data.charisma = inst2dict(character.charisma)
+	
+	var index = 0
+	while index < data.moves.size():
+		data.moves[index] = inst2dict(data.moves[index])
+		index += 1
+	
+	data.inventory = inst2dict(character.inventory)
+	
+	index = 0
+	while index < data.inventory.items.size():
+		data.inventory.items[index] = inst2dict(data.inventory.items[index])
+		index += 1
+	
+	index = 0
+	while index < data.inventory.weapons.size():
+		data.inventory.weapons[index] = inst2dict(data.inventory.weapons[index])
+		index += 1
+	
+	data.inventory.weapon = inst2dict(data.inventory.weapon)
+	data.inventory.armor = inst2dict(data.inventory.armor)
+	
 	return var2bytes(data)
 
 
