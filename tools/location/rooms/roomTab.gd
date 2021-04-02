@@ -37,10 +37,10 @@ func setRoom(value : Room) -> void:
 	
 	if room != null:
 		$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.value = room.northPortal
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.value = room.eastPortal
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.value = room.southPortal
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.value = room.westPortal
+		$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.value = room.getPortal(Enums.Direction.NORTH)
+		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.value = room.getPortal(Enums.Direction.EAST)
+		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.value = room.getPortal(Enums.Direction.WEST)
+		$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.value = room.getPortal(Enums.Direction.SOUTH)
 		$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.value = room.alert
 		enemyGroups2Txt()
 		friendlyGroup2Txt()
@@ -167,22 +167,22 @@ func setRoom(value : Room) -> void:
 
 func setNorthPortal(value : float) -> void:
 	if room != null:
-		room.northPortal = int(value)
+		room.portals[Enums.Direction.NORTH] = int(value)
 
 
 func setEastPortal(value : float) -> void:
 	if room != null:
-		room.eastPortal = int(value)
+		room.portals[Enums.Direction.EAST] = int(value)
 
 
 func setSouthPortal(value : float) -> void:
 	if room != null:
-		room.southPortal = int(value)
+		room.portals[Enums.Direction.SOUTH] = int(value)
 
 
 func setWestPortal(value : float) -> void:
 	if room != null:
-		room.westPortal = int(value)
+		room.portals[Enums.Direction.WEST] = int(value)
 
 
 func changeAlertLabel(value : float) -> void:

@@ -1,7 +1,7 @@
 extends Node
 
 
+signal fileOpened(shortName)
 signal loadedLocation(location)
-signal savedLocation(location)
 signal selectedRoom(room)
 

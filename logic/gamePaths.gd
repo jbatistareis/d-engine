@@ -1,5 +1,7 @@
 class_name GamePaths
 
+const EXTENSION_REGEX = '\\..*'
+
 const LOCATION = 'res://data/locations'
 const CHARACTER = 'res://data/characters'
 const ITEM = 'res://data/items'

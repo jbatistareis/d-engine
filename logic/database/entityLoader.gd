@@ -7,7 +7,7 @@ static func loadCharacter(shortName : String) -> Character:
 		GamePaths.CHARACTER_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
-	var character : Character = bytes2var(file.get_buffer(file.get_len()))
+	var character : Character = Deserializer.character(file.get_var())
 	file.close()
 	
 	return character
@@ -19,7 +19,7 @@ static func loadItem(shortName : String) -> Item:
 		GamePaths.ITEM_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
-	var item : Item = bytes2var(file.get_buffer(file.get_len()))
+	var item : Item = Deserializer.item(file.get_var())
 	file.close()
 	
 	return item
@@ -31,19 +31,8 @@ static func loadLocation(shortName : String) -> Location:
 		GamePaths.LOCATION_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
-	var location : Location = bytes2var(file.get_buffer(file.get_len()))
+	var location : Location = Deserializer.location(file.get_var())
 	file.close()
 	
 	return location
 
-
-static func loadLocationFromPath(path : String) -> Location:
-	var file = File.new()
-	file.open_compressed(
-		path,
-		File.READ,
-		File.COMPRESSION_ZSTD)
-	var location : Location = bytes2var(file.get_buffer(file.get_len()))
-	file.close()
-	
-	return location

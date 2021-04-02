@@ -5,7 +5,6 @@ var portalItemScene : PackedScene = preload("res://tools/location/portals/portal
 
 func _ready() -> void:
 	LocationEditorSignals.connect("loadedLocation", self, "loadPortals")
-	LocationEditorSignals.connect("savedLocation", self, "collectPortals")
 	$VBoxContainer/btnNewPortal.connect("button_up", self, "addPortal")
 
 
@@ -16,9 +15,11 @@ func loadPortals(location : Location) -> void:
 		portalItem.portal = portal
 
 
-func collectPortals(location : Location) -> void:
+func collectPortals() -> Array:
+	var portals = []
 	for portalItem in $VBoxContainer/ScrollContainer/portalsContainer.get_children():
-		location.spawns.append(portalItem.portal)
+		portals.append(portalItem.portal)
+	return portals
 
 
 func addPortal() -> void:
