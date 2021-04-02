@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="terrain" type="GridMap"]
+data = {
+"cells": PoolIntArray(  )
+}
+__meta__ = {
+"_editor_clip_": 0
+}

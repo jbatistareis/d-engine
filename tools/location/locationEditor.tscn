@@ -78,6 +78,7 @@ __meta__ = {
 }
 
 [node name="Location" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -265,7 +266,6 @@ margin_bottom = 684.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="Room" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -318,17 +318,45 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer"]
-margin_right = 342.0
-margin_bottom = 906.0
+margin_right = 330.0
+margin_bottom = 948.0
 rect_min_size = Vector2( 233, 0 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="portals" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="mesh" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 330.0
-margin_bottom = 104.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
+margin_left = 106.0
+margin_top = 2.0
+margin_right = 146.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 40, 20 )
+text = "Mesh"
+valign = 1
+
+[node name="spnMesh" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
+margin_left = 150.0
+margin_right = 224.0
+margin_bottom = 24.0
+max_value = 1024.0
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 330.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="portals" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 330.0
+margin_bottom = 146.0
 alignment = 1
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
@@ -461,16 +489,16 @@ hint_tooltip = "Enter the ID of the portal"
 max_value = 1024.0
 align = 1
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 108.0
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 150.0
 margin_right = 330.0
-margin_bottom = 118.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="alert" type="GridContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 122.0
+margin_top = 164.0
 margin_right = 330.0
-margin_bottom = 142.0
+margin_bottom = 184.0
 columns = 2
 
 [node name="lblAlert" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/alert"]
@@ -492,16 +520,16 @@ step = 0.01
 tick_count = 5
 ticks_on_borders = true
 
-[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 146.0
+[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 188.0
 margin_right = 330.0
-margin_bottom = 156.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="enemies" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 160.0
+margin_top = 202.0
 margin_right = 330.0
-margin_bottom = 242.0
+margin_bottom = 284.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/enemies"]
 margin_right = 330.0
@@ -521,16 +549,16 @@ show_line_numbers = true
 draw_tabs = true
 highlight_all_occurrences = true
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 246.0
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 288.0
 margin_right = 330.0
-margin_bottom = 256.0
+margin_bottom = 298.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="friendNpcs" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 260.0
+margin_top = 302.0
 margin_right = 330.0
-margin_bottom = 302.0
+margin_bottom = 344.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/friendNpcs"]
 margin_right = 330.0
@@ -545,16 +573,16 @@ rect_min_size = Vector2( 0, 20 )
 hint_tooltip = "Enter a comma separeted list of short names"
 size_flags_horizontal = 3
 
-[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 306.0
+[node name="HSeparator5" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 348.0
 margin_right = 330.0
-margin_bottom = 316.0
+margin_bottom = 358.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="logic" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 320.0
+margin_top = 362.0
 margin_right = 330.0
-margin_bottom = 892.0
+margin_bottom = 934.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -603,9 +631,9 @@ draw_tabs = true
 highlight_all_occurrences = true
 
 [node name="Control" type="Control" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 896.0
+margin_top = 938.0
 margin_right = 330.0
-margin_bottom = 906.0
+margin_bottom = 948.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="Portals" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
