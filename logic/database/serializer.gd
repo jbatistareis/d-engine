@@ -12,24 +12,34 @@ static func character(character : Character) -> PoolByteArray:
 	data.charisma = inst2dict(character.charisma)
 	
 	var index = 0
-	while index < data.moves.size():
-		data.moves[index] = inst2dict(data.moves[index])
+	for move in character.moves:
+		data.moves[index] = inst2dict(move)
 		index += 1
 	
 	data.inventory = inst2dict(character.inventory)
 	
 	index = 0
-	while index < data.inventory.items.size():
-		data.inventory.items[index] = inst2dict(data.inventory.items[index])
+	for item in character.inventory.items:
+		data.inventory.items[index] = inst2dict(item)
 		index += 1
 	
 	index = 0
-	while index < data.inventory.weapons.size():
-		data.inventory.weapons[index] = inst2dict(data.inventory.weapons[index])
+	for weapon in character.inventory.weapons:
+		data.inventory.weapons[index] = inst2dict(weapon)
 		index += 1
 	
-	data.inventory.weapon = inst2dict(data.inventory.weapon)
-	data.inventory.armor = inst2dict(data.inventory.armor)
+	data.verdict = inst2dict(character.verdict)
+	
+	index = 0
+	for concreteFact in character.verdict.concreteFacts:
+		data.verdict.concreteFacts[index] = [
+			inst2dict(concreteFact[0]),
+			inst2dict(concreteFact[1])
+		]
+		index += 1
+	
+	data.inventory.weapon = inst2dict(character.inventory.weapon)
+	data.inventory.armor = inst2dict(character.inventory.armor)
 	
 	return var2bytes(data)
 
@@ -48,18 +58,18 @@ static func location(location : Location) -> PoolByteArray:
 	var data : Dictionary = inst2dict(location)
 	
 	var index = 0
-	while index < data.rooms.size():
-		data.rooms[index] = inst2dict(data.rooms[index])
+	for room in location.rooms:
+		data.rooms[index] = inst2dict(room)
 		index += 1
 	
 	index = 0
-	while index < data.portals.size():
-		data.portals[index] = inst2dict(data.portals[index])
+	for portal in location.portals:
+		data.portals[index] = inst2dict(portal)
 		index += 1
 	
 	index = 0
-	while index < data.spawns.size():
-		data.spawns[index] = inst2dict(data.spawns[index])
+	for spawn in location.spawns:
+		data.spawns[index] = inst2dict(spawn)
 		index += 1
 	
 	return var2bytes(data)

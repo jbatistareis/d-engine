@@ -13,20 +13,30 @@ static func character(data : PoolByteArray) -> Character:
 	character.charisma = dict2inst(dict.charisma)
 	
 	var index = 0
-	while index < character.moves.size():
-		character.moves[index] = dict2inst(dict.moves[index])
+	for move in dict.moves:
+		character.moves[index] = dict2inst(move)
 		index += 1
 	
 	character.inventory = dict2inst(dict.inventory)
 	
 	index = 0
-	while index < character.inventory.items.size():
-		character.inventory.items[index] = dict2inst(dict.inventory.items[index])
+	for item in dict.inventory.items:
+		character.inventory.items[index] = dict2inst(item)
 		index += 1
 	
 	index = 0
-	while index < character.inventory.weapons.size():
-		character.inventory.weapons[index] = dict2inst(dict.inventory.weapons[index])
+	for weapon in dict.inventory.weapons:
+		character.inventory.weapons[index] = dict2inst(weapon)
+		index += 1
+	
+	character.verdict = dict2inst(dict.verdict)
+	
+	index = 0
+	for concreteFact in dict.verdict.concreteFacts:
+		character.verdict.concreteFacts[index] = [
+			dict2inst(concreteFact[0]),
+			dict2inst(concreteFact[1])
+		]
 		index += 1
 	
 	character.inventory.weapon = dict2inst(dict.inventory.weapon)
@@ -47,18 +57,18 @@ static func location(data : PoolByteArray) -> Location:
 	var location : Location = dict2inst(dict)
 	
 	var index = 0
-	while index < location.rooms.size():
-		location.rooms[index] = dict2inst(dict.rooms[index])
+	for room in dict.rooms:
+		location.rooms[index] = dict2inst(room)
 		index += 1
 	
 	index = 0
-	while index < location.portals.size():
-		location.portals[index] = dict2inst(dict.portals[index])
+	for portal in dict.portals:
+		location.portals[index] = dict2inst(portal)
 		index += 1
 	
 	index = 0
-	while index < location.spawns.size():
-		location.spawns[index] = dict2inst(dict.spawns[index])
+	for spawn in dict.spawns:
+		location.spawns[index] = dict2inst(spawn)
 		index += 1
 	
 	return location
