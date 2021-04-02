@@ -19,7 +19,7 @@ It is going to work some day.
 - [ ] Message system  
 - [ ] Dialog system
 - [ ] Event system  
-- [ ] Database system  
+- [x] Database system  
 - [ ] Save system  
 - [ ] Controls system
 - [ ] UI ~~system~~  
