@@ -26,13 +26,9 @@ static func loadItem(shortName : String) -> Item:
 
 
 static func loadLocation(shortName : String) -> Location:
-	return loadLocationFromPath(GamePaths.LOCATION_DATA % shortName)
-
-
-static func loadLocationFromPath(path : String) -> Location:
 	var file = File.new()
 	file.open_compressed(
-		path,
+		GamePaths.LOCATION_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
 	var location : Location = Deserializer.location(file.get_var())

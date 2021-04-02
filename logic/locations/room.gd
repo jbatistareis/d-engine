@@ -8,15 +8,8 @@ var y : int = 0
 var type : int = Enums.RoomType._0_EXIT
 var orientation : int = Enums.Direction.NORTH setget setOrientation
 
-var northExit : int = 0
-var southExit : int = 0
-var eastExit : int = 0
-var westExit : int = 0
-
-var northPortal : int = 0
-var southPortal : int = 0
-var eastPortal : int = 0
-var westPortal : int = 0
+var exits : Array = [0, 0, 0, 0, 0, 0]
+var portals : Array = [0, 0, 0, 0, 0, 0]
 
 var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
@@ -84,29 +77,9 @@ func setOrientation(value : int) -> void:
 
 
 func getPortal(direction : int) -> int:
-	match direction:
-		Enums.Direction.NORTH:
-			return northPortal
-		Enums.Direction.SOUTH:
-			return southPortal
-		Enums.Direction.EAST:
-			return eastPortal
-		Enums.Direction.WEST:
-			return westPortal
-		_:
-			return 0
+	return portals[direction]
 
 
 func getExit(direction : int) -> int:
-	match direction:
-		Enums.Direction.NORTH:
-			return northExit
-		Enums.Direction.SOUTH:
-			return southExit
-		Enums.Direction.EAST:
-			return eastExit
-		Enums.Direction.WEST:
-			return westExit
-		_:
-			return 0
+	return exits[direction]
 

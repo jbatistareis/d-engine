@@ -1,34 +1,36 @@
 class_name EntitySaver
 
 
-static func saveCharacter(character : Character) -> void:
+static func saveCharacter(character : Character) -> String:
+	var path = GamePaths.CHARACTER_DATA % character.shortName
+	
 	var file = File.new()
 	file.open_compressed(
-		GamePaths.CHARACTER_DATA % character.shortName,
+		path,
 		File.WRITE,
 		File.COMPRESSION_ZSTD)
 	file.store_var(Serializer.character(character))
 	file.close()
+	
+	return path
 
 
-static func saveItem(item : Item) -> void:
+static func saveItem(item : Item) -> String:
+	var path = GamePaths.ITEM_DATA % item.shortName
+	
 	var file = File.new()
 	file.open_compressed(
-		GamePaths.ITEM_DATA % item.shortName,
+		path,
 		File.WRITE,
 		File.COMPRESSION_ZSTD)
 	file.store_var(Serializer.item(item))
 	file.close()
+	
+	return path
 
 
-static func saveLocation(location : Location) -> void:
-	saveLocationOnPath(location, GamePaths.LOCATION_DATA % location.shortName)
-
-
-static func saveLocationOnPath(location : Location, path : String) -> void:
-	location.rooms.sort_custom(EntityArrayHelper, 'idSort')
-	location.portals.sort_custom(EntityArrayHelper, 'idSort')
-	location.spawns.sort_custom(EntityArrayHelper, 'idSort')
+static func saveLocation(location : Location) -> String:
+	var path = GamePaths.LOCATION_DATA % location.shortName
 	
 	var file = File.new()
 	file.open_compressed(
@@ -37,4 +39,6 @@ static func saveLocationOnPath(location : Location, path : String) -> void:
 		File.COMPRESSION_ZSTD)
 	file.store_var(Serializer.location(location))
 	file.close()
+	
+	return path
 

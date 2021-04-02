@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tools/location/rooms/roomTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/properties.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://tools/location/portals/portalTab.gd" type="Script" id=4]
 [ext_resource path="res://tools/location/window.gd" type="Script" id=5]
 [ext_resource path="res://tools/location/spawns/spawnsTab.gd" type="Script" id=6]
+[ext_resource path="res://tools/location/openLocation.gd" type="Script" id=7]
 
 [node name="Panel" type="Panel"]
 self_modulate = Color( 1, 1, 1, 0.501961 )
@@ -691,18 +692,78 @@ margin_right = 40.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 0, 10 )
 
-[node name="openLocation" type="FileDialog" parent="."]
-margin_right = 640.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 640, 480 )
+[node name="openLocation" type="WindowDialog" parent="."]
+margin_right = 240.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 240, 320 )
 popup_exclusive = true
-window_title = "Chose a location file"
-mode = 0
-filters = PoolStringArray( "*.loc ; Location data" )
+window_title = "Pick a File"
+script = ExtResource( 7 )
 
-[node name="saveLocation" type="FileDialog" parent="."]
-margin_right = 640.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 640, 480 )
+[node name="VBoxContainer" type="VBoxContainer" parent="openLocation"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="filesContainer" type="ItemList" parent="openLocation/VBoxContainer"]
+margin_right = 240.0
+margin_bottom = 268.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Control" type="Control" parent="openLocation/VBoxContainer"]
+margin_top = 272.0
+margin_right = 240.0
+margin_bottom = 282.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="openLocation/VBoxContainer"]
+margin_top = 286.0
+margin_right = 240.0
+margin_bottom = 306.0
+rect_min_size = Vector2( 0, 20 )
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="openLocation/VBoxContainer/HBoxContainer"]
+margin_right = 66.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="btnLoadFile" type="Button" parent="openLocation/VBoxContainer/HBoxContainer"]
+margin_left = 70.0
+margin_right = 170.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 20 )
+size_flags_horizontal = 3
+text = "Load"
+
+[node name="Control2" type="Control" parent="openLocation/VBoxContainer/HBoxContainer"]
+margin_left = 174.0
+margin_right = 240.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="openLocation/VBoxContainer"]
+margin_top = 310.0
+margin_right = 240.0
+margin_bottom = 320.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="saveLocation" type="ConfirmationDialog" parent="."]
+margin_right = 267.0
+margin_bottom = 58.0
+rect_min_size = Vector2( 0, 0 )
 popup_exclusive = true
-filters = PoolStringArray( "*.loc ; Location data" )
+window_title = "Confirmation"
+dialog_text = "Do you want to save this location as is?
+I will overwrite any file with the same short name."
+
+[node name="fileSavedInfo" type="AcceptDialog" parent="."]
+margin_right = 83.0
+margin_bottom = 58.0
+popup_exclusive = true
+window_title = "Status"

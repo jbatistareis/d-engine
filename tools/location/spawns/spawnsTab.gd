@@ -5,7 +5,6 @@ var spawnItemScene : PackedScene = preload("res://tools/location/spawns/spawnIte
 
 func _ready() -> void:
 	LocationEditorSignals.connect("loadedLocation", self, "loadSpawns")
-	LocationEditorSignals.connect("savedLocation", self, "collectSpawns")
 	$VBoxContainer/btnNewSpawn.connect("button_up", self, "addSpawn")
 
 
@@ -16,9 +15,11 @@ func loadSpawns(location : Location) -> void:
 		spawnItem.spawn = spawn
 
 
-func collectSpawns(location : Location) -> void:
+func collectSpawns() -> Array:
+	var spawns = []
 	for spawnItem in $VBoxContainer/ScrollContainer/spawnsContainer.get_children():
-		location.spawns.append(spawnItem.spawn)
+		spawns.append(spawnItem.spawn)
+	return spawns
 
 
 func addSpawn() -> void:
