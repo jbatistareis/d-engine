@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://visuals/terrain/terrain.gd" type="Script" id=1]
+[ext_resource path="res://visuals/terrain/base.meshlib" type="MeshLibrary" id=2]
+
+[node name="terrain" type="GridMap"]
+mesh_library = ExtResource( 2 )
+cell_center_x = false
+cell_center_z = false
+data = {
+"cells": PoolIntArray(  )
+}
+script = ExtResource( 1 )
+__meta__ = {
+"_editor_clip_": 0,
+"_editor_floor_": Vector3( 0, 0, 0 )
+}
