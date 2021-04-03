@@ -7,6 +7,7 @@ var x : int = 0
 var y : int = 0
 var type : int = Enums.RoomType._0_EXIT
 var orientation : int = Enums.Direction.NORTH setget setOrientation
+var mesh : int = 0
 
 var exits : Array = [0, 0, 0, 0, 0, 0]
 var portals : Array = [0, 0, 0, 0, 0, 0]

@@ -8,9 +8,10 @@ signal characterMoved(character, direction) # use to move any other character ar
 # listen to get annoucements
 signal playerArrivedLocation(location) # fired when a player spawns
 signal playerLeftLocation(location) # fired when a player leaves a location
-signal playerChangedRoom() # fired when a player successfully moves, use to confirm room transitions
+signal playerChangedRoom(direction) # fired when a player successfully moves, use to confirm room transitions
 # used as internal communication, dont fire, or listen to then
 signal playerTransferedLocation(newLocationName, toSpawnId) # fired when a player leaves a location
+signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera 
 
 
 # character

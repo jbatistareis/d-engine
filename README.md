@@ -23,7 +23,7 @@ It is going to work some day.
 - [ ] Save system  
 - [ ] Controls system
 - [ ] UI ~~system~~  
-- [ ] 3D map  
+- [x] 3D map  
 - [x] Maps dev tool  
 - [ ] Characters dev tool  
 - [ ] Battles dev tool 

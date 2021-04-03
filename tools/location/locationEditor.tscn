@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tools/location/rooms/roomTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/properties.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://tools/location/window.gd" type="Script" id=5]
 [ext_resource path="res://tools/location/spawns/spawnsTab.gd" type="Script" id=6]
 [ext_resource path="res://tools/location/openLocation.gd" type="Script" id=7]
+[ext_resource path="res://visuals/terrain/terrain.tscn" type="PackedScene" id=8]
+[ext_resource path="res://visuals/mainCamera.tscn" type="PackedScene" id=9]
 
 [node name="Panel" type="Panel"]
 self_modulate = Color( 1, 1, 1, 0.501961 )
@@ -226,37 +228,38 @@ margin_bottom = 675.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
-margin_left = 18.0
-margin_right = 48.0
-margin_bottom = 20.0
-rect_min_size = Vector2( 30, 0 )
-
 [node name="btnSave" type="Button" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
-margin_left = 52.0
-margin_right = 152.0
+margin_left = 8.0
+margin_right = 108.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 100, 20 )
 text = "Save"
 
-[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
-margin_left = 156.0
-margin_right = 186.0
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
+margin_left = 112.0
+margin_right = 117.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 30, 0 )
+rect_min_size = Vector2( 5, 0 )
 
 [node name="btnLoad" type="Button" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
-margin_left = 190.0
-margin_right = 290.0
+margin_left = 121.0
+margin_right = 221.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 100, 20 )
 text = "Load"
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
-margin_left = 294.0
-margin_right = 324.0
+[node name="HSeparator1" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
+margin_left = 225.0
+margin_right = 230.0
 margin_bottom = 20.0
-rect_min_size = Vector2( 30, 0 )
+rect_min_size = Vector2( 5, 0 )
+
+[node name="btnTest" type="Button" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer"]
+margin_left = 234.0
+margin_right = 334.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 20 )
+text = "Test"
 
 [node name="Control2" type="Control" parent="HSplitContainer/Panel2/TabContainer/Location/VBoxContainer"]
 margin_top = 679.0
@@ -319,16 +322,44 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer"]
 margin_right = 342.0
-margin_bottom = 906.0
+margin_bottom = 948.0
 rect_min_size = Vector2( 233, 0 )
 size_flags_horizontal = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="portals" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+[node name="mesh" type="HBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
 margin_right = 330.0
-margin_bottom = 104.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
+margin_left = 106.0
+margin_top = 2.0
+margin_right = 146.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 40, 20 )
+text = "Mesh"
+valign = 1
+
+[node name="spnMesh" type="SpinBox" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
+margin_left = 150.0
+margin_right = 224.0
+margin_bottom = 24.0
+max_value = 1024.0
+
+[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 330.0
+margin_bottom = 38.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="portals" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 42.0
+margin_right = 330.0
+margin_bottom = 146.0
 alignment = 1
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/portals"]
@@ -461,16 +492,16 @@ hint_tooltip = "Enter the ID of the portal"
 max_value = 1024.0
 align = 1
 
-[node name="HSeparator" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 108.0
+[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 150.0
 margin_right = 330.0
-margin_bottom = 118.0
+margin_bottom = 160.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="alert" type="GridContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 122.0
+margin_top = 164.0
 margin_right = 330.0
-margin_bottom = 142.0
+margin_bottom = 184.0
 columns = 2
 
 [node name="lblAlert" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/alert"]
@@ -492,16 +523,16 @@ step = 0.01
 tick_count = 5
 ticks_on_borders = true
 
-[node name="HSeparator2" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 146.0
+[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 188.0
 margin_right = 330.0
-margin_bottom = 156.0
+margin_bottom = 198.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="enemies" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 160.0
+margin_top = 202.0
 margin_right = 330.0
-margin_bottom = 242.0
+margin_bottom = 284.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/enemies"]
 margin_right = 330.0
@@ -521,16 +552,16 @@ show_line_numbers = true
 draw_tabs = true
 highlight_all_occurrences = true
 
-[node name="HSeparator3" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 246.0
+[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 288.0
 margin_right = 330.0
-margin_bottom = 256.0
+margin_bottom = 298.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="friendNpcs" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 260.0
+margin_top = 302.0
 margin_right = 330.0
-margin_bottom = 302.0
+margin_bottom = 344.0
 
 [node name="Label" type="Label" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/friendNpcs"]
 margin_right = 330.0
@@ -545,16 +576,16 @@ rect_min_size = Vector2( 0, 20 )
 hint_tooltip = "Enter a comma separeted list of short names"
 size_flags_horizontal = 3
 
-[node name="HSeparator4" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 306.0
+[node name="HSeparator5" type="HSeparator" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
+margin_top = 348.0
 margin_right = 330.0
-margin_bottom = 316.0
+margin_bottom = 358.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="logic" type="VBoxContainer" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 320.0
+margin_top = 362.0
 margin_right = 330.0
-margin_bottom = 892.0
+margin_bottom = 934.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -603,9 +634,9 @@ draw_tabs = true
 highlight_all_occurrences = true
 
 [node name="Control" type="Control" parent="HSplitContainer/Panel2/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer"]
-margin_top = 896.0
+margin_top = 938.0
 margin_right = 330.0
-margin_bottom = 906.0
+margin_bottom = 948.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="Portals" type="Tabs" parent="HSplitContainer/Panel2/TabContainer"]
@@ -767,3 +798,31 @@ margin_right = 83.0
 margin_bottom = 58.0
 popup_exclusive = true
 window_title = "Status"
+
+[node name="locationTest" type="WindowDialog" parent="."]
+margin_right = 48.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 640, 480 )
+popup_exclusive = true
+window_title = "Location test"
+
+[node name="ViewportContainer" type="ViewportContainer" parent="locationTest"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="locationTest/ViewportContainer"]
+size = Vector2( 640, 480 )
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+data = {
+"cells": PoolIntArray(  )
+}
+
+[node name="camera" parent="locationTest/ViewportContainer/Viewport/terrain" instance=ExtResource( 9 )]

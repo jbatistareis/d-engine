@@ -11,6 +11,7 @@ func _ready() -> void:
 	$saveLocation.connect("confirmed", self, "saveLocation")
 	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer/btnLoad.connect("button_up", self, "openLocationFile")
 	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer/btnSave.connect("button_up", self, "saveLocationFile")
+	$HSplitContainer/Panel2/TabContainer/Location/VBoxContainer/HBoxContainer/btnTest.connect("button_up", self, "testLocation")
 	
 	LocationEditorSignals.connect("selectedRoom", self, "editRoom")
 
@@ -58,4 +59,13 @@ func saveLocation() -> void:
 
 func editRoom(room : Room) -> void:
 	$HSplitContainer/Panel2/TabContainer.current_tab = 1
+
+
+func testLocation() -> void:
+	location.rooms = $HSplitContainer/Panel/ScrollContainer/roomsContainer.collectRooms()
+	location.portals = $HSplitContainer/Panel2/TabContainer/Portals.collectPortals()
+	location.spawns = $HSplitContainer/Panel2/TabContainer/Spawns.collectSpawns()
+	
+	$locationTest.popup_centered()
+	LocationEditorSignals.emit_signal("testLocation", location, 15, -15, Enums.Direction.NORTH)
 

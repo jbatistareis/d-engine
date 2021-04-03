@@ -22,7 +22,7 @@ func _ready():
 	$buttons/rotateRoom.connect("mouse_exited", self, "hideButtons")
 	
 	$buttons/changeRoom.get_popup().connect("index_pressed", self, "setRoomType")
-	$buttons/rotateRoom.connect("button_down", self, "increaseOrientation")
+	$buttons/rotateRoom.connect("button_up", self, "increaseOrientation")
 
 
 func deselect(room : Room) -> void:
@@ -59,7 +59,8 @@ func setRoomType(value : int) -> void:
 			self.room.id = EditorIdGenerator.id
 			self.room.x = x
 			self.room.y = y
-		room.type = value
+		room.type = value - 1
+		room.mesh = room.type
 		
 		select()
 		

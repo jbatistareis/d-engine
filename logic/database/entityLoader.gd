@@ -1,7 +1,7 @@
 class_name EntityLoader
 
 
-static func loadCharacter(shortName : String) -> Character:
+static func loadCharacter(shortName : String):
 	var file = File.new()
 	file.open_compressed(
 		GamePaths.CHARACTER_DATA % shortName,
@@ -13,7 +13,7 @@ static func loadCharacter(shortName : String) -> Character:
 	return character
 
 
-static func loadItem(shortName : String) -> Item:
+static func loadItem(shortName : String):
 	var file = File.new()
 	file.open_compressed(
 		GamePaths.ITEM_DATA % shortName,
@@ -25,13 +25,13 @@ static func loadItem(shortName : String) -> Item:
 	return item
 
 
-static func loadLocation(shortName : String) -> Location:
+static func loadLocation(shortName : String):
 	var file = File.new()
 	file.open_compressed(
 		GamePaths.LOCATION_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
-	var location : Location = Deserializer.location(file.get_var())
+	var location = Deserializer.location(file.get_var())
 	file.close()
 	
 	return location

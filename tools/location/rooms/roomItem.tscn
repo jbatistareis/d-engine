@@ -49,7 +49,7 @@ margin_bottom = 20.0
 text = "+"
 flat = false
 align = 2
-items = [ "None", null, 0, false, false, 0, 0, null, "", false, "1 exit", null, 0, false, false, 1, 0, null, "", false, "2 exits I", null, 0, false, false, 2, 0, null, "", false, "2 exits L", null, 0, false, false, 3, 0, null, "", false, "3 exits", null, 0, false, false, 4, 0, null, "", false, "4 exits", null, 0, false, false, 5, 0, null, "", false ]
+items = [ "No room", null, 0, false, false, 0, 0, null, "", false, "0 exits", null, 0, false, false, 1, 0, null, "", false, "1 exit", null, 0, false, false, 2, 0, null, "", false, "2 exits I", null, 0, false, false, 3, 0, null, "", false, "2 exits L", null, 0, false, false, 4, 0, null, "", false, "3 exits", null, 0, false, false, 5, 0, null, "", false, "4 exits", null, 0, false, false, 6, 0, null, "", false ]
 __meta__ = {
 "_edit_use_anchors_": false
 }

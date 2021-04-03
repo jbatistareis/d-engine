@@ -9,6 +9,7 @@ func _ready() -> void:
 	txtGroupRegex.compile('(,$)|(,[\n\r])')
 	
 	LocationEditorSignals.connect("selectedRoom", self, "setRoom")
+	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/spnMesh.connect("value_changed", self, "setMesh")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.connect("value_changed", self, "setNorthPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.connect("value_changed", self, "setEastPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.connect("value_changed", self, "setSouthPortal")
@@ -37,6 +38,7 @@ func setRoom(value : Room) -> void:
 	
 	if room != null:
 		$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
+		$VBoxContainer/ScrollContainer/VBoxContainer/mesh/spnMesh.value = room.mesh
 		$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.value = room.getPortal(Enums.Direction.NORTH)
 		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.value = room.getPortal(Enums.Direction.EAST)
 		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.value = room.getPortal(Enums.Direction.WEST)
@@ -153,7 +155,7 @@ func setRoom(value : Room) -> void:
 						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
 						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
 			
-			_: # _4_EXITS
+			Enums.RoomType._4_EXITS:
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
@@ -163,6 +165,14 @@ func setRoom(value : Room) -> void:
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
 				$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
+			
+			_: # _0_EXITS
+				pass
+
+
+func setMesh(value : float) -> void:
+	if room != null:
+		room.mesh = int(value)
 
 
 func setNorthPortal(value : float) -> void:

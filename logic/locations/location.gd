@@ -15,13 +15,13 @@ var exitLogic : String = NOOP
 
 # used only by the player
 func enter(player : Character, toSpawnId : int) -> void:
-	var spawn = spawns[spawns.bsearch_custom(toSpawnId, EntityArrayHelper, 'idFind')]
+	var spawn = findSpawn(toSpawnId)
 	
 	Signals.emit_signal("playerArrivedLocation", self)
 	executeScript(entranceLogic, player)
 	
 	player.currentLocation = shortName
-	rooms[rooms.bsearch_custom(spawn.toRoomId, EntityArrayHelper, 'idFind')].enter(player)
+	findRoom(spawn.toRoomId).enter(player)
 
 
 func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:
@@ -33,28 +33,40 @@ func exit(character : Character, newLocationName : String, toSpawnId : int) -> v
 
 func move(character : Character, direction : int) -> void:
 	var canPass = false
-	var fromRoom = rooms[rooms.bsearch_custom(character.currentRoom, EntityArrayHelper, 'idFind')]
+	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExitRoom(direction)
 	
 	if portalId == 0: # no portal, can pass
 		canPass = true
 	else: # see if can pass
-		canPass = portals[portals.bsearch_custom(portalId, EntityArrayHelper, 'idFind')].canPass(character)
+		canPass = findPortal(portalId).canPass(character)
 	
 	if canPass:
 		if exitPoint != 0: # its a room
-			var toRoom = rooms[rooms.bsearch_custom(exitPoint, EntityArrayHelper, 'idFind')]
+			var toRoom = findRoom(exitPoint)
 			fromRoom.exit(character)
-			Signals.emit_signal("playerChangedRoom")
 			toRoom.enter(character)
+			Signals.emit_signal("playerChangedRoom", direction)
 			
 		else: # its a location
 			if character.type == Enums.CharacterType.PC:
-				var portal = portals[portals.bsearch_custom(portalId, EntityArrayHelper, 'idFind')]
+				var portal = findPortal(portalId)
 				exit(character, portal.newLocationName, portal.toSpawnId)
 
 
 func executeScript(script : String, character : Character) -> void:
 	ScriptTool.getReference(script).execute(character)
+
+
+func findRoom(id : int) -> Room:
+	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
+
+
+func findPortal(id : int) -> Room:
+	return portals[portals.bsearch_custom(id, EntityArrayHelper, 'idFind')]
+
+
+func findSpawn(id : int) -> Room:
+	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 

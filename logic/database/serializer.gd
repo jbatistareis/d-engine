@@ -1,8 +1,8 @@
 class_name Serializer
 
 
-static func character(character : Character) -> PoolByteArray:
-	var data : Dictionary = inst2dict(character)
+static func character(character) -> PoolByteArray:
+	var data = inst2dict(character)
 	
 	data.strength = inst2dict(character.strength)
 	data.dexterity = inst2dict(character.dexterity)
@@ -44,18 +44,18 @@ static func character(character : Character) -> PoolByteArray:
 	return var2bytes(data)
 
 
-static func item(item : Item) -> PoolByteArray:
-	var data : Dictionary = inst2dict(item)
+static func item(item) -> PoolByteArray:
+	var data  = inst2dict(item)
 	
 	return var2bytes(data)
 
 
-static func location(location : Location) -> PoolByteArray:
+static func location(location) -> PoolByteArray:
 	location.rooms.sort_custom(EntityArrayHelper, 'idSort')
 	location.portals.sort_custom(EntityArrayHelper, 'idSort')
 	location.spawns.sort_custom(EntityArrayHelper, 'idSort')
 	
-	var data : Dictionary = inst2dict(location)
+	var data = inst2dict(location)
 	
 	var index = 0
 	for room in location.rooms:
