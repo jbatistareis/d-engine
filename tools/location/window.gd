@@ -67,5 +67,5 @@ func testLocation() -> void:
 	location.spawns = $HSplitContainer/Panel2/TabContainer/Spawns.collectSpawns()
 	
 	$locationTest.popup_centered()
-	LocationEditorSignals.emit_signal("testLocation", location)
+	LocationEditorSignals.emit_signal("testLocation", location, 15, -15, Enums.Direction.NORTH)
 

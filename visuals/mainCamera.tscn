@@ -4,3 +4,5 @@
 
 [node name="camera" type="Camera"]
 script = ExtResource( 1 )
+
+[node name="tween" type="Tween" parent="."]

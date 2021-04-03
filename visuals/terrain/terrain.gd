@@ -6,11 +6,11 @@ var file = File.new()
 
 
 func _ready() -> void:
-	Signals.connect("playerArrivedLocation", self, "loadMap")
+	Signals.connect("playerSpawned", self, "loadMap")
 	LocationEditorSignals.connect("testLocation", self, "loadMap")
 
 
-func loadMap(location : Location) -> void:
+func loadMap(location : Location, x : int, y : int, direction : int) -> void:
 	clear()
 	
 	var path = GamePaths.LOCATION_MESH_LIB_DATA % location.shortName
@@ -19,5 +19,5 @@ func loadMap(location : Location) -> void:
 	
 	# TODO find out why the 1st mesh is 'Cube'
 	for room in location.rooms:
-		set_cell_item(room.x, 1, room.y, room.mesh + 1, rotations[room.orientation])
+		set_cell_item(room.x, 0, room.y, room.mesh + 1, rotations[room.orientation])
 

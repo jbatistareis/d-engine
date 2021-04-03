@@ -1,7 +1,7 @@
 extends Node
 
-var player : Character
-var location : Location
+var player : Character = null
+var location : Location = null
 
 
 func _ready():
@@ -11,8 +11,12 @@ func _ready():
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func instantiateLocation(player : Character, shortName : String, toSpawnId : int = 0) -> void:
+func instantiateLocation(player : Character, shortName : String, toSpawnId : int) -> void:
 	location = EntityLoader.loadLocation(shortName)
+	
+	var room = location.findRoom(location.findSpawn(toSpawnId).toRoomId)
+	Signals.emit_signal("playerSpawned", location, room.x, room.y, room.orientation)
+	
 	location.enter(player, toSpawnId)
 
 
@@ -21,9 +25,11 @@ func changeLocation(newLocationName : String, toSpawnId : int) -> void:
 
 
 func movePlayer(direction : int) -> void:
-	location.move(player, direction)
+	if (player != null) && (location != null):
+		location.move(player, direction)
 
 
 func moveCharacter(character, direction) -> void:
-	location.move(character, direction)
+	if location != null:
+		location.move(character, direction)
 
