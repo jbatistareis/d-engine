@@ -1,9 +1,9 @@
 class_name Deserializer
 
 
-static func character(data : PoolByteArray) -> Character:
-	var dict : Dictionary = bytes2var(data)
-	var character : Character = dict2inst(dict)
+static func character(data : PoolByteArray):
+	var dict = bytes2var(data)
+	var character = dict2inst(dict)
 	
 	character.strength = dict2inst(dict.strength)
 	character.dexterity = dict2inst(dict.dexterity)
@@ -45,16 +45,16 @@ static func character(data : PoolByteArray) -> Character:
 	return character
 
 
-static func item(data : PoolByteArray) -> Item:
-	var dict : Dictionary = bytes2var(data)
-	var item : Item = dict2inst(dict)
+static func item(data : PoolByteArray):
+	var dict = bytes2var(data)
+	var item = dict2inst(dict)
 	
 	return item
 
 
-static func location(data : PoolByteArray) -> Location:
-	var dict : Dictionary = bytes2var(data)
-	var location : Location = dict2inst(dict)
+static func location(data : PoolByteArray):
+	var dict = bytes2var(data)
+	var location = dict2inst(dict)
 	
 	var index = 0
 	for room in dict.rooms:

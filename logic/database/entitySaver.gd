@@ -1,7 +1,7 @@
 class_name EntitySaver
 
 
-static func saveCharacter(character : Character) -> String:
+static func saveCharacter(character) -> String:
 	var path = GamePaths.CHARACTER_DATA % character.shortName
 	
 	var file = File.new()
@@ -15,7 +15,7 @@ static func saveCharacter(character : Character) -> String:
 	return path
 
 
-static func saveItem(item : Item) -> String:
+static func saveItem(item) -> String:
 	var path = GamePaths.ITEM_DATA % item.shortName
 	
 	var file = File.new()
@@ -29,7 +29,7 @@ static func saveItem(item : Item) -> String:
 	return path
 
 
-static func saveLocation(location : Location) -> String:
+static func saveLocation(location) -> String:
 	var path = GamePaths.LOCATION_DATA % location.shortName
 	
 	var file = File.new()
