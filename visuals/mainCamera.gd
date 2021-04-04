@@ -143,20 +143,20 @@ func inputFreeFlight() -> void:
 		
 		if pitchUp:
 			$tween.interpolate_property(
-				self,
+				$camera,
 				"rotation:x",
-				rotation.x,
-				rotation.x + (rotate45 if rotation.x <= rotate45 else 0),
+				$camera.rotation.x,
+				$camera.rotation.x + (rotate45 if $camera.rotation.x <= rotate45 else 0),
 				0.25
 			)
 			$tween.start()
 		
 		if pitchDown:
 			$tween.interpolate_property(
-				self,
+				$camera,
 				"rotation:x",
-				rotation.x,
-				rotation.x - (rotate45 if rotation.x > -rotate90 else 0),
+				$camera.rotation.x,
+				$camera.rotation.x - (rotate45 if $camera.rotation.x > -rotate90 else 0),
 				0.25
 			)
 			$tween.start()
