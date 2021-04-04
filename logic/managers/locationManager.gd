@@ -12,10 +12,12 @@ func _ready():
 
 
 func instantiateLocation(player : Character, shortName : String, toSpawnId : int) -> void:
+	self.player = player
 	location = EntityLoader.loadLocation(shortName)
 	
-	var room = location.findRoom(location.findSpawn(toSpawnId).toRoomId)
-	Signals.emit_signal("playerSpawned", location, room.x, room.y, room.orientation)
+	var spawn = location.findSpawn(toSpawnId)
+	var room = location.findRoom(spawn.toRoomId)
+	Signals.emit_signal("playerSpawned", location, room.x, room.y, spawn.direction)
 	
 	location.enter(player, toSpawnId)
 
