@@ -25,6 +25,83 @@ func collectRooms() -> Array:
 	var rooms = []
 	for roomItem in get_children():
 		if roomItem.room != null:
+			connectRoom(roomItem.room)
 			rooms.append(roomItem.room)
 	return rooms
+
+
+func connectRoom(room : Room) -> void:
+	var index
+	match room.type:
+		Enums.RoomType._1_EXIT:
+			setConnections(room, [room.orientation])
+		
+		Enums.RoomType._2_EXITS_I:
+			if (room.orientation == Enums.Direction.NORTH) || (room.orientation == Enums.Direction.SOUTH):
+				setConnections(room, [Enums.Direction.NORTH, Enums.Direction.SOUTH])
+			
+			elif (room.orientation == Enums.Direction.EAST) || (room.orientation == Enums.Direction.WEST):
+				setConnections(room, [Enums.Direction.EAST, Enums.Direction.WEST])
+		
+		Enums.RoomType._2_EXITS_L:
+			match room.orientation:
+				Enums.Direction.NORTH:
+					setConnections(room, [Enums.Direction.NORTH, Enums.Direction.EAST])
+				
+				Enums.Direction.EAST:
+					setConnections(room, [Enums.Direction.EAST, Enums.Direction.SOUTH])
+				
+				Enums.Direction.SOUTH:
+					setConnections(room, [Enums.Direction.SOUTH, Enums.Direction.WEST])
+				
+				Enums.Direction.WEST:
+					setConnections(room, [Enums.Direction.WEST, Enums.Direction.NORTH])
+		
+		Enums.RoomType._3_EXITS:
+			match room.orientation:
+				Enums.Direction.NORTH:
+					setConnections(room, [Enums.Direction.WEST, Enums.Direction.NORTH, Enums.Direction.EAST])
+				
+				Enums.Direction.EAST:
+					setConnections(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH])
+				
+				Enums.Direction.SOUTH:
+					setConnections(room, [Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
+				
+				Enums.Direction.WEST:
+					setConnections(room, [Enums.Direction.SOUTH, Enums.Direction.WEST, Enums.Direction.NORTH])
+		
+		Enums.RoomType._4_EXITS:
+			setConnections(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
+		
+		_: # _0_EXITS
+			setConnections(room, [])
+
+
+func setConnections(room : Room, directions : Array) -> void:
+	var index
+	for direction in directions:
+		match room.orientation:
+			Enums.Direction.NORTH:
+				index = room.x + (room.y - 1)
+				
+			Enums.Direction.EAST:
+				index = (room.x + 1) + room.y
+				
+			Enums.Direction.SOUTH:
+				index = room.x + (room.y + 1)
+				
+			Enums.Direction.WEST:
+				index = (room.x - 1) + room.y
+		index *= SIZE
+		
+		if ((index >= 0) && (index < TOTAL_TILES)) && get_child(index).room != null:
+			room.exits[direction] = get_child(index).room.id
+		else:
+			room.exits[direction] = 0
+	
+	for i in 5:
+		if !directions.has(i):
+			room.exits[i] = 0
+			room.portals[i] = 0
 

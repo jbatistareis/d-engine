@@ -100,6 +100,6 @@ func setRoom(value : Room) -> void:
 		$buttons/rotateRoom.disabled = false
 		$buttons/rotateRoom.modulate.a = 1
 		
-		$background/roomIcon.frame = room.type
+		$background/roomIcon.frame = room.type + 1
 		$background/roomIcon.rotate(PI / 2 * room.orientation)
 
