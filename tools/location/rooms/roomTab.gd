@@ -3,6 +3,8 @@ extends Tabs
 var txtGroupRegex : RegEx = RegEx.new()
 var room : Room setget setRoom
 
+var portalFields : Array = []
+
 
 func _ready() -> void:
 	self.room = null
@@ -19,6 +21,11 @@ func _ready() -> void:
 	$VBoxContainer/ScrollContainer/VBoxContainer/friendNpcs/txtFriendNpcs.connect("text_changed", self, "txt2FriendlyGroup")
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.connect("text_changed", self, "setEntranceLogic")
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.connect("text_changed", self, "setExitLogic")
+	
+	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal)
+	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal)
+	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal)
+	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal)
 
 
 func setRoom(value : Room) -> void:
@@ -26,148 +33,63 @@ func setRoom(value : Room) -> void:
 	get_parent().set_tab_disabled(1, (room == null))
 	get_parent().current_tab = 0 if (room == null) else 1
 	
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = false
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = false
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = false
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = false
-	
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 0.5
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 0.5
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 0.5
-	$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 0.5
-	
 	if room != null:
 		$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
 		$VBoxContainer/ScrollContainer/VBoxContainer/mesh/spnMesh.value = room.mesh
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.value = room.getPortal(Enums.Direction.NORTH)
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.value = room.getPortal(Enums.Direction.EAST)
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.value = room.getPortal(Enums.Direction.WEST)
-		$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.value = room.getPortal(Enums.Direction.SOUTH)
 		$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.value = room.alert
-		enemyGroups2Txt()
-		friendlyGroup2Txt()
 		$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.text = room.entranceLogic
 		$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text = room.exitLogic
 		
+		for i in portalFields.size():
+			portalFields[i].value = room.getPortal(i)
+		
+		enemyGroups2Txt()
+		friendlyGroup2Txt()
+		
 		match room.type:
 			Enums.RoomType._1_EXIT:
-				match room.orientation:
-					Enums.Direction.NORTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-						
-					Enums.Direction.EAST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-						
-					Enums.Direction.SOUTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
-						
-					Enums.Direction.WEST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
+				setPortalFieldsState(room, [room.orientation])
 			
 			Enums.RoomType._2_EXITS_I:
 				if (room.orientation == Enums.Direction.NORTH) || (room.orientation == Enums.Direction.SOUTH):
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-					
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
+					setPortalFieldsState(room, [Enums.Direction.NORTH, Enums.Direction.SOUTH])
 				
 				elif (room.orientation == Enums.Direction.EAST) || (room.orientation == Enums.Direction.WEST):
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-					
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-					$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
+					setPortalFieldsState(room, [Enums.Direction.EAST, Enums.Direction.WEST])
 			
 			Enums.RoomType._2_EXITS_L:
 				match room.orientation:
 					Enums.Direction.NORTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.NORTH, Enums.Direction.EAST])
 					
 					Enums.Direction.EAST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.EAST, Enums.Direction.SOUTH])
 					
 					Enums.Direction.SOUTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.SOUTH, Enums.Direction.WEST])
 					
 					Enums.Direction.WEST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.WEST, Enums.Direction.NORTH])
 			
 			Enums.RoomType._3_EXITS:
 				match room.orientation:
 					Enums.Direction.NORTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.WEST, Enums.Direction.NORTH, Enums.Direction.EAST])
 					
 					Enums.Direction.EAST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH])
 					
 					Enums.Direction.SOUTH:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
 					
 					Enums.Direction.WEST:
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
-						
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-						$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
+						setPortalFieldsState(room, [Enums.Direction.SOUTH, Enums.Direction.WEST, Enums.Direction.NORTH])
 			
 			Enums.RoomType._4_EXITS:
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.editable = true
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.editable = true
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.editable = true
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.editable = true
-				
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.modulate.a = 1
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.modulate.a = 1
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.modulate.a = 1
-				$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.modulate.a = 1
+				setPortalFieldsState(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
 			
 			_: # _0_EXITS
-				pass
+				setPortalFieldsState(room, [])
 
 
 func setMesh(value : float) -> void:
@@ -266,4 +188,14 @@ func setEntranceLogic() -> void:
 func setExitLogic() -> void:
 	if room != null:
 		room.exitLogic = $VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text
+
+
+func setPortalFieldsState(room : Room, directions : Array) -> void:
+	for i in portalFields.size():
+		if directions.has(i):
+			portalFields[i].editable = true
+			portalFields[i].modulate.a = 1
+		else:
+			portalFields[i].editable = false
+			portalFields[i].modulate.a = 0.5
 
