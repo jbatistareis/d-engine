@@ -73,7 +73,7 @@ func executeScript(script : String, character : Character) -> void:
 
 
 func setOrientation(value : int) -> void:
-	var correctedValue = value if (value > -1) else 0
+	var correctedValue = value if (value > -1) else 3
 	orientation = correctedValue % 4
 
 
