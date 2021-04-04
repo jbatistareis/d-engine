@@ -34,7 +34,7 @@ func exit(character : Character, newLocationName : String, toSpawnId : int) -> v
 func move(character : Character, direction : int) -> void:
 	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
-	var exitPoint = fromRoom.getExitRoom(direction)
+	var exitPoint = fromRoom.getExit(direction)
 	
 	if (exitPoint > 0) && ((portalId == 0) || findPortal(portalId).canPass(character)): # move to a room
 		var toRoom = findRoom(exitPoint)
