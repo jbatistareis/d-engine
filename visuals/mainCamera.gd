@@ -22,14 +22,14 @@ func _process(delta : float) -> void:
 
 
 func setDirection(value : int) -> void:
-	var correctedValue = value if (value > -1) else 0
-	direction = direction % 4
+	var correctedValue = value if (value > -1) else 3
+	direction = correctedValue % 4
 
 
 func setup(location : Location, x : int, y : int, direction : int) -> void:
 	self.direction = direction
 	freeFlight = false
-	snapTo(x, y, direction)
+	goTo(x, y, direction)
 
 
 func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> void:
@@ -37,10 +37,10 @@ func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> 
 	freeFlight = true
 
 
-func snapTo(x : int, y : int, direction : int) -> void:
-	transform.origin.x = x - 1
+func goTo(x : int, y : int, direction : int) -> void:
+	transform.origin.x = x * 2
 	transform.origin.y = 1
-	transform.origin.z = y - 1
+	transform.origin.z = y * 2
 	rotation.y = rotate90 * direction
 
 
