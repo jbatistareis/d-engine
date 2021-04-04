@@ -2,10 +2,13 @@
 
 [ext_resource path="res://visuals/mainCamera.gd" type="Script" id=1]
 
-[node name="camera" type="Camera"]
+[node name="focus" type="Spatial"]
+script = ExtResource( 1 )
+
+[node name="camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
 keep_aspect = 0
 current = true
 fov = 90.0
-script = ExtResource( 1 )
 
 [node name="tween" type="Tween" parent="."]

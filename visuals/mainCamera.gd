@@ -1,4 +1,4 @@
-extends Camera
+extends Spatial
 
 var direction : int setget setDirection
 
