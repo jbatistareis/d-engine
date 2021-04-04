@@ -31,7 +31,6 @@ func collectRooms() -> Array:
 
 
 func connectRoom(room : Room) -> void:
-	var index
 	match room.type:
 		Enums.RoomType._1_EXIT:
 			setConnections(room, [room.orientation])
@@ -81,7 +80,7 @@ func connectRoom(room : Room) -> void:
 func setConnections(room : Room, directions : Array) -> void:
 	var index
 	for direction in directions:
-		match room.orientation:
+		match direction:
 			Enums.Direction.NORTH:
 				index = room.x + (room.y - 1) * SIZE
 				
