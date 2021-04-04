@@ -28,4 +28,3 @@ data = {
 }
 
 [node name="camera" parent="ViewportContainer/Viewport/terrain" instance=ExtResource( 3 )]
-current = true

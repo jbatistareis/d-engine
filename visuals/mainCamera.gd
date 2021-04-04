@@ -29,7 +29,7 @@ func setDirection(value : int) -> void:
 func setup(location : Location, x : int, y : int, direction : int) -> void:
 	self.direction = direction
 	freeFlight = false
-	snapTo(x, y, direction)
+	goTo(x, y, direction)
 
 
 func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> void:
@@ -37,7 +37,7 @@ func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> 
 	freeFlight = true
 
 
-func snapTo(x : int, y : int, direction : int) -> void:
+func goTo(x : int, y : int, direction : int) -> void:
 	transform.origin.x = x * 2
 	transform.origin.y = 1
 	transform.origin.z = y * 2
