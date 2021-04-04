@@ -53,7 +53,7 @@ func saveLocation() -> void:
 	
 	var path = EntitySaver.saveLocation(location)
 	
-	$fileSavedInfo.dialog_text = 'File saved as %s' % path
+	$fileSavedInfo.dialog_text = 'File saved as \'%s\'' % path
 	$fileSavedInfo.popup_centered()
 
 
@@ -67,5 +67,5 @@ func testLocation() -> void:
 	location.spawns = $HSplitContainer/Panel2/TabContainer/Spawns.collectSpawns()
 	
 	$locationTest.popup_centered()
-	LocationEditorSignals.emit_signal("testLocation", location, 15, -15, Enums.Direction.NORTH)
+	LocationEditorSignals.emit_signal("testLocation", location, 0, 0, Enums.Direction.NORTH)
 
