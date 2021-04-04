@@ -83,17 +83,16 @@ func setConnections(room : Room, directions : Array) -> void:
 	for direction in directions:
 		match room.orientation:
 			Enums.Direction.NORTH:
-				index = room.x + (room.y - 1)
+				index = room.x + (room.y - 1) * SIZE
 				
 			Enums.Direction.EAST:
-				index = (room.x + 1) + room.y
+				index = (room.x + 1) + room.y * SIZE
 				
 			Enums.Direction.SOUTH:
-				index = room.x + (room.y + 1)
+				index = room.x + (room.y + 1) * SIZE
 				
 			Enums.Direction.WEST:
-				index = (room.x - 1) + room.y
-		index *= SIZE
+				index = (room.x - 1) + room.y * SIZE
 		
 		if ((index >= 0) && (index < TOTAL_TILES)) && get_child(index).room != null:
 			room.exits[direction] = get_child(index).room.id
