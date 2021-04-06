@@ -5,8 +5,6 @@
 
 [node name="terrain" type="GridMap"]
 mesh_library = ExtResource( 2 )
-cell_center_x = false
-cell_center_z = false
 data = {
 "cells": PoolIntArray(  )
 }

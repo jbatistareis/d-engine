@@ -38,9 +38,10 @@ func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> 
 
 
 func goTo(x : int, y : int, direction : int) -> void:
-	transform.origin.x = x * 2
+	transform.origin.x = x * 2 + 1
 	transform.origin.y = 1
-	transform.origin.z = y * 2
+	transform.origin.z = y * 2 + 1
+	rotation.x = 0
 	rotation.y = rotate90 * direction
 
 
