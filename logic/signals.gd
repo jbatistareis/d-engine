@@ -1,17 +1,24 @@
 extends Node
 
 # location
-# fire to move around
 signal playerStartedAtLocation(playerCharacter, locationName, toSpawnId) # use to spawn a player and start the simulation at a location
-signal playerMoved(direction) # use to move the player arround rooms
+signal playerMoved(direction) # used to move the player arround rooms, not used with player inputs
 signal characterMoved(character, direction) # use to move any other character arround rooms
 # listen to get annoucements
 signal playerArrivedLocation(location) # fired when a player spawns
 signal playerLeftLocation(location) # fired when a player leaves a location
-signal playerChangedRoom(direction) # fired when a player successfully moves, use to confirm room transitions
+signal playerChangedRoom(direction) # fired when a player successfully moves, use to execute room transitions
+signal playerRoomChangeDenied() # fired when a player cant change rooms
 # used as internal communication, dont fire, or listen to then
 signal playerTransferedLocation(newLocationName, toSpawnId) # fired when a player leaves a location
 signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera 
+
+
+# inputs used to move the camera arround
+signal playerMovedForward()
+signal playerMovedBackward()
+signal playerRotatedLeft()
+signal playerRotatedRight()
 
 
 # character
