@@ -35,17 +35,23 @@ func move(character : Character, direction : int) -> void:
 	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExit(direction)
+	var canPass = true if (portalId == 0) else findPortal(portalId).canPass(character)
 	
-	if (exitPoint > 0) && ((portalId == 0) || findPortal(portalId).canPass(character)): # move to a room
+	if (exitPoint > 0) && canPass: # move to a room
 		var toRoom = findRoom(exitPoint)
 		fromRoom.exit(character)
 		toRoom.enter(character)
 		Signals.emit_signal("playerChangedRoom", direction)
 		
-	elif (character.type == Enums.CharacterType.PC) && (exitPoint == 0) && (portalId > 0): # see if can move to a location
-		if findPortal(portalId).canPass(character):
-			var portal = findPortal(portalId)
-			exit(character, portal.newLocationName, portal.toSpawnId)
+		return
+	
+	if (character.type == Enums.CharacterType.PC) && (exitPoint == 0) && canPass: # move to a location
+		var portal = findPortal(portalId)
+		exit(character, portal.newLocationName, portal.toSpawnId)
+		
+		return
+	
+	Signals.emit_signal("playerRoomChangeDenied")
 
 
 func executeScript(script : String, character : Character) -> void:

@@ -62,6 +62,7 @@ func editRoom(room : Room) -> void:
 
 
 func testLocation() -> void:
+	GameManager.testing = true
 	location.rooms = $HSplitContainer/Panel/ScrollContainer/roomsContainer.collectRooms()
 	location.portals = $HSplitContainer/Panel2/TabContainer/Portals.collectPortals()
 	location.spawns = $HSplitContainer/Panel2/TabContainer/Spawns.collectSpawns()
