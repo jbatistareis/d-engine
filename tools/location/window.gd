@@ -57,7 +57,7 @@ func saveLocation() -> void:
 	$fileSavedInfo.popup_centered()
 
 
-func editRoom(room : Room) -> void:
+func editRoom(room : Room, soloSelect : bool) -> void:
 	$HSplitContainer/Panel2/TabContainer.current_tab = 1
 
 

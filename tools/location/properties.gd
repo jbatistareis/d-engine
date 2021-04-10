@@ -1,12 +1,12 @@
 extends GridContainer
 
-var room : Room setget setRoom
+var room : Room
 
 
 func _ready() -> void:
 	LocationEditorSignals.connect("selectedRoom", self, "setRoom")
 
 
-func setRoom(value : Room) -> void:
+func setRoom(value : Room, soloSelect : bool) -> void:
 	room = value
 
