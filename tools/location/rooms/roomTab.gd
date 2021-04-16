@@ -7,12 +7,15 @@ var portalFields : Array = []
 
 
 func _ready() -> void:
+	get_parent().set_tab_disabled(1, true)
+	get_parent().connect("tab_changed", self, "loadMeshes")
+	
 	txtGroupRegex.compile('(,$)|(,[\n\r])')
 	
 	LocationEditorSignals.connect("selectedRoom", self, "addRoom")
 	LocationEditorSignals.connect("deselectedRoom", self, "removeRoom")
 	
-	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/spnMesh.connect("value_changed", self, "setMesh")
+	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.connect("item_selected", self, "setMesh")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal.connect("value_changed", self, "setNorthPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.connect("value_changed", self, "setEastPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.connect("value_changed", self, "setWestPortal")
@@ -29,6 +32,20 @@ func _ready() -> void:
 	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal)
 
 
+func loadMeshes(tabId : int) -> void:
+	if tabId == 1:
+		var previewArea = $VBoxContainer/ScrollContainer/VBoxContainer/ViewportContainer/preview/area
+		var path = GamePaths.LOCATION_MESH_LIB_DATA % $"../Location/VBoxContainer/GridContainer/txtShortName".text
+		
+		if File.new().file_exists(path):
+			previewArea.meshLib = load(path)
+		else:
+			previewArea.meshLib = load("res://visuals/terrain/base.meshlib")
+		
+		for item in previewArea.meshLib.get_item_list():
+			$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.add_item(str(item))
+
+
 func enableTab(value : bool) -> void:
 	get_parent().set_tab_disabled(1, value)
 	get_parent().current_tab = 0 if value else 1
@@ -36,7 +53,7 @@ func enableTab(value : bool) -> void:
 
 func setRoom(room : Room) -> void:
 	$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
-	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/spnMesh.value = room.mesh
+	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.select(room.mesh)
 	$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.value = room.alert
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.text = room.entranceLogic
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text = room.exitLogic
@@ -123,8 +140,12 @@ func removeRoom(room : Room) -> void:
 
 
 func setMesh(value : float) -> void:
+	var meshId = int($VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_text(value))
+	
 	for room in rooms:
-		room.mesh = int(value)
+		room.mesh = meshId
+	
+	LocationEditorSignals.emit_signal("changedRoomMesh", meshId)
 
 
 func setNorthPortal(value : float) -> void:

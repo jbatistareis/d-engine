@@ -30,6 +30,7 @@ func setDirection(value : int) -> void:
 
 
 func setup(location : Location, x : int, y : int, direction : int) -> void:
+	$camera.current = true
 	GameManager.direction = direction
 	freeFlight = false
 	goTo(x, y, direction)
@@ -156,3 +157,4 @@ func inputFreeFlight() -> void:
 
 func setCameraToIdle() -> void:
 	GameManager.isCameraIdle = true
+
