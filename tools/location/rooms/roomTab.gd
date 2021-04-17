@@ -35,15 +35,23 @@ func _ready() -> void:
 func loadMeshes(tabId : int) -> void:
 	if tabId == 1:
 		var previewArea = $VBoxContainer/ScrollContainer/VBoxContainer/ViewportContainer/preview/area
-		var path = GamePaths.LOCATION_MESH_LIB_DATA % $"../Location/VBoxContainer/GridContainer/txtShortName".text
+		previewArea.blocks.clear()
 		
-		if File.new().file_exists(path):
-			previewArea.meshLib = load(path)
-		else:
-			previewArea.meshLib = load("res://visuals/terrain/base.meshlib")
+		var shortName = $"../Location/VBoxContainer/GridContainer/txtShortName".text
+		var directory = Directory.new()
+		var path = GamePaths.MAP_DATA % (shortName if !shortName.empty() else 'baseLocation')
 		
-		for item in previewArea.meshLib.get_item_list():
-			$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.add_item(str(item))
+		directory.open(path)
+		directory.list_dir_begin(true, true)
+		
+		var filename = directory.get_next()
+		while !filename.empty():
+			if filename.ends_with('.tscn'):
+				previewArea.blocks[filename.substr(0, filename.find_last('.'))] = load(path + '/' + filename)
+			filename = directory.get_next()
+		
+		for key in previewArea.blocks.keys():
+			$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.add_item(key)
 
 
 func enableTab(value : bool) -> void:
@@ -53,7 +61,12 @@ func enableTab(value : bool) -> void:
 
 func setRoom(room : Room) -> void:
 	$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
-	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.select(room.mesh)
+	
+	for id in $VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_count():
+		if $VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_text(id) == room.mesh:
+			$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.select(id)
+			break
+	
 	$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.value = room.alert
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.text = room.entranceLogic
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text = room.exitLogic
@@ -139,13 +152,13 @@ func removeRoom(room : Room) -> void:
 	enableTab(rooms.empty())
 
 
-func setMesh(value : float) -> void:
-	var meshId = int($VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_text(value))
+func setMesh(value : int) -> void:
+	var mesh = $VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_text(value)
 	
 	for room in rooms:
-		room.mesh = meshId
+		room.mesh = mesh
 	
-	LocationEditorSignals.emit_signal("changedRoomMesh", meshId)
+	LocationEditorSignals.emit_signal("changedRoomMesh", rooms[rooms.size() - 1], true)
 
 
 func setNorthPortal(value : float) -> void:

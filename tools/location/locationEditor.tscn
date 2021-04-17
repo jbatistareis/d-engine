@@ -835,8 +835,5 @@ handle_input_locally = false
 render_target_update_mode = 0
 
 [node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
-data = {
-"cells": PoolIntArray(  )
-}
 
 [node name="camera" parent="locationTest/ViewportContainer/Viewport/terrain" instance=ExtResource( 9 )]

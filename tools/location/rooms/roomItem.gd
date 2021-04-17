@@ -3,8 +3,8 @@ extends Container
 var x : int = 0
 var y : int = 0
 
+var meshNames = ['0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
 var room : Room = null setget setRoom
-
 var selected : bool = false
 
 
@@ -73,7 +73,7 @@ func setRoomType(value : int) -> void:
 			room.x = x
 			room.y = y
 		room.type = value - 1
-		room.mesh = room.type
+		room.mesh = meshNames[room.type]
 		
 		LocationEditorSignals.emit_signal("selectedRoom", room, true)
 		

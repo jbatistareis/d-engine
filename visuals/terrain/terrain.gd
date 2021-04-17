@@ -1,8 +1,7 @@
-extends GridMap
+extends Spatial
 
-# for gridmap rotations, i added a cell with each orientation via the editor, and then printed their orientation
-var rotations : Array = [0, 22, 10, 16]
-var file = File.new()
+const ROTATE_90 : float = PI / 2
+var blocks : Dictionary = {}
 
 
 func _ready() -> void:
@@ -11,13 +10,28 @@ func _ready() -> void:
 
 
 func loadMap(location : Location, x : int, y : int, direction : int) -> void:
-	clear()
+	blocks.clear()
+	for node in $blocks.get_children():
+		node.queue_free()
 	
-	var path = GamePaths.LOCATION_MESH_LIB_DATA % location.shortName
-	if file.file_exists(path):
-		mesh_library = load(path)
+	var directory = Directory.new()
+	var path = GamePaths.MAP_DATA % (location.shortName if !location.shortName.empty() else 'baseLocation')
 	
-	# TODO find out why the 1st mesh is 'Cube'
+	directory.open(GamePaths.MAP_DATA % location.shortName)
+	directory.list_dir_begin(true, true)
+	
+	var filename = directory.get_next()
+	while !filename.empty():
+		if filename.ends_with('.tscn'):
+			blocks[filename.substr(0, filename.find_last('.'))] = load(path + '/' + filename)
+		filename = directory.get_next()
+	
 	for room in location.rooms:
-		set_cell_item(room.x, 0, room.y, room.mesh + 1, rotations[room.orientation])
+		var block : Spatial = blocks[room.mesh].instance()
+		block.transform.origin.x = room.x * 2 + 1
+		block.transform.origin.y = 1
+		block.transform.origin.z = room.y * 2 + 1
+		block.rotation.y = ROTATE_90 * -room.orientation
+		
+		$blocks.add_child(block)
 

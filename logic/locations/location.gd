@@ -13,6 +13,10 @@ var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
 
 
+func _init() -> void:
+	self.shortName = 'baseLocation'
+
+
 # used only by the player
 func enter(player : Character, toSpawnId : int) -> void:
 	var spawn = findSpawn(toSpawnId)
