@@ -47,7 +47,7 @@ func saveLocation() -> void:
 	location.entranceLogic = $HSplitContainer/properties/TabContainer/Location/VBoxContainer/VBoxContainer/txtEntranceLogic.text
 	location.exitLogic = $HSplitContainer/properties/TabContainer/Location/VBoxContainer/VBoxContainer/txtExitLogic.text
 	
-	location.rooms = $HSplitContainer/Panel/ScrollContainer/roomsContainer.collectRooms()
+	location.rooms = $HSplitContainer/tiles/ScrollContainer/roomsContainer.collectRooms()
 	location.portals = $HSplitContainer/properties/TabContainer/Portals.collectPortals()
 	location.spawns = $HSplitContainer/properties/TabContainer/Spawns.collectSpawns()
 	
