@@ -3,15 +3,17 @@ extends Container
 var x : int = 0
 var y : int = 0
 
+var meshNames = ['0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
 var room : Room = null setget setRoom
+var selected : bool = false
 
 
 func _ready():
-	deselect(null)
+	deselect()
 	
-	connect("gui_input", self, "openProperties")
-	
-	LocationEditorSignals.connect("selectedRoom", self, "deselect")
+	connect("gui_input", self, "toggleSelect")
+	LocationEditorSignals.connect("selectedItem", self, "checkSelect")
+	LocationEditorSignals.connect("deselectedItem", self, "checkDeselect")
 	
 	$buttons.connect("mouse_entered", self, "showButtons")
 	$buttons/changeRoom.connect("mouse_entered", self, "showButtons")
@@ -25,13 +27,24 @@ func _ready():
 	$buttons/rotateRoom.connect("button_up", self, "increaseOrientation")
 
 
-func deselect(room : Room) -> void:
+func checkSelect(room : Room) -> void:
+	if (self.room != null) && (room.id == self.room.id):
+		select()
+
+
+func checkDeselect(room : Room) -> void:
+	if (self.room != null) && (room.id == self.room.id):
+		deselect()
+
+
+func deselect() -> void:
+	selected = false
 	$background/cover.color.b = 0
 	$background/cover.color.a = 0.1
 
 
 func select() -> void:
-	LocationEditorSignals.emit_signal("selectedRoom", room)
+	selected = true
 	$background/cover.color.b = 1
 	$background/cover.color.a = 0.5
 
@@ -46,23 +59,23 @@ func hideButtons() -> void:
 
 func setRoomType(value : int) -> void:
 	if value == 0:
+		LocationEditorSignals.emit_signal("deselectedRoom", room)
+		
 		room = null
 		
 		$buttons/rotateRoom.disabled = true
 		$buttons/rotateRoom.modulate.a = 0
 		
-		deselect(null)
-		LocationEditorSignals.emit_signal("selectedRoom", null)
 	else:
 		if room == null:
 			self.room = Room.new()
-			self.room.id = EditorIdGenerator.id
-			self.room.x = x
-			self.room.y = y
+			room.id = EditorIdGenerator.id
+			room.x = x
+			room.y = y
 		room.type = value - 1
-		room.mesh = room.type
+		room.mesh = meshNames[room.type]
 		
-		select()
+		LocationEditorSignals.emit_signal("selectedRoom", room, true)
 		
 		$buttons/rotateRoom.disabled = false
 		$buttons/rotateRoom.modulate.a = 1
@@ -70,9 +83,22 @@ func setRoomType(value : int) -> void:
 	$background/roomIcon.frame = value
 
 
-func openProperties(event : InputEvent) -> void:
-	if (room != null) && event.is_action_pressed("left_click"):
-		select()
+func toggleSelect(event : InputEvent) -> void:
+	if (room != null):
+		var left = event.is_action_pressed("left_click")
+		var right = event.is_action_pressed("right_click")
+		
+		if left || right:
+			
+			if left:
+				LocationEditorSignals.emit_signal("selectedRoom", room, true)
+			else:
+				selected = !selected
+				
+				if selected:
+					LocationEditorSignals.emit_signal("selectedRoom", room, false)
+				else:
+					LocationEditorSignals.emit_signal("deselectedRoom", room)
 
 
 func setCoordinate(x : int, y : int) -> void:
@@ -90,7 +116,7 @@ func increaseOrientation() -> void:
 	room.orientation += 1
 	$background/roomIcon.rotate(PI / 2)
 	
-	select()
+	LocationEditorSignals.emit_signal("selectedRoom", room, true)
 
 
 func setRoom(value : Room) -> void:

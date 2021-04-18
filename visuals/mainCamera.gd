@@ -4,8 +4,8 @@ var direction : int setget setDirection
 
 var freeFlight : bool = false
 
-var rotate45 : float = PI / 4
-var rotate90 : float = PI / 2
+const ROTATE_45 : float = PI / 4
+const ROTATE_90 : float = PI / 2
 
 
 func _ready() -> void:
@@ -30,6 +30,7 @@ func setDirection(value : int) -> void:
 
 
 func setup(location : Location, x : int, y : int, direction : int) -> void:
+	$camera.current = true
 	GameManager.direction = direction
 	freeFlight = false
 	goTo(x, y, direction)
@@ -45,7 +46,7 @@ func goTo(x : int, y : int, direction : int) -> void:
 	transform.origin.y = 1
 	transform.origin.z = y * 2 + 1
 	rotation.x = 0
-	rotation.y = rotate90 * direction
+	rotation.y = ROTATE_90 * direction
 
 
 func moveForward() -> void:
@@ -87,7 +88,7 @@ func rotateLeft() -> void:
 		self,
 		"rotation:y",
 		rotation.y,
-		rotation.y + rotate90,
+		rotation.y + ROTATE_90,
 		0.25
 	)
 	$tween.start()
@@ -100,7 +101,7 @@ func rotateRight() -> void:
 		self,
 		"rotation:y",
 		rotation.y,
-		rotation.y - rotate90,
+		rotation.y - ROTATE_90,
 		0.25
 	)
 	$tween.start()
@@ -138,7 +139,7 @@ func inputFreeFlight() -> void:
 				$camera,
 				"rotation:x",
 				$camera.rotation.x,
-				$camera.rotation.x + (rotate45 if $camera.rotation.x <= rotate45 else 0),
+				$camera.rotation.x + (ROTATE_45 if $camera.rotation.x <= ROTATE_45 else 0),
 				0.25
 			)
 			$tween.start()
@@ -148,7 +149,7 @@ func inputFreeFlight() -> void:
 				$camera,
 				"rotation:x",
 				$camera.rotation.x,
-				$camera.rotation.x - (rotate45 if $camera.rotation.x > -rotate90 else 0),
+				$camera.rotation.x - (ROTATE_45 if $camera.rotation.x > -ROTATE_90 else 0),
 				0.25
 			)
 			$tween.start()
@@ -156,3 +157,4 @@ func inputFreeFlight() -> void:
 
 func setCameraToIdle() -> void:
 	GameManager.isCameraIdle = true
+
