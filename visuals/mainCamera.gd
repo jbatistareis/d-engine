@@ -15,9 +15,6 @@ func _ready() -> void:
 	Signals.connect("playerRotatedLeft", self, "rotateLeft")
 	Signals.connect("playerRotatedRight", self, "rotateRight")
 	LocationEditorSignals.connect("testLocation", self, "setupFreeFlight")
-	
-	$tween.connect("tween_all_completed", self, "setCameraToIdle")
-
 
 func _process(delta : float) -> void:
 	if freeFlight:
@@ -50,61 +47,61 @@ func goTo(x : int, y : int, direction : int) -> void:
 
 
 func moveForward() -> void:
-	GameManager.isCameraIdle = false
-	
-	$tween.interpolate_property(
-		self,
-		"transform:origin",
-		transform.origin,
-		transform.origin - Vector3(
-			sin(rotation.y) * 2,
-			0,
-			cos(rotation.y) * 2),
-		0.25
-	)
-	$tween.start()
+	if !$tween.is_active():
+		$tween.interpolate_property(
+			self,
+			"transform:origin",
+			transform.origin,
+			transform.origin - Vector3(
+				sin(rotation.y) * 2,
+				0,
+				cos(rotation.y) * 2),
+			0.25
+		)
+		$tween.start()
 
 
 func moveBackward() -> void:
-	GameManager.isCameraIdle = false
-	
-	$tween.interpolate_property(
-		self,
-		"transform:origin",
-		transform.origin,
-		transform.origin + Vector3(
-			sin(rotation.y) * 2,
-			0,
-			cos(rotation.y) * 2),
-		0.25
-	)
-	$tween.start()
+	if !$tween.is_active():
+		$tween.interpolate_property(
+			self,
+			"transform:origin",
+			transform.origin,
+			transform.origin + Vector3(
+				sin(rotation.y) * 2,
+				0,
+				cos(rotation.y) * 2),
+			0.25
+		)
+		$tween.start()
 
 
 func rotateLeft() -> void:
-	GameManager.isCameraIdle = false
-	
-	$tween.interpolate_property(
-		self,
-		"rotation:y",
-		rotation.y,
-		rotation.y + ROTATE_90,
-		0.25
-	)
-	$tween.start()
+	if !$tween.is_active():
+		GameManager.direction -= 1
+		
+		$tween.interpolate_property(
+			self,
+			"rotation:y",
+			rotation.y,
+			rotation.y + ROTATE_90,
+			0.25
+		)
+		$tween.start()
 
 
 func rotateRight() -> void:
-	GameManager.isCameraIdle = false
-	
-	$tween.interpolate_property(
-		self,
-		"rotation:y",
-		rotation.y,
-		rotation.y - ROTATE_90,
-		0.25
-	)
-	$tween.start()
+	if !$tween.is_active():
+		GameManager.direction += 1
+		
+		$tween.interpolate_property(
+			self,
+			"rotation:y",
+			rotation.y,
+			rotation.y - ROTATE_90,
+			0.25
+		)
+		$tween.start()
 
 
 func inputFreeFlight() -> void:
@@ -153,8 +150,4 @@ func inputFreeFlight() -> void:
 				0.25
 			)
 			$tween.start()
-
-
-func setCameraToIdle() -> void:
-	GameManager.isCameraIdle = true
 
