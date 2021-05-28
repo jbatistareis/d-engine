@@ -17,5 +17,4 @@ use_in_baked_light = true
 omni_range = 3.0
 
 [node name="BakedLightmap" type="BakedLightmap" parent="." index="2"]
-bake_extents = Vector3( 3, 3, 3 )
 light_data = SubResource( 1 )
