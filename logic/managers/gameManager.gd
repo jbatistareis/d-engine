@@ -2,8 +2,6 @@ extends Node
 
 onready var currentState : State = getState(Enums.States.IDLE)
 
-var isCameraIdle : bool = true
-
 # player vars
 var testing : bool = false
 var direction : int setget setDirection
