@@ -24,7 +24,7 @@ func collectSpawns() -> Array:
 
 func addSpawn() -> void:
 	var spawn = Spawn.new()
-	spawn.id = EditorIdGenerator.id
+	spawn.id = LocationIdGenerator.id
 	
 	var spawnItem = spawnItemScene.instance()
 	$VBoxContainer/ScrollContainer/spawnsContainer.add_child(spawnItem)
