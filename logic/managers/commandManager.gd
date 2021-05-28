@@ -23,6 +23,8 @@ func _ready():
 
 
 func tick() -> void:
+	pause()
+	
 	executedCommands.clear()
 	
 	for command in commandsQueue:
@@ -32,6 +34,8 @@ func tick() -> void:
 	
 	for executedCommand in executedCommands:
 		commandsQueue.erase(executedCommand)
+	
+	resume()
 
 
 func pause() -> void:
