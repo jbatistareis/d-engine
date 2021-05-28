@@ -5,7 +5,7 @@ var location : Location setget setLocation
 
 func _ready() -> void:
 	self.location = Location.new()
-	EditorIdGenerator.resetId()
+	LocationIdGenerator.resetId()
 	
 	LocationEditorSignals.connect("fileOpened", self, "loadLocation")
 	$saveLocation.connect("confirmed", self, "saveLocation")
@@ -36,7 +36,7 @@ func saveLocationFile() -> void:
 
 func loadLocation(shortName : String) -> void:
 	self.location = EntityLoader.loadLocation(shortName)
-	EditorIdGenerator.adjustId(location)
+	LocationIdGenerator.adjustId(location)
 	LocationEditorSignals.emit_signal("loadedLocation", location)
 
 

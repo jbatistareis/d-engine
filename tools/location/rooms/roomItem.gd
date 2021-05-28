@@ -69,7 +69,7 @@ func setRoomType(value : int) -> void:
 	else:
 		if room == null:
 			self.room = Room.new()
-			room.id = EditorIdGenerator.id
+			room.id = LocationIdGenerator.id
 			room.x = x
 			room.y = y
 		room.type = value - 1

@@ -24,7 +24,7 @@ func collectPortals() -> Array:
 
 func addPortal() -> void:
 	var portal = Portal.new()
-	portal.id = EditorIdGenerator.id
+	portal.id = LocationIdGenerator.id
 	
 	var portalItem = portalItemScene.instance()
 	$VBoxContainer/ScrollContainer/portalsContainer.add_child(portalItem)
