@@ -25,7 +25,7 @@ func execute() -> void:
 					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 			
 			_: # Dice.Outcome.WORST
-				pass # TODO miss
+				changeHp(target, 0) # TODO miss
 	
 	# TODO a persistent move effect should be applyed only one time per character
 	if persistent && (executions > 0):

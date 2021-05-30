@@ -11,31 +11,29 @@ var executedCommands : Array = []
 
 
 func _ready():
-	Signals.connect("commandsPaused", self, 'pause')
-	Signals.connect("commandsResumed", self, 'resume')
-	Signals.connect("commandPublished", self, 'publishCommand')
+	Signals.connect("commandsPaused", self, "pause")
+	Signals.connect("commandsResumed", self, "resume")
+	Signals.connect("commandPublished", self, "publishCommand")
 	Signals.connect("battleStarted", self, "reset")
 	Signals.connect("battleEnded", self, "reset")
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
-	reset()
 
 
 func tick() -> void:
-	pause()
-	
 	executedCommands.clear()
 	
 	for command in commandsQueue:
 		command.tick()
-		if command.executed:
-			executedCommands.append(command)
+		
+		if command.toBeExecuted:
+			command.run()
+			if command.executed:
+				executedCommands.append(command)
 	
 	for executedCommand in executedCommands:
 		commandsQueue.erase(executedCommand)
-	
-	resume()
 
 
 func pause() -> void:

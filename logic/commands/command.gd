@@ -5,6 +5,7 @@ var totalTicks : int setget setTotalTicks
 var remainingTicks : int
 var executions : int
 var persistent : bool
+var toBeExecuted : bool = false
 var executed : bool = false
 
 
@@ -26,10 +27,12 @@ func setTotalTicks(value : int) -> void:
 
 func tick() -> void:
 	if (executorCharacter != null) && (executorCharacter.currentHp == 0):
-		executed = true
+		toBeExecuted = true
 	
 	remainingTicks -= 1
-	
+
+
+func run() -> void:
 	if(remainingTicks <= 0) && !executed:
 		executions -= 1
 		executed = (executions <= 0)
