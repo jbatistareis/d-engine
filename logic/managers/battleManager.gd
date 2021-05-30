@@ -20,11 +20,12 @@ func start(players : Array, enemies : Array) -> void:
 		
 		yield(Signals, "battleScreenSetUp")
 		
+		# TODO pick order, ramdomize initial cd (or not)
+		for player in players:
+			if player.verdictActive:
+				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 1))
+		
 		for enemy in enemies:
-			var reference = ScriptTool.getReference(enemy.characterAproachesScript)
-			for player in players:
-				reference.execute(player)
-			
 			if enemy.verdictActive:
 				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 1))
 

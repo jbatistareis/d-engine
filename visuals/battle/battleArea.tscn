@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://visuals/battle/battleScreen.gd" type="Script" id=1]
+[ext_resource path="res://visuals/battle/battleArea.gd" type="Script" id=1]
 
 [node name="battleScreen" type="Spatial"]
 script = ExtResource( 1 )

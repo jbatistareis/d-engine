@@ -16,6 +16,7 @@ func _ready() -> void:
 	Signals.connect("playerRotatedRight", self, "rotateRight")
 	LocationEditorSignals.connect("testLocation", self, "setupFreeFlight")
 
+
 func _process(delta : float) -> void:
 	if freeFlight:
 		inputFreeFlight()
