@@ -14,6 +14,8 @@ func _ready() -> void:
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnTest.connect("button_up", self, "testLocation")
 	
 	LocationEditorSignals.connect("selectedRoom", self, "editRoom")
+	
+	Signals.emit_signal("guiOpenWindow", GuiWindowModel.new())
 
 
 func setLocation(value : Location) -> void:

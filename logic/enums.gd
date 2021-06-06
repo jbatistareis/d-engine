@@ -19,3 +19,7 @@ enum AfflictionType { TODO }
 
 enum MessageType { AUTO_TOP, AUTO_BOTTOM, DIALOG }
 
+enum GuiAction { NEW_WINDOW, CONFIRM, CANCEL, SLIDE, PREVIOUS, NEXT, TOGGLE }
+
+enum GuiOrientation { VERTICAL, HORIZONTAL }
+

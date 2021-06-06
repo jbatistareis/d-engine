@@ -65,3 +65,17 @@ signal characterReceivedItemOrWeapon(character, entity)
 signal characterDroppedItem(character, itemIndex)
 signal characterDroppedWeapon(character, weaponIndex)
 
+
+# GUI
+# used as internal communication, dont fire, or listen to then
+signal guiOpenWindow(window)
+signal guiCloseWindow()
+signal guiConfirm(source)
+# inputs used to move the cursor
+signal guiUp()
+signal guiDown()
+signal guiLeft()
+signal guiRight()
+signal guiSelect()
+signal guiCancel()
+
