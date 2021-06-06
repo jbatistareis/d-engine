@@ -8,7 +8,7 @@
 [ext_resource path="res://tools/location/spawns/spawnsTab.gd" type="Script" id=6]
 [ext_resource path="res://tools/location/openLocation.gd" type="Script" id=7]
 [ext_resource path="res://visuals/terrain/terrain.tscn" type="PackedScene" id=8]
-[ext_resource path="res://visuals/mainCamera.tscn" type="PackedScene" id=9]
+[ext_resource path="res://visuals/terrain/terrainCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://tools/location/locationTest.gd" type="Script" id=10]
 
 [node name="Panel" type="Panel"]
@@ -836,4 +836,4 @@ render_target_update_mode = 0
 
 [node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
-[node name="camera" parent="locationTest/ViewportContainer/Viewport/terrain" instance=ExtResource( 9 )]
+[node name="terrainCamera" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 9 )]

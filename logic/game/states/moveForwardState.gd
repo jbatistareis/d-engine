@@ -8,20 +8,11 @@ func _init() -> void:
 
 
 func handleInput(event : InputEvent) -> void:
-	if GameManager.isCameraIdle:
-		if GameManager.testing:
-			move(0)
-		else:
-			Signals.emit_signal("playerMoved", GameManager.direction)
+	if GameManager.testing:
+		Signals.emit_signal("playerMovedForward")
+	else:
+		Signals.emit_signal("playerMoved", GameManager.direction)
 	
 	if event.is_action_released("ui_up"):
-		idle()
-
-
-func move(ignore) -> void:
-	Signals.emit_signal("playerMovedForward")
-
-
-func idle() -> void:
-	next = GameManager.getState(Enums.States.IDLE)
+		next = GameManager.getState(Enums.States.IDLE)
 
