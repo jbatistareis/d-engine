@@ -20,7 +20,7 @@ func _init() -> void:
 	Signals.connect("guiDown", self, "action", [InputType.DOWN])
 	Signals.connect("guiSelect", self, "select")
 	
-	bg.color = Color.dodgerblue
+	bg.color = GuiColors.BG_COLOR
 	bg.anchor_bottom = 1
 	bg.anchor_right = 1
 	vBox.alignment = BoxContainer.ALIGN_CENTER
@@ -30,7 +30,9 @@ func _ready() -> void:
 	for button in buttons:
 		vBox.add_child(button)
 	
-	buttons[buttonIndex].hover = true
+	# TODO remove
+	if !buttons.empty():
+		buttons[buttonIndex].hover = true
 	
 	add_child(bg)
 	add_child(vBox)
@@ -42,7 +44,7 @@ func _ready() -> void:
 
 func action(inputAction : int) -> void:
 	if isCurrentWindow():
-		var newIndex = (buttonIndex + inputAction) % buttons.size()
+		var newIndex = (buttonIndex - inputAction) % buttons.size()
 		
 		buttons[buttonIndex].hover = false
 		buttonIndex = newIndex if (newIndex >= 0) else (buttons.size() - 1)
@@ -51,6 +53,7 @@ func action(inputAction : int) -> void:
 
 func select() -> void:
 	if isCurrentWindow():
+		yield(get_tree(), "idle_frame")
 		buttons[buttonIndex].action()
 
 

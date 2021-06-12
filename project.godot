@@ -20,6 +20,11 @@ _global_script_classes=[ {
 "path": "res://data/commands/askPlayerBattleInputCommand.gd"
 }, {
 "base": "State",
+"class": "BattleMenuState",
+"language": "GDScript",
+"path": "res://logic/game/states/battleMenuState.gd"
+}, {
+"base": "State",
 "class": "BootState",
 "language": "GDScript",
 "path": "res://logic/game/states/bootState.gd"
@@ -79,6 +84,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/enums.gd"
 }, {
+"base": "State",
+"class": "EquipmentState",
+"language": "GDScript",
+"path": "res://logic/game/states/equipmentState.gd"
+}, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
@@ -104,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://visuals/gui/model/guiButtonModel.gd"
 }, {
+"base": "Reference",
+"class": "GuiColors",
+"language": "GDScript",
+"path": "res://visuals/gui/guiColors.gd"
+}, {
 "base": "Control",
 "class": "GuiWindowModel",
 "language": "GDScript",
@@ -118,6 +133,11 @@ _global_script_classes=[ {
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://logic/characters/inventory.gd"
+}, {
+"base": "State",
+"class": "InventoryState",
+"language": "GDScript",
+"path": "res://logic/game/states/inventoryState.gd"
 }, {
 "base": "Entity",
 "class": "Item",
@@ -232,6 +252,7 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
+"BattleMenuState": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",
@@ -244,14 +265,17 @@ _global_script_class_icons={
 "EntityLoader": "",
 "EntitySaver": "",
 "Enums": "",
+"EquipmentState": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
 "GameMenuState": "",
 "GamePaths": "",
 "GuiButtonModel": "",
+"GuiColors": "",
 "GuiWindowModel": "",
 "IdleState": "",
 "Inventory": "",
+"InventoryState": "",
 "Item": "",
 "Location": "",
 "MainMenuState": "",

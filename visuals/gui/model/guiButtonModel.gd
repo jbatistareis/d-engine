@@ -1,7 +1,7 @@
 class_name GuiButtonModel
 extends Control
 
-var action : int = Enums.GuiAction.CONFIRM
+var action : int = Enums.GuiAction.CANCEL
 
 # misc metadata
 var text : String = ''
@@ -20,6 +20,10 @@ var newWindow
 var slideLabels : Array = []
 var slideValues : Array = []
 var slideIndex : int = 0
+
+
+func _init() -> void:
+	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
 
 
 func _ready() -> void:
@@ -44,7 +48,7 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	if hover:
-		bg.color = Color.darkslategray
+		bg.color = GuiColors.HOVER_COLOR
 	else:
 		bg.color = Color.transparent
 

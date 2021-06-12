@@ -14,29 +14,6 @@ func _ready() -> void:
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnTest.connect("button_up", self, "testLocation")
 	
 	LocationEditorSignals.connect("selectedRoom", self, "editRoom")
-	
-	
-	var menu = GuiWindowModel.new()
-	var button1 = GuiButtonModel.new()
-	var button2 = GuiButtonModel.new()
-	var button3 = GuiButtonModel.new()
-	var button4 = GuiButtonModel.new()
-	
-	button1.action = Enums.GuiAction.NEW_WINDOW
-	button1.newWindow = GuiWindowModel.new()
-	
-	button1.text = 'TEST 1'
-	button2.text = 'TEST 2'
-	button3.text = 'TEST 3'
-	button4.text = 'TEST 4'
-	
-	menu.buttons.push_back(button1)
-	menu.buttons.push_back(button2)
-	menu.buttons.push_back(button3)
-	menu.buttons.push_back(button4)
-	menu.position = Vector2(100, 100)
-	
-	Signals.emit_signal("guiOpenWindow", menu)
 
 
 func setLocation(value : Location) -> void:

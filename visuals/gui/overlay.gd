@@ -9,15 +9,16 @@ func _process(delta) -> void:
 
 
 func addWindow(window : GuiWindowModel) -> void:
-	var newWindowPosition = Vector2.ZERO
-	
 	if !WindowManager.windowQueue.empty():
 		var currentWindow = WindowManager.windowQueue.front()
-		newWindowPosition = currentWindow.rect_position
-		newWindowPosition += Vector2(
-			currentWindow.rect_size.x / 1.5,
+		window.position = currentWindow.rect_position
+		window.position += Vector2(
+			currentWindow.rect_size.x * 1.2,
 			0)
 	
-	window.rect_position = newWindowPosition
 	add_child(window)
+
+
+func removeWindow(window : GuiWindowModel) -> void:
+	remove_child(window)
 
