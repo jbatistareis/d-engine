@@ -34,6 +34,7 @@ func _ready() -> void:
 	menu.buttons.push_back(button2)
 	menu.buttons.push_back(button3)
 	menu.buttons.push_back(button4)
+	menu.position = Vector2(100, 100)
 	
 	Signals.emit_signal("guiOpenWindow", menu)
 

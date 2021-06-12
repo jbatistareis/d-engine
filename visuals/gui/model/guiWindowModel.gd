@@ -5,12 +5,13 @@ enum InputType {UP = 1, DOWN = -1}
 
 var title : String = ''
 var identifier : String = ''
-var bg : ColorRect = ColorRect.new()
 var buttons : Array = []
 var buttonIndex : int = 0
 var data = null
+var position : Vector2 = Vector2.ZERO setget setPostion
 
 var vBox : VBoxContainer = VBoxContainer.new()
+var bg : ColorRect = ColorRect.new()
 
 
 func _init() -> void:
@@ -20,10 +21,9 @@ func _init() -> void:
 	Signals.connect("guiSelect", self, "select")
 	
 	bg.color = Color.dodgerblue
+	bg.anchor_bottom = 1
+	bg.anchor_right = 1
 	vBox.alignment = BoxContainer.ALIGN_CENTER
-	
-	add_child(bg)
-	add_child(vBox)
 
 
 func _ready() -> void:
@@ -32,9 +32,12 @@ func _ready() -> void:
 	
 	buttons[buttonIndex].hover = true
 	
+	add_child(bg)
+	add_child(vBox)
+	
 	yield(get_tree(),"idle_frame")
 	rect_min_size = vBox.rect_size
-	bg.rect_min_size = vBox.rect_size
+	rect_position = position
 
 
 func action(inputAction : int) -> void:
@@ -69,6 +72,11 @@ func confirm(source : GuiButtonModel) -> void:
 
 func isCurrentWindow() -> bool:
 	return WindowManager.windowQueue.front() == self
+
+
+func setPostion(value : Vector2) -> void:
+	position = value
+	rect_position = value
 
 
 # override
