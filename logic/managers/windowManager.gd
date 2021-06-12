@@ -1,7 +1,7 @@
 extends Node
 
 var windowQueue : Array = []
-var currentWindow : Panel
+var currentWindow : GuiWindowModel
 
 
 func _init() -> void:
@@ -12,6 +12,7 @@ func _init() -> void:
 func open(window : GuiWindowModel) -> void:
 	get_tree().get_nodes_in_group('gui')[0].addWindow(window)
 	windowQueue.push_front(window)
+	currentWindow = window
 
 
 func close() -> void:

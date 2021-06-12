@@ -6,7 +6,7 @@ var extensionRegex : RegEx = RegEx.new()
 func _ready() -> void:
 	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 	
-	$VBoxContainer/HBoxContainer/btnLoadFile.connect("button_up", self, "open")
+	$VBoxContainer/HBoxContainer/btnLoadFile.connect("pressed", self, "open")
 	connect("visibility_changed", self, "listFiles")
 
 
