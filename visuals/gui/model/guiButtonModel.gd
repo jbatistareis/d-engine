@@ -10,9 +10,6 @@ var identifier : String = ''
 var hover : bool = false
 var data = null
 
-var label : Label = Label.new()
-var bg : ColorRect = ColorRect.new()
-
 # window metadata
 var newWindow
 
@@ -22,11 +19,11 @@ var slideValues : Array = []
 var slideIndex : int = 0
 
 
-func _init() -> void:
-	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
-
-
 func _ready() -> void:
+	var label : Label = Label.new()
+	var bg : ColorRect = ColorRect.new()
+	
+	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
 	label.text = text
 	
 	add_child(bg)
@@ -48,9 +45,9 @@ func _ready() -> void:
 
 func _process(delta : float) -> void:
 	if hover:
-		bg.color = GuiColors.HOVER_COLOR
+		get_child(0).color = GuiColors.HOVER_COLOR
 	else:
-		bg.color = Color.transparent
+		get_child(0).color = Color.transparent
 
 
 func action() -> void:
@@ -76,9 +73,9 @@ func action() -> void:
 			Enums.GuiAction.SLIDE:
 				slideIndex = (slideIndex + 1) % slideValues.size()
 				data = slideValues[slideIndex]
-				label.text = text.substr(0, text.length()) + ': ' + slideLabels[slideIndex]
+				get_child(1).text = text.substr(0, text.length()) + ': ' + slideLabels[slideIndex]
 			
 			Enums.GuiAction.TOGGLE:
 				data = !data
-				label.text = text.substr(0, text.length()) + ': ' + ('Yes' if data else 'No')
+				get_child(1).text = text.substr(0, text.length()) + ': ' + ('Yes' if data else 'No')
 

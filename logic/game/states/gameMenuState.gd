@@ -14,6 +14,10 @@ func _init() -> void:
 	
 	var button5 = GuiButtonModel.new()
 	
+	var text1 = GuiTextModel.new()
+	
+	text1.text = 'Supercalifragilisticoespialidoso|1>Test|2'
+	
 	button1.action = Enums.GuiAction.NEW_WINDOW
 	button1.newWindow = menu2
 	
@@ -22,7 +26,7 @@ func _init() -> void:
 	button3.text = 'TEST 3'
 	button4.text = 'TEST 4'
 	
-	button5.text = 'TEST 5'
+	button5.text = '< Back'
 	
 	menu1.buttons.push_back(button1)
 	menu1.buttons.push_back(button2)
@@ -30,6 +34,7 @@ func _init() -> void:
 	menu1.buttons.push_back(button4)
 	menu1.position = Vector2(100, 100)
 	
+	menu2.text = text1
 	menu2.buttons.push_back(button5)
 	
 	Signals.emit_signal("guiOpenWindow", menu1)
