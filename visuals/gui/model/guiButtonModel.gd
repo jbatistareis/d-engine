@@ -10,18 +10,21 @@ var identifier : String = ''
 var hover : bool = false
 var data = null
 
-# window metadata
-var newWindow
-
 # slide metadata
 var slideLabels : Array = []
 var slideValues : Array = []
 var slideIndex : int = 0
 
+var label = Label.new()
+var bg = ColorRect.new()
 
-func _ready() -> void:
-	var label : Label = Label.new()
-	var bg : ColorRect = ColorRect.new()
+
+func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, identifier : String = '', disabled : bool = false) -> void:
+	self.text = text
+	self.action = action
+	self.data = data
+	self.identifier = identifier
+	self.disabled = disabled
 	
 	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
 	label.text = text
@@ -38,9 +41,6 @@ func _ready() -> void:
 				data = false
 			
 			label.text += ': ' + ('Yes' if data else 'No')
-	
-	rect_min_size = label.rect_size
-	bg.rect_min_size = label.rect_size
 
 
 func _process(delta : float) -> void:
@@ -48,6 +48,12 @@ func _process(delta : float) -> void:
 		get_child(0).color = GuiColors.HOVER_COLOR
 	else:
 		get_child(0).color = Color.transparent
+
+
+func _enter_tree() -> void:
+	yield(get_tree(), "idle_frame")
+	rect_min_size = label.rect_size
+	bg.rect_min_size = label.rect_size
 
 
 func action() -> void:
@@ -60,7 +66,7 @@ func action() -> void:
 				Signals.emit_signal("guiConfirm", self)
 			
 			Enums.GuiAction.NEW_WINDOW:
-				Signals.emit_signal("guiOpenWindow", newWindow)
+				Signals.emit_signal("guiOpenWindow", data, Vector2.ZERO)
 			
 			Enums.GuiAction.NEXT:
 				# TODO

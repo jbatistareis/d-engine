@@ -6,38 +6,31 @@ func _init() -> void:
 	# TODO create a proper class
 	var menu1 = GuiWindowModel.new()
 	var menu2 = GuiWindowModel.new()
+	var menu3 = GuiWindowModel.new()
 	
-	var button1 = GuiButtonModel.new()
-	var button2 = GuiButtonModel.new()
-	var button3 = GuiButtonModel.new()
-	var button4 = GuiButtonModel.new()
+	var button1 = GuiButtonModel.new('TEST 1', Enums.GuiAction.NEW_WINDOW, menu2)
+	var button2 = GuiButtonModel.new('TEST 2')
+	var button3 = GuiButtonModel.new('TEST 3')
+	var button4 = GuiButtonModel.new('TEST 4')
 	
-	var button5 = GuiButtonModel.new()
+	var button5 = GuiButtonModel.new('< Back')
 	
-	var text1 = GuiTextModel.new()
-	
-	text1.text = 'Supercalifragilisticoespialidoso|1>Test|2'
-	
-	button1.action = Enums.GuiAction.NEW_WINDOW
-	button1.newWindow = menu2
-	
-	button1.text = 'TEST 1'
-	button2.text = 'TEST 2'
-	button3.text = 'TEST 3'
-	button4.text = 'TEST 4'
-	
-	button5.text = '< Back'
+	var text1 = GuiTextModel.new('Supercalifragilisticoespialidoso|1>Test|2')
+	var text2 = GuiTextModel.new('Player>Attack|1>Constitution|1>Dexterity|1>Wisdom|1>Money|9999')
 	
 	menu1.buttons.push_back(button1)
 	menu1.buttons.push_back(button2)
 	menu1.buttons.push_back(button3)
 	menu1.buttons.push_back(button4)
-	menu1.position = Vector2(100, 100)
 	
 	menu2.text = text1
 	menu2.buttons.push_back(button5)
 	
-	Signals.emit_signal("guiOpenWindow", menu1)
+	menu3.text = text2
+	menu3.foreground = false
+	
+	Signals.emit_signal("guiOpenWindow", menu1, Vector2(100, 100))
+	Signals.emit_signal("guiOpenWindow", menu3, Vector2(5, 5))
 
 
 func handleInput(event : InputEvent) -> void:

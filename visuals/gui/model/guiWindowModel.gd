@@ -8,7 +8,12 @@ var buttons : Array = []
 
 var buttonIndex : int = 0
 var data = null
-var position : Vector2 = Vector2.ZERO setget setPostion
+var position : Vector2 setget setPostion
+var foreground : bool = true
+
+var vBox : VBoxContainer = VBoxContainer.new()
+var bg : ColorRect = ColorRect.new()
+var shadow : ColorRect = ColorRect.new()
 
 
 func _init() -> void:
@@ -19,10 +24,6 @@ func _init() -> void:
 
 
 func _ready() -> void:
-	var vBox : VBoxContainer = VBoxContainer.new()
-	var bg : ColorRect = ColorRect.new()
-	var shadow : ColorRect = ColorRect.new()
-	
 	bg.color = GuiColors.BG_COLOR
 	bg.anchor_bottom = 1
 	bg.anchor_right = 1
@@ -38,15 +39,17 @@ func _ready() -> void:
 	for button in buttons:
 		vBox.add_child(button)
 	
-	buttons[buttonIndex].hover = true
+	if !buttons.empty():
+		buttons[buttonIndex].hover = true
 	
 	add_child(shadow)
 	add_child(bg)
 	add_child(vBox)
-	
-	for i in range(2):
-		yield(get_tree(),"idle_frame")
-	
+
+
+func _enter_tree() -> void:
+	for i in range(2): # wait for child components setup
+		yield(get_tree(), "idle_frame")
 	rect_min_size = vBox.rect_size
 	rect_position = position
 	shadow.rect_position += Vector2(4, 4)

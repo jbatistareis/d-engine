@@ -2,7 +2,7 @@
 
 [ext_resource path="res://visuals/gui/overlay.gd" type="Script" id=1]
 
-[node name="overlay" type="Control" groups=[
+[node name="overlay" type="Container" groups=[
 "gui",
 ]]
 anchor_right = 1.0
@@ -10,6 +10,21 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
+
+[node name="foreground" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+input_pass_on_modal_close_click = false
 __meta__ = {
 "_edit_use_anchors_": false
 }

@@ -8,9 +8,12 @@ func _init() -> void:
 	Signals.connect("guiCloseWindow", self, "close")
 
 
-func open(window : GuiWindowModel) -> void:
+func open(window : GuiWindowModel, position : Vector2) -> void:
+	window.position = position
 	get_tree().get_nodes_in_group('gui')[0].addWindow(window)
-	windowQueue.push_front(window)
+	
+	if window.foreground:
+		windowQueue.push_front(window)
 
 
 func close() -> void:

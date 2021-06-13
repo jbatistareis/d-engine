@@ -1,11 +1,10 @@
 class_name GuiTextModel
 extends Control
 
-var text : String = ''
+var vBox = VBoxContainer.new()
 
 
-func _ready() -> void:
-	var vBox = VBoxContainer.new()
+func _init(text : String) -> void:
 	add_child(vBox)
 	
 	var strLine = text.split(">")
@@ -21,11 +20,13 @@ func _ready() -> void:
 			
 			if (i > 0) && (i < (strArr.size() - 1)):
 				label.align = Label.ALIGN_CENTER
-			elif i == (strArr.size() - 1):
+			elif (strArr.size() > 1) && (i == (strArr.size() - 1)):
 				label.align = Label.ALIGN_RIGHT
 			
 			hBox.add_child(label)
-	
-	yield(get_tree(),"idle_frame")
+
+
+func _enter_tree() -> void:
+	yield(get_tree(), "idle_frame")
 	rect_min_size = vBox.rect_size
 
