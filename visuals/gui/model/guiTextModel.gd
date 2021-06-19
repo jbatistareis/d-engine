@@ -1,12 +1,16 @@
 class_name GuiTextModel
 extends Control
 
+var text : String
 var vBox = VBoxContainer.new()
 
 
 func _init(text : String) -> void:
+	self.text = text
 	add_child(vBox)
-	
+
+
+func _enter_tree() -> void:
 	var strLine = text.split(">")
 	for line in strLine:
 		var hBox = HBoxContainer.new()
@@ -24,9 +28,7 @@ func _init(text : String) -> void:
 				label.align = Label.ALIGN_RIGHT
 			
 			hBox.add_child(label)
-
-
-func _enter_tree() -> void:
+	
 	yield(get_tree(), "idle_frame")
 	rect_min_size = vBox.rect_size
 

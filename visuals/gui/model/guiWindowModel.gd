@@ -21,9 +21,13 @@ func _init() -> void:
 	Signals.connect("guiUp", self, "action", [InputType.UP])
 	Signals.connect("guiDown", self, "action", [InputType.DOWN])
 	Signals.connect("guiSelect", self, "select")
+	
+	add_child(shadow)
+	add_child(bg)
+	add_child(vBox)
 
 
-func _ready() -> void:
+func _enter_tree() -> void:
 	bg.color = GuiColors.BG_COLOR
 	bg.anchor_bottom = 1
 	bg.anchor_right = 1
@@ -42,12 +46,6 @@ func _ready() -> void:
 	if !buttons.empty():
 		buttons[buttonIndex].hover = true
 	
-	add_child(shadow)
-	add_child(bg)
-	add_child(vBox)
-
-
-func _enter_tree() -> void:
 	for i in range(2): # wait for child components setup
 		yield(get_tree(), "idle_frame")
 	rect_min_size = vBox.rect_size

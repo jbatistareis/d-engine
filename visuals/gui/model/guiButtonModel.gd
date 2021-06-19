@@ -27,10 +27,20 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 	self.disabled = disabled
 	
 	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
-	label.text = text
 	
 	add_child(bg)
 	add_child(label)
+
+
+func _process(delta : float) -> void:
+	if hover:
+		bg.color = GuiColors.HOVER_COLOR
+	else:
+		bg.color = Color.transparent
+
+
+func _enter_tree() -> void:
+	label.text = text
 	
 	match action:
 		Enums.GuiAction.SLIDE:
@@ -41,16 +51,7 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 				data = false
 			
 			label.text += ': ' + ('Yes' if data else 'No')
-
-
-func _process(delta : float) -> void:
-	if hover:
-		get_child(0).color = GuiColors.HOVER_COLOR
-	else:
-		get_child(0).color = Color.transparent
-
-
-func _enter_tree() -> void:
+	
 	yield(get_tree(), "idle_frame")
 	rect_min_size = label.rect_size
 	bg.rect_min_size = label.rect_size
@@ -79,9 +80,9 @@ func action() -> void:
 			Enums.GuiAction.SLIDE:
 				slideIndex = (slideIndex + 1) % slideValues.size()
 				data = slideValues[slideIndex]
-				get_child(1).text = text.substr(0, text.length()) + ': ' + slideLabels[slideIndex]
+				label.text = text + ': ' + slideLabels[slideIndex]
 			
 			Enums.GuiAction.TOGGLE:
 				data = !data
-				get_child(1).text = text.substr(0, text.length()) + ': ' + ('Yes' if data else 'No')
+				label.text = text + ': ' + ('Yes' if data else 'No')
 
