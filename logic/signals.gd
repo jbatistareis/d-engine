@@ -68,7 +68,7 @@ signal characterDroppedWeapon(character, weaponIndex)
 
 # GUI
 # used as internal communication, dont fire, or listen to then
-signal guiOpenWindow(window, position)
+signal guiOpenWindow(window)
 signal guiCloseWindow()
 signal guiConfirm(source)
 # inputs used to move the cursor

@@ -19,7 +19,7 @@ var label = Label.new()
 var bg = ColorRect.new()
 
 
-func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, identifier : String = '', disabled : bool = false) -> void:
+func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, identifier : String = '') -> void:
 	self.text = text
 	self.action = action
 	self.data = data
@@ -27,19 +27,6 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 	self.disabled = disabled
 	
 	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
-	
-	add_child(bg)
-	add_child(label)
-
-
-func _process(delta : float) -> void:
-	if hover:
-		bg.color = GuiColors.HOVER_COLOR
-	else:
-		bg.color = Color.transparent
-
-
-func _enter_tree() -> void:
 	label.text = text
 	
 	match action:
@@ -52,9 +39,25 @@ func _enter_tree() -> void:
 			
 			label.text += ': ' + ('Yes' if data else 'No')
 	
-	yield(get_tree(), "idle_frame")
+	add_child(bg)
+	add_child(label)
+
+
+func _ready() -> void:
 	rect_min_size = label.rect_size
 	bg.rect_min_size = label.rect_size
+
+
+func _process(delta : float) -> void:
+	if hover:
+		bg.color = GuiColors.HOVER_COLOR
+	else:
+		bg.color = Color.transparent
+
+
+func fitWidth(value : float) -> void:
+	rect_min_size.x = value
+	bg.rect_min_size.x = value
 
 
 func action() -> void:
@@ -67,7 +70,7 @@ func action() -> void:
 				Signals.emit_signal("guiConfirm", self)
 			
 			Enums.GuiAction.NEW_WINDOW:
-				Signals.emit_signal("guiOpenWindow", data, Vector2.ZERO)
+				Signals.emit_signal("guiOpenWindow", data)
 			
 			Enums.GuiAction.NEXT:
 				# TODO

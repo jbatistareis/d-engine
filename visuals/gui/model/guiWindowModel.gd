@@ -8,34 +8,29 @@ var buttons : Array = []
 
 var buttonIndex : int = 0
 var data = null
-var position : Vector2 setget setPostion
-var foreground : bool = true
+var position : Vector2 = Vector2.INF setget setPostion
+var type : int = Enums.GuiWindowType.FOREGROUND
 
 var vBox : VBoxContainer = VBoxContainer.new()
 var bg : ColorRect = ColorRect.new()
 var shadow : ColorRect = ColorRect.new()
 
 
+# override
 func _init() -> void:
+	pass
+
+
+func _ready() -> void:
 	Signals.connect("guiConfirm", self, "confirm")
 	Signals.connect("guiUp", self, "action", [InputType.UP])
 	Signals.connect("guiDown", self, "action", [InputType.DOWN])
 	Signals.connect("guiSelect", self, "select")
 	
-	add_child(shadow)
-	add_child(bg)
-	add_child(vBox)
-
-
-func _enter_tree() -> void:
 	bg.color = GuiColors.BG_COLOR
-	bg.anchor_bottom = 1
-	bg.anchor_right = 1
 	shadow.color = Color.black
 	shadow.color.a = 0.5
-	shadow.anchor_bottom = 1
-	shadow.anchor_right = 1
-	vBox.alignment = BoxContainer.ALIGN_CENTER
+	shadow.rect_position = Vector2(4, 4)
 	
 	if text != null:
 		vBox.add_child(text)
@@ -46,15 +41,30 @@ func _enter_tree() -> void:
 	if !buttons.empty():
 		buttons[buttonIndex].hover = true
 	
-	for i in range(2): # wait for child components setup
-		yield(get_tree(), "idle_frame")
+	add_child(shadow)
+	add_child(bg)
+	add_child(vBox)
+
+
+func _enter_tree() -> void:
+	yield(get_tree(), "idle_frame")
+	
 	rect_min_size = vBox.rect_size
+	
+	if position == Vector2.INF:
+		position = OverlayManager.windowSize() * 0.5 - (rect_min_size * 0.5)
+	
 	rect_position = position
-	shadow.rect_position += Vector2(4, 4)
+	
+	bg.rect_min_size = rect_min_size
+	shadow.rect_min_size = rect_min_size
+	
+	for button in buttons:
+		button.fitWidth(rect_min_size.x)
 
 
 func action(inputAction : int) -> void:
-	if isCurrentWindow():
+	if OverlayManager.isCurrentWindow(self):
 		var newIndex = (buttonIndex - inputAction) % buttons.size()
 		
 		if buttons[newIndex] is GuiButtonModel:
@@ -64,13 +74,13 @@ func action(inputAction : int) -> void:
 
 
 func select() -> void:
-	if isCurrentWindow():
+	if OverlayManager.isCurrentWindow(self):
 		yield(get_tree(), "idle_frame")
 		buttons[buttonIndex].action()
 
 
 func confirm(source : GuiButtonModel) -> void:
-	if isCurrentWindow() && buttons.has(source):
+	if OverlayManager.isCurrentWindow(self) && buttons.has(source):
 		data = null
 		
 		if source.data != null:
@@ -83,10 +93,6 @@ func confirm(source : GuiButtonModel) -> void:
 		
 		windowConfirmed()
 		Signals.emit_signal("guiCloseWindow")
-
-
-func isCurrentWindow() -> bool:
-	return WindowManager.windowQueue.front() == self
 
 
 func setPostion(value : Vector2) -> void:

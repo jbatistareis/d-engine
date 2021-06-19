@@ -89,6 +89,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/game/states/equipmentState.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "EquipmentWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/equipmentWindow.gd"
+}, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
@@ -98,6 +103,11 @@ _global_script_classes=[ {
 "class": "Fact",
 "language": "GDScript",
 "path": "res://logic/ai/fact.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "GameMenu",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/gameMenu.gd"
 }, {
 "base": "State",
 "class": "GameMenuState",
@@ -149,6 +159,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/items/item.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "ItemsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/itemsWindow.gd"
+}, {
 "base": "Entity",
 "class": "Location",
 "language": "GDScript",
@@ -158,6 +173,16 @@ _global_script_classes=[ {
 "class": "MainMenuState",
 "language": "GDScript",
 "path": "res://logic/game/states/mainMenuState.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "MapWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/mapWindow.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "MiniMapWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/miniMapWindow.gd"
 }, {
 "base": "Reference",
 "class": "Move",
@@ -178,6 +203,16 @@ _global_script_classes=[ {
 "class": "MoveResult",
 "language": "GDScript",
 "path": "res://logic/characters/moveResult.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "OptionsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/optionsWindow.gd"
+}, {
+"base": "Control",
+"class": "Overlay",
+"language": "GDScript",
+"path": "res://visuals/gui/overlay.gd"
 }, {
 "base": "Entity",
 "class": "Portal",
@@ -214,6 +249,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/database/serializer.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "SkillsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/skillsWindow.gd"
+}, {
 "base": "Entity",
 "class": "Spawn",
 "language": "GDScript",
@@ -228,6 +268,11 @@ _global_script_classes=[ {
 "class": "State",
 "language": "GDScript",
 "path": "res://logic/game/states/state.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "StatusWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/statusWindow.gd"
 }, {
 "base": "State",
 "class": "TitleState",
@@ -271,8 +316,10 @@ _global_script_class_icons={
 "EntitySaver": "",
 "Enums": "",
 "EquipmentState": "",
+"EquipmentWindow": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
+"GameMenu": "",
 "GameMenuState": "",
 "GamePaths": "",
 "GuiButtonModel": "",
@@ -283,12 +330,17 @@ _global_script_class_icons={
 "Inventory": "",
 "InventoryState": "",
 "Item": "",
+"ItemsWindow": "",
 "Location": "",
 "MainMenuState": "",
+"MapWindow": "",
+"MiniMapWindow": "",
 "Move": "",
 "MoveBackwardState": "",
 "MoveForwardState": "",
 "MoveResult": "",
+"OptionsWindow": "",
+"Overlay": "",
 "Portal": "",
 "Room": "",
 "RoomDamageCommand": "",
@@ -296,9 +348,11 @@ _global_script_class_icons={
 "RotateRightState": "",
 "ScriptTool": "",
 "Serializer": "",
+"SkillsWindow": "",
 "Spawn": "",
 "Stat": "",
 "State": "",
+"StatusWindow": "",
 "TitleState": "",
 "Verdict": "",
 "VerdictCommand": "",
@@ -319,14 +373,14 @@ default_bus_layout=""
 [autoload]
 
 Signals="*res://logic/signals.gd"
-RegionManager="*res://logic/managers/locationManager.gd"
+LocationManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
 LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
-WindowManager="*res://logic/managers/windowManager.gd"
+OverlayManager="*res://visuals/gui/overlayManager.gd"
 
 [display]
 
