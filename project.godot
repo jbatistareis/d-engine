@@ -19,10 +19,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://data/commands/askPlayerBattleInputCommand.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "BattleMenu",
+"language": "GDScript",
+"path": "res://visuals/gui/menus/battleMenu.gd"
+}, {
 "base": "State",
 "class": "BattleMenuState",
 "language": "GDScript",
 "path": "res://logic/game/states/battleMenuState.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "BattleSkillsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/battleSkillsWindow.gd"
 }, {
 "base": "State",
 "class": "BootState",
@@ -107,7 +117,7 @@ _global_script_classes=[ {
 "base": "GuiWindowModel",
 "class": "GameMenu",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/gameMenu.gd"
+"path": "res://visuals/gui/menus/gameMenu.gd"
 }, {
 "base": "State",
 "class": "GameMenuState",
@@ -302,7 +312,9 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
+"BattleMenu": "",
 "BattleMenuState": "",
+"BattleSkillsWindow": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",

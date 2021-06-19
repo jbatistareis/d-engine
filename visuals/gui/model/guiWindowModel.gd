@@ -17,8 +17,8 @@ var shadow : ColorRect = ColorRect.new()
 
 
 # override
-func _init() -> void:
-	pass
+func _init(pos : Vector2 = Vector2.INF) -> void:
+	position = pos
 
 
 func _ready() -> void:
