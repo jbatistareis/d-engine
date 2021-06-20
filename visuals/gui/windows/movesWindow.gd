@@ -1,4 +1,4 @@
-class_name SkillsWindow
+class_name MovesWindow
 extends GuiWindowModel
 
 

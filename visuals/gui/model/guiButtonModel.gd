@@ -1,13 +1,15 @@
 class_name GuiButtonModel
 extends Control
 
+var disabled : bool = false
+var hover : bool = false
+
+# presentation
+var text : String = ''
 var action : int = Enums.GuiAction.CANCEL
 
-# misc metadata
-var text : String = ''
-var disabled : bool = false
+# common metadata
 var identifier : String = ''
-var hover : bool = false
 var data = null
 
 # slide metadata
@@ -15,8 +17,9 @@ var slideLabels : Array = []
 var slideValues : Array = []
 var slideIndex : int = 0
 
-var label = Label.new()
-var bg = ColorRect.new()
+var margin : MarginContainer = MarginContainer.new()
+var label : Label = Label.new()
+var bg : ColorRect = ColorRect.new()
 
 
 func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, identifier : String = '') -> void:
@@ -26,7 +29,7 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 	self.identifier = identifier
 	self.disabled = disabled
 	
-	label.set("custom_colors/font_color", GuiColors.TEXT_COLOR)
+	label.set("custom_colors/font_color", GuiTheme.TEXT_COLOR)
 	label.text = text
 	
 	match action:
@@ -39,25 +42,32 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 			
 			label.text += ': ' + ('Yes' if data else 'No')
 	
+	margin.add_child(label)
 	add_child(bg)
-	add_child(label)
+	add_child(margin)
+	
+	bg.anchor_bottom = 1
+	bg.anchor_right = 1
+	
+	margin.add_constant_override("margin_top", GuiTheme.MARGIN_SIZE)
+	margin.add_constant_override("margin_left", GuiTheme.MARGIN_SIZE)
+	margin.add_constant_override("margin_bottom", GuiTheme.MARGIN_SIZE)
+	margin.add_constant_override("margin_right", GuiTheme.MARGIN_SIZE)
 
 
 func _ready() -> void:
-	rect_min_size = label.rect_size
-	bg.rect_min_size = label.rect_size
+	rect_min_size = margin.rect_size
 
 
 func _process(delta : float) -> void:
 	if hover:
-		bg.color = GuiColors.HOVER_COLOR
+		bg.color = GuiTheme.HOVER_COLOR
 	else:
-		bg.color = Color.transparent
+		bg.color = GuiTheme.UNSELECTED_COLOR
 
 
 func fitWidth(value : float) -> void:
 	rect_min_size.x = value
-	bg.rect_min_size.x = value
 
 
 func action() -> void:

@@ -27,7 +27,7 @@ func _ready() -> void:
 	Signals.connect("guiDown", self, "action", [InputType.DOWN])
 	Signals.connect("guiSelect", self, "select")
 	
-	bg.color = GuiColors.BG_COLOR
+	bg.color = GuiTheme.BG_COLOR
 	shadow.color = Color.black
 	shadow.color.a = 0.5
 	shadow.rect_position = Vector2(4, 4)

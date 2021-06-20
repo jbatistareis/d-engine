@@ -1,7 +1,7 @@
 class_name StatusWindow
 extends GuiWindowModel
 
-const TEXT : String = ' |-[|%s|]-| >HP|%d/%d>LV|%d|[next: %d/%d]>Spare pts.|%d>  -| |-| |-| |-| |-  >Strength|%d>Dexterity|%d>Constitution|%d>Intelligence|%d>Wisdom|%d>Charisma|%d'
+const TEXT : String = ' |[ |%s| ]| >HP|%d/%d>LV|%d|[next: %d/%d]>Spare pts.|%d>  |-| |-| |-| |-| |-|  >Strength|%d>Dexterity|%d>Constitution|%d>Intelligence|%d>Wisdom|%d>Charisma|%d'
 
 
 func _init() -> void:
