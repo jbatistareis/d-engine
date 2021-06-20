@@ -1,7 +1,7 @@
 class_name GuiMoveButtonModel
 extends GuiButtonModel
 
-const LABEL : String = '[  %s  ]\nT: %ds / %ds\n%s'
+const LABEL : String = '[  %s  ]  [  %ds / %ds  ]\n%s'
 
 
 func _init(move : Move).(LABEL % [move.name, move.cdPre, move.cdPost, move.description], Enums.GuiAction.CONFIRM, move, 'move') -> void:

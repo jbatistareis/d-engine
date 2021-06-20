@@ -1,7 +1,6 @@
 class_name GuiTextModel
-extends Control
+extends MarginContainer
 
-var margin : MarginContainer = MarginContainer.new()
 var vBox = VBoxContainer.new()
 
 
@@ -25,15 +24,14 @@ func _init(text : String) -> void:
 			
 			hBox.add_child(label)
 	
-	margin.add_constant_override("margin_top", GuiTheme.MARGIN_SIZE)
-	margin.add_constant_override("margin_left", GuiTheme.MARGIN_SIZE)
-	margin.add_constant_override("margin_bottom", GuiTheme.MARGIN_SIZE)
-	margin.add_constant_override("margin_right", GuiTheme.MARGIN_SIZE)
+	add_constant_override("margin_top", GuiTheme.MARGIN_SIZE)
+	add_constant_override("margin_left", GuiTheme.MARGIN_SIZE)
+	add_constant_override("margin_bottom", GuiTheme.MARGIN_SIZE)
+	add_constant_override("margin_right", GuiTheme.MARGIN_SIZE)
 	
-	margin.add_child(vBox)
-	add_child(margin)
+	add_child(vBox)
 
 
 func _ready() -> void:
-	rect_min_size = margin.rect_size
+	rect_min_size = vBox.rect_size
 

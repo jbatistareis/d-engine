@@ -134,7 +134,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://visuals/gui/model/guiMoveButtonModel.gd"
 }, {
-"base": "Control",
+"base": "MarginContainer",
 "class": "GuiTextModel",
 "language": "GDScript",
 "path": "res://visuals/gui/model/guiTextModel.gd"

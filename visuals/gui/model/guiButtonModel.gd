@@ -5,12 +5,12 @@ var disabled : bool = false
 var hover : bool = false
 
 # presentation
-var text : String = ''
-var action : int = Enums.GuiAction.CANCEL
+var text : String
+var action : int
 
 # common metadata
-var identifier : String = ''
-var data = null
+var identifier : String
+var data
 
 # slide metadata
 var slideLabels : Array = []
@@ -42,17 +42,20 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 			
 			label.text += ': ' + ('Yes' if data else 'No')
 	
-	margin.add_child(label)
-	add_child(bg)
-	add_child(margin)
-	
-	bg.anchor_bottom = 1
-	bg.anchor_right = 1
-	
 	margin.add_constant_override("margin_top", GuiTheme.MARGIN_SIZE)
 	margin.add_constant_override("margin_left", GuiTheme.MARGIN_SIZE)
 	margin.add_constant_override("margin_bottom", GuiTheme.MARGIN_SIZE)
 	margin.add_constant_override("margin_right", GuiTheme.MARGIN_SIZE)
+	
+	margin.add_child(label)
+	add_child(bg)
+	add_child(margin)
+	
+	margin.anchor_bottom = 1
+	margin.anchor_right = 1
+	
+	bg.anchor_bottom = 1
+	bg.anchor_right = 1
 
 
 func _ready() -> void:

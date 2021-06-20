@@ -3,9 +3,9 @@ extends State
 
 
 func _init() -> void:
-#	Signals.emit_signal("guiOpenWindow", StatusWindow.new())
-#	Signals.emit_signal("guiOpenWindow", GameMenu.new())
-	Signals.emit_signal("guiOpenWindow", BattleMenu.new(LocationManager.player if (LocationManager.player != null) else Character.new()))
+	Signals.emit_signal("guiOpenWindow", StatusWindow.new())
+	Signals.emit_signal("guiOpenWindow", GameMenu.new())
+#	Signals.emit_signal("guiOpenWindow", BattleMenu.new(LocationManager.player if (LocationManager.player != null) else Character.new()))
 
 
 func handleInput(event : InputEvent) -> void:
