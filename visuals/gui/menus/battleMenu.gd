@@ -32,5 +32,5 @@ func _init(character : Character) -> void:
 
 
 func windowConfirmed() -> void:
-	print(data)
+	CommandManager.publishCommand(data)
 
