@@ -14,29 +14,38 @@ func setDirection(value : int) -> void:
 
 func getState(id : int) -> State:
 	match id:
-		Enums.States.BOOT:
-			return BootState.new()
-		
-		Enums.States.GAME_MENU:
-			return GameMenuState.new()
-		
 		Enums.States.IDLE:
 			return IdleState.new()
 		
-		Enums.States.MAIN_MENU:
-			return MainMenuState.new()
-		
 		Enums.States.MOVE_BACKWARD:
 			return MoveBackwardState.new()
-		
-		Enums.States.MOVE_FORWARD:
-			return MoveForwardState.new()
 		
 		Enums.States.ROTATE_LEFT:
 			return RotateLeftState.new()
 		
 		Enums.States.ROTATE_RIGHT:
 			return RotateRightState.new()
+		
+		Enums.States.MOVE_FORWARD:
+			return MoveForwardState.new()
+		
+		Enums.States.BATTLE_MENU:
+			return BattleMenuState.new()
+		
+		Enums.States.GAME_MENU:
+			return GameMenuState.new()
+		
+		Enums.States.INVENTORY:
+			return InventoryState.new()
+		
+		Enums.States.EQUIPMENT:
+			return EquipmentState.new()
+		
+		Enums.States.BOOT:
+			return BootState.new()
+		
+		Enums.States.MAIN_MENU:
+			return MainMenuState.new()
 		
 		Enums.States.TITLE:
 			return TitleState.new()

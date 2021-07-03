@@ -19,6 +19,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://data/commands/askPlayerBattleInputCommand.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "BattleMenu",
+"language": "GDScript",
+"path": "res://visuals/gui/menus/battleMenu.gd"
+}, {
+"base": "State",
+"class": "BattleMenuState",
+"language": "GDScript",
+"path": "res://logic/game/states/battleMenuState.gd"
+}, {
 "base": "State",
 "class": "BootState",
 "language": "GDScript",
@@ -79,6 +89,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/enums.gd"
 }, {
+"base": "State",
+"class": "EquipmentState",
+"language": "GDScript",
+"path": "res://logic/game/states/equipmentState.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "EquipmentWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/equipmentWindow.gd"
+}, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
@@ -88,6 +108,11 @@ _global_script_classes=[ {
 "class": "Fact",
 "language": "GDScript",
 "path": "res://logic/ai/fact.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "GameMenu",
+"language": "GDScript",
+"path": "res://visuals/gui/menus/gameMenu.gd"
 }, {
 "base": "State",
 "class": "GameMenuState",
@@ -99,6 +124,31 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/gamePaths.gd"
 }, {
+"base": "Control",
+"class": "GuiButtonModel",
+"language": "GDScript",
+"path": "res://visuals/gui/model/guiButtonModel.gd"
+}, {
+"base": "GuiButtonModel",
+"class": "GuiMoveButtonModel",
+"language": "GDScript",
+"path": "res://visuals/gui/model/guiMoveButtonModel.gd"
+}, {
+"base": "MarginContainer",
+"class": "GuiTextModel",
+"language": "GDScript",
+"path": "res://visuals/gui/model/guiTextModel.gd"
+}, {
+"base": "Reference",
+"class": "GuiTheme",
+"language": "GDScript",
+"path": "res://visuals/gui/guiTheme.gd"
+}, {
+"base": "Control",
+"class": "GuiWindowModel",
+"language": "GDScript",
+"path": "res://visuals/gui/model/guiWindowModel.gd"
+}, {
 "base": "State",
 "class": "IdleState",
 "language": "GDScript",
@@ -109,10 +159,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/characters/inventory.gd"
 }, {
+"base": "State",
+"class": "InventoryState",
+"language": "GDScript",
+"path": "res://logic/game/states/inventoryState.gd"
+}, {
 "base": "Entity",
 "class": "Item",
 "language": "GDScript",
 "path": "res://logic/items/item.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "ItemsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/itemsWindow.gd"
 }, {
 "base": "Entity",
 "class": "Location",
@@ -123,6 +183,16 @@ _global_script_classes=[ {
 "class": "MainMenuState",
 "language": "GDScript",
 "path": "res://logic/game/states/mainMenuState.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "MapWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/mapWindow.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "MiniMapWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/miniMapWindow.gd"
 }, {
 "base": "Reference",
 "class": "Move",
@@ -143,6 +213,21 @@ _global_script_classes=[ {
 "class": "MoveResult",
 "language": "GDScript",
 "path": "res://logic/characters/moveResult.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "MovesWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/movesWindow.gd"
+}, {
+"base": "GuiWindowModel",
+"class": "OptionsWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/optionsWindow.gd"
+}, {
+"base": "Control",
+"class": "Overlay",
+"language": "GDScript",
+"path": "res://visuals/gui/overlay.gd"
 }, {
 "base": "Entity",
 "class": "Portal",
@@ -194,6 +279,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/game/states/state.gd"
 }, {
+"base": "GuiWindowModel",
+"class": "StatusWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/statusWindow.gd"
+}, {
 "base": "State",
 "class": "TitleState",
 "language": "GDScript",
@@ -222,6 +312,8 @@ _global_script_classes=[ {
 _global_script_class_icons={
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
+"BattleMenu": "",
+"BattleMenuState": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",
@@ -234,19 +326,34 @@ _global_script_class_icons={
 "EntityLoader": "",
 "EntitySaver": "",
 "Enums": "",
+"EquipmentState": "",
+"EquipmentWindow": "",
 "ExecuteMoveCommand": "",
 "Fact": "",
+"GameMenu": "",
 "GameMenuState": "",
 "GamePaths": "",
+"GuiButtonModel": "",
+"GuiMoveButtonModel": "",
+"GuiTextModel": "",
+"GuiTheme": "",
+"GuiWindowModel": "",
 "IdleState": "",
 "Inventory": "",
+"InventoryState": "",
 "Item": "",
+"ItemsWindow": "",
 "Location": "",
 "MainMenuState": "",
+"MapWindow": "",
+"MiniMapWindow": "",
 "Move": "",
 "MoveBackwardState": "",
 "MoveForwardState": "",
 "MoveResult": "",
+"MovesWindow": "",
+"OptionsWindow": "",
+"Overlay": "",
 "Portal": "",
 "Room": "",
 "RoomDamageCommand": "",
@@ -257,6 +364,7 @@ _global_script_class_icons={
 "Spawn": "",
 "Stat": "",
 "State": "",
+"StatusWindow": "",
 "TitleState": "",
 "Verdict": "",
 "VerdictCommand": "",
@@ -277,13 +385,14 @@ default_bus_layout=""
 [autoload]
 
 Signals="*res://logic/signals.gd"
-RegionManager="*res://logic/managers/locationManager.gd"
+LocationManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
 LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
+OverlayManager="*res://visuals/gui/overlayManager.gd"
 
 [display]
 

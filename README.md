@@ -22,7 +22,7 @@ It is going to work some day.
 - [x] Database system  
 - [ ] Save system  
 - [ ] Controls system
-- [ ] UI ~~system~~  
+- [x] UI ~~system~~  
 - [x] 3D map  
 - [x] Maps dev tool  
 - [ ] Characters dev tool  

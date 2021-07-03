@@ -13,6 +13,7 @@ var baseDamage : int = 1
 
 var currentLevel : int = 1
 var experiencePoints : int = 0
+var experienceToNextLevel : int = 8 setget ,getExperienceToNextLevel
 var sparePoints : int = 0
 
 var strength : Stat = Stat.new()
@@ -55,16 +56,16 @@ func change_hp(amount : int) -> void:
 
 
 func canLevelUp() -> bool:
-	return experiencePoints >= (currentLevel + 7)
+	return experiencePoints >= self.experienceToNextLevel
 
 
 func additional_levels() -> int:
-	return floor(experiencePoints / (currentLevel + 7)) as int
+	return floor(experiencePoints / self.experienceToNextLevel) as int
 
 
 func level_up() -> void:
 	if canLevelUp():
-		experiencePoints -= currentLevel + 7
+		experiencePoints -= self.experienceToNextLevel
 		sparePoints += 1
 		currentLevel += 1
 		
@@ -75,4 +76,8 @@ func gainExperience(amount : int) -> void:
 	experiencePoints += amount
 	
 	Signals.emit_signal("characterGotExperience", self, amount)
+
+
+func getExperienceToNextLevel() -> int:
+	return currentLevel + 7
 

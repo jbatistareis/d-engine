@@ -17,5 +17,7 @@ func end(loot) -> void:
 
 
 func showPlayerMenu(player : Character) -> void:
-	pass
+	# TODO build proper object
+	var menu = GuiWindowModel.new()
+	Signals.emit_signal("guiOpenWindow", menu)
 
