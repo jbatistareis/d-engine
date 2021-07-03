@@ -17,7 +17,7 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "AskPlayerBattleInputCommand",
 "language": "GDScript",
-"path": "res://data/commands/askPlayerBattleInputCommand.gd"
+"path": "res://logic/commands/askPlayerBattleInputCommand.gd"
 }, {
 "base": "GuiWindowModel",
 "class": "BattleMenu",
@@ -102,7 +102,7 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
-"path": "res://data/commands/executeMoveCommand.gd"
+"path": "res://logic/commands/executeMoveCommand.gd"
 }, {
 "base": "Reference",
 "class": "Fact",
@@ -242,7 +242,7 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "RoomDamageCommand",
 "language": "GDScript",
-"path": "res://data/commands/roomDamageCommand.gd"
+"path": "res://logic/commands/roomDamageCommand.gd"
 }, {
 "base": "State",
 "class": "RotateLeftState",
@@ -297,12 +297,12 @@ _global_script_classes=[ {
 "base": "Command",
 "class": "VerdictCommand",
 "language": "GDScript",
-"path": "res://data/commands/verdictCommand.gd"
+"path": "res://logic/commands/verdictCommand.gd"
 }, {
 "base": "Command",
 "class": "WaitCommand",
 "language": "GDScript",
-"path": "res://data/commands/waitCommand.gd"
+"path": "res://logic/commands/waitCommand.gd"
 }, {
 "base": "Entity",
 "class": "Weapon",
