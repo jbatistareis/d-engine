@@ -2,6 +2,8 @@ class_name Fact
 
 const _NOOP : String = 'func execute(executor : Character, suspects : Array) -> Array:\n\treturn []'
 
+var name : String = 'Fact'
+var description : String = 'NOOP fact'
 var analyzeScript : String = _NOOP
 
 

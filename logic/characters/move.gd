@@ -3,8 +3,8 @@ class_name Move
 const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
 const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 0'
 
-var name : String = ''
-var description : String = ''
+var name : String = 'Move'
+var description : String = 'NOOP move'
 var valueExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
 var outcomeExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
 var cdPre : int = 0

@@ -8,7 +8,7 @@ func _ready() -> void:
 
 
 func setup(players : Array, enemies : Array) -> void:
-	Signals.emit_signal("battleScreenSetUp")
+	Signals.emit_signal("battleScreenReady")
 
 
 # TODO
@@ -17,7 +17,5 @@ func end(loot) -> void:
 
 
 func showPlayerMenu(player : Character) -> void:
-	# TODO build proper object
-	var menu = GuiWindowModel.new()
-	Signals.emit_signal("guiOpenWindow", menu)
+	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
 

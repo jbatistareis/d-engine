@@ -54,7 +54,7 @@ signal charaterTimerResumed(character) # use to resume a character (friend or fo
 signal askedPlayerBattleInput(character) # use as a cue show a command window
 signal playerConfirmedBattleInput(command) # use when the player picks a command
 # used as internal communication, dont fire, or listen to then
-signal battleScreenSetUp() # used to continue to run battle logic
+signal battleScreenReady() # used to continue to run battle logic
 
 
 # inventory

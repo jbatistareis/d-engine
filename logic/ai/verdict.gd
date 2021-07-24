@@ -1,5 +1,7 @@
 class_name Verdict
 
+var name : String = 'Verdict'
+var description : String = 'NOOP verdict'
 var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT>, <MOVE>]
 
 

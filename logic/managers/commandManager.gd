@@ -19,6 +19,8 @@ func _ready():
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
+	
+	reset()
 
 
 func tick() -> void:

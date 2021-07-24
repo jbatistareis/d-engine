@@ -239,7 +239,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/locations/room.gd"
 }, {
-"base": "Command",
+"base": "Reference",
 "class": "RoomDamageCommand",
 "language": "GDScript",
 "path": "res://logic/commands/roomDamageCommand.gd"
@@ -299,7 +299,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/commands/verdictCommand.gd"
 }, {
-"base": "Command",
+"base": "Reference",
 "class": "WaitCommand",
 "language": "GDScript",
 "path": "res://logic/commands/waitCommand.gd"
@@ -375,7 +375,7 @@ _global_script_class_icons={
 [application]
 
 config/name="D Engine"
-run/main_scene="res://tools/location/locationEditor.tscn"
+run/main_scene="res://visuals/battle/battleArena.tscn"
 config/icon="res://icon.png"
 
 [audio]

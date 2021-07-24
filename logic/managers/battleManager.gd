@@ -18,12 +18,14 @@ func start(players : Array, enemies : Array) -> void:
 		self.players = players
 		self.enemies = enemies
 		
-		yield(Signals, "battleScreenSetUp")
+		yield(Signals, "battleScreenReady")
 		
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:
 			if player.verdictActive:
 				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 1))
+			else:
+				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 1))
 		
 		for enemy in enemies:
 			if enemy.verdictActive:
