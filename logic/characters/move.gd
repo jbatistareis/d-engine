@@ -11,11 +11,12 @@ var cdPre : int = 0
 var cdPost : int = 0
 var executions : int = 1
 var persistent : bool = false
+var targetType : int = Enums.CharacterTargetType.FOE # relative to the executor
+var animation : String = 'idle'
 
 
 func getResult(character) -> MoveResult:
 	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
-	var result = MoveResult.new(reference.getValue(character), reference.getOutcome(character))
 	
-	return result
+	return MoveResult.new(reference.getValue(character), reference.getOutcome(character))
 

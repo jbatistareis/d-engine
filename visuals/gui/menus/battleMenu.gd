@@ -1,8 +1,11 @@
 class_name BattleMenu
 extends GuiWindowModel
 
+var character : Character
+
 
 func _init(character : Character) -> void:
+	self.character = character
 	# TODO create real moves
 	var attack = Move.new()
 	var item = Move.new()
@@ -32,5 +35,7 @@ func _init(character : Character) -> void:
 
 
 func windowConfirmed() -> void:
-	CommandManager.publishCommand(data)
+#	CommandManager.publishCommand()
+	# TODO ask which target
+	pass
 
