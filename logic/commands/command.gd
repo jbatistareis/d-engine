@@ -16,7 +16,13 @@ func _init(executorCharacter, ticks : int, executions : int = 1, persistent : bo
 	self.persistent = persistent
 
 
+# implement this
 func execute() -> void:
+	pass
+
+
+# implement this
+func published() -> void:
 	pass
 
 

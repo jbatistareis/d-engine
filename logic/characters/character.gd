@@ -2,6 +2,7 @@ class_name Character
 extends Entity
 
 var type : int = Enums.CharacterType.FRIENDLY_NPC
+var model : String = ''
 
 var name : String = 'Base Character'
 

@@ -55,6 +55,7 @@ signal askedPlayerBattleInput(character) # use as a cue show a command window
 signal playerConfirmedBattleInput(command) # use when the player picks a command
 # used as internal communication, dont fire, or listen to then
 signal battleScreenReady() # used to continue to run battle logic
+signal startedBattleAnimation(character, animation) # used to tell a character to play an animation
 
 
 # inventory

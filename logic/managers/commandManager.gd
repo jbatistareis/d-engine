@@ -55,4 +55,6 @@ func publishCommand(command : Command) -> void:
 	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')
+	
+	command.published()
 

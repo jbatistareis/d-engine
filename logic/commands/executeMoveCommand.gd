@@ -10,9 +10,14 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 	self.move = move
 
 
+func published() -> void:
+	Signals.startedBattleAnimation(executorCharacter, move.selfAnimation)
+
+
 func execute() -> void:
 	var moveResult
 	for target in targets:
+		Signals.startedBattleAnimation(target, move.targetAnimation)
 		moveResult = move.getResult(executorCharacter)
 		
 		match moveResult.outcome:
