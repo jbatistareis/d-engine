@@ -6,8 +6,8 @@ var model : String = ''
 
 var name : String = 'Base Character'
 
-var baseHp : int = 1
-var currentHp : int = 1
+var baseHp : int = 9
+var currentHp : int = 10
 var maxHp : int setget ,getMaxHp
 
 var baseDamage : int = 1
