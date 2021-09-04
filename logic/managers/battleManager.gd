@@ -18,6 +18,7 @@ func start(players : Array, enemies : Array) -> void:
 		self.players = players
 		self.enemies = enemies
 		
+		Signals.emit_signal("setupBattleScreen", players, enemies)
 		yield(Signals, "battleScreenReady")
 		
 		# TODO pick order, ramdomize initial cd (or not)
@@ -39,17 +40,21 @@ func _process(delta):
 
 func end() -> void:
 	if inBattle:
-		inBattle = false
+		var battleResult = BattleResult.new()
 		
 		for enemy in enemies:
 			if enemy.health.currentHp == 0:
+				battleResult.experience += enemy.experiencePoints
 				pass # TODO loot
 			else:
 				#CharactersDatabase.deSpawnEntity(enemy.spawnId)
 				pass
 		
+		Signals.emit_signal("showBattleResult", players, battleResult)
+		
+		players.clear()
 		enemies.clear()
-		Signals.emit_signal("battleEnded", {}) # TODO loot
+		inBattle = false
 
 
 func pauseCommands(player : Character) -> void:

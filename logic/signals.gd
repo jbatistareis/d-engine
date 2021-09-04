@@ -47,15 +47,17 @@ signal commandPublished(command)
 # battle
 # use for flow control
 signal battleStarted(players, enemies) # use to show the battle screen, battle logic is paused until 'battleScreenSetUp' signal is fired
-signal battleEnded(loot) # TODO
+signal battleEnded()
 signal charaterTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
 signal charaterTimerPaused(character) # use to pause a character (friend or foe) battle timeline
 signal charaterTimerResumed(character) # use to resume a character (friend or foe) battle timeline
 signal askedPlayerBattleInput(character) # use as a cue show a command window
 signal playerConfirmedBattleInput(command) # use when the player picks a command
 # used as internal communication, dont fire, or listen to then
-signal battleScreenReady() # used to continue to run battle logic
-signal startedBattleAnimation(character, animation) # used to tell a character to play an animation
+signal setupBattleScreen(players, enemies)
+signal battleScreenReady()
+signal showBattleResult(players, battleResult)
+signal startedBattleAnimation(character, animation)
 
 
 # inventory
