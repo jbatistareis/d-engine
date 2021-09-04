@@ -27,6 +27,7 @@ static func loadItem(shortName : String):
 
 static func loadLocation(shortName : String):
 	var file = File.new()
+	print(GamePaths.LOCATION_DATA % shortName)
 	file.open_compressed(
 		GamePaths.LOCATION_DATA % shortName,
 		File.READ,

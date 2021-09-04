@@ -387,7 +387,7 @@ _global_script_class_icons={
 [application]
 
 config/name="D Engine"
-run/main_scene="res://visuals/battle/battleArena.tscn"
+run/main_scene="res://root.tscn"
 config/icon="res://icon.png"
 
 [audio]

@@ -20,7 +20,7 @@ func showPlayerMenu(player : Character) -> void:
 	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
 
 
-# TODO
+# TODO loot
 func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 	for player in players:
 		player.gainExperience(battleResult.experience)

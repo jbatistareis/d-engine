@@ -4,6 +4,7 @@ onready var currentState : State = getState(Enums.States.IDLE)
 
 # player vars
 var testing : bool = false
+var cameraMoving : bool = false
 var direction : int setget setDirection
 
 
@@ -54,8 +55,8 @@ func getState(id : int) -> State:
 			return null
 
 
-func _input(event : InputEvent) -> void:
+func _physics_process(delta) -> void:
 	if currentState != null:
-		currentState.handleInput(event)
+		currentState.handleInput()
 		currentState = currentState.next
 

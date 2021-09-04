@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://tools/location/rooms/roomTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/rooms/meshPreview.tscn" type="PackedScene" id=2]
@@ -10,7 +10,6 @@
 [ext_resource path="res://visuals/terrain/terrain.tscn" type="PackedScene" id=8]
 [ext_resource path="res://visuals/terrain/terrainCamera.tscn" type="PackedScene" id=9]
 [ext_resource path="res://tools/location/locationTest.gd" type="Script" id=10]
-[ext_resource path="res://visuals/gui/overlay.tscn" type="PackedScene" id=11]
 
 [node name="Panel" type="Panel"]
 self_modulate = Color( 1, 1, 1, 0.501961 )
@@ -838,5 +837,3 @@ render_target_update_mode = 0
 [node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
 [node name="terrainCamera" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 9 )]
-
-[node name="overlay" parent="." instance=ExtResource( 11 )]

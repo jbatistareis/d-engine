@@ -7,12 +7,21 @@ func _init() -> void:
 	Signals.connect("playerRoomChangeDenied", self, "idle")
 
 
-func handleInput(event : InputEvent) -> void:
-	if GameManager.testing:
-		Signals.emit_signal("playerMovedForward")
-	else:
-		Signals.emit_signal("playerMoved", GameManager.direction)
-	
-	if event.is_action_released("ui_up"):
+func handleInput() -> void:
+	if (!GameManager.cameraMoving):
+		if GameManager.testing:
+			move(GameManager.direction)
+		else:
+			Signals.emit_signal("playerMoved", GameManager.direction)
+		
+	if Input.is_action_just_released("ui_up"):
 		next = GameManager.getState(Enums.States.IDLE)
+
+
+func move(direction : int) -> void:
+	Signals.emit_signal("playerMovedForward")
+
+
+func idle() -> void:
+	next = GameManager.getState(Enums.States.IDLE)
 

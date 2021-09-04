@@ -1,7 +1,5 @@
 extends Spatial
 
-var direction : int setget setDirection
-
 var freeFlight : bool = false
 
 const ROTATE_45 : float = PI / 4
@@ -22,11 +20,6 @@ func _process(delta : float) -> void:
 		inputFreeFlight()
 
 
-func setDirection(value : int) -> void:
-	var correctedValue = value if (value > -1) else 3
-	direction = correctedValue % 4
-
-
 func setup(location : Location, x : int, y : int, direction : int) -> void:
 	$camera.current = true
 	GameManager.direction = direction
@@ -44,11 +37,13 @@ func goTo(x : int, y : int, direction : int) -> void:
 	transform.origin.y = 1
 	transform.origin.z = y * 2 + 1
 	rotation.x = 0
-	rotation.y = ROTATE_90 * direction
+	rotation.y = ROTATE_90 * -direction
 
 
 func moveForward() -> void:
 	if !$tween.is_active():
+		GameManager.cameraMoving = true
+		
 		$tween.interpolate_property(
 			self,
 			"transform:origin",
@@ -60,9 +55,14 @@ func moveForward() -> void:
 			0.25
 		)
 		$tween.start()
+		
+		yield($tween, "tween_all_completed")
+		GameManager.cameraMoving = false
 
 
 func moveBackward() -> void:
+	GameManager.cameraMoving = true
+	
 	if !$tween.is_active():
 		$tween.interpolate_property(
 			self,
@@ -75,10 +75,15 @@ func moveBackward() -> void:
 			0.25
 		)
 		$tween.start()
+		
+		yield($tween, "tween_all_completed")
+		GameManager.cameraMoving = false
 
 
 func rotateLeft() -> void:
 	if !$tween.is_active():
+		GameManager.cameraMoving = true
+		
 		GameManager.direction -= 1
 		
 		$tween.interpolate_property(
@@ -89,9 +94,14 @@ func rotateLeft() -> void:
 			0.25
 		)
 		$tween.start()
+		
+		yield($tween, "tween_all_completed")
+		GameManager.cameraMoving = false
 
 
 func rotateRight() -> void:
+	GameManager.cameraMoving = true
+	
 	if !$tween.is_active():
 		GameManager.direction += 1
 		
@@ -103,6 +113,9 @@ func rotateRight() -> void:
 			0.25
 		)
 		$tween.start()
+		
+		yield($tween, "tween_all_completed")
+		GameManager.cameraMoving = false
 
 
 func inputFreeFlight() -> void:

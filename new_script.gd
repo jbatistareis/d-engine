@@ -9,20 +9,7 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", Character.new(), 'entity', 13)
-
-
-#func _input(event) -> void:
-#	if event.is_action_pressed("ui_up"):
-#		Signals.emit_signal("playerMoved", Enums.Direction.NORTH)
-#	elif event.is_action_pressed("ui_down"):
-#		Signals.emit_signal("playerMoved", Enums.Direction.SOUTH)
-#	elif event.is_action_pressed("ui_left"):
-#		Signals.emit_signal("playerMoved", Enums.Direction.EAST)
-#	elif event.is_action_pressed("ui_right"):
-#		Signals.emit_signal("playerMoved", Enums.Direction.WEST)
-#	elif event.is_action_pressed("ui_accept"):
-#		pass
+	Signals.emit_signal("playerStartedAtLocation", Character.new(), 'baseLocation', 47)
 
 
 func _process(delta) -> void:
