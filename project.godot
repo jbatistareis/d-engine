@@ -149,11 +149,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://visuals/gui/model/guiTextModel.gd"
 }, {
-"base": "Reference",
-"class": "GuiTheme",
-"language": "GDScript",
-"path": "res://visuals/gui/guiTheme.gd"
-}, {
 "base": "Control",
 "class": "GuiWindowModel",
 "language": "GDScript",
@@ -348,7 +343,6 @@ _global_script_class_icons={
 "GuiButtonModel": "",
 "GuiMoveButtonModel": "",
 "GuiTextModel": "",
-"GuiTheme": "",
 "GuiWindowModel": "",
 "IdleState": "",
 "Inventory": "",
@@ -405,6 +399,7 @@ LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
 OverlayManager="*res://visuals/gui/overlayManager.gd"
+GuiTheme="*res://visuals/gui/guiTheme.gd"
 
 [display]
 

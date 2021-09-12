@@ -1,4 +1,6 @@
-class_name GuiTheme
+extends Node
+
+var font : DynamicFont = load("res://assets/font/IBMPlexMonoMedium.tres")
 
 const BG_COLOR : Color = Color.dodgerblue
 const HOVER_COLOR : Color = Color.darkslategray
