@@ -72,6 +72,7 @@ func action(inputAction : int) -> void:
 			buttons[buttonIndex].hover = false
 			buttonIndex = newIndex if (newIndex >= 0) else (buttons.size() - 1)
 			buttons[buttonIndex].hover = true
+			Signals.emit_signal("guiHover", buttons[buttonIndex].data)
 
 
 func select() -> void:

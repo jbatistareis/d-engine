@@ -81,4 +81,5 @@ signal guiLeft()
 signal guiRight()
 signal guiSelect()
 signal guiCancel()
+signal guiHover(data) # listen to get which item the player has his cursor over
 
