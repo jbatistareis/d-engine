@@ -21,10 +21,11 @@ func _init(pos : Vector2 = Vector2.INF) -> void:
 
 
 func _ready() -> void:
-	Signals.connect("guiConfirm", self, "confirm")
-	Signals.connect("guiUp", self, "action", [InputType.UP])
-	Signals.connect("guiDown", self, "action", [InputType.DOWN])
-	Signals.connect("guiSelect", self, "select")
+	if type == Enums.GuiWindowType.FOREGROUND:
+		Signals.connect("guiConfirm", self, "confirm")
+		Signals.connect("guiUp", self, "action", [InputType.UP])
+		Signals.connect("guiDown", self, "action", [InputType.DOWN])
+		Signals.connect("guiSelect", self, "select")
 	
 	bg.color = GuiTheme.BG_COLOR
 	

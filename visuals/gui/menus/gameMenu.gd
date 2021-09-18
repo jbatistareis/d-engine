@@ -10,7 +10,8 @@ func _init() -> void:
 		GuiButtonWidget.new('Equip >', Enums.GuiAction.NEW_WINDOW, EquipmentWindow.new()),
 		GuiButtonWidget.new('Moves >', Enums.GuiAction.NEW_WINDOW, MovesWindow.new()),
 		GuiButtonWidget.new('Conf  >', Enums.GuiAction.NEW_WINDOW, OptionsWindow.new()),
-		GuiButtonWidget.new('< Close')
+		GuiButtonWidget.new('< Close'),
+		GuiCommandProgressWidget.new(Character.new())
 	])
 	
 	position = Vector2(

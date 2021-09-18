@@ -139,6 +139,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://visuals/gui/widgets/guiButtonWidget.gd"
 }, {
+"base": "GuiWidget",
+"class": "GuiCommandProgressWidget",
+"language": "GDScript",
+"path": "res://visuals/gui/widgets/guiCommandProgressWidget.gd"
+}, {
 "base": "GuiButtonWidget",
 "class": "GuiMoveButtonWidget",
 "language": "GDScript",
@@ -346,6 +351,7 @@ _global_script_class_icons={
 "GameMenuState": "",
 "GamePaths": "",
 "GuiButtonWidget": "",
+"GuiCommandProgressWidget": "",
 "GuiMoveButtonWidget": "",
 "GuiTextWidget": "",
 "GuiWidget": "",

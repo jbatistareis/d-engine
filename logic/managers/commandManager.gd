@@ -2,7 +2,7 @@ extends Node
 
 onready var timer : Timer = Timer.new()
 
-var gcd : float = 1 # TODO make external
+var gcd : float = 0.25 # TODO make external
 var elapsed : float = 0
 var paused : bool = false
 
@@ -51,7 +51,7 @@ func reset() -> void:
 
 
 func publishCommand(command : Command) -> void:
-	Signals.emit_signal("charaterTimerSet", command.executor, command.totalTicks)
+	Signals.emit_signal("characterTimerSet", command.executor, command.totalTicks)
 	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')
