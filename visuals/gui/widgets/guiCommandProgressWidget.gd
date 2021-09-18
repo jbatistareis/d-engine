@@ -8,14 +8,16 @@ var character : Character
 var hBox = HBoxContainer.new()
 var barContainer = MarginContainer.new()
 var bg : ColorRect = ColorRect.new()
-var bar : ColorRect = ColorRect.new()
+var pre : ColorRect = ColorRect.new()
+var pos : ColorRect = ColorRect.new()
 var tween = Tween.new()
 
 
 func _init(character : Character) -> void:
 	self.character = character
 	
-	Signals.connect("characterTimerSet", self, "begin")
+	Signals.connect("characterPreTimerSet", self, "beginPre")
+	Signals.connect("characterPosTimerSet", self, "beginPos")
 	Signals.connect("characterTimerPaused", self, "pause")
 	Signals.connect("characterTimerResumed", self, "resume")
 	
@@ -33,9 +35,11 @@ func _init(character : Character) -> void:
 	label.text = name.join('')
 	
 	barContainer.add_child(bg)
-	barContainer.add_child(bar)
+	barContainer.add_child(pre)
+	barContainer.add_child(pos)
 	bg.color = GuiTheme.COMMAND_PRG_BG
-	bar.color = GuiTheme.COMMAND_PRG_PRO
+	pre.color = GuiTheme.COMMAND_PRG_PRE
+	pos.color = GuiTheme.COMMAND_PRG_POS
 	
 	hBox.add_child(label)
 	hBox.add_child(barContainer)
@@ -50,20 +54,31 @@ func _enter_tree() -> void:
 	rect_min_size = hBox.rect_size
 	
 	bg.rect_size = Vector2(200, rect_min_size.y)
-	bar.rect_size = Vector2(0, rect_min_size.y)
+	pre.rect_size = Vector2(0, rect_min_size.y)
+	pos.rect_size = Vector2(0, rect_min_size.y)
 
 
 func _ready() -> void:
 	rect_min_size = hBox.rect_size
 
 
-func progress(percent : float) -> void:
-	bar.rect_size.x = 200 * percent
+func progressPre(percent : float) -> void:
+	pre.rect_size.x = 200 * percent
 
 
-func begin(character : Character, ticks : int) -> void:
+func progressPos(percent : float) -> void:
+	pos.rect_size.x = 200 * percent
+
+
+func beginPre(character : Character, ticks : int) -> void:
 	if character == self.character:
-		tween.interpolate_method(self, "progress", 0, 1, gcd * ticks)
+		tween.interpolate_method(self, "progressBg", 0, 1, gcd * ticks)
+		tween.start()
+
+
+func beginPos(character : Character, ticks : int) -> void:
+	if character == self.character:
+		tween.interpolate_method(self, "progressBar", 0, 1, gcd * ticks)
 		tween.start()
 
 

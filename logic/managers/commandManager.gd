@@ -32,6 +32,7 @@ func tick() -> void:
 		if command.toBeExecuted:
 			command.run()
 			if command.executed:
+				# TODO pos cd
 				executedCommands.append(command)
 	
 	for executedCommand in executedCommands:
@@ -51,7 +52,7 @@ func reset() -> void:
 
 
 func publishCommand(command : Command) -> void:
-	Signals.emit_signal("characterTimerSet", command.executor, command.totalTicks)
+	Signals.emit_signal("characterPreTimerSet", command.executor, command.totalTicks)
 	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')

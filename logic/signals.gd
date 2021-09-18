@@ -48,7 +48,8 @@ signal commandPublished(command)
 # use for flow control
 signal battleStarted(players, enemies) # use to show the battle screen, battle logic is paused until 'battleScreenSetUp' signal is fired
 signal battleEnded()
-signal characterTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
+signal characterPreTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
+signal characterPosTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
 signal characterTimerPaused(character) # use to pause a character (friend or foe) battle timeline
 signal characterTimerResumed(character) # use to resume a character (friend or foe) battle timeline
 signal askedPlayerBattleInput(character) # use as a cue show a command window
