@@ -3,7 +3,7 @@ extends Node
 var windowQueue : Array = []
 
 
-func isCurrentWindow(window : GuiWindowModel) -> bool:
+func isCurrentWindow(window : GuiWindow) -> bool:
 	return (windowQueue.front() == window) if !windowQueue.empty() else false
 
 

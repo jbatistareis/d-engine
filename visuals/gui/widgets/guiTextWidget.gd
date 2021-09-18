@@ -1,5 +1,5 @@
-class_name GuiTextModel
-extends MarginContainer
+class_name GuiTextWidget
+extends GuiWidget
 
 var vBox = VBoxContainer.new()
 
@@ -9,7 +9,6 @@ func _init(text : String) -> void:
 	
 	for line in strLine:
 		var hBox = HBoxContainer.new()
-		vBox.add_child(hBox)
 		
 		var strArr = line.split("|")
 		for i in strArr.size():
@@ -25,11 +24,8 @@ func _init(text : String) -> void:
 				label.align = Label.ALIGN_RIGHT
 			
 			hBox.add_child(label)
-	
-	add_constant_override("margin_top", GuiTheme.MARGIN_SIZE)
-	add_constant_override("margin_left", GuiTheme.MARGIN_SIZE)
-	add_constant_override("margin_bottom", GuiTheme.MARGIN_SIZE)
-	add_constant_override("margin_right", GuiTheme.MARGIN_SIZE)
+		
+		vBox.add_child(hBox)
 	
 	add_child(vBox)
 

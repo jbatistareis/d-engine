@@ -1,10 +1,9 @@
-class_name GuiWindowModel
+class_name GuiWindow
 extends Control
 
 enum InputType {UP = 1, DOWN = -1}
 
-var text : GuiTextModel = null
-var buttons : Array = []
+var widgets : Array = []
 
 var buttonIndex : int = 0
 var data = null
@@ -33,14 +32,13 @@ func _ready() -> void:
 	shadow.color.a = 0.5
 	shadow.rect_position = Vector2(4, 4)
 	
-	if text != null:
-		vBox.add_child(text)
+	for widget in widgets:
+		vBox.add_child(widget)
 	
-	for button in buttons:
-		vBox.add_child(button)
-	
-	if !buttons.empty():
-		buttons[buttonIndex].hover = true
+	for widget in widgets:
+		if widget is GuiButtonWidget:
+			widget.hover = true
+			break
 	
 	add_child(shadow)
 	add_child(bg)
@@ -60,38 +58,38 @@ func _enter_tree() -> void:
 	bg.rect_min_size = rect_min_size
 	shadow.rect_min_size = rect_min_size
 	
-	for button in buttons:
-		button.fitWidth(rect_min_size.x)
+	for widget in widgets:
+		widget.fitWidth(rect_min_size.x)
 
 
 func action(inputAction : int) -> void:
 	if OverlayManager.isCurrentWindow(self):
-		var newIndex = (buttonIndex - inputAction) % buttons.size()
+		var newIndex = (buttonIndex - inputAction) % widgets.size()
 		
-		if buttons[newIndex] is GuiButtonModel:
-			buttons[buttonIndex].hover = false
-			buttonIndex = newIndex if (newIndex >= 0) else (buttons.size() - 1)
-			buttons[buttonIndex].hover = true
-			Signals.emit_signal("guiHover", buttons[buttonIndex].data)
+		if widgets[newIndex] is GuiButtonWidget:
+			widgets[buttonIndex].hover = false
+			buttonIndex = newIndex if (newIndex >= 0) else (widgets.size() - 1)
+			widgets[buttonIndex].hover = true
+			Signals.emit_signal("guiHover", widgets[buttonIndex].data)
 
 
 func select() -> void:
 	if OverlayManager.isCurrentWindow(self):
 		yield(get_tree(), "idle_frame")
-		buttons[buttonIndex].action()
+		widgets[buttonIndex].action()
 
 
-func confirm(source : GuiButtonModel) -> void:
-	if OverlayManager.isCurrentWindow(self) && buttons.has(source):
+func confirm(source : GuiButtonWidget) -> void:
+	if OverlayManager.isCurrentWindow(self) && widgets.has(source):
 		data = null
 		
 		if source.data != null:
 			data = source.data
 		else:
 			data = {}
-			for button in buttons:
-				if (button.identifier != null) && !button.identifier.empty():
-					data[button.identifier] = button.data
+			for widget in widgets:
+				if (widget.identifier != null) && !widget.identifier.empty():
+					data[widget.identifier] = widget.data
 		
 		windowConfirmed()
 		Signals.emit_signal("guiCloseWindow")

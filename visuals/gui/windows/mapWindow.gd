@@ -1,5 +1,5 @@
 class_name MapWindow
-extends GuiWindowModel
+extends GuiWindow
 
 
 func _init() -> void:

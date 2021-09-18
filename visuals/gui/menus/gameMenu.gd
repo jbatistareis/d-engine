@@ -1,16 +1,16 @@
 class_name GameMenu
-extends GuiWindowModel
+extends GuiWindow
 
 
 func _init() -> void:
-	buttons.append_array([
-		GuiButtonModel.new('Action ', Enums.GuiAction.CONFIRM, true),
-		GuiButtonModel.new('Map   >', Enums.GuiAction.NEW_WINDOW, MapWindow.new()),
-		GuiButtonModel.new('Items >', Enums.GuiAction.NEW_WINDOW, ItemsWindow.new()),
-		GuiButtonModel.new('Equip >', Enums.GuiAction.NEW_WINDOW, EquipmentWindow.new()),
-		GuiButtonModel.new('Moves >', Enums.GuiAction.NEW_WINDOW, MovesWindow.new()),
-		GuiButtonModel.new('Conf  >', Enums.GuiAction.NEW_WINDOW, OptionsWindow.new()),
-		GuiButtonModel.new('< Close')
+	widgets.append_array([
+		GuiButtonWidget.new('Action ', Enums.GuiAction.CONFIRM, true),
+		GuiButtonWidget.new('Map   >', Enums.GuiAction.NEW_WINDOW, MapWindow.new()),
+		GuiButtonWidget.new('Items >', Enums.GuiAction.NEW_WINDOW, ItemsWindow.new()),
+		GuiButtonWidget.new('Equip >', Enums.GuiAction.NEW_WINDOW, EquipmentWindow.new()),
+		GuiButtonWidget.new('Moves >', Enums.GuiAction.NEW_WINDOW, MovesWindow.new()),
+		GuiButtonWidget.new('Conf  >', Enums.GuiAction.NEW_WINDOW, OptionsWindow.new()),
+		GuiButtonWidget.new('< Close')
 	])
 	
 	position = Vector2(

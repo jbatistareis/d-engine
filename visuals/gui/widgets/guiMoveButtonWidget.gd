@@ -1,5 +1,5 @@
-class_name GuiMoveButtonModel
-extends GuiButtonModel
+class_name GuiMoveButtonWidget
+extends GuiButtonWidget
 
 const LABEL : String = '[  %s  ]  [  %ds / %ds  ]\n%s'
 

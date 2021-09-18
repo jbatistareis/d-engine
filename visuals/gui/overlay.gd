@@ -24,7 +24,7 @@ func close() -> void:
 		OverlayManager.windowQueue.pop_front()
 
 
-func addWindow(window : GuiWindowModel) -> void:
+func addWindow(window : GuiWindow) -> void:
 	if !OverlayManager.windowQueue.empty() && (window.type == Enums.GuiWindowType.FOREGROUND):
 		var currentWindow = OverlayManager.windowQueue.front()
 		window.position = currentWindow.rect_position
@@ -42,7 +42,7 @@ func addWindow(window : GuiWindowModel) -> void:
 			$permanent.add_child(window)
 
 
-func removeWindow(window : GuiWindowModel) -> void:
+func removeWindow(window : GuiWindow) -> void:
 	match window.type:
 		Enums.GuiWindowType.BACKGROUND: # TODO wat 2 do
 			pass

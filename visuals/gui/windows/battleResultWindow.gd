@@ -1,12 +1,12 @@
 class_name BattleResultWindow
-extends GuiWindowModel
+extends GuiWindow
 
 
 # TODO build a table
 func _init(battleResult : BattleResult) -> void:
-	text = GuiTextModel.new('TODO')
+	widgets.append(GuiTextWidget.new('TODO'))
 	
-	buttons.append_array([GuiButtonModel.new('Close', Enums.GuiAction.CONFIRM)])
+	widgets.append_array([GuiButtonWidget.new('Close', Enums.GuiAction.CONFIRM)])
 	
 	position = Vector2(
 		OverlayManager.windowSize().x * 0.5,
