@@ -7,10 +7,7 @@ script = ExtResource( 1 )
 
 [node name="Tween" type="Tween" parent="."]
 
-[node name="bg" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="cover" type="ColorRect" parent="bg"]
+[node name="cover" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0

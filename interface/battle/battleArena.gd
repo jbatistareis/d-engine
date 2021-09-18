@@ -9,7 +9,7 @@ func _ready() -> void:
 
 
 func setup(players : Array, enemies : Array) -> void:
-	$Tween.interpolate_property($Camera/bg/cover, 'modulate:a', 0, 50, 0.25)
+	$Tween.interpolate_property($cover, 'modulate:a', 0, 0.5, 0.25)
 	$Tween.start()
 	
 	var timerWindow = BattleTimerWindow.new(players, enemies)
@@ -20,7 +20,7 @@ func setup(players : Array, enemies : Array) -> void:
 
 
 func finish() -> void:
-	$Tween.interpolate_property($Camera/bg/cover, 'modulate:a', 0, 50, 0.25)
+	$Tween.interpolate_property($cover, 'modulate:a', 0.5, 0, 0.25)
 	$Tween.start()
 
 
