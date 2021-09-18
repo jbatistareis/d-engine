@@ -9,6 +9,10 @@ func _ready() -> void:
 
 
 func setup(players : Array, enemies : Array) -> void:
+	var timerWindow = BattleTimerWindow.new(players, enemies)
+	timerWindow.position = Vector2(25, 50)
+	Signals.emit_signal("guiOpenWindow", timerWindow)
+	
 	Signals.emit_signal("battleScreenReady")
 
 

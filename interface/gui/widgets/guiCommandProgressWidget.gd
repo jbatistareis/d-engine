@@ -19,8 +19,10 @@ func _init(character : Character) -> void:
 	
 	Signals.connect("characterPreTimerSet", self, "beginPre")
 	Signals.connect("characterPosTimerSet", self, "beginPos")
-	Signals.connect("characterTimerPaused", self, "pause")
-	Signals.connect("characterTimerResumed", self, "resume")
+	Signals.connect("characterTimerPaused", self, "pauseCharacter")
+	Signals.connect("characterTimerResumed", self, "resumeCharacter")
+	Signals.connect("commandsPaused", self, "pause")
+	Signals.connect("commandsResumed", self, "resume")
 	
 	var name = PoolStringArray([' ', ' ', ' ', ' ', ' ', ' ', ' | '])
 	
@@ -79,12 +81,20 @@ func beginPos(character : Character, ticks : int) -> void:
 		tween.start()
 
 
-func pause(character : Character) -> void:
+func pause() -> void:
+	tween.stop_all()
+
+
+func resume() -> void:
+	tween.resume_all()
+
+
+func pauseCharacter(character : Character) -> void:
 	if character == self.character:
 		tween.stop_all()
 
 
-func resume(character : Character) -> void:
+func resumeCharacter(character : Character) -> void:
 	if character == self.character:
 		tween.resume_all()
 

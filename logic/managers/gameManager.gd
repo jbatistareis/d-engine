@@ -8,9 +8,17 @@ var cameraMoving : bool = false
 var direction : int setget setDirection
 
 
+func _ready() -> void :
+	Signals.connect("battleStarted", self, "startBattleState")
+
+
 func setDirection(value : int) -> void:
 	var correctedValue = value if (value > -1) else 3
 	direction = correctedValue % 4
+
+
+func startBattleState(players, enemies) -> void:
+	currentState = getState(Enums.States.BATTLE)
 
 
 func getState(id : int) -> State:
@@ -30,8 +38,8 @@ func getState(id : int) -> State:
 		Enums.States.MOVE_FORWARD:
 			return MoveForwardState.new()
 		
-		Enums.States.BATTLE_MENU:
-			return BattleMenuState.new()
+		Enums.States.BATTLE:
+			return BattleState.new()
 		
 		Enums.States.GAME_MENU:
 			return GameMenuState.new()

@@ -20,7 +20,7 @@ func _ready():
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
 	
-	reset()
+	reset(null, null)
 
 
 func tick() -> void:
@@ -47,7 +47,7 @@ func resume() -> void:
 	timer.paused = false
 
 
-func reset() -> void:
+func reset(players, enemies) -> void:
 	timer.start(gcd)
 
 

@@ -21,6 +21,11 @@ func printEntering(location : Location) -> void:
 
 
 func printTraveling(direction : int) -> void:
+	# TODO
+	var players = [Character.new()]
+	var enemies = [Character.new()]
+	Signals.emit_signal("battleStarted", players, enemies)
+	
 	var directionStr
 	
 	match direction:

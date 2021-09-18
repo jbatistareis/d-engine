@@ -24,11 +24,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://interface/gui/menus/battleMenu.gd"
 }, {
-"base": "State",
-"class": "BattleMenuState",
-"language": "GDScript",
-"path": "res://logic/game/states/battleMenuState.gd"
-}, {
 "base": "Reference",
 "class": "BattleResult",
 "language": "GDScript",
@@ -38,6 +33,11 @@ _global_script_classes=[ {
 "class": "BattleResultWindow",
 "language": "GDScript",
 "path": "res://interface/gui/windows/battleResultWindow.gd"
+}, {
+"base": "State",
+"class": "BattleState",
+"language": "GDScript",
+"path": "res://logic/game/states/battleState.gd"
 }, {
 "base": "GuiWindow",
 "class": "BattleTimerWindow",
@@ -333,9 +333,9 @@ _global_script_class_icons={
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
 "BattleMenu": "",
-"BattleMenuState": "",
 "BattleResult": "",
 "BattleResultWindow": "",
+"BattleState": "",
 "BattleTimerWindow": "",
 "BootState": "",
 "Character": "",

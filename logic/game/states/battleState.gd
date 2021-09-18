@@ -1,4 +1,4 @@
-class_name BattleMenuState
+class_name BattleState
 extends State
 
 
