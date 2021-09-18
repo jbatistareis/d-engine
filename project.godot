@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "BattleMenu",
 "language": "GDScript",
-"path": "res://visuals/gui/menus/battleMenu.gd"
+"path": "res://interface/gui/menus/battleMenu.gd"
 }, {
 "base": "State",
 "class": "BattleMenuState",
@@ -37,12 +37,12 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "BattleResultWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/battleResultWindow.gd"
+"path": "res://interface/gui/windows/battleResultWindow.gd"
 }, {
 "base": "GuiWindow",
 "class": "BattleTimerWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/battleTimerWindow.gd"
+"path": "res://interface/gui/windows/battleTimerWindow.gd"
 }, {
 "base": "State",
 "class": "BootState",
@@ -112,7 +112,7 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "EquipmentWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/equipmentWindow.gd"
+"path": "res://interface/gui/windows/equipmentWindow.gd"
 }, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
@@ -127,7 +127,7 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "GameMenu",
 "language": "GDScript",
-"path": "res://visuals/gui/menus/gameMenu.gd"
+"path": "res://interface/gui/menus/gameMenu.gd"
 }, {
 "base": "State",
 "class": "GameMenuState",
@@ -142,32 +142,32 @@ _global_script_classes=[ {
 "base": "GuiWidget",
 "class": "GuiButtonWidget",
 "language": "GDScript",
-"path": "res://visuals/gui/widgets/guiButtonWidget.gd"
+"path": "res://interface/gui/widgets/guiButtonWidget.gd"
 }, {
 "base": "GuiWidget",
 "class": "GuiCommandProgressWidget",
 "language": "GDScript",
-"path": "res://visuals/gui/widgets/guiCommandProgressWidget.gd"
+"path": "res://interface/gui/widgets/guiCommandProgressWidget.gd"
 }, {
 "base": "GuiButtonWidget",
 "class": "GuiMoveButtonWidget",
 "language": "GDScript",
-"path": "res://visuals/gui/widgets/guiMoveButtonWidget.gd"
+"path": "res://interface/gui/widgets/guiMoveButtonWidget.gd"
 }, {
 "base": "GuiWidget",
 "class": "GuiTextWidget",
 "language": "GDScript",
-"path": "res://visuals/gui/widgets/guiTextWidget.gd"
+"path": "res://interface/gui/widgets/guiTextWidget.gd"
 }, {
 "base": "Control",
 "class": "GuiWidget",
 "language": "GDScript",
-"path": "res://visuals/gui/widgets/guiWidget.gd"
+"path": "res://interface/gui/widgets/guiWidget.gd"
 }, {
 "base": "Control",
 "class": "GuiWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/guiWindow.gd"
+"path": "res://interface/gui/windows/guiWindow.gd"
 }, {
 "base": "State",
 "class": "IdleState",
@@ -192,7 +192,7 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "ItemsWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/itemsWindow.gd"
+"path": "res://interface/gui/windows/itemsWindow.gd"
 }, {
 "base": "Entity",
 "class": "Location",
@@ -207,12 +207,12 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "MapWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/mapWindow.gd"
+"path": "res://interface/gui/windows/mapWindow.gd"
 }, {
 "base": "GuiWindow",
 "class": "MiniMapWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/miniMapWindow.gd"
+"path": "res://interface/gui/windows/miniMapWindow.gd"
 }, {
 "base": "Reference",
 "class": "Move",
@@ -237,17 +237,17 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "MovesWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/movesWindow.gd"
+"path": "res://interface/gui/windows/movesWindow.gd"
 }, {
 "base": "GuiWindow",
 "class": "OptionsWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/optionsWindow.gd"
+"path": "res://interface/gui/windows/optionsWindow.gd"
 }, {
 "base": "Control",
 "class": "Overlay",
 "language": "GDScript",
-"path": "res://visuals/gui/overlay.gd"
+"path": "res://interface/gui/overlay.gd"
 }, {
 "base": "Entity",
 "class": "Portal",
@@ -302,7 +302,7 @@ _global_script_classes=[ {
 "base": "GuiWindow",
 "class": "StatusWindow",
 "language": "GDScript",
-"path": "res://visuals/gui/windows/statusWindow.gd"
+"path": "res://interface/gui/windows/statusWindow.gd"
 }, {
 "base": "State",
 "class": "TitleState",
@@ -416,8 +416,8 @@ CommandManager="*res://logic/managers/commandManager.gd"
 LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
-OverlayManager="*res://visuals/gui/overlayManager.gd"
-GuiTheme="*res://visuals/gui/guiTheme.gd"
+OverlayManager="*res://interface/gui/overlayManager.gd"
+GuiTheme="*res://interface/gui/guiTheme.gd"
 
 [display]
 

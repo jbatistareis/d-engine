@@ -17,7 +17,6 @@ var slideLabels : Array = []
 var slideValues : Array = []
 var slideIndex : int = 0
 
-var margin : MarginContainer = MarginContainer.new()
 var label : Label = Label.new()
 var bg : ColorRect = ColorRect.new()
 
@@ -43,16 +42,15 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 			
 			label.text += ': ' + ('Yes' if data else 'No')
 	
-	margin.add_child(label)
 	add_child(bg)
-	add_child(margin)
+	add_child(label)
 	
 	bg.anchor_bottom = 1
 	bg.anchor_right = 1
 
 
 func _ready() -> void:
-	rect_min_size = margin.rect_size
+	rect_min_size = label.rect_size
 
 
 func _process(delta : float) -> void:
