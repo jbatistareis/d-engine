@@ -19,7 +19,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/commands/askPlayerBattleInputCommand.gd"
 }, {
-"base": "GuiWindowModel",
+"base": "GuiWindow",
 "class": "BattleMenu",
 "language": "GDScript",
 "path": "res://visuals/gui/menus/battleMenu.gd"

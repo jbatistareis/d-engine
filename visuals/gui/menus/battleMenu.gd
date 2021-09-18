@@ -1,5 +1,5 @@
 class_name BattleMenu
-extends GuiWindowModel
+extends GuiWindow
 
 var character : Character
 
@@ -20,13 +20,13 @@ func _init(character : Character) -> void:
 	defend.name = 'Defend'
 	defend.description =  'Protect yourself from coming attacks'
 	
-	buttons.append(GuiMoveButtonModel.new(attack))
+	widgets.append(GuiMoveButtonWidget.new(attack))
 	
 	for move in character.moves:
-		buttons.append(GuiMoveButtonModel.new(move))
+		widgets.append(GuiMoveButtonWidget.new(move))
 	
-	buttons.append(GuiMoveButtonModel.new(item))
-	buttons.append(GuiMoveButtonModel.new(defend))
+	widgets.append(GuiMoveButtonWidget.new(item))
+	widgets.append(GuiMoveButtonWidget.new(defend))
 	
 	position = Vector2(
 		OverlayManager.windowSize().x * 0.18,

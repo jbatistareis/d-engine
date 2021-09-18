@@ -3,7 +3,7 @@ extends GuiWindow
 
 
 func _init(players : Array, enemies : Array) -> void:
-	type = Enums.GuiWindowType.FOREGROUND
+	type = Enums.GuiWindowType.BACKGROUND
 	
 	for player in players:
 		widgets.append(GuiCommandProgressWidget.new(player))
