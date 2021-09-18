@@ -1,23 +1,17 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://interface/battle/battleArena.gd" type="Script" id=1]
-[ext_resource path="res://interface/gui/overlay.tscn" type="PackedScene" id=2]
 
 [node name="arena" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2 )
+[node name="Tween" type="Tween" parent="."]
 
-[node name="hud" type="CanvasLayer" parent="Camera"]
-
-[node name="overlay" parent="Camera/hud" instance=ExtResource( 2 )]
-
-[node name="bg" type="CanvasLayer" parent="Camera"]
+[node name="bg" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="cover" type="ColorRect" parent="Camera/bg"]
-modulate = Color( 1, 1, 1, 0.196078 )
+[node name="cover" type="ColorRect" parent="bg"]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 1 )

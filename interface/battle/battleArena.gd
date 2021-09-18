@@ -9,6 +9,9 @@ func _ready() -> void:
 
 
 func setup(players : Array, enemies : Array) -> void:
+	$Tween.interpolate_property($Camera/bg/cover, 'modulate:a', 0, 50, 0.25)
+	$Tween.start()
+	
 	var timerWindow = BattleTimerWindow.new(players, enemies)
 	timerWindow.position = Vector2(25, 50)
 	Signals.emit_signal("guiOpenWindow", timerWindow)
@@ -17,7 +20,8 @@ func setup(players : Array, enemies : Array) -> void:
 
 
 func finish() -> void:
-	pass
+	$Tween.interpolate_property($Camera/bg/cover, 'modulate:a', 0, 50, 0.25)
+	$Tween.start()
 
 
 func showPlayerMenu(player : Character) -> void:
