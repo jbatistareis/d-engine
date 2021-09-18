@@ -39,6 +39,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://visuals/gui/windows/battleResultWindow.gd"
 }, {
+"base": "GuiWindow",
+"class": "BattleTimerWindow",
+"language": "GDScript",
+"path": "res://visuals/gui/windows/battleTimerWindow.gd"
+}, {
 "base": "State",
 "class": "BootState",
 "language": "GDScript",
@@ -331,6 +336,7 @@ _global_script_class_icons={
 "BattleMenuState": "",
 "BattleResult": "",
 "BattleResultWindow": "",
+"BattleTimerWindow": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",
