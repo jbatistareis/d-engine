@@ -32,3 +32,20 @@ render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="ViewportContainer/Viewport"]
 fov = 90.0
+
+[node name="enemies" type="Node" parent="ViewportContainer/Viewport"]
+
+[node name="enemy1" type="Spatial" parent="ViewportContainer/Viewport/enemies"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6 )
+
+[node name="enemy2" type="Spatial" parent="ViewportContainer/Viewport/enemies"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 3, 0, -6 )
+
+[node name="enemy3" type="Spatial" parent="ViewportContainer/Viewport/enemies"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2.98698, 9.53674e-07, -6.03427 )
+
+[node name="enemy4" type="Spatial" parent="ViewportContainer/Viewport/enemies"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 6, 0, -5 )
+
+[node name="enemy5" type="Spatial" parent="ViewportContainer/Viewport/enemies"]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -6, 0, -5 )

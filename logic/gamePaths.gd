@@ -11,3 +11,5 @@ const ITEM_DATA = ITEM + '/%s.itm'
 const LOCATION_DATA = LOCATION + '/%s.loc'
 const MAP_DATA = LOCATION + '/%s'
 
+const CHARACTER_MODEL = CHARACTER + '/%s/characterModel.tscn'
+
