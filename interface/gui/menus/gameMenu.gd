@@ -14,8 +14,8 @@ func _init() -> void:
 	])
 	
 	position = Vector2(
-		OverlayManager.windowSize().x * 0.25,
-		OverlayManager.windowSize().y * 0.3
+		GuiOverlayManager.windowSize().x * 0.25,
+		GuiOverlayManager.windowSize().y * 0.3
 	)
 
 

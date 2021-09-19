@@ -29,8 +29,8 @@ func _init(character : Character) -> void:
 	widgets.append(GuiMoveButtonWidget.new(defend))
 	
 	position = Vector2(
-		OverlayManager.windowSize().x * 0.18,
-		OverlayManager.windowSize().y * 0.3
+		GuiOverlayManager.windowSize().x * 0.18,
+		GuiOverlayManager.windowSize().y * 0.3
 	)
 
 

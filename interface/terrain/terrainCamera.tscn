@@ -5,9 +5,9 @@
 [node name="terrainCamera" type="Spatial"]
 script = ExtResource( 1 )
 
-[node name="camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
-keep_aspect = 0
-fov = 90.0
-
 [node name="tween" type="Tween" parent="."]
+
+[node name="camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5 )
+current = true
+fov = 90.0

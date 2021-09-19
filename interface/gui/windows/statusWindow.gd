@@ -11,7 +11,7 @@ func _init() -> void:
 	widgets.append(GuiTextWidget.new(TEXT % [player.name, player.currentHp, player.maxHp, player.currentLevel, player.experiencePoints, player.experienceToNextLevel, player.sparePoints, player.strength.score, player.dexterity.score, player.constitution.score, player.intelligence.score, player.wisdom.score, player.charisma.score]))
 	
 	position = Vector2(
-		OverlayManager.windowSize().x * 0.05,
-		OverlayManager.windowSize().y * 0.3
+		GuiOverlayManager.windowSize().x * 0.05,
+		GuiOverlayManager.windowSize().y * 0.3
 	)
 

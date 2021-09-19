@@ -19,14 +19,14 @@ func open(window) -> void:
 
 
 func close() -> void:
-	if !OverlayManager.windowQueue.empty():
-		removeWindow(OverlayManager.windowQueue.front())
-		OverlayManager.windowQueue.pop_front()
+	if !GuiOverlayManager.windowQueue.empty():
+		removeWindow(GuiOverlayManager.windowQueue.front())
+		GuiOverlayManager.windowQueue.pop_front()
 
 
 func addWindow(window : GuiWindow) -> void:
-	if !OverlayManager.windowQueue.empty() && (window.type == Enums.GuiWindowType.FOREGROUND):
-		var currentWindow = OverlayManager.windowQueue.front()
+	if !GuiOverlayManager.windowQueue.empty() && (window.type == Enums.GuiWindowType.FOREGROUND):
+		var currentWindow = GuiOverlayManager.windowQueue.front()
 		window.position = currentWindow.rect_position
 		window.position += Vector2(currentWindow.rect_size.x * 1.2, 0)
 	
@@ -36,7 +36,7 @@ func addWindow(window : GuiWindow) -> void:
 		
 		Enums.GuiWindowType.FOREGROUND:
 			$foreground.add_child(window)
-			OverlayManager.windowQueue.push_front(window)
+			GuiOverlayManager.windowQueue.push_front(window)
 		
 		Enums.GuiWindowType.PERMANENT:
 			$permanent.add_child(window)

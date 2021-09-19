@@ -23,6 +23,6 @@ func handleInput() -> void:
 	elif Input.is_action_just_pressed("ui_home"):
 		Signals.emit_signal("guiCloseWindow")
 	
-	if OverlayManager.windowQueue.empty():
+	if GuiOverlayManager.windowQueue.empty():
 		next = GameManager.getState(Enums.States.IDLE)
 

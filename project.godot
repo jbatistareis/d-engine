@@ -247,7 +247,7 @@ _global_script_classes=[ {
 "base": "Control",
 "class": "Overlay",
 "language": "GDScript",
-"path": "res://interface/gui/overlay.gd"
+"path": "res://interface/gui/guiOverlay.gd"
 }, {
 "base": "Entity",
 "class": "Portal",
@@ -416,7 +416,7 @@ CommandManager="*res://logic/managers/commandManager.gd"
 LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
-OverlayManager="*res://interface/gui/overlayManager.gd"
+GuiOverlayManager="*res://interface/gui/guiOverlayManager.gd"
 GuiTheme="*res://interface/gui/guiTheme.gd"
 
 [display]

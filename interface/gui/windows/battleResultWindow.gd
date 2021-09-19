@@ -9,8 +9,8 @@ func _init(battleResult : BattleResult) -> void:
 	widgets.append_array([GuiButtonWidget.new('Close', Enums.GuiAction.CONFIRM)])
 	
 	position = Vector2(
-		OverlayManager.windowSize().x * 0.5,
-		OverlayManager.windowSize().y * 0.5
+		GuiOverlayManager.windowSize().x * 0.5,
+		GuiOverlayManager.windowSize().y * 0.5
 	)
 
 

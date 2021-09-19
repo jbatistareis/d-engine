@@ -52,7 +52,7 @@ func _enter_tree() -> void:
 	rect_min_size = vBox.rect_size
 	
 	if position == Vector2.INF:
-		position = OverlayManager.windowSize() * 0.5 - (rect_min_size * 0.5)
+		position = GuiOverlayManager.windowSize() * 0.5 - (rect_min_size * 0.5)
 	
 	rect_position = position
 	
@@ -64,7 +64,7 @@ func _enter_tree() -> void:
 
 
 func action(inputAction : int) -> void:
-	if OverlayManager.isCurrentWindow(self):
+	if GuiOverlayManager.isCurrentWindow(self):
 		var newIndex = (buttonIndex - inputAction) % widgets.size()
 		
 		if widgets[newIndex] is GuiButtonWidget:
@@ -75,13 +75,13 @@ func action(inputAction : int) -> void:
 
 
 func select() -> void:
-	if OverlayManager.isCurrentWindow(self):
+	if GuiOverlayManager.isCurrentWindow(self):
 		yield(get_tree(), "idle_frame")
 		widgets[buttonIndex].action()
 
 
 func confirm(source : GuiButtonWidget) -> void:
-	if OverlayManager.isCurrentWindow(self) && widgets.has(source):
+	if GuiOverlayManager.isCurrentWindow(self) && widgets.has(source):
 		data = null
 		
 		if source.data != null:
