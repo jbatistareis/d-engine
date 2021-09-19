@@ -16,5 +16,5 @@ func lastSize() -> Vector2:
 
 
 func windowSize() -> Vector2:
-	return get_tree().get_nodes_in_group('gui')[0].rect_size
+	return OS.get_real_window_size()
 

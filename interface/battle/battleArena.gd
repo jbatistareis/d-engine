@@ -9,6 +9,7 @@ func _ready() -> void:
 
 
 func setup(players : Array, enemies : Array) -> void:
+	visible = true
 	$Tween.interpolate_property($cover, 'modulate:a', 0, 0.5, 0.25)
 	$Tween.start()
 	
@@ -22,6 +23,9 @@ func setup(players : Array, enemies : Array) -> void:
 func finish() -> void:
 	$Tween.interpolate_property($cover, 'modulate:a', 0.5, 0, 0.25)
 	$Tween.start()
+	
+	yield($Tween, "tween_all_completed")
+	visible = false
 
 
 func showPlayerMenu(player : Character) -> void:

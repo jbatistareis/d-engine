@@ -13,10 +13,7 @@ func _init() -> void:
 		GuiButtonWidget.new('< Close')
 	])
 	
-	position = Vector2(
-		GuiOverlayManager.windowSize().x * 0.25,
-		GuiOverlayManager.windowSize().y * 0.3
-	)
+	position = Vector2(266, GuiOverlayManager.windowSize().y / 2 - 141)
 
 
 func windowConfirmed() -> void:
