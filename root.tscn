@@ -27,6 +27,7 @@ handle_input_locally = false
 render_target_update_mode = 3
 
 [node name="Camera" type="Camera" parent="battleOverlay/Viewport"]
+fov = 90.0
 
 [node name="arena" parent="battleOverlay/Viewport" instance=ExtResource( 4 )]
 

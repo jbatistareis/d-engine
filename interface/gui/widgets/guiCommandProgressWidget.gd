@@ -24,7 +24,7 @@ func _init(character : Character) -> void:
 	Signals.connect("commandsPaused", self, "pause")
 	Signals.connect("commandsResumed", self, "resume")
 	
-	var name = PoolStringArray([' ', ' ', ' ', ' ', ' ', ' ', ' | '])
+	var name = PoolStringArray([' ', ' ', ' ', ' ', ' ', ' ', ' '])
 	
 	var i = 0
 	for ch in character.shortName:
