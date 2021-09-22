@@ -11,13 +11,16 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 
 
 func published() -> void:
-	Signals.startedBattleAnimation(executorCharacter, move.selfAnimation)
+	Signals.startedBattleAnimation(executorCharacter, move.prepareAnimation)
 
 
 func execute() -> void:
 	var moveResult
 	for target in targets:
-		Signals.startedBattleAnimation(target, move.targetAnimation)
+		Signals.startedBattleAnimation(executorCharacter, move.attackAnimation)
+		yield(Signals, "finishedBattleAnimation")
+		#TODO player hit animation
+		
 		moveResult = move.getResult(executorCharacter)
 		
 		match moveResult.outcome:

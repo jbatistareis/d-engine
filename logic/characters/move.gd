@@ -17,8 +17,8 @@ var persistent : bool = false
 
 var targetType : int = Enums.CharacterTargetType.FOE # relative to the executor
 
-var selfAnimation : String = 'none'
-var targetAnimation : String = 'none'
+var prepareAnimation : String = 'prepare1'
+var attackAnimation : String = 'attack1'
 
 
 func getResult(character) -> MoveResult:

@@ -59,6 +59,7 @@ signal setupBattleScreen(players, enemies)
 signal battleScreenReady()
 signal showBattleResult(players, battleResult)
 signal startedBattleAnimation(character, animation)
+signal finishedBattleAnimation()
 
 
 # inventory

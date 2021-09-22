@@ -32,7 +32,6 @@ func tick() -> void:
 		if command.toBeExecuted:
 			command.run()
 			if command.executed:
-				# TODO pos cd
 				executedCommands.append(command)
 	
 	for executedCommand in executedCommands:
@@ -52,7 +51,10 @@ func reset(players, enemies) -> void:
 
 
 func publishCommand(command : Command) -> void:
-	Signals.emit_signal("characterPreTimerSet", command.executor, command.totalTicks)
+	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand) || (command is WaitCommand):
+		Signals.emit_signal("characterPosTimerSet", command.executor, command.totalTicks)
+	else:
+		Signals.emit_signal("characterPreTimerSet", command.executor, command.totalTicks)
 	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')

@@ -35,6 +35,10 @@ var currentLocation : String = ''
 var currentRoom : int = 0
 
 
+func _init() -> void:
+	self.shortName = 'BSECHA'
+
+
 func getMaxHp() -> int:
 	return baseHp + constitution.score
 
