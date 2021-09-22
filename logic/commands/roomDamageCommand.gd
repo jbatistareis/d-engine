@@ -11,7 +11,7 @@ func _init(ticks, damage : int, executions : int).(null, ticks, executions, true
 
 
 func execute() -> void:
-	var playersRoom = RegionManager.player.currentRoom
+	var playersRoom = LocationManager.player.currentRoom
 	
 	if playersRoom != currentRoom:
 		executed = true
@@ -27,7 +27,7 @@ func execute() -> void:
 		for enemies in BattleManager.enemies:
 			characters.append(enemies)
 	else:
-		characters.append(RegionManager.player)
+		characters.append(LocationManager.player)
 	
 	for character in characters:
 		character.changeHp(damage)
