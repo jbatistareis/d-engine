@@ -1,6 +1,92 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=21 format=2]
 
-[ext_resource path="res://data/characters/ENTITY/characterModel.gd" type="Script" id=1]
+[ext_resource path="res://assets/BSECHA.gltf" type="PackedScene" id=1]
+[ext_resource path="res://data/characters/ENTITY/characterModel.gd" type="Script" id=2]
 
-[node name="characterModel" type="Spatial"]
-script = ExtResource( 1 )
+[sub_resource type="AnimationNodeAnimation" id=1]
+animation = "attack1"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "damage"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "damage"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=2]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=3]
+animation = "prepare1"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=4]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=5]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=6]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=11]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=13]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+xfade_time = 0.25
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+states/attack1/node = SubResource( 1 )
+states/attack1/position = Vector2( 129, -54 )
+states/damageIdle/node = SubResource( 12 )
+states/damageIdle/position = Vector2( 300, 57 )
+states/damagePrep1/node = SubResource( 9 )
+states/damagePrep1/position = Vector2( 497, -54 )
+states/deathIdle/node = SubResource( 16 )
+states/deathIdle/position = Vector2( 129, 150.968 )
+states/deathPrep1/node = SubResource( 15 )
+states/deathPrep1/position = Vector2( 300, -148.648 )
+states/idle/node = SubResource( 2 )
+states/idle/position = Vector2( 129, 57 )
+states/prepare1/node = SubResource( 3 )
+states/prepare1/position = Vector2( 300, -54 )
+transitions = [ "idle", "prepare1", SubResource( 4 ), "prepare1", "attack1", SubResource( 5 ), "attack1", "idle", SubResource( 6 ), "prepare1", "damagePrep1", SubResource( 10 ), "damagePrep1", "prepare1", SubResource( 11 ), "idle", "damageIdle", SubResource( 13 ), "damageIdle", "idle", SubResource( 14 ), "idle", "deathIdle", SubResource( 17 ), "prepare1", "deathPrep1", SubResource( 18 ) ]
+start_node = "idle"
+graph_offset = Vector2( 0, -39.48 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[node name="BSECHA" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "idle"
+next/prepare1 = "idle"
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="2"]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 8 )
