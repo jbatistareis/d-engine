@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=9 format=2]
 
-[ext_resource path="res://assets/room_icons_60.png" type="Texture" id=1]
+[ext_resource path="res://assets/base_icons/room_icons_60.png" type="Texture" id=1]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4

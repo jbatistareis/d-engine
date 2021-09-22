@@ -14,7 +14,8 @@ var exitLogic : String = NOOP
 
 
 func _init() -> void:
-	self.shortName = 'baseLocation'
+	self.name = 'Base Location'
+	self.shortName = 'BSELOC'
 
 
 # used only by the player
