@@ -21,7 +21,8 @@ It is going to work some day.
 - [ ] Event system  
 - [x] Database system  
 - [ ] Save system  
-- [ ] Controls system
+- [x] Controls system
+- [x] Scene preload system
 - [x] UI ~~system~~  
 - [x] 3D map  
 - [x] Maps dev tool  
