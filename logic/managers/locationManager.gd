@@ -15,6 +15,9 @@ func instantiateLocation(player : Character, shortName : String, toSpawnId : int
 	self.player = player
 	location = EntityLoader.loadLocation(shortName)
 	
+	# TODO loading screen
+	SceneLoadManager.fromLocation(location)
+	
 	var spawn = location.findSpawn(toSpawnId)
 	var room = location.findRoom(spawn.toRoomId)
 	Signals.emit_signal("playerSpawned", location, room.x, room.y, spawn.direction)

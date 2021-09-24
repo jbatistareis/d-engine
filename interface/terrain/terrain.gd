@@ -14,20 +14,8 @@ func loadMap(location : Location, x : int, y : int, direction : int) -> void:
 	for node in $blocks.get_children():
 		node.queue_free()
 	
-	var directory = Directory.new()
-	var path = GamePaths.MAP_DATA % (location.shortName if !location.shortName.empty() else 'baseLocation')
-	
-	directory.open(GamePaths.MAP_DATA % location.shortName)
-	directory.list_dir_begin(true, true)
-	
-	var filename = directory.get_next()
-	while !filename.empty():
-		if filename.ends_with('.tscn'):
-			blocks[filename.substr(0, filename.find_last('.'))] = load(path + '/' + filename)
-		filename = directory.get_next()
-	
 	for room in location.rooms:
-		var block = blocks[room.mesh].instance()
+		var block = SceneLoadManager.scenes[room.mesh].instance()
 		block.transform.origin.x = room.x * 2 + 1
 		block.transform.origin.y = 1
 		block.transform.origin.z = room.y * 2 + 1

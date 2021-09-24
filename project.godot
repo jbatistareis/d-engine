@@ -409,6 +409,7 @@ default_bus_layout=""
 [autoload]
 
 Signals="*res://logic/signals.gd"
+SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"
 LocationManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
