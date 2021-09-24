@@ -30,7 +30,8 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		for node in enemyNode.get_children():
 			node.queue_free()
 		
-		enemyNode.add_child(SceneLoadManager.scenes[enemyData[index].shortName].instance())
+		if enemyData[index] != null:
+			enemyNode.add_child(SceneLoadManager.scenes[enemyData[index].shortName].instance())
 		
 		index += 1
 		if index > enemyData.size() - 1:

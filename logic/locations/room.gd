@@ -53,9 +53,12 @@ func enter(character : Character) -> void:
 			
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size() - 1)]
 			for shortName in chosenGroup:
-				var enemy = EntityLoader.loadCharacter(shortName)
-				enemy.currentRoom = id
-				enemies.append(enemy)
+				if !shortName.empty():
+					var enemy = EntityLoader.loadCharacter(shortName)
+					enemy.currentRoom = id
+					enemies.append(enemy)
+				else:
+					enemies.append(null)
 			
 			Signals.emit_signal("battleStarted", [character], enemies) # TODO form a player party
 
