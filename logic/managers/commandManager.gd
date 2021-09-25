@@ -2,7 +2,6 @@ extends Node
 
 onready var timer : Timer = Timer.new()
 
-var gcd : float = 0.25 # TODO make external
 var elapsed : float = 0
 var paused : bool = false
 
@@ -47,7 +46,7 @@ func resume() -> void:
 
 
 func reset(players, enemies) -> void:
-	timer.start(gcd)
+	timer.start(GameParameters.GCD)
 
 
 func publishCommand(command : Command) -> void:

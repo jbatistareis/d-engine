@@ -33,7 +33,7 @@ func start(players : Array, enemies : Array) -> void:
 				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 1))
 
 
-func _process(delta):
+func _physics_process(delta) -> void:
 	if inBattle && (enemiesAlive() == 0):
 		end()
 

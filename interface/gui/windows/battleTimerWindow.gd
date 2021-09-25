@@ -1,6 +1,8 @@
 class_name BattleTimerWindow
 extends GuiWindow
 
+const ENEMY_ORDER : Array = [4, 2, 0, 1, 3]
+
 
 func _init(players : Array, enemies : Array) -> void:
 	type = Enums.GuiWindowType.BACKGROUND
@@ -8,7 +10,7 @@ func _init(players : Array, enemies : Array) -> void:
 	for player in players:
 		widgets.append(GuiCommandProgressWidget.new(player))
 	
-	for enemy in enemies:
-		if enemy != null:
-			widgets.append(GuiCommandProgressWidget.new(enemy))
+	for i in ENEMY_ORDER:
+		if (i < enemies.size()) && (enemies[i] != null):
+			widgets.append(GuiCommandProgressWidget.new(enemies[i]))
 

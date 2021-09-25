@@ -1,15 +1,15 @@
 class_name GamePaths
 
-const EXTENSION_REGEX = '\\..*'
+const EXTENSION_REGEX : String = '\\..*'
 
-const LOCATION = 'res://data/locations'
-const CHARACTER = 'res://data/characters'
-const ITEM = 'res://data/items'
+const LOCATION : String = 'res://data/locations'
+const CHARACTER : String = 'res://data/characters'
+const ITEM : String = 'res://data/items'
 
-const CHARACTER_DATA = CHARACTER + '/%s.cha'
-const ITEM_DATA = ITEM + '/%s.itm'
-const LOCATION_DATA = LOCATION + '/%s.loc'
-const MAP_DATA = LOCATION + '/%s'
+const CHARACTER_DATA : String = CHARACTER + '/%s.cha'
+const ITEM_DATA : String = ITEM + '/%s.itm'
+const LOCATION_DATA : String = LOCATION + '/%s.loc'
+const MAP_DATA : String = LOCATION + '/%s'
 
-const CHARACTER_MODEL = CHARACTER + '/%s/characterModel.tscn'
+const CHARACTER_MODEL : String = CHARACTER + '/%s/characterModel.tscn'
 

@@ -135,6 +135,11 @@ _global_script_classes=[ {
 "path": "res://logic/game/states/gameMenuState.gd"
 }, {
 "base": "Reference",
+"class": "GameParameters",
+"language": "GDScript",
+"path": "res://logic/gameParameters.gd"
+}, {
+"base": "Reference",
 "class": "GamePaths",
 "language": "GDScript",
 "path": "res://logic/gamePaths.gd"
@@ -355,6 +360,7 @@ _global_script_class_icons={
 "Fact": "",
 "GameMenu": "",
 "GameMenuState": "",
+"GameParameters": "",
 "GamePaths": "",
 "GuiButtonWidget": "",
 "GuiCommandProgressWidget": "",

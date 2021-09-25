@@ -1,8 +1,6 @@
 class_name GuiCommandProgressWidget
 extends GuiWidget
 
-var gcd : float = 0.25 # TODO make external
-
 var character : Character
 
 var hBox = HBoxContainer.new()
@@ -24,17 +22,17 @@ func _init(character : Character) -> void:
 	Signals.connect("commandsPaused", self, "pause")
 	Signals.connect("commandsResumed", self, "resume")
 	
-	var name = PoolStringArray([' ', ' ', ' ', ' ', ' ', ' ', ' '])
+	var labelText = PoolStringArray([' ', ' ', ' ', ' ', ' ', ' ', ' '])
 	
 	var i = 0
 	for ch in character.shortName:
-		name.set(i, ch)
+		labelText.set(i, ch)
 		i += 1
 	
 	label.set('custom_colors/font_color', GuiTheme.TEXT_COLOR)
 	label.add_font_override('font', GuiTheme.font)
 	label.size_flags_horizontal = SIZE_EXPAND_FILL
-	label.text = name.join('')
+	label.text = labelText.join('')
 	
 	pre.color = GuiTheme.COMMAND_PRG_PRE
 	pos.color = GuiTheme.COMMAND_PRG_POS
@@ -70,14 +68,14 @@ func progressPos(percent : float) -> void:
 func beginPre(character : Character, ticks : int) -> void:
 	if character == self.character:
 		barContainer.move_child(pre, 1)
-		tween.interpolate_method(self, "progressPre", 0, 1, gcd * ticks)
+		tween.interpolate_method(self, "progressPre", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 
 
 func beginPos(character : Character, ticks : int) -> void:
 	if character == self.character:
 		barContainer.move_child(pos, 1)
-		tween.interpolate_method(self, "progressPos", 0, 1, gcd * ticks)
+		tween.interpolate_method(self, "progressPos", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 
 
