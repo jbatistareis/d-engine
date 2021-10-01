@@ -17,9 +17,13 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	$Tween.interpolate_property($cover, 'modulate:a', 0, 0.5, 0.25)
 	$Tween.start()
 	
-	var timerWindow = BattleTimerWindow.new(playerData, enemyData)
-	timerWindow.position = Vector2(25, 50)
-	Signals.emit_signal("guiOpenWindow", timerWindow)
+	var enemiesTimerWindow = BattleTimerEnemiesWindow.new(enemyData)
+	enemiesTimerWindow.position = Vector2(25, 25)
+	Signals.emit_signal("guiOpenWindow", enemiesTimerWindow)
+	
+	var playersTimerWindow = BattleTimerPlayersWindow.new(playerData)
+	playersTimerWindow.position = Vector2(25, GuiOverlayManager.windowSize().y - 157)
+	Signals.emit_signal("guiOpenWindow", playersTimerWindow)
 	
 	var width = GuiOverlayManager.windowSize().x / 5
 	var heigth = width * ENEMY_FRAME_RATIO

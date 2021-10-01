@@ -40,9 +40,14 @@ _global_script_classes=[ {
 "path": "res://logic/game/states/battleState.gd"
 }, {
 "base": "GuiWindow",
-"class": "BattleTimerWindow",
+"class": "BattleTimerEnemiesWindow",
 "language": "GDScript",
-"path": "res://interface/gui/windows/battleTimerWindow.gd"
+"path": "res://interface/gui/windows/battleTimerEnemiesWindow.gd"
+}, {
+"base": "GuiWindow",
+"class": "BattleTimerPlayersWindow",
+"language": "GDScript",
+"path": "res://interface/gui/windows/battleTimerPlayersWindow.gd"
 }, {
 "base": "State",
 "class": "BootState",
@@ -341,7 +346,8 @@ _global_script_class_icons={
 "BattleResult": "",
 "BattleResultWindow": "",
 "BattleState": "",
-"BattleTimerWindow": "",
+"BattleTimerEnemiesWindow": "",
+"BattleTimerPlayersWindow": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",
