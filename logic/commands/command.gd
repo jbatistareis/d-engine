@@ -32,15 +32,15 @@ func setTotalTicks(value : int) -> void:
 
 
 func tick() -> void:
-	if (executorCharacter != null) && (executorCharacter.currentHp == 0):
-		toBeExecuted = true
-	
 	remainingTicks -= 1
+	toBeExecuted = (remainingTicks <= 0) && (executorCharacter.currentHp >= 0)
 
 
 func run() -> void:
-	if(remainingTicks <= 0) && !executed:
+	if !executed:
 		executions -= 1
 		executed = (executions <= 0)
+		if !executed: # check again to reset ticks
+			remainingTicks = totalTicks
 		execute()
 

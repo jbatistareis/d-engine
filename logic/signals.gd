@@ -42,6 +42,7 @@ signal commandsPaused() # use to pause all battle timelines
 signal commandsResumed() # use to resume all battle timelines
 # used as internal communication, dont fire, or listen to then
 signal commandPublished(command)
+signal ticked() # used for synchronization
 
 
 # battle

@@ -7,8 +7,8 @@ var hBox = HBoxContainer.new()
 var barContainer = MarginContainer.new()
 var margin = MarginContainer.new()
 var label = Label.new()
-var pre : ColorRect = ColorRect.new()
-var pos : ColorRect = ColorRect.new()
+var bar1 : ColorRect = ColorRect.new()
+var bar2 : ColorRect = ColorRect.new()
 var tween = Tween.new()
 
 
@@ -34,11 +34,11 @@ func _init(character : Character) -> void:
 	label.size_flags_horizontal = SIZE_EXPAND_FILL
 	label.text = labelText.join('')
 	
-	pre.color = GuiTheme.COMMAND_PRG_PRE
-	pos.color = GuiTheme.COMMAND_PRG_POS
+	bar1.color = GuiTheme.COMMAND_PRG_POS
+	bar2.color = GuiTheme.COMMAND_PRG_PRE
 	
-	barContainer.add_child(pre)
-	barContainer.add_child(pos)
+	barContainer.add_child(bar2)
+	barContainer.add_child(bar1)
 	
 	hBox.add_child(label)
 	hBox.add_child(barContainer)
@@ -55,27 +55,28 @@ func _enter_tree() -> void:
 
 func _ready() -> void:
 	rect_min_size = hBox.rect_size
+	
+	yield(get_tree(), "idle_frame")
+	bar1.rect_size.x = 0
 
 
-func progressPre(percent : float) -> void:
-	pre.rect_size.x = 200 * percent
-
-
-func progressPos(percent : float) -> void:
-	pos.rect_size.x = 200 * percent
+func progress(percent : float) -> void:
+	bar1.rect_size.x = 200 * percent
 
 
 func beginPre(character : Character, ticks : int) -> void:
 	if character == self.character:
-		barContainer.move_child(pre, 1)
-		tween.interpolate_method(self, "progressPre", 0, 1, GameParameters.GCD * ticks)
+		bar1.color = GuiTheme.COMMAND_PRG_PRE
+		bar2.color = GuiTheme.COMMAND_PRG_POS
+		tween.interpolate_method(self, "progress", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 
 
 func beginPos(character : Character, ticks : int) -> void:
 	if character == self.character:
-		barContainer.move_child(pos, 1)
-		tween.interpolate_method(self, "progressPos", 0, 1, GameParameters.GCD * ticks)
+		bar1.color = GuiTheme.COMMAND_PRG_POS
+		bar2.color = GuiTheme.COMMAND_PRG_PRE
+		tween.interpolate_method(self, "progress", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 
 

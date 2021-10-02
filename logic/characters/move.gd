@@ -9,8 +9,8 @@ var description : String = 'NOOP move'
 var valueExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
 var outcomeExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
 
-var cdPre : int = 0
-var cdPost : int = 0
+var cdPre : int = 1
+var cdPost : int = 1
 
 var executions : int = 1
 var persistent : bool = false

@@ -29,7 +29,7 @@ var moves : Array = []
 var inventory : Inventory = Inventory.new()
 
 var verdict : Verdict = Verdict.new()
-var verdictActive : bool = false
+var verdictActive : bool = true
 
 var currentLocation : String = ''
 var currentRoom : int = 0

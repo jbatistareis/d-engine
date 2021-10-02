@@ -41,6 +41,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if index > enemyData.size() - 1:
 			break
 	
+	yield(get_tree(), "idle_frame")
 	Signals.emit_signal("battleScreenReady")
 
 

@@ -23,13 +23,18 @@ func _ready():
 
 
 func tick() -> void:
+	Signals.emit_signal("ticked")
 	executedCommands.clear()
 	
 	for command in commandsQueue:
 		command.tick()
 		
 		if command.toBeExecuted:
+			
+			pause()
 			command.run()
+			resume()
+			
 			if command.executed:
 				executedCommands.append(command)
 	
@@ -50,10 +55,12 @@ func reset(players, enemies) -> void:
 
 
 func publishCommand(command : Command) -> void:
-	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand) || (command is WaitCommand):
-		Signals.emit_signal("characterPosTimerSet", command.executor, command.totalTicks)
+	yield(Signals, "ticked")
+	
+	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand):
+		Signals.emit_signal("characterPosTimerSet", command.executorCharacter, command.totalTicks)
 	else:
-		Signals.emit_signal("characterPreTimerSet", command.executor, command.totalTicks)
+		Signals.emit_signal("characterPreTimerSet", command.executorCharacter, command.totalTicks)
 	
 	commandsQueue.append(command)
 	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')

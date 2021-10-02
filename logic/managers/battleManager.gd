@@ -24,13 +24,13 @@ func start(players : Array, enemies : Array) -> void:
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:
 			if player.verdictActive:
-				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 1))
+				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 10))
 			else:
-				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 1))
+				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 10))
 		
 		for enemy in enemies:
 			if enemy.verdictActive:
-				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 1))
+				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10))
 
 
 func _physics_process(delta) -> void:

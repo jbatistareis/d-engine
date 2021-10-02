@@ -2,39 +2,40 @@ class_name Verdict
 
 var name : String = 'Verdict'
 var description : String = 'NOOP verdict'
-var concreteFacts : Array = [] # holds 2 dimensional arrays [<FACT>, <MOVE>]
+var actions : Array = [Action.new()] # Action array
 
 
 func decision(auditorCharacter, suspects : Array) -> void:
-	if auditorCharacter != null:
-		var result
-		var fact
-		
-		for concreteFact in concreteFacts:
-			result = concreteFact[0].analyze(auditorCharacter, suspects)
-			if !result.empty():
-				Signals.emit_signal(
-						"commandPublished",
-						ExecuteMoveCommand.new(auditorCharacter, result, concreteFact[1])
-				)
-				return
+	for action in actions:
+		var targets = action.fact.analyze(auditorCharacter, suspects)
+		if !targets.empty():
+			Signals.emit_signal(
+					"commandPublished",
+					ExecuteMoveCommand.new(auditorCharacter, targets, action.move)
+			)
+			return
+	
+	Signals.emit_signal(
+		"commandPublished",
+		WaitCommand.new(VerdictCommand.new(auditorCharacter, GameParameters.WAIT_TICKS / 2))
+	)
 
 
-func addConcreteFact(index : int, fact : Fact, move : Move) -> void:
-	concreteFacts.insert(index, [fact, move])
+func addAction(index : int, fact : Fact, move : Move) -> void:
+	actions.insert(index, Action.new(fact, move))
 
 
 func removeConcreteFact(index : int) -> void:
-	concreteFacts.remove(index)
+	actions.remove(index)
 
 
-func swapConcreteFacts(chosenConcreteFactIndex : int, targetConcreteFactIndex : int) -> void:
-	var chosen = concreteFacts[chosenConcreteFactIndex]
-	var target = concreteFacts[targetConcreteFactIndex]
+func swapActions(chosenActionIndex : int, targetActionIndex : int) -> void:
+	var chosen = actions[chosenActionIndex]
+	var target = actions[targetActionIndex]
 	
-	concreteFacts.remove(chosenConcreteFactIndex)
-	concreteFacts.remove(targetConcreteFactIndex)
+	actions.remove(chosenActionIndex)
+	actions.remove(targetActionIndex)
 	
-	concreteFacts.insert(targetConcreteFactIndex, chosen)
-	concreteFacts.insert(chosenConcreteFactIndex, target)
+	actions.insert(targetActionIndex, chosen)
+	actions.insert(chosenActionIndex, target)
 
