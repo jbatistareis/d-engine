@@ -35,5 +35,5 @@ func done() -> void:
 
 # uso to randomize looping animations
 func randomizePosition(animation : String) -> void:
-	$AnimationTree.advance(rand_range(0, $AnimationPlayer.get_animation(animation).length))
+	$AnimationTree.advance((Dice.rollNormal(Enums.DiceType.D100) / 100.0) * $AnimationPlayer.get_animation(animation).length)
 

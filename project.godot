@@ -80,11 +80,6 @@ _global_script_classes=[ {
 "path": "res://logic/database/deserializer.gd"
 }, {
 "base": "Reference",
-"class": "Dice",
-"language": "GDScript",
-"path": "res://logic/dice.gd"
-}, {
-"base": "Reference",
 "class": "Entity",
 "language": "GDScript",
 "path": "res://logic/database/entity.gd"
@@ -354,7 +349,6 @@ _global_script_class_icons={
 "Command": "",
 "CommandArrayHelper": "",
 "Deserializer": "",
-"Dice": "",
 "Entity": "",
 "EntityArrayHelper": "",
 "EntityLoader": "",
@@ -421,6 +415,7 @@ default_bus_layout=""
 [autoload]
 
 Signals="*res://logic/signals.gd"
+Dice="*res://logic/dice.gd"
 SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"
 LocationManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"
