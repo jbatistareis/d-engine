@@ -68,6 +68,7 @@ func beginPre(character : Character, ticks : int) -> void:
 	if character == self.character:
 		bar1.color = GuiTheme.COMMAND_PRG_PRE
 		bar2.color = GuiTheme.COMMAND_PRG_POS
+		bar1.rect_size.x = 0
 		tween.interpolate_method(self, "progress", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 
@@ -76,6 +77,7 @@ func beginPos(character : Character, ticks : int) -> void:
 	if character == self.character:
 		bar1.color = GuiTheme.COMMAND_PRG_POS
 		bar2.color = GuiTheme.COMMAND_PRG_PRE
+		bar1.rect_size.x = 0
 		tween.interpolate_method(self, "progress", 0, 1, GameParameters.GCD * ticks)
 		tween.start()
 

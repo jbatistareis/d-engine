@@ -17,23 +17,23 @@ func published() -> void:
 func execute() -> void:
 	var moveResult
 	for target in targets:
+		moveResult = move.getResult(executorCharacter)
+		
 		Signals.startedBattleAnimation(executorCharacter, move.attackAnimation)
 		yield(Signals, "finishedBattleAnimation")
-		#TODO player hit animation
-		
-		moveResult = move.getResult(executorCharacter)
 		
 		match moveResult.outcome:
 			Dice.Outcome.BEST:
-				changeHp(target, moveResult.value)
+				target.takeHit(moveResult.value)
+				Signals.startedBattleAnimation(target, 'damage')
 			
 			Dice.Outcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
-				changeHp(
-					target,
+				target.takeHit(
 					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
+				Signals.startedBattleAnimation(target, 'damage')
 			
 			_: # Dice.Outcome.WORST
-				changeHp(target, 0) # TODO miss
+				target.takeHit(0) # TODO miss
 	
 	# TODO a persistent move effect should be applyed only one time per character
 	if persistent && (executions > 0):
@@ -45,11 +45,4 @@ func execute() -> void:
 			Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, move.cdPost))
 		else:
 			Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
-
-
-func changeHp(character, amount : int, bypassArmor : bool = false) -> void:
-	if (!bypassArmor && (amount < 0) && (character.inventory.armor != null)):
-		amount = character.inventory.armor.takeHit(amount)
-	
-	character.changeHp(amount)
 

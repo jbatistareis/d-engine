@@ -1,6 +1,26 @@
 extends Spatial
 
+
+# Every battle character must have the following animations:
+# idle, damage, death, attack#, prepare#
+# The # relates to the attack and its preparation, in case of
+# multiple attacks with different preparation animations.
+#
+# In order for animations to work, the character node must
+# have an Animation Player and Animation Tree nodes named
+# AnimationPlayer and AnimationTree, respectively.
+# The animations are controlled via the $AnimationTree, which
+# must be constructed similar to the one from the base
+# character.
+# Note that idle has its damage and death state connections,
+# and prepare1 has its damage1 and death1 connections.
+# These are going to be used for their specific trasitions.
+# If you have multiple attacks, you must follow the naming
+# pattern (as in attack2, prepare2, damage2, death2).
+
+
 onready var playback : AnimationNodeStateMachinePlayback = $AnimationTree.get("parameters/playback")
+var character : Character
 
 
 func _ready() -> void:
@@ -11,19 +31,14 @@ func _ready() -> void:
 
 
 func play(character : Character, animation : String) -> void:
-	if character.shortName == name:
+	if character == self.character:
 		var current = playback.get_current_node()
 		
-		if animation == 'damage':
-			if current.begins_with('prepare'):
-				animation = 'damagePrepare' + current.substr(7)
-			elif current == 'idle':
-				animation = 'damageIdle'
-		elif animation == 'death':
-			if current.begins_with('prepare'):
-				animation = 'deathPrepare' + current.substr(7)
-			elif current == 'idle':
-				animation = 'deathIdle'
+		if current.begins_with('prepare'):
+			if animation == 'damage':
+				animation = 'damage' + current.substr(7)
+			elif animation == 'death':
+				animation = 'death' + current.substr(7)
 		
 		playback.travel(animation)
 

@@ -43,7 +43,14 @@ func getMaxHp() -> int:
 	return baseHp + constitution.score
 
 
-func change_hp(amount : int) -> void:
+func takeHit(amount : int, bypassArmor : bool = false) -> void:
+	if (!bypassArmor && (amount < 0) && (inventory.armor != null)):
+		amount = inventory.armor.takeHit(amount)
+	
+	changeHp(amount)
+
+
+func changeHp(amount : int) -> void:
 	if amount >= 0:
 		Signals.emit_signal("characterGainedHp", self, amount)
 	else:
@@ -64,11 +71,11 @@ func canLevelUp() -> bool:
 	return experiencePoints >= self.experienceToNextLevel
 
 
-func additional_levels() -> int:
+func additionalLevels() -> int:
 	return floor(experiencePoints / self.experienceToNextLevel) as int
 
 
-func level_up() -> void:
+func levelUp() -> void:
 	if canLevelUp():
 		experiencePoints -= self.experienceToNextLevel
 		sparePoints += 1
