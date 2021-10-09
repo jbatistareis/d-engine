@@ -16,5 +16,5 @@ func lastSize() -> Vector2:
 
 
 func windowSize() -> Vector2:
-	return OS.get_real_window_size()
+	return get_viewport().size
 

@@ -1,11 +1,12 @@
 extends Spatial
 
 const ENEMY_FRAME_RATIO : float = 1.875
-
 var enemyFrameSize : Vector2
 
 
 func _ready() -> void:
+	$ViewportContainer/Viewport.size = GuiOverlayManager.windowSize()
+	
 	Signals.connect("setupBattleScreen", self, "setup")
 	Signals.connect("battleEnded", self, "finish")
 	Signals.connect("askedPlayerBattleInput", self, "showPlayerMenu")
@@ -13,9 +14,7 @@ func _ready() -> void:
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-	visible = true
-	$Tween.interpolate_property($cover, 'modulate:a', 0, 0.5, 0.25)
-	$Tween.start()
+	$AnimationPlayer.play("start")
 	
 	var enemiesTimerWindow = BattleTimerEnemiesWindow.new(enemyData)
 	enemiesTimerWindow.position = Vector2(25, 25)
@@ -48,11 +47,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 
 
 func finish() -> void:
-	$Tween.interpolate_property($cover, 'modulate:a', 0.5, 0, 0.25)
-	$Tween.start()
-	
-	yield($Tween, "tween_all_completed")
-	visible = false
+	$AnimationPlayer.play("finish")
 
 
 func showPlayerMenu(player : Character) -> void:
