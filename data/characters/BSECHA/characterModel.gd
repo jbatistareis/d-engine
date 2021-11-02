@@ -37,8 +37,6 @@ func play(character : Character, animation : String) -> void:
 		if current.begins_with('prepare'):
 			if animation == 'damage':
 				animation = 'damage' + current.substr(7)
-			elif animation == 'death':
-				animation = 'death' + current.substr(7)
 		
 		playback.travel(animation)
 
