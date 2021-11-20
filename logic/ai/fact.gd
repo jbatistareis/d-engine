@@ -1,6 +1,6 @@
 class_name Fact
 
-const _NOOP : String = 'func execute(executor : Character, suspects : Array) -> Array:\n\treturn []'
+const _NOOP : String = 'func execute(executor : Character, suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(suspects)'
 
 var name : String = 'NOOP fact'
 var description : String = 'Placeholder fact'

@@ -11,6 +11,8 @@ func _ready() -> void:
 	
 	print('TEST START')
 	
+	player.currentHp = 1000
+	player.baseHp = 1000
 	player.type = Enums.CharacterType.PC
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')

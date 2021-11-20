@@ -29,8 +29,7 @@ func start(players : Array, enemies : Array) -> void:
 				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 10))
 		
 		for enemy in enemies:
-			if enemy.verdictActive:
-				Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10))
+			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10))
 
 
 func _physics_process(delta) -> void:
@@ -43,7 +42,7 @@ func end() -> void:
 		var battleResult = BattleResult.new()
 		
 		for enemy in enemies:
-			if enemy.health.currentHp == 0:
+			if enemy.currentHp == 0:
 				battleResult.experience += enemy.experiencePoints
 				pass # TODO loot
 			else:

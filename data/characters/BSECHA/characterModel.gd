@@ -43,7 +43,7 @@ func play(character : Character, animation : String) -> void:
 
 # this method must be called from every attack animation (add a Call Mathod track)
 func done() -> void:
-	Signals.emit_signal("finishedBattleAnimation")
+	Signals.emit_signal("finishedBattleAnimation", self.character)
 
 
 # uso to randomize looping animations

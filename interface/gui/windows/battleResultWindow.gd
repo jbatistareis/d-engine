@@ -4,9 +4,11 @@ extends GuiWindow
 
 # TODO build a table
 func _init(battleResult : BattleResult) -> void:
-	widgets.append(GuiTextWidget.new('TODO'))
 	
-	widgets.append_array([GuiButtonWidget.new('Close', Enums.GuiAction.CONFIRM)])
+	widgets.append_array([
+		GuiTextWidget.new('TODO'),
+		GuiButtonWidget.new('Close', Enums.GuiAction.CONFIRM)
+	])
 	
 	position = Vector2(
 		GuiOverlayManager.windowSize().x * 0.5,

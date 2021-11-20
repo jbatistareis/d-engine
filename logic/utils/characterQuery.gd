@@ -11,7 +11,7 @@ static func findByHighestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp >= highest:
-			return [character.spawnId]
+			return [character]
 	
 	return []
 
@@ -24,7 +24,7 @@ static func findByLowestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp <= lowest:
-			return [character.spawnId]
+			return [character]
 	
 	return []
 
@@ -38,7 +38,7 @@ static func findByHighestAbilityScore(characters : Array, ability : int) -> Arra
 	
 	for character in characters:
 		if character.getScore(ability) >= highest:
-			return [character.spawnId]
+			return [character]
 	
 	return []
 
@@ -52,7 +52,7 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 	
 	for character in characters:
 		if character.getScore(ability) <= lowest:
-			return [character.spawnId]
+			return [character]
 	
 	return []
 

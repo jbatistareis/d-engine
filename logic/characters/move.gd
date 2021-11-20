@@ -1,7 +1,7 @@
 class_name Move
 
-const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
-const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 0'
+const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn -character.strength.score'
+const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
 
 var name : String = 'NOOP move'
 var description : String = 'Placeholder move'
@@ -21,6 +21,7 @@ var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'
 
 
+# negative values represent damage, positive represent cure
 func getResult(character) -> MoveResult:
 	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
 	

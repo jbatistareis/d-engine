@@ -14,7 +14,7 @@ func _ready():
 	Signals.connect("commandsResumed", self, "resume")
 	Signals.connect("commandPublished", self, "publishCommand")
 	Signals.connect("battleStarted", self, "reset")
-	Signals.connect("battleEnded", self, "reset")
+	Signals.connect("battleEnded", self, "reset", [true, true])
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
@@ -30,10 +30,7 @@ func tick() -> void:
 		command.tick()
 		
 		if command.toBeExecuted:
-			
-			pause()
 			command.run()
-			resume()
 			
 			if command.executed:
 				executedCommands.append(command)

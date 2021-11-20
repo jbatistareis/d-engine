@@ -36,10 +36,13 @@ func _ready() -> void:
 	for widget in widgets:
 		vBox.add_child(widget)
 	
+	var index = 0
 	for widget in widgets:
 		if widget is GuiButtonWidget:
+			buttonIndex = index
 			widget.hover = true
 			break
+		index += 1
 	
 	add_child(shadow)
 	add_child(bg)
@@ -89,7 +92,7 @@ func confirm(source : GuiButtonWidget) -> void:
 		else:
 			data = {}
 			for widget in widgets:
-				if (widget.identifier != null) && !widget.identifier.empty():
+				if (widget is GuiButtonWidget) && (widget.identifier != null) && !widget.identifier.empty():
 					data[widget.identifier] = widget.data
 		
 		windowConfirmed()
