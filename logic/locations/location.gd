@@ -50,11 +50,13 @@ func move(character : Character, direction : int) -> void:
 		
 		return
 	
-	if (character.type == Enums.CharacterType.PC) && (exitPoint == 0) && canPass: # move to a location
+	if (exitPoint == 0) && canPass: # move to a location
 		var portal = findPortal(portalId)
-		exit(character, portal.newLocationName, portal.toSpawnId)
 		
-		return
+		if (portal != null) && !portal.newLocationName.empty():
+			exit(character, portal.newLocationName, portal.toSpawnId)
+			
+			return
 	
 	Signals.emit_signal("playerRoomChangeDenied")
 

@@ -4,7 +4,10 @@ var player : Character = Character.new()
 
 
 func _ready() -> void:
-	set_process_input(true)
+	# TODO tests
+	var character : Character = Character.new()
+	#EntitySaver.saveCharacter(character)
+	#
 	
 	print('TEST START')
 	
