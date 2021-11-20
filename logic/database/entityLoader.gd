@@ -7,6 +7,7 @@ static func loadCharacter(shortName : String):
 		GamePaths.CHARACTER_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
+	
 	var character : Character = Deserializer.character(file.get_var())
 	file.close()
 	

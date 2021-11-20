@@ -3,14 +3,14 @@ class_name Move
 const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn 0'
 const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn 0'
 
-var name : String = 'Move'
-var description : String = 'NOOP move'
+var name : String = 'NOOP move'
+var description : String = 'Placeholder move'
 
 var valueExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
 var outcomeExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
 
-var cdPre : int = 1
-var cdPost : int = 1
+var cdPre : int = 5
+var cdPost : int = 5
 
 var executions : int = 1
 var persistent : bool = false

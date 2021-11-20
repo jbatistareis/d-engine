@@ -1,7 +1,7 @@
 class_name Verdict
 
-var name : String = 'Verdict'
-var description : String = 'NOOP verdict'
+var name : String = 'NOOP verdict'
+var description : String = 'Placeholder verdict'
 var actions : Array = [Action.new()] # Action array
 
 

@@ -1,7 +1,7 @@
 class_name Serializer
 
 
-static func character(character) -> PoolByteArray:
+static func character(character) -> Dictionary:
 	var data = inst2dict(character)
 	
 	data.strength = inst2dict(character.strength)
@@ -31,26 +31,27 @@ static func character(character) -> PoolByteArray:
 	data.verdict = inst2dict(character.verdict)
 	
 	index = 0
-	for concreteFact in character.verdict.concreteFacts:
-		data.verdict.concreteFacts[index] = [
-			inst2dict(concreteFact[0]),
-			inst2dict(concreteFact[1])
-		]
+	for action in character.verdict.actions:
+		var actionData = inst2dict(action)
+		actionData.fact = inst2dict(action.fact)
+		actionData.move = inst2dict(action.move)
+		
+		data.verdict.actions[index] = actionData
 		index += 1
 	
 	data.inventory.weapon = inst2dict(character.inventory.weapon)
 	data.inventory.armor = inst2dict(character.inventory.armor)
 	
-	return var2bytes(data)
+	return data
 
 
-static func item(item) -> PoolByteArray:
-	var data  = inst2dict(item)
+static func item(item) -> Dictionary:
+	var data = inst2dict(item)
 	
-	return var2bytes(data)
+	return data
 
 
-static func location(location) -> PoolByteArray:
+static func location(location) -> Dictionary:
 	location.rooms.sort_custom(EntityArrayHelper, 'idSort')
 	location.portals.sort_custom(EntityArrayHelper, 'idSort')
 	location.spawns.sort_custom(EntityArrayHelper, 'idSort')
@@ -72,5 +73,5 @@ static func location(location) -> PoolByteArray:
 		data.spawns[index] = inst2dict(spawn)
 		index += 1
 	
-	return var2bytes(data)
+	return data
 

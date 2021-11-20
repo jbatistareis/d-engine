@@ -51,7 +51,7 @@ func enter(character : Character) -> void:
 		if !foeShortNameGroups.empty() && battleTriggered:
 			var enemies = []
 			
-			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size() - 1)]
+			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size()) - 1]
 			for shortName in chosenGroup:
 				if !shortName.empty():
 					var enemy = EntityLoader.loadCharacter(shortName)
