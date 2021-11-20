@@ -23,7 +23,7 @@ func collectSpawns() -> Array:
 
 
 func addSpawn() -> void:
-	var spawn = Spawn.new()
+	var spawn = RoomSpawn.new()
 	spawn.id = LocationIdGenerator.id
 	
 	var spawnItem = spawnItemScene.instance()

@@ -63,7 +63,7 @@ func executeScript(script : String, character : Character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 
-func findRoom(id : int) -> Room:
+func findRoom(id : int) -> RoomTile:
 	var index = rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')
 	
 	if index >= rooms.size():
@@ -73,7 +73,7 @@ func findRoom(id : int) -> Room:
 	return found if (found.id == id) else null
 
 
-func findPortal(id : int) -> Portal:
+func findPortal(id : int) -> RoomPortal:
 	var index = portals.bsearch_custom(id, EntityArrayHelper, 'idFind')
 	
 	if index >= portals.size():
@@ -83,7 +83,7 @@ func findPortal(id : int) -> Portal:
 	return found if (found.id == id) else null
 
 
-func findSpawn(id : int) -> Spawn:
+func findSpawn(id : int) -> RoomSpawn:
 	var index = spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')
 	
 	if index >= spawns.size():

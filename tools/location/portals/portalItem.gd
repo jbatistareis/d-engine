@@ -1,13 +1,13 @@
 extends VBoxContainer
 
-var portal : Portal setget setPortal,getPortal
+var portal : RoomPortal setget setPortal,getPortal
 
 
 func _ready() -> void:
 	$HBoxContainer/btnRemove.connect("button_up", self, "remove")
 
 
-func setPortal(value : Portal) -> void:
+func setPortal(value : RoomPortal) -> void:
 	portal = value
 	$HBoxContainer/lblId.text = ('ID: %d' % portal.id)
 	$txtPassLogic.text = portal.passLogic
@@ -15,7 +15,7 @@ func setPortal(value : Portal) -> void:
 	$GridContainer/spnToSpawn.value = portal.toSpawnId
 
 
-func getPortal() -> Portal:
+func getPortal() -> RoomPortal:
 	portal.passLogic = $txtPassLogic.text
 	portal.newLocationShortName = $GridContainer/txtNewLocation.text
 	portal.toSpawnId = int($GridContainer/spnToSpawn.value)

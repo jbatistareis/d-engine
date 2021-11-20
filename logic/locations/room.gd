@@ -1,4 +1,4 @@
-class_name Room
+class_name RoomTile
 extends Entity
 
 const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'

@@ -1,15 +1,18 @@
 extends Spatial
 
+var player : Character = Character.new()
+
 
 func _ready() -> void:
 	set_process_input(true)
 	
 	print('TEST START')
 	
+	player.type = Enums.CharacterType.PC
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", Character.new(), 'BSELOC', 47)
+	Signals.emit_signal("playerStartedAtLocation", player, 'BSELOC', 47)
 
 
 func _process(delta) -> void:
@@ -21,11 +24,6 @@ func printEntering(location : Location) -> void:
 
 
 func printTraveling(direction : int) -> void:
-	# TODO
-	var players = [Character.new()]
-	var enemies = [Character.new(),Character.new(),Character.new(),Character.new(),Character.new()]
-	Signals.emit_signal("battleStarted", players, enemies)
-	
 	var directionStr
 	
 	match direction:

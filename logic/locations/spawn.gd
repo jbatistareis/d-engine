@@ -1,4 +1,4 @@
-class_name Spawn
+class_name RoomSpawn
 extends Entity
 
 var direction : int = Enums.Direction.NORTH

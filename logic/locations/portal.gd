@@ -1,4 +1,4 @@
-class_name Portal
+class_name RoomPortal
 extends Entity
 
 const NOOP : String = 'func execute(character : Character) -> bool:\n\treturn true'

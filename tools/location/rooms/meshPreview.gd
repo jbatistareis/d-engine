@@ -15,7 +15,7 @@ func hideWindow(location, x, y, direction) -> void:
 	hide()
 
 
-func setPreview(room : Room, ignore) -> void:
+func setPreview(room : RoomTile, ignore) -> void:
 	$Camera.current = true
 	visible = true
 	

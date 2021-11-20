@@ -23,7 +23,7 @@ func collectPortals() -> Array:
 
 
 func addPortal() -> void:
-	var portal = Portal.new()
+	var portal = RoomPortal.new()
 	portal.id = LocationIdGenerator.id
 	
 	var portalItem = portalItemScene.instance()

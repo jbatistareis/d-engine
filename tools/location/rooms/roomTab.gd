@@ -59,7 +59,7 @@ func enableTab(value : bool) -> void:
 	get_parent().current_tab = 0 if value else 1
 
 
-func setRoom(room : Room) -> void:
+func setRoom(room : RoomTile) -> void:
 	$VBoxContainer/HBoxContainer/lblId.text = ('ID: %d  /  x: %d, y: %d' % [room.id, room.x, room.y])
 	
 	for id in $VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.get_item_count():
@@ -123,7 +123,7 @@ func setRoom(room : Room) -> void:
 			setPortalFieldsState(room, [])
 
 
-func addRoom(room : Room, soloSelect : bool) -> void:
+func addRoom(room : RoomTile, soloSelect : bool) -> void:
 	if (room != null):
 		if soloSelect:
 			for room in rooms:
@@ -139,7 +139,7 @@ func addRoom(room : Room, soloSelect : bool) -> void:
 	enableTab(room == null)
 
 
-func removeRoom(room : Room) -> void:
+func removeRoom(room : RoomTile) -> void:
 	if rooms.has(room):
 		var oldIndex = rooms.find(room)
 		rooms.erase(room)
@@ -188,7 +188,7 @@ func changeAlertLabel(value : float) -> void:
 	$VBoxContainer/ScrollContainer/VBoxContainer/alert/lblAlert.text = ('Alert: %d' % (value * 100)) + '%'
 
 
-func enemyGroups2Txt(room : Room) -> void:
+func enemyGroups2Txt(room : RoomTile) -> void:
 	var result = ''
 	
 	for group in room.foeShortNameGroups:
@@ -205,7 +205,7 @@ func enemyGroups2Txt(room : Room) -> void:
 func txt2EnemyGroups() -> void:
 	var result = []
 	var text = $VBoxContainer/ScrollContainer/VBoxContainer/enemies/txtEnemyGroups.text
-	text = txtGroupRegex.sub(text, '', true)
+	text = txtGroupRegex.sub(text, '', true).replace(' ', '')
 	
 	if !text.empty():
 		for txtGroup in text.split('\n'):
@@ -220,7 +220,7 @@ func txt2EnemyGroups() -> void:
 		room.foeShortNameGroups = result
 
 
-func friendlyGroup2Txt(room : Room) -> void:
+func friendlyGroup2Txt(room : RoomTile) -> void:
 	var result = ''
 	
 	for txtFriend in room.friendlyShortNames:
@@ -253,7 +253,7 @@ func setExitLogic() -> void:
 		room.exitLogic = $VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text
 
 
-func setPortalFieldsState(room : Room, directions : Array) -> void:
+func setPortalFieldsState(room : RoomTile, directions : Array) -> void:
 	for i in portalFields.size():
 		if directions.has(i):
 			portalFields[i].editable = true

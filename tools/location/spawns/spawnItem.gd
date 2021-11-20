@@ -1,13 +1,13 @@
 extends VBoxContainer
 
-var spawn : Spawn setget setSpawn,getSpawn
+var spawn : RoomSpawn setget setSpawn,getSpawn
 
 
 func _ready() -> void:
 	$HBoxContainer/btnRemove.connect("button_up", self, "remove")
 
 
-func setSpawn(value : Spawn) -> void:
+func setSpawn(value : RoomSpawn) -> void:
 	spawn = value
 	$HBoxContainer/lblId.text = ('ID: %d' % spawn.id)
 	$HBoxContainer2/spnToRoomId.value = spawn.toRoomId
@@ -15,7 +15,7 @@ func setSpawn(value : Spawn) -> void:
 	
 
 
-func getSpawn() -> Spawn:
+func getSpawn() -> RoomSpawn:
 	spawn.toRoomId = int($HBoxContainer2/spnToRoomId.value)
 	spawn.direction = $HBoxContainer2/optDirection.selected
 	

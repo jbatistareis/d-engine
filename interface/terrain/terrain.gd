@@ -10,6 +10,8 @@ func _ready() -> void:
 
 
 func loadMap(location : Location, x : int, y : int, direction : int) -> void:
+	SceneLoadManager.fromLocation(location)
+	
 	blocks.clear()
 	for node in $blocks.get_children():
 		node.queue_free()

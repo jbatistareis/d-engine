@@ -4,7 +4,7 @@ var x : int = 0
 var y : int = 0
 
 var meshNames = ['0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
-var room : Room = null setget setRoom
+var room : RoomTile = null setget setRoom
 var selected : bool = false
 
 
@@ -27,12 +27,12 @@ func _ready():
 	$buttons/rotateRoom.connect("button_up", self, "increaseOrientation")
 
 
-func checkSelect(room : Room) -> void:
+func checkSelect(room : RoomTile) -> void:
 	if (self.room != null) && (room.id == self.room.id):
 		select()
 
 
-func checkDeselect(room : Room) -> void:
+func checkDeselect(room : RoomTile) -> void:
 	if (self.room != null) && (room.id == self.room.id):
 		deselect()
 
@@ -68,7 +68,7 @@ func setRoomType(value : int) -> void:
 		
 	else:
 		if room == null:
-			self.room = Room.new()
+			self.room = RoomTile.new()
 			room.id = LocationIdGenerator.id
 			room.x = x
 			room.y = y
@@ -119,7 +119,7 @@ func increaseOrientation() -> void:
 	LocationEditorSignals.emit_signal("selectedRoom", room, true)
 
 
-func setRoom(value : Room) -> void:
+func setRoom(value : RoomTile) -> void:
 	room = value
 	
 	if value != null:
