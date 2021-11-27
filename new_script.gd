@@ -14,6 +14,7 @@ func _ready() -> void:
 	player.currentHp = 1000
 	player.baseHp = 1000
 	player.type = Enums.CharacterType.PC
+	player.verdictActive = false
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	

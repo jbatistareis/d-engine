@@ -7,7 +7,7 @@ var inBattle : bool = false
 
 func _ready():
 	Signals.connect("battleStarted", self, "start")
-	Signals.connect("askedPlayerBattleInput", self, "pauseCommands")
+	Signals.connect("askedPlayerBattleInput", self, "openMovesWindow")
 	Signals.connect("playerConfirmedBattleInput", self, "confirmInput")
 
 
@@ -56,8 +56,9 @@ func end() -> void:
 		inBattle = false
 
 
-func pauseCommands(player : Character) -> void:
+func openMovesWindow(player : Character) -> void:
 	Signals.emit_signal("commandsPaused")
+	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
 
 
 func confirmInput(command : Command) -> void:

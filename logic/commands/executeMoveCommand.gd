@@ -19,8 +19,6 @@ func published() -> void:
 func execute() -> void:
 	var moveResult
 	for target in targets:
-		Signals.emit_signal("commandsPaused")
-		
 		currentTarget = target
 		moveResult = move.getResult(executorCharacter)
 		
@@ -32,22 +30,20 @@ func execute() -> void:
 		
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:
-				target.takeHit(moveResult.value)
 				Signals.emit_signal("startedBattleAnimation", target, 'damage')
+				target.takeHit(moveResult.value)
 			
 			# TODO
 			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
-				target.takeHit(
-					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 				Signals.emit_signal("startedBattleAnimation", target, 'damage')
+				.takeHit(
+					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 			
 			_: # Enums.DiceOutcome.WORST
 				target.takeHit(0) # TODO miss
 		
 		if target.currentHp == 0:
 			Signals.emit_signal("startedBattleAnimation", target, 'death')
-		
-		Signals.emit_signal("commandsResumed")
 	
 	# TODO a persistent move effect should be applyed only one time per character
 	if persistent && (executions > 0):

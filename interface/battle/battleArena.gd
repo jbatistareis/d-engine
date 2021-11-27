@@ -14,6 +14,10 @@ func _ready() -> void:
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
+	for node in $ViewportContainer/Viewport/enemies.get_children():
+		for enemy in node.get_children():
+			enemy.queue_free()
+	
 	$AnimationPlayer.play("start")
 	
 	var enemiesTimerWindow = BattleTimerEnemiesWindow.new(enemyData)
@@ -30,9 +34,6 @@ func setup(playerData : Array, enemyData : Array) -> void:
 
 	var index = 0
 	for enemyNode in $ViewportContainer/Viewport/enemies.get_children():
-		for node in enemyNode.get_children():
-			node.queue_free()
-		
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName].instance()
 			scene.character = enemyData[index]
@@ -50,14 +51,12 @@ func finish() -> void:
 	$AnimationPlayer.play("finish")
 
 
-func showPlayerMenu(player : Character) -> void:
-	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
-
-
 # TODO loot
 func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 	for player in players:
 		player.gainExperience(battleResult.experience)
 	
+	Signals.emit_signal("guiClearWindows")
+	yield(get_tree(), "idle_frame")
 	Signals.emit_signal("guiOpenWindow", BattleResultWindow.new(battleResult))
 

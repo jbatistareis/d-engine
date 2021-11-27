@@ -2,11 +2,9 @@ extends Node
 
 onready var timer : Timer = Timer.new()
 
-var elapsed : float = 0
 var paused : bool = false
-
+var executingCommand : bool = false
 var commandsQueue : Array = []
-var executedCommands : Array = []
 
 
 func _ready():
@@ -23,20 +21,22 @@ func _ready():
 
 
 func tick() -> void:
-	Signals.emit_signal("ticked")
-	executedCommands.clear()
-	
-	for command in commandsQueue:
-		command.tick()
+	if !executingCommand:
+		Signals.emit_signal("ticked")
+		executingCommand = true
 		
-		if command.toBeExecuted:
-			command.run()
+		for item in commandsQueue:
+			item.tick()
+		
+		var command = commandsQueue.front()
+		if command != null:
+			if command.toBeExecuted:
+				command.run()
 			
 			if command.executed:
-				executedCommands.append(command)
-	
-	for executedCommand in executedCommands:
-		commandsQueue.erase(executedCommand)
+				commandsQueue.pop_front()
+		
+		executingCommand = false
 
 
 func pause() -> void:
@@ -52,8 +52,6 @@ func reset(players, enemies) -> void:
 
 
 func publishCommand(command : Command) -> void:
-	yield(Signals, "ticked")
-	
 	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand):
 		Signals.emit_signal("characterPosTimerSet", command.executorCharacter, command.totalTicks)
 	else:

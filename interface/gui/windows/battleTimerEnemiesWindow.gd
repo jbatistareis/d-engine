@@ -5,7 +5,7 @@ const ENEMY_ORDER : Array = [4, 2, 0, 1, 3]
 
 
 func _init(enemies : Array) -> void:
-	type = Enums.GuiWindowType.BACKGROUND
+	type = Enums.GuiWindowType.PERMANENT
 	
 	for i in ENEMY_ORDER:
 		if (i < enemies.size()) && (enemies[i] != null):

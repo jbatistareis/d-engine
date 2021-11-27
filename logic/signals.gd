@@ -76,6 +76,7 @@ signal characterDroppedWeapon(character, weaponIndex)
 # used as internal communication, dont fire, or listen to then
 signal guiOpenWindow(window)
 signal guiCloseWindow()
+signal guiClearWindows()
 signal guiConfirm(source)
 # inputs used to move the cursor
 signal guiUp()

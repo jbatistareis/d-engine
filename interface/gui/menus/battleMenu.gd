@@ -7,20 +7,14 @@ var character : Character
 func _init(character : Character) -> void:
 	self.character = character
 	# TODO create real moves
-	var attack = Move.new()
 	var item = Move.new()
 	var defend = Move.new()
-	
-	attack.name = 'Attack'
-	attack.description = 'Use your primary weapon'
 	
 	item.name = 'Item'
 	item.description = 'Use an item from your inventory'
 	
 	defend.name = 'Defend'
 	defend.description =  'Protect yourself from coming attacks'
-	
-	widgets.append(GuiMoveButtonWidget.new(attack))
 	
 	for move in character.moves:
 		widgets.append(GuiMoveButtonWidget.new(move))
@@ -35,7 +29,7 @@ func _init(character : Character) -> void:
 
 
 func windowConfirmed() -> void:
-#	CommandManager.publishCommand()
+#	playerConfirmedBattleInput
 	# TODO ask which target
 	pass
 

@@ -5,6 +5,7 @@ extends Control
 func _ready() -> void:
 	Signals.connect("guiOpenWindow", self, "open")
 	Signals.connect("guiCloseWindow", self, "close")
+	Signals.connect("guiClearWindows", self, "clear")
 
 
 func _process(delta) -> void:
@@ -58,3 +59,13 @@ func removeWindow(window : GuiWindow) -> void:
 		for child in $background.get_children():
 			child.queue_free()
 
+
+func clear() -> void:
+	for child in $background.get_children():
+		child.queue_free()
+	
+	for child in $foreground.get_children():
+		child.queue_free()
+	
+	for child in $permanent.get_children():
+		child.queue_free()
