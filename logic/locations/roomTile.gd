@@ -14,7 +14,6 @@ var portals : Array = [0, 0, 0, 0, 0, 0]
 
 var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
-var alert : float = 0 # from 0 to 1, controls the possibility of a battle ocurring
 
 var friendlyShortNames : Array = [] # present npc short names
 var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
@@ -37,7 +36,7 @@ func _init() -> void:
 		friendSpawns.append(npc)
 
 
-func enter(character : Character) -> void:
+func enter(character : Character, battleTriggered : bool) -> void:
 	visited = true
 	executeScript(entranceLogic, character)
 	
@@ -47,7 +46,6 @@ func enter(character : Character) -> void:
 		for npc in friendSpawns:
 			executeScript(character.characterAproachesScript, npc)
 		
-		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * alert))
 		if !foeShortNameGroups.empty() && battleTriggered:
 			var enemies = []
 			

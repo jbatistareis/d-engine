@@ -12,6 +12,8 @@ var spawns : Array = []
 var entranceLogic : String = NOOP
 var exitLogic : String = NOOP
 
+var encounterRate : float = 0.0
+
 
 func _init() -> void:
 	self.name = 'Base Location'
@@ -20,13 +22,14 @@ func _init() -> void:
 
 # used only by the player
 func enter(player : Character, toSpawnId : int) -> void:
+	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
+	
 	var spawn = findSpawn(toSpawnId)
 	
 	Signals.emit_signal("playerArrivedLocation", self)
 	executeScript(entranceLogic, player)
-	
 	player.currentLocation = shortName
-	findRoom(spawn.toRoomId).enter(player)
+	findRoom(spawn.toRoomId).enter(player, false)
 
 
 func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:
@@ -44,8 +47,10 @@ func move(character : Character, direction : int) -> void:
 	
 	if (exitPoint > 0) && canPass: # move to a room
 		var toRoom = findRoom(exitPoint)
+		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
+		
 		fromRoom.exit(character)
-		toRoom.enter(character)
+		toRoom.enter(character, battleTriggered)
 		Signals.emit_signal("playerChangedRoom", direction)
 		
 		return
@@ -93,4 +98,8 @@ func findSpawn(id : int) -> RoomSpawn:
 	
 	var found = spawns[index]
 	return found if (found.id == id) else null
+
+
+func changeEncounterRate(value : float) -> void:
+	encounterRate = max(0.0, min(value, 1.0))
 

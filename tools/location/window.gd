@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 	LocationEditorSignals.connect("fileOpened", self, "loadLocation")
 	$saveLocation.connect("confirmed", self, "saveLocation")
+	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/GridContainer/sldEncRate.connect("value_changed", self, "changeEncRateLabel")
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnLoad.connect("button_up", self, "openLocationFile")
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnSave.connect("button_up", self, "saveLocationFile")
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnTest.connect("button_up", self, "testLocation")
@@ -51,6 +52,8 @@ func saveLocation() -> void:
 	location.portals = $HSplitContainer/properties/TabContainer/Portals.collectPortals()
 	location.spawns = $HSplitContainer/properties/TabContainer/Spawns.collectSpawns()
 	
+	location.encounterRate = $HSplitContainer/properties/TabContainer/Location/VBoxContainer/GridContainer/sldEncRate.value
+	
 	var path = EntitySaver.saveLocation(location)
 	
 	$fileSavedInfo.dialog_text = 'File saved as \'%s\'' % path
@@ -69,4 +72,8 @@ func testLocation() -> void:
 	
 	$locationTest.popup_centered()
 	LocationEditorSignals.emit_signal("testLocation", location, 0, 0, Enums.Direction.NORTH)
+
+
+func changeEncRateLabel(value : float) -> void:
+	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/GridContainer/lblEncRate.text = ('Enc.: %d' % (value * 100)) + '%'
 

@@ -20,7 +20,6 @@ func _ready() -> void:
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal.connect("value_changed", self, "setEastPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnWestPortal.connect("value_changed", self, "setWestPortal")
 	$VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal.connect("value_changed", self, "setSouthPortal")
-	$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.connect("value_changed", self, "changeAlertLabel")
 	$VBoxContainer/ScrollContainer/VBoxContainer/enemies/txtEnemyGroups.connect("text_changed", self, "txt2EnemyGroups")
 	$VBoxContainer/ScrollContainer/VBoxContainer/friendNpcs/txtFriendNpcs.connect("text_changed", self, "txt2FriendlyGroup")
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.connect("text_changed", self, "setEntranceLogic")
@@ -67,7 +66,6 @@ func setRoom(room : RoomTile) -> void:
 			$VBoxContainer/ScrollContainer/VBoxContainer/mesh/cmbMesh.select(id)
 			break
 	
-	$VBoxContainer/ScrollContainer/VBoxContainer/alert/sldAlert.value = room.alert
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.text = room.entranceLogic
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.text = room.exitLogic
 	
@@ -179,13 +177,6 @@ func setSouthPortal(value : float) -> void:
 func setWestPortal(value : float) -> void:
 	for room in rooms:
 		room.portals[Enums.Direction.WEST] = int(value)
-
-
-func changeAlertLabel(value : float) -> void:
-	for room in rooms:
-		room.alert = value
-	
-	$VBoxContainer/ScrollContainer/VBoxContainer/alert/lblAlert.text = ('Alert: %d' % (value * 100)) + '%'
 
 
 func enemyGroups2Txt(room : RoomTile) -> void:

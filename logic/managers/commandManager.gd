@@ -21,7 +21,7 @@ func _ready():
 
 
 func tick() -> void:
-	if !executingCommand:
+	if !executingCommand && !commandsQueue.empty():
 		Signals.emit_signal("ticked")
 		executingCommand = true
 		
@@ -29,12 +29,11 @@ func tick() -> void:
 			item.tick()
 		
 		var command = commandsQueue.front()
-		if command != null:
-			if command.toBeExecuted:
-				command.run()
-			
-			if command.executed:
-				commandsQueue.pop_front()
+		if command.toBeExecuted:
+			command.run()
+		
+		if command.executed:
+			commandsQueue.pop_front()
 		
 		executingCommand = false
 

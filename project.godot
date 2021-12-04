@@ -107,7 +107,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Enums",
 "language": "GDScript",
-"path": "res://logic/enums.gd"
+"path": "res://enums.gd"
 }, {
 "base": "State",
 "class": "EquipmentState",
@@ -142,12 +142,12 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "GameParameters",
 "language": "GDScript",
-"path": "res://logic/gameParameters.gd"
+"path": "res://gameParameters.gd"
 }, {
 "base": "Reference",
 "class": "GamePaths",
 "language": "GDScript",
-"path": "res://logic/gamePaths.gd"
+"path": "res://gamePaths.gd"
 }, {
 "base": "GuiWidget",
 "class": "GuiButtonWidget",
@@ -267,17 +267,17 @@ _global_script_classes=[ {
 "base": "Entity",
 "class": "RoomPortal",
 "language": "GDScript",
-"path": "res://logic/locations/portal.gd"
+"path": "res://logic/locations/roomPortal.gd"
 }, {
 "base": "Entity",
 "class": "RoomSpawn",
 "language": "GDScript",
-"path": "res://logic/locations/spawn.gd"
+"path": "res://logic/locations/roomSpawn.gd"
 }, {
 "base": "Entity",
 "class": "RoomTile",
 "language": "GDScript",
-"path": "res://logic/locations/room.gd"
+"path": "res://logic/locations/roomTile.gd"
 }, {
 "base": "State",
 "class": "RotateLeftState",
@@ -420,8 +420,8 @@ default_bus_layout=""
 
 [autoload]
 
-Signals="*res://logic/signals.gd"
-Dice="*res://logic/dice.gd"
+Signals="*res://signals.gd"
+Dice="*res://dice.gd"
 SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"
 LocationManager="*res://logic/managers/locationManager.gd"
 BattleManager="*res://logic/managers/battleManager.gd"

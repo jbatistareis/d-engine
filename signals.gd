@@ -4,6 +4,7 @@ extends Node
 signal playerStartedAtLocation(playerCharacter, locationName, toSpawnId) # use to spawn a player and start the simulation at a location
 signal playerMoved(direction) # used to move the player arround rooms, not used with player inputs
 signal characterMoved(character, direction) # use to move any other character arround rooms
+signal changedEncounterRate(value)
 # listen to get annoucements
 signal playerArrivedLocation(location) # fired when a player spawns
 signal playerLeftLocation(location) # fired when a player leaves a location
