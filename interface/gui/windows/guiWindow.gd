@@ -44,6 +44,11 @@ func _ready() -> void:
 			break
 		index += 1
 	
+	if position == Vector2.INF:
+		position = GuiOverlayManager.windowSize() * 0.5 - (rect_min_size * 0.5)
+	
+	rect_position = position
+	
 	add_child(shadow)
 	add_child(bg)
 	add_child(vBox)
@@ -53,11 +58,6 @@ func _enter_tree() -> void:
 	yield(get_tree(), "idle_frame")
 	
 	rect_min_size = vBox.rect_size
-	
-	if position == Vector2.INF:
-		position = GuiOverlayManager.windowSize() * 0.5 - (rect_min_size * 0.5)
-	
-	rect_position = position
 	
 	bg.rect_min_size = rect_min_size
 	shadow.rect_min_size = rect_min_size

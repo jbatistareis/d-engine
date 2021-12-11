@@ -9,12 +9,11 @@ func _ready() -> void:
 	
 	Signals.connect("setupBattleScreen", self, "setup")
 	Signals.connect("battleEnded", self, "finish")
-	Signals.connect("askedPlayerBattleInput", self, "showPlayerMenu")
 	Signals.connect("showBattleResult", self, "showBattleResult")
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-	for node in $ViewportContainer/Viewport/enemies.get_children():
+	for node in $ViewportContainer/Viewport/arena/enemies.get_children():
 		for enemy in node.get_children():
 			enemy.queue_free()
 	
@@ -33,7 +32,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	enemyFrameSize = Vector2(width, heigth)
 
 	var index = 0
-	for enemyNode in $ViewportContainer/Viewport/enemies.get_children():
+	for enemyNode in $ViewportContainer/Viewport/arena/enemies.get_children():
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName].instance()
 			scene.character = enemyData[index]

@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="PlaneMesh" id=4]
+size = Vector2( 45, 50 )
+
+[node name="arena" type="Spatial"]
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 1, 0 )
+fov = 54.0
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 4 )
+shadow_enabled = true
+spot_range = 40.0
+
+[node name="enemies" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
+
+[node name="enemy1" type="Spatial" parent="enemies"]
+
+[node name="enemy2" type="Spatial" parent="enemies"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 1.5, 0, 0 )
+
+[node name="enemy3" type="Spatial" parent="enemies"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.5, 0, 0 )
+
+[node name="enemy4" type="Spatial" parent="enemies"]
+transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 0, 0 )
+
+[node name="enemy5" type="Spatial" parent="enemies"]
+transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -3, 0, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -20 )
+mesh = SubResource( 4 )
+material/0 = null

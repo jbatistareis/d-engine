@@ -1,13 +1,13 @@
 class_name Move
 
-const _INTERNAL_MOVE_SCRIPT_NOOP_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn -character.strength.score'
-const _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
+const _BASE_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn -character.strength.score'
+const _BASE_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
 
-var name : String = 'NOOP move'
-var description : String = 'Placeholder move'
+var name : String = 'Punch'
+var description : String = 'A weak punch'
 
-var valueExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_VALUE
-var outcomeExpression : String = _INTERNAL_MOVE_SCRIPT_NOOP_OUTCOME
+var valueExpression : String = _BASE_VALUE
+var outcomeExpression : String = _BASE_OUTCOME
 
 var cdPre : int = 5
 var cdPost : int = 5
