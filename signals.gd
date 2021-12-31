@@ -59,6 +59,9 @@ signal playerConfirmedBattleInput(command) # use when the player picks a command
 # used as internal communication, dont fire, or listen to then
 signal setupBattleScreen(players, enemies)
 signal battleScreenReady()
+signal battleCursorOpen(player, move)
+signal battleCursorConfirm(player, move, targets) # targets is an array
+signal battleCursorCancel()
 signal showBattleResult(players, battleResult)
 signal startedBattleAnimation(character, animation)
 signal finishedBattleAnimation(character)

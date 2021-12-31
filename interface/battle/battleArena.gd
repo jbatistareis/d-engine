@@ -1,6 +1,7 @@
 extends Spatial
 
 const ENEMY_FRAME_RATIO : float = 1.875
+const ENEMY_MAP : Array = [2, 3, 1, 4, 0]
 var enemyFrameSize : Vector2
 
 
@@ -30,13 +31,12 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	var width = GuiOverlayManager.windowSize().x / 5
 	var heigth = width * ENEMY_FRAME_RATIO
 	enemyFrameSize = Vector2(width, heigth)
-
-	var index = 0
-	for enemyNode in $ViewportContainer/Viewport/arena/enemies.get_children():
+	
+	for index in range(5):
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName].instance()
 			scene.character = enemyData[index]
-			enemyNode.add_child(scene)
+			$ViewportContainer/Viewport/arena/enemies.get_child(ENEMY_MAP[index]).add_child(scene)
 		
 		index += 1
 		if index > enemyData.size() - 1:

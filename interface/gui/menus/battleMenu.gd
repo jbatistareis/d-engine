@@ -40,5 +40,5 @@ func windowConfirmed() -> void:
 			pass #TODO
 		
 		_: # normal move
-			yield(get_tree(), "idle_frame")
+			Signals.emit_signal("battleCursorOpen", character, data)
 
