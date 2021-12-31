@@ -4,9 +4,8 @@ extends GuiWindow
 
 # TODO build a table
 func _init(battleResult : BattleResult) -> void:
-	
 	widgets.append_array([
-		GuiTextWidget.new('TODO'),
+		GuiTextWidget.new('TODO Battle Result'),
 		GuiButtonWidget.new('Close', Enums.GuiAction.CONFIRM)
 	])
 	

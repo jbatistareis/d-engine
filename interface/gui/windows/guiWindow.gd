@@ -26,6 +26,7 @@ func _ready() -> void:
 		Signals.connect("guiUp", self, "action", [InputType.UP])
 		Signals.connect("guiDown", self, "action", [InputType.DOWN])
 		Signals.connect("guiSelect", self, "select")
+		Signals.connect("guiCancel", self, "cancel")
 	
 	bg.color = GuiTheme.BG_COLOR
 	
@@ -96,6 +97,14 @@ func confirm(source : GuiButtonWidget) -> void:
 					data[widget.identifier] = widget.data
 		
 		windowConfirmed()
+		
+		if source.closeOnConfirm:
+			Signals.emit_signal("guiCloseWindow")
+
+
+func cancel(source : GuiButtonWidget) -> void:
+	if GuiOverlayManager.isCurrentWindow(self) && widgets.has(source):
+		windowClosed()
 		Signals.emit_signal("guiCloseWindow")
 
 
@@ -106,5 +115,11 @@ func setPostion(value : Vector2) -> void:
 
 # override
 func windowConfirmed() -> void:
+	pass
+
+
+
+# override
+func windowClosed() -> void:
 	pass
 

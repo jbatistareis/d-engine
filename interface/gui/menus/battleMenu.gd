@@ -2,13 +2,12 @@ class_name BattleMenu
 extends GuiWindow
 
 var character : Character
+var item = Move.new()
+var defend = Move.new()
 
 
 func _init(character : Character) -> void:
 	self.character = character
-	# TODO create real moves
-	var item = Move.new()
-	var defend = Move.new()
 	
 	item.name = 'Item'
 	item.description = 'Use an item from your inventory'
@@ -19,7 +18,10 @@ func _init(character : Character) -> void:
 	for move in character.moves:
 		widgets.append(GuiMoveButtonWidget.new(move))
 	
-	widgets.append(GuiMoveButtonWidget.new(item))
+	var itemButton = GuiMoveButtonWidget.new(item)
+	itemButton.closeOnConfirm = false
+	
+	widgets.append(itemButton)
 	widgets.append(GuiMoveButtonWidget.new(defend))
 	
 	position = Vector2(
@@ -28,8 +30,15 @@ func _init(character : Character) -> void:
 	)
 
 
+# data == chosen move
 func windowConfirmed() -> void:
-#	playerConfirmedBattleInput
-	# TODO ask which target
-	pass
+	match data:
+		item:
+			Signals.emit_signal("guiOpenWindow", ItemsWindow.new(character))
+		
+		defend:
+			pass #TODO
+		
+		_: # normal move
+			yield(get_tree(), "idle_frame")
 

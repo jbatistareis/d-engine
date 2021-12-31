@@ -79,12 +79,12 @@ signal guiOpenWindow(window)
 signal guiCloseWindow()
 signal guiClearWindows()
 signal guiConfirm(source)
+signal guiCancel(source)
 # inputs used to move the cursor
 signal guiUp()
 signal guiDown()
 signal guiLeft()
 signal guiRight()
 signal guiSelect()
-signal guiCancel()
 signal guiHover(data) # listen to get which item the player has his cursor over
 

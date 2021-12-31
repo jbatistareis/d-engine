@@ -7,6 +7,7 @@ var hover : bool = false
 # presentation
 var text : String
 var action : int
+var closeOnConfirm : bool = true
 
 # common metadata
 var identifier : String
@@ -68,6 +69,7 @@ func action() -> void:
 	if !disabled:
 		match action:
 			Enums.GuiAction.CANCEL:
+				Signals.emit_signal("guiCancel", self)
 				Signals.emit_signal("guiCloseWindow")
 			
 			Enums.GuiAction.CONFIRM:
