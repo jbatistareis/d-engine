@@ -3,9 +3,8 @@ extends State
 
 
 func handleInput() -> void:
-	if (!GameManager.cameraMoving):
+	if GameManager.canMove():
 		Signals.emit_signal("playerRotatedLeft")
 		
-	if Input.is_action_just_released("ui_left"):
-		next = GameManager.getState(Enums.States.IDLE)
+	next = GameManager.getState(Enums.States.IDLE)
 

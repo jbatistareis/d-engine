@@ -12,6 +12,10 @@ func _ready() -> void :
 	Signals.connect("battleStarted", self, "startBattleState")
 
 
+func canMove() -> bool:
+	return !cameraMoving && !BattleManager.inBattle
+
+
 func setDirection(value : int) -> void:
 	var correctedValue = value if (value > -1) else 3
 	direction = correctedValue % 4
@@ -64,7 +68,6 @@ func getState(id : int) -> State:
 
 
 func _physics_process(delta) -> void:
-	if currentState != null:
-		currentState.handleInput()
-		currentState = currentState.next
+	currentState.handleInput()
+	currentState = currentState.next
 

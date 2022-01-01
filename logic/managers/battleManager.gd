@@ -69,9 +69,8 @@ func confirmInput(player : Character, targets : Array, move : Move) -> void:
 func enemiesAlive() -> int:
 	var result = 0
 	for enemy in enemies:
-		if enemy != null:
-			if enemy.currentHp > 0:
-				result += 1
+		if (enemy != null) && (enemy.currentHp > 0):
+			result += 1
 	
 	return result
 

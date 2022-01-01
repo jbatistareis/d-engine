@@ -8,7 +8,7 @@ func _init() -> void:
 
 
 func handleInput() -> void:
-	if (!GameManager.cameraMoving):
+	if GameManager.canMove():
 		var direction = (GameManager.direction + 2) % 4
 		
 		if GameManager.testing:
@@ -16,8 +16,7 @@ func handleInput() -> void:
 		else:
 			Signals.emit_signal("playerMoved", direction)
 		
-	if Input.is_action_just_released("ui_down"):
-		next = GameManager.getState(Enums.States.IDLE)
+	idle()
 
 
 func move(direction : int) -> void:
