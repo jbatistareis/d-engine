@@ -30,7 +30,7 @@ func changeLocation(newLocationName : String, toSpawnId : int) -> void:
 
 
 func movePlayer(direction : int) -> void:
-	if (player != null) && (location != null):
+	if !BattleManager.inBattle && (player != null) && (location != null):
 		location.move(player, direction)
 
 

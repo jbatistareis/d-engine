@@ -51,6 +51,9 @@ func reset(players, enemies) -> void:
 
 
 func publishCommand(command : Command) -> void:
+	if command.executorCharacter.currentHp <= 0:
+		return
+	
 	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand):
 		Signals.emit_signal("characterPosTimerSet", command.executorCharacter, command.totalTicks)
 	else:

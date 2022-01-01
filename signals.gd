@@ -55,13 +55,11 @@ signal characterPosTimerSet(character, ticks) # use to set a character (friend o
 signal characterTimerPaused(character) # use to pause a character (friend or foe) battle timeline
 signal characterTimerResumed(character) # use to resume a character (friend or foe) battle timeline
 signal askedPlayerBattleInput(character) # use as a cue show a command window
-signal playerConfirmedBattleInput(command) # use when the player picks a command
 # used as internal communication, dont fire, or listen to then
 signal setupBattleScreen(players, enemies)
 signal battleScreenReady()
 signal battleCursorOpen(player, move)
-signal battleCursorConfirm(player, move, targets) # targets is an array
-signal battleCursorCancel()
+signal battleCursorConfirm(player, targets, move) # targets is an array
 signal showBattleResult(players, battleResult)
 signal startedBattleAnimation(character, animation)
 signal finishedBattleAnimation(character)

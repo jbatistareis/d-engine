@@ -3,18 +3,29 @@ extends Spatial
 const ENEMY_FRAME_RATIO : float = 1.875
 const ENEMY_MAP : Array = [2, 3, 1, 4, 0]
 var enemyFrameSize : Vector2
+onready var enemiesNode : Node = $ViewportContainer/Viewport/arena/enemies
+
+var cursorOn : bool = false
+var cursorPos : int = 0
+var cursorPlayer : Character
+var cursorMove : Move
 
 
 func _ready() -> void:
 	$ViewportContainer/Viewport.size = GuiOverlayManager.windowSize()
 	
 	Signals.connect("setupBattleScreen", self, "setup")
+	Signals.connect("battleCursorOpen", self, "showCursor")
+	Signals.connect("guiLeft", self, "moveCursor", [Enums.Direction.EAST])
+	Signals.connect("guiRight", self, "moveCursor", [Enums.Direction.WEST])
+	Signals.connect("guiSelect", self, "confirmCursor")
+	Signals.connect("guiCancel", self, "hideCursor")
 	Signals.connect("battleEnded", self, "finish")
 	Signals.connect("showBattleResult", self, "showBattleResult")
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-	for node in $ViewportContainer/Viewport/arena/enemies.get_children():
+	for node in enemiesNode.get_children():
 		for enemy in node.get_children():
 			enemy.queue_free()
 	
@@ -36,7 +47,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName].instance()
 			scene.character = enemyData[index]
-			$ViewportContainer/Viewport/arena/enemies.get_child(ENEMY_MAP[index]).add_child(scene)
+			enemiesNode.get_child(ENEMY_MAP[index]).add_child(scene)
 		
 		index += 1
 		if index > enemyData.size() - 1:
@@ -44,6 +55,53 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	
 	yield(get_tree(), "idle_frame")
 	Signals.emit_signal("battleScreenReady")
+
+
+func showCursor(player : Character, move : Move) -> void:
+	if !cursorOn:
+		# TODO error out if no one is alive
+		for index in range(5):
+			if enemiesNode.get_child(ENEMY_MAP[index]).get_child_count() == 0:
+				break
+			
+			if enemiesNode.get_child(ENEMY_MAP[index]).get_child(0).character.currentHp > 0:
+				cursorPos = index
+				break
+		
+		cursorPlayer = player
+		cursorMove = move
+		cursorOn = true
+
+
+# TODO fix this repetition
+# TODO error out if no one is alive
+func moveCursor(direction : int) -> void:
+	var newPos = cursorPos
+	
+	if direction == Enums.Direction.EAST: # left
+		newPos = (newPos - 1) if newPos > 0 else 4
+	elif direction == Enums.Direction.WEST: # right
+		newPos = (newPos + 1) if newPos < 4 else 0
+	
+	while (enemiesNode.get_child(ENEMY_MAP[newPos]).get_child_count() == 0) || (enemiesNode.get_child(ENEMY_MAP[newPos]).get_child(0).character.currentHp == 0):
+		if direction == Enums.Direction.EAST: # left
+			newPos = (newPos - 1) if newPos > 0 else 4
+		elif direction == Enums.Direction.WEST: # right
+			newPos = (newPos + 1) if newPos < 4 else 0
+	
+	cursorPos = newPos
+
+
+func confirmCursor() -> void:
+	if cursorOn:
+		Signals.emit_signal("battleCursorConfirm", cursorPlayer, [enemiesNode.get_child(ENEMY_MAP[cursorPos]).get_child(0).character], cursorMove)
+		cursorOn = false
+
+
+func hideCursor() -> void:
+	if cursorOn:
+		cursorOn = false
+		Signals.emit_signal("askedPlayerBattleInput", cursorPlayer)
 
 
 func finish() -> void:

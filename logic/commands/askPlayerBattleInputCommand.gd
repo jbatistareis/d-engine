@@ -7,5 +7,10 @@ func _init(player, ticks : int).(player, ticks) -> void:
 
 
 func execute() -> void:
+	if !BattleManager.inBattle:
+		executed = true
+		toBeExecuted = false
+		return
+	
 	Signals.emit_signal("askedPlayerBattleInput", executorCharacter)
 

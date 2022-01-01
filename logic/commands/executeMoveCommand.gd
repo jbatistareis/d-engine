@@ -17,6 +17,11 @@ func published() -> void:
 
 
 func execute() -> void:
+	if !BattleManager.inBattle:
+		executed = true
+		toBeExecuted = false
+		return
+	
 	var moveResult
 	for target in targets:
 		currentTarget = target

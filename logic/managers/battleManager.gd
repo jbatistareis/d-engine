@@ -8,7 +8,7 @@ var inBattle : bool = false
 func _ready():
 	Signals.connect("battleStarted", self, "start")
 	Signals.connect("askedPlayerBattleInput", self, "openMovesWindow")
-	Signals.connect("playerConfirmedBattleInput", self, "confirmInput")
+	Signals.connect("battleCursorConfirm", self, "confirmInput")
 
 
 func start(players : Array, enemies : Array) -> void:
@@ -39,6 +39,7 @@ func _physics_process(delta) -> void:
 
 func end() -> void:
 	if inBattle:
+		inBattle = false
 		var battleResult = BattleResult.new()
 		
 		for enemy in enemies:
@@ -53,7 +54,6 @@ func end() -> void:
 		
 		players.clear()
 		enemies.clear()
-		inBattle = false
 
 
 func openMovesWindow(player : Character) -> void:
@@ -61,8 +61,8 @@ func openMovesWindow(player : Character) -> void:
 	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
 
 
-func confirmInput(command : Command) -> void:
-	Signals.emit_signal("commandPublished", command)
+func confirmInput(player : Character, targets : Array, move : Move) -> void:
+	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
 	Signals.emit_signal("commandsResumed")
 
 

@@ -7,6 +7,11 @@ func _init(executorCharacter, ticks : int).(executorCharacter, ticks) -> void:
 
 
 func execute() -> void:
+	if !BattleManager.inBattle:
+		executed = true
+		toBeExecuted = false
+		return
+	
 	if executorCharacter.verdictActive:
 		var suspects
 		
