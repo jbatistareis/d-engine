@@ -5,6 +5,7 @@ onready var timer : Timer = Timer.new()
 var paused : bool = false
 var executingCommand : bool = false
 var commandsQueue : Array = []
+var newCommands : Array = []
 
 
 func _ready():
@@ -12,7 +13,6 @@ func _ready():
 	Signals.connect("commandsResumed", self, "resume")
 	Signals.connect("commandPublished", self, "publishCommand")
 	Signals.connect("battleStarted", self, "reset")
-	Signals.connect("battleEnded", self, "reset", [true, true])
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
@@ -21,21 +21,34 @@ func _ready():
 
 
 func tick() -> void:
-	if !executingCommand && !commandsQueue.empty():
-		Signals.emit_signal("ticked")
-		executingCommand = true
+	if !executingCommand:
+		if !commandsQueue.empty():
+			executingCommand = true
+			
+			for item in commandsQueue:
+				item.tick()
+			
+			var command = commandsQueue.back()
+			if command.toBeExecuted:
+				command.run()
+			
+			if command.executed:
+				commandsQueue.pop_back()
+			
+			executingCommand = false
 		
-		for item in commandsQueue:
-			item.tick()
-		
-		var command = commandsQueue.front()
-		if command.toBeExecuted:
-			command.run()
-		
-		if command.executed:
-			commandsQueue.pop_front()
-		
-		executingCommand = false
+		while !newCommands.empty():
+			var command = newCommands.pop_front()
+			
+			if command is ExecuteMoveCommand:
+				Signals.emit_signal("characterPreTimerSet", command.executorCharacter, command.totalTicks)
+			else:
+				Signals.emit_signal("characterPosTimerSet", command.executorCharacter, command.totalTicks)
+			
+			commandsQueue.append(command)
+			commandsQueue.sort_custom(CommandArrayHelper, 'tickSortReverse')
+			
+			command.published()
 
 
 func pause() -> void:
@@ -54,13 +67,5 @@ func publishCommand(command : Command) -> void:
 	if command.executorCharacter.currentHp <= 0:
 		return
 	
-	if (command is AskPlayerBattleInputCommand) || (command is VerdictCommand):
-		Signals.emit_signal("characterPosTimerSet", command.executorCharacter, command.totalTicks)
-	else:
-		Signals.emit_signal("characterPreTimerSet", command.executorCharacter, command.totalTicks)
-	
-	commandsQueue.append(command)
-	commandsQueue.sort_custom(CommandArrayHelper, 'tickSort')
-	
-	command.published()
+	newCommands.append(command)
 

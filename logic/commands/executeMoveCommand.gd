@@ -31,8 +31,10 @@ func execute() -> void:
 		
 		# TODO player animations
 		if executorCharacter.type != Enums.CharacterType.PC:
-			yield(Signals, "finishedBattleAnimation")
+			while yield(Signals, "finishedBattleAnimation") != executorCharacter:
+				pass
 		
+		# TODO enemy/player hit animations
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:
 				Signals.emit_signal("startedBattleAnimation", target, 'damage')
