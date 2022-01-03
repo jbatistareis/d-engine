@@ -45,9 +45,6 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 	
 	add_child(bg)
 	add_child(label)
-	
-	bg.anchor_bottom = 1
-	bg.anchor_right = 1
 
 
 func _ready() -> void:
@@ -63,6 +60,7 @@ func _process(delta : float) -> void:
 
 func fitWidth(value : float) -> void:
 	rect_min_size.x = value
+	bg.rect_min_size = rect_min_size
 
 
 func action() -> void:

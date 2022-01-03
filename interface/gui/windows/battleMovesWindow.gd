@@ -1,4 +1,4 @@
-class_name BattleMenu
+class_name BattleMovesWindow
 extends GuiWindow
 
 var character : Character
@@ -23,9 +23,11 @@ func _init(character : Character) -> void:
 	itemButton.closeOnConfirm = false
 	
 	position = Vector2(
-		GuiOverlayManager.windowSize().x * 0.18,
-		GuiOverlayManager.windowSize().y * 0.3
+		350,
+		GuiOverlayManager.windowSize().y - 157
 	)
+	
+	lines = 3
 
 
 # data == chosen move

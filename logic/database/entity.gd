@@ -5,4 +5,4 @@ var shortName : String = 'ENTITY' setget setShortName
 
 
 func setShortName(value : String) -> void:
-	shortName = value.substr(0, 6).to_upper()
+	shortName = value.substr(0, 10).to_upper()

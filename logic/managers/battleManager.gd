@@ -13,6 +13,7 @@ func _ready():
 
 func start(players : Array, enemies : Array) -> void:
 	if !inBattle:
+		Signals.emit_signal("commandsPaused")
 		inBattle = true
 		
 		self.players = players
@@ -24,12 +25,14 @@ func start(players : Array, enemies : Array) -> void:
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:
 			if player.verdictActive:
-				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 10))
+				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
 			else:
-				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 10))
+				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
 		
 		for enemy in enemies:
-			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10))
+			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
+		
+		Signals.emit_signal("commandsResumed")
 
 
 func _physics_process(delta) -> void:
@@ -57,8 +60,7 @@ func end() -> void:
 
 
 func openMovesWindow(player : Character) -> void:
-	Signals.emit_signal("commandsPaused")
-	Signals.emit_signal("guiOpenWindow", BattleMenu.new(player))
+	Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(player))
 
 
 func confirmInput(player : Character, targets : Array, move : Move) -> void:

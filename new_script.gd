@@ -15,6 +15,7 @@ func _ready() -> void:
 	player.baseHp = 1000
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
+	player.moves.append_array([Move.new(), Move.new(), Move.new(), Move.new(), Move.new()])
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	

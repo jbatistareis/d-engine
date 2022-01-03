@@ -41,6 +41,9 @@ func addWindow(window : GuiWindow) -> void:
 		
 		Enums.GuiWindowType.PERMANENT:
 			$permanent.add_child(window)
+	
+	window.setContent()
+	window.fit()
 
 
 func removeWindow(window : GuiWindow) -> void:

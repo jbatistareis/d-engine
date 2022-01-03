@@ -25,9 +25,14 @@ _global_script_classes=[ {
 "path": "res://logic/commands/askPlayerBattleInputCommand.gd"
 }, {
 "base": "GuiWindow",
-"class": "BattleMenu",
+"class": "BattleCursorWindow",
 "language": "GDScript",
-"path": "res://interface/gui/menus/battleMenu.gd"
+"path": "res://interface/gui/windows/battleCursorWindow.gd"
+}, {
+"base": "GuiWindow",
+"class": "BattleMovesWindow",
+"language": "GDScript",
+"path": "res://interface/gui/windows/battleMovesWindow.gd"
 }, {
 "base": "Reference",
 "class": "BattleResult",
@@ -338,7 +343,8 @@ _global_script_class_icons={
 "Action": "",
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
-"BattleMenu": "",
+"BattleCursorWindow": "",
+"BattleMovesWindow": "",
 "BattleResult": "",
 "BattleResultWindow": "",
 "BattleState": "",
@@ -429,7 +435,7 @@ GuiTheme="*res://interface/gui/guiTheme.gd"
 
 [display]
 
-window/size/width=1280
+window/size/width=1080
 window/size/height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
