@@ -2,6 +2,7 @@
 
 [ext_resource path="res://assets/kenney_prototypetextures/Light/texture_07.png" type="Texture" id=1]
 [ext_resource path="res://interface/battle/arena.gd" type="Script" id=2]
+[ext_resource path="res://interface/battle/arenaEnvironment.tres" type="Environment" id=3]
 
 [sub_resource type="Animation" id=8]
 length = 0.001
@@ -15,7 +16,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 0.5 ) ]
+"values": [ Vector3( 0, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -31,19 +32,8 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 0.5 ), Vector3( 0, 1, 1.5 ) ]
+"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 1 ) ]
 }
-
-[sub_resource type="Environment" id=5]
-background_mode = 1
-background_sky_orientation = Basis( -1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1 )
-background_sky_rotation = Vector3( 0, 3.14159, 0 )
-background_sky_rotation_degrees = Vector3( 0, 180, 0 )
-fog_color = Color( 0, 0, 0, 0 )
-fog_sun_color = Color( 1, 1, 1, 1 )
-fog_depth_begin = 5.0
-fog_depth_end = 25.0
-ss_reflections_enabled = true
 
 [sub_resource type="CylinderMesh" id=6]
 height = 0.5
@@ -63,8 +53,8 @@ anims/RESET = SubResource( 8 )
 anims/exit = SubResource( 10 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.5 )
-environment = SubResource( 5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+environment = ExtResource( 3 )
 current = true
 fov = 54.0
 size = 0.1

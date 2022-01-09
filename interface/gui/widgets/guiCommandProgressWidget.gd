@@ -66,7 +66,6 @@ func progress(percent : float) -> void:
 
 func beginPre(character : Character, ticks : int) -> void:
 	if character == self.character:
-		yield(get_tree(), "idle_frame")
 		bar1.color = GuiTheme.COMMAND_PRG_PRE
 		bar2.color = GuiTheme.COMMAND_PRG_POS
 		bar1.rect_size.x = 0
@@ -76,7 +75,6 @@ func beginPre(character : Character, ticks : int) -> void:
 
 func beginPos(character : Character, ticks : int) -> void:
 	if character == self.character:
-		yield(get_tree(), "idle_frame")
 		bar1.color = GuiTheme.COMMAND_PRG_POS
 		bar2.color = GuiTheme.COMMAND_PRG_PRE
 		bar1.rect_size.x = 0
