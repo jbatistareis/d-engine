@@ -11,11 +11,9 @@ func _ready() -> void:
 	
 	print('TEST START')
 	
-	player.currentHp = 1000
-	player.baseHp = 1000
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
-	player.moves.append_array([Move.new(), Move.new(), Move.new(), Move.new(), Move.new()])
+	player.moves.append_array([Move.new()])
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	

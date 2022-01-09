@@ -18,7 +18,7 @@ func handleInput() -> void:
 	elif Input.is_action_just_pressed("ui_accept"):
 		Signals.emit_signal("guiSelect")
 	elif Input.is_action_just_pressed("ui_cancel"):
-		Signals.emit_signal("guiCancel")
+		Signals.emit_signal("guiCancel", null)
 
 
 func exitState() -> void:

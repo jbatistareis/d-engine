@@ -30,7 +30,6 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 	self.disabled = disabled
 	
 	label.set("custom_colors/font_color", GuiTheme.TEXT_COLOR)
-	label.add_font_override('font', GuiTheme.font)
 	label.text = text
 	
 	match action:

@@ -2,18 +2,18 @@ class_name Armor
 extends Entity
 
 var name : String
-var protection : int
+var maxProtection : int
 var currentProtection : int
 
 var plateValue : int
 
 
 #armor items equip the character when interacted
-func _init(id : int, name : String, protection : int = 0) -> void:
+func _init(id : int, name : String, maxProtection : int = 0) -> void:
 	self.name = name
-	self.protection = protection if (protection >= 5) else 5
-	self.currentProtection = protection
-	self.plateValue = floor(protection / 5)
+	self.maxProtection = maxProtection if (maxProtection >= 5) else 5
+	self.currentProtection = maxProtection
+	self.plateValue = floor(maxProtection / 5)
 
 
 # returns the amount of damage to the character body

@@ -1,11 +1,11 @@
 class_name BattleMovesWindow
 extends GuiWindow
 
-var character : Character
+var character
 var item = Move.new()
 
 
-func _init(character : Character) -> void:
+func _init(character) -> void:
 	self.character = character
 	
 	item.name = 'Item'
@@ -23,7 +23,7 @@ func _init(character : Character) -> void:
 	itemButton.closeOnConfirm = false
 	
 	position = Vector2(
-		350,
+		560,
 		GuiOverlayManager.windowSize().y - 157
 	)
 	

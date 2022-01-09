@@ -14,7 +14,6 @@ func _init(text : String) -> void:
 		for i in strArr.size():
 			var label = Label.new()
 			label.set("custom_colors/font_color", GuiTheme.TEXT_COLOR)
-			label.add_font_override('font', GuiTheme.font)
 			label.size_flags_horizontal = SIZE_EXPAND_FILL
 			label.text = strArr[i]
 			

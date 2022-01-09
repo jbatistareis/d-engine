@@ -36,7 +36,7 @@ func _init() -> void:
 		friendSpawns.append(npc)
 
 
-func enter(character : Character, battleTriggered : bool) -> void:
+func enter(character, battleTriggered : bool) -> void:
 	visited = true
 	executeScript(entranceLogic, character)
 	
@@ -61,7 +61,7 @@ func enter(character : Character, battleTriggered : bool) -> void:
 			Signals.emit_signal("battleStarted", [character], enemies) # TODO form a player party
 
 
-func exit(character : Character) -> void:
+func exit(character) -> void:
 	if character.type == Enums.CharacterType.PC:
 		for npc in friendSpawns:
 			executeScript(npc.characterLeavesScript, character)
@@ -69,7 +69,7 @@ func exit(character : Character) -> void:
 	executeScript(exitLogic, character)
 
 
-func executeScript(script : String, character : Character) -> void:
+func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 

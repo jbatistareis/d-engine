@@ -30,9 +30,19 @@ _global_script_classes=[ {
 "path": "res://interface/gui/windows/battleCursorWindow.gd"
 }, {
 "base": "GuiWindow",
+"class": "BattleEnemiesWindow",
+"language": "GDScript",
+"path": "res://interface/gui/windows/battleEnemiesWindow.gd"
+}, {
+"base": "GuiWindow",
 "class": "BattleMovesWindow",
 "language": "GDScript",
 "path": "res://interface/gui/windows/battleMovesWindow.gd"
+}, {
+"base": "GuiWindow",
+"class": "BattlePlayersWindow",
+"language": "GDScript",
+"path": "res://interface/gui/windows/battlePlayersWindow.gd"
 }, {
 "base": "Reference",
 "class": "BattleResult",
@@ -48,16 +58,6 @@ _global_script_classes=[ {
 "class": "BattleState",
 "language": "GDScript",
 "path": "res://logic/game/states/battleState.gd"
-}, {
-"base": "GuiWindow",
-"class": "BattleTimerEnemiesWindow",
-"language": "GDScript",
-"path": "res://interface/gui/windows/battleTimerEnemiesWindow.gd"
-}, {
-"base": "GuiWindow",
-"class": "BattleTimerPlayersWindow",
-"language": "GDScript",
-"path": "res://interface/gui/windows/battleTimerPlayersWindow.gd"
 }, {
 "base": "State",
 "class": "BootState",
@@ -160,9 +160,9 @@ _global_script_classes=[ {
 "path": "res://interface/gui/widgets/guiButtonWidget.gd"
 }, {
 "base": "GuiWidget",
-"class": "GuiCommandProgressWidget",
+"class": "GuiCharVitalsWidget",
 "language": "GDScript",
-"path": "res://interface/gui/widgets/guiCommandProgressWidget.gd"
+"path": "res://interface/gui/widgets/guiCharVitalsWidget.gd"
 }, {
 "base": "GuiButtonWidget",
 "class": "GuiMoveButtonWidget",
@@ -344,12 +344,12 @@ _global_script_class_icons={
 "Armor": "",
 "AskPlayerBattleInputCommand": "",
 "BattleCursorWindow": "",
+"BattleEnemiesWindow": "",
 "BattleMovesWindow": "",
+"BattlePlayersWindow": "",
 "BattleResult": "",
 "BattleResultWindow": "",
 "BattleState": "",
-"BattleTimerEnemiesWindow": "",
-"BattleTimerPlayersWindow": "",
 "BootState": "",
 "Character": "",
 "CharacterQuery": "",
@@ -370,7 +370,7 @@ _global_script_class_icons={
 "GameParameters": "",
 "GamePaths": "",
 "GuiButtonWidget": "",
-"GuiCommandProgressWidget": "",
+"GuiCharVitalsWidget": "",
 "GuiMoveButtonWidget": "",
 "GuiTextWidget": "",
 "GuiWidget": "",
@@ -431,7 +431,7 @@ LocationEditorSignals="*res://tools/location/locationEditorSignals.gd"
 LocationIdGenerator="*res://tools/location/locationIdGenerator.gd"
 GameManager="*res://logic/managers/gameManager.gd"
 GuiOverlayManager="*res://interface/gui/guiOverlayManager.gd"
-GuiTheme="*res://interface/gui/guiTheme.gd"
+GuiTheme="*res://guiTheme.gd"
 
 [display]
 
@@ -444,6 +444,10 @@ window/stretch/aspect="keep"
 
 fps=false
 ligh=false
+
+[gui]
+
+theme/custom_font="res://assets/font/IBMPlexMonoMedium.tres"
 
 [input]
 

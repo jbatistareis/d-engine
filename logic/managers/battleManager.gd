@@ -7,7 +7,6 @@ var inBattle : bool = false
 
 func _ready():
 	Signals.connect("battleStarted", self, "start")
-	Signals.connect("askedPlayerBattleInput", self, "openMovesWindow")
 	Signals.connect("battleCursorConfirm", self, "confirmInput")
 
 
@@ -59,11 +58,7 @@ func end() -> void:
 		enemies.clear()
 
 
-func openMovesWindow(player : Character) -> void:
-	Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(player))
-
-
-func confirmInput(player : Character, targets : Array, move : Move) -> void:
+func confirmInput(player, targets : Array, move : Move) -> void:
 	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
 	Signals.emit_signal("commandsResumed")
 

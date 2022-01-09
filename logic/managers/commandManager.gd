@@ -25,12 +25,11 @@ func tick() -> void:
 		if !commandsQueue.empty():
 			executingCommand = true
 			
-			for item in commandsQueue:
-				item.tick()
+			for command in commandsQueue:
+				command.tick()
 			
 			var command = commandsQueue.back()
-			if command.toBeExecuted:
-				command.run()
+			command.run()
 			
 			if command.executed:
 				commandsQueue.pop_back()

@@ -9,7 +9,7 @@ enum DiceRollType { BEST, NORMAL, WORST }
 enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, WISDOM, CHARISMA }
 enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
 enum CharacterType { PC, FRIENDLY_NPC, FOE_NPC }
-enum CharacterTargetType { ANY, FRIENDLY, FOE }
+enum CharacterTargetType { ANY, NONE, FRIENDLY, FOE }
 
 enum ItemType { ARMOR, WEAPON, CONSUMABLE, KEY }
 

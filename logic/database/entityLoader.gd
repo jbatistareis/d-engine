@@ -8,7 +8,7 @@ static func loadCharacter(shortName : String):
 		File.READ,
 		File.COMPRESSION_ZSTD)
 	
-	var character : Character = Deserializer.character(file.get_var())
+	var character = Deserializer.character(file.get_var())
 	file.close()
 	
 	return character
@@ -20,7 +20,7 @@ static func loadItem(shortName : String):
 		GamePaths.ITEM_DATA % shortName,
 		File.READ,
 		File.COMPRESSION_ZSTD)
-	var item : Item = Deserializer.item(file.get_var())
+	var item = Deserializer.item(file.get_var())
 	file.close()
 	
 	return item

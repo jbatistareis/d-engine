@@ -51,11 +51,6 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 
 
 func changeHp(amount : int) -> void:
-	if amount >= 0:
-		Signals.emit_signal("characterGainedHp", self, amount)
-	else:
-		Signals.emit_signal("characterLostHp", self, amount)
-	
 	if amount != 0:
 		var result = currentHp + amount
 		
@@ -65,6 +60,11 @@ func changeHp(amount : int) -> void:
 			currentHp = 0
 			
 			Signals.emit_signal("characterDied", self)
+	
+	if amount >= 0:
+		Signals.emit_signal("characterGainedHp", self, amount)
+	else:
+		Signals.emit_signal("characterLostHp", self, amount)
 
 
 func canLevelUp() -> bool:

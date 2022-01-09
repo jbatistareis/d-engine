@@ -4,8 +4,6 @@ extends Command
 var targets : Array = []
 var move : Move
 
-var currentTarget = null
-
 
 func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre, move.executions, move.persistent) -> void:
 	self.targets = targets
@@ -14,6 +12,7 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 
 func published() -> void:
 	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.prepareAnimation)
+	move.pick(executorCharacter)
 
 
 func execute() -> void:
@@ -22,10 +21,8 @@ func execute() -> void:
 		toBeExecuted = false
 		return
 	
-	var moveResult
 	for target in targets:
-		currentTarget = target
-		moveResult = move.getResult(executorCharacter)
+		var moveResult = move.getResult(executorCharacter)
 		
 		Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
 		
@@ -43,7 +40,7 @@ func execute() -> void:
 			# TODO
 			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
 				Signals.emit_signal("startedBattleAnimation", target, 'damage')
-				.takeHit(
+				target.takeHit(
 					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
 			
 			_: # Enums.DiceOutcome.WORST
@@ -63,7 +60,3 @@ func execute() -> void:
 		else:
 			Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
 
-
-func shouldResume(character) -> void:
-	if character == currentTarget:
-		Signals.emit_signal("commandsResumed")

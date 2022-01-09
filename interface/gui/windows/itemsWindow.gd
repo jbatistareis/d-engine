@@ -1,10 +1,10 @@
 class_name ItemsWindow
 extends GuiWindow
 
-var character : Character
+var character
 
 
-func _init(character : Character) -> void:
+func _init(character) -> void:
 	self.character = character
 	
 	widgets.append_array([

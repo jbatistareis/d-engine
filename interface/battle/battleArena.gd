@@ -40,13 +40,13 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	
 	$AnimationPlayer.play("start")
 	
-	var enemiesTimerWindow = BattleTimerEnemiesWindow.new(enemyData)
-	enemiesTimerWindow.position = Vector2(25, 25)
-	Signals.emit_signal("guiOpenWindow", enemiesTimerWindow)
+	var enemiesWindow = BattleEnemiesWindow.new(enemyData)
+	enemiesWindow.position = Vector2(25, 25)
+	Signals.emit_signal("guiOpenWindow", enemiesWindow)
 	
-	var playersTimerWindow = BattleTimerPlayersWindow.new(playerData)
-	playersTimerWindow.position = Vector2(25, GuiOverlayManager.windowSize().y - 157)
-	Signals.emit_signal("guiOpenWindow", playersTimerWindow)
+	var playersWindow = BattlePlayersWindow.new(playerData)
+	playersWindow.position = Vector2(25, GuiOverlayManager.windowSize().y - 157)
+	Signals.emit_signal("guiOpenWindow", playersWindow)
 	
 	var width = GuiOverlayManager.windowSize().x / 5
 	var heigth = width * ENEMY_FRAME_RATIO
@@ -76,6 +76,10 @@ func createCursor() -> BattleCursorWindow:
 
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
+		if move.targetType == Enums.CharacterTargetType.NONE:
+			dummyConfirm(player, move)
+			return
+		
 		# TODO error out if no one is alive
 		for index in range(5):
 			if enemiesNode.get_child(ENEMY_MAP[index]).get_child_count() == 0:
@@ -117,6 +121,11 @@ func moveCursor(direction : int) -> void:
 		Signals.emit_signal("guiOpenWindow", createCursor())
 
 
+func dummyConfirm(player : Character, move : Move) -> void:
+	Signals.emit_signal("battleCursorConfirm", player, [], move)
+	cursorOn = false
+
+
 func confirmCursor() -> void:
 	if cursorOn:
 		Signals.emit_signal("guiCloseWindow")
@@ -129,8 +138,7 @@ func cancelCursor(ignore) -> void:
 	if cursorOn:
 		cursorOn = false
 		Signals.emit_signal("guiCloseWindow")
-		yield(get_tree(), "idle_frame")
-		Signals.emit_signal("askedPlayerBattleInput", cursorPlayer)
+		Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(cursorPlayer))
 
 
 func finish() -> void:

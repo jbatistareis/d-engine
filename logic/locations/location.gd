@@ -21,7 +21,7 @@ func _init() -> void:
 
 
 # used only by the player
-func enter(player : Character, toSpawnId : int) -> void:
+func enter(player, toSpawnId : int) -> void:
 	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
 	
 	var spawn = findSpawn(toSpawnId)
@@ -32,14 +32,14 @@ func enter(player : Character, toSpawnId : int) -> void:
 	findRoom(spawn.toRoomId).enter(player, false)
 
 
-func exit(character : Character, newLocationName : String, toSpawnId : int) -> void:
+func exit(character, newLocationName : String, toSpawnId : int) -> void:
 	executeScript(exitLogic, character)
 	
 	Signals.emit_signal("playerLeftLocation", self)
 	Signals.emit_signal("playerTransferedLocation", newLocationName, toSpawnId)
 
 
-func move(character : Character, direction : int) -> void:
+func move(character, direction : int) -> void:
 	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExit(direction)
@@ -66,7 +66,7 @@ func move(character : Character, direction : int) -> void:
 	Signals.emit_signal("playerRoomChangeDenied")
 
 
-func executeScript(script : String, character : Character) -> void:
+func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 
