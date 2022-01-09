@@ -10,18 +10,29 @@ func _ready() -> void:
 	LocationEditorSignals.connect("testLocation", self, "hideWindow")
 
 
+func rotatePivot(angle : float) -> void:
+	if !$Tween.is_active():
+		$Tween.interpolate_property(
+			$pivot,
+			'rotation:y',
+			$pivot.rotation.y,
+			$pivot.rotation.y + deg2rad(angle),
+			0.1)
+		$Tween.start()
+
+
 # ignore parameters
 func hideWindow(location, x, y, direction) -> void:
 	hide()
 
 
 func setPreview(room : RoomTile, ignore) -> void:
-	$Camera.current = true
+	$pivot/Camera.current = true
 	visible = true
 	
 	for node in $blockArea.get_children():
 		node.queue_free()
 	
 	$blockArea.add_child(blocks[room.mesh].instance())
-	$blockArea.rotation.y = ROTATE_90 * -room.orientation
+	$pivot.rotation.y = ROTATE_90 * room.orientation
 

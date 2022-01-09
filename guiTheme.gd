@@ -1,7 +1,5 @@
 extends Node
 
-var font : DynamicFont = load("res://assets/font/IBMPlexMonoMedium.tres")
-
 const TEXT_COLOR : Color = Color.white
 
 const BG_COLOR : Color = Color.dodgerblue
@@ -10,7 +8,7 @@ const UNSELECTED_COLOR : Color = Color.transparent
 
 const COMMAND_PRG_PRE = Color.tomato
 const COMMAND_PRG_POS = Color.white
-const COMMAND_DEAD = Color.darkslategray
+const COMMAND_DEAD = Color.teal
 
 const HP_BAR = Color.limegreen
 const ARMOR_BAR = Color.orange

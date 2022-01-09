@@ -25,6 +25,7 @@ func setLocation(value : Location) -> void:
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/GridContainer/txtDescription.text = location.description
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/VBoxContainer/txtEntranceLogic.text = location.entranceLogic
 	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/VBoxContainer/txtExitLogic.text = location.exitLogic
+	$HSplitContainer/properties/TabContainer/Location/VBoxContainer/GridContainer/sldEncRate.value = location.encounterRate
 
 
 func openLocationFile() -> void:

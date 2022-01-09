@@ -25,6 +25,9 @@ func _ready() -> void:
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtEntranceLogic.connect("text_changed", self, "setEntranceLogic")
 	$VBoxContainer/ScrollContainer/VBoxContainer/logic/txtExitLogic.connect("text_changed", self, "setExitLogic")
 	
+	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/btnRotMeshL.connect("pressed", self, "rotatePreview", [45])
+	$VBoxContainer/ScrollContainer/VBoxContainer/mesh/btnRotMeshR.connect("pressed", self, "rotatePreview", [-45])
+	
 	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/north/spnNorthPortal)
 	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/eastWest/spnEastPortal)
 	portalFields.append($VBoxContainer/ScrollContainer/VBoxContainer/portals/south/spnSouthPortal)
@@ -252,4 +255,8 @@ func setPortalFieldsState(room : RoomTile, directions : Array) -> void:
 		else:
 			portalFields[i].editable = false
 			portalFields[i].modulate.a = 0.5
+
+
+func rotatePreview(angle : float) -> void:
+	$VBoxContainer/ScrollContainer/VBoxContainer/ViewportContainer/preview/area.rotatePivot(angle)
 
