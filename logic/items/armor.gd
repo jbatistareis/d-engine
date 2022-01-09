@@ -18,7 +18,10 @@ func _init(id : int, name : String, maxProtection : int = 0) -> void:
 
 # returns the amount of damage to the character body
 func takeHit(value : int) -> int:
-	Signals.emit_signal("armorTookHit", self, value)
+	if value < 0:
+		Signals.emit_signal("armorTookHit", self, value)
+	else:
+		Signals.emit_signal("armorRepaired", self, value)
 	
 	if (currentProtection > 0):
 		currentProtection = max(0, currentProtection + value)

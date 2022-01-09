@@ -3,18 +3,18 @@ extends GuiWidget
 
 var character : Character
 
-var hBox = HBoxContainer.new()
-var hpArmBarBox = MarginContainer.new()
-var timerBarContainer = MarginContainer.new()
-var label = Label.new()
+var hBox : HBoxContainer = HBoxContainer.new()
+var hpArmBarBox : MarginContainer = MarginContainer.new()
+var timerBarContainer : MarginContainer = MarginContainer.new()
+var label : Label = Label.new()
 var posBar : ColorRect = ColorRect.new()
 var preBar : ColorRect = ColorRect.new()
 var hpBar : ColorRect = ColorRect.new()
 var deadBar : ColorRect = ColorRect.new()
 var armorBar : ColorRect = ColorRect.new()
-var timerTween = Tween.new()
-var hpTween = Tween.new()
-var armorTween = Tween.new()
+var timerTween : Tween = Tween.new()
+var hpTween : Tween = Tween.new()
+var armorTween : Tween = Tween.new()
 
 
 func _init(character : Character) -> void:
@@ -27,6 +27,7 @@ func _init(character : Character) -> void:
 	Signals.connect("characterGainedHp", self, "hpBarChange")
 	Signals.connect("characterLostHp", self, "hpBarChange")
 	Signals.connect("armorTookHit", self, "armorBarChange")
+	Signals.connect("armorRepaired", self, "armorBarChange")
 	Signals.connect("commandsPaused", self, "pause")
 	Signals.connect("commandsResumed", self, "resume")
 	
