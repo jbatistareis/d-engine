@@ -6,6 +6,7 @@ var item = Move.new()
 
 
 func _init(character) -> void:
+	Signals.emit_signal("commandsPaused")
 	self.character = character
 	
 	item.name = 'Item'

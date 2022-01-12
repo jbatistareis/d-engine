@@ -12,7 +12,6 @@ func _ready():
 
 func start(players : Array, enemies : Array) -> void:
 	if !inBattle:
-		Signals.emit_signal("commandsPaused")
 		inBattle = true
 		
 		self.players = players
@@ -30,8 +29,6 @@ func start(players : Array, enemies : Array) -> void:
 		
 		for enemy in enemies:
 			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
-		
-		Signals.emit_signal("commandsResumed")
 
 
 func _physics_process(delta) -> void:

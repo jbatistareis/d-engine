@@ -31,6 +31,8 @@ func execute() -> void:
 			while yield(Signals, "finishedBattleAnimation") != executorCharacter:
 				pass
 		
+		Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
+		
 		# TODO enemy/player hit animations
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:

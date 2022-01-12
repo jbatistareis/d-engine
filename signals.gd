@@ -41,23 +41,20 @@ signal armorRepaired(armor, amount)
 # listen to get annoucements
 signal commandsPaused() # use to pause all battle timelines
 signal commandsResumed() # use to resume all battle timelines
-signal commandPublished(command)
+signal commandPublished(command) # use to send commands to the execution queue
+signal commandOnQueue(command) # listen to know when a command is on execution queue
 
 
 # battle
 # use for flow control
 signal battleStarted(players, enemies) # use to show the battle screen, battle logic is paused until 'battleScreenSetUp' signal is fired
 signal battleEnded()
-signal characterPreTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
-signal characterPosTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
-signal characterTimerPaused(character) # use to pause a character (friend or foe) battle timeline
-signal characterTimerResumed(character) # use to resume a character (friend or foe) battle timeline
 signal askedPlayerBattleInput(character) # use as a cue show a command window
+signal battleCursorOpen(player, move)
+signal battleCursorConfirm(player, targets, move) # targets is an array
 # used as internal communication, dont fire, or listen to then
 signal setupBattleScreen(players, enemies)
 signal battleScreenReady()
-signal battleCursorOpen(player, move)
-signal battleCursorConfirm(player, targets, move) # targets is an array
 signal showBattleResult(players, battleResult)
 signal startedBattleAnimation(character, animation)
 signal finishedBattleAnimation(character)

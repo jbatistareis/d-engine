@@ -12,6 +12,8 @@ func execute() -> void:
 		toBeExecuted = false
 		return
 	
+	Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
+	
 	if executorCharacter.verdictActive:
 		var suspects
 		
