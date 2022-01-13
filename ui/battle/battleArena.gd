@@ -1,12 +1,12 @@
 extends Spatial
 
 const ENEMY_FRAME_RATIO : float = 1.875
-const ENEMY_MAP : Array = [2, 3, 1, 4, 0]
-const PREFIXES : Array = ["[A] ", "[B] ", "[C] ", "[D] ", "[E] "]
+const ENEMY_MAP : Array = [1, 2, 0]
+const PREFIXES : Array = ["[A] ", "[B] ", "[C] "]
 
 var enemyFrameSize : Vector2
 onready var enemiesNode : Node = $ViewportContainer/Viewport/arena/enemies
-onready var battleCamera : Camera = $ViewportContainer/Viewport/arena/Camera
+onready var battleCamera : Camera = $ViewportContainer/Viewport/arena/pivot/Camera
 
 var cursorOn : bool = false
 var cursorPos : int = 0
@@ -24,7 +24,7 @@ func _ready() -> void:
 	Signals.connect("guiSelect", self, "confirmCursor")
 	Signals.connect("guiCancel", self, "cancelCursor")
 	Signals.connect("battleEnded", self, "finish")
-	Signals.connect("showBattleResult", self, "showBattleResult")
+	Signals.connect("battleWon", self, "showBattleResult")
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
@@ -104,15 +104,15 @@ func moveCursor(direction : int) -> void:
 		var newPos = cursorPos
 		
 		if direction == Enums.Direction.EAST: # left
-			newPos = (newPos - 1) if newPos > 0 else 4
+			newPos = (newPos - 1) if newPos > 0 else 2
 		elif direction == Enums.Direction.WEST: # right
-			newPos = (newPos + 1) if newPos < 4 else 0
+			newPos = (newPos + 1) if newPos < 2 else 0
 		
 		while (enemiesNode.get_child(ENEMY_MAP[newPos]).get_child_count() == 0) || (enemiesNode.get_child(ENEMY_MAP[newPos]).get_child(0).character.currentHp == 0):
 			if direction == Enums.Direction.EAST: # left
-				newPos = (newPos - 1) if newPos > 0 else 4
+				newPos = (newPos - 1) if newPos > 0 else 2
 			elif direction == Enums.Direction.WEST: # right
-				newPos = (newPos + 1) if newPos < 4 else 0
+				newPos = (newPos + 1) if newPos < 2 else 0
 		
 		cursorPos = newPos
 		

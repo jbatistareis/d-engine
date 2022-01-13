@@ -32,8 +32,14 @@ func start(players : Array, enemies : Array) -> void:
 
 
 func _physics_process(delta) -> void:
-	if inBattle && (enemiesAlive() == 0):
-		end()
+	if inBattle:
+		if playersAlive() == 0:
+			Signals.emit_signal("commandsPaused")
+			Signals.emit_signal("battleLost")
+			inBattle = false
+			# TODO game over
+		elif enemiesAlive() == 0:
+			end()
 
 
 func end() -> void:
@@ -49,7 +55,7 @@ func end() -> void:
 				#CharactersDatabase.deSpawnEntity(enemy.spawnId)
 				pass
 		
-		Signals.emit_signal("showBattleResult", players, battleResult)
+		Signals.emit_signal("battleWon", players, battleResult)
 		
 		players.clear()
 		enemies.clear()
@@ -64,6 +70,15 @@ func enemiesAlive() -> int:
 	var result = 0
 	for enemy in enemies:
 		if (enemy != null) && (enemy.currentHp > 0):
+			result += 1
+	
+	return result
+
+
+func playersAlive() -> int:
+	var result = 0
+	for player in players:
+		if (player != null) && (player.currentHp > 0):
 			result += 1
 	
 	return result

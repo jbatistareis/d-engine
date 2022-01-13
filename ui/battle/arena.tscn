@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/kenney_prototypetextures/Light/texture_07.png" type="Texture" id=1]
 [ext_resource path="res://ui/battle/arena.gd" type="Script" id=2]
@@ -7,7 +7,7 @@
 [sub_resource type="Animation" id=8]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera:translation")
+tracks/0/path = NodePath("pivot:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -16,23 +16,128 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 0 ) ]
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/Camera:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 4.5 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/Camera/bulb:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/lantern:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "exit"
-length = 0.5
+length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Camera:translation")
+tracks/0/path = NodePath("pivot:translation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 0 ), Vector3( 0, 1, 1 ) ]
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "lose"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Camera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 4.5 ), Vector3( 0, 1, 9 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/lantern:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.25 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "win"
+length = 30.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 30 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
 }
 
 [sub_resource type="CylinderMesh" id=6]
@@ -47,41 +152,44 @@ uv1_scale = Vector3( 15, 15, 15 )
 [node name="arena" type="Spatial"]
 script = ExtResource( 2 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-autoplay = "RESET"
-playback_default_blend_time = 0.3
-anims/RESET = SubResource( 8 )
-anims/exit = SubResource( 10 )
+[node name="Tween" type="Tween" parent="."]
 
-[node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 8 )
+anims/exit = SubResource( 9 )
+anims/lose = SubResource( 11 )
+anims/win = SubResource( 10 )
+
+[node name="pivot" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.5 )
 environment = ExtResource( 3 )
 current = true
 fov = 54.0
 size = 0.1
 
-[node name="Light" type="SpotLight" parent="Camera"]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866026, 0, 4, 1.76015 )
+[node name="bulb" type="OmniLight" parent="pivot/Camera"]
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 7.1389
+
+[node name="lantern" type="SpotLight" parent="pivot"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 7.45058e-08, 5, 6.26015 )
+light_energy = 0.5
 shadow_enabled = true
 spot_range = 20.0
 spot_angle = 40.0
 
 [node name="enemies" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.5 )
 
 [node name="enemy1" type="Spatial" parent="enemies"]
-transform = Transform( 0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, -3, 0, 0 )
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2, 0, 0 )
 
 [node name="enemy2" type="Spatial" parent="enemies"]
-transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -1.5, 0, 0 )
 
 [node name="enemy3" type="Spatial" parent="enemies"]
-
-[node name="enemy4" type="Spatial" parent="enemies"]
-transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 1.5, 0, 0 )
-
-[node name="enemy5" type="Spatial" parent="enemies"]
-transform = Transform( 0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, 3, 0, 0 )
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 2, 0, 0 )
 
 [node name="ground" type="MeshInstance" parent="."]
 transform = Transform( 21, 0, 0, 0, 1, 0, 0, 0, 21, 0, -0.25, 0 )

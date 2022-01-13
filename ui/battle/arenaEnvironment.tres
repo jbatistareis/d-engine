@@ -2,5 +2,6 @@
 
 [resource]
 background_mode = 1
+tonemap_mode = 4
 auto_exposure_scale = 0.05
 ss_reflections_enabled = true
