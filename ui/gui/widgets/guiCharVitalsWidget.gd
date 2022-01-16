@@ -91,20 +91,20 @@ func commandQueued(command : Command) -> void:
 		timerBar2.color = GuiTheme.COMMAND_PRG_PRE
 	
 	timerBar1.rect_size.x = 0
-	timerTween.interpolate_method(self, "timerProgress", 0, 1, GameParameters.GCD * (command.totalTicks - 1))
+	timerTween.interpolate_method(self, "timerProgress", 0, 1, GameParameters.GCD * command.totalTicks)
 	timerTween.start()
 
 
 func timerProgress(percent : float) -> void:
-	timerBar1.rect_size.x = 200 * percent
+	timerBar1.rect_size.x = ceil(200 * percent)
 
 
 func hpBarSize(percent : float) -> void:
-	hpBar.rect_size.x = 200 * percent
+	hpBar.rect_size.x = ceil(200 * percent)
 
 
 func armorBarSize(percent : float) -> void:
-	armorBar.rect_size.x = 200 * percent
+	armorBar.rect_size.x = ceil(200 * percent)
 
 
 func hpBarChange(character : Character, amount : int) -> void:
@@ -142,9 +142,9 @@ func armorBarChange(armor : Armor, amount : int) -> void:
 
 
 func pause() -> void:
-	timerTween.stop_all()
+	timerTween.set_active(false)
 
 
 func resume() -> void:
-	timerTween.resume_all()
+	timerTween.set_active(true)
 

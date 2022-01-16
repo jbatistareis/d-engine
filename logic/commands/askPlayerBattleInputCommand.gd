@@ -12,5 +12,6 @@ func execute() -> void:
 		toBeExecuted = false
 		return
 	
+	Signals.emit_signal("commandsPaused")
 	Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(executorCharacter))
 

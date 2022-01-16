@@ -2,6 +2,7 @@ extends Spatial
 
 
 func _ready() -> void:
+	Signals.connect("battleWon", self, "win")
 	Signals.connect("battleLost", self, "lose")
 	Signals.connect("battleEnded", self, "exit")
 	Signals.connect("commandsPaused", self, "pause")
@@ -10,6 +11,10 @@ func _ready() -> void:
 
 func reset() -> void:
 	$AnimationPlayer.play("RESET")
+
+
+func win(ignore1, ignore2) -> void:
+	$AnimationPlayer.play("win")
 
 
 func lose() -> void:
