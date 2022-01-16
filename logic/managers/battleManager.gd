@@ -7,7 +7,6 @@ var inBattle : bool = false
 
 func _ready():
 	Signals.connect("battleStarted", self, "start")
-	Signals.connect("battleCursorConfirm", self, "confirmInput")
 
 
 func start(players : Array, enemies : Array) -> void:
@@ -34,36 +33,26 @@ func start(players : Array, enemies : Array) -> void:
 func _physics_process(delta) -> void:
 	if inBattle:
 		if playersAlive() == 0:
+			inBattle = false
 			Signals.emit_signal("commandsPaused")
 			Signals.emit_signal("battleLost")
-			inBattle = false
 			# TODO game over
 		elif enemiesAlive() == 0:
-			end()
-
-
-func end() -> void:
-	if inBattle:
-		inBattle = false
-		var battleResult = BattleResult.new()
-		
-		for enemy in enemies:
-			if enemy.currentHp == 0:
-				battleResult.experience += enemy.experiencePoints
-				pass # TODO loot
-			else:
-				#CharactersDatabase.deSpawnEntity(enemy.spawnId)
-				pass
-		
-		Signals.emit_signal("battleWon", players, battleResult)
-		
-		players.clear()
-		enemies.clear()
-
-
-func confirmInput(player, targets : Array, move : Move) -> void:
-	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
-	Signals.emit_signal("commandsResumed")
+			inBattle = false
+			
+			var battleResult = BattleResult.new()
+			for enemy in enemies:
+				if enemy.currentHp == 0:
+					battleResult.experience += enemy.experiencePoints
+					pass # TODO loot
+				else:
+					#CharactersDatabase.deSpawnEntity(enemy.spawnId)
+					pass
+			
+			Signals.emit_signal("battleWon", players, battleResult)
+			
+			players.clear()
+			enemies.clear()
 
 
 func enemiesAlive() -> int:

@@ -77,7 +77,7 @@ func createCursor() -> BattleCursorWindow:
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
 		if move.targetType == Enums.CharacterTargetType.NONE:
-			dummyConfirm(player, move)
+			publishCommand(player, [], move)
 			return
 		
 		# TODO error out if no one is alive
@@ -121,23 +121,26 @@ func moveCursor(direction : int) -> void:
 		Signals.emit_signal("guiOpenWindow", createCursor())
 
 
-func dummyConfirm(player : Character, move : Move) -> void:
-	Signals.emit_signal("battleCursorConfirm", player, [], move)
-	cursorOn = false
-
-
 func confirmCursor() -> void:
 	if cursorOn:
-		Signals.emit_signal("guiCloseWindow")
-		yield(get_tree(), "idle_frame")
-		Signals.emit_signal("battleCursorConfirm", cursorPlayer, [enemiesNode.get_child(ENEMY_MAP[cursorPos]).get_child(0).character], cursorMove)
-		cursorOn = false
+		publishCommand(
+			cursorPlayer,
+			[enemiesNode.get_child(ENEMY_MAP[cursorPos]).get_child(0).character],
+			cursorMove)
+
+
+func publishCommand(player, targets : Array, move : Move) -> void:
+	Signals.emit_signal("guiCloseWindow")
+	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
+	Signals.emit_signal("commandsResumed")
+	cursorOn = false
 
 
 func cancelCursor(ignore) -> void:
 	if cursorOn:
 		cursorOn = false
 		Signals.emit_signal("guiCloseWindow")
+		yield(get_tree(), "idle_frame")
 		Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(cursorPlayer))
 
 
@@ -151,6 +154,6 @@ func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 		player.gainExperience(battleResult.experience)
 	
 	Signals.emit_signal("guiClearWindows")
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(1), "timeout")
 	Signals.emit_signal("guiOpenWindow", BattleResultWindow.new(battleResult))
 

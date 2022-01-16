@@ -51,7 +51,6 @@ signal battleStarted(players, enemies) # use to show the battle screen, battle l
 signal battleEnded()
 signal askedPlayerBattleInput(character) # use as a cue show a command window
 signal battleCursorOpen(player, move)
-signal battleCursorConfirm(player, targets, move) # targets is an array
 signal battleWon(players, battleResult)
 signal battleLost()
 # used as internal communication, dont fire, or listen to then

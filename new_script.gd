@@ -11,6 +11,8 @@ func _ready() -> void:
 	
 	print('TEST START')
 	
+	player.name = 'Player'
+	player.shortName = 'PLAYER'
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
 	player.moves.append_array([Move.new()])
