@@ -23,11 +23,6 @@ var friendSpawns : Array = [] # spawned npcs
 
 var visited : bool = false
 
-# TODO
-#var stayLogic : String = NOOP
-#var cd : float = 1
-#var elapsed : float = 0
-
 
 func _init() -> void:
 	for shortName in friendlyShortNames:
@@ -43,9 +38,6 @@ func enter(character, battleTriggered : bool) -> void:
 	character.currentRoom = id
 	
 	if character.type == Enums.CharacterType.PC:
-		for npc in friendSpawns:
-			executeScript(character.characterAproachesScript, npc)
-		
 		if !foeShortNameGroups.empty() && battleTriggered:
 			var enemies = []
 			
@@ -55,17 +47,11 @@ func enter(character, battleTriggered : bool) -> void:
 					var enemy = EntityLoader.loadCharacter(shortName)
 					enemy.currentRoom = id
 					enemies.append(enemy)
-				else:
-					enemies.append(null)
 			
 			Signals.emit_signal("battleStarted", [character], enemies) # TODO form a player party
 
 
 func exit(character) -> void:
-	if character.type == Enums.CharacterType.PC:
-		for npc in friendSpawns:
-			executeScript(npc.characterLeavesScript, character)
-		
 	executeScript(exitLogic, character)
 
 
