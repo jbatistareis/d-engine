@@ -3,7 +3,7 @@ extends Node
 
 # player related
 # to start a match: playerEnteredGame -> playerTransferedLocation
-# controls provided by UI signals
+# controls provided by Godots ui_* signals, see each state logic for mappings
 signal playerEnteredGame(playerCharacter) # sets the current player
 signal playerTransferedLocation(newLocationName, toSpawnId) # puts player in a location, at spawn point
 
@@ -73,7 +73,6 @@ signal characterDroppedWeapon(character, weaponIndex)
 signal guiOpenWindow(window)
 signal guiCloseWindow()
 signal guiClearWindows()
-# inputs used player controls
 signal guiUp()
 signal guiDown()
 signal guiLeft()
