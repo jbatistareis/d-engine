@@ -40,7 +40,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 4.5 ) ]
+"values": [ Vector3( 0, 1, 6 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("pivot/Camera/bulb:light_energy")
@@ -92,7 +92,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.6 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 4.5 ), Vector3( 0, 1, 5.5 ) ]
+"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 1, 7 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
@@ -120,7 +120,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, 1, 4.5 ), Vector3( 0, 0, 25 ) ]
+"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 0, 25 ) ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
@@ -189,10 +189,10 @@ anims/win = SubResource( 10 )
 [node name="pivot" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="pivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 4.5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
 environment = ExtResource( 3 )
 current = true
-fov = 54.0
+fov = 39.0
 size = 0.1
 
 [node name="bulb" type="OmniLight" parent="pivot/Camera"]
