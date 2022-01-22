@@ -22,5 +22,5 @@ func handleInput() -> void:
 
 
 func exitState() -> void:
-	next = GameManager.getState(Enums.States.IDLE)
+	next = GameManager.getState(Enums.States.EXPLORING)
 

@@ -5,10 +5,22 @@ const TEXT : String = ' |[ |%s| ]| >HP|%d/%d>LV|%d|[next: %d/%d]>Spare pts.|%d> 
 
 
 func _init() -> void:
-	var player = LocationManager.player if (LocationManager.player != null) else Character.new()
-	
 	type = Enums.GuiWindowType.BACKGROUND
-	widgets.append(GuiTextWidget.new(TEXT % [player.name, player.currentHp, player.maxHp, player.currentLevel, player.experiencePoints, player.experienceToNextLevel, player.sparePoints, player.strength.score, player.dexterity.score, player.constitution.score, player.intelligence.score, player.wisdom.score, player.charisma.score]))
+	widgets.append(GuiTextWidget.new(TEXT % [
+		GameManager.player.name,
+		GameManager.player.currentHp,
+		GameManager.player.maxHp,
+		GameManager.player.currentLevel,
+		GameManager.player.experiencePoints,
+		GameManager.player.experienceToNextLevel,
+		GameManager.player.sparePoints,
+		GameManager.player.strength.score,
+		GameManager.player.dexterity.score,
+		GameManager.player.constitution.score,
+		GameManager.player.intelligence.score,
+		GameManager.player.wisdom.score,
+		GameManager.player.charisma.score
+	]))
 	
 	position = Vector2(25, GuiOverlayManager.windowSize().y / 2 - 141)
 

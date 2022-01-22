@@ -19,7 +19,8 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", player, 'BSELOC', 26)
+	Signals.emit_signal("playerEnteredGame", player)
+	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 26)
 
 
 func _process(delta) -> void:

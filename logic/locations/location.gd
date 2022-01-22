@@ -39,7 +39,7 @@ func exit(character, newLocationName : String, toSpawnId : int) -> void:
 	Signals.emit_signal("playerTransferedLocation", newLocationName, toSpawnId)
 
 
-func move(character, direction : int) -> void:
+func move(character, direction : int) -> int:
 	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExit(direction)
@@ -51,19 +51,16 @@ func move(character, direction : int) -> void:
 		
 		fromRoom.exit(character)
 		toRoom.enter(character, battleTriggered)
-		Signals.emit_signal("playerChangedRoom", direction)
 		
-		return
+		return Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD
 	
 	if (exitPoint == 0) && canPass: # move to a location
 		var portal = findPortal(portalId)
 		
 		if (portal != null) && !portal.newLocationName.empty():
 			exit(character, portal.newLocationName, portal.toSpawnId)
-			
-			return
 	
-	Signals.emit_signal("playerRoomChangeDenied")
+	return Enums.Direction.NONE
 
 
 func executeScript(script : String, character) -> void:

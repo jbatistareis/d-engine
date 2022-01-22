@@ -8,10 +8,10 @@ const ROTATE_90 : float = PI / 2
 
 func _ready() -> void:
 	Signals.connect("playerSpawned", self, "setup")
-	Signals.connect("playerMovedForward", self, "moveForward")
-	Signals.connect("playerMovedBackward", self, "moveBackward")
-	Signals.connect("playerRotatedLeft", self, "rotateLeft")
-	Signals.connect("playerRotatedRight", self, "rotateRight")
+	Signals.connect("cameraMovedForward", self, "moveForward")
+	Signals.connect("cameraMovedBackward", self, "moveBackward")
+	Signals.connect("cameraRotatedLeft", self, "rotateLeft")
+	Signals.connect("cameraRotatedRight", self, "rotateRight")
 	LocationEditorSignals.connect("testLocation", self, "setupFreeFlight")
 
 
@@ -41,9 +41,9 @@ func goTo(x : int, y : int, direction : int) -> void:
 
 
 func moveForward() -> void:
+	GameManager.cameraMoving = true
+	
 	if !$tween.is_active():
-		GameManager.cameraMoving = true
-		
 		$tween.interpolate_property(
 			self,
 			"transform:origin",
@@ -57,7 +57,8 @@ func moveForward() -> void:
 		$tween.start()
 		
 		yield($tween, "tween_all_completed")
-		GameManager.cameraMoving = false
+	
+	GameManager.cameraMoving = false
 
 
 func moveBackward() -> void:
@@ -77,15 +78,14 @@ func moveBackward() -> void:
 		$tween.start()
 		
 		yield($tween, "tween_all_completed")
-		GameManager.cameraMoving = false
+	
+	GameManager.cameraMoving = false
 
 
 func rotateLeft() -> void:
+	GameManager.cameraMoving = true
+	
 	if !$tween.is_active():
-		GameManager.cameraMoving = true
-		
-		GameManager.direction -= 1
-		
 		$tween.interpolate_property(
 			self,
 			"rotation:y",
@@ -94,17 +94,15 @@ func rotateLeft() -> void:
 			0.25
 		)
 		$tween.start()
-		
 		yield($tween, "tween_all_completed")
-		GameManager.cameraMoving = false
+	
+	GameManager.cameraMoving = false
 
 
 func rotateRight() -> void:
 	GameManager.cameraMoving = true
 	
 	if !$tween.is_active():
-		GameManager.direction += 1
-		
 		$tween.interpolate_property(
 			self,
 			"rotation:y",
@@ -113,9 +111,9 @@ func rotateRight() -> void:
 			0.25
 		)
 		$tween.start()
-		
 		yield($tween, "tween_all_completed")
-		GameManager.cameraMoving = false
+	
+	GameManager.cameraMoving = false
 
 
 func inputFreeFlight() -> void:

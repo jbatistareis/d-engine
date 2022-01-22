@@ -1,4 +1,4 @@
-class_name GameMenuState
+class_name ExploringMenuState
 extends State
 
 
@@ -24,5 +24,5 @@ func handleInput() -> void:
 		Signals.emit_signal("guiCloseWindow")
 	
 	if GuiOverlayManager.windowQueue.empty():
-		next = GameManager.getState(Enums.States.IDLE)
+		next = GameManager.getState(Enums.States.EXPLORING)
 
