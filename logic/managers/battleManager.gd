@@ -7,12 +7,10 @@ var inBattle : bool = false
 
 func _ready():
 	Signals.connect("battleStarted", self, "start")
-	Signals.connect("battleCursorConfirm", self, "confirmInput")
 
 
 func start(players : Array, enemies : Array) -> void:
 	if !inBattle:
-		Signals.emit_signal("commandsPaused")
 		inBattle = true
 		
 		self.players = players
@@ -30,43 +28,46 @@ func start(players : Array, enemies : Array) -> void:
 		
 		for enemy in enemies:
 			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
-		
-		Signals.emit_signal("commandsResumed")
 
 
 func _physics_process(delta) -> void:
-	if inBattle && (enemiesAlive() == 0):
-		end()
-
-
-func end() -> void:
 	if inBattle:
-		inBattle = false
-		var battleResult = BattleResult.new()
-		
-		for enemy in enemies:
-			if enemy.currentHp == 0:
-				battleResult.experience += enemy.experiencePoints
-				pass # TODO loot
-			else:
-				#CharactersDatabase.deSpawnEntity(enemy.spawnId)
-				pass
-		
-		Signals.emit_signal("showBattleResult", players, battleResult)
-		
-		players.clear()
-		enemies.clear()
-
-
-func confirmInput(player, targets : Array, move : Move) -> void:
-	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
-	Signals.emit_signal("commandsResumed")
+		if playersAlive() == 0:
+			inBattle = false
+			Signals.emit_signal("commandsPaused")
+			Signals.emit_signal("battleLost")
+			# TODO game over
+		elif enemiesAlive() == 0:
+			inBattle = false
+			
+			var battleResult = BattleResult.new()
+			for enemy in enemies:
+				if enemy.currentHp == 0:
+					battleResult.experience += enemy.experiencePoints
+					pass # TODO loot
+				else:
+					#CharactersDatabase.deSpawnEntity(enemy.spawnId)
+					pass
+			
+			Signals.emit_signal("battleWon", players, battleResult)
+			
+			players.clear()
+			enemies.clear()
 
 
 func enemiesAlive() -> int:
 	var result = 0
 	for enemy in enemies:
 		if (enemy != null) && (enemy.currentHp > 0):
+			result += 1
+	
+	return result
+
+
+func playersAlive() -> int:
+	var result = 0
+	for player in players:
+		if (player != null) && (player.currentHp > 0):
 			result += 1
 	
 	return result

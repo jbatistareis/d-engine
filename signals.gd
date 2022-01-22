@@ -1,69 +1,65 @@
 extends Node
 
-# location
-signal playerStartedAtLocation(playerCharacter, locationName, toSpawnId) # use to spawn a player and start the simulation at a location
-signal playerMoved(direction) # used to move the player arround rooms, not used with player inputs
-signal characterMoved(character, direction) # use to move any other character arround rooms
-signal changedEncounterRate(value)
-# listen to get annoucements
-signal playerArrivedLocation(location) # fired when a player spawns
-signal playerLeftLocation(location) # fired when a player leaves a location
-signal playerChangedRoom(direction) # fired when a player successfully moves, use to execute room transitions
-signal playerRoomChangeDenied() # fired when a player cant change rooms
-# used as internal communication, dont fire, or listen to then
-signal playerTransferedLocation(newLocationName, toSpawnId) # fired when a player leaves a location
+
+# player related
+# to start a match: playerEnteredGame -> playerTransferedLocation
+# controls provided by Godots ui_* signals, see each state logic for mappings
+signal playerEnteredGame(playerCharacter) # sets the current player
+signal playerTransferedLocation(newLocationName, toSpawnId) # puts player in a location, at spawn point
+
+# internal use
+signal playerMoved(direction) # moves the player arround rooms, not used with player inputs
 signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera 
+signal characterMoved(character, direction) # moves any other character arround rooms
+signal changedEncounterRate(value) # changes location rate
 
-
-# inputs used to move the camera arround
-signal playerMovedForward()
-signal playerMovedBackward()
-signal playerRotatedLeft()
-signal playerRotatedRight()
-
-
-# character
 # listen to get annoucements
+signal playerArrivedLocation(location) # when a player spawns
+signal playerLeftLocation(location) # when a player leaves
+signal playerChangedRoom(direction) # when a player successfully moves (Direction enum)
+signal playerRoomChangeDenied() # when a player cant change rooms
+
+# moves the camera, fw/bw fired by location manager, l/r fired by exploring state
+signal cameraMovedForward()
+signal cameraMovedBackward()
+signal cameraRotatedLeft()
+signal cameraRotatedRight()
+
+
+# game character related
 signal characterLeveledUp(character)
 signal characterGotExperience(character, amount)
 signal characterGainedHp(character, amount)
 signal characterLostHp(character, amount)
 signal characterDied(character)
-
-
-# armor
-# listen to get annoucements
 signal armorTookHit(armor, amount)
 signal armorRepaired(armor, amount)
 
 
-# commands
-# listen to get annoucements
-signal commandsPaused() # use to pause all battle timelines
-signal commandsResumed() # use to resume all battle timelines
-signal commandPublished(command)
+# command related
+signal commandsPaused() # pauses all battle timelines
+signal commandsResumed() # resumes all battle timelines
+
+# internal use
+signal commandPublished(command) # sends commands to the execution queue
+signal commandOnQueue(command) # when a command is put on execution queue
 
 
-# battle
-# use for flow control
-signal battleStarted(players, enemies) # use to show the battle screen, battle logic is paused until 'battleScreenSetUp' signal is fired
+# battle related
+# internal use
+signal battleStarted(players, enemies) # changes state to battle, logic is held until 'battleScreenReady' signal is fired
+signal setupBattleScreen(players, enemies) # for transition animation
+signal battleScreenReady() # logic starts after this
 signal battleEnded()
-signal characterPreTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
-signal characterPosTimerSet(character, ticks) # use to set a character (friend or foe) battle timeline
-signal characterTimerPaused(character) # use to pause a character (friend or foe) battle timeline
-signal characterTimerResumed(character) # use to resume a character (friend or foe) battle timeline
-signal askedPlayerBattleInput(character) # use as a cue show a command window
-# used as internal communication, dont fire, or listen to then
-signal setupBattleScreen(players, enemies)
-signal battleScreenReady()
+signal askedPlayerBattleInput(character)
 signal battleCursorOpen(player, move)
-signal battleCursorConfirm(player, targets, move) # targets is an array
-signal showBattleResult(players, battleResult)
+signal battleWon(players, battleResult)
+signal battleLost()
 signal startedBattleAnimation(character, animation)
-signal finishedBattleAnimation(character)
+signal finishedBattleAnimation(character) # cue to resume logic
 
 
-# inventory
+# inventory related
 signal characterEquipedWeapon(character, weaponIndex)
 signal characterEquipedArmor(character, armor)
 signal characterUsedItem(character, itemIndex)
@@ -72,18 +68,17 @@ signal characterDroppedItem(character, itemIndex)
 signal characterDroppedWeapon(character, weaponIndex)
 
 
-# GUI
-# used as internal communication, dont fire, or listen to then
+# UI related
+# internal use
 signal guiOpenWindow(window)
 signal guiCloseWindow()
 signal guiClearWindows()
-signal guiConfirm(source)
-signal guiCancel(source)
-# inputs used to move the cursor
 signal guiUp()
 signal guiDown()
 signal guiLeft()
 signal guiRight()
-signal guiSelect()
+signal guiSelect() # used in a 'press A' context
+signal guiConfirm(source) # used in an 'OK' button context
+signal guiCancel(source)
 signal guiHover(data) # listen to get which item the player has his cursor over
 

@@ -2,25 +2,13 @@ class_name BattleMovesWindow
 extends GuiWindow
 
 var character
-var item = Move.new()
 
 
 func _init(character) -> void:
 	self.character = character
 	
-	item.name = 'Item'
-	item.description = 'Use an item from your inventory'
-	
-	# TODO remove
-	var moveBtn = GuiMoveButtonWidget.new(Move.new())
-	widgets.append(moveBtn)
-	
 	for move in character.moves:
-		var btn = GuiMoveButtonWidget.new(move)
-		widgets.append(btn)
-	
-	var itemButton = GuiMoveButtonWidget.new(item)
-	itemButton.closeOnConfirm = false
+		widgets.append(GuiMoveButtonWidget.new(move))
 	
 	position = Vector2(
 		560,
@@ -32,8 +20,5 @@ func _init(character) -> void:
 
 # data == chosen move
 func windowConfirmed() -> void:
-	if data == item:
-		Signals.emit_signal("guiOpenWindow", ItemsWindow.new(character))
-	else:
-		Signals.emit_signal("battleCursorOpen", character, data)
+	Signals.emit_signal("battleCursorOpen", character, data)
 

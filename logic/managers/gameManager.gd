@@ -1,15 +1,22 @@
 extends Node
 
-onready var currentState : State = getState(Enums.States.IDLE)
+onready var currentState : State = getState(Enums.States.EXPLORING)
 
-# player vars
+var player : Character setget setPlayer
+
+# control vars
 var testing : bool = false
 var cameraMoving : bool = false
 var direction : int setget setDirection
 
 
 func _ready() -> void :
+	Signals.connect("playerEnteredGame", self, "setPlayer")
 	Signals.connect("battleStarted", self, "startBattleState")
+
+
+func setPlayer(value : Character) -> void:
+	player = value
 
 
 func canMove() -> bool:
@@ -27,26 +34,14 @@ func startBattleState(players, enemies) -> void:
 
 func getState(id : int) -> State:
 	match id:
-		Enums.States.IDLE:
-			return IdleState.new()
-		
-		Enums.States.MOVE_BACKWARD:
-			return MoveBackwardState.new()
-		
-		Enums.States.ROTATE_LEFT:
-			return RotateLeftState.new()
-		
-		Enums.States.ROTATE_RIGHT:
-			return RotateRightState.new()
-		
-		Enums.States.MOVE_FORWARD:
-			return MoveForwardState.new()
+		Enums.States.EXPLORING:
+			return ExploringState.new()
 		
 		Enums.States.BATTLE:
 			return BattleState.new()
 		
-		Enums.States.GAME_MENU:
-			return GameMenuState.new()
+		Enums.States.EXPLORING_MENU:
+			return ExploringMenuState.new()
 		
 		Enums.States.INVENTORY:
 			return InventoryState.new()

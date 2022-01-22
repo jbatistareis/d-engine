@@ -9,7 +9,7 @@ var plateValue : int
 
 
 #armor items equip the character when interacted
-func _init(id : int, name : String, maxProtection : int = 0) -> void:
+func _init(name : String, maxProtection : int = 0) -> void:
 	self.name = name
 	self.maxProtection = maxProtection if (maxProtection >= 5) else 5
 	self.currentProtection = maxProtection

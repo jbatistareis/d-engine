@@ -11,13 +11,16 @@ func _ready() -> void:
 	
 	print('TEST START')
 	
+	player.name = 'Player'
+	player.shortName = 'PLAYER'
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
 	player.moves.append_array([Move.new()])
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	Signals.emit_signal("playerStartedAtLocation", player, 'BSELOC', 26)
+	Signals.emit_signal("playerEnteredGame", player)
+	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 26)
 
 
 func _process(delta) -> void:

@@ -1,40 +1,42 @@
 extends Node
 
-var player : Character = null
 var location : Location = null
 
 
 func _ready():
-	Signals.connect("playerStartedAtLocation", self, "instantiateLocation")
 	Signals.connect("playerTransferedLocation", self, "changeLocation")
 	Signals.connect("playerMoved", self, "movePlayer")
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func instantiateLocation(player : Character, shortName : String, toSpawnId : int) -> void:
-	self.player = player
-	location = EntityLoader.loadLocation(shortName)
+func changeLocation(locationName : String, toSpawnId : int) -> void:
+	location = EntityLoader.loadLocation(locationName)
 	
-	# TODO loading screen
 	SceneLoadManager.fromLocation(location)
 	
 	var spawn = location.findSpawn(toSpawnId)
 	var room = location.findRoom(spawn.toRoomId)
 	Signals.emit_signal("playerSpawned", location, room.x, room.y, spawn.direction)
 	
-	location.enter(player, toSpawnId)
-
-
-func changeLocation(newLocationName : String, toSpawnId : int) -> void:
-	instantiateLocation(player, newLocationName, toSpawnId)
+	location.enter(GameManager.player, toSpawnId)
 
 
 func movePlayer(direction : int) -> void:
-	if !BattleManager.inBattle && (player != null) && (location != null):
-		location.move(player, direction)
+	var result = location.move(GameManager.player, direction)
+	
+	match result:
+		Enums.Direction.FORWARD:
+			Signals.emit_signal("cameraMovedForward")
+		
+		Enums.Direction.BACKWARD:
+			Signals.emit_signal("cameraMovedBackward")
+	
+	if result == Enums.Direction.NONE:
+		Signals.emit_signal("playerRoomChangeDenied")
+	else:
+		Signals.emit_signal("playerChangedRoom", direction)
 
 
 func moveCharacter(character, direction) -> void:
-	if location != null:
-		location.move(character, direction)
+	location.move(character, direction)
 

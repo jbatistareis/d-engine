@@ -14,7 +14,7 @@ var baseDamage : int = 1
 
 var currentLevel : int = 1
 var experiencePoints : int = 0
-var experienceToNextLevel : int = 8 setget ,getExperienceToNextLevel
+var experienceToNextLevel : int setget ,getExperienceToNextLevel
 var sparePoints : int = 0
 
 var strength : Stat = Stat.new()
@@ -55,7 +55,7 @@ func changeHp(amount : int) -> void:
 		var result = currentHp + amount
 		
 		if result > 0:
-			currentHp = result if (result < self.maxHp) else self.maxHp
+			currentHp = result if (result < maxHp) else maxHp
 		else:
 			currentHp = 0
 			
@@ -68,16 +68,16 @@ func changeHp(amount : int) -> void:
 
 
 func canLevelUp() -> bool:
-	return experiencePoints >= self.experienceToNextLevel
+	return experiencePoints >= experienceToNextLevel
 
 
 func additionalLevels() -> int:
-	return floor(experiencePoints / self.experienceToNextLevel) as int
+	return floor(experiencePoints / experienceToNextLevel) as int
 
 
 func levelUp() -> void:
 	if canLevelUp():
-		experiencePoints -= self.experienceToNextLevel
+		experiencePoints -= experienceToNextLevel
 		sparePoints += 1
 		currentLevel += 1
 		
@@ -91,5 +91,5 @@ func gainExperience(amount : int) -> void:
 
 
 func getExperienceToNextLevel() -> int:
-	return currentLevel + 7
+	return int(round(7 * pow(currentLevel, 1.3)))
 
