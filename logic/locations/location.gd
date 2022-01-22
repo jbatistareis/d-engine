@@ -16,20 +16,19 @@ var encounterRate : float = 0.0
 
 
 func _init() -> void:
+	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
+	
 	self.name = 'Base Location'
 	self.shortName = 'BSELOC'
 
 
 # used only by the player
 func enter(player, toSpawnId : int) -> void:
-	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
-	
-	var spawn = findSpawn(toSpawnId)
-	
 	Signals.emit_signal("playerArrivedLocation", self)
+	
 	executeScript(entranceLogic, player)
 	player.currentLocation = shortName
-	findRoom(spawn.toRoomId).enter(player, false)
+	findRoom(findSpawn(toSpawnId).toRoomId).enter(player, false)
 
 
 func exit(character, newLocationName : String, toSpawnId : int) -> void:
