@@ -151,9 +151,11 @@ func extraHpBarChange(character : Character, amount : int) -> void:
 
 
 func pause() -> void:
-	timerTween.set_active(false)
+	yield(get_tree(), "idle_frame")
+	timerTween.stop_all()
 
 
 func resume() -> void:
-	timerTween.set_active(true)
+	yield(get_tree(), "idle_frame")
+	timerTween.resume_all()
 
