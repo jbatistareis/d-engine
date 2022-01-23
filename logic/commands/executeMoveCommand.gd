@@ -37,7 +37,7 @@ func execute() -> void:
 			
 			# TODO
 			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage
-				target.takeHit(moveResult.value * (Dice.rollWorst(Enums.DiceType.D100) / 100.0))
+				target.takeHit(moveResult.value * randf())
 			
 			_: # Enums.DiceOutcome.WORST
 				target.takeHit(0) # TODO miss

@@ -23,10 +23,11 @@ func _ready() -> void:
 func play(character : Character, animation : String) -> void:
 	if (character == self.character) && (character.currentHp > 0) && (!animation.empty() || (animation != null)):
 		$AnimationPlayer.play(animation)
-		yield($AnimationPlayer, "animation_finished")
 		
-		if (character.currentHp > 0) && animation.begins_with("attack"):
-			$AnimationPlayer.play("idle")
+		if !$AnimationPlayer.get_animation(animation).loop:
+			yield($AnimationPlayer, "animation_finished")
+			if (character.currentHp > 0) && animation.begins_with("attack"):
+				$AnimationPlayer.play("idle")
 
 
 func damage(character : Character) -> void:
