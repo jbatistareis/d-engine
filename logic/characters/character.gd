@@ -57,7 +57,7 @@ func changeHp(amount : int) -> void:
 		var result = extraHp + amount
 		extraHp = result if (result >= 0) else 0
 		amount = result if (result < 0) else 0
-
+		
 		Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
 	
 	if amount != 0:
@@ -74,7 +74,7 @@ func changeHp(amount : int) -> void:
 
 func changeExtraHp(amount : int) -> void:
 	var prevExtraHp = extraHp
-	extraHp = min(self.maxHp, extraHp + amount)
+	extraHp = max(0, min(self.maxHp, extraHp + amount))
 	Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
 
 
