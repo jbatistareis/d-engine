@@ -24,9 +24,9 @@ func play(character : Character, animation : String) -> void:
 	if (character == self.character) && (character.currentHp > 0) && (!animation.empty() || (animation != null)):
 		$AnimationPlayer.play(animation)
 		
-		if !$AnimationPlayer.get_animation(animation).loop:
+		if animation.begins_with("attack"):
 			yield($AnimationPlayer, "animation_finished")
-			if (character.currentHp > 0) && animation.begins_with("attack"):
+			if character.currentHp > 0:
 				$AnimationPlayer.play("idle")
 
 
