@@ -6,14 +6,20 @@ var maxIntegrity : int = 0
 var currentIntegrity : int = 0
 
 
-# returns the amount of damage to the character body
+# returns unsoaked damage
 func changeIntegrity(amount : int) -> int:
-	if amount != 0:
+	if currentIntegrity == 0:
+		return amount
+	
+	elif amount != 0:
 		var result = currentIntegrity + amount
-		currentIntegrity = min(maxIntegrity, result) if (result >= 0) else 0
-		amount = result if (result < 0) else 0
+		currentIntegrity = min(maxIntegrity, max(0, result))
+		Signals.emit_signal("armorChangedIntegrity", self, currentIntegrity - maxIntegrity)
+		
+		return int(min(0, result))
 	
-	Signals.emit_signal("armorChangedIntegrity", self, currentIntegrity - maxIntegrity)
-	
-	return 0 if (currentIntegrity > 0) else amount
+	else:
+		Signals.emit_signal("armorChangedIntegrity", self, 0)
+		
+		return 0
 

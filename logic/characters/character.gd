@@ -45,37 +45,54 @@ func getMaxHp() -> int:
 
 
 func takeHit(amount : int, bypassArmor : bool = false) -> void:
-	if (!bypassArmor && (amount < 0) && (inventory.armor != null)):
+	if currentHp == 0:
+		return
+	
+	if (amount < 0) && (extraHp > 0):
+		amount = changeExtraHp(amount)
+	
+	if (amount < 0) && !bypassArmor && (inventory.armor != null):
 		amount = inventory.armor.changeIntegrity(amount)
 	
-	changeHp(amount)
+	if amount < 0:
+		changeHp(amount)
 
 
 func changeHp(amount : int) -> void:
-	if (extraHp > 0) && (amount < 0):
-		var prevExtraHp = extraHp
-		var result = extraHp + amount
-		extraHp = result if (result >= 0) else 0
-		amount = result if (result < 0) else 0
-		
-		Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
+	if currentHp == 0:
+		return
 	
-	if amount != 0:
+	elif amount != 0:
 		var result = currentHp + amount
 		
 		if result > 0:
-			currentHp = result if (result < self.maxHp) else self.maxHp
+			currentHp = min(self.maxHp, result)
 		else:
 			currentHp = 0
 			Signals.emit_signal("characterDied", self)
+		
+		Signals.emit_signal("characterChangedHp", self, currentHp - self.maxHp)
+	else:
+		Signals.emit_signal("characterChangedHp", self, 0)
+
+
+# returns unsoaked damage
+func changeExtraHp(amount : int) -> int:
+	if currentHp == 0:
+		return 0
 	
-	Signals.emit_signal("characterChangedHp", self, currentHp - self.maxHp)
-
-
-func changeExtraHp(amount : int) -> void:
-	var prevExtraHp = extraHp
-	extraHp = max(0, min(self.maxHp, extraHp + amount))
-	Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
+	elif amount != 0:
+		var prevExtraHp = extraHp
+		var result = extraHp + amount
+		extraHp = max(0, result)
+		Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
+		
+		return int(min(0, result))
+	
+	else:
+		Signals.emit_signal("characterChangedExtraHp", self, 0)
+		
+		return 0
 
 
 func canLevelUp() -> bool:
