@@ -10,15 +10,6 @@ var armor : Armor = null
 var money : int = 0
 
 
-#TODO add some sort of consumable armor plate
-func repairArmor() -> void:
-	var oldProtection = armor.currentProtection
-	var newProtection = armor.currentProtection + armor.plateValue
-	armor.currentProtection = newProtection if (newProtection < armor.protection) else armor.protection
-	
-	Signals.emit_signal("armorRepaired", armor, armor.currentProtection - oldProtection)
-
-
 func add(entity : Entity) -> void:
 	if entity is Item:
 		items.append(entity as Item)

@@ -29,11 +29,10 @@ signal cameraRotatedRight()
 # game character related
 signal characterLeveledUp(character)
 signal characterGotExperience(character, amount)
-signal characterGainedHp(character, amount)
-signal characterLostHp(character, amount)
+signal characterChangedHp(character, amount)
+signal characterChangedExtraHp(character, amount)
 signal characterDied(character)
-signal armorTookHit(armor, amount)
-signal armorRepaired(armor, amount)
+signal armorChangedIntegrity(armor, amount)
 
 
 # command related

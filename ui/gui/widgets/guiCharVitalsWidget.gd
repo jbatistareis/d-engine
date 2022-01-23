@@ -21,10 +21,9 @@ func _init(character : Character) -> void:
 	self.character = character
 	
 	Signals.connect("commandOnQueue", self, "commandQueued")
-	Signals.connect("characterGainedHp", self, "hpBarChange")
-	Signals.connect("characterLostHp", self, "hpBarChange")
-	Signals.connect("armorTookHit", self, "armorBarChange")
-	Signals.connect("armorRepaired", self, "armorBarChange")
+	Signals.connect("characterChangedHp", self, "hpBarChange")
+	Signals.connect("armorChangedIntegrity", self, "armorBarChange")
+	Signals.connect("characterChangedExtraHp", self, "extraHpBarChange")
 	Signals.connect("commandsPaused", self, "pause")
 	Signals.connect("commandsResumed", self, "resume")
 	
@@ -135,10 +134,15 @@ func armorBarChange(armor : Armor, amount : int) -> void:
 			self,
 			"armorBarSize",
 			armorBar.rect_size.x / 200.0,
-			armor.currentProtection / float(armor.maxProtection),
+			armor.currentIntegrity / float(armor.maxIntegrity),
 			0.2
 		)
 		armorTween.start()
+
+
+func extraHpBarChange(character : Character, amount : int) -> void:
+	if character == self.character:
+		pass
 
 
 func pause() -> void:

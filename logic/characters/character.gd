@@ -8,6 +8,7 @@ var name : String = 'Base Character'
 
 var baseHp : int = 9
 var currentHp : int = 10
+var extraHp : int = 0
 var maxHp : int setget ,getMaxHp
 
 var baseDamage : int = 1
@@ -45,39 +46,49 @@ func getMaxHp() -> int:
 
 func takeHit(amount : int, bypassArmor : bool = false) -> void:
 	if (!bypassArmor && (amount < 0) && (inventory.armor != null)):
-		amount = inventory.armor.takeHit(amount)
+		amount = inventory.armor.changeIntegrity(amount)
 	
 	changeHp(amount)
 
 
 func changeHp(amount : int) -> void:
+	if (extraHp > 0) && (amount < 0):
+		var prevExtraHp = extraHp
+		var result = extraHp + amount
+		extraHp = result if (result >= 0) else 0
+		amount = result if (result < 0) else 0
+
+		Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
+	
 	if amount != 0:
 		var result = currentHp + amount
 		
 		if result > 0:
-			currentHp = result if (result < maxHp) else maxHp
+			currentHp = result if (result < self.maxHp) else self.maxHp
 		else:
 			currentHp = 0
-			
 			Signals.emit_signal("characterDied", self)
 	
-	if amount >= 0:
-		Signals.emit_signal("characterGainedHp", self, amount)
-	else:
-		Signals.emit_signal("characterLostHp", self, amount)
+	Signals.emit_signal("characterChangedHp", self, currentHp - self.maxHp)
+
+
+func changeExtraHp(amount : int) -> void:
+	var prevExtraHp = extraHp
+	extraHp = min(self.maxHp, extraHp + amount)
+	Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
 
 
 func canLevelUp() -> bool:
-	return experiencePoints >= experienceToNextLevel
+	return experiencePoints >= self.experienceToNextLevel
 
 
 func additionalLevels() -> int:
-	return floor(experiencePoints / experienceToNextLevel) as int
+	return floor(experiencePoints / self.experienceToNextLevel) as int
 
 
 func levelUp() -> void:
 	if canLevelUp():
-		experiencePoints -= experienceToNextLevel
+		experiencePoints -= self.experienceToNextLevel
 		sparePoints += 1
 		currentLevel += 1
 		

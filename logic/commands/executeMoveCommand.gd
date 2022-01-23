@@ -21,6 +21,8 @@ func execute() -> void:
 		toBeExecuted = false
 		return
 	
+	move.execute(executorCharacter)
+	
 	for target in targets:
 		var moveResult = move.getResult(executorCharacter)
 		
