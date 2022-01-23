@@ -13,6 +13,8 @@ func _ready() -> void:
 	
 	player.name = 'Player'
 	player.shortName = 'PLAYER'
+	player.currentHp = 100
+	player.constitution.score = 91
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
 	player.moves.append_array([Move.new()])

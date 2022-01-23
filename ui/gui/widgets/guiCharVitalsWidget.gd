@@ -24,6 +24,7 @@ func _init(character : Character) -> void:
 	Signals.connect("characterChangedHp", self, "hpBarChange")
 	Signals.connect("armorChangedIntegrity", self, "armorBarChange")
 	Signals.connect("characterChangedExtraHp", self, "extraHpBarChange")
+	Signals.connect("characterDied", self, "dead")
 	Signals.connect("commandsPaused", self, "pause")
 	Signals.connect("commandsResumed", self, "resume")
 	
@@ -79,43 +80,23 @@ func _ready() -> void:
 
 
 func commandQueued(command : Command) -> void:
-	if command.executorCharacter != character:
-		return
-	
-	if command is ExecuteMoveCommand: # pre
-		timerBar1.color = GuiTheme.COMMAND_PRG_PRE
-		timerBar2.color = GuiTheme.COMMAND_PRG_POS
-	else: # pos
-		timerBar1.color = GuiTheme.COMMAND_PRG_POS
-		timerBar2.color = GuiTheme.COMMAND_PRG_PRE
-	
-	timerBar1.rect_size.x = 0
-	timerTween.interpolate_method(self, "timerProgress", 0, 1, GameParameters.GCD * command.totalTicks)
-	timerTween.start()
-
-
-func timerProgress(percent : float) -> void:
-	timerBar1.rect_size.x = ceil(200 * percent)
-
-
-func hpBarSize(percent : float) -> void:
-	hpBar.rect_size.x = ceil(200 * percent)
-
-
-func armorBarSize(percent : float) -> void:
-	armorBar.rect_size.x = ceil(200 * percent)
+	if command.executorCharacter == character:
+		timerTween.remove_all()
+		
+		if command is ExecuteMoveCommand: # pre
+			timerBar1.color = GuiTheme.COMMAND_PRG_PRE
+			timerBar2.color = GuiTheme.COMMAND_PRG_POS
+		else: # pos
+			timerBar1.color = GuiTheme.COMMAND_PRG_POS
+			timerBar2.color = GuiTheme.COMMAND_PRG_PRE
+		
+		timerBar1.rect_size.x = 0
+		timerTween.interpolate_method(self, "timerProgress", 0, 1, GameParameters.GCD * command.totalTicks)
+		timerTween.start()
 
 
 func hpBarChange(character : Character, amount : int) -> void:
 	if character == self.character:
-		if character.currentHp == 0:
-			timerBar1.color = GuiTheme.COMMAND_DEAD
-			timerBar2.color = GuiTheme.COMMAND_DEAD
-			hpBar.color = GuiTheme.DEAD_BAR
-			armorBar.color = GuiTheme.DEAD_BAR
-			
-			return
-		
 		hpTween.remove_all()
 		hpTween.interpolate_method(
 			self,
@@ -138,6 +119,30 @@ func armorBarChange(armor : Armor, amount : int) -> void:
 			0.2
 		)
 		armorTween.start()
+
+
+func dead(character : Character) -> void:
+	if character == self.character:
+		timerTween.remove_all()
+		hpTween.remove_all()
+		armorTween.remove_all()
+		
+		timerBar1.color = GuiTheme.COMMAND_DEAD
+		timerBar2.color = GuiTheme.COMMAND_DEAD
+		hpBar.color = GuiTheme.DEAD_BAR
+		armorBar.color = GuiTheme.DEAD_BAR
+
+
+func timerProgress(percent : float) -> void:
+	timerBar1.rect_size.x = ceil(200 * percent)
+
+
+func hpBarSize(percent : float) -> void:
+	hpBar.rect_size.x = ceil(200 * percent)
+
+
+func armorBarSize(percent : float) -> void:
+	armorBar.rect_size.x = ceil(200 * percent)
 
 
 func extraHpBarChange(character : Character, amount : int) -> void:

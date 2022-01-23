@@ -47,6 +47,8 @@ func getMaxHp() -> int:
 func takeHit(amount : int, bypassArmor : bool = false) -> void:
 	if currentHp == 0:
 		return
+	elif amount < 0:
+		Signals.emit_signal("characterTookDamage", self)
 	
 	if (amount < 0) && (extraHp > 0):
 		amount = changeExtraHp(amount)

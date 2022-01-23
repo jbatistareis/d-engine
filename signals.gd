@@ -31,6 +31,7 @@ signal characterLeveledUp(character)
 signal characterGotExperience(character, amount)
 signal characterChangedHp(character, amount)
 signal characterChangedExtraHp(character, amount)
+signal characterTookDamage(character)
 signal characterDied(character)
 signal armorChangedIntegrity(armor, amount)
 

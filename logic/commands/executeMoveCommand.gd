@@ -16,42 +16,31 @@ func published() -> void:
 
 
 func execute() -> void:
-	if !BattleManager.inBattle:
-		executed = true
-		toBeExecuted = false
+	if !confirmExecution():
 		return
 	
 	move.execute(executorCharacter)
 	
+	# TODO enemy/player animations
+	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
+	if executorCharacter.type != Enums.CharacterType.PC:
+		while yield(Signals, "finishedBattleAnimation") != executorCharacter:
+			if !confirmExecution():
+				return
+			pass
+	
+	var moveResult = move.getResult(executorCharacter)
 	for target in targets:
-		var moveResult = move.getResult(executorCharacter)
-		
-		Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
-		
-		# TODO player animations
-		if executorCharacter.type != Enums.CharacterType.PC:
-			while yield(Signals, "finishedBattleAnimation") != executorCharacter:
-				pass
-		
-		Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
-		
-		# TODO enemy/player hit animations
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:
-				Signals.emit_signal("startedBattleAnimation", target, 'damage')
 				target.takeHit(moveResult.value)
 			
 			# TODO
-			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage by a factor of '(STR + DEX + WIS) / 3'
-				Signals.emit_signal("startedBattleAnimation", target, 'damage')
-				target.takeHit(
-					max(1, floor(moveResult.value / max(1, ((target.strength.modifier + target.dexterity.modifier + target.wisdom.modifier) / 3)))))
+			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage
+				target.takeHit(moveResult.value * (Dice.rollWorst(Enums.DiceType.D100) / 100.0))
 			
 			_: # Enums.DiceOutcome.WORST
 				target.takeHit(0) # TODO miss
-		
-		if target.currentHp == 0:
-			Signals.emit_signal("startedBattleAnimation", target, 'death')
 	
 	# TODO a persistent move effect should be applyed only one time per character
 	if persistent && (executions > 0):
@@ -63,4 +52,13 @@ func execute() -> void:
 			Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, move.cdPost))
 		else:
 			Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
+
+
+func confirmExecution() -> bool:
+	if !BattleManager.inBattle || (executorCharacter.currentHp == 0):
+		executed = true
+		toBeExecuted = false
+		return false
+	
+	return true
 

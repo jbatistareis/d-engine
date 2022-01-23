@@ -13,8 +13,8 @@ var outcomeExpression : String = _BASE_OUTCOME
 var pickExpression : String = _BASE_PICK
 var excuteExpression : String = _BASE_EXECUTE
 
-var cdPre : int = 4
-var cdPost : int = 3
+var cdPre : int = 10
+var cdPost : int = 10
 
 var executions : int = 1
 var persistent : bool = false
