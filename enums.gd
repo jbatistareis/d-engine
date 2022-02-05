@@ -8,8 +8,11 @@ enum DiceRollType { BEST, NORMAL, WORST }
 
 enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, WISDOM, CHARISMA }
 enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
-enum CharacterType { PC, FRIENDLY_NPC, FOE_NPC }
+enum CharacterType { PC, NPC, FOE }
 enum CharacterTargetType { ANY, NONE, FRIENDLY, FOE }
+
+enum MoveModifierType { NONE, ATTACK, DEFENCE, COOLDOWN }
+enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
 
 enum ItemType { ARMOR, WEAPON, CONSUMABLE, KEY }
 

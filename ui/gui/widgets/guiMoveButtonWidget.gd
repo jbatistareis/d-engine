@@ -4,7 +4,7 @@ extends GuiButtonWidget
 const LABEL : String = '[  %s  ]  [  %ds / %ds  ]\n%s'
 
 
-func _init(move : Move).(LABEL % [move.name, move.cdPre, move.cdPost, move.description], Enums.GuiAction.CONFIRM, move, 'move') -> void:
+func _init(move : Move).(LABEL % [move.name, move.cdPre, move.cdPos, move.description], Enums.GuiAction.CONFIRM, move, 'move') -> void:
 	pass
 
 

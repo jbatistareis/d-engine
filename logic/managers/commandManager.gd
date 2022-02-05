@@ -27,9 +27,10 @@ func tick() -> void:
 			
 			if command.toBeExecuted:
 				executingCommand = command is ExecuteMoveCommand
-				command.run()
-				if command.executed:
-					commandsQueue.erase(command)
+				command.execute()
+			
+			if command.remainingTicks == 0:
+				commandsQueue.erase(command)
 		
 		executingCommand = false
 		

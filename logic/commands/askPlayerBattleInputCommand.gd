@@ -8,8 +8,8 @@ func _init(player, ticks : int).(player, ticks) -> void:
 
 func execute() -> void:
 	if !BattleManager.inBattle:
-		executed = true
 		toBeExecuted = false
+		remainingTicks = 0
 		return
 	
 	Signals.emit_signal("commandsPaused")
