@@ -1,8 +1,8 @@
 class_name Character
 extends Entity
 
-var type : int = Enums.CharacterType.FRIENDLY_NPC
-var model : String = ''
+var type : int = Enums.CharacterType.NPC
+var model : String = 'BSECHA'
 
 var name : String = 'Base Character'
 
@@ -27,6 +27,8 @@ var charisma : Stat = Stat.new()
 
 var moves : Array = []
 
+var moveModifiers : Array = []
+
 var inventory : Inventory = Inventory.new()
 
 var verdict : Verdict = Verdict.new()
@@ -49,6 +51,12 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 		return
 	elif amount < 0:
 		Signals.emit_signal("characterTookDamage", self)
+		
+		var defOffset = (0.2 * countModifiersByProperty(Enums.MoveModifierProperty.DEF_P)) - (1 + 0.2 * countModifiersByProperty(Enums.MoveModifierProperty.DEF_M))
+		amount = -ceil(amount * defOffset)
+		
+		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
+		moveModifiers.erase(Enums.MoveModifierProperty.DEF_M)
 	
 	if (amount < 0) && (extraHp > 0):
 		amount = changeExtraHp(amount)
@@ -122,4 +130,41 @@ func gainExperience(amount : int) -> void:
 
 func getExperienceToNextLevel() -> int:
 	return int(round(7 * pow(currentLevel, 1.3)))
+
+
+func countModifiersByProperty(modifierProperty : int, modifiers : Array = moveModifiers) -> int:
+	var count = 0
+	for modifier in modifiers:
+		if modifier == modifierProperty:
+			count += 1
+	
+	return count
+
+
+func clearModifiersByType(modifierType : int) -> void:
+	for modifier in moveModifiers:
+		if modifier == modifierType:
+			moveModifiers.erase(modifier)
+
+
+func removeModifierByType(modifierType : int) -> void:
+	moveModifiers.erase(modifierType)
+
+
+func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
+	for modifier in newModifiers:
+		if countModifiersByProperty(modifier) < 3:
+			moveModifiers.append(modifier)
+	
+	if !onlyApply:
+		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_P)
+		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_M)
+		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_P)
+		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_M)
+
+
+func reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
+	var count = countModifiersByProperty(modifierType, newModifiers)
+	if count == 0:
+		moveModifiers.erase(modifierType)
 

@@ -4,10 +4,21 @@ extends Command
 var targets : Array = []
 var move : Move
 
+var atkOffset : float
+var cdOffset : float
 
-func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre, move.executions, move.persistent) -> void:
+
+func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre) -> void:
+	self.atkOffset = (1 + calculateModOffset(Enums.MoveModifierProperty.ATK_P)) - calculateModOffset(Enums.MoveModifierProperty.ATK_M)
+	self.cdOffset = -(calculateModOffset(Enums.MoveModifierProperty.CD_P) - (1 + calculateModOffset(Enums.MoveModifierProperty.CD_M)))
+	
 	self.targets = targets
 	self.move = move
+	self.totalTicks = ceil(move.cdPre * cdOffset)
+
+
+func calculateModOffset(moveModifierProperty : int) -> float:
+	return 0.2 * executorCharacter.countModifiersByProperty(moveModifierProperty)
 
 
 func published() -> void:
@@ -31,33 +42,34 @@ func execute() -> void:
 	
 	var moveResult = move.getResult(executorCharacter)
 	for target in targets:
+		var sig = sign(moveResult.value)
+		var value = ceil(moveResult.value * atkOffset * sig) * sig
+		
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:
-				target.takeHit(moveResult.value)
+				target.takeHit(value)
 			
 			# TODO
 			Enums.DiceOutcome.WITH_CONSEQUENCE: # reduces damage
-				target.takeHit(moveResult.value * randf())
+				target.takeHit(value * randf())
 			
 			_: # Enums.DiceOutcome.WORST
 				target.takeHit(0) # TODO miss
+		
+		target.applyMoveModifiers(move.targetModifiers, true)
 	
-	# TODO a persistent move effect should be applyed only one time per character
-	if persistent && (executions > 0):
-		Signals.emit_signal("commandPublished", self)
-	elif persistent && (executions < 1):
-		return
-	else:
-		if executorCharacter.verdictActive:
-			Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, move.cdPost))
-		else:
-			Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, move.cdPost))
+	executorCharacter.applyMoveModifiers(move.executorModifiers)
+	
+	if executorCharacter.verdictActive:
+		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, ceil(move.cdPos * cdOffset)))
+	elif executorCharacter.type == Enums.CharacterType.PC:
+		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, ceil(move.cdPos * cdOffset)))
 
 
 func confirmExecution() -> bool:
 	if !BattleManager.inBattle || (executorCharacter.currentHp == 0):
-		executed = true
 		toBeExecuted = false
+		remainingTicks = 0
 		return false
 	
 	return true

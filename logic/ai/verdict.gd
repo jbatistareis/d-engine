@@ -17,7 +17,7 @@ func decision(auditorCharacter, suspects : Array) -> void:
 	
 	Signals.emit_signal(
 		"commandPublished",
-		WaitCommand.new(VerdictCommand.new(auditorCharacter, GameParameters.WAIT_TICKS / 2))
+		WaitCommand.new(VerdictCommand.new(auditorCharacter, GameParameters.WAIT_TICKS))
 	)
 
 

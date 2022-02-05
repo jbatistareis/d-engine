@@ -13,29 +13,30 @@ var outcomeExpression : String = _BASE_OUTCOME
 var pickExpression : String = _BASE_PICK
 var excuteExpression : String = _BASE_EXECUTE
 
-var cdPre : int = 10
-var cdPost : int = 10
-
-var executions : int = 1
-var persistent : bool = false
+var cdPre : int = 5
+var cdPos : int = 5
 
 var targetType : int = Enums.CharacterTargetType.FOE # relative to the executor
 
 var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'
 
+var executorModifiers : Array = []
+var targetModifiers : Array = []
+
 
 # negative values represent damage, positive represent cure
-func getResult(character) -> MoveResult:
+func getResult(executor) -> MoveResult:
 	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
+	var result = MoveResult.new(reference.getValue(executor), reference.getOutcome(executor))
 	
-	return MoveResult.new(reference.getValue(character), reference.getOutcome(character))
+	return result
 
 
-func pick(character) -> void:
-	ScriptTool.getReference(pickExpression).pick(character)
+func pick(executor) -> void:
+	ScriptTool.getReference(pickExpression).pick(executor)
 
 
-func execute(character) -> void:
-	ScriptTool.getReference(excuteExpression).execute(character)
+func execute(executor) -> void:
+	ScriptTool.getReference(excuteExpression).execute(executor)
 

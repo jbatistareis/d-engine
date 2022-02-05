@@ -8,8 +8,8 @@ func _init(executorCharacter, ticks : int).(executorCharacter, ticks) -> void:
 
 func execute() -> void:
 	if !BattleManager.inBattle:
-		executed = true
 		toBeExecuted = false
+		remainingTicks = 0
 		return
 	
 	Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
@@ -21,7 +21,7 @@ func execute() -> void:
 			Enums.CharacterType.PC:
 				suspects = BattleManager.enemies
 			
-			Enums.CharacterType.FOE_NPC:
+			Enums.CharacterType.FOE:
 				suspects = BattleManager.players
 			
 			_:
