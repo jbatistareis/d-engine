@@ -1,15 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://new_script.gd" type="Script" id=1]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/terrain/terrainCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/battle/battleArena.tscn" type="PackedScene" id=4]
 [ext_resource path="res://ui/gui/guiOverlay.tscn" type="PackedScene" id=5]
 
 [node name="root" type="Spatial"]
 script = ExtResource( 1 )
-
-[node name="terrainCamera" parent="." instance=ExtResource( 3 )]
 
 [node name="terrain" parent="." instance=ExtResource( 2 )]
 

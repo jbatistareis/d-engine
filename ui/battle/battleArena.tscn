@@ -1,29 +1,19 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://ui/battle/battleArena.gd" type="Script" id=1]
-[ext_resource path="res://ui/battle/arena.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/kenney_prototypetextures/Light/texture_07.png" type="Texture" id=3]
+[ext_resource path="res://ui/battle/arenaEnvironment.tres" type="Environment" id=4]
+[ext_resource path="res://ui/battle/arena.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("ViewportContainer/Viewport/arena:visible")
+tracks/0/path = NodePath("ViewportContainer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ViewportContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
@@ -34,24 +24,12 @@ tracks/1/keys = {
 resource_name = "finish"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("ViewportContainer/Viewport/arena:visible")
+tracks/0/path = NodePath("ViewportContainer:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("ViewportContainer:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 0, 0.5 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -73,8 +51,23 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
+
+[sub_resource type="Animation" id=8]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
 tracks/1/type = "value"
-tracks/1/path = NodePath("ViewportContainer/Viewport/arena:visible")
+tracks/1/path = NodePath("pivot:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -82,9 +75,151 @@ tracks/1/enabled = true
 tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ true ]
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/Camera:translation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 6 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("pivot/Camera/bulb:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("pivot/lantern:light_energy")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.5 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("pivot/Camera:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "exit"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Camera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 1, 7 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "lose"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot/Camera:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 0, 25 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("pivot/lantern:light_energy")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 4.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.5, 0.0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "win"
+length = 30.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("pivot:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 30 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+}
+
+[sub_resource type="CylinderMesh" id=6]
+height = 0.5
+
+[sub_resource type="SpatialMaterial" id=7]
+albedo_texture = ExtResource( 3 )
+metallic = 0.5
+roughness = 0.0
+uv1_scale = Vector3( 15, 15, 15 )
 
 [node name="battleArena" type="Spatial"]
 script = ExtResource( 1 )
@@ -115,5 +250,50 @@ shadow_atlas_quad_1 = 4
 shadow_atlas_quad_2 = 5
 shadow_atlas_quad_3 = 6
 
-[node name="arena" parent="ViewportContainer/Viewport" instance=ExtResource( 2 )]
-visible = false
+[node name="arena" type="Spatial" parent="ViewportContainer/Viewport"]
+script = ExtResource( 5 )
+
+[node name="Tween" type="Tween" parent="ViewportContainer/Viewport/arena"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ViewportContainer/Viewport/arena"]
+autoplay = "RESET"
+anims/RESET = SubResource( 8 )
+anims/exit = SubResource( 9 )
+anims/lose = SubResource( 11 )
+anims/win = SubResource( 10 )
+
+[node name="pivot" type="Spatial" parent="ViewportContainer/Viewport/arena"]
+
+[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/arena/pivot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
+environment = ExtResource( 4 )
+current = true
+fov = 39.0
+size = 0.1
+
+[node name="bulb" type="OmniLight" parent="ViewportContainer/Viewport/arena/pivot/Camera"]
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 7.1389
+
+[node name="lantern" type="SpotLight" parent="ViewportContainer/Viewport/arena/pivot"]
+transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 7.45058e-08, 5, 6.26015 )
+light_energy = 0.5
+shadow_enabled = true
+spot_range = 20.0
+spot_angle = 40.0
+
+[node name="enemies" type="Spatial" parent="ViewportContainer/Viewport/arena"]
+
+[node name="enemy1" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
+transform = Transform( 0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -2, 0, 0 )
+
+[node name="enemy2" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
+
+[node name="enemy3" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
+transform = Transform( 0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, 2, 0, 0 )
+
+[node name="ground" type="MeshInstance" parent="ViewportContainer/Viewport/arena"]
+transform = Transform( 21, 0, 0, 0, 1, 0, 0, 0, 21, 0, -0.25, 0 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
