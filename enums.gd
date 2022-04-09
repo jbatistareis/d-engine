@@ -4,12 +4,12 @@ enum States { BOOT, TITLE, MAIN_MENU, EXPLORING, EXPLORING_MENU, BATTLE, INVENTO
 
 enum DiceType { D4 = 4, D6 = 6, D8 = 8, D10 = 10, D12 = 12, D20 = 20, D100 = 100 }
 enum DiceOutcome { BEST, WITH_CONSEQUENCE, WORST }
-enum DiceRollType { BEST, NORMAL, WORST, NONE }
+enum DiceRollType { NONE, BEST, NORMAL, WORST }
 
 enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, WISDOM, CHARISMA }
 enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
 enum CharacterType { PC, NPC, FOE }
-enum CharacterTargetType { ANY, NONE, FRIENDLY, FOE }
+enum CharacterTargetType { NONE, ANY, FRIENDLY, FOE }
 
 enum MoveModifierType { NONE, ATTACK, DEFENCE, COOLDOWN }
 enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
