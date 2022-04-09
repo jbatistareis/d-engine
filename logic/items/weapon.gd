@@ -48,9 +48,6 @@ func calculateDamage(character) -> int:
 		_: # Character.Modifier.NONE
 			modifierValue = 0
 	
-	if (modifierDice == null):
-		return damage + modifierValue
-	
 	match modifierRollType:
 		Enums.DiceRollType.NORMAL:
 			return Dice.rollNormal(modifierDice) + damage + modifierValue
