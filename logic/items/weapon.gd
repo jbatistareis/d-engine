@@ -52,12 +52,15 @@ func calculateDamage(character) -> int:
 		return damage + modifierValue
 	
 	match modifierRollType:
+		Enums.DiceRollType.NORMAL:
+			return Dice.rollNormal(modifierDice) + damage + modifierValue
+		
 		Enums.DiceRollType.BEST:
 			return Dice.rollBest(modifierDice) + damage + modifierValue
 		
 		Enums.DiceRollType.WORST:
 			return Dice.rollWorst(modifierDice) + damage + modifierValue
 		
-		_: # Dice.RollType.NORMAL
-			return Dice.rollNormal(modifierDice) + damage + modifierValue
+		_: # Dice.RollType.NONE
+			return damage + modifierValue
 
