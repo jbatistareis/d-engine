@@ -28,12 +28,12 @@ func tick() -> void:
 			if command.toBeExecuted:
 				executingCommand = command is ExecuteMoveCommand
 				command.execute()
-			
-			if command.remainingTicks == 0:
+				commandsQueue.erase(command)
+			elif command.canceled:
 				commandsQueue.erase(command)
 		
 		executingCommand = false
-		
+	
 	while !newCommands.empty():
 		var command = newCommands.pop_front()
 		commandsQueue.append(command)

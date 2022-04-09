@@ -5,8 +5,8 @@ const _BASE_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n
 const _BASE_PICK : String = 'func pick(character : Character) -> void:\n\tpass'
 const _BASE_EXECUTE : String = 'func execute(character : Character) -> void:\n\tpass'
 
-var name : String = 'Speed jab'
-var description : String = 'Attacks keeping balance'
+var name : String = 'Base attack'
+var description : String = 'Base attack'
 
 var valueExpression : String = _BASE_VALUE
 var outcomeExpression : String = _BASE_OUTCOME

@@ -4,6 +4,7 @@ var executorCharacter
 var totalTicks : int setget setTotalTicks
 var remainingTicks : int
 var toBeExecuted : bool = false
+var canceled : bool = false
 
 
 func _init(executorCharacter, ticks : int) -> void:
@@ -29,6 +30,7 @@ func setTotalTicks(value : int) -> void:
 func tick() -> void:
 	if (executorCharacter != null) && (executorCharacter.currentHp <= 0):
 		toBeExecuted = false
+		canceled = true
 		remainingTicks = 0
 		return
 	
