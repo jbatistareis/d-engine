@@ -9,6 +9,7 @@ var modifierRollType : int # returns Dice.RollType enum
 var modifier : int # returns Character.Modifier enum
 var cdPre : int
 var cdPost : int
+var moves : Array = []
 
 
 #weapon items equip the character when interacted

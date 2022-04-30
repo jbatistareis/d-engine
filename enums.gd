@@ -9,7 +9,7 @@ enum DiceRollType { NONE, BEST, NORMAL, WORST }
 enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, WISDOM, CHARISMA }
 enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
 enum CharacterType { PC, NPC, FOE }
-enum CharacterTargetType { NONE, ANY, FRIENDLY, FOE }
+enum CharacterTargetType { NONE, ANY, FRIENDLY, FOE, FOE_ALL }
 
 enum MoveModifierType { NONE, ATTACK, DEFENCE, COOLDOWN }
 enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
