@@ -62,7 +62,7 @@ func getState(id : int) -> State:
 			return null
 
 
-func _physics_process(delta) -> void:
+func _process(delta) -> void:
 	currentState.handleInput()
 	currentState = currentState.next
 

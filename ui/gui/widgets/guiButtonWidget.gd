@@ -47,14 +47,12 @@ func _init(text : String, action : int = Enums.GuiAction.CANCEL, data = null, id
 
 
 func _ready() -> void:
-	rect_min_size = label.rect_size
+	label.rect_position += (GuiTheme.WIDGET_PADDING / 2)
+	rect_min_size = label.rect_size + GuiTheme.WIDGET_PADDING
 
 
 func _process(delta : float) -> void:
-	if hover:
-		bg.color = GuiTheme.HOVER_COLOR
-	else:
-		bg.color = GuiTheme.UNSELECTED_COLOR
+	bg.color = GuiTheme.HOVER_COLOR if hover else GuiTheme.UNSELECTED_COLOR
 
 
 func fitWidth(value : float) -> void:

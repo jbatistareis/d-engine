@@ -60,6 +60,7 @@ func _init(character : Character) -> void:
 	hBox.add_child(label)
 	hBox.add_child(hpArmBarBox)
 	hBox.add_child(timerBarContainer)
+	hBox.add_constant_override('separation', GuiTheme.WIDGET_PADDING.x)
 	
 	add_child(hBox)
 	add_child(timerTween)
@@ -68,7 +69,8 @@ func _init(character : Character) -> void:
 
 
 func _ready() -> void:
-	rect_min_size = hBox.rect_size
+	hBox.rect_position += (GuiTheme.WIDGET_PADDING / 2)
+	rect_min_size = hBox.rect_size + GuiTheme.WIDGET_PADDING
 	
 	yield(get_tree(), "idle_frame")
 	armorBar.rect_size.y = hBox.rect_size.y * 0.5

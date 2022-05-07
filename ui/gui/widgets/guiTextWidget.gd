@@ -1,7 +1,7 @@
 class_name GuiTextWidget
 extends GuiWidget
 
-var vBox = VBoxContainer.new()
+var vBox : VBoxContainer = VBoxContainer.new()
 
 
 func _init(text : String) -> void:
@@ -30,5 +30,6 @@ func _init(text : String) -> void:
 
 
 func _ready() -> void:
-	rect_min_size = vBox.rect_size
+	vBox.rect_position += (GuiTheme.WIDGET_PADDING / 2)
+	rect_min_size = vBox.rect_size + GuiTheme.WIDGET_PADDING
 

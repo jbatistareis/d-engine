@@ -14,5 +14,5 @@ const HP_BAR = Color.limegreen
 const ARMOR_BAR = Color.orange
 const DEAD_BAR = Color.teal
 
-const WINDOW_MARGIN : int = 2
+const WIDGET_PADDING : Vector2 = Vector2(4, 4)
 
