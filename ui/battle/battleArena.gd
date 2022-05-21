@@ -76,18 +76,28 @@ func createCursor() -> BattleCursorWindow:
 
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
-		if move.targetType == Enums.CharacterTargetType.NONE:
+		if move.targetType == Enums.CharacterTargetType.FRIENDLY:
 			publishCommand(player, [], move)
+			return
+		elif move.targetType == Enums.CharacterTargetType.FOE_ALL:
+			var targets = []
+			for index in range(3):
+				var character = enemiesNode.get_child(ENEMY_MAP[index]).get_child(0).character
+				
+				if character.currentHp > 0:
+					targets.append(character)
+			
+			publishCommand(player, targets, move)
 			return
 		
 		# TODO error out if no one is alive
-		for index in range(5):
-			if enemiesNode.get_child(ENEMY_MAP[index]).get_child_count() == 0:
-				break
-			
-			if enemiesNode.get_child(ENEMY_MAP[index]).get_child(0).character.currentHp > 0:
-				cursorPos = index
-				break
+		if enemiesNode.get_child(ENEMY_MAP[cursorPos]).get_child(0).character.currentHp <= 0:
+			for index in range(3):
+				if enemiesNode.get_child(ENEMY_MAP[index]).get_child(0).character.currentHp > 0:
+					cursorPos = index
+					break
+				elif enemiesNode.get_child(ENEMY_MAP[index]).get_child_count() == 0:
+					return
 		
 		cursorPlayer = player
 		cursorMove = move

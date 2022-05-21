@@ -6,36 +6,11 @@ var player : Character = Character.new()
 func _ready() -> void:
 	# TODO tests
 	var character : Character = Character.new()
-#	EntitySaver.saveCharacter(character)
+	character.type = Enums.CharacterType.FOE
+	EntitySaver.saveCharacter(character)
 	#
 	
 	print('TEST START')
-	
-	
-	var atkP = Move.new()
-	atkP.name = 'Target ATK+'
-	atkP.targetModifiers.append(Enums.MoveModifierProperty.ATK_P)
-	
-	var atkM = Move.new()
-	atkM.name = 'Target ATK-'
-	atkM.targetModifiers.append(Enums.MoveModifierProperty.ATK_M)
-	
-	var defP = Move.new()
-	defP.name = 'Target DEF+'
-	defP.targetModifiers.append(Enums.MoveModifierProperty.DEF_P)
-	
-	var defM = Move.new()
-	defM.name = 'Target DEF-'
-	defM.targetModifiers.append(Enums.MoveModifierProperty.DEF_M)
-	defM.targetModifiers.append(Enums.MoveModifierProperty.DEF_M)
-	
-	var cdP = Move.new()
-	cdP.name = 'Target CD+'
-	cdP.targetModifiers.append(Enums.MoveModifierProperty.CD_P)
-	
-	var cdM = Move.new()
-	cdM.name = 'Target CD-'
-	cdM.targetModifiers.append(Enums.MoveModifierProperty.CD_M)
 	
 	
 	player.name = 'Player'
@@ -44,8 +19,6 @@ func _ready() -> void:
 	player.constitution.score = 91
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
-	player.moves.append_array([Move.new()])
-#	player.moves.append_array([atkP, atkM, defP, defM, cdP, cdM])
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	

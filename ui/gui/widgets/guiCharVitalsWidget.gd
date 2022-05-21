@@ -1,6 +1,8 @@
 class_name GuiCharVitalsWidget
 extends GuiWidget
 
+const BAR_SIZE : float = 150.0
+
 var character : Character
 
 var hBox : HBoxContainer = HBoxContainer.new()
@@ -48,16 +50,17 @@ func _init(character : Character) -> void:
 	
 	timerBarContainer.add_child(timerBar2)
 	timerBarContainer.add_child(timerBar1)
-	timerBarContainer.rect_min_size = Vector2(200, 0)
+	timerBarContainer.rect_min_size = Vector2(BAR_SIZE, 0)
 	
 	hpArmBarBox.add_child(deadBar)
 	hpArmBarBox.add_child(hpBar)
 	hpArmBarBox.add_child(armorBar)
-	hpArmBarBox.rect_min_size = Vector2(200, 0)
+	hpArmBarBox.rect_min_size = Vector2(BAR_SIZE, 0)
 	
 	hBox.add_child(label)
 	hBox.add_child(hpArmBarBox)
 	hBox.add_child(timerBarContainer)
+	hBox.add_constant_override('separation', GuiTheme.WIDGET_PADDING.x)
 	
 	add_child(hBox)
 	add_child(timerTween)
@@ -66,7 +69,8 @@ func _init(character : Character) -> void:
 
 
 func _ready() -> void:
-	rect_min_size = hBox.rect_size
+	hBox.rect_position += (GuiTheme.WIDGET_PADDING / 2)
+	rect_min_size = hBox.rect_size + GuiTheme.WIDGET_PADDING
 	
 	yield(get_tree(), "idle_frame")
 	armorBar.rect_size.y = hBox.rect_size.y * 0.5
@@ -101,7 +105,7 @@ func hpBarChange(character : Character, amount : int) -> void:
 		hpTween.interpolate_method(
 			self,
 			"hpBarSize",
-			hpBar.rect_size.x / 200.0,
+			hpBar.rect_size.x / BAR_SIZE,
 			character.currentHp / float(character.maxHp),
 			0.2
 		)
@@ -114,7 +118,7 @@ func armorBarChange(armor : Armor, amount : int) -> void:
 		armorTween.interpolate_method(
 			self,
 			"armorBarSize",
-			armorBar.rect_size.x / 200.0,
+			armorBar.rect_size.x / BAR_SIZE,
 			armor.currentIntegrity / float(armor.maxIntegrity),
 			0.2
 		)
@@ -134,15 +138,15 @@ func dead(character : Character) -> void:
 
 
 func timerProgress(percent : float) -> void:
-	timerBar1.rect_size.x = ceil(200 * percent)
+	timerBar1.rect_size.x = ceil(BAR_SIZE * percent)
 
 
 func hpBarSize(percent : float) -> void:
-	hpBar.rect_size.x = ceil(200 * percent)
+	hpBar.rect_size.x = ceil(BAR_SIZE * percent)
 
 
 func armorBarSize(percent : float) -> void:
-	armorBar.rect_size.x = ceil(200 * percent)
+	armorBar.rect_size.x = ceil(BAR_SIZE * percent)
 
 
 func extraHpBarChange(character : Character, amount : int) -> void:

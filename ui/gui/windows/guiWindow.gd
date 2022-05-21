@@ -22,8 +22,7 @@ var hBox : HBoxContainer = HBoxContainer.new()
 func _init(pos : Vector2 = Vector2.INF) -> void:
 	position = pos
 
-
-func setContent() -> void:
+func _ready():
 	if type == Enums.GuiWindowType.FOREGROUND:
 		Signals.connect("guiConfirm", self, "confirm")
 		Signals.connect("guiUp", self, "action", [InputType.UP])
@@ -44,7 +43,9 @@ func setContent() -> void:
 	columns = ceil(widgets.size() / float(lines))
 	
 	for i in range(columns):
-		hBox.add_child(VBoxContainer.new())
+		var vbox = VBoxContainer.new()
+		vbox.add_constant_override("separation", 0)
+		hBox.add_child(vbox)
 	
 	var lineCount = 0
 	var columnCount = 0
@@ -72,14 +73,10 @@ func setContent() -> void:
 	add_child(shadow)
 	add_child(bg)
 	add_child(hBox)
-
-
-func fit() -> void:
+	
 	var columnWidth = hBox.rect_size.x / float(columns)
 	for widget in widgets:
 		widget.fitWidth(columnWidth)
-		
-	yield(get_tree(), "idle_frame")
 	
 	bg.rect_min_size =  hBox.rect_size
 	shadow.rect_min_size =  hBox.rect_size
