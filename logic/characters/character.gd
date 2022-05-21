@@ -4,8 +4,6 @@ extends Entity
 var type : int = Enums.CharacterType.NPC
 var model : String = 'BSECHA'
 
-var name : String = 'Base Character'
-
 var baseHp : int = 9
 var currentHp : int = 10
 var extraHp : int = 2
@@ -37,6 +35,7 @@ var currentRoom : int = 0
 
 
 func _init() -> void:
+	self.name = 'Base Character'
 	self.shortName = 'BSECHA'
 
 

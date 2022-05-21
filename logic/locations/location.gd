@@ -3,7 +3,6 @@ extends Entity
 
 const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
 
-var name : String
 var description : String
 var rooms : Array = []
 var portals : Array = []

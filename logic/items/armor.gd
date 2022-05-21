@@ -1,7 +1,6 @@
 class_name Armor
 extends Entity
 
-var name : String
 var maxIntegrity : int = 0
 var currentIntegrity : int = 0
 

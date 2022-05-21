@@ -1,11 +1,11 @@
 class_name Move
+extends Entity
 
 const _BASE_VALUE : String = 'func getValue(character : Character) -> int:\n\treturn -(character.strength.score + character.inventory.weapon.calculateDamage(character))'
 const _BASE_OUTCOME : String = 'func getOutcome(character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
 const _BASE_PICK : String = 'func pick(character : Character) -> void:\n\tpass'
 const _BASE_EXECUTE : String = 'func execute(character : Character) -> void:\n\tpass'
 
-var name : String = 'Base attack'
 var description : String = 'Base attack'
 
 var valueExpression : String = _BASE_VALUE
@@ -23,6 +23,10 @@ var attackAnimation : String = 'attack1'
 
 var executorModifiers : Array = []
 var targetModifiers : Array = []
+
+
+func _init():
+	self.name = 'Base attack'
 
 
 # negative values represent damage, positive represent cure

@@ -1,8 +1,6 @@
 class_name Weapon
 extends Entity
 
-var name : String
-
 var damage : int
 var modifierDice : int # returns Dice.Type enum
 var modifierRollType : int # returns Dice.RollType enum
