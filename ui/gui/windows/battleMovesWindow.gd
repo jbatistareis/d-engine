@@ -7,7 +7,7 @@ var character
 func _init(character) -> void:
 	self.character = character
 	
-	for move in character.moves:
+	for move in character.inventory.weapon.moves:
 		widgets.append(GuiMoveButtonWidget.new(move))
 	
 	position = Vector2(

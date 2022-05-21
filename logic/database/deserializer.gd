@@ -2,6 +2,7 @@ class_name Deserializer
 
 
 static func character(dict : Dictionary):
+	var index = 0
 	var data = dict2inst(dict)
 	
 	data.strength = dict2inst(dict.strength)
@@ -11,25 +12,17 @@ static func character(dict : Dictionary):
 	data.wisdom = dict2inst(dict.wisdom)
 	data.charisma = dict2inst(dict.charisma)
 	
-	var index = 0
-	for move in dict.moves:
-		data.moves[index] = dict2inst(move)
-		index += 1
-	
 	data.inventory = dict2inst(dict.inventory)
-	
 	index = 0
 	for item in dict.inventory.items:
 		data.inventory.items[index] = dict2inst(item)
 		index += 1
-	
 	index = 0
 	for weapon in dict.inventory.weapons:
 		data.inventory.weapons[index] = dict2inst(weapon)
 		index += 1
 	
 	data.verdict = dict2inst(dict.verdict)
-	
 	index = 0
 	for action in dict.verdict.actions:
 		var actionInst = dict2inst(action)
@@ -40,6 +33,11 @@ static func character(dict : Dictionary):
 		index += 1
 	
 	data.inventory.weapon = null if (dict.inventory.weapon == null) else dict2inst(dict.inventory.weapon)
+	index = 0
+	for move in dict.inventory.weapon.moves:
+		data.inventory.weapon.moves[index] = dict2inst(move)
+		index += 1
+	
 	data.inventory.armor = null if (dict.inventory.armor == null) else dict2inst(dict.inventory.armor)
 	
 	return data

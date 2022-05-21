@@ -9,18 +9,15 @@ var modifierRollType : int # returns Dice.RollType enum
 var modifier : int # returns Character.Modifier enum
 var cdPre : int
 var cdPost : int
-var moves : Array = []
+# characters dont earn moves
+# moves should access calculateDamage on its logic
+var moves : Array = [Move.new()]
 
 
-#weapon items equip the character when interacted
-func _init(name : String, damage : int = 1, modifierDice : int = Enums.DiceType.D4, modifier : int = Enums.CharacterModifier.STR, cdPre : int = 1, cdPost : int = 1) -> void:
-	self.name = name
-	self.damage = damage
-	self.modifierDice = modifierDice
-	self.modifierRollType = modifierRollType
-	self.modifier = modifier
-	self.cdPre = cdPre
-	self.cdPost = cdPost
+# TODO dto
+#func _init(name : String, moves : Array) -> void:
+#	self.name = name
+#	self.moves = moves
 
 
 #TODO find a better way to do it

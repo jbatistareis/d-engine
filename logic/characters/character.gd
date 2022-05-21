@@ -8,7 +8,7 @@ var name : String = 'Base Character'
 
 var baseHp : int = 9
 var currentHp : int = 10
-var extraHp : int = 0
+var extraHp : int = 2
 var maxHp : int setget ,getMaxHp
 
 var baseDamage : int = 1
@@ -24,8 +24,6 @@ var constitution : Stat = Stat.new()
 var intelligence : Stat = Stat.new()
 var wisdom : Stat = Stat.new()
 var charisma : Stat = Stat.new()
-
-var moves : Array = []
 
 var moveModifiers : Array = []
 

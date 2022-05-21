@@ -3,7 +3,7 @@ class_name Inventory
 var items : Array = []
 var weapons : Array = []
 
-var weapon : Weapon = null
+var weapon : Weapon = Weapon.new()
 #armors are not meant to be caried, you can only have your equiped one, and you can change then only on specific places
 var armor : Armor = null
 
