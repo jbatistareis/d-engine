@@ -1,6 +1,16 @@
 class_name Persistence
 
 
+# TODO
+static func saveProgress(slot : int) -> bool:
+	return true
+
+
+# TODO
+static func loadProgress(slot : int) -> bool:
+	return true
+
+
 static func saveDTO(dto : DTO) -> String:
 	var path = ''
 	

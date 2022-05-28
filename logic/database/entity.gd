@@ -1,8 +1,8 @@
 class_name Entity
 
 var id : int
-var shortName : String = 'ENTITY' setget setShortName
 var name : String
+var shortName : String = 'ENTITY' setget setShortName
 
 
 func setShortName(value : String) -> void:
