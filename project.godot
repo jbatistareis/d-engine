@@ -155,11 +155,6 @@ _global_script_classes=[ {
 "path": "res://ui/gui/menus/gameMenu.gd"
 }, {
 "base": "Reference",
-"class": "GameParameters",
-"language": "GDScript",
-"path": "res://gameParameters.gd"
-}, {
-"base": "Reference",
 "class": "GamePaths",
 "language": "GDScript",
 "path": "res://gamePaths.gd"
@@ -285,34 +280,9 @@ _global_script_classes=[ {
 "path": "res://logic/database/persistence.gd"
 }, {
 "base": "Entity",
-"class": "RoomPortal",
-"language": "GDScript",
-"path": "res://logic/locations/roomPortal.gd"
-}, {
-"base": "Reference",
-"class": "RoomPortalDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/location/roomPortalDto.gd"
-}, {
-"base": "Entity",
-"class": "RoomSpawn",
-"language": "GDScript",
-"path": "res://logic/locations/roomSpawn.gd"
-}, {
-"base": "Reference",
-"class": "RoomSpawnDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/location/roomSpawnDto.gd"
-}, {
-"base": "Entity",
 "class": "RoomTile",
 "language": "GDScript",
 "path": "res://logic/locations/roomTile.gd"
-}, {
-"base": "Reference",
-"class": "RoomTileDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/location/roomTileDto.gd"
 }, {
 "base": "Reference",
 "class": "ScriptTool",
@@ -399,7 +369,6 @@ _global_script_class_icons={
 "Fact": "",
 "FactDTO": "",
 "GameMenu": "",
-"GameParameters": "",
 "GamePaths": "",
 "GuiButtonWidget": "",
 "GuiCharVitalsWidget": "",
@@ -425,12 +394,7 @@ _global_script_class_icons={
 "OptionsWindow": "",
 "Overlay": "",
 "Persistence": "",
-"RoomPortal": "",
-"RoomPortalDTO": "",
-"RoomSpawn": "",
-"RoomSpawnDTO": "",
 "RoomTile": "",
-"RoomTileDTO": "",
 "ScriptTool": "",
 "Stat": "",
 "State": "",
@@ -456,6 +420,7 @@ default_bus_layout=""
 
 [autoload]
 
+GameParameters="*res://gameParameters.gd"
 Signals="*res://signals.gd"
 Dice="*res://dice.gd"
 SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"

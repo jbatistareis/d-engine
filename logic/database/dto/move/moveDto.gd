@@ -13,11 +13,15 @@ var excuteExpression : String = GameParameters.MOVE_BASE_EXECUTE
 var cdPre : int = 1
 var cdPos : int = 1
 
-var targetType : int = Enums.CharacterTargetType.FOE # relative to the executor
+# use Enums.CharacterTargetType
+# relative to the executor
+var targetType : int = Enums.CharacterTargetType.FOE
 
 var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'
 
-var executorModifiers : Array = [] # use Enums.MoveModifierProperty
-var targetModifiers : Array = [] # use Enums.MoveModifierProperty
+# use Enums.MoveModifierProperty
+var executorModifiers : Array = []
+# use Enums.MoveModifierProperty
+var targetModifiers : Array = []
 

@@ -1,24 +1,36 @@
 class_name Location
 extends Entity
 
-const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
-
 var description : String
 var rooms : Array = []
-var portals : Array = []
-var spawns : Array = []
+var portals : Array
+var spawns : Array
 
-var entranceLogic : String = NOOP
-var exitLogic : String = NOOP
+var entranceLogic : String
+var exitLogic : String
 
-var encounterRate : float = 0.0
+var encounterRate : float
 
 
 func _init(locationShortName : String) -> void:
-	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
+	var dto = Persistence.loadDTO(locationShortName, Enums.EntityType.LOCATION)
 	
-	self.name = 'Base Location'
-	self.shortName = 'BSELOC'
+	self.name = dto.name
+	self.shortName = dto.shortName
+	self.description = dto.description
+	
+	for room in dto.rooms:
+		self.rooms.clear()
+		self.rooms.append(RoomTile.new(room))
+	self.portals = dto.portals
+	self.spawns = dto.spawns
+	
+	self.entranceLogic = dto.entranceLogic
+	self.exitLogic = dto.exitLogic
+	
+	self.encounterRate = dto.encounterRate
+	
+	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
 
 
 # used only by the player
@@ -41,7 +53,7 @@ func move(character, direction : int) -> int:
 	var fromRoom = findRoom(character.currentRoom)
 	var portalId = fromRoom.getPortal(direction)
 	var exitPoint = fromRoom.getExit(direction)
-	var canPass = true if (portalId == 0) else findPortal(portalId).canPass(character)
+	var canPass = true if (portalId == 0) else canPass(findPortal(portalId).passLogic, character)
 	
 	if (exitPoint > 0) && canPass: # move to a room
 		var toRoom = findRoom(exitPoint)
@@ -55,7 +67,7 @@ func move(character, direction : int) -> int:
 	if (exitPoint == 0) && canPass: # move to a location
 		var portal = findPortal(portalId)
 		
-		if (portal != null) && !portal.newLocationName.empty():
+		if !portal.newLocationShortName.empty():
 			exit(character, portal.newLocationName, portal.toSpawnId)
 	
 	return Enums.Direction.NONE
@@ -65,34 +77,20 @@ func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 
+func canPass(passLogic : String, character : Character) -> bool:
+	return ScriptTool.getReference(passLogic).execute(character)
+
+
 func findRoom(id : int) -> RoomTile:
-	var index = rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')
-	
-	if index >= rooms.size():
-		return null
-	
-	var found = rooms[index]
-	return found if (found.id == id) else null
+	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
-func findPortal(id : int) -> RoomPortal:
-	var index = portals.bsearch_custom(id, EntityArrayHelper, 'idFind')
-	
-	if index >= portals.size():
-		return null
-	
-	var found = portals[index]
-	return found if (found.id == id) else null
+func findPortal(id : int) -> Dictionary:
+	return portals[portals.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
-func findSpawn(id : int) -> RoomSpawn:
-	var index = spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')
-	
-	if index >= spawns.size():
-		return null
-	
-	var found = spawns[index]
-	return found if (found.id == id) else null
+func findSpawn(id : int) -> Dictionary:
+	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
 func changeEncounterRate(value : float) -> void:
