@@ -1,42 +1,73 @@
 class_name Character
 extends Entity
 
-var type : int = Enums.CharacterType.NPC
-var model : String = 'BSECHA'
+var type : int
+var model : String
 
-var baseHp : int = 9
-var currentHp : int = 10
-var extraHp : int = 2
+var baseHp : int
+var currentHp : int
+var extraHp : int
 var maxHp : int setget ,getMaxHp
 
-var baseDamage : int = 1
+var baseDamage : int
 
-var currentLevel : int = 1
-var experiencePoints : int = 0
+var currentLevel : int
+var experiencePoints : int
 var experienceToNextLevel : int setget ,getExperienceToNextLevel
-var sparePoints : int = 0
+var sparePoints : int
 
-var strength : Stat = Stat.new()
-var dexterity : Stat = Stat.new()
-var constitution : Stat = Stat.new()
-var intelligence : Stat = Stat.new()
-var wisdom : Stat = Stat.new()
-var charisma : Stat = Stat.new()
+var strength : Stat
+var dexterity : Stat
+var constitution : Stat
+var intelligence : Stat
+var wisdom : Stat
+var charisma : Stat
 
+# does not persist
 var moveModifiers : Array = []
 
-var inventory : Inventory = Inventory.new()
+var inventory : Inventory
 
-var verdict : Verdict = Verdict.new()
-var verdictActive : bool = true
+var verdict : Verdict
+var verdictActive : bool
 
-var currentLocation : String = ''
-var currentRoom : int = 0
+var currentLocation : String
+var currentRoom : int
 
 
-func _init() -> void:
-	self.name = 'Base Character'
-	self.shortName = 'BSECHA'
+func _init(characterShortName : String) -> void:
+	var dto = Persistence.loadDTO(characterShortName, Enums.EntityType.CHARACTER)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	
+	self.type = dto.type
+	self.model = dto.model
+	
+	self.baseHp = dto.baseHp
+	self.currentHp = dto.currentHp
+	self.extraHp = dto.extraHp
+	
+	self.baseDamage = dto.baseDamage
+	
+	self.currentLevel = dto.currentLevel
+	self.experiencePoints = dto.experiencePoints
+	self.sparePoints = dto.sparePoints
+	
+	self.strength = Stat.new(dto.strength)
+	self.dexterity = Stat.new(dto.dexterity)
+	self.constitution = Stat.new(dto.constitution)
+	self.intelligence = Stat.new(dto.intelligence)
+	self.wisdom = Stat.new(dto.wisdom)
+	self.charisma = Stat.new(dto.charisma)
+	
+	self.inventory = Inventory.new(dto.inventoryShortName)
+	
+	self.verdict = Verdict.new(dto.verdictShortName)
+	self.verdictActive = dto.verdictActive
+	
+	self.currentLocation = dto.currentLocation
+	self.currentRoom = dto.currentRoom
 
 
 func getMaxHp() -> int:
@@ -154,13 +185,13 @@ func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
 			moveModifiers.append(modifier)
 	
 	if !onlyApply:
-		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_P)
-		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_M)
-		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_P)
-		reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_M)
+		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_P)
+		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_M)
+		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_P)
+		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_M)
 
 
-func reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
+func _reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
 	var count = countModifiersByProperty(modifierType, newModifiers)
 	if count == 0:
 		moveModifiers.erase(modifierType)

@@ -26,7 +26,7 @@ var visited : bool = false
 
 func _init() -> void:
 	for shortName in friendlyShortNames:
-		var npc = EntityLoader.loadCharacter(shortName)
+		var npc = Character.new(shortName)
 		npc.currentRoom = id
 		friendSpawns.append(npc)
 
@@ -44,7 +44,7 @@ func enter(character, battleTriggered : bool) -> void:
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size(), -1)]
 			for shortName in chosenGroup:
 				if !shortName.empty():
-					var enemy = EntityLoader.loadCharacter(shortName)
+					var enemy = Character.new(shortName)
 					enemy.currentRoom = id
 					enemies.append(enemy)
 			

@@ -9,8 +9,8 @@ func _ready():
 	Signals.connect("characterMoved", self, "moveCharacter")
 
 
-func changeLocation(locationName : String, toSpawnId : int) -> void:
-	location = EntityLoader.loadLocation(locationName)
+func changeLocation(locationShortName : String, toSpawnId : int) -> void:
+	location = Location.new(locationShortName)
 	
 	SceneLoadManager.fromLocation(location)
 	

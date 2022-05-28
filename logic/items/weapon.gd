@@ -5,21 +5,36 @@ var damage : int
 var modifierDice : int # returns Dice.Type enum
 var modifierRollType : int # returns Dice.RollType enum
 var modifier : int # returns Character.Modifier enum
+
 var cdPre : int
-var cdPost : int
-# characters dont earn moves
+var cdPos : int
+
 # moves should access calculateDamage on its logic
-var moves : Array = [Move.new()]
+var moves : Array = []
 
 
-# TODO dto
-#func _init(name : String, moves : Array) -> void:
-#	self.name = name
-#	self.moves = moves
+func _init(weaponShortName : String) -> void:
+	var dto = Persistence.loadDTO(weaponShortName, Enums.EntityType.WEAPON)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	
+	self.damage = dto.damage
+	self.modifierDice = dto.modifierDice
+	self.modifierRollType = dto.modifierRollType
+	self.modifier = dto.modifier
+	
+	self.cdPre = dto.cdPre
+	self.cdPos = dto.cdPos
+	
+	for moveSrtNm in dto.moveShortNames:
+		moves.clear()
+		var move = Move.new(moveSrtNm)
+		move.cdPre += cdPre
+		move.cdPos += cdPos
+		moves.append(move)
 
 
-#TODO find a better way to do it
-#the type of the character parameter is not specified to avoid a cyclic reference error
 func calculateDamage(character) -> int:
 	var modifierValue
 	match modifier:

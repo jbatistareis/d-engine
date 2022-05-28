@@ -1,8 +1,20 @@
 class_name Armor
 extends Entity
 
-var maxIntegrity : int = 0
-var currentIntegrity : int = 0
+# TODO expand functionality
+
+var maxIntegrity : int
+var currentIntegrity : int
+
+
+func _init(armorShortName : String) -> void:
+	var dto = Persistence.loadDTO(armorShortName, Enums.EntityType.ARMOR)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	
+	self.maxIntegrity = dto.maxIntegrity
+	self.currentIntegrity = dto.currentIntegrity
 
 
 # returns unsoaked damage

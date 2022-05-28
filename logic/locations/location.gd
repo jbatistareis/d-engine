@@ -14,7 +14,7 @@ var exitLogic : String = NOOP
 var encounterRate : float = 0.0
 
 
-func _init() -> void:
+func _init(locationShortName : String) -> void:
 	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
 	
 	self.name = 'Base Location'

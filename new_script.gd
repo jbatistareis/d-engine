@@ -1,15 +1,23 @@
 extends Spatial
 
-var player : Character = Character.new()
+var player : Character
+
+
+func _init():
+	Persistence.saveDTO(CharacterDTO.new())
+	Persistence.saveDTO(VerdictDTO.new())
+	Persistence.saveDTO(FactDTO.new())
+	Persistence.saveDTO(InventoryDTO.new())
+	Persistence.saveDTO(ItemDTO.new())
+	Persistence.saveDTO(WeaponDTO.new())
+	Persistence.saveDTO(ArmorDTO.new())
+	Persistence.saveDTO(MoveDTO.new())
+	Persistence.saveDTO(LocationDTO.new())
+	
+	player = Character.new('BSECHA')
 
 
 func _ready() -> void:
-	# TODO tests
-	var character : Character = Character.new()
-	character.type = Enums.CharacterType.FOE
-	EntitySaver.saveCharacter(character)
-	#
-	
 	print('TEST START')
 	
 	

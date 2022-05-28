@@ -1,13 +1,33 @@
 class_name Inventory
+extends Entity
 
 var items : Array = []
 var weapons : Array = []
 
-var weapon : Weapon = Weapon.new()
+var weapon : Weapon
 #armors are not meant to be caried, you can only have your equiped one, and you can change then only on specific places
-var armor : Armor = null
+var armor : Armor
 
-var money : int = 0
+var money : int
+
+
+func _init(inventoryShortName : String) -> void:
+	var dto = Persistence.loadDTO(inventoryShortName, Enums.EntityType.INVENTORY)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	
+	for itemSrtNm in dto.itemShortNames:
+		self.items.clear()
+		self.items.append(Item.new(itemSrtNm))
+	for weaponSrtNm in dto.weaponShortNames:
+		self.weapons.clear()
+		self.weapons.append(Weapon.new(weaponSrtNm))
+	
+	self.weapon = Weapon.new(dto.weaponShortName)
+	self.armor = Armor.new(dto.armorShortName)
+	
+	self.money = dto.money
 
 
 func add(entity : Entity) -> void:

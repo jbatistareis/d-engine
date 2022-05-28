@@ -1,8 +1,17 @@
 class_name Verdict
+extends Entity
 
-var name : String = 'NOOP verdict'
-var description : String = 'Placeholder verdict'
-var actions : Array = [Action.new()] # Action array
+# TODO actions is prone to erros, a better solution is needed
+var actions : Array = [] # { fact, move } dict
+
+
+func _init(verdictShrtNm : String) -> void:
+	var dto = Persistence.loadDTO(verdictShrtNm, Enums.EntityType.VERDICT)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	
+	self.actions = dto.actions
 
 
 func decision(auditorCharacter, suspects : Array) -> void:
@@ -21,8 +30,9 @@ func decision(auditorCharacter, suspects : Array) -> void:
 	)
 
 
-func addAction(index : int, fact : Fact, move : Move) -> void:
-	actions.insert(index, Action.new(fact, move))
+# action is a { fact, move } dict
+func addAction(action : Dictionary) -> void:
+	actions.append(action)
 
 
 func removeConcreteFact(index : int) -> void:

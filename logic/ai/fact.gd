@@ -1,10 +1,17 @@
 class_name Fact
+extends Entity
 
-const _NOOP : String = 'func execute(executor : Character, suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(suspects)'
+var description : String
+var analyzeScript : String
 
-var name : String = 'NOOP fact'
-var description : String = 'Placeholder fact'
-var analyzeScript : String = _NOOP
+
+func _init(factShortName : String) -> void:
+	var dto = Persistence.loadDTO(factShortName, Enums.EntityType.FACT)
+	
+	self.name = dto.name
+	self.shortName = dto.shortName
+	self.description = dto.description
+	self.analyzeScript = dto.analyzeScript
 
 
 func analyze(auditorCharacter, suspects : Array) -> Array:
