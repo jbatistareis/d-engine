@@ -18,9 +18,6 @@ var exitLogic : String = NOOP
 var friendlyShortNames : Array = [] # present npc short names
 var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
 
-# use this for queries
-var friendSpawns : Array = [] # spawned npcs
-
 var visited : bool = false
 
 
@@ -28,7 +25,6 @@ func _init() -> void:
 	for shortName in friendlyShortNames:
 		var npc = Character.new(shortName)
 		npc.currentRoom = id
-		friendSpawns.append(npc)
 
 
 func enter(character, battleTriggered : bool) -> void:
