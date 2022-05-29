@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://tools/location/rooms/roomTab.gd" type="Script" id=1]
-[ext_resource path="res://tools/location/rooms/meshPreview.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tools/location/rooms/roomsContainer.gd" type="Script" id=3]
-[ext_resource path="res://tools/location/portals/portalTab.gd" type="Script" id=4]
-[ext_resource path="res://tools/location/window.gd" type="Script" id=5]
-[ext_resource path="res://tools/location/spawns/spawnsTab.gd" type="Script" id=6]
-[ext_resource path="res://tools/location/openLocation.gd" type="Script" id=7]
+[ext_resource path="res://tools/location_old/rooms/roomTab.gd" type="Script" id=1]
+[ext_resource path="res://tools/location_old/rooms/meshPreview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tools/location_old/rooms/roomsContainer.gd" type="Script" id=3]
+[ext_resource path="res://tools/location_old/portals/portalTab.gd" type="Script" id=4]
+[ext_resource path="res://tools/location_old/window.gd" type="Script" id=5]
+[ext_resource path="res://tools/location_old/spawns/spawnsTab.gd" type="Script" id=6]
+[ext_resource path="res://tools/location_old/openLocation.gd" type="Script" id=7]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=8]
-[ext_resource path="res://tools/location/locationTest.gd" type="Script" id=10]
+[ext_resource path="res://tools/location_old/locationTest.gd" type="Script" id=10]
 
 [node name="Panel" type="Panel"]
 self_modulate = Color( 1, 1, 1, 0.501961 )
@@ -25,9 +25,6 @@ mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 anchor_right = 1.0
