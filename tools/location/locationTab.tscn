@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://tools/location/grid.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/general/grid.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.gd" type="Script" id=2]
-[ext_resource path="res://tools/location/group1.gd" type="Script" id=3]
-[ext_resource path="res://tools/location/logic.gd" type="Script" id=4]
+[ext_resource path="res://tools/location/general/group1.gd" type="Script" id=3]
+[ext_resource path="res://tools/location/general/logic.gd" type="Script" id=4]
+[ext_resource path="res://tools/location/general/saveConfirmation.gd" type="Script" id=5]
+[ext_resource path="res://tools/location/general/testWindow.gd" type="Script" id=6]
+[ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=7]
+[ext_resource path="res://tools/location/room/meshPreview.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tools/location/openWindow.gd" type="Script" id=9]
 
 [node name="locationTab" type="Tabs"]
 anchor_right = 1.0
@@ -231,12 +236,12 @@ margin_right = 324.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="btnTest" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="btnPreview" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
 margin_left = 328.0
 margin_right = 438.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
-text = "Test"
+text = "Preview"
 
 [node name="Control4" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
 margin_left = 442.0
@@ -252,6 +257,113 @@ margin_left = 4.0
 margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/Room"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_vertical = 3
+
+[node name="details" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer"]
+margin_right = 472.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/details"]
+margin_right = 232.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="lblDetails" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/details"]
+margin_left = 236.0
+margin_right = 236.0
+margin_bottom = 22.0
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/details"]
+margin_left = 240.0
+margin_right = 472.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="scroll" type="ScrollContainer" parent="background/mainDivider/parameters/Room/mainContainer"]
+margin_top = 26.0
+margin_right = 472.0
+margin_bottom = 676.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="parameters" type="VBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll"]
+margin_right = 472.0
+margin_bottom = 650.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="mesh" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters"]
+margin_right = 472.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+
+[node name="controls" type="VBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh"]
+margin_right = 168.0
+margin_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="lblMesh" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+margin_right = 168.0
+margin_bottom = 22.0
+text = "Mesh"
+align = 1
+
+[node name="optMesh" type="OptionButton" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+margin_top = 26.0
+margin_right = 168.0
+margin_bottom = 54.0
+size_flags_horizontal = 3
+
+[node name="HSeparator" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+margin_top = 58.0
+margin_right = 168.0
+margin_bottom = 88.0
+custom_constants/separation = 30
+
+[node name="lblCamera" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+margin_top = 92.0
+margin_right = 168.0
+margin_bottom = 114.0
+text = "Camera"
+align = 1
+
+[node name="rotation" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+margin_top = 118.0
+margin_right = 168.0
+margin_bottom = 146.0
+
+[node name="btnRotateL" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls/rotation"]
+margin_right = 82.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "<"
+
+[node name="btnRotateR" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls/rotation"]
+margin_left = 86.0
+margin_right = 168.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = ">"
+
+[node name="ViewportContainer" type="ViewportContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh"]
+margin_left = 172.0
+margin_right = 472.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 300, 300 )
+
+[node name="Viewport" type="Viewport" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/ViewportContainer"]
+size = Vector2( 300, 300 )
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="area" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
 [node name="Portals" type="Tabs" parent="background/mainDivider/parameters"]
 visible = false
@@ -271,6 +383,42 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 
+[node name="saveConfirmation" type="ConfirmationDialog" parent="."]
+margin_right = 218.0
+margin_bottom = 74.0
+popup_exclusive = true
+window_title = "Confirm"
+script = ExtResource( 5 )
+
+[node name="previewWindow" type="WindowDialog" parent="."]
+margin_right = 48.0
+margin_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+popup_exclusive = true
+window_title = "Terrain preview"
+script = ExtResource( 6 )
+
+[node name="ViewportContainer" type="ViewportContainer" parent="previewWindow"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Viewport" type="Viewport" parent="previewWindow/ViewportContainer"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="terrain" parent="previewWindow/ViewportContainer/Viewport" instance=ExtResource( 7 )]
+
+[node name="openWindow" type="WindowDialog" parent="."]
+visible = true
+margin_right = 48.0
+margin_bottom = 40.0
+popup_exclusive = true
+window_title = "Choose a file"
+script = ExtResource( 9 )
+
 [connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_locationTab_loadedLocationDto"]
 [connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_locationTab_loadedLocationDto"]
 [connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="." method="_on_txtName_text_changed"]
@@ -278,3 +426,7 @@ margin_bottom = -4.0
 [connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="." method="_on_txtDescription_text_changed"]
 [connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="." method="_on_sldEncounter_value_changed"]
 [connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_sldEncounter_value_changed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnOpen" to="." method="_on_btnOpen_pressed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="." method="_on_btnPreview_pressed"]
+[connection signal="confirmed" from="saveConfirmation" to="." method="_on_saveConfirmation_confirmed"]

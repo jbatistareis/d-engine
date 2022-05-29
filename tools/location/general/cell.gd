@@ -1,14 +1,24 @@
 extends Panel
 
 const _ROTATION : float = PI / 2
+const _BASE_MESHES = ['', '0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
+
 
 var roomDict : Dictionary = {
-		'id': 0,
-		'x': 0,
-		'y': 0,
-		'type': Enums.RoomType.DUMMY,
-		'orientation': Enums.Direction.NORTH
-	} setget setRoomDict
+	'id': 0,
+	'x': 0,
+	'y': 0,
+	'type': Enums.RoomType.DUMMY, # use  Enums.RoomType
+	'orientation': Enums.Direction.NORTH , # use Enums.Direction
+	'mesh': '4_exits',
+	'exits': [0, 0, 0, 0, 0, 0],
+	'portals': [0, 0, 0, 0, 0, 0],
+	'entranceLogic': GameParameters.ROOM_TILE_NOOP,
+	'exitLogic': GameParameters.ROOM_TILE_NOOP,
+	'friendlyShortNames': [], # short names of NPCs present in the room
+	'foeShortNameGroups': [], # 2D array representing possible enemy groups
+	'visited': false,
+} setget setRoomDict
 
 
 func _ready() -> void:
@@ -40,6 +50,9 @@ func optionSelected(index : int) -> void:
 		index -= 3
 		$icon.frame = index
 		roomDict.type = index
+		roomDict.mesh = _BASE_MESHES[index]
+		print(index)
+		print(Enums.RoomType.keys()[index])
 	
 	updateHint()
 

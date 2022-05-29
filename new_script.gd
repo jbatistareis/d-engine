@@ -12,7 +12,7 @@ func _init():
 #	Persistence.saveDTO(WeaponDTO.new())
 #	Persistence.saveDTO(ArmorDTO.new())
 #	Persistence.saveDTO(MoveDTO.new())
-#	Persistence.saveDTO(LocationDTO.new())
+	Persistence.saveDTO(LocationDTO.new())
 	
 	player = Character.new().fromShortName('BSECHA')
 

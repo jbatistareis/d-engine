@@ -6,7 +6,6 @@ var blocks : Dictionary = {}
 
 func _ready() -> void:
 	Signals.connect("playerSpawned", self, "loadMap")
-	LocationEditorSignals.connect("testLocation", self, "loadMap")
 
 
 func loadMap(location : Location, x : int, y : int, direction : int) -> void:

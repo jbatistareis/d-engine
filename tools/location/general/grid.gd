@@ -1,6 +1,6 @@
 extends GridContainer
 
-var cellScene : PackedScene = preload("res://tools/location/cell.tscn")
+var cellScene : PackedScene = preload("res://tools/location/general/cell.tscn")
 
 
 func _ready() -> void:

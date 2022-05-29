@@ -25,9 +25,9 @@ var roomBase : Dictionary = {
 	'id': 0,
 	'x': 0,
 	'y': 0,
-	'type': Enums.RoomType._0_EXIT, # use  Enums.RoomType
+	'type': Enums.RoomType._4_EXITS, # use  Enums.RoomType
 	'orientation': Enums.Direction.NORTH , # use Enums.Direction
-	'mesh': '0_exits',
+	'mesh': '4_exits',
 	'exits': [0, 0, 0, 0, 0, 0],
 	'portals': [0, 0, 0, 0, 0, 0],
 	'entranceLogic': ROOM_TILE_NOOP,

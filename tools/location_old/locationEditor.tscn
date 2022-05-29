@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tools/location_old/rooms/roomTab.gd" type="Script" id=1]
-[ext_resource path="res://tools/location_old/rooms/meshPreview.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tools/location/room/meshPreview.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tools/location_old/rooms/roomsContainer.gd" type="Script" id=3]
 [ext_resource path="res://tools/location_old/portals/portalTab.gd" type="Script" id=4]
 [ext_resource path="res://tools/location_old/window.gd" type="Script" id=5]
@@ -77,6 +77,7 @@ __meta__ = {
 }
 
 [node name="Location" type="Tabs" parent="HSplitContainer/properties/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -285,7 +286,6 @@ margin_bottom = 676.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="Room" type="Tabs" parent="HSplitContainer/properties/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -338,7 +338,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer"]
-margin_right = 442.0
+margin_right = 430.0
 margin_bottom = 1302.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_horizontal = 3
@@ -354,7 +354,7 @@ mouse_default_cursor_shape = 6
 [node name="preview" type="Viewport" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/ViewportContainer"]
 size = Vector2( 430, 330 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 shadow_atlas_size = 10000
 shadow_atlas_quad_0 = 3
 shadow_atlas_quad_1 = 4
@@ -371,12 +371,12 @@ size_flags_horizontal = 3
 alignment = 1
 
 [node name="btnRotMeshL" type="Button" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
-margin_right = 22.0
+margin_right = 42.0
 margin_bottom = 28.0
 text = " ↩ "
 
 [node name="spacer1" type="Control" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
-margin_left = 26.0
+margin_left = 46.0
 margin_right = 159.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
@@ -399,12 +399,12 @@ align = 1
 
 [node name="spacer2" type="Control" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
 margin_left = 271.0
-margin_right = 404.0
+margin_right = 384.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="btnRotMeshR" type="Button" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/mesh"]
-margin_left = 408.0
+margin_left = 388.0
 margin_right = 430.0
 margin_bottom = 28.0
 text = " ↪ "
@@ -827,6 +827,7 @@ popup_exclusive = true
 window_title = "Status"
 
 [node name="locationTest" type="WindowDialog" parent="."]
+visible = true
 margin_right = 640.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
@@ -846,6 +847,8 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="locationTest/ViewportContainer"]
 size = Vector2( 640, 480 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+
+[connection signal="pressed" from="HSplitContainer/properties/TabContainer/Location/VBoxContainer/HBoxContainer/btnTest" to="." method="_on_btnTest_pressed"]
