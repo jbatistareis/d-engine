@@ -45,7 +45,7 @@ func optionSelected(index : int) -> void:
 
 
 func updateHint() -> void:
-	$options.hint_tooltip = 'id: %d\nx: %d, y: %d\n%s' % [roomDict.id, roomDict.x, roomDict.y, Enums.Direction.keys()[roomDict.orientation]]
+	$options.hint_tooltip = 'id: %d\nx: %d, y: %d\n%s' % [roomDict.id, roomDict.x, roomDict.y, Enums.Direction.keys()[roomDict.orientation].capitalize()]
 	$icon/pointer.visible = roomDict.type != Enums.RoomType.DUMMY
 
 

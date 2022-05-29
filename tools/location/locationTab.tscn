@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tools/location/grid.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.gd" type="Script" id=2]
+[ext_resource path="res://tools/location/group1.gd" type="Script" id=3]
+[ext_resource path="res://tools/location/logic.gd" type="Script" id=4]
 
 [node name="locationTab" type="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+scrolling_enabled = false
 script = ExtResource( 2 )
 
 [node name="background" type="Panel" parent="."]
@@ -29,7 +32,7 @@ margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ColorRect" type="ColorRect" parent="background/mainDivider/map"]
+[node name="overlay" type="ColorRect" parent="background/mainDivider/map"]
 margin_right = 800.0
 margin_bottom = 720.0
 color = Color( 1, 1, 1, 0.25 )
@@ -57,6 +60,189 @@ margin_left = 4.0
 margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/General"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="group1" type="GridContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+margin_right = 472.0
+margin_bottom = 142.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 8
+custom_constants/hseparation = 8
+columns = 2
+script = ExtResource( 3 )
+
+[node name="lblName" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 27.0
+text = "Name"
+
+[node name="txtName" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_left = 118.0
+margin_right = 472.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+
+[node name="lblShortName" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_top = 45.0
+margin_right = 110.0
+margin_bottom = 67.0
+text = "ShortName"
+
+[node name="txtShortName" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_left = 118.0
+margin_top = 40.0
+margin_right = 472.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+max_length = 10
+
+[node name="lblDescription" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_top = 85.0
+margin_right = 110.0
+margin_bottom = 107.0
+text = "Description"
+
+[node name="txtDescription" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_left = 118.0
+margin_top = 80.0
+margin_right = 472.0
+margin_bottom = 112.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="lblEncounter" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_top = 120.0
+margin_right = 110.0
+margin_bottom = 142.0
+text = "Enc.: 0%"
+
+[node name="sldEncounter" type="HSlider" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+margin_left = 118.0
+margin_top = 120.0
+margin_right = 472.0
+margin_bottom = 136.0
+max_value = 1.0
+step = 0.01
+tick_count = 11
+
+[node name="logic" type="TabContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+margin_top = 146.0
+margin_right = 472.0
+margin_bottom = 635.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource( 4 )
+
+[node name="Entrance logic" type="Tabs" parent="background/mainDivider/parameters/General/mainContainer/logic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="txtEntranceLogic" type="TextEdit" parent="background/mainDivider/parameters/General/mainContainer/logic/Entrance logic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+bookmark_gutter = true
+highlight_all_occurrences = true
+
+[node name="Exit logic" type="Tabs" parent="background/mainDivider/parameters/General/mainContainer/logic"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="txtExitLogic" type="TextEdit" parent="background/mainDivider/parameters/General/mainContainer/logic/Exit logic"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+highlight_current_line = true
+syntax_highlighting = true
+show_line_numbers = true
+draw_tabs = true
+bookmark_gutter = true
+highlight_all_occurrences = true
+
+[node name="Control" type="Control" parent="background/mainDivider/parameters/General/mainContainer"]
+margin_top = 639.0
+margin_right = 472.0
+margin_bottom = 644.0
+rect_min_size = Vector2( 0, 5 )
+size_flags_horizontal = 3
+
+[node name="buttons" type="HBoxContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+margin_top = 648.0
+margin_right = 472.0
+margin_bottom = 676.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_right = 30.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 0 )
+
+[node name="btnOpen" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 34.0
+margin_right = 143.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Open"
+
+[node name="Control2" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 147.0
+margin_right = 177.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 0 )
+
+[node name="btnSave" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 181.0
+margin_right = 290.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Save"
+
+[node name="Control3" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 294.0
+margin_right = 324.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 0 )
+
+[node name="btnTest" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 328.0
+margin_right = 438.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Test"
+
+[node name="Control4" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+margin_left = 442.0
+margin_right = 472.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 30, 0 )
 
 [node name="Room" type="Tabs" parent="background/mainDivider/parameters"]
 visible = false
@@ -84,3 +270,11 @@ margin_left = 4.0
 margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
+
+[connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_locationTab_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_locationTab_loadedLocationDto"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="." method="_on_txtDescription_text_changed"]
+[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="." method="_on_sldEncounter_value_changed"]
+[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_sldEncounter_value_changed"]
