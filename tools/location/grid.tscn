@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://tools/location/grid.gd" type="Script" id=1]
-
-[node name="grid" type="GridContainer"]
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 48
-script = ExtResource( 1 )

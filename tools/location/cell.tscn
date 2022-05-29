@@ -61,6 +61,18 @@ script = ExtResource( 1 )
 position = Vector2( 30, 30 )
 frames = SubResource( 9 )
 
+[node name="pointer" type="Label" parent="icon"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -30.0
+margin_top = -30.0
+margin_right = -30.0
+margin_bottom = -30.0
+text = "^"
+align = 1
+valign = 1
+
 [node name="options" type="MenuButton" parent="."]
 margin_right = 12.0
 margin_bottom = 28.0

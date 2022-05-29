@@ -6,9 +6,14 @@ var cellScene : PackedScene = preload("res://tools/location/cell.tscn")
 func _ready() -> void:
 	for i in range(columns * columns):
 		var cell = cellScene.instance()
-		cell.room.id = i
-		cell.room.x = i % columns
-		cell.room.y = i / columns
+		cell.roomDict.id = i
+		cell.roomDict.x = i % columns
+		cell.roomDict.y = i / columns
 		
 		add_child(cell)
+
+
+func loadRooms(roomDicts : Array) -> void:
+	for roomDict in roomDicts:
+		get_child(roomDict.id).roomDict = roomDict
 
