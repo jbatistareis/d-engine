@@ -13,26 +13,49 @@ var cdPos : int
 var moves : Array = []
 
 
-func _init(weaponShortName : String) -> void:
-	var dto = Persistence.loadDTO(weaponShortName, Enums.EntityType.WEAPON)
+func fromShortName(weaponShortName : String) -> Weapon:
+	return fromDTO(Persistence.loadDTO(weaponShortName, Enums.EntityType.WEAPON))
+
+
+func fromDTO(weaponDto : WeaponDTO) -> Weapon:
+	self.name = weaponDto.name
+	self.shortName = weaponDto.shortName
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
+	self.damage = weaponDto.damage
+	self.modifierDice = weaponDto.modifierDice
+	self.modifierRollType = weaponDto.modifierRollType
+	self.modifier = weaponDto.modifier
 	
-	self.damage = dto.damage
-	self.modifierDice = dto.modifierDice
-	self.modifierRollType = dto.modifierRollType
-	self.modifier = dto.modifier
+	self.cdPre = weaponDto.cdPre
+	self.cdPos = weaponDto.cdPos
 	
-	self.cdPre = dto.cdPre
-	self.cdPos = dto.cdPos
+	self.moves.clear()
+	for moveSrtNm in weaponDto.moveShortNames:
+		var move = Move.new().fromShortName(moveSrtNm)
+		move.cdPre += self.cdPre
+		move.cdPos += self.cdPos
+		self.moves.append(move)
 	
-	for moveSrtNm in dto.moveShortNames:
-		moves.clear()
-		var move = Move.new(moveSrtNm)
-		move.cdPre += cdPre
-		move.cdPos += cdPos
-		moves.append(move)
+	return self
+
+
+func toDTO() -> WeaponDTO:
+	var weaponDto = WeaponDTO.new()
+	weaponDto.name = self.name
+	weaponDto.shortName = self.shortName
+	
+	weaponDto.damage = self.damage
+	weaponDto.modifierDice = self.modifierDice
+	weaponDto.modifierRollType = self.modifierRollType
+	weaponDto.modifier = self.modifier
+	
+	weaponDto.cdPre = self.cdPre
+	weaponDto.cdPos = self.cdPos
+	
+	for move in self.moves:
+		weaponDto.moveShortNames.append(move.shortName)
+	
+	return weaponDto
 
 
 func calculateDamage(character) -> int:

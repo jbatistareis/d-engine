@@ -9,13 +9,29 @@ var price : int
 var type : int # use Enums.ItemType
 
 
-func _init(itemShortName : String) -> void:
-	var dto = Persistence.loadDTO(itemShortName, Enums.EntityType.ITEM)
+func fromShortName(itemShortName : String) -> Item:
+	return fromDTO(Persistence.loadDTO(itemShortName, Enums.EntityType.ITEM))
+
+
+func fromDTO(itemDto : ItemDTO) -> Item:
+	self.name = itemDto.name
+	self.shortName = itemDto.shortName
+	self.description = itemDto.description
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
-	self.description = dto.description
+	self.price = itemDto.price
+	self.type = itemDto.type
 	
-	self.price = dto.price
-	self.type = dto.type
+	return self
+
+
+func toDTO() -> ItemDTO:
+	var itemDto = ItemDTO.new()
+	itemDto.name = self.name
+	itemDto.shortName = self.shortName
+	itemDto.description = self.description
+	
+	itemDto.price = self.price
+	itemDto.type = self.type
+	
+	return itemDto
 

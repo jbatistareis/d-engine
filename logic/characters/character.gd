@@ -35,39 +35,79 @@ var currentLocation : String
 var currentRoom : int
 
 
-func _init(characterShortName : String) -> void:
-	var dto = Persistence.loadDTO(characterShortName, Enums.EntityType.CHARACTER)
+func fromShortName(characterShortName : String) -> Character:
+	return fromDTO(Persistence.loadDTO(characterShortName, Enums.EntityType.CHARACTER))
+
+
+func fromDTO(characterDto : CharacterDTO) -> Character:
+	self.name = characterDto.name
+	self.shortName = characterDto.shortName
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
+	self.type = characterDto.type
+	self.model = characterDto.model
 	
-	self.type = dto.type
-	self.model = dto.model
+	self.baseHp = characterDto.baseHp
+	self.currentHp = characterDto.currentHp
+	self.extraHp = characterDto.extraHp
 	
-	self.baseHp = dto.baseHp
-	self.currentHp = dto.currentHp
-	self.extraHp = dto.extraHp
+	self.baseDamage = characterDto.baseDamage
 	
-	self.baseDamage = dto.baseDamage
+	self.currentLevel = characterDto.currentLevel
+	self.experiencePoints = characterDto.experiencePoints
+	self.sparePoints = characterDto.sparePoints
 	
-	self.currentLevel = dto.currentLevel
-	self.experiencePoints = dto.experiencePoints
-	self.sparePoints = dto.sparePoints
+	self.strength = Stat.new(characterDto.strength)
+	self.dexterity = Stat.new(characterDto.dexterity)
+	self.constitution = Stat.new(characterDto.constitution)
+	self.intelligence = Stat.new(characterDto.intelligence)
+	self.wisdom = Stat.new(characterDto.wisdom)
+	self.charisma = Stat.new(characterDto.charisma)
 	
-	self.strength = Stat.new(dto.strength)
-	self.dexterity = Stat.new(dto.dexterity)
-	self.constitution = Stat.new(dto.constitution)
-	self.intelligence = Stat.new(dto.intelligence)
-	self.wisdom = Stat.new(dto.wisdom)
-	self.charisma = Stat.new(dto.charisma)
+	self.inventory = Inventory.new().fromShortName(characterDto.inventoryShortName)
 	
-	self.inventory = Inventory.new(dto.inventoryShortName)
+	self.verdict = Verdict.new().fromShortName(characterDto.verdictShortName)
+	self.verdictActive = characterDto.verdictActive
 	
-	self.verdict = Verdict.new(dto.verdictShortName)
-	self.verdictActive = dto.verdictActive
+	self.currentLocation = characterDto.currentLocation
+	self.currentRoom = characterDto.currentRoom
 	
-	self.currentLocation = dto.currentLocation
-	self.currentRoom = dto.currentRoom
+	return self
+
+
+func toDTO() -> CharacterDTO:
+	var characterDto = CharacterDTO.new()
+	characterDto.name = self.name
+	characterDto.shortName = self.shortName
+	
+	characterDto.type = self.type
+	characterDto.model = self.model
+	
+	characterDto.baseHp = self.baseHp
+	characterDto.currentHp = self.currentHp
+	characterDto.extraHp = self.extraHp
+	
+	characterDto.baseDamage = self.baseDamage
+	
+	characterDto.currentLevel = self.currentLevel
+	characterDto.experiencePoints = self.experiencePoints
+	characterDto.sparePoints = self.sparePoints
+	
+	characterDto.strength = self.strength.score
+	characterDto.dexterity = self.dexterity.score
+	characterDto.constitution = self.constitution.score
+	characterDto.intelligence = self.intelligence.score
+	characterDto.wisdom = self.wisdom.score
+	characterDto.charisma = self.charisma.score
+	
+	characterDto.inventoryShortName = self.inventory.shortName
+	
+	characterDto.verdictShortName = self.verdict.shortName
+	characterDto.verdictActive = self.verdictActive
+	
+	characterDto.currentLocation = self.currentLocation
+	characterDto.currentRoom = self.currentRoom
+	
+	return characterDto
 
 
 func getMaxHp() -> int:

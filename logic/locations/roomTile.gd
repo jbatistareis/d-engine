@@ -1,5 +1,6 @@
 class_name RoomTile
-extends Entity
+
+var id : int
 
 var x : int
 var y : int
@@ -22,7 +23,7 @@ var foeShortNameGroups : Array
 var visited : bool
 
 
-func _init(roomTileDict : Dictionary) -> void:
+func fromDict(roomTileDict : Dictionary) -> RoomTile:
 	self.id = roomTileDict.id
 	self.x = roomTileDict.x
 	self.y = roomTileDict.y
@@ -40,6 +41,26 @@ func _init(roomTileDict : Dictionary) -> void:
 	self.foeShortNameGroups = roomTileDict.foeShortNameGroups
 	
 	self.visited = roomTileDict.visited
+	
+	return self
+
+
+func toDict() -> Dictionary:
+	return {
+		'id': self.id,
+		'x': self.x,
+		'y': self.y,
+		'type': self.type,
+		'orientation': self.orientation,
+		'mesh': self.mesh,
+		'exits': self.exits,
+		'portals': self.portals,
+		'entranceLogic': self.entranceLogic,
+		'exitLogic': self.exitLogic,
+		'friendlyShortNames': self.friendlyShortNames,
+		'foeShortNameGroups': self.foeShortNameGroups,
+		'visited': self.visited
+	}
 
 
 func enter(character, battleTriggered : bool) -> void:
@@ -55,7 +76,7 @@ func enter(character, battleTriggered : bool) -> void:
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size(), -1)]
 			for shortName in chosenGroup:
 				if !shortName.empty():
-					var enemy = Character.new(shortName)
+					var enemy = Character.new().fromShortName(shortName)
 					enemy.currentRoom = id
 					enemies.append(enemy)
 			

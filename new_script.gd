@@ -14,7 +14,7 @@ func _init():
 #	Persistence.saveDTO(MoveDTO.new())
 #	Persistence.saveDTO(LocationDTO.new())
 	
-	player = Character.new('BSECHA')
+	player = Character.new().fromShortName('BSECHA')
 
 
 func _ready() -> void:

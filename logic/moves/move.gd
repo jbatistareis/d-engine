@@ -22,28 +22,57 @@ var executorModifiers : Array = []
 var targetModifiers : Array = []
 
 
-func _init(moveShortName : String):
-	var dto = Persistence.loadDTO(moveShortName, Enums.EntityType.MOVE)
+func fromShortName(moveShortName : String) -> Move:
+	return fromDTO(Persistence.loadDTO(moveShortName, Enums.EntityType.MOVE))
+
+
+func fromDTO(moveDto : MoveDTO) -> Move:
+	self.name = moveDto.name
+	self.shortName = moveDto.shortName
+	self.description = moveDto.description
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
-	self.description = dto.description
+	self.valueExpression = moveDto.valueExpression
+	self.outcomeExpression = moveDto.outcomeExpression
+	self.pickExpression = moveDto.pickExpression
+	self.excuteExpression = moveDto.excuteExpression
 	
-	self.valueExpression = dto.valueExpression
-	self.outcomeExpression = dto.outcomeExpression
-	self.pickExpression = dto.pickExpression
-	self.excuteExpression = dto.excuteExpression
+	self.cdPre = moveDto.cdPre
+	self.cdPos = moveDto.cdPos
 	
-	self.cdPre = dto.cdPre
-	self.cdPos = dto.cdPos
+	self.targetType = moveDto.targetType
 	
-	self.targetType = dto.targetType
+	self.prepareAnimation = moveDto.prepareAnimation
+	self.attackAnimation = moveDto.attackAnimation
 	
-	self.prepareAnimation = dto.prepareAnimation
-	self.attackAnimation = dto.attackAnimation
+	self.executorModifiers = moveDto.executorModifiers
+	self.targetModifiers = moveDto.targetModifiers
 	
-	self.executorModifiers = dto.executorModifiers
-	self.targetModifiers = dto.targetModifiers
+	return self
+
+
+func toDTO() -> MoveDTO:
+	var moveDto = MoveDTO.new()
+	moveDto.name = self.name
+	moveDto.shortName = self.shortName
+	moveDto.description = self.description
+	
+	moveDto.valueExpression = self.valueExpression
+	moveDto.outcomeExpression = self.outcomeExpression
+	moveDto.pickExpression = self.pickExpression
+	moveDto.excuteExpression = self.excuteExpression
+	
+	moveDto.cdPre = self.cdPre
+	moveDto.cdPos = self.cdPos
+	
+	moveDto.targetType = self.targetType
+	
+	moveDto.prepareAnimation = self.prepareAnimation
+	moveDto.attackAnimation = self.attackAnimation
+	
+	moveDto.executorModifiers = self.executorModifiers
+	moveDto.targetModifiers = self.targetModifiers
+	
+	return moveDto
 
 
 # negative values represent damage, positive represent cure

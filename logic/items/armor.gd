@@ -7,14 +7,29 @@ var maxIntegrity : int
 var currentIntegrity : int
 
 
-func _init(armorShortName : String) -> void:
-	var dto = Persistence.loadDTO(armorShortName, Enums.EntityType.ARMOR)
+func fromShortName(armorShortName : String) -> Armor:
+	return fromDTO(Persistence.loadDTO(armorShortName, Enums.EntityType.ARMOR))
+
+
+func fromDTO(armorDto : ArmorDTO) -> Armor:
+	self.name = armorDto.name
+	self.shortName = armorDto.shortName
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
+	self.maxIntegrity = armorDto.maxIntegrity
+	self.currentIntegrity = armorDto.currentIntegrity
 	
-	self.maxIntegrity = dto.maxIntegrity
-	self.currentIntegrity = dto.currentIntegrity
+	return self
+
+
+func toDTO() -> ArmorDTO:
+	var armorDto = ArmorDTO.new()
+	armorDto.name = self.name
+	armorDto.shortName = self.shortName
+	
+	armorDto.maxIntegrity = self.maxIntegrity
+	armorDto.currentIntegrity = self.currentIntegrity
+	
+	return armorDto
 
 
 # returns unsoaked damage

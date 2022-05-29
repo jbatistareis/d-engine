@@ -10,7 +10,7 @@ func _ready():
 
 
 func changeLocation(locationShortName : String, toSpawnId : int) -> void:
-	location = Location.new(locationShortName)
+	location = Location.new().fromShortName(locationShortName)
 	
 	SceneLoadManager.fromLocation(location)
 	

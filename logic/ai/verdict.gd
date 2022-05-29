@@ -5,17 +5,36 @@ extends Entity
 var actions : Array = []
 
 
-func _init(verdictShrtNm : String) -> void:
-	var dto = Persistence.loadDTO(verdictShrtNm, Enums.EntityType.VERDICT)
+func fromShortName(verdictShortName : String) -> Verdict:
+	return fromDTO(Persistence.loadDTO(verdictShortName, Enums.EntityType.VERDICT))
+
+
+func fromDTO(verdictDto : VerdictDTO) -> Verdict:
+	self.name = verdictDto.name
+	self.shortName = verdictDto.shortName
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
-	
-	for actionShtNms in dto.actions:
+	self.actions.clear()
+	for actionShtNms in verdictDto.actions:
 		self.actions.append({
-			'fact': Fact.new(actionShtNms.factShortName),
-			'move': Move.new(actionShtNms.moveShortName)
+			'fact': Fact.new().fromShortName(actionShtNms.factShortName),
+			'move': Move.new().fromShortName(actionShtNms.moveShortName)
 		})
+	
+	return self
+
+
+func toDTO() -> VerdictDTO:
+	var verdictDto = VerdictDTO.new()
+	verdictDto.name = self.name
+	verdictDto.shortName = self.shortName
+	
+	for action in self.actions:
+		verdictDto.actions.append({
+			'factShortName': action.fact.shortName,
+			'moveShortName': action.move.shortName
+		})
+	
+	return verdictDto
 
 
 func decision(auditorCharacter, suspects : Array) -> void:

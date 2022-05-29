@@ -11,23 +11,44 @@ var armor : Armor
 var money : int
 
 
-func _init(inventoryShortName : String) -> void:
-	var dto = Persistence.loadDTO(inventoryShortName, Enums.EntityType.INVENTORY)
+func fromShortName(inventoryShortName : String) -> Inventory:
+	return fromDTO(Persistence.loadDTO(inventoryShortName, Enums.EntityType.INVENTORY))
+
+
+func fromDTO(inventoryDto : InventoryDTO) -> Inventory:
+	self.name = inventoryDto.name
+	self.shortName = inventoryDto.shortName
 	
-	self.name = dto.name
-	self.shortName = dto.shortName
+	for itemSrtNm in inventoryDto.itemShortNames:
+		self.items.append(Item.new().fromShortName(itemSrtNm))
 	
-	for itemSrtNm in dto.itemShortNames:
-		self.items.clear()
-		self.items.append(Item.new(itemSrtNm))
-	for weaponSrtNm in dto.weaponShortNames:
-		self.weapons.clear()
-		self.weapons.append(Weapon.new(weaponSrtNm))
+	for weaponSrtNm in inventoryDto.weaponShortNames:
+		self.weapons.append(Weapon.new().fromShortName(weaponSrtNm))
 	
-	self.weapon = Weapon.new(dto.weaponShortName)
-	self.armor = Armor.new(dto.armorShortName)
+	self.weapon = Weapon.new().fromShortName(inventoryDto.weaponShortName)
+	self.armor = Armor.new().fromShortName(inventoryDto.armorShortName)
 	
-	self.money = dto.money
+	self.money = inventoryDto.money
+	
+	return self
+
+
+func toDTO() -> InventoryDTO:
+	var inventoryDto = InventoryDTO.new()
+	inventoryDto.name = self.name
+	inventoryDto.shortName = self.shortName
+	
+	for item in self.items:
+		inventoryDto.itemShortNames.append(item.shortName)
+	for weapon in self.weapons:
+		inventoryDto.weaponShortNames.append(weapon.shortName)
+	
+	inventoryDto.weapon = self.weapon.shortName
+	inventoryDto.armor = self.armor.shortName
+	
+	inventoryDto.money = self.money
+	
+	return inventoryDto
 
 
 func add(entity : Entity) -> void:

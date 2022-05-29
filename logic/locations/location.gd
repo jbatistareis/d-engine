@@ -12,25 +12,52 @@ var exitLogic : String
 var encounterRate : float
 
 
-func _init(locationShortName : String) -> void:
-	var dto = Persistence.loadDTO(locationShortName, Enums.EntityType.LOCATION)
-	
-	self.name = dto.name
-	self.shortName = dto.shortName
-	self.description = dto.description
-	
-	for room in dto.rooms:
-		self.rooms.clear()
-		self.rooms.append(RoomTile.new(room))
-	self.portals = dto.portals
-	self.spawns = dto.spawns
-	
-	self.entranceLogic = dto.entranceLogic
-	self.exitLogic = dto.exitLogic
-	
-	self.encounterRate = dto.encounterRate
-	
+func _init() -> void:
 	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
+
+
+func fromShortName(locationShortName : String) -> Location:
+	return fromDTO(Persistence.loadDTO(locationShortName, Enums.EntityType.LOCATION))
+
+
+func fromDTO(locationDto : LocationDTO) -> Location:
+	self.name = locationDto.name
+	self.shortName = locationDto.shortName
+	self.description = locationDto.description
+	
+	self.rooms.clear()
+	for room in locationDto.roomDicts:
+		self.rooms.append(RoomTile.new().fromDict(room))
+	
+	self.portals = locationDto.portals
+	self.spawns = locationDto.spawns
+	
+	self.entranceLogic = locationDto.entranceLogic
+	self.exitLogic = locationDto.exitLogic
+	
+	self.encounterRate = locationDto.encounterRate
+	
+	return self
+
+
+func toDTO() -> LocationDTO:
+	var locationDto = LocationDTO.new()
+	locationDto.name = self.name
+	locationDto.shortName = self.shortName
+	locationDto.description = self.description
+	
+	for room in self.rooms:
+		locationDto.roomDicts.append(room.toDict())
+	
+	locationDto.portals = self.portals
+	locationDto.spawns = self.spawns
+	
+	locationDto.entranceLogic = self.entranceLogic
+	locationDto.exitLogic = self.exitLogic
+	
+	locationDto.encounterRate = self.encounterRate
+	
+	return locationDto
 
 
 # used only by the player
