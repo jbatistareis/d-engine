@@ -17,8 +17,8 @@ const ROOM_TILE_NOOP : String = 'func execute(_character : Character) -> void:\n
 
 
 var actionBase : Dictionary = {
-	'fact': 'HGHPEN',
-	'move': 'BSEMOV'
+	'factShortName': 'HGHPEN',
+	'moveShortName': 'BSEATK'
 }
 
 var roomBase : Dictionary = {

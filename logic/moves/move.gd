@@ -11,13 +11,15 @@ var excuteExpression : String
 var cdPre : int
 var cdPos : int
 
-var targetType : int # relative to the executor
+# relative to the executor
+var targetType : int
 
 var prepareAnimation : String
 var attackAnimation : String
 
-var executorModifiers : Array = [] # use Enums.MoveModifierProperty
-var targetModifiers : Array = [] # use Enums.MoveModifierProperty
+# use Enums.MoveModifierProperty in both
+var executorModifiers : Array = []
+var targetModifiers : Array = []
 
 
 func _init(moveShortName : String):

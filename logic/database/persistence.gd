@@ -42,7 +42,7 @@ static func saveDTO(dto : DTO) -> String:
 		path = GamePaths.LOCATION_DATA
 	
 	if path.empty():
-		push_error(ErrorMessages.SAVE_ERR_UNK_TYPE)
+		push_error(ErrorMessages.FILE_SAVE_ERR_UNK_TYPE)
 		return ''
 	
 	path %= dto.shortName
@@ -87,13 +87,17 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 			path = GamePaths.LOCATION_DATA
 		
 		_:
-			push_error(ErrorMessages.LOAD_ERR_UNK_TYPE)
+			push_error(ErrorMessages.FILE_LOAD_ERR_UNK_TYPE)
 			return null
 	
 	path %= shortName
 	
 	var file = File.new()
 	file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+	
+	if !file.file_exists(path):
+		push_error(ErrorMessages.FILE_NOT_FOUND % path)
+	
 	var dto = dict2inst(file.get_var())
 	file.close()
 	

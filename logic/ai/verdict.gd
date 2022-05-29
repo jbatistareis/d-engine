@@ -1,8 +1,8 @@
 class_name Verdict
 extends Entity
 
-# TODO actions is prone to erros, a better solution is needed
-var actions : Array = [] # { fact, move } dict
+# { fact, move } dict
+var actions : Array = []
 
 
 func _init(verdictShrtNm : String) -> void:
@@ -11,7 +11,11 @@ func _init(verdictShrtNm : String) -> void:
 	self.name = dto.name
 	self.shortName = dto.shortName
 	
-	self.actions = dto.actions
+	for actionShtNms in dto.actions:
+		self.actions.append({
+			'fact': Fact.new(actionShtNms.factShortName),
+			'move': Move.new(actionShtNms.moveShortName)
+		})
 
 
 func decision(auditorCharacter, suspects : Array) -> void:

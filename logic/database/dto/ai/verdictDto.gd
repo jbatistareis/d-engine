@@ -4,6 +4,6 @@ extends DTO
 var name : String = 'Base verdict'
 var shortName : String = 'BSEVRD'
 
-# { fact, move } dict
+# { factShortName, moveShortName } dict
 var actions : Array = [GameParameters.actionBase]
 
