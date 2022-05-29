@@ -1,15 +1,23 @@
 extends Spatial
 
-var player : Character = Character.new()
+var player : Character
+
+
+func _init():
+#	Persistence.saveDTO(CharacterDTO.new())
+#	Persistence.saveDTO(VerdictDTO.new())
+#	Persistence.saveDTO(FactDTO.new())
+#	Persistence.saveDTO(InventoryDTO.new())
+#	Persistence.saveDTO(ItemDTO.new())
+#	Persistence.saveDTO(WeaponDTO.new())
+#	Persistence.saveDTO(ArmorDTO.new())
+#	Persistence.saveDTO(MoveDTO.new())
+#	Persistence.saveDTO(LocationDTO.new())
+	
+	player = Character.new().fromShortName('BSECHA')
 
 
 func _ready() -> void:
-	# TODO tests
-	var character : Character = Character.new()
-	character.type = Enums.CharacterType.FOE
-	EntitySaver.saveCharacter(character)
-	#
-	
 	print('TEST START')
 	
 	
@@ -23,7 +31,7 @@ func _ready() -> void:
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
 	Signals.emit_signal("playerEnteredGame", player)
-	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 26)
+	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 2)
 
 
 func _process(delta) -> void:

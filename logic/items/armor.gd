@@ -1,9 +1,35 @@
 class_name Armor
 extends Entity
 
-var name : String
-var maxIntegrity : int = 0
-var currentIntegrity : int = 0
+# TODO expand functionality
+
+var maxIntegrity : int
+var currentIntegrity : int
+
+
+func fromShortName(armorShortName : String) -> Armor:
+	return fromDTO(Persistence.loadDTO(armorShortName, Enums.EntityType.ARMOR))
+
+
+func fromDTO(armorDto : ArmorDTO) -> Armor:
+	self.name = armorDto.name
+	self.shortName = armorDto.shortName
+	
+	self.maxIntegrity = armorDto.maxIntegrity
+	self.currentIntegrity = armorDto.currentIntegrity
+	
+	return self
+
+
+func toDTO() -> ArmorDTO:
+	var armorDto = ArmorDTO.new()
+	armorDto.name = self.name
+	armorDto.shortName = self.shortName
+	
+	armorDto.maxIntegrity = self.maxIntegrity
+	armorDto.currentIntegrity = self.currentIntegrity
+	
+	return armorDto
 
 
 # returns unsoaked damage

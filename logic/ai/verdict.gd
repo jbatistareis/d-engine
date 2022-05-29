@@ -1,8 +1,40 @@
 class_name Verdict
+extends Entity
 
-var name : String = 'NOOP verdict'
-var description : String = 'Placeholder verdict'
-var actions : Array = [Action.new()] # Action array
+# { fact, move } dict
+var actions : Array = []
+
+
+func fromShortName(verdictShortName : String) -> Verdict:
+	return fromDTO(Persistence.loadDTO(verdictShortName, Enums.EntityType.VERDICT))
+
+
+func fromDTO(verdictDto : VerdictDTO) -> Verdict:
+	self.name = verdictDto.name
+	self.shortName = verdictDto.shortName
+	
+	self.actions.clear()
+	for actionShtNms in verdictDto.actions:
+		self.actions.append({
+			'fact': Fact.new().fromShortName(actionShtNms.factShortName),
+			'move': Move.new().fromShortName(actionShtNms.moveShortName)
+		})
+	
+	return self
+
+
+func toDTO() -> VerdictDTO:
+	var verdictDto = VerdictDTO.new()
+	verdictDto.name = self.name
+	verdictDto.shortName = self.shortName
+	
+	for action in self.actions:
+		verdictDto.actions.append({
+			'factShortName': action.fact.shortName,
+			'moveShortName': action.move.shortName
+		})
+	
+	return verdictDto
 
 
 func decision(auditorCharacter, suspects : Array) -> void:
@@ -21,8 +53,9 @@ func decision(auditorCharacter, suspects : Array) -> void:
 	)
 
 
-func addAction(index : int, fact : Fact, move : Move) -> void:
-	actions.insert(index, Action.new(fact, move))
+# action is a { fact, move } dict
+func addAction(action : Dictionary) -> void:
+	actions.append(action)
 
 
 func removeConcreteFact(index : int) -> void:

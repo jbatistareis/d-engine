@@ -1,34 +1,66 @@
 class_name RoomTile
-extends Entity
 
-const NOOP : String = 'func execute(character : Character) -> void:\n\treturn'
+var id : int
 
-var x : int = 0
-var y : int = 0
-var type : int = Enums.RoomType._0_EXIT
-var orientation : int = Enums.Direction.NORTH setget setOrientation
-var mesh : String = ''
+var x : int
+var y : int
+var type : int
+var orientation : int
+var mesh : String
 
-var exits : Array = [0, 0, 0, 0, 0, 0]
-var portals : Array = [0, 0, 0, 0, 0, 0]
+var exits : Array
+var portals : Array 
 
-var entranceLogic : String = NOOP
-var exitLogic : String = NOOP
+var entranceLogic : String
+var exitLogic : String
 
-var friendlyShortNames : Array = [] # present npc short names
-var foeShortNameGroups : Array = [] # 2D array representing possible enemy groups
+# TODO spawn then
+# short names of NPCs present in the room
+var friendlyShortNames : Array
+# 2D array representing possible enemy groups
+var foeShortNameGroups : Array
 
-# use this for queries
-var friendSpawns : Array = [] # spawned npcs
-
-var visited : bool = false
+var visited : bool
 
 
-func _init() -> void:
-	for shortName in friendlyShortNames:
-		var npc = EntityLoader.loadCharacter(shortName)
-		npc.currentRoom = id
-		friendSpawns.append(npc)
+func fromDict(roomTileDict : Dictionary) -> RoomTile:
+	self.id = roomTileDict.id
+	self.x = roomTileDict.x
+	self.y = roomTileDict.y
+	self.type = roomTileDict.type
+	self.orientation = roomTileDict.orientation
+	self.mesh = roomTileDict.mesh
+	
+	self.exits = roomTileDict.exits
+	self.portals = roomTileDict.portals
+	
+	self.entranceLogic = roomTileDict.entranceLogic
+	self.exitLogic = roomTileDict.exitLogic
+	
+	self.friendlyShortNames = roomTileDict.friendlyShortNames
+	self.foeShortNameGroups = roomTileDict.foeShortNameGroups
+	
+	self.visited = roomTileDict.visited
+	
+	return self
+
+
+func toDict() -> Dictionary:
+	return {
+		'id': self.id,
+		'x': self.x,
+		'y': self.y,
+		'type': self.type,
+		'orientation': self.orientation,
+		'mesh': self.mesh,
+		'exits': self.exits,
+		'portals': self.portals,
+		'entranceLogic': self.entranceLogic,
+		'exitLogic': self.exitLogic,
+		'friendlyShortNames': self.friendlyShortNames,
+		'foeShortNameGroups': self.foeShortNameGroups,
+		'visited': self.visited
+	}
 
 
 func enter(character, battleTriggered : bool) -> void:
@@ -44,11 +76,12 @@ func enter(character, battleTriggered : bool) -> void:
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size(), -1)]
 			for shortName in chosenGroup:
 				if !shortName.empty():
-					var enemy = EntityLoader.loadCharacter(shortName)
+					var enemy = Character.new().fromShortName(shortName)
 					enemy.currentRoom = id
 					enemies.append(enemy)
 			
-			Signals.emit_signal("battleStarted", [character], enemies) # TODO form a player party
+			# TODO form a player party
+			Signals.emit_signal("battleStarted", [character], enemies)
 
 
 func exit(character) -> void:

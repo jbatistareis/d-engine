@@ -9,15 +9,15 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Reference",
-"class": "Action",
-"language": "GDScript",
-"path": "res://logic/ai/action.gd"
-}, {
 "base": "Entity",
 "class": "Armor",
 "language": "GDScript",
 "path": "res://logic/items/armor.gd"
+}, {
+"base": "DTO",
+"class": "ArmorDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/item/armorDto.gd"
 }, {
 "base": "Command",
 "class": "AskPlayerBattleInputCommand",
@@ -69,6 +69,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/characters/character.gd"
 }, {
+"base": "DTO",
+"class": "CharacterDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/character/characterDto.gd"
+}, {
 "base": "Reference",
 "class": "CharacterQuery",
 "language": "GDScript",
@@ -85,9 +90,9 @@ _global_script_classes=[ {
 "path": "res://logic/utils/commandArrayHelper.gd"
 }, {
 "base": "Reference",
-"class": "Deserializer",
+"class": "DTO",
 "language": "GDScript",
-"path": "res://logic/database/deserializer.gd"
+"path": "res://logic/database/dto.gd"
 }, {
 "base": "Reference",
 "class": "Entity",
@@ -98,16 +103,6 @@ _global_script_classes=[ {
 "class": "EntityArrayHelper",
 "language": "GDScript",
 "path": "res://logic/utils/entityArrayHelper.gd"
-}, {
-"base": "Reference",
-"class": "EntityLoader",
-"language": "GDScript",
-"path": "res://logic/database/entityLoader.gd"
-}, {
-"base": "Reference",
-"class": "EntitySaver",
-"language": "GDScript",
-"path": "res://logic/database/entitySaver.gd"
 }, {
 "base": "Reference",
 "class": "Enums",
@@ -124,6 +119,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/gui/windows/equipmentWindow.gd"
 }, {
+"base": "Reference",
+"class": "ErrorMessages",
+"language": "GDScript",
+"path": "res://errorMessages.gd"
+}, {
 "base": "Command",
 "class": "ExecuteMoveCommand",
 "language": "GDScript",
@@ -139,20 +139,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/game/states/exploringState.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Fact",
 "language": "GDScript",
 "path": "res://logic/ai/fact.gd"
+}, {
+"base": "DTO",
+"class": "FactDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/ai/factDto.gd"
 }, {
 "base": "GuiWindow",
 "class": "GameMenu",
 "language": "GDScript",
 "path": "res://ui/gui/menus/gameMenu.gd"
-}, {
-"base": "Reference",
-"class": "GameParameters",
-"language": "GDScript",
-"path": "res://gameParameters.gd"
 }, {
 "base": "Reference",
 "class": "GamePaths",
@@ -189,10 +189,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/gui/windows/guiWindow.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://logic/characters/inventory.gd"
+}, {
+"base": "DTO",
+"class": "InventoryDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/character/inventoryDto.gd"
 }, {
 "base": "State",
 "class": "InventoryState",
@@ -204,6 +209,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/items/item.gd"
 }, {
+"base": "DTO",
+"class": "ItemDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/item/itemDto.gd"
+}, {
 "base": "GuiWindow",
 "class": "ItemsWindow",
 "language": "GDScript",
@@ -213,6 +223,11 @@ _global_script_classes=[ {
 "class": "Location",
 "language": "GDScript",
 "path": "res://logic/locations/location.gd"
+}, {
+"base": "DTO",
+"class": "LocationDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/location/locationDto.gd"
 }, {
 "base": "State",
 "class": "MainMenuState",
@@ -229,15 +244,20 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/gui/windows/miniMapWindow.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Move",
 "language": "GDScript",
-"path": "res://logic/characters/move.gd"
+"path": "res://logic/moves/move.gd"
+}, {
+"base": "DTO",
+"class": "MoveDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/move/moveDto.gd"
 }, {
 "base": "Reference",
 "class": "MoveResult",
 "language": "GDScript",
-"path": "res://logic/characters/moveResult.gd"
+"path": "res://logic/moves/moveResult.gd"
 }, {
 "base": "GuiWindow",
 "class": "MovesWindow",
@@ -254,17 +274,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/gui/guiOverlay.gd"
 }, {
-"base": "Entity",
-"class": "RoomPortal",
+"base": "Reference",
+"class": "Persistence",
 "language": "GDScript",
-"path": "res://logic/locations/roomPortal.gd"
+"path": "res://logic/database/persistence.gd"
 }, {
-"base": "Entity",
-"class": "RoomSpawn",
-"language": "GDScript",
-"path": "res://logic/locations/roomSpawn.gd"
-}, {
-"base": "Entity",
+"base": "Reference",
 "class": "RoomTile",
 "language": "GDScript",
 "path": "res://logic/locations/roomTile.gd"
@@ -273,11 +288,6 @@ _global_script_classes=[ {
 "class": "ScriptTool",
 "language": "GDScript",
 "path": "res://logic/utils/scriptTool.gd"
-}, {
-"base": "Reference",
-"class": "Serializer",
-"language": "GDScript",
-"path": "res://logic/database/serializer.gd"
 }, {
 "base": "Reference",
 "class": "Stat",
@@ -299,7 +309,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/game/states/titleState.gd"
 }, {
-"base": "Reference",
+"base": "Entity",
 "class": "Verdict",
 "language": "GDScript",
 "path": "res://logic/ai/verdict.gd"
@@ -308,6 +318,11 @@ _global_script_classes=[ {
 "class": "VerdictCommand",
 "language": "GDScript",
 "path": "res://logic/commands/verdictCommand.gd"
+}, {
+"base": "DTO",
+"class": "VerdictDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/ai/verdictDto.gd"
 }, {
 "base": "Command",
 "class": "WaitCommand",
@@ -318,10 +333,15 @@ _global_script_classes=[ {
 "class": "Weapon",
 "language": "GDScript",
 "path": "res://logic/items/weapon.gd"
+}, {
+"base": "DTO",
+"class": "WeaponDTO",
+"language": "GDScript",
+"path": "res://logic/database/dto/item/weaponDto.gd"
 } ]
 _global_script_class_icons={
-"Action": "",
 "Armor": "",
+"ArmorDTO": "",
 "AskPlayerBattleInputCommand": "",
 "BattleCursorWindow": "",
 "BattleEnemiesWindow": "",
@@ -332,23 +352,23 @@ _global_script_class_icons={
 "BattleState": "",
 "BootState": "",
 "Character": "",
+"CharacterDTO": "",
 "CharacterQuery": "",
 "Command": "",
 "CommandArrayHelper": "",
-"Deserializer": "",
+"DTO": "",
 "Entity": "",
 "EntityArrayHelper": "",
-"EntityLoader": "",
-"EntitySaver": "",
 "Enums": "",
 "EquipmentState": "",
 "EquipmentWindow": "",
+"ErrorMessages": "",
 "ExecuteMoveCommand": "",
 "ExploringMenuState": "",
 "ExploringState": "",
 "Fact": "",
+"FactDTO": "",
 "GameMenu": "",
-"GameParameters": "",
 "GamePaths": "",
 "GuiButtonWidget": "",
 "GuiCharVitalsWidget": "",
@@ -357,31 +377,35 @@ _global_script_class_icons={
 "GuiWidget": "",
 "GuiWindow": "",
 "Inventory": "",
+"InventoryDTO": "",
 "InventoryState": "",
 "Item": "",
+"ItemDTO": "",
 "ItemsWindow": "",
 "Location": "",
+"LocationDTO": "",
 "MainMenuState": "",
 "MapWindow": "",
 "MiniMapWindow": "",
 "Move": "",
+"MoveDTO": "",
 "MoveResult": "",
 "MovesWindow": "",
 "OptionsWindow": "",
 "Overlay": "",
-"RoomPortal": "",
-"RoomSpawn": "",
+"Persistence": "",
 "RoomTile": "",
 "ScriptTool": "",
-"Serializer": "",
 "Stat": "",
 "State": "",
 "StatusWindow": "",
 "TitleState": "",
 "Verdict": "",
 "VerdictCommand": "",
+"VerdictDTO": "",
 "WaitCommand": "",
-"Weapon": ""
+"Weapon": "",
+"WeaponDTO": ""
 }
 
 [application]
@@ -396,6 +420,7 @@ default_bus_layout=""
 
 [autoload]
 
+GameParameters="*res://gameParameters.gd"
 Signals="*res://signals.gd"
 Dice="*res://dice.gd"
 SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"
