@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://tools/editor.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/grid.tscn" type="PackedScene" id=2]
 
-[node name="Panel" type="Panel"]
+[node name="editor" type="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -14,7 +15,6 @@ anchor_bottom = 1.0
 script = ExtResource( 1 )
 
 [node name="Armor" type="Tabs" parent="tabs"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -22,6 +22,10 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Armor"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Character" type="Tabs" parent="tabs"]
 visible = false
@@ -33,6 +37,10 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 
+[node name="background" type="Panel" parent="tabs/Character"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Event" type="Tabs" parent="tabs"]
 visible = false
 anchor_right = 1.0
@@ -42,6 +50,10 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Event"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Fact" type="Tabs" parent="tabs"]
 visible = false
@@ -53,6 +65,10 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 
+[node name="background" type="Panel" parent="tabs/Fact"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Inventory" type="Tabs" parent="tabs"]
 visible = false
 anchor_right = 1.0
@@ -62,6 +78,10 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Item" type="Tabs" parent="tabs"]
 visible = false
@@ -73,7 +93,12 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 
+[node name="background" type="Panel" parent="tabs/Item"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Location" type="Tabs" parent="tabs"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -82,6 +107,76 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 
+[node name="background" type="Panel" parent="tabs/Location"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="mainDivider" type="HBoxContainer" parent="tabs/Location/background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="tabs/Location/background/mainDivider"]
+margin_right = 792.0
+margin_bottom = 676.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ColorRect" type="ColorRect" parent="tabs/Location/background/mainDivider/MarginContainer"]
+margin_right = 792.0
+margin_bottom = 676.0
+color = Color( 1, 1, 1, 0.25 )
+
+[node name="scroll" type="ScrollContainer" parent="tabs/Location/background/mainDivider/MarginContainer"]
+margin_right = 792.0
+margin_bottom = 676.0
+
+[node name="grid" parent="tabs/Location/background/mainDivider/MarginContainer/scroll" instance=ExtResource( 2 )]
+margin_right = 792.0
+margin_bottom = 676.0
+
+[node name="parameters" type="TabContainer" parent="tabs/Location/background/mainDivider"]
+margin_left = 792.0
+margin_right = 1272.0
+margin_bottom = 676.0
+rect_min_size = Vector2( 480, 0 )
+size_flags_vertical = 3
+
+[node name="General" type="Tabs" parent="tabs/Location/background/mainDivider/parameters"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Room" type="Tabs" parent="tabs/Location/background/mainDivider/parameters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Portals" type="Tabs" parent="tabs/Location/background/mainDivider/parameters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Spawns" type="Tabs" parent="tabs/Location/background/mainDivider/parameters"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
 [node name="Message" type="Tabs" parent="tabs"]
 visible = false
 margin_left = 814.0
@@ -89,6 +184,10 @@ margin_top = 47.0
 margin_right = 924.0
 margin_bottom = 709.0
 size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Message"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="Move" type="Tabs" parent="tabs"]
 visible = false
@@ -106,6 +205,10 @@ margin_right = 1154.0
 margin_bottom = 709.0
 size_flags_horizontal = 3
 
+[node name="background" type="Panel" parent="tabs/Verdict"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
 [node name="Weapon" type="Tabs" parent="tabs"]
 visible = false
 margin_left = 1158.0
@@ -113,3 +216,7 @@ margin_top = 47.0
 margin_right = 1269.0
 margin_bottom = 709.0
 size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Weapon"]
+anchor_right = 1.0
+anchor_bottom = 1.0

@@ -10,9 +10,6 @@ rect_min_size = Vector2( 60, 60 )
 hint_tooltip = "lll"
 mouse_filter = 1
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="background" type="Control" parent="."]
 margin_right = 60.0
@@ -34,6 +31,7 @@ __meta__ = {
 [node name="roomIcon" type="AnimatedSprite" parent="background"]
 position = Vector2( 30, 30 )
 frames = ExtResource( 2 )
+frame = 1
 
 [node name="buttons" type="Control" parent="."]
 modulate = Color( 1, 1, 1, 0 )
@@ -50,9 +48,6 @@ text = "+"
 flat = false
 align = 2
 items = [ "No room", null, 0, false, false, 0, 0, null, "", false, "0 exits", null, 0, false, false, 1, 0, null, "", false, "1 exit", null, 0, false, false, 2, 0, null, "", false, "2 exits I", null, 0, false, false, 3, 0, null, "", false, "2 exits L", null, 0, false, false, 4, 0, null, "", false, "3 exits", null, 0, false, false, 5, 0, null, "", false, "4 exits", null, 0, false, false, 6, 0, null, "", false ]
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="rotateRoom" type="Button" parent="buttons"]
 modulate = Color( 1, 1, 1, 0 )
@@ -63,8 +58,5 @@ margin_bottom = 60.0
 disabled = true
 text = ">"
 align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Tween" type="Tween" parent="."]

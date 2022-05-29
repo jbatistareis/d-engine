@@ -17,7 +17,7 @@ enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
 
 enum ItemType { CONSUMABLE, TOOL, KEY }
 
-enum RoomType { _0_EXIT, _1_EXIT, _2_EXITS_I, _2_EXITS_L, _3_EXITS, _4_EXITS }
+enum RoomType { DUMMY, _0_EXIT, _1_EXIT, _2_EXITS_I, _2_EXITS_L, _3_EXITS, _4_EXITS }
 enum Direction { NORTH, EAST, SOUTH, WEST, UP, DOWN, FORWARD, BACKWARD, LEFT, RIGHT, NONE }
 
 enum AfflictionType { TODO }
