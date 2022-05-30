@@ -8,10 +8,7 @@ var shortName : String = 'BSELOC'
 var description : String = 'Placeholder location'
 
 # { id, x, y, type, orientation, mesh, exits, portals, entranceLogic, exitLogic, friendlyShortNames, foeShortNameGroups, visited } dict
-var roomDicts : Array = [GameParameters.roomBase]
-
-# { id, passLogic, newLocationShortName, toSpawnId } dict
-var portals : Array = [GameParameters.portalBase]
+var rooms: Array = [GameParameters.roomBase]
 
 # { id, direction, toRoomId } dict
 var spawns : Array = [GameParameters.spwanBase]

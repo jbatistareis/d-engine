@@ -19,10 +19,6 @@ func fromLocation(location : Location) -> void:
 		filename = directory.get_next()
 	
 	for room in location.rooms:
-		if !scenes.has_all(room.friendlyShortNames):
-			for friendly in room.friendlyShortNames:
-				scenes[friendly] = load(GamePaths.CHARACTER_MODEL % friendly)
-		
 		for foeGroup in room.foeShortNameGroups:
 			if !scenes.has_all(foeGroup):
 				for foe in foeGroup:

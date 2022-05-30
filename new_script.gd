@@ -12,7 +12,7 @@ func _init():
 #	Persistence.saveDTO(WeaponDTO.new())
 #	Persistence.saveDTO(ArmorDTO.new())
 #	Persistence.saveDTO(MoveDTO.new())
-	Persistence.saveDTO(LocationDTO.new())
+#	Persistence.saveDTO(LocationDTO.new())
 	
 	player = Character.new().fromShortName('BSECHA')
 
@@ -31,7 +31,7 @@ func _ready() -> void:
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
 	Signals.emit_signal("playerEnteredGame", player)
-	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 2)
+	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 0)
 
 
 func _process(delta) -> void:
