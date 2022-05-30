@@ -10,6 +10,9 @@ func _ready():
 
 
 func changeLocation(locationShortName : String, toSpawnId : int) -> void:
+	if location != null:
+		location.exit(GameManager.player)
+	
 	location = Location.new().fromShortName(locationShortName)
 	
 	SceneLoadManager.fromLocation(location)

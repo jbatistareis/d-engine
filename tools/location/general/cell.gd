@@ -1,24 +1,23 @@
 extends Panel
 
 const _ROTATION : float = PI / 2
-const _BASE_MESHES = ['', '0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
+const _BASE_MODELS = ['', '0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
 
 
-var roomDict : Dictionary = {
+var room : Dictionary = {
 	'id': 0,
 	'x': 0,
 	'y': 0,
 	'type': Enums.RoomType.DUMMY, # use  Enums.RoomType
 	'orientation': Enums.Direction.NORTH , # use Enums.Direction
-	'mesh': '4_exits',
+	'model': '4_exits',
 	'exits': [0, 0, 0, 0, 0, 0],
-	'portals': [0, 0, 0, 0, 0, 0],
-	'entranceLogic': GameParameters.ROOM_TILE_NOOP,
-	'exitLogic': GameParameters.ROOM_TILE_NOOP,
-	'friendlyShortNames': [], # short names of NPCs present in the room
+	'canEnterLogic': GameParameters.ROOM_ENTER_NOOP,
+	'enteringLogic': GameParameters.ROOM_NOOP,
+	'exitingLogic': GameParameters.ROOM_NOOP,
 	'foeShortNameGroups': [], # 2D array representing possible enemy groups
 	'visited': false,
-} setget setRoomDict
+} setget setRoom
 
 
 func _ready() -> void:
@@ -38,19 +37,19 @@ func _ready() -> void:
 func optionSelected(index : int) -> void:
 	if index == 0:
 		$icon.rotate(_ROTATION)
-		var newOrientation = roomDict.orientation + 1
-		roomDict.orientation = newOrientation if (newOrientation <= Enums.Direction.WEST) else 0
+		var newOrientation = room.orientation + 1
+		room.orientation = newOrientation if (newOrientation <= Enums.Direction.WEST) else 0
 	
 	elif index == 1:
 		$icon.rotate(-_ROTATION)
-		var newOrientation = roomDict.orientation - 1
-		roomDict.orientation = newOrientation if (newOrientation >= Enums.Direction.NORTH) else 3
+		var newOrientation = room.orientation - 1
+		room.orientation = newOrientation if (newOrientation >= Enums.Direction.NORTH) else 3
 	
 	elif index >= 3:
 		index -= 3
 		$icon.frame = index
-		roomDict.type = index
-		roomDict.mesh = _BASE_MESHES[index]
+		room.type = index
+		room.model = _BASE_MODELS[index]
 		print(index)
 		print(Enums.RoomType.keys()[index])
 	
@@ -58,14 +57,14 @@ func optionSelected(index : int) -> void:
 
 
 func updateHint() -> void:
-	$options.hint_tooltip = 'id: %d\nx: %d, y: %d\n%s' % [roomDict.id, roomDict.x, roomDict.y, Enums.Direction.keys()[roomDict.orientation].capitalize()]
-	$icon/pointer.visible = roomDict.type != Enums.RoomType.DUMMY
+	$options.hint_tooltip = 'id: %d\nx: %d, y: %d\n%s' % [room.id, room.x, room.y, Enums.Direction.keys()[room.orientation].capitalize()]
+	$icon/pointer.visible = room.type != Enums.RoomType.DUMMY
 
 
-func setRoomDict(value : Dictionary) -> void:
-	roomDict = value
-	$icon.frame = roomDict.type
-	$icon.rotate(_ROTATION * roomDict.orientation)
+func setRoom(value : Dictionary) -> void:
+	room = value
+	$icon.frame = room.type
+	$icon.rotate(_ROTATION * room.orientation)
 	
 	updateHint()
 

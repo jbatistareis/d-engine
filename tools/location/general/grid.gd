@@ -6,7 +6,7 @@ var cellScene : PackedScene = preload("res://tools/location/general/cell.tscn")
 func _ready() -> void:
 	for i in range(columns * columns):
 		var cell = cellScene.instance()
-		cell.roomDict.id = i
+		cell.roomDict.id = i + 1
 		cell.roomDict.x = i % columns
 		cell.roomDict.y = i / columns
 		

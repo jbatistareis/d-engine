@@ -22,7 +22,7 @@ var actionBase : Dictionary = {
 }
 
 var roomBase : Dictionary = {
-	'id': 0,
+	'id': 1,
 	'x': 0,
 	'y': 0,
 	'type': Enums.RoomType._4_EXITS, # use  Enums.RoomType
@@ -40,6 +40,6 @@ var roomBase : Dictionary = {
 var spwanBase : Dictionary = {
 	'id': 0,
 	'direction': Enums.Direction.NORTH,
-	'toRoomId': 0
+	'toRoomId': 1
 }
 

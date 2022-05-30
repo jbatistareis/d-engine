@@ -16,7 +16,7 @@ func loadMap(location : Location, x : int, y : int, direction : int) -> void:
 		node.queue_free()
 	
 	for room in location.rooms:
-		var block = SceneLoadManager.scenes[room.mesh].instance()
+		var block = SceneLoadManager.scenes[room.model].instance()
 		block.transform.origin.x = room.x * 2 + 1
 		block.transform.origin.y = 1
 		block.transform.origin.z = room.y * 2 + 1
