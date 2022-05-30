@@ -11,9 +11,9 @@ const MOVE_BASE_EXECUTE : String = 'func execute(_character : Character) -> void
 
 const FACT_BASE : String = 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(suspects)'
 
-const LOCATION_NOOP : String = 'func execute(_character : Character) -> void:\n\treturn'
-const ROOM_ENTER_NOOP : String = 'func execute(_character : Character) -> bool:\n\treturn true'
-const ROOM_NOOP : String = 'func execute(_character : Character) -> void:\n\treturn'
+const LOCATION_NOOP : String = 'func execute(_character : Character, direction : int) -> void:\n\treturn'
+const ROOM_ENTER_NOOP : String = 'func execute(_character : Character, direction : int) -> bool:\n\treturn true'
+const ROOM_NOOP : String = 'func execute(_character : Character, direction : int) -> void:\n\treturn'
 
 
 var actionBase : Dictionary = {
