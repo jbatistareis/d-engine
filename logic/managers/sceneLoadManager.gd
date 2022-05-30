@@ -1,6 +1,11 @@
 extends Node
 
+var extensionRegex : RegEx = RegEx.new()
 var scenes : Dictionary = {}
+
+
+func _init() -> void:
+	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 
 
 func fromLocation(location : Location) -> void:
@@ -15,7 +20,7 @@ func fromLocation(location : Location) -> void:
 	var filename = directory.get_next()
 	while !filename.empty():
 		if filename.ends_with('.tscn'):
-			scenes[filename.substr(0, filename.find_last('.'))] = load(path + '/' + filename)
+			scenes[extensionRegex.sub(filename, '')] = load(path + '/' + filename)
 		filename = directory.get_next()
 	
 	for room in location.rooms:

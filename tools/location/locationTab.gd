@@ -5,39 +5,39 @@ signal loadedLocationDto(locationDto)
 const _SAVE_MESSAGE : String = 'Do you wish to save/overwrite the file \'%s\'?'
 const _PREVIEW_TITLE : String = '%s (%s) preview'
 
+var extensionRegex : RegEx = RegEx.new()
 var locationDto : LocationDTO setget setLocationDto
 
 
 func _ready() -> void:
+	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 	self.locationDto = LocationDTO.new()
 
 
 func setLocationDto(value : LocationDTO) -> void:
 	locationDto = value
-	$background/mainDivider/map/scroll/grid.loadRooms(locationDto.roomDicts)
+	$background/mainDivider/map/scroll/grid.loadRooms(locationDto.rooms)
 	
 	emit_signal("loadedLocationDto", locationDto)
 
 
 func updateLocation() -> void:
 	# this is a fugly fix for an UI bug that occurs on long lines
-	var txtEntranceLogic = ("background/mainDivider/parameters/General/mainContainer" 
-		+ "/logic/Entrance logic/txtEntranceLogic")
-	var txtExitLogic = ("background/mainDivider/parameters/General/mainContainer" 
-		+ "/logic/Exit logic/txtExitLogic")
+	var txtEntranceLogic = ("background/mainDivider/parameters/General/mainContainer"
+		+ "/logic/Entrance/txtEntranceLogic")
+	var txtExitLogic = ("background/mainDivider/parameters/General/mainContainer"
+		+ "/logic/Exit/txtExitLogic")
 	
 	locationDto.entranceLogic = get_node(txtEntranceLogic).text
 	locationDto.exitLogic = get_node(txtExitLogic).text
 	
-	locationDto.roomDicts.clear()
-	locationDto.portals.clear()
-	locationDto.spawns.clear()
+	locationDto.rooms = []
+	locationDto.spawns = []
 	
 	for cell in $background/mainDivider/map/scroll/grid.get_children():
-		var roomDict = cell.roomDict
-		
-		if roomDict.type != Enums.RoomType.DUMMY:
-			locationDto.roomDicts.append(roomDict)
+		if cell.room.type != Enums.RoomType.DUMMY:
+			print(cell.room)
+			locationDto.rooms.append(cell.room)
 
 
 # parameter listeners
@@ -78,7 +78,34 @@ func _on_btnPreview_pressed():
 	Signals.emit_signal("playerSpawned", location, 0, 0, Enums.Direction.NORTH)
 
 
-
 func _on_btnOpen_pressed():
 	$openWindow.popup_centered()
+	
+	var lst = $openWindow/VBoxContainer/ScrollContainer/lstFiles
+	lst.clear()
+	
+	var dir = Directory.new()
+	if dir.open(GamePaths.DATA % 'locations') == OK:
+		dir.list_dir_begin()
+		var file = dir.get_next()
+		
+		while !file.empty():
+			if !dir.current_is_dir():
+				lst.add_item(extensionRegex.sub(file, ''))
+			file = dir.get_next()
+		
+	lst.sort_items_by_text()
+
+
+func _on_btnCancel_pressed():
+	$openWindow.hide()
+
+
+func _on_btnOpenConfirm_pressed():
+	var lst = $openWindow/VBoxContainer/ScrollContainer/lstFiles
+	if lst.is_anything_selected():
+		var shortName = lst.get_item_text(lst.get_selected_items()[0])
+		setLocationDto(Persistence.loadDTO(shortName, Enums.EntityType.LOCATION))
+		
+		$openWindow.hide()
 

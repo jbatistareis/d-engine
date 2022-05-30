@@ -4,20 +4,7 @@ const _ROTATION : float = PI / 2
 const _BASE_MODELS = ['', '0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']
 
 
-var room : Dictionary = {
-	'id': 0,
-	'x': 0,
-	'y': 0,
-	'type': Enums.RoomType.DUMMY, # use  Enums.RoomType
-	'orientation': Enums.Direction.NORTH , # use Enums.Direction
-	'model': '4_exits',
-	'exits': [0, 0, 0, 0, 0, 0],
-	'canEnterLogic': GameParameters.ROOM_ENTER_NOOP,
-	'enteringLogic': GameParameters.ROOM_NOOP,
-	'exitingLogic': GameParameters.ROOM_NOOP,
-	'foeShortNameGroups': [], # 2D array representing possible enemy groups
-	'visited': false,
-} setget setRoom
+var room : Dictionary setget setRoom
 
 
 func _ready() -> void:
@@ -50,8 +37,6 @@ func optionSelected(index : int) -> void:
 		$icon.frame = index
 		room.type = index
 		room.model = _BASE_MODELS[index]
-		print(index)
-		print(Enums.RoomType.keys()[index])
 	
 	updateHint()
 

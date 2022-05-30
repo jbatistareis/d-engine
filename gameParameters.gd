@@ -22,13 +22,13 @@ var actionBase : Dictionary = {
 }
 
 var roomBase : Dictionary = {
-	'id': 1,
+	'id': 0,
 	'x': 0,
 	'y': 0,
 	'type': Enums.RoomType._4_EXITS, # use  Enums.RoomType
 	'orientation': Enums.Direction.NORTH , # use Enums.Direction
 	'model': '4_exits',
-	'exits': [0, 0, 0, 0, 0, 0],
+	'exits': [-1, -1, -1, -1, -1, -1],
 	'canEnterLogic': ROOM_ENTER_NOOP,
 	'enteringLogic': ROOM_NOOP,
 	'exitingLogic': ROOM_NOOP,

@@ -75,7 +75,7 @@ func move(character, direction : int) -> int:
 	roomTile.fromDict(findRoom(character.currentRoom))
 	var exitPoint = roomTile.getExit(direction)
 	
-	if exitPoint != 0:
+	if exitPoint != -1:
 		var toRoom = findRoom(exitPoint)
 		
 		if canPass(toRoom.canEnterLogic, character, reverseDirection(direction)):

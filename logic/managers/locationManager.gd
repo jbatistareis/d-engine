@@ -14,7 +14,6 @@ func changeLocation(locationShortName : String, toSpawnId : int) -> void:
 		location.exit(GameManager.player)
 	
 	location = Location.new().fromShortName(locationShortName)
-	
 	SceneLoadManager.fromLocation(location)
 	
 	var spawn = location.findSpawn(toSpawnId)

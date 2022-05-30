@@ -2,17 +2,18 @@ class_name GamePaths
 
 const EXTENSION_REGEX : String = '\\..*'
 
-const _LOCATION : String = 'res://data/locations'
-const _CHARACTER : String = 'res://data/characters'
-const _VERDICT : String = 'res://data/verdicts'
-const _FACT : String = 'res://data/facts'
-const _INVENTORY : String = 'res://data/inventories'
-const _ITEM : String = 'res://data/items'
-const _WEAPON : String = 'res://data/weapons'
-const _MOVE : String = 'res://data/moves'
-const _ARMOR : String = 'res://data/armors'
+const DATA : String = 'res://data/%s'
 
-const DUMMY_DATA : String = 'res://data/%s'
+const _LOCATION : String = DATA % 'locations'
+const _CHARACTER : String = DATA % 'characters'
+const _VERDICT : String = DATA % 'verdicts'
+const _FACT : String = DATA % 'facts'
+const _INVENTORY : String = DATA % 'inventories'
+const _ITEM : String = DATA % 'items'
+const _WEAPON : String = DATA % 'weapons'
+const _MOVE : String = DATA % 'moves'
+const _ARMOR : String = DATA % 'armors'
+
 const CHARACTER_DATA : String = _CHARACTER + '/%s.cha'
 const VERDICT_DATA : String = _VERDICT + '/%s.vrd'
 const FACT_DATA : String = _FACT + '/%s.fct'

@@ -77,7 +77,6 @@ __meta__ = {
 }
 
 [node name="Location" type="Tabs" parent="HSplitContainer/properties/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -286,6 +285,7 @@ margin_bottom = 676.0
 rect_min_size = Vector2( 0, 5 )
 
 [node name="Room" type="Tabs" parent="HSplitContainer/properties/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -338,7 +338,7 @@ __meta__ = {
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer"]
-margin_right = 430.0
+margin_right = 442.0
 margin_bottom = 1302.0
 rect_min_size = Vector2( 330, 0 )
 size_flags_horizontal = 3
@@ -354,7 +354,7 @@ mouse_default_cursor_shape = 6
 [node name="preview" type="Viewport" parent="HSplitContainer/properties/TabContainer/Room/VBoxContainer/ScrollContainer/VBoxContainer/ViewportContainer"]
 size = Vector2( 430, 330 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 shadow_atlas_size = 10000
 shadow_atlas_quad_0 = 3
 shadow_atlas_quad_1 = 4
@@ -751,6 +751,7 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="openLocation" type="WindowDialog" parent="."]
+visible = true
 margin_right = 240.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 240, 320 )
@@ -769,18 +770,18 @@ __meta__ = {
 
 [node name="filesContainer" type="ItemList" parent="openLocation/VBoxContainer"]
 margin_right = 240.0
-margin_bottom = 268.0
+margin_bottom = 260.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Control" type="Control" parent="openLocation/VBoxContainer"]
-margin_top = 272.0
+margin_top = 264.0
 margin_right = 240.0
-margin_bottom = 282.0
+margin_bottom = 274.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="HBoxContainer" type="HBoxContainer" parent="openLocation/VBoxContainer"]
-margin_top = 286.0
+margin_top = 278.0
 margin_right = 240.0
 margin_bottom = 306.0
 rect_min_size = Vector2( 0, 20 )
@@ -788,13 +789,13 @@ size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="openLocation/VBoxContainer/HBoxContainer"]
 margin_right = 66.0
-margin_bottom = 20.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="btnLoadFile" type="Button" parent="openLocation/VBoxContainer/HBoxContainer"]
 margin_left = 70.0
 margin_right = 170.0
-margin_bottom = 20.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 100, 20 )
 size_flags_horizontal = 3
 text = "Load"
@@ -802,7 +803,7 @@ text = "Load"
 [node name="Control2" type="Control" parent="openLocation/VBoxContainer/HBoxContainer"]
 margin_left = 174.0
 margin_right = 240.0
-margin_bottom = 20.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="Control2" type="Control" parent="openLocation/VBoxContainer"]
@@ -827,7 +828,6 @@ popup_exclusive = true
 window_title = "Status"
 
 [node name="locationTest" type="WindowDialog" parent="."]
-visible = true
 margin_right = 640.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
@@ -847,7 +847,7 @@ __meta__ = {
 [node name="Viewport" type="Viewport" parent="locationTest/ViewportContainer"]
 size = Vector2( 640, 480 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="terrain" parent="locationTest/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
