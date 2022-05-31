@@ -15,9 +15,9 @@ func _init() -> void:
 
 func setRoom(value : Dictionary):
 	room = value
-	$mainContainer/details/lblDetails.text = _DETAILS_TEXT % [room.id, room.x, room.y]
+	$mainContainer/model/controls/lblDetails.text = _DETAILS_TEXT % [room.id, room.x, room.y]
 	
-	var optModel = $mainContainer/scroll/parameters/model/controls/optModel
+	var optModel = $mainContainer/model/controls/optModel
 	for index in optModel.get_item_count():
 		if optModel.get_item_text(index) == room.model:
 			optModel.select(index)
@@ -26,7 +26,7 @@ func setRoom(value : Dictionary):
 
 func _on_General_loadedLocationDto(locationDto : LocationDTO):
 	self.locationDto = locationDto
-	$mainContainer/scroll/parameters/model/controls/optModel.items.clear()
+	$mainContainer/model/controls/optModel.items.clear()
 	
 	var dir = Directory.new()
 	if dir.open(GamePaths.LOCATION_MODELS % self.locationDto.shortName) == OK:
@@ -35,7 +35,7 @@ func _on_General_loadedLocationDto(locationDto : LocationDTO):
 		
 		while !file.empty():
 			if !dir.current_is_dir():
-				$mainContainer/scroll/parameters/model/controls/optModel.add_item(extensionRegex.sub(file, ''))
+				$mainContainer/model/controls/optModel.add_item(extensionRegex.sub(file, ''))
 			file = dir.get_next()
 
 
@@ -46,6 +46,6 @@ func _on_grid_selectedRoom(room : Dictionary):
 
 
 func _on_optModel_item_selected(index : int):
-	room.model = $mainContainer/scroll/parameters/model/controls/optModel.get_item_text(index)
+	room.model = $mainContainer/model/controls/optModel.get_item_text(index)
 	emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
 
