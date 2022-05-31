@@ -7,3 +7,11 @@ func _enter_tree() -> void:
 	$ViewportContainer.rect_size = size
 	$ViewportContainer/Viewport.size = size
 
+
+func _on_previewWindow_about_to_show():
+	$ViewportContainer/Viewport/terrain.visible = true
+
+
+func _on_previewWindow_popup_hide():
+	$ViewportContainer/Viewport/terrain.visible = false
+

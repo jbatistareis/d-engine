@@ -24,4 +24,3 @@ func loadMap(location : Location, x : int, y : int, direction : int) -> void:
 		
 		$blocks.add_child(block)
 
-

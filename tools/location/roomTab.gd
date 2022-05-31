@@ -1,5 +1,7 @@
 extends Tabs
 
+signal changeModel(locationShortName, model, orientation)
+
 const _DETAILS_TEXT = 'id: %d @ (%d, %d)'
 
 var extensionRegex : RegEx = RegEx.new()
@@ -40,7 +42,10 @@ func _on_General_loadedLocationDto(locationDto : LocationDTO):
 func _on_grid_selectedRoom(room : Dictionary):
 	if !room.empty():
 		self.room = room
+		emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
 
 
 func _on_optModel_item_selected(index : int):
 	room.model = $mainContainer/scroll/parameters/model/controls/optModel.get_item_text(index)
+	emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
+

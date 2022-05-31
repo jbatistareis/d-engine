@@ -1,13 +1,11 @@
 extends Spatial
 
-const ROTATE_90 : float = PI / 2
+const _ROTATE_ORIENTATION : float = PI / 2
+const _ROTATE_BUTTON : float = PI / 4
+
+const _MODEL_FILE : String = GamePaths.LOCATION_MODELS + '%s.tscn'
+
 var blocks : Dictionary = {}
-
-
-func _ready() -> void:
-	LocationEditorSignals.connect("selectedRoom", self, "setPreview")
-	LocationEditorSignals.connect("changedRoomMesh", self, "setPreview")
-	LocationEditorSignals.connect("testLocation", self, "hideWindow")
 
 
 func rotatePivot(angle : float) -> void:
@@ -16,23 +14,34 @@ func rotatePivot(angle : float) -> void:
 			$pivot,
 			'rotation:y',
 			$pivot.rotation.y,
-			$pivot.rotation.y + deg2rad(angle),
+			$pivot.rotation.y + angle,
 			0.1)
 		$Tween.start()
 
 
-# ignore parameters
-func hideWindow(location, x, y, direction) -> void:
-	hide()
-
-
-func setPreview(room : RoomTile, ignore) -> void:
-	$pivot/Camera.current = true
+func _on_Room_changeModel(locationShortName : String, model : String, orientation : int) -> void:
 	visible = true
 	
 	for node in $blockArea.get_children():
 		node.queue_free()
 	
-	$blockArea.add_child(blocks[room.mesh].instance())
-	$pivot.rotation.y = ROTATE_90 * room.orientation
+	$blockArea.add_child(load(_MODEL_FILE % [locationShortName, model]).instance())
+	$pivot.rotation.y = (_ROTATE_ORIENTATION * orientation) + _ROTATE_BUTTON
+
+
+
+func _on_btnPreview_pressed():
+	visible = false
+
+
+func _on_previewWindow_popup_hide():
+	visible = true
+
+
+func _on_btnRotateL_pressed():
+	rotatePivot(-_ROTATE_BUTTON)
+
+
+func _on_btnRotateR_pressed():
+	rotatePivot(_ROTATE_BUTTON)
 
