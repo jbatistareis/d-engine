@@ -97,7 +97,7 @@ func canPass(passLogic : String, character : Character, direction : int) -> bool
 	return ScriptTool.getReference(passLogic).execute(character, direction)
 
 
-func findRoom(id : int) -> RoomTile:
+func findRoom(id : int) -> Dictionary:
 	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 

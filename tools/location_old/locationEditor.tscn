@@ -751,7 +751,6 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="openLocation" type="WindowDialog" parent="."]
-visible = true
 margin_right = 240.0
 margin_bottom = 320.0
 rect_min_size = Vector2( 240, 320 )

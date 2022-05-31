@@ -22,22 +22,16 @@ func setLocationDto(value : LocationDTO) -> void:
 
 
 func updateLocation() -> void:
-	# this is a fugly fix for an UI bug that occurs on long lines
-	var txtEntranceLogic = ("background/mainDivider/parameters/General/mainContainer"
-		+ "/logic/Entrance/txtEntranceLogic")
-	var txtExitLogic = ("background/mainDivider/parameters/General/mainContainer"
-		+ "/logic/Exit/txtExitLogic")
+	var txtEntranceLogic : TextEdit = $background/mainDivider/parameters/General/mainContainer/logic/Entrance/txtEntranceLogic
+	var txtExitLogic : TextEdit = $background/mainDivider/parameters/General/mainContainer/logic/Exit/txtExitLogic
 	
-	locationDto.entranceLogic = get_node(txtEntranceLogic).text
-	locationDto.exitLogic = get_node(txtExitLogic).text
+	locationDto.entranceLogic = txtEntranceLogic.text
+	locationDto.exitLogic = txtExitLogic.text
 	
-	locationDto.rooms = []
-	locationDto.spawns = []
+	locationDto.rooms.clear()
+	locationDto.spawns.clear()
 	
-	for cell in $background/mainDivider/map/scroll/grid.get_children():
-		if cell.room.type != Enums.RoomType.DUMMY:
-			print(cell.room)
-			locationDto.rooms.append(cell.room)
+	locationDto.rooms = $background/mainDivider/map/scroll/grid.collectRooms()
 
 
 # parameter listeners
@@ -105,7 +99,7 @@ func _on_btnOpenConfirm_pressed():
 	var lst = $openWindow/VBoxContainer/ScrollContainer/lstFiles
 	if lst.is_anything_selected():
 		var shortName = lst.get_item_text(lst.get_selected_items()[0])
-		setLocationDto(Persistence.loadDTO(shortName, Enums.EntityType.LOCATION))
+		self.locationDto = Persistence.loadDTO(shortName, Enums.EntityType.LOCATION)
 		
 		$openWindow.hide()
 

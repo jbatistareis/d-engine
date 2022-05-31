@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://tools/location/general/grid.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/map/grid.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.gd" type="Script" id=2]
 [ext_resource path="res://tools/location/general/group1.gd" type="Script" id=3]
 [ext_resource path="res://tools/location/general/logic.gd" type="Script" id=4]
-[ext_resource path="res://tools/location/general/saveConfirmation.gd" type="Script" id=5]
-[ext_resource path="res://tools/location/general/testWindow.gd" type="Script" id=6]
+[ext_resource path="res://tools/location/saveConfirmation.gd" type="Script" id=5]
+[ext_resource path="res://tools/location/testWindow.gd" type="Script" id=6]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=7]
 [ext_resource path="res://tools/location/room/meshPreview.tscn" type="PackedScene" id=8]
-[ext_resource path="res://tools/location/openWindow.gd" type="Script" id=9]
 
 [node name="locationTab" type="Tabs"]
 anchor_right = 1.0
@@ -48,7 +47,7 @@ margin_bottom = 720.0
 follow_focus = true
 
 [node name="grid" type="GridContainer" parent="background/mainDivider/map/scroll"]
-columns = 32
+columns = 48
 script = ExtResource( 1 )
 
 [node name="parameters" type="TabContainer" parent="background/mainDivider"]
@@ -143,7 +142,7 @@ tick_count = 11
 [node name="logic" type="TabContainer" parent="background/mainDivider/parameters/General/mainContainer"]
 margin_top = 146.0
 margin_right = 472.0
-margin_bottom = 635.0
+margin_bottom = 626.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
@@ -168,6 +167,7 @@ syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
+fold_gutter = true
 highlight_all_occurrences = true
 
 [node name="Exit" type="Tabs" parent="background/mainDivider/parameters/General/mainContainer/logic"]
@@ -191,19 +191,20 @@ syntax_highlighting = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
+fold_gutter = true
 highlight_all_occurrences = true
 
 [node name="Control" type="Control" parent="background/mainDivider/parameters/General/mainContainer"]
-margin_top = 639.0
+margin_top = 630.0
 margin_right = 472.0
-margin_bottom = 644.0
+margin_bottom = 635.0
 rect_min_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
 [node name="buttons" type="HBoxContainer" parent="background/mainDivider/parameters/General/mainContainer"]
-margin_top = 648.0
+margin_top = 639.0
 margin_right = 472.0
-margin_bottom = 676.0
+margin_bottom = 667.0
 size_flags_horizontal = 3
 alignment = 1
 
@@ -250,6 +251,13 @@ margin_left = 442.0
 margin_right = 472.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
+
+[node name="Control2" type="Control" parent="background/mainDivider/parameters/General/mainContainer"]
+margin_top = 671.0
+margin_right = 472.0
+margin_bottom = 676.0
+rect_min_size = Vector2( 0, 5 )
+size_flags_horizontal = 3
 
 [node name="Room" type="Tabs" parent="background/mainDivider/parameters"]
 visible = false
@@ -419,7 +427,6 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 180, 240 )
 popup_exclusive = true
 window_title = "Choose a file"
-script = ExtResource( 9 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="openWindow"]
 anchor_right = 1.0

@@ -40,6 +40,6 @@ var roomBase : Dictionary = {
 var spwanBase : Dictionary = {
 	'id': 0,
 	'direction': Enums.Direction.NORTH,
-	'toRoomId': 1
+	'toRoomId': 0
 }
 
