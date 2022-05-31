@@ -1,13 +1,13 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tools/location/map/grid.gd" type="Script" id=1]
-[ext_resource path="res://tools/location/locationTab.gd" type="Script" id=2]
 [ext_resource path="res://tools/location/general/group1.gd" type="Script" id=3]
 [ext_resource path="res://tools/location/general/logic.gd" type="Script" id=4]
 [ext_resource path="res://tools/location/saveConfirmation.gd" type="Script" id=5]
 [ext_resource path="res://tools/location/testWindow.gd" type="Script" id=6]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=7]
 [ext_resource path="res://tools/location/room/meshPreview.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tools/location/generalTab.gd" type="Script" id=9]
 
 [node name="locationTab" type="Tabs"]
 anchor_right = 1.0
@@ -15,7 +15,6 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scrolling_enabled = false
-script = ExtResource( 2 )
 
 [node name="background" type="Panel" parent="."]
 anchor_right = 1.0
@@ -66,6 +65,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 9 )
 
 [node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/General"]
 anchor_right = 1.0
@@ -308,81 +308,72 @@ margin_bottom = 650.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="mesh" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters"]
+[node name="model" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters"]
 margin_right = 472.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
 
-[node name="controls" type="VBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh"]
+[node name="controls" type="VBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model"]
 margin_right = 168.0
 margin_bottom = 300.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="lblMesh" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+[node name="lblModel" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls"]
 margin_right = 168.0
 margin_bottom = 22.0
-text = "Mesh"
+text = "Model"
 align = 1
 
-[node name="optMesh" type="OptionButton" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+[node name="optModel" type="OptionButton" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls"]
 margin_top = 26.0
 margin_right = 168.0
 margin_bottom = 54.0
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+[node name="HSeparator" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls"]
 margin_top = 58.0
 margin_right = 168.0
 margin_bottom = 88.0
 custom_constants/separation = 30
 
-[node name="lblCamera" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+[node name="lblCamera" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls"]
 margin_top = 92.0
 margin_right = 168.0
 margin_bottom = 114.0
 text = "Camera"
 align = 1
 
-[node name="rotation" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls"]
+[node name="rotation" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls"]
 margin_top = 118.0
 margin_right = 168.0
 margin_bottom = 146.0
 
-[node name="btnRotateL" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls/rotation"]
+[node name="btnRotateL" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls/rotation"]
 margin_right = 82.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "<"
 
-[node name="btnRotateR" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/controls/rotation"]
+[node name="btnRotateR" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls/rotation"]
 margin_left = 86.0
 margin_right = 168.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = ">"
 
-[node name="ViewportContainer" type="ViewportContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh"]
+[node name="ViewportContainer" type="ViewportContainer" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model"]
 margin_left = 172.0
 margin_right = 472.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 300, 300 )
 
-[node name="Viewport" type="Viewport" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/ViewportContainer"]
 size = Vector2( 300, 300 )
 handle_input_locally = false
 render_target_update_mode = 0
 
-[node name="area" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/mesh/ViewportContainer/Viewport" instance=ExtResource( 8 )]
-
-[node name="Portals" type="Tabs" parent="background/mainDivider/parameters"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+[node name="area" parent="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
 [node name="Spawns" type="Tabs" parent="background/mainDivider/parameters"]
 visible = false
@@ -490,16 +481,16 @@ margin_bottom = 240.0
 rect_min_size = Vector2( 0, 1 )
 size_flags_horizontal = 3
 
-[connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_locationTab_loadedLocationDto"]
-[connection signal="loadedLocationDto" from="." to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_locationTab_loadedLocationDto"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="." method="_on_txtName_text_changed"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtShortName" to="." method="_on_txtShortName_text_changed"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="." method="_on_txtDescription_text_changed"]
-[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="." method="_on_sldEncounter_value_changed"]
+[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="background/mainDivider/parameters/General" method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtShortName" to="background/mainDivider/parameters/General" method="_on_txtShortName_text_changed"]
+[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="background/mainDivider/parameters/General" method="_on_txtDescription_text_changed"]
+[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General" method="_on_sldEncounter_value_changed"]
 [connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_sldEncounter_value_changed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnOpen" to="." method="_on_btnOpen_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnSave" to="." method="_on_btnSave_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="." method="_on_btnPreview_pressed"]
-[connection signal="confirmed" from="saveConfirmation" to="." method="_on_saveConfirmation_confirmed"]
-[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="." method="_on_btnOpenConfirm_pressed"]
-[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="." method="_on_btnCancel_pressed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnOpen" to="background/mainDivider/parameters/General" method="_on_btnOpen_pressed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnSave" to="background/mainDivider/parameters/General" method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="background/mainDivider/parameters/General" method="_on_btnPreview_pressed"]
+[connection signal="confirmed" from="saveConfirmation" to="background/mainDivider/parameters/General" method="_on_saveConfirmation_confirmed"]
+[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="background/mainDivider/parameters/General" method="_on_btnOpenConfirm_pressed"]
+[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="background/mainDivider/parameters/General" method="_on_btnCancel_pressed"]

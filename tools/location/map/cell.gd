@@ -54,6 +54,7 @@ func optionSelected(index : int) -> void:
 			room.clear()
 	
 	updateHint()
+	emit_signal("selectedRoom", room)
 
 
 func updateHint() -> void:
@@ -72,4 +73,8 @@ func setRoom(value : Dictionary) -> void:
 		$icon.rotation = 0
 	
 	updateHint()
+
+
+func _on_options_pressed():
+	emit_signal("selectedRoom", room)
 

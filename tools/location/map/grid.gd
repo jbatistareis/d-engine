@@ -1,5 +1,7 @@
 extends GridContainer
 
+signal selectedRoom(room)
+
 var cellScene : PackedScene = preload("res://tools/location/map/cell.tscn")
 
 

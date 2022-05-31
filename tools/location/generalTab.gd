@@ -16,22 +16,19 @@ func _ready() -> void:
 
 func setLocationDto(value : LocationDTO) -> void:
 	locationDto = value
-	$background/mainDivider/map/scroll/grid.loadRooms(locationDto.rooms)
+	get_node("../../map/scroll/grid").loadRooms(locationDto.rooms)
 	
 	emit_signal("loadedLocationDto", locationDto)
 
 
 func updateLocation() -> void:
-	var txtEntranceLogic : TextEdit = $background/mainDivider/parameters/General/mainContainer/logic/Entrance/txtEntranceLogic
-	var txtExitLogic : TextEdit = $background/mainDivider/parameters/General/mainContainer/logic/Exit/txtExitLogic
-	
-	locationDto.entranceLogic = txtEntranceLogic.text
-	locationDto.exitLogic = txtExitLogic.text
+	locationDto.entranceLogic = $mainContainer/logic/Entrance/txtEntranceLogic.text
+	locationDto.exitLogic = $mainContainer/logic/Exit/txtExitLogic.text
 	
 	locationDto.rooms.clear()
 	locationDto.spawns.clear()
 	
-	locationDto.rooms = $background/mainDivider/map/scroll/grid.collectRooms()
+	locationDto.rooms = get_node("../../map/scroll/grid").collectRooms()
 
 
 # parameter listeners
@@ -53,8 +50,9 @@ func _on_txtDescription_text_changed(new_text):
 
 # button listeners
 func _on_btnSave_pressed():
-	$saveConfirmation.dialog_text = _SAVE_MESSAGE % locationDto.shortName
-	$saveConfirmation.popup_centered()
+	var saveConfirmation = get_node("../../../../saveConfirmation")
+	saveConfirmation.dialog_text = _SAVE_MESSAGE % locationDto.shortName
+	saveConfirmation.popup_centered()
 
 
 func _on_saveConfirmation_confirmed():
@@ -67,15 +65,17 @@ func _on_btnPreview_pressed():
 	updateLocation()
 	var location = Location.new().fromDTO(locationDto)
 	
-	$previewWindow.window_title = _PREVIEW_TITLE % [location.name, location.shortName]
-	$previewWindow.popup_centered()
+	var previewWindow = get_node("../../../../previewWindow")
+	previewWindow.window_title = _PREVIEW_TITLE % [location.name, location.shortName]
+	previewWindow.popup_centered()
+	
 	Signals.emit_signal("playerSpawned", location, 0, 0, Enums.Direction.NORTH)
 
 
 func _on_btnOpen_pressed():
-	$openWindow.popup_centered()
+	get_node("../../../../openWindow").popup_centered()
 	
-	var lst = $openWindow/VBoxContainer/ScrollContainer/lstFiles
+	var lst = get_node("../../../../openWindow/VBoxContainer/ScrollContainer/lstFiles")
 	lst.clear()
 	
 	var dir = Directory.new()
@@ -92,14 +92,14 @@ func _on_btnOpen_pressed():
 
 
 func _on_btnCancel_pressed():
-	$openWindow.hide()
+	get_node("../../../../openWindow").hide()
 
 
 func _on_btnOpenConfirm_pressed():
-	var lst = $openWindow/VBoxContainer/ScrollContainer/lstFiles
+	var lst = get_node("../../../../openWindow/VBoxContainer/ScrollContainer/lstFiles")
 	if lst.is_anything_selected():
 		var shortName = lst.get_item_text(lst.get_selected_items()[0])
 		self.locationDto = Persistence.loadDTO(shortName, Enums.EntityType.LOCATION)
 		
-		$openWindow.hide()
+		get_node("../../../../openWindow").hide()
 
