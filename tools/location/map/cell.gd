@@ -54,7 +54,7 @@ func optionSelected(index : int) -> void:
 			room.clear()
 	
 	updateHint()
-	emit_signal("selectedRoom", room)
+	get_parent().emit_signal("selectedRoom", room)
 
 
 func updateHint() -> void:
@@ -76,5 +76,5 @@ func setRoom(value : Dictionary) -> void:
 
 
 func _on_options_pressed():
-	emit_signal("selectedRoom", room)
+	get_parent().emit_signal("selectedRoom", room)
 

@@ -79,7 +79,7 @@ func _on_btnOpen_pressed():
 	lst.clear()
 	
 	var dir = Directory.new()
-	if dir.open(GamePaths.DATA % 'locations') == OK:
+	if dir.open(GamePaths.LOCATION_PATH) == OK:
 		dir.list_dir_begin()
 		var file = dir.get_next()
 		

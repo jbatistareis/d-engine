@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tools/location/map/grid.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/roomTab.gd" type="Script" id=2]
 [ext_resource path="res://tools/location/general/group1.gd" type="Script" id=3]
 [ext_resource path="res://tools/location/general/logic.gd" type="Script" id=4]
 [ext_resource path="res://tools/location/saveConfirmation.gd" type="Script" id=5]
@@ -267,6 +268,7 @@ margin_left = 4.0
 margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
+script = ExtResource( 2 )
 
 [node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/Room"]
 anchor_right = 1.0
@@ -481,8 +483,10 @@ margin_bottom = 240.0
 rect_min_size = Vector2( 0, 1 )
 size_flags_horizontal = 3
 
+[connection signal="selectedRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/parameters/Room" method="_on_grid_selectedRoom"]
 [connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
 [connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/Room" method="_on_General_loadedLocationDto"]
 [connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="background/mainDivider/parameters/General" method="_on_txtName_text_changed"]
 [connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtShortName" to="background/mainDivider/parameters/General" method="_on_txtShortName_text_changed"]
 [connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="background/mainDivider/parameters/General" method="_on_txtDescription_text_changed"]
@@ -491,6 +495,7 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnOpen" to="background/mainDivider/parameters/General" method="_on_btnOpen_pressed"]
 [connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnSave" to="background/mainDivider/parameters/General" method="_on_btnSave_pressed"]
 [connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="background/mainDivider/parameters/General" method="_on_btnPreview_pressed"]
+[connection signal="item_selected" from="background/mainDivider/parameters/Room/mainContainer/scroll/parameters/model/controls/optModel" to="background/mainDivider/parameters/Room" method="_on_optModel_item_selected"]
 [connection signal="confirmed" from="saveConfirmation" to="background/mainDivider/parameters/General" method="_on_saveConfirmation_confirmed"]
 [connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="background/mainDivider/parameters/General" method="_on_btnOpenConfirm_pressed"]
 [connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="background/mainDivider/parameters/General" method="_on_btnCancel_pressed"]

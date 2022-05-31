@@ -12,9 +12,9 @@ func fromLocation(location : Location) -> void:
 	scenes.clear()
 	
 	var directory = Directory.new()
-	var path = GamePaths.MAP_DATA % location.shortName
+	var path = GamePaths.LOCATION_MODELS % location.shortName
 	
-	directory.open(GamePaths.MAP_DATA % location.shortName)
+	directory.open(GamePaths.LOCATION_MODELS % location.shortName)
 	directory.list_dir_begin(true, true)
 	
 	var filename = directory.get_next()
