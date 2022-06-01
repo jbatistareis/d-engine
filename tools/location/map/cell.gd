@@ -13,6 +13,7 @@ var room : Dictionary = {} setget setRoom
 func _ready() -> void:
 	updateHint()
 	
+	$options.get_popup().connect("mouse_exited", self, "closeMenu")
 	$options.get_popup().add_multistate_item("Rotate R", 1)
 	$options.get_popup().add_multistate_item("Rotate L", 1)
 	$options.get_popup().add_separator()
@@ -73,6 +74,10 @@ func setRoom(value : Dictionary) -> void:
 		$icon.rotation = 0
 	
 	updateHint()
+
+
+func closeMenu() -> void:
+	$options.get_popup().hide()
 
 
 func _on_options_pressed():

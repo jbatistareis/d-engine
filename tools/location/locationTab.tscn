@@ -60,7 +60,6 @@ size_flags_vertical = 3
 script = ExtResource( 10 )
 
 [node name="General" type="Tabs" parent="background/mainDivider/parameters"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -264,6 +263,7 @@ rect_min_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
 [node name="Room" type="Tabs" parent="background/mainDivider/parameters"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -353,7 +353,7 @@ rect_min_size = Vector2( 300, 250 )
 [node name="Viewport" type="Viewport" parent="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer"]
 size = Vector2( 300, 250 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="area" parent="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
