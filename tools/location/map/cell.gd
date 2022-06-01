@@ -6,7 +6,7 @@ const _HINT_TEXT : String = 'id: %d\nx: %d, y: %d'
 
 var id : int
 var x : int
-var y: int
+var y : int
 var room : Dictionary = {} setget setRoom
 
 
