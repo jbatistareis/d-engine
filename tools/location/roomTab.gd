@@ -30,7 +30,8 @@ func saveLogic() -> void:
 		var enemiesText = $mainContainer/logic/Enemies/txtEnemyGroups.text.replace(' ', '')
 		room.foeShortNameGroups.clear()
 		for groupText in enemiesText.split('\n'):
-			room.foeShortNameGroups.append(groupText.split(','))
+			if !groupText.empty():
+				room.foeShortNameGroups.append(groupText.split(','))
 		
 		room.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
 		room.enteringLogic = $mainContainer/logic/Entering/txtEntering.text
@@ -40,11 +41,12 @@ func saveLogic() -> void:
 func setLogic() -> void:
 	var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
 	for group in room.foeShortNameGroups:
-		var line = ''
-		for enemy in group:
-			line += enemy + ', '
-		
-		enemyGroups.text += line.substr(0, line.length() - 2) + '\n'
+		if !group.empty():
+			var line = ''
+			for enemy in group:
+				line += enemy + ', '
+			
+			enemyGroups.text += line.substr(0, line.length() - 2) + '\n'
 	
 	enemyGroups.text = enemyGroups.text.substr(0, enemyGroups.text.length() - 1)
 	

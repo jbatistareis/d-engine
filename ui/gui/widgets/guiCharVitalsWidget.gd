@@ -77,8 +77,12 @@ func _ready() -> void:
 	timerBar1.rect_size.x = 0
 	
 	hpBarSize(character.currentHp / float(character.maxHp))
+	
 	if character.inventory.armor != null:
-		armorBarSize(character.inventory.armor.currentProtection / float(character.inventory.armor.maxProtection))
+		if character.inventory.armor.maxIntegrity > 0:
+			armorBarSize(character.inventory.armor.currentIntegrity / float(character.inventory.armor.maxIntegrity))
+		else:
+			armorBarSize(0)
 	else:
 		armorBarSize(0)
 

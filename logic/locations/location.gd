@@ -102,7 +102,8 @@ func findRoom(id : int) -> Dictionary:
 
 
 func findSpawn(id : int) -> Dictionary:
-	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
+	return GameParameters.spwanBase
+#	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
 func changeEncounterRate(value : float) -> void:

@@ -14,6 +14,10 @@ func _init():
 #	Persistence.saveDTO(MoveDTO.new())
 #	Persistence.saveDTO(LocationDTO.new())
 	
+#	var enemy = CharacterDTO.new()
+#	enemy.type = Enums.CharacterType.FOE
+#	Persistence.saveDTO(enemy)
+	
 	player = Character.new().fromShortName('BSECHA')
 
 

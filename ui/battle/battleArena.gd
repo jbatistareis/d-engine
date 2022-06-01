@@ -28,6 +28,10 @@ func _ready() -> void:
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
+	if playerData.empty() || enemyData.empty():
+		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])
+		return
+	
 	for node in enemiesNode.get_children():
 		for enemy in node.get_children():
 			enemy.queue_free()

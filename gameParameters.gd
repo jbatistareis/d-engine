@@ -4,16 +4,16 @@ const GCD : float = 0.25
 const WAIT_TICKS : int = 20
 
 
-const MOVE_BASE_VALUE : String = 'func getValue(_character : Character) -> int:\n\treturn -(character.baseDamage + character.strength.score + character.inventory.weapon.calculateDamage(character))'
+const MOVE_BASE_VALUE : String = 'func getValue(_character : Character) -> int:\n\treturn -(_character.baseDamage + _character.strength.score + _character.inventory.weapon.calculateDamage(_character))'
 const MOVE_BASE_OUTCOME : String = 'func getOutcome(_character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
 const MOVE_BASE_PICK : String = 'func pick(_character : Character) -> void:\n\tpass'
 const MOVE_BASE_EXECUTE : String = 'func execute(_character : Character) -> void:\n\tpass'
 
-const FACT_BASE : String = 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(suspects)'
+const FACT_BASE : String = 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(_suspects)'
 
 const LOCATION_NOOP : String = 'func execute(_character : Character) -> void:\n\treturn'
-const ROOM_ENTER_NOOP : String = 'func execute(_character : Character, direction : int) -> bool:\n\treturn true'
-const ROOM_NOOP : String = 'func execute(_character : Character, direction : int) -> void:\n\treturn'
+const ROOM_ENTER_NOOP : String = 'func execute(_character : Character, _direction : int) -> bool:\n\treturn true'
+const ROOM_NOOP : String = 'func execute(_character : Character, _direction : int) -> void:\n\treturn'
 
 
 var actionBase : Dictionary = {
