@@ -11,7 +11,11 @@ var locationDto : LocationDTO setget setLocationDto
 
 func _ready() -> void:
 	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
-	self.locationDto = LocationDTO.new()
+	
+	var dummyLocation = LocationDTO.new()
+	dummyLocation.rooms.clear()
+	
+	self.locationDto = dummyLocation
 
 
 func setLocationDto(value : LocationDTO) -> void:
