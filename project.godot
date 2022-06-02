@@ -129,10 +129,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://logic/commands/executeMoveCommand.gd"
 }, {
-"base": "State",
+"base": "Reference",
 "class": "ExploringMenuState",
 "language": "GDScript",
-"path": "res://logic/game/states/gameMenuState.gd"
+"path": "res://logic/game/states/exploringMenuState.gd"
 }, {
 "base": "State",
 "class": "ExploringState",

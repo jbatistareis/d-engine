@@ -26,7 +26,6 @@ func updateLocation() -> void:
 	locationDto.exitLogic = $mainContainer/logic/Exit/txtExitLogic.text
 	
 	locationDto.rooms.clear()
-	locationDto.spawns.clear()
 	
 	locationDto.rooms = get_node("../../map/scroll/grid").collectRooms()
 

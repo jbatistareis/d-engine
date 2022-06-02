@@ -447,15 +447,6 @@ draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Spawns" type="Tabs" parent="background/mainDivider/parameters"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
-
 [node name="saveConfirmation" type="ConfirmationDialog" parent="."]
 margin_right = 218.0
 margin_bottom = 74.0

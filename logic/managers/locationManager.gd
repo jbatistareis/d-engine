@@ -4,27 +4,23 @@ var location : Location = null
 
 
 func _ready():
-	Signals.connect("playerTransferedLocation", self, "changeLocation")
-	Signals.connect("playerMoved", self, "movePlayer")
+	Signals.connect("characterTransferedLocation", self, "changeLocation")
 	Signals.connect("characterMoved", self, "moveCharacter")
+	Signals.connect("characterTeleported", self, "teleportCharacter")
 
 
-func changeLocation(locationShortName : String, toSpawnId : int) -> void:
+func changeLocation(character : Character, locationShortName : String, toRoomId : int, facingDirection : int) -> void:
 	if location != null:
-		location.exit(GameManager.player)
+		location.exit(character)
 	
 	location = Location.new().fromShortName(locationShortName)
 	SceneLoadManager.fromLocation(location)
 	
-	var spawn = location.findSpawn(toSpawnId)
-	var room = location.findRoom(spawn.toRoomId)
-	Signals.emit_signal("playerSpawned", location, room.x, room.y, spawn.direction)
-	
-	location.enter(GameManager.player, toSpawnId)
+	location.enter(character, toRoomId, facingDirection)
 
 
-func movePlayer(direction : int) -> void:
-	var result = location.move(GameManager.player, direction)
+func moveCharacter(character : Character, direction : int) -> void:
+	var result = location.move(character, direction)
 	
 	match result:
 		Enums.Direction.FORWARD:
@@ -39,6 +35,9 @@ func movePlayer(direction : int) -> void:
 		Signals.emit_signal("playerChangedRoom", direction)
 
 
-func moveCharacter(character, direction) -> void:
-	location.move(character, direction)
+func teleportCharacter(character : Character, toRoomId : int, facingDirection : int) -> void:
+	location.teleport(character, toRoomId, facingDirection)
+	
+	var room = location.findRoom(toRoomId)
+	Signals.emit_signal("cameraSnapped", room.x, room.y, facingDirection)
 

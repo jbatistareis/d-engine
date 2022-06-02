@@ -35,7 +35,7 @@ func _ready() -> void:
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
 	Signals.emit_signal("playerEnteredGame", player)
-	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 0)
+	Signals.emit_signal("characterTransferedLocation", GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 
 
 func _process(delta) -> void:

@@ -4,14 +4,14 @@ extends Node
 # player related
 # to start a match: playerEnteredGame -> playerTransferedLocation
 # controls provided by Godots ui_* signals, see each state logic for mappings
-signal playerEnteredGame(playerCharacter) # sets the current player
-signal playerTransferedLocation(newLocationName, toSpawnId) # puts player in a location, at spawn point
+signal playerEnteredGame(playerCharacter) # sets the current GameManager.player
+signal characterTransferedLocation(character, newLocationName, toRoomId, facingDirection) # puts player in a location
+signal characterMoved(character, direction) # moves a character arround rooms
+signal characterTeleported(character, toRoomId, facingDirection) # use to teleport a character inside its current location
+signal changedEncounterRate(value) # changes location rate
 
 # internal use
-signal playerMoved(direction) # moves the player arround rooms, not used with player inputs
-signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera 
-signal characterMoved(character, direction) # moves any other character arround rooms
-signal changedEncounterRate(value) # changes location rate
+signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera
 
 # listen to get annoucements
 signal playerArrivedLocation(location) # when a player spawns
@@ -24,6 +24,7 @@ signal cameraMovedForward()
 signal cameraMovedBackward()
 signal cameraRotatedLeft()
 signal cameraRotatedRight()
+signal cameraSnapped(x, y, facingDirection)
 
 
 # game character related

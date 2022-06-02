@@ -5,7 +5,6 @@ var roomTile = RoomTile.new()
 
 var description : String
 var rooms : Array = []
-var spawns : Array
 
 var entranceLogic : String
 var exitLogic : String
@@ -27,7 +26,6 @@ func fromDTO(locationDto : LocationDTO) -> Location:
 	self.description = locationDto.description
 	
 	self.rooms = locationDto.rooms
-	self.spawns = locationDto.spawns
 	
 	self.entranceLogic = locationDto.entranceLogic
 	self.exitLogic = locationDto.exitLogic
@@ -55,14 +53,15 @@ func toDTO() -> LocationDTO:
 
 
 # used only by the player
-func enter(player, toSpawnId : int) -> void:
+func enter(player, toRoomId : int, facingDirection : int) -> void:
+	var room = findRoom(toRoomId)
+	
 	Signals.emit_signal("playerArrivedLocation", self)
+	Signals.emit_signal("playerSpawned", self, room.x, room.y, facingDirection)
 	executeScript(entranceLogic, player)
 	
-	var spawn = findSpawn(toSpawnId)
-	
 	player.currentLocation = shortName
-	roomTile.fromDict(findRoom(spawn.toRoomId)).enter(player, reverseDirection(spawn.direction), false)
+	roomTile.fromDict(room).enter(player, facingDirection, false)
 
 
 # used only by the player
@@ -89,6 +88,12 @@ func move(character, direction : int) -> int:
 	return Enums.Direction.NONE
 
 
+func teleport(character : Character, toRoomId : int, facingDirection : int) -> void:
+	var room = findRoom(toRoomId)
+	GameManager.direction = facingDirection
+	roomTile.fromDict(room).enter(character, reverseDirection(facingDirection), false)
+
+
 func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
@@ -99,11 +104,6 @@ func canPass(passLogic : String, character : Character, direction : int) -> bool
 
 func findRoom(id : int) -> Dictionary:
 	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
-
-
-func findSpawn(id : int) -> Dictionary:
-	return GameParameters.spwanBase
-#	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
 func changeEncounterRate(value : float) -> void:
