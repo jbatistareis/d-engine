@@ -1,6 +1,9 @@
 class_name CharacterQuery
+
+# TODO find by move modifier
+
 #
-# multi queries
+# multi target queries
 #
 
 static func findByHighestHp(characters : Array) -> Array:
@@ -66,11 +69,22 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 
 
 # percentage is normalized, 0.05~0.95
-static func findByPctHp(characters : Array, hpPctTarget : int) -> Array:
+static func findByHpLt(characters : Array, percent : int) -> Array:
 	var matches = []
 	
 	for character in characters:
-		if clamp(hpPctTarget, 0.05 ,0.95) >= ((character.getCurrentHp() * 100.0) / character.maxHp):
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) <= clamp(percent, 0.05 ,0.95):
+			matches.append(character)
+	
+	return matches
+
+
+# percentage is normalized, 0.05~0.95
+static func findByHpGt(characters : Array, percent : int) -> Array:
+	var matches = []
+	
+	for character in characters:
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) >= clamp(percent, 0.05 ,0.95):
 			matches.append(character)
 	
 	return matches
@@ -89,11 +103,11 @@ static func findByAfflictionType(characters : Array, type : int) -> Array:
 
 
 #
-# individual queries
+# single target queries
 #
 # TODO
 # use Enums.AfflictionType
-static func characterHasAfflictionType(characterSpawnId : int, type : int) -> bool:
+static func characterHasAfflictionType(character : Character, type : int) -> bool:
 	return RandomNumberGenerator.new().randi_range(0, 1) == 0
 
 

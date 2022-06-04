@@ -113,6 +113,24 @@ func toDTO() -> CharacterDTO:
 func getMaxHp() -> int:
 	return baseHp + constitution.score
 
+# use Enums.CharacterAbility
+func getScore(ability : int) -> int:
+	match ability:
+		Enums.CharacterAbility.CHARISMA:
+			return charisma.score
+		Enums.CharacterAbility.CONSTITUTION:
+			return constitution.score
+		Enums.CharacterAbility.DEXTERITY:
+			return dexterity.score
+		Enums.CharacterAbility.INTELLIGENCE:
+			return intelligence.score
+		Enums.CharacterAbility.STRENGTH:
+			return strength.score
+		Enums.CharacterAbility.WISDOM:
+			return wisdom.score
+		_:
+			return 0
+
 
 func takeHit(amount : int, bypassArmor : bool = false) -> void:
 	if currentHp == 0:
