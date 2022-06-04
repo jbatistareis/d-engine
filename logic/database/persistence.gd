@@ -20,9 +20,6 @@ static func saveDTO(dto : DTO) -> String:
 	elif dto is VerdictDTO:
 		path = GamePaths.VERDICT_DATA
 	
-	elif dto is FactDTO:
-		path = GamePaths.FACT_DATA
-	
 	elif dto is InventoryDTO:
 		path = GamePaths.INVENTORY_DATA
 	
@@ -64,9 +61,6 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 		
 		Enums.EntityType.VERDICT:
 			path = GamePaths.VERDICT_DATA
-		
-		Enums.EntityType.FACT:
-			path = GamePaths.FACT_DATA
 		
 		Enums.EntityType.INVENTORY:
 			path = GamePaths.INVENTORY_DATA

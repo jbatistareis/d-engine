@@ -79,7 +79,6 @@ func move(character, direction : int) -> int:
 		
 		if canPass(toRoom.canEnterLogic, character, reverseDirection(direction)):
 			roomTile.exit(character, direction)
-			
 			roomTile.fromDict(toRoom)
 			roomTile.enter(character, reverseDirection(direction), Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
 			

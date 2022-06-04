@@ -4,6 +4,6 @@ extends DTO
 var name : String = 'Base verdict'
 var shortName : String = 'BSEVRD'
 
-# { factShortName, moveShortName } dict
+# { Enums.Fact, moveShortName } dict
 var actions : Array = [DefaultValues.actionBase]
 

@@ -40,7 +40,7 @@ func optionSelected(index : int) -> void:
 	
 	elif index >= 3:
 		if room.empty():
-			self.room = GameParameters.roomBase
+			self.room = DefaultValues.roomBase
 			room.id = id
 			room.x = x
 			room.y = y

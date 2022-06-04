@@ -5,7 +5,7 @@ const _ALL : String = "_ALL"
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-# { fact, move } dict
+# { Enums.Fact, move } dict
 var actions : Array = []
 
 
@@ -18,10 +18,10 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.shortName = verdictDto.shortName
 	
 	self.actions.clear()
-	for actionShtNms in verdictDto.actions:
+	for action in verdictDto.actions:
 		self.actions.append({
-			'fact': Fact.new().fromShortName(actionShtNms.factShortName),
-			'move': Move.new().fromShortName(actionShtNms.moveShortName)
+			'fact': action.fact,
+			'move': Move.new().fromShortName(action.moveShortName)
 		})
 	
 	return self
@@ -34,7 +34,7 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'factShortName': action.fact.shortName,
+			'fact': action.fact,
 			'moveShortName': action.move.shortName
 		})
 	
@@ -43,7 +43,7 @@ func toDTO() -> VerdictDTO:
 
 func decision(auditorCharacter, suspects : Array) -> void:
 	for action in actions:
-		var targets = action.fact.analyze(auditorCharacter, suspects)
+		var targets = analyze(DefaultValues.facts[action.fact], auditorCharacter, suspects)
 		
 		if !targets.empty():
 			if Enums.MoveTargetType.keys()[action.move.targetType].ends_with(_ALL):
@@ -64,6 +64,10 @@ func decision(auditorCharacter, suspects : Array) -> void:
 		"commandPublished",
 		WaitCommand.new(VerdictCommand.new(auditorCharacter, GameParameters.WAIT_TICKS))
 	)
+
+
+func analyze(script : String, auditorCharacter, suspects : Array) -> Array:
+	return ScriptTool.getReference(script).execute(auditorCharacter, suspects)
 
 
 # action is a { fact, move } dict

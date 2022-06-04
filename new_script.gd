@@ -6,14 +6,13 @@ var player : Character
 func _init():
 #	Persistence.saveDTO(CharacterDTO.new())
 #	Persistence.saveDTO(VerdictDTO.new())
-#	Persistence.saveDTO(FactDTO.new())
 #	Persistence.saveDTO(InventoryDTO.new())
 #	Persistence.saveDTO(ItemDTO.new())
 #	Persistence.saveDTO(WeaponDTO.new())
 #	Persistence.saveDTO(ArmorDTO.new())
 #	Persistence.saveDTO(MoveDTO.new())
 #	Persistence.saveDTO(LocationDTO.new())
-	
+#
 #	var enemy = CharacterDTO.new()
 #	enemy.type = Enums.CharacterType.FOE
 #	Persistence.saveDTO(enemy)

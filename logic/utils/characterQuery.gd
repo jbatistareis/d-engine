@@ -69,7 +69,7 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 
 
 # percentage is normalized, 0.05~0.95
-static func findByHpLt(characters : Array, percent : int) -> Array:
+static func findByHpLt(characters : Array, percent : float) -> Array:
 	var matches = []
 	
 	for character in characters:
@@ -80,7 +80,7 @@ static func findByHpLt(characters : Array, percent : int) -> Array:
 
 
 # percentage is normalized, 0.05~0.95
-static func findByHpGt(characters : Array, percent : int) -> Array:
+static func findByHpGt(characters : Array, percent : float) -> Array:
 	var matches = []
 	
 	for character in characters:
