@@ -80,10 +80,11 @@ func createCursor() -> BattleCursorWindow:
 
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
-		if move.targetType == Enums.CharacterTargetType.FRIENDLY:
+		# adapt for FRIENDLY_ALL and ANY_ALL
+		if move.targetType == Enums.MoveTargetType.FRIENDLY:
 			publishCommand(player, [], move)
 			return
-		elif move.targetType == Enums.CharacterTargetType.FOE_ALL:
+		elif move.targetType == Enums.MoveTargetType.FOE_ALL:
 			var targets = []
 			for index in range(3):
 				var character = enemiesNode.get_child(ENEMY_MAP[index]).get_child(0).character

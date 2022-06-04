@@ -4,6 +4,8 @@ class_name CharacterQuery
 #
 
 static func findByHighestHp(characters : Array) -> Array:
+	var matches = []
+	
 	var highest = 0
 	for character in characters:
 		if character.currentHp > highest:
@@ -11,12 +13,14 @@ static func findByHighestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp >= highest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 static func findByLowestHp(characters : Array) -> Array:
+	var matches = []
+	
 	var lowest = 9999
 	for character in characters:
 		if character.currentHp < lowest:
@@ -24,13 +28,15 @@ static func findByLowestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp <= lowest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 # use Enums.CharacterAbility
 static func findByHighestAbilityScore(characters : Array, ability : int) -> Array:
+	var matches = []
+	
 	var highest = 0
 	for character in characters:
 		if character.getScore(ability) > highest:
@@ -38,13 +44,15 @@ static func findByHighestAbilityScore(characters : Array, ability : int) -> Arra
 	
 	for character in characters:
 		if character.getScore(ability) >= highest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 # use Enums.CharacterAbility
 static func findByLowestAbilityScore(characters : Array, ability : int) -> Array:
+	var matches = []
+	
 	var lowest = 9999
 	for character in characters:
 		if character.getScore(ability) < lowest:
@@ -52,17 +60,17 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 	
 	for character in characters:
 		if character.getScore(ability) <= lowest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
-# percentage is normalized, 0-1
+# percentage is normalized, 0.05~0.95
 static func findByPctHp(characters : Array, hpPctTarget : int) -> Array:
 	var matches = []
 	
 	for character in characters:
-		if max(0, min(1, hpPctTarget)) <= ((character.getCurrentHp() * 100) / character.maxHp):
+		if clamp(hpPctTarget, 0.05 ,0.95) >= ((character.getCurrentHp() * 100.0) / character.maxHp):
 			matches.append(character)
 	
 	return matches

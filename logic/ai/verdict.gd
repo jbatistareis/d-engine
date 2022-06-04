@@ -1,6 +1,10 @@
 class_name Verdict
 extends Entity
 
+const _ALL : String = "_ALL"
+
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
 # { fact, move } dict
 var actions : Array = []
 
@@ -40,11 +44,20 @@ func toDTO() -> VerdictDTO:
 func decision(auditorCharacter, suspects : Array) -> void:
 	for action in actions:
 		var targets = action.fact.analyze(auditorCharacter, suspects)
+		
 		if !targets.empty():
-			Signals.emit_signal(
+			if Enums.MoveTargetType.keys()[action.move.targetType].ends_with(_ALL):
+				Signals.emit_signal(
 					"commandPublished",
-					ExecuteMoveCommand.new(auditorCharacter, targets, action.move)
-			)
+					ExecuteMoveCommand.new(auditorCharacter, targets, action.move))
+			else:
+				rng.randomize()
+				Signals.emit_signal(
+						"commandPublished",
+						ExecuteMoveCommand.new(
+							auditorCharacter,
+							[targets[rng.randi_range(0, targets.size() - 1)]],
+							action.move))
 			return
 	
 	Signals.emit_signal(

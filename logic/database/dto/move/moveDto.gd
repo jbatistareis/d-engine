@@ -15,7 +15,7 @@ var cdPos : int = 1
 
 # use Enums.CharacterTargetType
 # relative to the executor
-var targetType : int = Enums.CharacterTargetType.FOE
+var targetType : int = Enums.MoveTargetType.FOE
 
 var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'
