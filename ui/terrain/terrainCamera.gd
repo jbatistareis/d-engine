@@ -55,24 +55,24 @@ func teleport(x : int, y : int, direction : int) -> void:
 func moveForward() -> void:
 	GameManager.cameraMoving = true
 	
-	$tween.interpolate_property(
-		self,
-		"transform:origin",
-		transform.origin,
-		transform.origin - Vector3(
-			sin(rotation.y) * 2,
-			0,
-			cos(rotation.y) * 2),
-		0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT_IN
-	)
-	$tween.start()
-	yield($tween, "tween_all_completed")
-	
 	if !teleportData.empty():
 		goTo(teleportData.x, teleportData.y, teleportData.direction)
 		teleportData.clear()
+	else:
+		$tween.interpolate_property(
+			self,
+			"transform:origin",
+			transform.origin,
+			transform.origin - Vector3(
+				sin(rotation.y) * 2,
+				0,
+				cos(rotation.y) * 2),
+			0.25,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_OUT_IN
+		)
+		$tween.start()
+		yield($tween, "tween_all_completed")
 	
 	GameManager.cameraMoving = false
 
@@ -80,24 +80,24 @@ func moveForward() -> void:
 func moveBackward() -> void:
 	GameManager.cameraMoving = true
 	
-	$tween.interpolate_property(
-		self,
-		"transform:origin",
-		transform.origin,
-		transform.origin + Vector3(
-			sin(rotation.y) * 2,
-			0,
-			cos(rotation.y) * 2),
-		0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT_IN
-	)
-	$tween.start()
-	yield($tween, "tween_all_completed")
-	
 	if !teleportData.empty():
 		goTo(teleportData.x, teleportData.y, teleportData.direction)
 		teleportData.clear()
+	else:
+		$tween.interpolate_property(
+			self,
+			"transform:origin",
+			transform.origin,
+			transform.origin + Vector3(
+				sin(rotation.y) * 2,
+				0,
+				cos(rotation.y) * 2),
+			0.25,
+			Tween.TRANS_LINEAR,
+			Tween.EASE_OUT_IN
+		)
+		$tween.start()
+		yield($tween, "tween_all_completed")
 	
 	GameManager.cameraMoving = false
 
