@@ -85,6 +85,7 @@ func _on_General_loadedLocationDto(locationDto : LocationDTO):
 		dir.list_dir_begin()
 		var file = dir.get_next()
 		
+		$mainContainer/model/controls/optModel.clear()
 		while !file.empty():
 			if !dir.current_is_dir():
 				$mainContainer/model/controls/optModel.add_item(extensionRegex.sub(file, ''))

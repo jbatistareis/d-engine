@@ -35,7 +35,7 @@ func _input(event) -> void:
 			selection.end = event.position
 			
 			var selectedRooms = []
-			for body in get_node("../../cellSelection/selectionArea").get_overlapping_bodies():
+			for body in get_node("../cellSelection/selectionArea").get_overlapping_bodies():
 				if !body.get_parent().room.empty():
 					selectedRooms.append(body.get_parent().room)
 			
@@ -72,11 +72,13 @@ func _input(event) -> void:
 				end = selection.start
 				pivot = selection.end
 		
-		get_node("../../cellSelection").rect_position = pivot
-		get_node("../../cellSelection").rect_size = end - start
-		get_node("../../cellSelection").color = Color(1, 1, 1, 0.5)
-		get_node("../../cellSelection/selectionArea/collision").shape.extents = (end - start) / 2.0
-		get_node("../../cellSelection/selectionArea").global_position = start + ((end - start) / 2.0)
+		var scroll = get_node("../..")
+		
+		get_node("../cellSelection").rect_position = pivot + Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
+		get_node("../cellSelection").rect_size = end - start
+		get_node("../cellSelection").color = Color(1, 1, 1, 0.5)
+		get_node("../cellSelection/selectionArea/collision").shape.extents = (end - start) / 2.0
+		get_node("../cellSelection/selectionArea").global_position = start + ((end - start) / 2.0)
 
 
 func collectRooms() -> Array:
@@ -178,4 +180,4 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 
 
 func _on_grid_selectedRoom(room):
-	get_node("../../cellSelection").color = Color.transparent
+	get_node("../cellSelection").color = Color.transparent

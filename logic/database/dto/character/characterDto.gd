@@ -9,7 +9,7 @@ var model : String = 'BSECHA'
 
 var baseHp : int = 9
 var currentHp : int = 10
-var extraHp : int = 2
+var extraHp : int = 0
 
 var baseDamage : int = 1
 

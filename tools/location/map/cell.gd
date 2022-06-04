@@ -1,4 +1,4 @@
-extends Panel
+extends ColorRect
 
 const _ROTATION : float = PI / 2
 const _BASE_MODELS : Array = ['', '0_exits', '1_exit', '2_exits_I', '2_exits_L', '3_exits', '4_exits']

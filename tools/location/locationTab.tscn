@@ -26,45 +26,47 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="mainDivider" type="HBoxContainer" parent="background"]
+[node name="mainContainer" type="HSplitContainer" parent="background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 0
 
-[node name="map" type="MarginContainer" parent="background/mainDivider"]
-margin_right = 720.0
+[node name="map" type="MarginContainer" parent="background/mainContainer"]
+margin_right = 708.0
 margin_bottom = 720.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="overlay" type="ColorRect" parent="background/mainDivider/map"]
-margin_right = 720.0
-margin_bottom = 720.0
-color = Color( 1, 1, 1, 0.25 )
-
-[node name="scroll" type="ScrollContainer" parent="background/mainDivider/map"]
-margin_right = 720.0
+[node name="scroll" type="ScrollContainer" parent="background/mainContainer/map"]
+margin_right = 708.0
 margin_bottom = 720.0
 follow_focus = true
 
-[node name="grid" type="GridContainer" parent="background/mainDivider/map/scroll"]
+[node name="container" type="MarginContainer" parent="background/mainContainer/map/scroll"]
+margin_right = 708.0
+margin_bottom = 720.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="grid" type="GridContainer" parent="background/mainContainer/map/scroll/container"]
+margin_right = 708.0
+margin_bottom = 720.0
 columns = 48
 script = ExtResource( 1 )
 
-[node name="cellSelection" type="ColorRect" parent="background/mainDivider/map"]
-margin_right = 720.0
+[node name="cellSelection" type="ColorRect" parent="background/mainContainer/map/scroll/container"]
+margin_right = 708.0
 margin_bottom = 720.0
 mouse_filter = 2
 color = Color( 1, 1, 1, 0 )
 
-[node name="selectionArea" type="Area2D" parent="background/mainDivider/map/cellSelection"]
+[node name="selectionArea" type="Area2D" parent="background/mainContainer/map/scroll/container/cellSelection"]
 
-[node name="collision" type="CollisionShape2D" parent="background/mainDivider/map/cellSelection/selectionArea"]
+[node name="collision" type="CollisionShape2D" parent="background/mainContainer/map/scroll/container/cellSelection/selectionArea"]
 shape = SubResource( 1 )
 
-[node name="parameters" type="TabContainer" parent="background/mainDivider"]
+[node name="parameters" type="TabContainer" parent="background/mainContainer"]
 margin_left = 720.0
 margin_right = 1280.0
 margin_bottom = 720.0
@@ -72,8 +74,7 @@ rect_min_size = Vector2( 560, 0 )
 size_flags_vertical = 3
 script = ExtResource( 10 )
 
-[node name="General" type="Tabs" parent="background/mainDivider/parameters"]
-visible = false
+[node name="General" type="Tabs" parent="background/mainContainer/parameters"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -84,13 +85,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 9 )
 
-[node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/General"]
+[node name="mainContainer" type="VBoxContainer" parent="background/mainContainer/parameters/General"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="group1" type="GridContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+[node name="group1" type="GridContainer" parent="background/mainContainer/parameters/General/mainContainer"]
 margin_right = 552.0
 margin_bottom = 142.0
 size_flags_horizontal = 3
@@ -99,26 +100,26 @@ custom_constants/hseparation = 8
 columns = 2
 script = ExtResource( 3 )
 
-[node name="lblName" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="lblName" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_top = 5.0
 margin_right = 110.0
 margin_bottom = 27.0
 text = "Name"
 
-[node name="txtName" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="txtName" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_left = 118.0
 margin_right = 552.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 
-[node name="lblShortName" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="lblShortName" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_top = 45.0
 margin_right = 110.0
 margin_bottom = 67.0
 text = "Short name"
 
-[node name="txtShortName" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="txtShortName" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_left = 118.0
 margin_top = 40.0
 margin_right = 552.0
@@ -127,13 +128,13 @@ size_flags_horizontal = 3
 max_length = 10
 clear_button_enabled = true
 
-[node name="lblDescription" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="lblDescription" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_top = 85.0
 margin_right = 110.0
 margin_bottom = 107.0
 text = "Description"
 
-[node name="txtDescription" type="LineEdit" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="txtDescription" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_left = 118.0
 margin_top = 80.0
 margin_right = 552.0
@@ -141,13 +142,13 @@ margin_bottom = 112.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 
-[node name="lblEncounter" type="Label" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="lblEncounter" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_top = 120.0
 margin_right = 110.0
 margin_bottom = 142.0
 text = "Enc.: 0%"
 
-[node name="sldEncounter" type="HSlider" parent="background/mainDivider/parameters/General/mainContainer/group1"]
+[node name="sldEncounter" type="HSlider" parent="background/mainContainer/parameters/General/mainContainer/group1"]
 margin_left = 118.0
 margin_top = 120.0
 margin_right = 552.0
@@ -156,7 +157,7 @@ max_value = 1.0
 step = 0.01
 tick_count = 11
 
-[node name="logic" type="TabContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+[node name="logic" type="TabContainer" parent="background/mainContainer/parameters/General/mainContainer"]
 margin_top = 146.0
 margin_right = 552.0
 margin_bottom = 626.0
@@ -164,7 +165,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
 
-[node name="Entrance" type="Tabs" parent="background/mainDivider/parameters/General/mainContainer/logic"]
+[node name="Entrance" type="Tabs" parent="background/mainContainer/parameters/General/mainContainer/logic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -174,7 +175,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="txtEntranceLogic" type="TextEdit" parent="background/mainDivider/parameters/General/mainContainer/logic/Entrance"]
+[node name="txtEntranceLogic" type="TextEdit" parent="background/mainContainer/parameters/General/mainContainer/logic/Entrance"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -187,7 +188,7 @@ bookmark_gutter = true
 fold_gutter = true
 highlight_all_occurrences = true
 
-[node name="Exit" type="Tabs" parent="background/mainDivider/parameters/General/mainContainer/logic"]
+[node name="Exit" type="Tabs" parent="background/mainContainer/parameters/General/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -198,7 +199,7 @@ margin_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="txtExitLogic" type="TextEdit" parent="background/mainDivider/parameters/General/mainContainer/logic/Exit"]
+[node name="txtExitLogic" type="TextEdit" parent="background/mainContainer/parameters/General/mainContainer/logic/Exit"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -211,72 +212,73 @@ bookmark_gutter = true
 fold_gutter = true
 highlight_all_occurrences = true
 
-[node name="Control" type="Control" parent="background/mainDivider/parameters/General/mainContainer"]
+[node name="Control" type="Control" parent="background/mainContainer/parameters/General/mainContainer"]
 margin_top = 630.0
 margin_right = 552.0
 margin_bottom = 635.0
 rect_min_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
-[node name="buttons" type="HBoxContainer" parent="background/mainDivider/parameters/General/mainContainer"]
+[node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/General/mainContainer"]
 margin_top = 639.0
 margin_right = 552.0
 margin_bottom = 667.0
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Control" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="Control" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_right = 30.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="btnOpen" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="btnOpen" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 34.0
 margin_right = 170.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "Open"
 
-[node name="Control2" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="Control2" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 174.0
 margin_right = 204.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="btnSave" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="btnSave" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 208.0
 margin_right = 344.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "Save"
 
-[node name="Control3" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="Control3" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 348.0
 margin_right = 378.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="btnPreview" type="Button" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="btnPreview" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 382.0
 margin_right = 518.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "Preview"
 
-[node name="Control4" type="Control" parent="background/mainDivider/parameters/General/mainContainer/buttons"]
+[node name="Control4" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
 margin_left = 522.0
 margin_right = 552.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 30, 0 )
 
-[node name="Control2" type="Control" parent="background/mainDivider/parameters/General/mainContainer"]
+[node name="Control2" type="Control" parent="background/mainContainer/parameters/General/mainContainer"]
 margin_top = 671.0
 margin_right = 552.0
 margin_bottom = 676.0
 rect_min_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
-[node name="Room" type="Tabs" parent="background/mainDivider/parameters"]
+[node name="Room" type="Tabs" parent="background/mainContainer/parameters"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -285,64 +287,64 @@ margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 2 )
 
-[node name="mainContainer" type="VBoxContainer" parent="background/mainDivider/parameters/Room"]
+[node name="mainContainer" type="VBoxContainer" parent="background/mainContainer/parameters/Room"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 
-[node name="model" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer"]
+[node name="model" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer"]
 margin_right = 552.0
 margin_bottom = 250.0
 size_flags_horizontal = 3
 
-[node name="controls" type="VBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/model"]
+[node name="controls" type="VBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
 margin_right = 248.0
 margin_bottom = 250.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="lblDetails" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="lblDetails" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_right = 248.0
 margin_bottom = 22.0
 align = 1
 
-[node name="Control" type="Control" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="Control" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 26.0
 margin_right = 248.0
 margin_bottom = 48.0
 rect_min_size = Vector2( 0, 22 )
 
-[node name="lblModel" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="lblModel" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 52.0
 margin_right = 248.0
 margin_bottom = 74.0
 text = "Model"
 align = 1
 
-[node name="optModel" type="OptionButton" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="optModel" type="OptionButton" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 78.0
 margin_right = 248.0
 margin_bottom = 106.0
 size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 110.0
 margin_right = 248.0
 margin_bottom = 140.0
 custom_constants/separation = 30
 
-[node name="buttons" type="HBoxContainer" parent="background/mainDivider/parameters/Room/mainContainer/model/controls"]
+[node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 144.0
 margin_right = 248.0
 margin_bottom = 172.0
 
-[node name="btnRotateL" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/model/controls/buttons"]
+[node name="btnRotateL" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
 margin_right = 70.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "<"
 
-[node name="lblCamera" type="Label" parent="background/mainDivider/parameters/Room/mainContainer/model/controls/buttons"]
+[node name="lblCamera" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
 margin_left = 74.0
 margin_top = 3.0
 margin_right = 174.0
@@ -350,34 +352,34 @@ margin_bottom = 25.0
 text = "  Camera  "
 align = 1
 
-[node name="btnRotateR" type="Button" parent="background/mainDivider/parameters/Room/mainContainer/model/controls/buttons"]
+[node name="btnRotateR" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
 margin_left = 178.0
 margin_right = 248.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = ">"
 
-[node name="ViewportContainer" type="ViewportContainer" parent="background/mainDivider/parameters/Room/mainContainer/model"]
+[node name="ViewportContainer" type="ViewportContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
 margin_left = 252.0
 margin_right = 552.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 300, 250 )
 
-[node name="Viewport" type="Viewport" parent="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer"]
+[node name="Viewport" type="Viewport" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer"]
 size = Vector2( 300, 250 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
-[node name="area" parent="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+[node name="area" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 
-[node name="logic" type="TabContainer" parent="background/mainDivider/parameters/Room/mainContainer"]
+[node name="logic" type="TabContainer" parent="background/mainContainer/parameters/Room/mainContainer"]
 margin_top = 254.0
 margin_right = 552.0
 margin_bottom = 676.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Enemies" type="Tabs" parent="background/mainDivider/parameters/Room/mainContainer/logic"]
+[node name="Enemies" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -385,7 +387,7 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="txtEnemyGroups" type="TextEdit" parent="background/mainDivider/parameters/Room/mainContainer/logic/Enemies"]
+[node name="txtEnemyGroups" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Enemies"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -397,7 +399,7 @@ draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Can enter" type="Tabs" parent="background/mainDivider/parameters/Room/mainContainer/logic"]
+[node name="Can enter" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -406,7 +408,7 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="txtCanEnter" type="TextEdit" parent="background/mainDivider/parameters/Room/mainContainer/logic/Can enter"]
+[node name="txtCanEnter" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Can enter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -418,7 +420,7 @@ draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Entering" type="Tabs" parent="background/mainDivider/parameters/Room/mainContainer/logic"]
+[node name="Entering" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -427,7 +429,7 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="txtEntering" type="TextEdit" parent="background/mainDivider/parameters/Room/mainContainer/logic/Entering"]
+[node name="txtEntering" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Entering"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -439,7 +441,7 @@ draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Exiting" type="Tabs" parent="background/mainDivider/parameters/Room/mainContainer/logic"]
+[node name="Exiting" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -448,7 +450,7 @@ margin_top = 40.0
 margin_right = -4.0
 margin_bottom = -4.0
 
-[node name="txtExiting" type="TextEdit" parent="background/mainDivider/parameters/Room/mainContainer/logic/Exiting"]
+[node name="txtExiting" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Exiting"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
@@ -557,31 +559,31 @@ margin_bottom = 240.0
 rect_min_size = Vector2( 0, 1 )
 size_flags_horizontal = 3
 
-[connection signal="selectedMultiRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/parameters" method="_on_grid_selectedMultiRoom"]
-[connection signal="selectedMultiRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/parameters/Room" method="_on_grid_selectedMultiRoom"]
-[connection signal="selectedRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/map/scroll/grid" method="_on_grid_selectedRoom"]
-[connection signal="selectedRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/parameters" method="_on_grid_selectedRoom"]
-[connection signal="selectedRoom" from="background/mainDivider/map/scroll/grid" to="background/mainDivider/parameters/Room" method="_on_grid_selectedRoom"]
-[connection signal="tab_changed" from="background/mainDivider/parameters" to="background/mainDivider/parameters/Room" method="_on_parameters_tab_changed"]
-[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
-[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]
-[connection signal="loadedLocationDto" from="background/mainDivider/parameters/General" to="background/mainDivider/parameters/Room" method="_on_General_loadedLocationDto"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtName" to="background/mainDivider/parameters/General" method="_on_txtName_text_changed"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtShortName" to="background/mainDivider/parameters/General" method="_on_txtShortName_text_changed"]
-[connection signal="text_changed" from="background/mainDivider/parameters/General/mainContainer/group1/txtDescription" to="background/mainDivider/parameters/General" method="_on_txtDescription_text_changed"]
-[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General" method="_on_sldEncounter_value_changed"]
-[connection signal="value_changed" from="background/mainDivider/parameters/General/mainContainer/group1/sldEncounter" to="background/mainDivider/parameters/General/mainContainer/group1" method="_on_sldEncounter_value_changed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnOpen" to="background/mainDivider/parameters/General" method="_on_btnOpen_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnSave" to="background/mainDivider/parameters/General" method="_on_btnSave_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="background/mainDivider/parameters/General" method="_on_btnPreview_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/General/mainContainer/buttons/btnPreview" to="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnPreview_pressed"]
-[connection signal="changeModel" from="background/mainDivider/parameters/Room" to="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_Room_changeModel"]
-[connection signal="item_selected" from="background/mainDivider/parameters/Room/mainContainer/model/controls/optModel" to="background/mainDivider/parameters/Room" method="_on_optModel_item_selected"]
-[connection signal="pressed" from="background/mainDivider/parameters/Room/mainContainer/model/controls/buttons/btnRotateL" to="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateL_pressed"]
-[connection signal="pressed" from="background/mainDivider/parameters/Room/mainContainer/model/controls/buttons/btnRotateR" to="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateR_pressed"]
-[connection signal="confirmed" from="saveConfirmation" to="background/mainDivider/parameters/General" method="_on_saveConfirmation_confirmed"]
+[connection signal="selectedMultiRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters" method="_on_grid_selectedMultiRoom"]
+[connection signal="selectedMultiRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters/Room" method="_on_grid_selectedMultiRoom"]
+[connection signal="selectedRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/map/scroll/container/grid" method="_on_grid_selectedRoom"]
+[connection signal="selectedRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters" method="_on_grid_selectedRoom"]
+[connection signal="selectedRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters/Room" method="_on_grid_selectedRoom"]
+[connection signal="tab_changed" from="background/mainContainer/parameters" to="background/mainContainer/parameters/Room" method="_on_parameters_tab_changed"]
+[connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/Room" method="_on_General_loadedLocationDto"]
+[connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtName" to="background/mainContainer/parameters/General" method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtShortName" to="background/mainContainer/parameters/General" method="_on_txtShortName_text_changed"]
+[connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtDescription" to="background/mainContainer/parameters/General" method="_on_txtDescription_text_changed"]
+[connection signal="value_changed" from="background/mainContainer/parameters/General/mainContainer/group1/sldEncounter" to="background/mainContainer/parameters/General" method="_on_sldEncounter_value_changed"]
+[connection signal="value_changed" from="background/mainContainer/parameters/General/mainContainer/group1/sldEncounter" to="background/mainContainer/parameters/General/mainContainer/group1" method="_on_sldEncounter_value_changed"]
+[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnOpen" to="background/mainContainer/parameters/General" method="_on_btnOpen_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnSave" to="background/mainContainer/parameters/General" method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/General" method="_on_btnPreview_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnPreview_pressed"]
+[connection signal="changeModel" from="background/mainContainer/parameters/Room" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_Room_changeModel"]
+[connection signal="item_selected" from="background/mainContainer/parameters/Room/mainContainer/model/controls/optModel" to="background/mainContainer/parameters/Room" method="_on_optModel_item_selected"]
+[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateL" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateL_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateR" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateR_pressed"]
+[connection signal="confirmed" from="saveConfirmation" to="background/mainContainer/parameters/General" method="_on_saveConfirmation_confirmed"]
 [connection signal="about_to_show" from="previewWindow" to="previewWindow" method="_on_previewWindow_about_to_show"]
-[connection signal="popup_hide" from="previewWindow" to="background/mainDivider/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_previewWindow_popup_hide"]
+[connection signal="popup_hide" from="previewWindow" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_previewWindow_popup_hide"]
 [connection signal="popup_hide" from="previewWindow" to="previewWindow" method="_on_previewWindow_popup_hide"]
-[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="background/mainDivider/parameters/General" method="_on_btnOpenConfirm_pressed"]
-[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="background/mainDivider/parameters/General" method="_on_btnCancel_pressed"]
+[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="background/mainContainer/parameters/General" method="_on_btnOpenConfirm_pressed"]
+[connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="background/mainContainer/parameters/General" method="_on_btnCancel_pressed"]

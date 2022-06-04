@@ -20,7 +20,7 @@ func _ready() -> void:
 
 func setLocationDto(value : LocationDTO) -> void:
 	locationDto = value
-	get_node("../../map/scroll/grid").loadRooms(locationDto.rooms)
+	get_node("../../map/scroll/container/grid").loadRooms(locationDto.rooms)
 	
 	emit_signal("loadedLocationDto", locationDto)
 
@@ -31,7 +31,7 @@ func updateLocation() -> void:
 	
 	locationDto.rooms.clear()
 	
-	locationDto.rooms = get_node("../../map/scroll/grid").collectRooms()
+	locationDto.rooms = get_node("../../map/scroll/container/grid").collectRooms()
 
 
 # parameter listeners
