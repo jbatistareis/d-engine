@@ -55,20 +55,6 @@ size_flags_horizontal = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Fact" type="Tabs" parent="tabs"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-
-[node name="background" type="Panel" parent="tabs/Fact"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
 [node name="Inventory" type="Tabs" parent="tabs"]
 visible = false
 anchor_right = 1.0
