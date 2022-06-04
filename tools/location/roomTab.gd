@@ -2,11 +2,13 @@ extends Tabs
 
 signal changeModel(locationShortName, model, orientation)
 
-const _DETAILS_TEXT = 'id: %d @ (%d, %d)'
+const _DETAILS_SINGLE_TEXT = 'id: %d @ (%d, %d)'
+const _DETAILS_MULTI_TEXT = 'Multiple rooms'
 
 var extensionRegex : RegEx = RegEx.new()
 var locationDto : LocationDTO
 var room : Dictionary = {} setget setRoom
+var multiRoom : Array = []
 
 
 func _init() -> void:
@@ -16,7 +18,11 @@ func _init() -> void:
 func setRoom(value : Dictionary):
 	saveLogic()
 	room = value
-	$mainContainer/model/controls/lblDetails.text = _DETAILS_TEXT % [room.id, room.x, room.y]
+	
+	if multiRoom.empty():
+		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [room.id, room.x, room.y]
+	else:
+		$mainContainer/model/controls/lblDetails.text = _DETAILS_MULTI_TEXT
 	
 	var optModel = $mainContainer/model/controls/optModel
 	for index in optModel.get_item_count():
@@ -26,16 +32,24 @@ func setRoom(value : Dictionary):
 
 
 func saveLogic() -> void:
-	if !room.empty():
+	if multiRoom.empty():
+		setRoomFields(room)
+	else:
+		for singleRoom in multiRoom:
+			setRoomFields(singleRoom)
+
+
+func setRoomFields(data : Dictionary) -> void:
+	if !data.empty():
 		var enemiesText = $mainContainer/logic/Enemies/txtEnemyGroups.text.replace(' ', '')
-		room.foeShortNameGroups.clear()
+		data.foeShortNameGroups.clear()
 		for groupText in enemiesText.split('\n'):
 			if !groupText.empty():
-				room.foeShortNameGroups.append(groupText.split(','))
+				data.foeShortNameGroups.append(groupText.split(','))
 		
-		room.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
-		room.enteringLogic = $mainContainer/logic/Entering/txtEntering.text
-		room.exitingLogic = $mainContainer/logic/Exiting/txtExiting.text
+		data.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
+		data.enteringLogic = $mainContainer/logic/Entering/txtEntering.text
+		data.exitingLogic = $mainContainer/logic/Exiting/txtExiting.text
 
 
 func setLogic() -> void:
@@ -84,13 +98,28 @@ func _on_grid_selectedRoom(room : Dictionary):
 		
 		clearLogic()
 		setLogic()
+		multiRoom.clear()
 
 
 func _on_optModel_item_selected(index : int):
-	room.model = $mainContainer/model/controls/optModel.get_item_text(index)
+	if multiRoom.empty():
+		room.model = $mainContainer/model/controls/optModel.get_item_text(index)
+	else:
+		for singleRoom in multiRoom:
+			singleRoom.model = $mainContainer/model/controls/optModel.get_item_text(index)
+	
 	emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
 
 
-func _on_parameters_tab_changed(tab):
+func _on_parameters_tab_changed(tab : int):
 	saveLogic()
+
+
+
+func _on_grid_selectedMultiRoom(rooms : Array):
+	multiRoom = rooms
+	self.room = rooms[0]
+	
+	clearLogic()
+	setLogic()
 
