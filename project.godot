@@ -420,6 +420,7 @@ default_bus_layout=""
 
 [autoload]
 
+DefaultValues="*res://defaultValues.gd"
 GameParameters="*res://gameParameters.gd"
 Signals="*res://signals.gd"
 Dice="*res://dice.gd"

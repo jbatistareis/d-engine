@@ -5,5 +5,5 @@ var name : String = 'Base verdict'
 var shortName : String = 'BSEVRD'
 
 # { factShortName, moveShortName } dict
-var actions : Array = [GameParameters.actionBase]
+var actions : Array = [DefaultValues.actionBase]
 
