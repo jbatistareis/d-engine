@@ -325,7 +325,7 @@ rect_min_size = Vector2( 0, 15 )
 [node name="misc" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 387.0
 margin_right = 606.0
-margin_bottom = 565.0
+margin_bottom = 517.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
 margin_right = 606.0
@@ -345,47 +345,42 @@ size_flags_horizontal = 3
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
 margin_top = 26.0
 margin_right = 606.0
-margin_bottom = 178.0
+margin_bottom = 130.0
 
-[node name="container" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields"]
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields"]
 margin_left = 163.0
 margin_right = 443.0
-margin_bottom = 152.0
-custom_constants/separation = 20
-
-[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container"]
-margin_right = 280.0
 margin_bottom = 104.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 10
 columns = 3
 
-[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_top = 3.0
 margin_right = 100.0
 margin_bottom = 25.0
 text = "Model "
 
-[node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 104.0
 margin_right = 254.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
-[node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 258.0
 margin_right = 280.0
 margin_bottom = 28.0
 text = "→"
 
-[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_top = 41.0
 margin_right = 100.0
 margin_bottom = 63.0
 text = "Inventory "
 
-[node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 104.0
 margin_top = 38.0
 margin_right = 254.0
@@ -393,20 +388,20 @@ margin_bottom = 66.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
-[node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 258.0
 margin_top = 38.0
 margin_right = 280.0
 margin_bottom = 66.0
 text = "→"
 
-[node name="lblVerdict" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="lblVerdict" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_top = 79.0
 margin_right = 100.0
 margin_bottom = 101.0
 text = "Verdict "
 
-[node name="optVerdict" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="optVerdict" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 104.0
 margin_top = 76.0
 margin_right = 254.0
@@ -414,28 +409,68 @@ margin_bottom = 104.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
-[node name="btnViewVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+[node name="btnViewVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 258.0
 margin_top = 76.0
 margin_right = 280.0
 margin_bottom = 104.0
 text = "→"
 
-[node name="Button" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container"]
-margin_top = 124.0
-margin_right = 280.0
-margin_bottom = 152.0
+[node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 521.0
+margin_right = 606.0
+margin_bottom = 706.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
+margin_top = 157.0
+margin_right = 606.0
+margin_bottom = 185.0
+alignment = 1
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_right = 135.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="btnSave" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 139.0
+margin_right = 274.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Save|Create"
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 278.0
+margin_right = 328.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="btnReload" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 332.0
+margin_right = 467.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
 text = "Reload lists"
+
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 471.0
+margin_right = 606.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="background/mainSeparator"]
 margin_left = 758.0
-margin_right = 758.0
+margin_right = 773.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 15, 0 )
 size_flags_vertical = 3
 
 [node name="visualization" type="VBoxContainer" parent="background/mainSeparator"]
-margin_left = 762.0
-margin_right = 1207.0
+margin_left = 777.0
+margin_right = 1222.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 445, 0 )
 size_flags_vertical = 3
@@ -634,7 +669,6 @@ margin_left = 64.0
 margin_right = 145.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "D100"
 
 [node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
 margin_left = 149.0
@@ -647,7 +681,6 @@ margin_left = 213.0
 margin_right = 294.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "WORST"
 
 [node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
 margin_left = 298.0
@@ -660,7 +693,6 @@ margin_left = 362.0
 margin_right = 443.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
-text = "INT"
 
 [node name="Control2" type="Control" parent="background/mainSeparator/visualization/inventory"]
 margin_top = 253.0
