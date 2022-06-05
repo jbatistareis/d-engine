@@ -349,73 +349,100 @@ margin_right = 606.0
 margin_bottom = 130.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields"]
-margin_left = 163.0
-margin_right = 443.0
+margin_left = 81.0
+margin_right = 525.0
 margin_bottom = 104.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 10
-columns = 3
+custom_constants/hseparation = 10
+columns = 5
 
-[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_top = 3.0
 margin_right = 100.0
 margin_bottom = 25.0
-text = "Model "
-
-[node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 104.0
-margin_right = 254.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 150, 0 )
-align = 1
-
-[node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 258.0
-margin_right = 280.0
-margin_bottom = 28.0
-text = "→"
-
-[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_top = 41.0
-margin_right = 100.0
-margin_bottom = 63.0
 text = "Inventory "
 
 [node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 104.0
-margin_top = 38.0
-margin_right = 254.0
-margin_bottom = 66.0
+margin_left = 110.0
+margin_right = 260.0
+margin_bottom = 28.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
 [node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 258.0
-margin_top = 38.0
-margin_right = 280.0
-margin_bottom = 66.0
-text = "→"
+margin_left = 270.0
+margin_right = 322.0
+margin_bottom = 28.0
+text = "View"
+
+[node name="VSeparator2" type="VSeparator" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 332.0
+margin_right = 382.0
+margin_bottom = 28.0
+custom_constants/separation = 50
+
+[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 392.0
+margin_right = 444.0
+margin_bottom = 28.0
+text = "Edit"
 
 [node name="lblVerdict" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_top = 79.0
+margin_top = 41.0
 margin_right = 100.0
-margin_bottom = 101.0
+margin_bottom = 63.0
 text = "Verdict "
 
 [node name="optVerdict" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 104.0
-margin_top = 76.0
-margin_right = 254.0
-margin_bottom = 104.0
+margin_left = 110.0
+margin_top = 38.0
+margin_right = 260.0
+margin_bottom = 66.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
 [node name="btnViewVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 258.0
+margin_left = 270.0
+margin_top = 38.0
+margin_right = 322.0
+margin_bottom = 66.0
+text = "View"
+
+[node name="VSeparator3" type="VSeparator" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 332.0
+margin_top = 38.0
+margin_right = 382.0
+margin_bottom = 66.0
+custom_constants/separation = 50
+
+[node name="Button3" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 392.0
+margin_top = 38.0
+margin_right = 444.0
+margin_bottom = 66.0
+text = "Edit"
+
+[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_top = 79.0
+margin_right = 100.0
+margin_bottom = 101.0
+text = "Model "
+
+[node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 110.0
 margin_top = 76.0
-margin_right = 280.0
+margin_right = 260.0
 margin_bottom = 104.0
-text = "→"
+rect_min_size = Vector2( 150, 0 )
+align = 1
+
+[node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 270.0
+margin_top = 76.0
+margin_right = 322.0
+margin_bottom = 104.0
+text = "View"
 
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 521.0
@@ -532,7 +559,6 @@ handle_input_locally = false
 render_target_update_mode = 0
 
 [node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
@@ -655,42 +681,42 @@ margin_right = 445.0
 margin_bottom = 223.0
 text = "Modifiers ⬎"
 
-[node name="weapon2" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="weaponMod" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
 margin_top = 227.0
 margin_right = 445.0
 margin_bottom = 249.0
 columns = 6
 
-[node name="lblWpnModifierDice" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpnModifierDice" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_right = 60.0
 margin_bottom = 22.0
 text = "Dice: "
 
-[node name="lblWpnModifierDiceData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpnModifierDiceData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_left = 64.0
 margin_right = 145.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_left = 149.0
 margin_right = 209.0
 margin_bottom = 22.0
 text = "Roll: "
 
-[node name="lblWpModifierRollData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpModifierRollData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_left = 213.0
 margin_right = 294.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_left = 298.0
 margin_right = 358.0
 margin_bottom = 22.0
 text = "Stat: "
 
-[node name="lblWpnModifierData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+[node name="lblWpnModifierData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
 margin_left = 362.0
 margin_right = 443.0
 margin_bottom = 22.0
@@ -835,6 +861,7 @@ size_flags_horizontal = 3
 columns = 4
 
 [node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
