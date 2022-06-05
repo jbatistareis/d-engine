@@ -526,39 +526,8 @@ align = 1
 valign = 1
 autowrap = true
 
-[node name="model" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
-margin_top = 6.0
-margin_right = 408.0
-margin_bottom = 720.0
-size_flags_vertical = 3
-
-[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
-margin_right = 408.0
-margin_bottom = 22.0
-
-[node name="lblModel" type="Label" parent="background/mainSeparator/visualization/model/title"]
-margin_right = 80.0
-margin_bottom = 22.0
-text = "↳ Model "
-
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/model/title"]
-margin_left = 84.0
-margin_right = 408.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/model"]
-visible = false
-margin_right = 432.0
-margin_bottom = 714.0
-size_flags_vertical = 3
-
-[node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
-handle_input_locally = false
-render_target_update_mode = 0
-
 [node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
@@ -861,7 +830,6 @@ size_flags_horizontal = 3
 columns = 4
 
 [node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
@@ -881,3 +849,95 @@ margin_left = 104.0
 margin_right = 445.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
+
+[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 26.0
+margin_right = 445.0
+margin_bottom = 48.0
+columns = 2
+
+[node name="lblVrdName" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "Name: "
+
+[node name="lblVrdNameData" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+margin_left = 64.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 52.0
+margin_right = 445.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="actionsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 71.0
+margin_right = 445.0
+margin_bottom = 93.0
+
+[node name="lblActions" type="Label" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Actions "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+margin_left = 104.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 97.0
+margin_right = 445.0
+margin_bottom = 695.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="container" type="VBoxContainer" parent="background/mainSeparator/visualization/verdict/scroll"]
+margin_right = 445.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 699.0
+margin_right = 445.0
+margin_bottom = 714.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="model" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
+margin_top = 6.0
+margin_right = 408.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
+margin_right = 408.0
+margin_bottom = 22.0
+
+[node name="lblModel" type="Label" parent="background/mainSeparator/visualization/model/title"]
+margin_right = 80.0
+margin_bottom = 22.0
+text = "↳ Model "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/model/title"]
+margin_left = 84.0
+margin_right = 408.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/model"]
+visible = false
+margin_right = 432.0
+margin_bottom = 714.0
+size_flags_vertical = 3
+
+[node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
+handle_input_locally = false
+render_target_update_mode = 0
