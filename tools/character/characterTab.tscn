@@ -20,61 +20,804 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="fileList" type="ItemList" parent="background/mainSeparator"]
-margin_right = 200.0
+margin_right = 130.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 200, 0 )
+rect_min_size = Vector2( 130, 0 )
 size_flags_vertical = 3
 
 [node name="dataPanel" type="PanelContainer" parent="background/mainSeparator"]
-margin_left = 204.0
-margin_right = 740.0
+margin_left = 134.0
+margin_right = 754.0
 margin_bottom = 720.0
-size_flags_horizontal = 3
+rect_min_size = Vector2( 620, 0 )
 size_flags_vertical = 3
 
 [node name="dataContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 529.0
+margin_right = 613.0
 margin_bottom = 713.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="visualization" type="MarginContainer" parent="background/mainSeparator"]
-margin_left = 744.0
-margin_right = 1280.0
-margin_bottom = 720.0
+[node name="identification" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_right = 606.0
+margin_bottom = 94.0
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+margin_right = 170.0
+margin_bottom = 22.0
+text = "↳ Identification "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+margin_left = 174.0
+margin_right = 606.0
+margin_bottom = 22.0
 size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 94.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields"]
+margin_left = 6.0
+margin_right = 600.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 594, 0 )
+columns = 2
+
+[node name="lblName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 27.0
+text = "Name"
+
+[node name="txtName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_left = 114.0
+margin_right = 594.0
+margin_bottom = 32.0
+
+[node name="lblShortName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_top = 41.0
+margin_right = 110.0
+margin_bottom = 63.0
+text = "Short name "
+
+[node name="container" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_left = 114.0
+margin_top = 36.0
+margin_right = 594.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="txtShortName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container"]
+margin_right = 302.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="VSeparator" type="VSeparator" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container"]
+margin_left = 306.0
+margin_right = 326.0
+margin_bottom = 32.0
+custom_constants/separation = 20
+
+[node name="optType" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container"]
+margin_left = 330.0
+margin_right = 480.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 150, 0 )
+text = "Enemy"
+align = 1
+items = [ "Playable", null, false, 0, null, "N. playable", null, false, 1, null, "Enemy", null, false, 2, null ]
+selected = 2
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 98.0
+margin_right = 606.0
+margin_bottom = 113.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="hp" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 117.0
+margin_right = 606.0
+margin_bottom = 211.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/hp"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblHp" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/hp/title"]
+margin_right = 50.0
+margin_bottom = 22.0
+text = "↳ HP "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/hp/title"]
+margin_left = 54.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/hp"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 94.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields"]
+margin_left = 6.0
+margin_right = 600.0
+margin_bottom = 68.0
+columns = 4
+
+[node name="lblBaseHp" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_top = 5.0
+margin_right = 130.0
+margin_bottom = 27.0
+text = "Base         "
+
+[node name="sbBaseHp" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 134.0
+margin_right = 280.0
+margin_bottom = 32.0
+
+[node name="lblCurrentHp" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 284.0
+margin_top = 5.0
+margin_right = 444.0
+margin_bottom = 27.0
+text = "   Current      "
+
+[node name="sbCurrentHp" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 448.0
+margin_right = 594.0
+margin_bottom = 32.0
+
+[node name="lblExtraHp" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_top = 41.0
+margin_right = 130.0
+margin_bottom = 63.0
+text = "Extra "
+
+[node name="sbExtraHp" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 134.0
+margin_top = 36.0
+margin_right = 280.0
+margin_bottom = 68.0
+
+[node name="lblMaxHp" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 284.0
+margin_top = 41.0
+margin_right = 444.0
+margin_bottom = 63.0
+text = "   Max "
+
+[node name="sbMaxHp" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid"]
+margin_left = 448.0
+margin_top = 36.0
+margin_right = 594.0
+margin_bottom = 68.0
+hint_tooltip = "Affected by (BaseHP + Constitution)"
+editable = false
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 215.0
+margin_right = 606.0
+margin_bottom = 230.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="stats" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 234.0
+margin_right = 606.0
+margin_bottom = 364.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblStats" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
+margin_right = 80.0
+margin_bottom = 22.0
+text = "↳ Stats "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
+margin_left = 84.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 130.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields"]
+margin_left = 6.0
+margin_right = 600.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+columns = 4
+
+[node name="lblStrength" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 5.0
+margin_right = 130.0
+margin_bottom = 27.0
+text = "Strength "
+
+[node name="sbStrength" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 134.0
+margin_right = 280.0
+margin_bottom = 32.0
+
+[node name="lblDexterity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 284.0
+margin_top = 5.0
+margin_right = 444.0
+margin_bottom = 27.0
+text = "   Dexterity "
+
+[node name="sbDexterity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 448.0
+margin_right = 594.0
+margin_bottom = 32.0
+
+[node name="lblConstitution" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 41.0
+margin_right = 130.0
+margin_bottom = 63.0
+text = "Constitution "
+
+[node name="sbConstitution" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 134.0
+margin_top = 36.0
+margin_right = 280.0
+margin_bottom = 68.0
+
+[node name="lblIntelligence" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 284.0
+margin_top = 41.0
+margin_right = 444.0
+margin_bottom = 63.0
+text = "   Intelligence "
+
+[node name="sbIntelligence" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 448.0
+margin_top = 36.0
+margin_right = 594.0
+margin_bottom = 68.0
+
+[node name="lblWisdom" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 77.0
+margin_right = 130.0
+margin_bottom = 99.0
+text = "Wisdom "
+
+[node name="sbWisdom" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 134.0
+margin_top = 72.0
+margin_right = 280.0
+margin_bottom = 104.0
+
+[node name="lblCharisma" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 284.0
+margin_top = 77.0
+margin_right = 444.0
+margin_bottom = 99.0
+text = "   Charisma "
+
+[node name="sbCharisma" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 448.0
+margin_top = 72.0
+margin_right = 594.0
+margin_bottom = 104.0
+
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 368.0
+margin_right = 606.0
+margin_bottom = 383.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="misc" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 387.0
+margin_right = 606.0
+margin_bottom = 565.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblMisc" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/title"]
+margin_right = 160.0
+margin_bottom = 22.0
+text = "↳ Miscellaneous "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/misc/title"]
+margin_left = 164.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 178.0
+
+[node name="container" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields"]
+margin_left = 163.0
+margin_right = 443.0
+margin_bottom = 152.0
+custom_constants/separation = 20
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container"]
+margin_right = 280.0
+margin_bottom = 104.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 10
+columns = 3
+
+[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_top = 3.0
+margin_right = 100.0
+margin_bottom = 25.0
+text = "Model "
+
+[node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 104.0
+margin_right = 254.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 150, 0 )
+align = 1
+
+[node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 258.0
+margin_right = 280.0
+margin_bottom = 28.0
+text = "→"
+
+[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_top = 41.0
+margin_right = 100.0
+margin_bottom = 63.0
+text = "Inventory "
+
+[node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 104.0
+margin_top = 38.0
+margin_right = 254.0
+margin_bottom = 66.0
+rect_min_size = Vector2( 150, 0 )
+align = 1
+
+[node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 258.0
+margin_top = 38.0
+margin_right = 280.0
+margin_bottom = 66.0
+text = "→"
+
+[node name="lblVerdict" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_top = 79.0
+margin_right = 100.0
+margin_bottom = 101.0
+text = "Verdict "
+
+[node name="optVerdict" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 104.0
+margin_top = 76.0
+margin_right = 254.0
+margin_bottom = 104.0
+rect_min_size = Vector2( 150, 0 )
+align = 1
+
+[node name="btnViewVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container/grid"]
+margin_left = 258.0
+margin_top = 76.0
+margin_right = 280.0
+margin_bottom = 104.0
+text = "→"
+
+[node name="Button" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/container"]
+margin_top = 124.0
+margin_right = 280.0
+margin_bottom = 152.0
+text = "Reload lists"
+
+[node name="Control" type="Control" parent="background/mainSeparator"]
+margin_left = 758.0
+margin_right = 758.0
+margin_bottom = 720.0
 size_flags_vertical = 3
 
-[node name="dummyContainer" type="CenterContainer" parent="background/mainSeparator/visualization"]
-margin_right = 536.0
+[node name="visualization" type="VBoxContainer" parent="background/mainSeparator"]
+margin_left = 762.0
+margin_right = 1207.0
 margin_bottom = 720.0
+rect_min_size = Vector2( 445, 0 )
+size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="background/mainSeparator/visualization/dummyContainer"]
-margin_left = 68.0
-margin_top = 336.0
-margin_right = 468.0
-margin_bottom = 383.0
+[node name="Control" type="Control" parent="background/mainSeparator/visualization"]
+margin_right = 445.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 0, 2 )
+
+[node name="dummyContainer" type="CenterContainer" parent="background/mainSeparator/visualization"]
+visible = false
+margin_top = 6.0
+margin_right = 408.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="lblDummy" type="Label" parent="background/mainSeparator/visualization/dummyContainer"]
+margin_left = 4.0
+margin_top = 333.0
+margin_right = 404.0
+margin_bottom = 380.0
 rect_min_size = Vector2( 400, 0 )
-text = "Click on a model, inventory, or verdict to see its details here."
+text = "Click on a model, inventory, or verdict to see more details."
 align = 1
 valign = 1
 autowrap = true
 
-[node name="modelContainer" type="ViewportContainer" parent="background/mainSeparator/visualization"]
+[node name="model" type="VBoxContainer" parent="background/mainSeparator/visualization"]
 visible = false
-margin_right = 536.0
+margin_top = 6.0
+margin_right = 408.0
 margin_bottom = 720.0
-
-[node name="inventoryContainer" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
-margin_right = 536.0
-margin_bottom = 720.0
-size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="verdictContainer" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
+margin_right = 408.0
+margin_bottom = 22.0
+
+[node name="lblModel" type="Label" parent="background/mainSeparator/visualization/model/title"]
+margin_right = 80.0
+margin_bottom = 22.0
+text = "↳ Model "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/model/title"]
+margin_left = 84.0
+margin_right = 408.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/model"]
 visible = false
-margin_right = 536.0
+margin_right = 432.0
+margin_bottom = 714.0
+size_flags_vertical = 3
+
+[node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
+handle_input_locally = false
+render_target_update_mode = 0
+
+[node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+margin_top = 6.0
+margin_right = 445.0
 margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="identificationTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_right = 445.0
+margin_bottom = 22.0
+
+[node name="lblInventory" type="Label" parent="background/mainSeparator/visualization/inventory/identificationTitle"]
+margin_right = 120.0
+margin_bottom = 22.0
+text = "↳ Inventory "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/identificationTitle"]
+margin_left = 124.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 26.0
+margin_right = 445.0
+margin_bottom = 74.0
+columns = 2
+
+[node name="lblInvName" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+margin_right = 70.0
+margin_bottom = 22.0
+text = "Name: "
+
+[node name="lblInvNameData" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+margin_left = 74.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="lblInvMoney" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+margin_top = 26.0
+margin_right = 70.0
+margin_bottom = 48.0
+text = "Money: "
+
+[node name="lblInvMoneyData" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+margin_left = 74.0
+margin_top = 26.0
+margin_right = 445.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 78.0
+margin_right = 445.0
+margin_bottom = 93.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="weaponTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 97.0
+margin_right = 445.0
+margin_bottom = 119.0
+
+[node name="lblWeapon" type="Label" parent="background/mainSeparator/visualization/inventory/weaponTitle"]
+margin_right = 90.0
+margin_bottom = 22.0
+text = "↳ Weapon "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/weaponTitle"]
+margin_left = 94.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="weapon1" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 123.0
+margin_right = 445.0
+margin_bottom = 197.0
+columns = 2
+
+[node name="lblWpnName" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_right = 120.0
+margin_bottom = 22.0
+text = "Name: "
+
+[node name="lblWpnNameData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_left = 124.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="lblWpnShortName" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_top = 26.0
+margin_right = 120.0
+margin_bottom = 48.0
+text = "Short name: "
+
+[node name="lblWpnShortNameData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_left = 124.0
+margin_top = 26.0
+margin_right = 445.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="lblWpnDamage" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_top = 52.0
+margin_right = 120.0
+margin_bottom = 74.0
+text = "Damage: "
+
+[node name="lblWpnDamageData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+margin_left = 124.0
+margin_top = 52.0
+margin_right = 445.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+
+[node name="lblModifiers" type="Label" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 201.0
+margin_right = 445.0
+margin_bottom = 223.0
+text = "Modifiers ⬎"
+
+[node name="weapon2" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 227.0
+margin_right = 445.0
+margin_bottom = 249.0
+columns = 6
+
+[node name="lblWpnModifierDice" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "Dice: "
+
+[node name="lblWpnModifierDiceData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_left = 64.0
+margin_right = 145.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "D100"
+
+[node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_left = 149.0
+margin_right = 209.0
+margin_bottom = 22.0
+text = "Roll: "
+
+[node name="lblWpModifierRollData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_left = 213.0
+margin_right = 294.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "WORST"
+
+[node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_left = 298.0
+margin_right = 358.0
+margin_bottom = 22.0
+text = "Stat: "
+
+[node name="lblWpnModifierData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon2"]
+margin_left = 362.0
+margin_right = 443.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+text = "INT"
+
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 253.0
+margin_right = 445.0
+margin_bottom = 268.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="armorTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 272.0
+margin_right = 445.0
+margin_bottom = 294.0
+
+[node name="lblArmor" type="Label" parent="background/mainSeparator/visualization/inventory/armorTitle"]
+margin_right = 80.0
+margin_bottom = 22.0
+text = "↳ Armor "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/armorTitle"]
+margin_left = 84.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="armor" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 298.0
+margin_right = 445.0
+margin_bottom = 372.0
+columns = 2
+
+[node name="lblArmName" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_right = 150.0
+margin_bottom = 22.0
+text = "Name: "
+
+[node name="lblArmNameData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_left = 154.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="lblArmShortName" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_top = 26.0
+margin_right = 150.0
+margin_bottom = 48.0
+text = "Short name: "
+
+[node name="lblArmShortNameData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_left = 154.0
+margin_top = 26.0
+margin_right = 445.0
+margin_bottom = 48.0
+size_flags_horizontal = 3
+
+[node name="lblArmMaxIntegrity" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_top = 52.0
+margin_right = 150.0
+margin_bottom = 74.0
+text = "Max integrity: "
+
+[node name="lblArmMaxIntegrityData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+margin_left = 154.0
+margin_top = 52.0
+margin_right = 445.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 376.0
+margin_right = 445.0
+margin_bottom = 391.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="itemsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 395.0
+margin_right = 445.0
+margin_bottom = 417.0
+
+[node name="lblItems" type="Label" parent="background/mainSeparator/visualization/inventory/itemsTitle"]
+margin_right = 80.0
+margin_bottom = 22.0
+text = "↳ Items "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/itemsTitle"]
+margin_left = 84.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="itemsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 421.0
+margin_right = 445.0
+margin_bottom = 543.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/inventory/itemsContainer"]
+margin_right = 445.0
+size_flags_horizontal = 3
+columns = 4
+
+[node name="Control4" type="Control" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 547.0
+margin_right = 445.0
+margin_bottom = 562.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="weaponsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 566.0
+margin_right = 445.0
+margin_bottom = 588.0
+
+[node name="lblWeapons" type="Label" parent="background/mainSeparator/visualization/inventory/weaponsTitle"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Weapons "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/weaponsTitle"]
+margin_left = 104.0
+margin_right = 445.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="weaponsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/inventory"]
+margin_top = 592.0
+margin_right = 445.0
+margin_bottom = 714.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/inventory/weaponsContainer"]
+margin_right = 445.0
+size_flags_horizontal = 3
+columns = 4
+
+[node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
+margin_top = 6.0
+margin_right = 408.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_right = 408.0
+margin_bottom = 22.0
+
+[node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/verdict/title"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Verdict "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/title"]
+margin_left = 104.0
+margin_right = 408.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
