@@ -41,7 +41,7 @@ func _input(event) -> void:
 			
 			if !selectedRooms.empty():
 				emit_signal("selectedMultiRoom", selectedRooms)
-			
+		
 	elif mousePressed && (event is InputEventMouseMotion):
 		mouseDragged = true
 		selection.end = event.position

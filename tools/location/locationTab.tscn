@@ -75,6 +75,7 @@ size_flags_vertical = 3
 script = ExtResource( 10 )
 
 [node name="General" type="Tabs" parent="background/mainContainer/parameters"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -278,7 +279,6 @@ rect_min_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
 [node name="Room" type="Tabs" parent="background/mainContainer/parameters"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -342,7 +342,7 @@ margin_bottom = 172.0
 margin_right = 70.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
-text = "<"
+text = "↩"
 
 [node name="lblCamera" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
 margin_left = 74.0
@@ -357,7 +357,7 @@ margin_left = 178.0
 margin_right = 248.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
-text = ">"
+text = "↪"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
 margin_left = 252.0
@@ -368,7 +368,7 @@ rect_min_size = Vector2( 300, 250 )
 [node name="Viewport" type="Viewport" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer"]
 size = Vector2( 300, 250 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
 [node name="area" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
 

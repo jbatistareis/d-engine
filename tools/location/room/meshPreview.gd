@@ -39,9 +39,9 @@ func _on_previewWindow_popup_hide():
 
 
 func _on_btnRotateL_pressed():
-	rotatePivot(-_ROTATE_BUTTON)
+	rotatePivot(_ROTATE_BUTTON)
 
 
 func _on_btnRotateR_pressed():
-	rotatePivot(_ROTATE_BUTTON)
+	rotatePivot(-_ROTATE_BUTTON)
 
