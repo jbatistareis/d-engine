@@ -43,8 +43,9 @@ func _on_txtName_text_changed(new_text):
 	locationDto.name = new_text
 
 
-func _on_txtShortName_text_changed(new_text):
+func _on_txtShortName_text_changed(new_text : String):
 	locationDto.shortName = new_text
+	$mainContainer/buttons/btnSave.disabled = new_text.empty()
 
 
 func _on_txtDescription_text_changed(new_text):

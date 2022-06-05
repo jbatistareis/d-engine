@@ -82,6 +82,7 @@ text = "Name"
 margin_left = 114.0
 margin_right = 594.0
 margin_bottom = 32.0
+clear_button_enabled = true
 
 [node name="lblShortName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
 margin_top = 41.0
@@ -531,6 +532,7 @@ handle_input_locally = false
 render_target_update_mode = 0
 
 [node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
@@ -833,14 +835,13 @@ size_flags_horizontal = 3
 columns = 4
 
 [node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
 margin_top = 6.0
-margin_right = 408.0
+margin_right = 445.0
 margin_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_right = 408.0
+margin_right = 445.0
 margin_bottom = 22.0
 
 [node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/verdict/title"]
@@ -850,6 +851,6 @@ text = "↳ Verdict "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/title"]
 margin_left = 104.0
-margin_right = 408.0
+margin_right = 445.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
