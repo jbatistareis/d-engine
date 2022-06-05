@@ -6,3 +6,5 @@ const FILE_NOT_FOUND : String = 'File \'%s\' not found'
 
 const BATTLE_CANT_START : String = 'Can\'t start battle: %s, %s'
 
+const UNK_CHARACTER_DATA : String = 'Unknown character data: %s, type %d'
+

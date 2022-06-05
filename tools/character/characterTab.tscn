@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tools/character/characterTab.gd" type="Script" id=1]
+[ext_resource path="res://tools/character/verdict.gd" type="Script" id=2]
+[ext_resource path="res://tools/character/model.gd" type="Script" id=3]
+[ext_resource path="res://tools/character/visualization.gd" type="Script" id=4]
+[ext_resource path="res://tools/character/inventory.gd" type="Script" id=5]
 
 [node name="Character" type="Tabs"]
 anchor_right = 1.0
@@ -382,7 +386,7 @@ margin_right = 382.0
 margin_bottom = 28.0
 custom_constants/separation = 50
 
-[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+[node name="btnEditInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 392.0
 margin_right = 444.0
 margin_bottom = 28.0
@@ -416,7 +420,7 @@ margin_right = 382.0
 margin_bottom = 66.0
 custom_constants/separation = 50
 
-[node name="Button3" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 392.0
 margin_top = 38.0
 margin_right = 444.0
@@ -502,6 +506,7 @@ margin_right = 1222.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 445, 0 )
 size_flags_vertical = 3
+script = ExtResource( 4 )
 
 [node name="Control" type="Control" parent="background/mainSeparator/visualization"]
 margin_right = 445.0
@@ -509,16 +514,15 @@ margin_bottom = 2.0
 rect_min_size = Vector2( 0, 2 )
 
 [node name="dummyContainer" type="CenterContainer" parent="background/mainSeparator/visualization"]
-visible = false
 margin_top = 6.0
-margin_right = 408.0
+margin_right = 445.0
 margin_bottom = 720.0
 size_flags_vertical = 3
 
 [node name="lblDummy" type="Label" parent="background/mainSeparator/visualization/dummyContainer"]
-margin_left = 4.0
+margin_left = 22.0
 margin_top = 333.0
-margin_right = 404.0
+margin_right = 422.0
 margin_bottom = 380.0
 rect_min_size = Vector2( 400, 0 )
 text = "Click on a model, inventory, or verdict to see more details."
@@ -532,6 +536,7 @@ margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
 size_flags_vertical = 3
+script = ExtResource( 5 )
 
 [node name="identificationTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
 margin_right = 445.0
@@ -830,10 +835,12 @@ size_flags_horizontal = 3
 columns = 4
 
 [node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
 margin_top = 6.0
 margin_right = 445.0
 margin_bottom = 720.0
 size_flags_vertical = 3
+script = ExtResource( 2 )
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
 margin_right = 445.0
@@ -916,6 +923,7 @@ margin_top = 6.0
 margin_right = 408.0
 margin_bottom = 720.0
 size_flags_vertical = 3
+script = ExtResource( 3 )
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
 margin_right = 408.0
@@ -941,3 +949,27 @@ size_flags_vertical = 3
 [node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
 handle_input_locally = false
 render_target_update_mode = 0
+
+[connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container/optType" to="." method="_on_optType_item_selected"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbBaseHp" to="." method="_on_sbBaseHp_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp" to="." method="_on_sbCurrentHp_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbExtraHp" to="." method="_on_sbExtraHp_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbStrength" to="." method="_on_sbStrength_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbDexterity" to="." method="_on_sbDexterity_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbConstitution" to="." method="_on_sbConstitution_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbIntelligence" to="." method="_on_sbIntelligence_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbWisdom" to="." method="_on_sbWisdom_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbCharisma" to="." method="_on_sbCharisma_value_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory" to="." method="_on_optInventory_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewInventory" to="." method="_on_btnViewInventory_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnEditInventory" to="." method="_on_btnEditInventory_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict" to="." method="_on_optVerdict_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewVerdict" to="." method="_on_btnViewVerdict_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnEditVerdict" to="." method="_on_btnEditVerdict_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel" to="." method="_on_optModel_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewModel" to="." method="_on_btnViewModel_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
