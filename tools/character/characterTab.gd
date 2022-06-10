@@ -63,6 +63,7 @@ func loadAllData() -> void:
 		$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel.add_item(model)
 
 
+
 # files list
 func _on_fileList_item_selected(index):
 	loadCharacter($background/mainSeparator/fileList.get_item_text(index))
@@ -174,6 +175,11 @@ func _on_btnViewModel_pressed():
 
 # buttons
 func _on_btnSave_pressed():
+	$saveConfigmation.entityName = characterDto.shortName
+	$saveConfigmation.popup_centered()
+
+
+func _on_saveConfigmation_confirmed():
 	Persistence.saveDTO(characterDto)
 	loadAllData()
 

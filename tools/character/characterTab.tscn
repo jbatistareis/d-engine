@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tools/character/characterTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/character/verdict.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://tools/character/visualization.gd" type="Script" id=4]
 [ext_resource path="res://tools/character/inventory.gd" type="Script" id=5]
 [ext_resource path="res://tools/character/model/modelPreview.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tools/character/saveConfigmation.gd" type="Script" id=7]
 
 [node name="Character" type="Tabs"]
 anchor_right = 1.0
@@ -1078,6 +1079,11 @@ margin_right = 452.0
 margin_bottom = 764.0
 rect_min_size = Vector2( 0, 2 )
 
+[node name="saveConfigmation" type="ConfirmationDialog" parent="."]
+margin_right = 218.0
+margin_bottom = 74.0
+script = ExtResource( 7 )
+
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/container/txtShortName" to="." method="_on_txtShortName_text_changed"]
@@ -1107,3 +1113,4 @@ rect_min_size = Vector2( 0, 2 )
 [connection signal="pressed" from="background/mainSeparator/visualization/Inventory/data/button/btnEditInventory" to="background/mainSeparator/visualization/Inventory/data" method="_on_btnEditInventory_pressed"]
 [connection signal="pressed" from="background/mainSeparator/visualization/Model/data/buttons/btnRotateL" to="background/mainSeparator/visualization/Model/data/container/Viewport/area" method="_on_btnRotateL_pressed"]
 [connection signal="pressed" from="background/mainSeparator/visualization/Model/data/buttons/btnRotateR" to="background/mainSeparator/visualization/Model/data/container/Viewport/area" method="_on_btnRotateR_pressed"]
+[connection signal="confirmed" from="saveConfigmation" to="." method="_on_saveConfigmation_confirmed"]
