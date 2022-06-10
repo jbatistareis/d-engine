@@ -1,14 +1,20 @@
 extends Tabs
 
-var characterDto : CharacterDTO
+var characterDto : CharacterDTO = CharacterDTO.new()
 
 
 func _ready() -> void:
+	setFields()
 	loadAllData()
 
 
 func loadCharacter(shortName : String) -> void:
 	characterDto = Persistence.loadDTO(shortName, Enums.EntityType.CHARACTER)
+	setFields()
+
+
+func setFields() -> void:
+	pass
 
 
 func loadAllData() -> void:
@@ -120,4 +126,5 @@ func _on_btnSave_pressed():
 
 func _on_btnReload_pressed():
 	loadAllData()
+	setFields()
 
