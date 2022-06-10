@@ -28,14 +28,14 @@ size_flags_vertical = 3
 
 [node name="fileList" type="ItemList" parent="background/mainSeparator"]
 margin_right = 130.0
-margin_bottom = 720.0
+margin_bottom = 768.0
 rect_min_size = Vector2( 130, 0 )
 size_flags_vertical = 3
 
 [node name="dataPanel" type="PanelContainer" parent="background/mainSeparator"]
 margin_left = 134.0
 margin_right = 754.0
-margin_bottom = 720.0
+margin_bottom = 768.0
 rect_min_size = Vector2( 620, 0 )
 size_flags_vertical = 3
 
@@ -43,7 +43,7 @@ size_flags_vertical = 3
 margin_left = 7.0
 margin_top = 7.0
 margin_right = 613.0
-margin_bottom = 713.0
+margin_bottom = 761.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -458,15 +458,15 @@ margin_bottom = 106.0
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 559.0
 margin_right = 606.0
-margin_bottom = 706.0
+margin_bottom = 754.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 119.0
+margin_top = 167.0
 margin_right = 606.0
-margin_bottom = 147.0
+margin_bottom = 195.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
@@ -503,23 +503,23 @@ size_flags_horizontal = 3
 [node name="Control" type="Control" parent="background/mainSeparator"]
 margin_left = 758.0
 margin_right = 768.0
-margin_bottom = 720.0
+margin_bottom = 768.0
 rect_min_size = Vector2( 10, 0 )
 
 [node name="visualization" type="TabContainer" parent="background/mainSeparator"]
 margin_left = 772.0
 margin_right = 1232.0
-margin_bottom = 720.0
+margin_bottom = 768.0
 rect_min_size = Vector2( 460, 0 )
 size_flags_vertical = 3
 tabs_visible = false
 script = ExtResource( 4 )
 
 [node name="Message" type="Tabs" parent="background/mainSeparator/visualization"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
+margin_top = 8.0
 margin_right = -4.0
 margin_bottom = -4.0
 
@@ -531,9 +531,9 @@ size_flags_vertical = 3
 
 [node name="lblDummy" type="Label" parent="background/mainSeparator/visualization/Message/dummyContainer"]
 margin_left = 26.0
-margin_top = 334.0
+margin_top = 354.0
 margin_right = 426.0
-margin_bottom = 381.0
+margin_bottom = 401.0
 rect_min_size = Vector2( 400, 0 )
 text = "Click on a model, inventory, or verdict to see more details."
 align = 1
@@ -989,6 +989,7 @@ rect_min_size = Vector2( 0, 2 )
 size_flags_horizontal = 3
 
 [node name="Model" type="Tabs" parent="background/mainSeparator/visualization"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -1020,21 +1021,21 @@ size_flags_horizontal = 3
 [node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/Model/data"]
 margin_top = 26.0
 margin_right = 452.0
-margin_bottom = 678.0
+margin_bottom = 726.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/Model/data/container"]
-size = Vector2( 452, 576 )
+size = Vector2( 452, 640 )
 handle_input_locally = false
-render_target_update_mode = 3
+render_target_update_mode = 0
 
 [node name="area" parent="background/mainSeparator/visualization/Model/data/container/Viewport" instance=ExtResource( 6 )]
 
 [node name="buttons" type="HBoxContainer" parent="background/mainSeparator/visualization/Model/data"]
-margin_top = 682.0
+margin_top = 730.0
 margin_right = 452.0
-margin_bottom = 710.0
+margin_bottom = 758.0
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="background/mainSeparator/visualization/Model/data/buttons"]
@@ -1072,9 +1073,9 @@ margin_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="background/mainSeparator/visualization/Model/data"]
-margin_top = 714.0
+margin_top = 762.0
 margin_right = 452.0
-margin_bottom = 716.0
+margin_bottom = 764.0
 rect_min_size = Vector2( 0, 2 )
 
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
