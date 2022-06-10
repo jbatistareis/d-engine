@@ -1,7 +1,10 @@
 extends VBoxContainer
 
+var inventoryDto : InventoryDTO
+
 
 func loadData(inventoryDto : InventoryDTO) -> void:
+	self.inventoryDto = inventoryDto
 	$identification/lblInvNameData.text = inventoryDto.name
 	$identification/lblInvMoneyData.text = str(inventoryDto.money)
 	
@@ -35,13 +38,13 @@ func loadData(inventoryDto : InventoryDTO) -> void:
 
 
 func _on_lnkWpnShortNameData_pressed():
-	pass # Replace with function body.
+	EditorSignals.emit_signal("selectedWeapon", inventoryDto.weaponShortName)
 
 
 func _on_lnkArmShortNameData_pressed():
-	pass # Replace with function body.
+	EditorSignals.emit_signal("selectedArmor", inventoryDto.armorShortName)
 
 
 func _on_btnEditInventory_pressed():
-	pass # Replace with function body.
+	EditorSignals.emit_signal("selectedInventory", inventoryDto.shortName)
 
