@@ -1,27 +1,17 @@
 extends Node
 
-var extensionRegex : RegEx = RegEx.new()
 var scenes : Dictionary = {}
-
-
-func _init() -> void:
-	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 
 
 func fromLocation(location : Location) -> void:
 	scenes.clear()
 	
-	var directory = Directory.new()
-	var path = GamePaths.LOCATION_MODELS % location.shortName
+	var locationModels = Persistence.listEntities(Enums.EntityType.LOCATION_MODELS, location.shortName)
+	var locationModelPath = GamePaths.LOCATION_MODELS + '/%s.tscn'
 	
-	directory.open(GamePaths.LOCATION_MODELS % location.shortName)
-	directory.list_dir_begin(true, true)
-	
-	var filename = directory.get_next()
-	while !filename.empty():
-		if filename.ends_with('.tscn'):
-			scenes[extensionRegex.sub(filename, '')] = load(path + '/' + filename)
-		filename = directory.get_next()
+	for model in locationModels:
+		if !scenes.has(model):
+			scenes[model] = load(locationModelPath % [location.shortName, model])
 	
 	for room in location.rooms:
 		for foeGroup in room.foeShortNameGroups:

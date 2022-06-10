@@ -138,18 +138,20 @@ static func listEntities(entityType : int, subpath : String = '') -> Array:
 	
 	var dir = Directory.new()
 	if dir.open(path) == OK:
-		dir.list_dir_begin()
-		var file = dir.get_next()
+		dir.list_dir_begin(true, true)
 		
+		var file = dir.get_next()
 		while !file.empty():
-			if entityType != Enums.EntityType.CHARACTER_MODEL:
-				if !dir.current_is_dir():
-					result.append(extensionRegex.sub(file, ''))
-			else:
-				if dir.current_is_dir():
-					result.append(file)
+			if (entityType != Enums.EntityType.CHARACTER_MODEL) && !dir.current_is_dir():
+				result.append(extensionRegex.sub(file, ''))
+			elif (entityType == Enums.EntityType.CHARACTER_MODEL) && dir.current_is_dir():
+				result.append(extensionRegex.sub(file, ''))
 			
 			file = dir.get_next()
+		
+		dir.list_dir_end()
+	else:
+		push_error(ErrorMessages.DIR_NOT_FOUND % path)
 	
 	return result
 
