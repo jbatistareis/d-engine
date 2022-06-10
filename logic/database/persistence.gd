@@ -148,11 +148,11 @@ static func listEntities(entityType : int, subpath : String = '') -> Array:
 				result.append(extensionRegex.sub(file, ''))
 			
 			file = dir.get_next()
+		
+		dir.list_dir_end()
 	else:
 		push_error(ErrorMessages.DIR_NOT_FOUND % path)
 	
-	dir.list_dir_end()
 	result.sort()
-	
 	return result
 
