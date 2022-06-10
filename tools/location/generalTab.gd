@@ -5,13 +5,10 @@ signal loadedLocationDto(locationDto)
 const _SAVE_MESSAGE : String = 'Do you wish to save/overwrite the file \'%s\'?'
 const _PREVIEW_TITLE : String = '%s (%s) preview'
 
-var extensionRegex : RegEx = RegEx.new()
 var locationDto : LocationDTO setget setLocationDto
 
 
 func _ready() -> void:
-	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
-	
 	var dummyLocation = LocationDTO.new()
 	dummyLocation.rooms.clear()
 	
@@ -82,16 +79,9 @@ func _on_btnOpen_pressed():
 	var lst = get_node("../../../../openWindow/VBoxContainer/ScrollContainer/lstFiles")
 	lst.clear()
 	
-	var dir = Directory.new()
-	if dir.open(GamePaths.LOCATION_PATH) == OK:
-		dir.list_dir_begin()
-		var file = dir.get_next()
-		
-		while !file.empty():
-			if !dir.current_is_dir():
-				lst.add_item(extensionRegex.sub(file, ''))
-			file = dir.get_next()
-		
+	for item in Persistence.listEntities(Enums.EntityType.LOCATION):
+		lst.add_item(item)
+	
 	lst.sort_items_by_text()
 
 
