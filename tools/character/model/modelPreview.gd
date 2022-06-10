@@ -4,8 +4,6 @@ const _ROTATE_BUTTON : float = PI / 4
 
 
 func view(model : Spatial) -> void:
-	visible = true
-	
 	for node in $blockArea.get_children():
 		node.queue_free()
 	

@@ -184,6 +184,8 @@ func _on_btnReload_pressed():
 
 
 func _on_tabs_tab_changed(tab : int):
-	if tab != get_index():
+	if tab == get_index():
+		get_node("background/mainSeparator/visualization/model/container/Viewport/area").visible = true
+	else:
 		get_node("background/mainSeparator/visualization/model/container/Viewport/area").visible = false
 

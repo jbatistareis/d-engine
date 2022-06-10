@@ -30,6 +30,7 @@ anchor_bottom = 1.0
 
 [node name="Character" parent="tabs" instance=ExtResource( 3 )]
 visible = false
+scrolling_enabled = false
 
 [node name="Event" type="Tabs" parent="tabs"]
 visible = false
