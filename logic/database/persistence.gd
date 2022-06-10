@@ -98,7 +98,7 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	return dto
 
 
-static func listEntities(entityType : int) -> Array:
+static func listEntities(entityType : int, subpath : String = '') -> Array:
 	var extensionRegex : RegEx = RegEx.new()
 	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 	
@@ -107,6 +107,9 @@ static func listEntities(entityType : int) -> Array:
 	
 	match entityType:
 		Enums.EntityType.CHARACTER:
+			path = GamePaths.CHARACTER_PATH
+		
+		Enums.EntityType.CHARACTER_MODEL:
 			path = GamePaths.CHARACTER_PATH
 		
 		Enums.EntityType.VERDICT:
@@ -129,6 +132,9 @@ static func listEntities(entityType : int) -> Array:
 		
 		Enums.EntityType.LOCATION:
 			path = GamePaths.LOCATION_PATH
+		
+		Enums.EntityType.LOCATION_MODELS:
+			path = GamePaths.LOCATION_MODELS % subpath
 	
 	var dir = Directory.new()
 	if dir.open(path) == OK:
@@ -136,8 +142,13 @@ static func listEntities(entityType : int) -> Array:
 		var file = dir.get_next()
 		
 		while !file.empty():
-			if !dir.current_is_dir():
-				result.append(extensionRegex.sub(file, ''))
+			if entityType != Enums.EntityType.CHARACTER_MODEL:
+				if !dir.current_is_dir():
+					result.append(extensionRegex.sub(file, ''))
+			else:
+				if dir.current_is_dir():
+					result.append(file)
+			
 			file = dir.get_next()
 	
 	return result

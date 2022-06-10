@@ -81,8 +81,6 @@ func _on_btnOpen_pressed():
 	
 	for item in Persistence.listEntities(Enums.EntityType.LOCATION):
 		lst.add_item(item)
-	
-	lst.sort_items_by_text()
 
 
 func _on_btnCancel_pressed():

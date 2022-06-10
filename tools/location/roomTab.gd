@@ -5,14 +5,9 @@ signal changeModel(locationShortName, model, orientation)
 const _DETAILS_SINGLE_TEXT = 'id: %d @ (%d, %d)'
 const _DETAILS_MULTI_TEXT = 'Multiple rooms'
 
-var extensionRegex : RegEx = RegEx.new()
 var locationDto : LocationDTO
 var room : Dictionary = {} setget setRoom
 var multiRoom : Array = []
-
-
-func _init() -> void:
-	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
 
 
 func setRoom(value : Dictionary):
@@ -80,16 +75,8 @@ func _on_General_loadedLocationDto(locationDto : LocationDTO):
 	self.locationDto = locationDto
 	$mainContainer/model/controls/optModel.items.clear()
 	
-	var dir = Directory.new()
-	if dir.open(GamePaths.LOCATION_MODELS % self.locationDto.shortName) == OK:
-		dir.list_dir_begin()
-		var file = dir.get_next()
-		
-		$mainContainer/model/controls/optModel.clear()
-		while !file.empty():
-			if !dir.current_is_dir():
-				$mainContainer/model/controls/optModel.add_item(extensionRegex.sub(file, ''))
-			file = dir.get_next()
+	for item in Persistence.listEntities(Enums.EntityType.LOCATION_MODELS, self.locationDto.shortName):
+		$mainContainer/model/controls/optModel.add_item(item)
 
 
 func _on_grid_selectedRoom(room : Dictionary):
