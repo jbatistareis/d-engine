@@ -1,29 +1,24 @@
-extends VBoxContainer
+extends TabContainer
 
 
 func showData(type : int, shortName : String = '') -> void:
-	$dummyContainer.visible = false
-	$inventory.visible = false
-	$verdict.visible = false
-	$model.visible = false
-	
 	match type:
-		Enums.EntityType.INVENTORY:
-			$inventory.visible = true
-			$inventory.loadData(Persistence.loadDTO(shortName, type))
-		
 		Enums.EntityType.VERDICT:
-			$verdict.visible = true
-			$verdict.loadData(Persistence.loadDTO(shortName, type))
+			current_tab = 1
+			$Verdict/data.loadData(Persistence.loadDTO(shortName, type))
+		
+		Enums.EntityType.INVENTORY:
+			current_tab = 2
+			$Inventory/data.loadData(Persistence.loadDTO(shortName, type))
 		
 		Enums.EntityType.CHARACTER_MODEL:
-			$model.visible = true
-			$model.loadData(load(GamePaths.CHARACTER_MODEL % shortName))
+			current_tab = 3
+			$Model/data.loadData(load(GamePaths.CHARACTER_MODEL % shortName))
 		
 		-1:
-			$dummyContainer.visible = true
+			current_tab = 0
 		
 		_:
-			$dummyContainer.visible = true
+			current_tab = 0
 			push_error(ErrorMessages.UNK_CHARACTER_DATA % [shortName, type])
 

@@ -506,554 +506,575 @@ margin_right = 768.0
 margin_bottom = 720.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="visualization" type="VBoxContainer" parent="background/mainSeparator"]
+[node name="visualization" type="TabContainer" parent="background/mainSeparator"]
 margin_left = 772.0
-margin_right = 1222.0
+margin_right = 1232.0
 margin_bottom = 720.0
-rect_min_size = Vector2( 450, 0 )
+rect_min_size = Vector2( 460, 0 )
 size_flags_vertical = 3
+tabs_visible = false
 script = ExtResource( 4 )
 
-[node name="Control" type="Control" parent="background/mainSeparator/visualization"]
-margin_right = 450.0
-margin_bottom = 2.0
-rect_min_size = Vector2( 0, 2 )
+[node name="Message" type="Tabs" parent="background/mainSeparator/visualization"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
 
-[node name="dummyContainer" type="CenterContainer" parent="background/mainSeparator/visualization"]
-margin_top = 6.0
-margin_right = 450.0
-margin_bottom = 720.0
+[node name="dummyContainer" type="CenterContainer" parent="background/mainSeparator/visualization/Message"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="lblDummy" type="Label" parent="background/mainSeparator/visualization/dummyContainer"]
-margin_left = 25.0
-margin_top = 333.0
-margin_right = 425.0
-margin_bottom = 380.0
+[node name="lblDummy" type="Label" parent="background/mainSeparator/visualization/Message/dummyContainer"]
+margin_left = 26.0
+margin_top = 334.0
+margin_right = 426.0
+margin_bottom = 381.0
 rect_min_size = Vector2( 400, 0 )
 text = "Click on a model, inventory, or verdict to see more details."
 align = 1
 valign = 1
 autowrap = true
 
-[node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+[node name="Verdict" type="Tabs" parent="background/mainSeparator/visualization"]
 visible = false
-margin_top = 6.0
-margin_right = 450.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="data" type="VBoxContainer" parent="background/mainSeparator/visualization/Verdict"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 2 )
 
-[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_right = 450.0
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/Verdict/data"]
+margin_right = 500.0
 margin_bottom = 22.0
 
-[node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/verdict/title"]
+[node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/Verdict/data/title"]
 margin_right = 100.0
 margin_bottom = 22.0
 text = "↳ Verdict "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/title"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Verdict/data/title"]
 margin_left = 104.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/verdict"]
+[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/Verdict/data"]
 margin_top = 26.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 48.0
 columns = 2
 
-[node name="lblVrdName" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+[node name="lblVrdName" type="Label" parent="background/mainSeparator/visualization/Verdict/data/identification"]
 margin_right = 60.0
 margin_bottom = 22.0
 text = "Name: "
 
-[node name="lblVrdNameData" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+[node name="lblVrdNameData" type="Label" parent="background/mainSeparator/visualization/Verdict/data/identification"]
 margin_left = 64.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainSeparator/visualization/verdict"]
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/Verdict/data"]
 margin_top = 52.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="actionsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+[node name="actionsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Verdict/data"]
 margin_top = 71.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 93.0
 
-[node name="lblActions" type="Label" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+[node name="lblActions" type="Label" parent="background/mainSeparator/visualization/Verdict/data/actionsTitle"]
 margin_right = 100.0
 margin_bottom = 22.0
 text = "↳ Actions "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Verdict/data/actionsTitle"]
 margin_left = 104.0
-margin_right = 450.0
+margin_right = 500.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/visualization/verdict"]
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/visualization/Verdict/data"]
 margin_top = 97.0
-margin_right = 450.0
-margin_bottom = 657.0
+margin_right = 500.0
+margin_bottom = 619.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="container" type="VBoxContainer" parent="background/mainSeparator/visualization/verdict/scroll"]
-margin_right = 450.0
+[node name="container" type="VBoxContainer" parent="background/mainSeparator/visualization/Verdict/data/scroll"]
+margin_right = 500.0
 size_flags_horizontal = 3
 custom_constants/separation = 5
 
-[node name="Control2" type="Control" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 661.0
-margin_right = 450.0
-margin_bottom = 676.0
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/Verdict/data"]
+margin_top = 623.0
+margin_right = 500.0
+margin_bottom = 638.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 680.0
-margin_right = 450.0
-margin_bottom = 708.0
+[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/Verdict/data"]
+margin_top = 642.0
+margin_right = 500.0
+margin_bottom = 670.0
 alignment = 2
 
-[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/visualization/verdict/button"]
-margin_left = 398.0
-margin_right = 450.0
+[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/visualization/Verdict/data/button"]
+margin_left = 448.0
+margin_right = 500.0
 margin_bottom = 28.0
 text = "Edit"
 
-[node name="Control3" type="Control" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 712.0
-margin_right = 450.0
-margin_bottom = 714.0
+[node name="Control3" type="Control" parent="background/mainSeparator/visualization/Verdict/data"]
+margin_top = 674.0
+margin_right = 500.0
+margin_bottom = 676.0
 rect_min_size = Vector2( 0, 2 )
 size_flags_horizontal = 3
 
-[node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+[node name="Inventory" type="Tabs" parent="background/mainSeparator/visualization"]
 visible = false
-margin_top = 6.0
-margin_right = 450.0
-margin_bottom = 720.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="data" type="VBoxContainer" parent="background/mainSeparator/visualization/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 5 )
 
-[node name="identificationTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
-margin_right = 450.0
+[node name="identificationTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data"]
+margin_right = 452.0
 margin_bottom = 22.0
 
-[node name="lblInventory" type="Label" parent="background/mainSeparator/visualization/inventory/identificationTitle"]
+[node name="lblInventory" type="Label" parent="background/mainSeparator/visualization/Inventory/data/identificationTitle"]
 margin_right = 120.0
 margin_bottom = 22.0
 text = "↳ Inventory "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/identificationTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/identificationTitle"]
 margin_left = 124.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 26.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 74.0
 columns = 2
 
-[node name="lblInvName" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+[node name="lblInvName" type="Label" parent="background/mainSeparator/visualization/Inventory/data/identification"]
 margin_right = 70.0
 margin_bottom = 22.0
 text = "Name: "
 
-[node name="lblInvNameData" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+[node name="lblInvNameData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/identification"]
 margin_left = 74.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblInvMoney" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+[node name="lblInvMoney" type="Label" parent="background/mainSeparator/visualization/Inventory/data/identification"]
 margin_top = 26.0
 margin_right = 70.0
 margin_bottom = 48.0
 text = "Money: "
 
-[node name="lblInvMoneyData" type="Label" parent="background/mainSeparator/visualization/inventory/identification"]
+[node name="lblInvMoneyData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/identification"]
 margin_left = 74.0
 margin_top = 26.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainSeparator/visualization/inventory"]
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 78.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 93.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="weaponTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="weaponTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 97.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 119.0
 
-[node name="lblWeapon" type="Label" parent="background/mainSeparator/visualization/inventory/weaponTitle"]
+[node name="lblWeapon" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponTitle"]
 margin_right = 90.0
 margin_bottom = 22.0
 text = "↳ Weapon "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/weaponTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/weaponTitle"]
 margin_left = 94.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="weapon1" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="weapon1" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 123.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 197.0
 columns = 2
 
-[node name="lblWpnName" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lblWpnName" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_right = 120.0
 margin_bottom = 22.0
 text = "Name: "
 
-[node name="lblWpnNameData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lblWpnNameData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_left = 124.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblWpnShortName" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lblWpnShortName" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_top = 26.0
 margin_right = 120.0
 margin_bottom = 48.0
 text = "Short name: "
 
-[node name="lnkWpnShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lnkWpnShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_left = 124.0
 margin_top = 26.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="lblWpnDamage" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lblWpnDamage" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_top = 52.0
 margin_right = 120.0
 margin_bottom = 74.0
 text = "Damage: "
 
-[node name="lblWpnDamageData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lblWpnDamageData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weapon1"]
 margin_left = 124.0
 margin_top = 52.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
-[node name="lblModifiers" type="Label" parent="background/mainSeparator/visualization/inventory"]
+[node name="lblModifiers" type="Label" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 201.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 223.0
 text = "Modifiers ⬎"
 
-[node name="weaponMod" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="weaponMod" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 227.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 249.0
 columns = 6
 
-[node name="lblWpnModifierDice" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
+[node name="lblWpnModifierDice" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
 margin_right = 60.0
 margin_bottom = 22.0
 text = "Dice: "
 
-[node name="lblWpnModifierDiceData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
+[node name="lblWpnModifierDiceData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
 margin_left = 64.0
-margin_right = 147.0
+margin_right = 148.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
-margin_left = 151.0
-margin_right = 211.0
+[node name="lblWpnModifierRoll" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
+margin_left = 152.0
+margin_right = 212.0
 margin_bottom = 22.0
 text = "Roll: "
 
-[node name="lblWpModifierRollData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
-margin_left = 215.0
-margin_right = 298.0
+[node name="lblWpModifierRollData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
+margin_left = 216.0
+margin_right = 300.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
-margin_left = 302.0
-margin_right = 362.0
+[node name="lblWpnModifier" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
+margin_left = 304.0
+margin_right = 364.0
 margin_bottom = 22.0
 text = "Stat: "
 
-[node name="lblWpnModifierData" type="Label" parent="background/mainSeparator/visualization/inventory/weaponMod"]
-margin_left = 366.0
-margin_right = 449.0
+[node name="lblWpnModifierData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/weaponMod"]
+margin_left = 368.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="background/mainSeparator/visualization/inventory"]
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 253.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 268.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="armorTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="armorTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 272.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 294.0
 
-[node name="lblArmor" type="Label" parent="background/mainSeparator/visualization/inventory/armorTitle"]
+[node name="lblArmor" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armorTitle"]
 margin_right = 80.0
 margin_bottom = 22.0
 text = "↳ Armor "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/armorTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/armorTitle"]
 margin_left = 84.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="armor" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="armor" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 298.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 372.0
 columns = 2
 
-[node name="lblArmName" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lblArmName" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_right = 150.0
 margin_bottom = 22.0
 text = "Name: "
 
-[node name="lblArmNameData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lblArmNameData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_left = 154.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="lblArmShortName" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lblArmShortName" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_top = 26.0
 margin_right = 150.0
 margin_bottom = 48.0
 text = "Short name: "
 
-[node name="lnkArmShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lnkArmShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_left = 154.0
 margin_top = 26.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 48.0
 size_flags_horizontal = 3
 
-[node name="lblArmMaxIntegrity" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lblArmMaxIntegrity" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_top = 52.0
 margin_right = 150.0
 margin_bottom = 74.0
 text = "Max integrity: "
 
-[node name="lblArmMaxIntegrityData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lblArmMaxIntegrityData" type="Label" parent="background/mainSeparator/visualization/Inventory/data/armor"]
 margin_left = 154.0
 margin_top = 52.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 74.0
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="background/mainSeparator/visualization/inventory"]
+[node name="Control3" type="Control" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 376.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 391.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="itmWpnGrid" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
+[node name="itmWpnGrid" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data"]
 margin_top = 395.0
-margin_right = 450.0
-margin_bottom = 657.0
+margin_right = 452.0
+margin_bottom = 619.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/hseparation = 15
 columns = 2
 
-[node name="itemsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid"]
-margin_right = 217.0
+[node name="itemsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
+margin_right = 218.0
 margin_bottom = 22.0
 
-[node name="lblItems" type="Label" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/itemsTitle"]
+[node name="lblItems" type="Label" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsTitle"]
 margin_right = 80.0
 margin_bottom = 22.0
 text = "↳ Items "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/itemsTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsTitle"]
 margin_left = 84.0
-margin_right = 217.0
+margin_right = 218.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="weaponsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid"]
-margin_left = 232.0
-margin_right = 449.0
+[node name="weaponsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
+margin_left = 233.0
+margin_right = 451.0
 margin_bottom = 22.0
 
-[node name="lblWeapons" type="Label" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/weaponsTitle"]
+[node name="lblWeapons" type="Label" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/weaponsTitle"]
 margin_right = 100.0
 margin_bottom = 22.0
 text = "↳ Weapons "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/weaponsTitle"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/weaponsTitle"]
 margin_left = 104.0
-margin_right = 217.0
+margin_right = 218.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="itemsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid"]
+[node name="itemsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
 margin_top = 26.0
-margin_right = 217.0
-margin_bottom = 262.0
+margin_right = 218.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/itemsContainer"]
-margin_right = 217.0
+[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsContainer"]
+margin_right = 218.0
 size_flags_horizontal = 3
 columns = 2
 
-[node name="weaponsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid"]
-margin_left = 232.0
+[node name="weaponsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
+margin_left = 233.0
 margin_top = 26.0
-margin_right = 449.0
-margin_bottom = 262.0
+margin_right = 451.0
+margin_bottom = 224.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
-[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid/weaponsContainer"]
-margin_right = 217.0
+[node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/weaponsContainer"]
+margin_right = 218.0
 size_flags_horizontal = 3
 columns = 2
 
-[node name="Control5" type="Control" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 661.0
-margin_right = 450.0
-margin_bottom = 676.0
+[node name="Control5" type="Control" parent="background/mainSeparator/visualization/Inventory/data"]
+margin_top = 623.0
+margin_right = 452.0
+margin_bottom = 638.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
-[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 680.0
-margin_right = 450.0
-margin_bottom = 708.0
+[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data"]
+margin_top = 642.0
+margin_right = 452.0
+margin_bottom = 670.0
 alignment = 2
 
-[node name="btnEditInventory" type="Button" parent="background/mainSeparator/visualization/inventory/button"]
-margin_left = 398.0
-margin_right = 450.0
+[node name="btnEditInventory" type="Button" parent="background/mainSeparator/visualization/Inventory/data/button"]
+margin_left = 400.0
+margin_right = 452.0
 margin_bottom = 28.0
 text = "Edit"
 
-[node name="Control4" type="Control" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 712.0
-margin_right = 450.0
-margin_bottom = 714.0
+[node name="Control4" type="Control" parent="background/mainSeparator/visualization/Inventory/data"]
+margin_top = 674.0
+margin_right = 452.0
+margin_bottom = 676.0
 rect_min_size = Vector2( 0, 2 )
 size_flags_horizontal = 3
 
-[node name="model" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
-margin_top = 6.0
-margin_right = 450.0
-margin_bottom = 720.0
+[node name="Model" type="Tabs" parent="background/mainSeparator/visualization"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="data" type="VBoxContainer" parent="background/mainSeparator/visualization/Model"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 3 )
 
-[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
-margin_right = 450.0
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/Model/data"]
+margin_right = 452.0
 margin_bottom = 22.0
 
-[node name="lblModel" type="Label" parent="background/mainSeparator/visualization/model/title"]
+[node name="lblModel" type="Label" parent="background/mainSeparator/visualization/Model/data/title"]
 margin_right = 80.0
 margin_bottom = 22.0
 text = "↳ Model "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/model/title"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Model/data/title"]
 margin_left = 84.0
-margin_right = 450.0
+margin_right = 452.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/model"]
+[node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/Model/data"]
 margin_top = 26.0
-margin_right = 450.0
-margin_bottom = 26.0
+margin_right = 452.0
+margin_bottom = 678.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
-size = Vector2( 450, 0 )
+[node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/Model/data/container"]
+size = Vector2( 452, 576 )
 handle_input_locally = false
-render_target_update_mode = 0
+render_target_update_mode = 3
 
-[node name="area" parent="background/mainSeparator/visualization/model/container/Viewport" instance=ExtResource( 6 )]
+[node name="area" parent="background/mainSeparator/visualization/Model/data/container/Viewport" instance=ExtResource( 6 )]
 
-[node name="buttons" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
-margin_top = 680.0
-margin_right = 450.0
-margin_bottom = 708.0
+[node name="buttons" type="HBoxContainer" parent="background/mainSeparator/visualization/Model/data"]
+margin_top = 682.0
+margin_right = 452.0
+margin_bottom = 710.0
+size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainSeparator/visualization/model/buttons"]
-margin_right = 86.0
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/Model/data/buttons"]
+margin_right = 87.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="btnRotateL" type="Button" parent="background/mainSeparator/visualization/model/buttons"]
-margin_left = 90.0
-margin_right = 177.0
+[node name="btnRotateL" type="Button" parent="background/mainSeparator/visualization/Model/data/buttons"]
+margin_left = 91.0
+margin_right = 178.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "↩"
 
-[node name="lblCamera" type="Label" parent="background/mainSeparator/visualization/model/buttons"]
-margin_left = 181.0
+[node name="lblCamera" type="Label" parent="background/mainSeparator/visualization/Model/data/buttons"]
+margin_left = 182.0
 margin_top = 3.0
-margin_right = 268.0
+margin_right = 269.0
 margin_bottom = 25.0
 size_flags_horizontal = 3
 text = "Camera"
 align = 1
 
-[node name="btnRotateR" type="Button" parent="background/mainSeparator/visualization/model/buttons"]
-margin_left = 272.0
-margin_right = 359.0
+[node name="btnRotateR" type="Button" parent="background/mainSeparator/visualization/Model/data/buttons"]
+margin_left = 273.0
+margin_right = 360.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 text = "↪"
 
-[node name="Control2" type="Control" parent="background/mainSeparator/visualization/model/buttons"]
-margin_left = 363.0
-margin_right = 450.0
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/Model/data/buttons"]
+margin_left = 364.0
+margin_right = 452.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainSeparator/visualization/model"]
-margin_top = 712.0
-margin_right = 450.0
-margin_bottom = 714.0
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/Model/data"]
+margin_top = 714.0
+margin_right = 452.0
+margin_bottom = 716.0
 rect_min_size = Vector2( 0, 2 )
 
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
@@ -1079,9 +1100,9 @@ rect_min_size = Vector2( 0, 2 )
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewModel" to="." method="_on_btnViewModel_pressed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/verdict/button/btnEditVerdict" to="background/mainSeparator/visualization/verdict" method="_on_btnEditVerdict_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/inventory/weapon1/lnkWpnShortNameData" to="background/mainSeparator/visualization/inventory" method="_on_lnkWpnShortNameData_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/inventory/armor/lnkArmShortNameData" to="background/mainSeparator/visualization/inventory" method="_on_lnkArmShortNameData_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/inventory/button/btnEditInventory" to="background/mainSeparator/visualization/inventory" method="_on_btnEditInventory_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/model/buttons/btnRotateL" to="background/mainSeparator/visualization/model/container/Viewport/area" method="_on_btnRotateL_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/model/buttons/btnRotateR" to="background/mainSeparator/visualization/model/container/Viewport/area" method="_on_btnRotateR_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Verdict/data/button/btnEditVerdict" to="background/mainSeparator/visualization/Verdict/data" method="_on_btnEditVerdict_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Inventory/data/weapon1/lnkWpnShortNameData" to="background/mainSeparator/visualization/Inventory/data" method="_on_lnkWpnShortNameData_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Inventory/data/armor/lnkArmShortNameData" to="background/mainSeparator/visualization/Inventory/data" method="_on_lnkArmShortNameData_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Inventory/data/button/btnEditInventory" to="background/mainSeparator/visualization/Inventory/data" method="_on_btnEditInventory_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Model/data/buttons/btnRotateL" to="background/mainSeparator/visualization/Model/data/container/Viewport/area" method="_on_btnRotateL_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/Model/data/buttons/btnRotateR" to="background/mainSeparator/visualization/Model/data/container/Viewport/area" method="_on_btnRotateR_pressed"]
