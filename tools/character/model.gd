@@ -2,5 +2,6 @@ extends VBoxContainer
 
 
 func loadData(modelScene : PackedScene) -> void:
-	pass
+	$container/Viewport.size = $container.rect_size
+	$container/Viewport/area.view(modelScene.instance())
 

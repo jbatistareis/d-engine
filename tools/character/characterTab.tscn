@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tools/character/characterTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/character/verdict.gd" type="Script" id=2]
 [ext_resource path="res://tools/character/model.gd" type="Script" id=3]
 [ext_resource path="res://tools/character/visualization.gd" type="Script" id=4]
 [ext_resource path="res://tools/character/inventory.gd" type="Script" id=5]
+[ext_resource path="res://tools/character/model/modelPreview.tscn" type="PackedScene" id=6]
 
 [node name="Character" type="Tabs"]
 anchor_right = 1.0
@@ -207,7 +208,7 @@ margin_left = 448.0
 margin_top = 36.0
 margin_right = 594.0
 margin_bottom = 68.0
-hint_tooltip = "Affected by (BaseHP + Constitution)"
+hint_tooltip = "Affected by (Base + Constitution)"
 editable = false
 
 [node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
@@ -219,7 +220,7 @@ rect_min_size = Vector2( 0, 15 )
 [node name="stats" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 234.0
 margin_right = 606.0
-margin_bottom = 364.0
+margin_bottom = 400.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
 margin_right = 606.0
@@ -239,12 +240,12 @@ size_flags_horizontal = 3
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
 margin_top = 26.0
 margin_right = 606.0
-margin_bottom = 130.0
+margin_bottom = 166.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields"]
 margin_left = 6.0
 margin_right = 600.0
-margin_bottom = 104.0
+margin_bottom = 140.0
 size_flags_horizontal = 3
 columns = 4
 
@@ -321,16 +322,28 @@ margin_top = 72.0
 margin_right = 594.0
 margin_bottom = 104.0
 
+[node name="lblBaseDamage" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 113.0
+margin_right = 130.0
+margin_bottom = 135.0
+text = "Base damage "
+
+[node name="sbBaseDamage" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 134.0
+margin_top = 108.0
+margin_right = 280.0
+margin_bottom = 140.0
+
 [node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 368.0
+margin_top = 404.0
 margin_right = 606.0
-margin_bottom = 383.0
+margin_bottom = 419.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="misc" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 387.0
+margin_top = 423.0
 margin_right = 606.0
-margin_bottom = 517.0
+margin_bottom = 555.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
 margin_right = 606.0
@@ -350,80 +363,98 @@ size_flags_horizontal = 3
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
 margin_top = 26.0
 margin_right = 606.0
-margin_bottom = 130.0
+margin_bottom = 132.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields"]
-margin_left = 142.0
-margin_right = 464.0
-margin_bottom = 104.0
+margin_left = 93.0
+margin_right = 513.0
+margin_bottom = 106.0
 size_flags_horizontal = 3
 custom_constants/vseparation = 10
 custom_constants/hseparation = 10
-columns = 3
-
-[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_top = 3.0
-margin_right = 100.0
-margin_bottom = 25.0
-text = "Inventory "
-
-[node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 110.0
-margin_right = 260.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 150, 0 )
-align = 1
-
-[node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_left = 270.0
-margin_right = 322.0
-margin_bottom = 28.0
-text = "View"
+columns = 4
 
 [node name="lblVerdict" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_top = 41.0
+margin_top = 4.0
 margin_right = 100.0
-margin_bottom = 63.0
+margin_bottom = 26.0
 text = "Verdict "
 
 [node name="optVerdict" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 110.0
-margin_top = 38.0
 margin_right = 260.0
-margin_bottom = 66.0
+margin_bottom = 30.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
 [node name="btnViewVerdict" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 270.0
-margin_top = 38.0
 margin_right = 322.0
-margin_bottom = 66.0
+margin_bottom = 30.0
 text = "View"
 
-[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
-margin_top = 79.0
+[node name="chkVerdictAct" type="CheckBox" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 332.0
+margin_right = 420.0
+margin_bottom = 30.0
+text = "Active"
+
+[node name="lblInventory" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_top = 43.0
 margin_right = 100.0
-margin_bottom = 101.0
+margin_bottom = 65.0
+text = "Inventory "
+
+[node name="optInventory" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 110.0
+margin_top = 40.0
+margin_right = 260.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 150, 0 )
+align = 1
+
+[node name="btnViewInventory" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 270.0
+margin_top = 40.0
+margin_right = 322.0
+margin_bottom = 68.0
+text = "View"
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 332.0
+margin_top = 40.0
+margin_right = 420.0
+margin_bottom = 68.0
+
+[node name="lblModel" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_top = 81.0
+margin_right = 100.0
+margin_bottom = 103.0
 text = "Model "
 
 [node name="optModel" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 110.0
-margin_top = 76.0
+margin_top = 78.0
 margin_right = 260.0
-margin_bottom = 104.0
+margin_bottom = 106.0
 rect_min_size = Vector2( 150, 0 )
 align = 1
 
 [node name="btnViewModel" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
 margin_left = 270.0
-margin_top = 76.0
+margin_top = 78.0
 margin_right = 322.0
-margin_bottom = 104.0
+margin_bottom = 106.0
 text = "View"
 
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid"]
+margin_left = 332.0
+margin_top = 78.0
+margin_right = 420.0
+margin_bottom = 106.0
+
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 521.0
+margin_top = 559.0
 margin_right = 606.0
 margin_bottom = 706.0
 size_flags_horizontal = 3
@@ -431,9 +462,9 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 157.0
+margin_top = 119.0
 margin_right = 606.0
-margin_bottom = 185.0
+margin_bottom = 147.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
@@ -503,9 +534,111 @@ align = 1
 valign = 1
 autowrap = true
 
+[node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
+visible = false
+margin_top = 6.0
+margin_right = 450.0
+margin_bottom = 720.0
+size_flags_vertical = 3
+script = ExtResource( 2 )
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_right = 450.0
+margin_bottom = 22.0
+
+[node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/verdict/title"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Verdict "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/title"]
+margin_left = 104.0
+margin_right = 450.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 26.0
+margin_right = 450.0
+margin_bottom = 48.0
+columns = 2
+
+[node name="lblVrdName" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "Name: "
+
+[node name="lblVrdNameData" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
+margin_left = 64.0
+margin_right = 450.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 52.0
+margin_right = 450.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="actionsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 71.0
+margin_right = 450.0
+margin_bottom = 93.0
+
+[node name="lblActions" type="Label" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Actions "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
+margin_left = 104.0
+margin_right = 450.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 97.0
+margin_right = 450.0
+margin_bottom = 656.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+scroll_horizontal_enabled = false
+
+[node name="container" type="VBoxContainer" parent="background/mainSeparator/visualization/verdict/scroll"]
+margin_right = 450.0
+size_flags_horizontal = 3
+custom_constants/separation = 5
+
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 660.0
+margin_right = 450.0
+margin_bottom = 675.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+
+[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 679.0
+margin_right = 450.0
+margin_bottom = 707.0
+alignment = 2
+
+[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/visualization/verdict/button"]
+margin_left = 398.0
+margin_right = 450.0
+margin_bottom = 28.0
+text = "Edit"
+
+[node name="Control3" type="Control" parent="background/mainSeparator/visualization/verdict"]
+margin_top = 711.0
+margin_right = 450.0
+margin_bottom = 714.0
+rect_min_size = Vector2( 0, 2 )
+size_flags_horizontal = 3
+
 [node name="inventory" type="VBoxContainer" parent="background/mainSeparator/visualization"]
 visible = false
-margin_top = 242.0
+margin_top = 6.0
 margin_right = 450.0
 margin_bottom = 720.0
 size_flags_vertical = 3
@@ -602,7 +735,7 @@ margin_right = 120.0
 margin_bottom = 48.0
 text = "Short name: "
 
-[node name="lblWpnShortNameData" type="Label" parent="background/mainSeparator/visualization/inventory/weapon1"]
+[node name="lnkWpnShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/inventory/weapon1"]
 margin_left = 124.0
 margin_top = 26.0
 margin_right = 450.0
@@ -715,7 +848,7 @@ margin_right = 150.0
 margin_bottom = 48.0
 text = "Short name: "
 
-[node name="lblArmShortNameData" type="Label" parent="background/mainSeparator/visualization/inventory/armor"]
+[node name="lnkArmShortNameData" type="LinkButton" parent="background/mainSeparator/visualization/inventory/armor"]
 margin_left = 154.0
 margin_top = 26.0
 margin_right = 450.0
@@ -745,7 +878,7 @@ size_flags_horizontal = 3
 [node name="itmWpnGrid" type="GridContainer" parent="background/mainSeparator/visualization/inventory"]
 margin_top = 395.0
 margin_right = 450.0
-margin_bottom = 421.0
+margin_bottom = 657.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/hseparation = 15
@@ -785,7 +918,7 @@ size_flags_horizontal = 3
 [node name="itemsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/inventory/itmWpnGrid"]
 margin_top = 26.0
 margin_right = 217.0
-margin_bottom = 26.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -799,7 +932,7 @@ columns = 2
 margin_left = 232.0
 margin_top = 26.0
 margin_right = 449.0
-margin_bottom = 26.0
+margin_bottom = 262.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
@@ -810,16 +943,16 @@ size_flags_horizontal = 3
 columns = 2
 
 [node name="Control5" type="Control" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 425.0
+margin_top = 661.0
 margin_right = 450.0
-margin_bottom = 440.0
+margin_bottom = 676.0
 rect_min_size = Vector2( 0, 15 )
 size_flags_horizontal = 3
 
 [node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 444.0
+margin_top = 680.0
 margin_right = 450.0
-margin_bottom = 472.0
+margin_bottom = 708.0
 alignment = 2
 
 [node name="btnEditInventory" type="Button" parent="background/mainSeparator/visualization/inventory/button"]
@@ -829,124 +962,22 @@ margin_bottom = 28.0
 text = "Edit"
 
 [node name="Control4" type="Control" parent="background/mainSeparator/visualization/inventory"]
-margin_top = 476.0
-margin_right = 450.0
-margin_bottom = 478.0
-rect_min_size = Vector2( 0, 2 )
-size_flags_horizontal = 3
-
-[node name="verdict" type="VBoxContainer" parent="background/mainSeparator/visualization"]
-visible = false
-margin_top = 6.0
-margin_right = 450.0
-margin_bottom = 720.0
-size_flags_vertical = 3
-script = ExtResource( 2 )
-
-[node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_right = 450.0
-margin_bottom = 22.0
-
-[node name="lblVerdict" type="Label" parent="background/mainSeparator/visualization/verdict/title"]
-margin_right = 100.0
-margin_bottom = 22.0
-text = "↳ Verdict "
-
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/title"]
-margin_left = 104.0
-margin_right = 450.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="identification" type="GridContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 26.0
-margin_right = 450.0
-margin_bottom = 48.0
-columns = 2
-
-[node name="lblVrdName" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
-margin_right = 60.0
-margin_bottom = 22.0
-text = "Name: "
-
-[node name="lblVrdNameData" type="Label" parent="background/mainSeparator/visualization/verdict/identification"]
-margin_left = 64.0
-margin_right = 450.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="Control" type="Control" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 52.0
-margin_right = 450.0
-margin_bottom = 67.0
-rect_min_size = Vector2( 0, 15 )
-size_flags_horizontal = 3
-
-[node name="actionsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 71.0
-margin_right = 450.0
-margin_bottom = 93.0
-
-[node name="lblActions" type="Label" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
-margin_right = 100.0
-margin_bottom = 22.0
-text = "↳ Actions "
-
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/verdict/actionsTitle"]
-margin_left = 104.0
-margin_right = 450.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 97.0
-margin_right = 450.0
-margin_bottom = 656.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-scroll_horizontal_enabled = false
-
-[node name="container" type="VBoxContainer" parent="background/mainSeparator/visualization/verdict/scroll"]
-margin_right = 450.0
-size_flags_horizontal = 3
-custom_constants/separation = 5
-
-[node name="Control2" type="Control" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 660.0
-margin_right = 450.0
-margin_bottom = 675.0
-rect_min_size = Vector2( 0, 15 )
-size_flags_horizontal = 3
-
-[node name="button" type="HBoxContainer" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 679.0
-margin_right = 450.0
-margin_bottom = 707.0
-alignment = 2
-
-[node name="btnEditVerdict" type="Button" parent="background/mainSeparator/visualization/verdict/button"]
-margin_left = 398.0
-margin_right = 450.0
-margin_bottom = 28.0
-text = "Edit"
-
-[node name="Control3" type="Control" parent="background/mainSeparator/visualization/verdict"]
-margin_top = 711.0
+margin_top = 712.0
 margin_right = 450.0
 margin_bottom = 714.0
-rect_min_size = Vector2( 0, 3 )
+rect_min_size = Vector2( 0, 2 )
 size_flags_horizontal = 3
 
 [node name="model" type="VBoxContainer" parent="background/mainSeparator/visualization"]
 visible = false
 margin_top = 6.0
-margin_right = 445.0
+margin_right = 450.0
 margin_bottom = 720.0
 size_flags_vertical = 3
 script = ExtResource( 3 )
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
-margin_right = 445.0
+margin_right = 450.0
 margin_bottom = 22.0
 
 [node name="lblModel" type="Label" parent="background/mainSeparator/visualization/model/title"]
@@ -956,19 +987,67 @@ text = "↳ Model "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/model/title"]
 margin_left = 84.0
-margin_right = 445.0
+margin_right = 450.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="container" type="ViewportContainer" parent="background/mainSeparator/visualization/model"]
-visible = false
-margin_right = 432.0
-margin_bottom = 714.0
+margin_top = 26.0
+margin_right = 450.0
+margin_bottom = 676.0
+size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Viewport" type="Viewport" parent="background/mainSeparator/visualization/model/container"]
 handle_input_locally = false
 render_target_update_mode = 0
+
+[node name="area" parent="background/mainSeparator/visualization/model/container/Viewport" instance=ExtResource( 6 )]
+
+[node name="buttons" type="HBoxContainer" parent="background/mainSeparator/visualization/model"]
+margin_top = 680.0
+margin_right = 450.0
+margin_bottom = 708.0
+
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/model/buttons"]
+margin_right = 86.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="btnRotateL" type="Button" parent="background/mainSeparator/visualization/model/buttons"]
+margin_left = 90.0
+margin_right = 177.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "↩"
+
+[node name="lblCamera" type="Label" parent="background/mainSeparator/visualization/model/buttons"]
+margin_left = 181.0
+margin_top = 3.0
+margin_right = 268.0
+margin_bottom = 25.0
+size_flags_horizontal = 3
+text = "Camera"
+align = 1
+
+[node name="btnRotateR" type="Button" parent="background/mainSeparator/visualization/model/buttons"]
+margin_left = 272.0
+margin_right = 359.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "↪"
+
+[node name="Control2" type="Control" parent="background/mainSeparator/visualization/model/buttons"]
+margin_left = 363.0
+margin_right = 450.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="background/mainSeparator/visualization/model"]
+margin_top = 712.0
+margin_right = 450.0
+margin_bottom = 714.0
+rect_min_size = Vector2( 0, 2 )
 
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
@@ -983,13 +1062,19 @@ render_target_update_mode = 0
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbIntelligence" to="." method="_on_sbIntelligence_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbWisdom" to="." method="_on_sbWisdom_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbCharisma" to="." method="_on_sbCharisma_value_changed"]
-[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory" to="." method="_on_optInventory_item_selected"]
-[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewInventory" to="." method="_on_btnViewInventory_pressed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbBaseDamage" to="." method="_on_sbBaseDamage_value_changed"]
 [connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict" to="." method="_on_optVerdict_item_selected"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewVerdict" to="." method="_on_btnViewVerdict_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/chkVerdictAct" to="." method="_on_chkVerdictAct_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory" to="." method="_on_optInventory_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewInventory" to="." method="_on_btnViewInventory_pressed"]
 [connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel" to="." method="_on_optModel_item_selected"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewModel" to="." method="_on_btnViewModel_pressed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/inventory/button/btnEditInventory" to="." method="_on_btnEditInventory_pressed"]
-[connection signal="pressed" from="background/mainSeparator/visualization/verdict/button/btnEditVerdict" to="." method="_on_btnEditVerdict_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/verdict/button/btnEditVerdict" to="background/mainSeparator/visualization/verdict" method="_on_btnEditVerdict_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/inventory/weapon1/lnkWpnShortNameData" to="background/mainSeparator/visualization/inventory" method="_on_lnkWpnShortNameData_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/inventory/armor/lnkArmShortNameData" to="background/mainSeparator/visualization/inventory" method="_on_lnkArmShortNameData_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/inventory/button/btnEditInventory" to="background/mainSeparator/visualization/inventory" method="_on_btnEditInventory_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/model/buttons/btnRotateL" to="background/mainSeparator/visualization/model/container/Viewport/area" method="_on_btnRotateL_pressed"]
+[connection signal="pressed" from="background/mainSeparator/visualization/model/buttons/btnRotateR" to="background/mainSeparator/visualization/model/container/Viewport/area" method="_on_btnRotateR_pressed"]

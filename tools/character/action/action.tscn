@@ -39,3 +39,5 @@ margin_left = 281.0
 margin_right = 430.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
+
+[connection signal="pressed" from="grid/lnkActMoveData" to="." method="_on_lnkActMoveData_pressed"]

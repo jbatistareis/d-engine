@@ -1,13 +1,14 @@
 extends PanelContainer
 
-
-func _init() -> void:
-	# action : Dictionary
-	pass
+var action : Dictionary = DefaultValues.actionBase
 
 
-func _ready():
-	var action = DefaultValues.actionBase
+func _enter_tree() -> void:
 	$grid/lblAcFactData.text = Enums.Fact.keys()[action.fact]
 	$grid/lnkActMoveData.text = action.moveShortName
+
+
+
+func _on_lnkActMoveData_pressed():
+	pass # Replace with function body.
 

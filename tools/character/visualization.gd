@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 
-func showData(shortName : String, type : int) -> void:
+func showData(type : int, shortName : String = '') -> void:
 	$dummyContainer.visible = false
 	$inventory.visible = false
 	$verdict.visible = false
@@ -19,6 +19,9 @@ func showData(shortName : String, type : int) -> void:
 		Enums.EntityType.CHARACTER_MODEL:
 			$model.visible = true
 			$model.loadData(load(GamePaths.CHARACTER_MODEL % shortName))
+		
+		-1:
+			$dummyContainer.visible = true
 		
 		_:
 			$dummyContainer.visible = true

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://tools/location/map/grid.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/roomTab.gd" type="Script" id=2]
@@ -7,9 +7,10 @@
 [ext_resource path="res://tools/location/saveConfirmation.gd" type="Script" id=5]
 [ext_resource path="res://tools/location/testWindow.gd" type="Script" id=6]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=7]
-[ext_resource path="res://tools/location/room/meshPreview.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tools/location/room/modelPreview.tscn" type="PackedScene" id=8]
 [ext_resource path="res://tools/location/generalTab.gd" type="Script" id=9]
 [ext_resource path="res://tools/location/parameters.gd" type="Script" id=10]
+[ext_resource path="res://tools/location/locationTab.gd" type="Script" id=11]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,6 +20,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scrolling_enabled = false
+script = ExtResource( 11 )
 
 [node name="background" type="Panel" parent="."]
 anchor_right = 1.0
