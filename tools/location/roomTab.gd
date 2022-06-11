@@ -101,6 +101,8 @@ func _on_optModel_item_selected(index : int):
 
 func _on_parameters_tab_changed(tab : int):
 	saveLogic()
+	
+	
 
 
 

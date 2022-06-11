@@ -21,7 +21,7 @@ func _init(character) -> void:
 	
 	position = Vector2(
 		560,
-		GuiOverlayManager.windowSize().y - 157
+		GuiOverlayManager.currentSize.y - 157
 	)
 	
 	lines = 3

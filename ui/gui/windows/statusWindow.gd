@@ -22,5 +22,5 @@ func _init() -> void:
 		GameManager.player.charisma.score
 	]))
 	
-	position = Vector2(25, GuiOverlayManager.windowSize().y / 2 - 141)
+	position = Vector2(25, GuiOverlayManager.currentSize.y / 2 - 141)
 

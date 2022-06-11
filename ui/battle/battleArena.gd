@@ -15,8 +15,6 @@ var cursorMove : Move
 
 
 func _ready() -> void:
-	$ViewportContainer/Viewport.size = GuiOverlayManager.windowSize()
-	
 	Signals.connect("setupBattleScreen", self, "setup")
 	Signals.connect("battleCursorOpen", self, "showCursor")
 	Signals.connect("guiLeft", self, "moveCursor", [Enums.Direction.EAST])
@@ -25,6 +23,13 @@ func _ready() -> void:
 	Signals.connect("guiCancel", self, "cancelCursor")
 	Signals.connect("battleEnded", self, "finish")
 	Signals.connect("battleWon", self, "showBattleResult")
+	
+	get_viewport().connect("size_changed", self, "updateSize")
+	updateSize()
+
+
+func updateSize() -> void:
+	$ViewportContainer/Viewport.size = GuiOverlayManager.currentSize
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
@@ -49,10 +54,10 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	Signals.emit_signal("guiOpenWindow", enemiesWindow)
 	
 	var playersWindow = BattlePlayersWindow.new(playerData)
-	playersWindow.position = Vector2(25, GuiOverlayManager.windowSize().y - 157)
+	playersWindow.position = Vector2(25, GuiOverlayManager.currentSize.y - 157)
 	Signals.emit_signal("guiOpenWindow", playersWindow)
 	
-	var width = GuiOverlayManager.windowSize().x / 5
+	var width = GuiOverlayManager.currentSize.x / 5
 	var heigth = width * ENEMY_FRAME_RATIO
 	enemyFrameSize = Vector2(width, heigth)
 	
