@@ -71,8 +71,10 @@ func _on_btnSave_pressed():
 func _on_saveConfirm_confirmed():
 	Persistence.saveDTO(armorDto)
 	loadAllData()
+	$background/mainSeparator/fileList.select(list.find(armorDto.shortName))
 
 
 func _on_btnReload_pressed():
 	loadAllData()
+	$background/mainSeparator/fileList.select(list.find(armorDto.shortName))
 

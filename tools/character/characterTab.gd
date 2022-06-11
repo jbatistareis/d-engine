@@ -2,6 +2,7 @@ extends Tabs
 
 var characterDto : CharacterDTO = CharacterDTO.new()
 
+var characters : Array = []
 var verdicts : Array = []
 var inventories : Array = []
 var models : Array = []
@@ -43,8 +44,9 @@ func setFields() -> void:
 
 
 func loadAllData() -> void:
+	characters = Persistence.listEntities(Enums.EntityType.CHARACTER)
 	$background/mainSeparator/fileList.clear()
-	for character in Persistence.listEntities(Enums.EntityType.CHARACTER):
+	for character in characters:
 		$background/mainSeparator/fileList.add_item(character)
 	
 	verdicts = Persistence.listEntities(Enums.EntityType.VERDICT)
@@ -182,11 +184,14 @@ func _on_btnSave_pressed():
 func _on_saveConfigmation_confirmed():
 	Persistence.saveDTO(characterDto)
 	loadAllData()
+	setFields()
+	$background/mainSeparator/fileList.select(characters.find(characterDto.shortName))
 
 
 func _on_btnReload_pressed():
 	loadAllData()
 	setFields()
+	$background/mainSeparator/fileList.select(characters.find(characterDto.shortName))
 
 
 func _on_tabs_tab_changed(tab : int):
