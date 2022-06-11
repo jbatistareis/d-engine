@@ -46,10 +46,14 @@ func decision(auditorCharacter, suspects : Array) -> void:
 		var targets = analyze(DefaultValues.facts[action.fact], auditorCharacter, suspects)
 		
 		if !targets.empty():
+			var move = Move.new().fromShortName(action.move.shortName)
+			move.cdPre += auditorCharacter.inventory.weapon.cdPre
+			move.cdPos += auditorCharacter.inventory.weapon.cdPos
+			
 			if Enums.MoveTargetType.keys()[action.move.targetType].ends_with(_ALL):
 				Signals.emit_signal(
 					"commandPublished",
-					ExecuteMoveCommand.new(auditorCharacter, targets, action.move))
+					ExecuteMoveCommand.new(auditorCharacter, targets, move))
 			else:
 				rng.randomize()
 				Signals.emit_signal(
@@ -57,7 +61,8 @@ func decision(auditorCharacter, suspects : Array) -> void:
 						ExecuteMoveCommand.new(
 							auditorCharacter,
 							[targets[rng.randi_range(0, targets.size() - 1)]],
-							action.move))
+							move))
+			
 			return
 	
 	Signals.emit_signal(

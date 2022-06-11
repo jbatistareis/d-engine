@@ -7,8 +7,17 @@ var character
 func _init(character) -> void:
 	self.character = character
 	
-	for move in character.inventory.weapon.moves:
-		widgets.append(GuiMoveButtonWidget.new(move))
+	if character.inventory.weapon.move1 != null:
+		widgets.append(GuiMoveButtonWidget.new(character.inventory.weapon.move1))
+	
+	if character.inventory.weapon.move2 != null:
+		widgets.append(GuiMoveButtonWidget.new(character.inventory.weapon.move2))
+	
+	if character.inventory.weapon.move3 != null:
+		widgets.append(GuiMoveButtonWidget.new(character.inventory.weapon.move3))
+	
+	if character.inventory.weapon.move4 != null:
+		widgets.append(GuiMoveButtonWidget.new(character.inventory.weapon.move4))
 	
 	position = Vector2(
 		560,

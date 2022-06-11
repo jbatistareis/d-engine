@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://tools/weapon/weaponTab.gd" type="Script" id=1]
+[ext_resource path="res://tools/weapon/saveConfirm.gd" type="Script" id=2]
 
 [node name="Weapon" type="Tabs"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( -556.42, -42.8121 )
 size_flags_horizontal = 3
 script = ExtResource( 1 )
 
@@ -102,63 +104,301 @@ margin_right = 606.0
 margin_bottom = 113.0
 rect_min_size = Vector2( 0, 15 )
 
-[node name="integrity" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+[node name="stats" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 117.0
 margin_right = 606.0
-margin_bottom = 175.0
+margin_bottom = 226.0
 
-[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/integrity"]
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
 margin_right = 606.0
 margin_bottom = 22.0
 
-[node name="lblStats" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/integrity/title"]
-margin_right = 110.0
+[node name="lblStats" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
+margin_right = 80.0
 margin_bottom = 22.0
-text = "↳ Integrity"
+text = "↳ Stats "
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/integrity/title"]
-margin_left = 114.0
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
+margin_left = 84.0
 margin_right = 606.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
-[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/integrity"]
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 90.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields"]
+margin_left = 84.0
+margin_right = 522.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+columns = 4
+
+[node name="lblDamage" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 5.0
+margin_right = 70.0
+margin_bottom = 27.0
+text = "Damage "
+
+[node name="sbDamage" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 74.0
+margin_right = 220.0
+margin_bottom = 32.0
+
+[node name="lblModifier" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 224.0
+margin_top = 5.0
+margin_right = 354.0
+margin_bottom = 27.0
+text = "   Modifier "
+
+[node name="optModifier" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 358.0
+margin_right = 438.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 80, 0 )
+text = "None"
+align = 1
+items = [ "None", null, false, 0, null, "D4", null, false, 1, null, "D6", null, false, 2, null, "D8", null, false, 3, null, "D10", null, false, 4, null, "D12", null, false, 5, null, "D20", null, false, 6, null, "D100", null, false, 7, null ]
+selected = 0
+
+[node name="lblRoll" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 39.0
+margin_right = 70.0
+margin_bottom = 61.0
+text = "Roll "
+
+[node name="optRoll" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 74.0
+margin_top = 36.0
+margin_right = 220.0
+margin_bottom = 64.0
+text = "None"
+align = 1
+items = [ "None", null, false, 0, null, "Best", null, false, 1, null, "Normal", null, false, 2, null, "Worst", null, false, 3, null ]
+selected = 0
+
+[node name="lblStat" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 224.0
+margin_top = 39.0
+margin_right = 354.0
+margin_bottom = 61.0
+text = "   Stat mod. "
+
+[node name="optStat" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 358.0
+margin_top = 36.0
+margin_right = 438.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 80, 0 )
+text = "None"
+align = 1
+items = [ "None", null, false, 0, null, "STR", null, false, 1, null, "DEX", null, false, 2, null, "CON", null, false, 3, null, "INT", null, false, 4, null, "WIS", null, false, 5, null, "CHA", null, false, 6, null ]
+selected = 0
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
+margin_top = 94.0
+margin_right = 606.0
+margin_bottom = 109.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="cd" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 230.0
+margin_right = 606.0
+margin_bottom = 307.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblCd" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/title"]
+margin_right = 120.0
+margin_bottom = 22.0
+text = "↳ Cooldowns "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/cd/title"]
+margin_left = 124.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
 margin_top = 26.0
 margin_right = 606.0
 margin_bottom = 58.0
 
-[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields"]
-margin_left = 56.0
-margin_right = 550.0
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields"]
+margin_left = 91.0
+margin_right = 515.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 columns = 4
 
-[node name="lblCurrIntegrity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
+[node name="lblCdPre" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
 margin_top = 5.0
+margin_right = 40.0
+margin_bottom = 27.0
+text = "Pre "
+
+[node name="sbCdPre" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
+margin_left = 44.0
+margin_right = 190.0
+margin_bottom = 32.0
+
+[node name="lblCdPos" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
+margin_left = 194.0
+margin_top = 5.0
+margin_right = 274.0
+margin_bottom = 27.0
+text = "   Post "
+
+[node name="sbCdPos" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
+margin_left = 278.0
+margin_right = 424.0
+margin_bottom = 32.0
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
+margin_top = 62.0
+margin_right = 606.0
+margin_bottom = 77.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="moves" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 311.0
+margin_right = 606.0
+margin_bottom = 496.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblMoves" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/title"]
 margin_right = 80.0
-margin_bottom = 27.0
-text = "Current "
+margin_bottom = 22.0
+text = "↳ Moves "
 
-[node name="sbCurrIntegrity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/moves/title"]
 margin_left = 84.0
-margin_right = 230.0
-margin_bottom = 32.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
 
-[node name="lblMaxIntegrity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
-margin_left = 234.0
-margin_top = 5.0
-margin_right = 344.0
-margin_bottom = 27.0
-text = "   Maximum "
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 166.0
 
-[node name="sbMaxIntegrity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
-margin_left = 348.0
-margin_right = 494.0
-margin_bottom = 32.0
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields"]
+margin_left = 113.0
+margin_right = 493.0
+margin_bottom = 140.0
+size_flags_horizontal = 3
+custom_constants/vseparation = 20
+custom_constants/hseparation = 10
+columns = 4
+
+[node name="lblMove1" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_top = 19.0
+margin_right = 30.0
+margin_bottom = 41.0
+text = "1. "
+
+[node name="moveBtn1" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 40.0
+margin_right = 170.0
+margin_bottom = 60.0
+
+[node name="optMove1" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1"]
+margin_right = 130.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="btnEditMove1" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1"]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 60.0
+text = "Edit"
+
+[node name="lblMove2" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 180.0
+margin_top = 19.0
+margin_right = 240.0
+margin_bottom = 41.0
+text = "   2. "
+
+[node name="moveBtn2" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 250.0
+margin_right = 380.0
+margin_bottom = 60.0
+
+[node name="optMove2" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2"]
+margin_right = 130.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="btnEditMove2" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2"]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 60.0
+text = "Edit"
+
+[node name="lblMove3" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_top = 99.0
+margin_right = 30.0
+margin_bottom = 121.0
+text = "3. "
+
+[node name="moveBtn3" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 40.0
+margin_top = 80.0
+margin_right = 170.0
+margin_bottom = 140.0
+
+[node name="optMove3" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3"]
+margin_right = 130.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="btnEditMove3" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3"]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 60.0
+text = "Edit"
+
+[node name="lblMove4" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 180.0
+margin_top = 99.0
+margin_right = 240.0
+margin_bottom = 121.0
+text = "   4. "
+
+[node name="moveBtn4" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
+margin_left = 250.0
+margin_top = 80.0
+margin_right = 380.0
+margin_bottom = 140.0
+
+[node name="optMove4" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4"]
+margin_right = 130.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 130, 0 )
+
+[node name="btnEditMove4" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4"]
+margin_top = 32.0
+margin_right = 130.0
+margin_bottom = 60.0
+text = "Edit"
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
+margin_top = 170.0
+margin_right = 606.0
+margin_bottom = 185.0
+rect_min_size = Vector2( 0, 15 )
 
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 179.0
+margin_top = 500.0
 margin_right = 606.0
 margin_bottom = 754.0
 size_flags_horizontal = 3
@@ -166,9 +406,9 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 547.0
+margin_top = 226.0
 margin_right = 606.0
-margin_bottom = 575.0
+margin_bottom = 254.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
@@ -201,3 +441,29 @@ margin_left = 480.0
 margin_right = 606.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
+
+[node name="saveConfirm" type="ConfirmationDialog" parent="."]
+margin_right = 218.0
+margin_bottom = 74.0
+script = ExtResource( 2 )
+
+[connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbDamage" to="." method="_on_sbDamage_value_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/optModifier" to="." method="_on_optModifier_item_selected"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/optRoll" to="." method="_on_optRoll_item_selected"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/optStat" to="." method="_on_optStat_item_selected"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPre" to="." method="_on_sbCdPre_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPos" to="." method="_on_sbCdPos_value_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1/optMove1" to="." method="_on_optMove1_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1/btnEditMove1" to="." method="_on_btnEditMove1_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2/optMove2" to="." method="_on_optMove2_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2/btnEditMove2" to="." method="_on_btnEditMove2_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3/optMove3" to="." method="_on_optMove3_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3/btnEditMove3" to="." method="_on_btnEditMove3_pressed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4/optMove4" to="." method="_on_optMove4_item_selected"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4/btnEditMove4" to="." method="_on_btnEditMove4_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_saveConfirm_confirmed"]

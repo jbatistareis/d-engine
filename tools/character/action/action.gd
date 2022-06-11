@@ -10,5 +10,5 @@ func _enter_tree() -> void:
 
 
 func _on_lnkActMoveData_pressed():
-	pass # Replace with function body.
+	EditorSignals.emit_signal("selectedMove", action.moveShortName)
 
