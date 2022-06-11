@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://tools/editor.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
 [ext_resource path="res://tools/character/characterTab.tscn" type="PackedScene" id=3]
 [ext_resource path="res://tools/armor/armorTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
 
 [node name="editor" type="Panel"]
 anchor_right = 1.0
@@ -115,17 +116,8 @@ size_flags_horizontal = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Weapon" type="Tabs" parent="tabs"]
+[node name="Weapon" parent="tabs" instance=ExtResource( 5 )]
 visible = false
-margin_left = 1158.0
-margin_top = 47.0
-margin_right = 1269.0
-margin_bottom = 709.0
-size_flags_horizontal = 3
-
-[node name="background" type="Panel" parent="tabs/Weapon"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [connection signal="tab_changed" from="tabs" to="tabs/Character" method="_on_tabs_tab_changed"]
 [connection signal="tab_changed" from="tabs" to="tabs/Location" method="_on_tabs_tab_changed"]
