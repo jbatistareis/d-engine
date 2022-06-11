@@ -1,5 +1,7 @@
 extends Tabs
 
+enum _MOD_TYPE { EX_ATK, EX_DEF, EX_CD, TGT_ATK, TGT_DEF, TGT_CD }
+
 var moveDto : MoveDTO = MoveDTO.new()
 var list : Array = []
 
@@ -21,6 +23,72 @@ func loadMove(shortName : String) -> void:
 func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName.text = moveDto.name
 	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName.text = moveDto.shortName
+	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtDescription.text = moveDto.description
+	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/optTarget.select(moveDto.targetType)
+	
+	$background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPre.value = moveDto.cdPre
+	$background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPos.value = moveDto.cdPos
+	
+	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimPrepare.text = moveDto.prepareAnimation
+	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimAttack.text = moveDto.attackAnimation
+	
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkEx.value = countMods(_MOD_TYPE.EX_ATK)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefEx.value = countMods(_MOD_TYPE.EX_DEF)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdEx.value = countMods(_MOD_TYPE.EX_CD)
+	
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkTgt.value = countMods(_MOD_TYPE.TGT_ATK)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefTgt.value = countMods(_MOD_TYPE.TGT_DEF)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdTgt.value = countMods(_MOD_TYPE.TGT_CD)
+	
+	$background/mainSeparator/PanelContainer/logic/tabs/Value/txtValue.text = moveDto.valueExpression
+	$background/mainSeparator/PanelContainer/logic/tabs/Outcome/txtOutcome.text = moveDto.outcomeExpression
+	$background/mainSeparator/PanelContainer/logic/tabs/Pick/txtPick.text = moveDto.pickExpression
+	$background/mainSeparator/PanelContainer/logic/tabs/Execute/txtExecute.text = moveDto.excuteExpression
+
+
+func countMods(modType : int) -> int:
+	var result = 0
+	
+	match modType:
+		_MOD_TYPE.EX_ATK:
+			for mod in moveDto.executorModifiers:
+				if mod == Enums.MoveModifierProperty.ATK_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.ATK_M:
+					result -= 1
+		_MOD_TYPE.EX_DEF:
+			for mod in moveDto.executorModifiers:
+				if mod == Enums.MoveModifierProperty.DEF_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.DEF_M:
+					result -= 1
+		_MOD_TYPE.EX_CD:
+			for mod in moveDto.executorModifiers:
+				if mod == Enums.MoveModifierProperty.CD_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.CD_M:
+					result -= 1
+		
+		_MOD_TYPE.TGT_ATK:
+			for mod in moveDto.targetModifiers:
+				if mod == Enums.MoveModifierProperty.ATK_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.ATK_M:
+					result -= 1
+		_MOD_TYPE.TGT_DEF:
+			for mod in moveDto.targetModifiers:
+				if mod == Enums.MoveModifierProperty.DEF_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.DEF_M:
+					result -= 1
+		_MOD_TYPE.TGT_CD:
+			for mod in moveDto.targetModifiers:
+				if mod == Enums.MoveModifierProperty.CD_P:
+					result += 1
+				elif mod == Enums.MoveModifierProperty.CD_M:
+					result -= 1
+	
+	return result
 
 
 func loadAllData() -> void:
@@ -36,4 +104,132 @@ func loadAllData() -> void:
 func _on_fileList_item_selected(index):
 	loadMove($background/mainSeparator/fileList.get_item_text(index))
 
+
+
+# identification
+func _on_txtName_text_changed(new_text):
+	moveDto.name = new_text
+
+
+func _on_txtShortName_text_changed(new_text):
+	moveDto.shortName = new_text
+
+
+func _on_txtDescription_text_changed(new_text):
+	moveDto.description = new_text
+
+
+func _on_optTarget_item_selected(index):
+	moveDto.targetType = index
+
+
+
+# cooldowns
+func _on_sbCdPre_value_changed(value):
+	moveDto.cdPre = value
+
+
+func _on_sbCdPos_value_changed(value):
+	moveDto.cdPos = value
+
+
+
+# animations
+func _on_txtAnimPrepare_text_changed(new_text):
+	moveDto.prepareAnimation = new_text
+
+
+func _on_txtAnimAttack_text_changed(new_text):
+	moveDto.attackAnimation = new_text
+
+
+
+# buttons
+func _on_btnSave_pressed():
+	$saveConfirm.entityName = moveDto.shortName
+	$saveConfirm.popup_centered()
+
+
+func _on_saveConfirm_confirmed():
+	moveDto.valueExpression = $background/mainSeparator/PanelContainer/logic/tabs/Value/txtValue.text
+	moveDto.outcomeExpression = $background/mainSeparator/PanelContainer/logic/tabs/Outcome/txtOutcome.text
+	moveDto.pickExpression = $background/mainSeparator/PanelContainer/logic/tabs/Pick/txtPick.text
+	moveDto.excuteExpression = $background/mainSeparator/PanelContainer/logic/tabs/Execute/txtExecute.text
+	
+	
+	var ex_atk = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkEx.value
+	var ex_def = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefEx.value
+	var ex_cd = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdEx.value
+	
+	var tgt_atk = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkTgt.value
+	var tgt_def = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefTgt.value
+	var tgt_cd = $background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdTgt.value
+	
+	moveDto.executorModifiers.clear()
+	moveDto.targetModifiers.clear()
+	
+	# find a way to semi automate this in gd script whithout slowing to a crawl
+	match int(sign(ex_atk)):
+		-1:
+			for i in range(abs(ex_atk)):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.ATK_M)
+		
+		1:
+			for i in range(ex_atk):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.ATK_P)
+	
+	match int(sign(ex_def)):
+		-1:
+			for i in range(abs(ex_def)):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.DEF_M)
+		
+		1:
+			for i in range(ex_def):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.DEF_P)
+	
+	match int(sign(ex_cd)):
+		-1:
+			for i in range(abs(ex_cd)):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.CD_M)
+		
+		1:
+			for i in range(ex_cd):
+				moveDto.executorModifiers.append(Enums.MoveModifierProperty.CD_P)
+	
+	
+	match int(sign(tgt_atk)):
+		-1:
+			for i in range(abs(tgt_atk)):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.ATK_M)
+		
+		1:
+			for i in range(tgt_atk):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.ATK_P)
+	
+	match int(sign(tgt_def)):
+		-1:
+			for i in range(abs(tgt_def)):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.DEF_M)
+		
+		1:
+			for i in range(tgt_def):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.DEF_P)
+	
+	match int(sign(tgt_cd)):
+		-1:
+			for i in range(abs(tgt_cd)):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.CD_M)
+		
+		1:
+			for i in range(tgt_cd):
+				moveDto.targetModifiers.append(Enums.MoveModifierProperty.CD_P)
+	
+	Persistence.saveDTO(moveDto)
+	_on_btnReload_pressed()
+
+
+
+func _on_btnReload_pressed():
+	loadAllData()
+	$background/mainSeparator/fileList.select(list.find(moveDto.shortName))
 

@@ -334,7 +334,7 @@ margin_right = 374.0
 margin_bottom = 53.0
 text = "   Attack "
 
-[node name="sbModAtkTrg" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
+[node name="sbModAtkTgt" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
 margin_left = 378.0
 margin_top = 26.0
 margin_right = 524.0
@@ -363,7 +363,7 @@ margin_right = 374.0
 margin_bottom = 89.0
 text = "   Defense "
 
-[node name="sbModDefTrg" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
+[node name="sbModDefTgt" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
 margin_left = 378.0
 margin_top = 62.0
 margin_right = 524.0
@@ -392,7 +392,7 @@ margin_right = 374.0
 margin_bottom = 125.0
 text = "   Cooldown "
 
-[node name="sbModCdTrg" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
+[node name="sbModCdTgt" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid"]
 margin_left = 378.0
 margin_top = 98.0
 margin_right = 524.0
@@ -575,3 +575,16 @@ highlight_all_occurrences = true
 margin_right = 218.0
 margin_bottom = 74.0
 script = ExtResource( 2 )
+
+[connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtDescription" to="." method="_on_txtDescription_text_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/optTarget" to="." method="_on_optTarget_item_selected"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPre" to="." method="_on_sbCdPre_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid/sbCdPos" to="." method="_on_sbCdPos_value_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimPrepare" to="." method="_on_txtAnimPrepare_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimAttack" to="." method="_on_txtAnimAttack_text_changed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_saveConfirm_confirmed"]
