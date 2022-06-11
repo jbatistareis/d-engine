@@ -501,15 +501,9 @@ margin_right = 606.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainSeparator"]
-margin_left = 758.0
-margin_right = 768.0
-margin_bottom = 768.0
-rect_min_size = Vector2( 10, 0 )
-
 [node name="visualization" type="TabContainer" parent="background/mainSeparator"]
-margin_left = 772.0
-margin_right = 1232.0
+margin_left = 758.0
+margin_right = 1218.0
 margin_bottom = 768.0
 rect_min_size = Vector2( 460, 0 )
 size_flags_vertical = 3
