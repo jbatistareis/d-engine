@@ -13,6 +13,7 @@ enum CharacterType { PC, NPC, FOE }
 
 enum MoveTargetType { NONE, ANY, FRIENDLY, FOE, ANY_ALL, FRIENDLY_ALL, FOE_ALL }
 enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
+enum MoveModifierType { ATK, DEF, CD }
 
 enum ItemType { CONSUMABLE, TOOL, KEY }
 

@@ -1,7 +1,5 @@
 extends Tabs
 
-enum _MOD_TYPE { EX_ATK, EX_DEF, EX_CD, TGT_ATK, TGT_DEF, TGT_CD }
-
 var moveDto : MoveDTO = MoveDTO.new()
 var list : Array = []
 
@@ -32,63 +30,18 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimPrepare.text = moveDto.prepareAnimation
 	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimAttack.text = moveDto.attackAnimation
 	
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkEx.value = countMods(_MOD_TYPE.EX_ATK)
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefEx.value = countMods(_MOD_TYPE.EX_DEF)
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdEx.value = countMods(_MOD_TYPE.EX_CD)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.ATK, moveDto.executorModifiers)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.DEF, moveDto.executorModifiers)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.CD, moveDto.executorModifiers)
 	
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkTgt.value = countMods(_MOD_TYPE.TGT_ATK)
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefTgt.value = countMods(_MOD_TYPE.TGT_DEF)
-	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdTgt.value = countMods(_MOD_TYPE.TGT_CD)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkTgt.value = Util.countAbsoluteModType(Enums.MoveModifierType.ATK, moveDto.targetModifiers)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefTgt.value = Util.countAbsoluteModType(Enums.MoveModifierType.DEF, moveDto.targetModifiers)
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdTgt.value = Util.countAbsoluteModType(Enums.MoveModifierType.CD, moveDto.targetModifiers)
 	
 	$background/mainSeparator/PanelContainer/logic/tabs/Value/txtValue.text = moveDto.valueExpression
 	$background/mainSeparator/PanelContainer/logic/tabs/Outcome/txtOutcome.text = moveDto.outcomeExpression
 	$background/mainSeparator/PanelContainer/logic/tabs/Pick/txtPick.text = moveDto.pickExpression
 	$background/mainSeparator/PanelContainer/logic/tabs/Execute/txtExecute.text = moveDto.excuteExpression
-
-
-func countMods(modType : int) -> int:
-	var result = 0
-	
-	match modType:
-		_MOD_TYPE.EX_ATK:
-			for mod in moveDto.executorModifiers:
-				if mod == Enums.MoveModifierProperty.ATK_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.ATK_M:
-					result -= 1
-		_MOD_TYPE.EX_DEF:
-			for mod in moveDto.executorModifiers:
-				if mod == Enums.MoveModifierProperty.DEF_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.DEF_M:
-					result -= 1
-		_MOD_TYPE.EX_CD:
-			for mod in moveDto.executorModifiers:
-				if mod == Enums.MoveModifierProperty.CD_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.CD_M:
-					result -= 1
-		
-		_MOD_TYPE.TGT_ATK:
-			for mod in moveDto.targetModifiers:
-				if mod == Enums.MoveModifierProperty.ATK_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.ATK_M:
-					result -= 1
-		_MOD_TYPE.TGT_DEF:
-			for mod in moveDto.targetModifiers:
-				if mod == Enums.MoveModifierProperty.DEF_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.DEF_M:
-					result -= 1
-		_MOD_TYPE.TGT_CD:
-			for mod in moveDto.targetModifiers:
-				if mod == Enums.MoveModifierProperty.CD_P:
-					result += 1
-				elif mod == Enums.MoveModifierProperty.CD_M:
-					result -= 1
-	
-	return result
 
 
 func loadAllData() -> void:

@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/theme/default/styleBoxFlat_tomato.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/theme/default/styleBoxFlat_white.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=3]
+[ext_resource path="res://ui/gui/battle/timerBar.gd" type="Script" id=4]
+
+[node name="timerBar" type="MarginContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 4 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="timer" type="ProgressBar" parent="."]
+margin_right = 150.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 3 )
+custom_styles/fg = ExtResource( 1 )
+custom_styles/bg = ExtResource( 2 )
+value = 100.0

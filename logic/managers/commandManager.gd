@@ -13,6 +13,7 @@ func _ready():
 	Signals.connect("commandsResumed", self, "resume")
 	Signals.connect("commandPublished", self, "publishCommand")
 	Signals.connect("battleScreenReady", self, "reset")
+	Signals.connect("commandsCleared", self, "clearCommands")
 	
 	add_child(timer)
 	timer.connect("timeout", self, "tick")
@@ -21,12 +22,15 @@ func _ready():
 
 
 func tick() -> void:
-	if !executingCommand && !timer.paused:
+	if timer.paused:
+		return
+	
+	if !executingCommand:
 		for command in commandsQueue:
+			executingCommand=true
 			command.tick()
 			
 			if command.toBeExecuted:
-				executingCommand = command is ExecuteMoveCommand
 				command.execute()
 				commandsQueue.erase(command)
 			elif command.canceled:
@@ -37,10 +41,11 @@ func tick() -> void:
 	while !newCommands.empty():
 		var command = newCommands.pop_front()
 		commandsQueue.append(command)
-		commandsQueue.sort_custom(CommandArrayHelper, 'tickSortReverse')
 		command.published()
 		
 		Signals.emit_signal("commandOnQueue", command)
+	
+	commandsQueue.sort_custom(CommandArrayHelper, 'tickSortReverse')
 
 
 func pause() -> void:
@@ -53,6 +58,11 @@ func resume() -> void:
 
 func reset() -> void:
 	timer.start(GameParameters.GCD)
+
+
+func clearCommands() -> void:
+	commandsQueue.clear()
+	newCommands.clear()
 
 
 func publishCommand(command : Command) -> void:
