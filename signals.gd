@@ -40,6 +40,7 @@ signal armorChangedIntegrity(armor, amount)
 # command related
 signal commandsPaused() # pauses all battle timelines
 signal commandsResumed() # resumes all battle timelines
+signal commandsCleared() # removes all commands
 
 # internal use
 signal commandPublished(command) # sends commands to the execution queue
@@ -71,15 +72,19 @@ signal characterDroppedWeapon(character, weaponIndex)
 
 # UI related
 # internal use
-signal guiOpenWindow(window)
-signal guiCloseWindow()
-signal guiClearWindows()
 signal guiUp()
 signal guiDown()
 signal guiLeft()
 signal guiRight()
-signal guiSelect() # used in a 'press A' context
-signal guiConfirm(source) # used in an 'OK' button context
-signal guiCancel(source)
-signal guiHover(data) # listen to get which item the player has his cursor over
+signal guiConfirm()
+signal guiCancel()
+
+signal guiOpenExploringMenu()
+signal guiCloseExploringMenu()
+
+signal battleShowCharacterMoves(character)
+signal battleHideCharacterMoves()
+signal battleCursorMove(title, position)
+signal battleCursorHide()
+signal battleShowResult(battleResult)
 

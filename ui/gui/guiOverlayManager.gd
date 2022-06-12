@@ -17,15 +17,3 @@ func changeSize() -> void:
 	
 	ratioDiff = currentSize.x / oldSize.x
 
-
-func isCurrentWindow(window : GuiWindow) -> bool:
-	return (windowQueue.front() == window) if !windowQueue.empty() else false
-
-
-func lastPosition() -> Vector2:
-	return windowQueue.front().position if !windowQueue.empty() else Vector2.ZERO
-
-
-func lastSize() -> Vector2:
-	return windowQueue.front().rect_size if !windowQueue.empty() else Vector2.ZERO
-

@@ -138,7 +138,10 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 	elif amount < 0:
 		Signals.emit_signal("characterTookDamage", self)
 		
-		var defOffset = (0.2 * countModifiersByProperty(Enums.MoveModifierProperty.DEF_P)) - (1 + 0.2 * countModifiersByProperty(Enums.MoveModifierProperty.DEF_M))
+		var defP = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_P, moveModifiers)
+		var defM = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_M, moveModifiers)
+		
+		var defOffset = (0.2 * defP) - (1 + 0.2 * defM)
 		amount = -ceil(amount * defOffset)
 		
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
@@ -218,15 +221,6 @@ func getExperienceToNextLevel() -> int:
 	return int(round(7 * pow(currentLevel, 1.3)))
 
 
-func countModifiersByProperty(modifierProperty : int, modifiers : Array = moveModifiers) -> int:
-	var count = 0
-	for modifier in modifiers:
-		if modifier == modifierProperty:
-			count += 1
-	
-	return count
-
-
 func clearModifiersByType(modifierType : int) -> void:
 	for modifier in moveModifiers:
 		if modifier == modifierType:
@@ -239,7 +233,7 @@ func removeModifierByType(modifierType : int) -> void:
 
 func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
 	for modifier in newModifiers:
-		if countModifiersByProperty(modifier) < 3:
+		if Util.countIndividualModType(modifier, moveModifiers) < 3:
 			moveModifiers.append(modifier)
 	
 	if !onlyApply:
@@ -250,7 +244,7 @@ func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
 
 
 func _reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
-	var count = countModifiersByProperty(modifierType, newModifiers)
+	var count = Util.countIndividualModType(modifierType, newModifiers)
 	if count == 0:
 		moveModifiers.erase(modifierType)
 
