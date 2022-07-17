@@ -310,47 +310,41 @@ margin_right = 248.0
 margin_bottom = 22.0
 align = 1
 
-[node name="btnSave" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
+[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
 margin_top = 26.0
 margin_right = 248.0
-margin_bottom = 54.0
-text = "Save changes"
-
-[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 58.0
-margin_right = 248.0
-margin_bottom = 113.0
-rect_min_size = Vector2( 0, 55 )
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 22 )
 
 [node name="lblModel" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 117.0
+margin_top = 52.0
 margin_right = 248.0
-margin_bottom = 139.0
+margin_bottom = 74.0
 text = "Model"
 align = 1
 
 [node name="Control" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 143.0
+margin_top = 78.0
 margin_right = 248.0
-margin_bottom = 145.0
+margin_bottom = 80.0
 rect_min_size = Vector2( 0, 2 )
 
 [node name="optModel" type="OptionButton" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 149.0
+margin_top = 84.0
 margin_right = 248.0
-margin_bottom = 177.0
+margin_bottom = 112.0
 size_flags_horizontal = 3
 
 [node name="Control2" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 181.0
+margin_top = 116.0
 margin_right = 248.0
-margin_bottom = 183.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 0, 2 )
 
 [node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 187.0
+margin_top = 122.0
 margin_right = 248.0
-margin_bottom = 215.0
+margin_bottom = 150.0
 
 [node name="btnRotateL" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
 margin_right = 70.0
@@ -390,7 +384,7 @@ render_target_update_mode = 3
 [node name="logic" type="TabContainer" parent="background/mainContainer/parameters/Room/mainContainer"]
 margin_top = 254.0
 margin_right = 552.0
-margin_bottom = 724.0
+margin_bottom = 692.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -476,6 +470,12 @@ show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
+
+[node name="btnSave" type="Button" parent="background/mainContainer/parameters/Room/mainContainer"]
+margin_top = 696.0
+margin_right = 552.0
+margin_bottom = 724.0
+text = "Save logic"
 
 [node name="saveConfirmation" type="ConfirmationDialog" parent="."]
 margin_right = 218.0
@@ -591,10 +591,10 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/General" method="_on_btnPreview_pressed"]
 [connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnPreview_pressed"]
 [connection signal="changeModel" from="background/mainContainer/parameters/Room" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_Room_changeModel"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/btnSave" to="background/mainContainer/parameters/Room" method="_on_btnSave_pressed"]
 [connection signal="item_selected" from="background/mainContainer/parameters/Room/mainContainer/model/controls/optModel" to="background/mainContainer/parameters/Room" method="_on_optModel_item_selected"]
 [connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateL" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateL_pressed"]
 [connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateR" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateR_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/btnSave" to="background/mainContainer/parameters/Room" method="_on_btnSave_pressed"]
 [connection signal="confirmed" from="saveConfirmation" to="background/mainContainer/parameters/General" method="_on_saveConfirmation_confirmed"]
 [connection signal="about_to_show" from="previewWindow" to="previewWindow" method="_on_previewWindow_about_to_show"]
 [connection signal="popup_hide" from="previewWindow" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_previewWindow_popup_hide"]
