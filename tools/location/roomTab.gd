@@ -6,32 +6,37 @@ const _DETAILS_SINGLE_TEXT = 'id: %d @ (%d, %d)'
 const _DETAILS_MULTI_TEXT = 'Multiple rooms'
 
 var locationDto : LocationDTO
-var room : Dictionary = {} setget setRoom
-var multiRoom : Array = []
+var rooms : Array = [] setget setRooms
 
 
-func setRoom(value : Dictionary):
-	saveLogic()
-	room = value
+func setRooms(value : Array):
+	changeCellSelection(false)
 	
-	if multiRoom.empty():
-		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [room.id, room.x, room.y]
-	else:
+	rooms = value
+	
+	changeCellSelection(true)
+	
+	if (rooms.size() == 1) &&  !rooms[0].empty():
+		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [rooms[0].id, rooms[0].x, rooms[0].y]
+	elif rooms.size() > 1:
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_MULTI_TEXT
 	
 	var optModel = $mainContainer/model/controls/optModel
 	for index in optModel.get_item_count():
-		if optModel.get_item_text(index) == room.model:
+		if !rooms[0].empty() && (optModel.get_item_text(index) == rooms[0].model):
 			optModel.select(index)
 			break
 
 
+func changeCellSelection(state : bool) -> void:
+	for room in rooms:
+		if !room.empty():
+			get_node("../../map/scroll/container/grid").get_child(room.id).select(state)
+
+
 func saveLogic() -> void:
-	if multiRoom.empty():
-		setRoomFields(room)
-	else:
-		for singleRoom in multiRoom:
-			setRoomFields(singleRoom)
+	for singleRoom in rooms:
+		setRoomFields(singleRoom)
 
 
 func setRoomFields(data : Dictionary) -> void:
@@ -48,20 +53,21 @@ func setRoomFields(data : Dictionary) -> void:
 
 
 func setLogic() -> void:
-	var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
-	for group in room.foeShortNameGroups:
-		if !group.empty():
-			var line = ''
-			for enemy in group:
-				line += enemy + ', '
-			
-			enemyGroups.text += line.substr(0, line.length() - 2) + '\n'
-	
-	enemyGroups.text = enemyGroups.text.substr(0, enemyGroups.text.length() - 1)
-	
-	$"mainContainer/logic/Can enter/txtCanEnter".text = room.canEnterLogic
-	$mainContainer/logic/Entering/txtEntering.text = room.enteringLogic
-	$mainContainer/logic/Exiting/txtExiting.text = room.exitingLogic
+	if !rooms.empty() && !rooms[0].empty():
+		var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
+		for group in rooms[0].foeShortNameGroups:
+			if !group.empty():
+				var line = ''
+				for enemy in group:
+					line += enemy + ', '
+				
+				enemyGroups.text += line.substr(0, line.length() - 2) + '\n'
+		
+		enemyGroups.text = enemyGroups.text.substr(0, enemyGroups.text.length() - 1)
+		
+		$"mainContainer/logic/Can enter/txtCanEnter".text = rooms[0].canEnterLogic
+		$mainContainer/logic/Entering/txtEntering.text = rooms[0].enteringLogic
+		$mainContainer/logic/Exiting/txtExiting.text = rooms[0].exitingLogic
 
 
 func clearLogic() -> void:
@@ -79,37 +85,22 @@ func _on_General_loadedLocationDto(locationDto : LocationDTO):
 		$mainContainer/model/controls/optModel.add_item(item)
 
 
-func _on_grid_selectedRoom(room : Dictionary):
-	if !room.empty():
-		self.room = room
-		emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
-		
-		clearLogic()
-		setLogic()
-		multiRoom.clear()
-
-
 func _on_optModel_item_selected(index : int):
-	if multiRoom.empty():
-		room.model = $mainContainer/model/controls/optModel.get_item_text(index)
-	else:
-		for singleRoom in multiRoom:
-			singleRoom.model = $mainContainer/model/controls/optModel.get_item_text(index)
+	for singleRoom in rooms:
+		singleRoom.model = $mainContainer/model/controls/optModel.get_item_text(index)
 	
-	emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
-
-
-func _on_parameters_tab_changed(tab : int):
-	saveLogic()
-	
-	
-
+	emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
 
 
 func _on_grid_selectedMultiRoom(rooms : Array):
-	multiRoom = rooms
-	self.room = rooms[0]
-	
-	clearLogic()
-	setLogic()
+	if !rooms[0].empty():
+		self.rooms = rooms
+		emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
+		
+		clearLogic()
+		setLogic()
+
+
+func _on_btnSave_pressed():
+	saveLogic()
 

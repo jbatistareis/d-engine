@@ -6,6 +6,8 @@ signal selectedMultiRoom(rooms)
 var cellScene : PackedScene = preload("res://tools/location/map/cell.tscn")
 var totalRooms : int
 
+var multiRooms : Array = []
+
 var checkSelection : bool = false
 var mousePressed : bool
 var mouseDragged : bool
@@ -28,57 +30,17 @@ func _input(event) -> void:
 	if event is InputEventMouseButton:
 		mousePressed = event.pressed
 		
-		if mousePressed:
-			selection.start = event.position
-		elif !mousePressed && mouseDragged:
+		if !mousePressed && mouseDragged:
 			mouseDragged = false
-			selection.end = event.position
 			
-			var selectedRooms = []
-			for body in get_node("../cellSelection/selectionArea").get_overlapping_bodies():
-				if !body.get_parent().room.empty():
-					selectedRooms.append(body.get_parent().room)
-			
-			if !selectedRooms.empty():
-				emit_signal("selectedMultiRoom", selectedRooms)
+			if !multiRooms.empty():
+				emit_signal("selectedMultiRoom", multiRooms)
 		
 	elif mousePressed && (event is InputEventMouseMotion):
 		mouseDragged = true
-		selection.end = event.position
-		
-		var start = Vector2.ZERO
-		var end = Vector2.ZERO
-		var pivot = Vector2.ZERO
-		
-		if selection.start.x < selection.end.x:
-			start = selection.start
-			end = selection.end
-			
-			if selection.start.y < selection.end.y:
-				pivot = selection.start
-			else:
-				start.y = selection.end.y
-				end.y = selection.start.y
-				pivot = start
-		else:
-			if selection.start.y < selection.end.y:
-				start.x = selection.end.x
-				start.y = selection.start.y
-				end.x = selection.start.x
-				end.y = selection.end.y
-				pivot = start
-			else:
-				start = selection.end
-				end = selection.start
-				pivot = selection.end
 		
 		var scroll = get_node("../..")
-		
-		get_node("../cellSelection").rect_position = pivot + Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
-		get_node("../cellSelection").rect_size = end - start
-		get_node("../cellSelection").color = Color(1, 1, 1, 0.5)
-		get_node("../cellSelection/selectionArea/collision").shape.extents = (end - start) / 2.0
-		get_node("../cellSelection/selectionArea").global_position = start + ((end - start) / 2.0)
+		get_node("../selectionArea").global_position = event.position + Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
 
 
 func collectRooms() -> Array:
@@ -178,6 +140,13 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 			room.exits[i] = -1
 
 
+func _on_selectionArea_body_entered(body):
+	if mouseDragged and ("room" in body.get_parent()) and (!body.get_parent().room.empty()):
+		print(body.get_parent().room)
+		multiRooms.append(body.get_parent().room)
+
+
 
 func _on_grid_selectedRoom(room):
-	get_node("../cellSelection").color = Color.transparent
+	multiRooms = [room]
+	emit_signal("selectedMultiRoom", multiRooms)

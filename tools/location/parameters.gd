@@ -10,12 +10,8 @@ func goToRoomTab() -> void:
 	current_tab = 1
 
 
-func _on_grid_selectedRoom(room : Dictionary):
-	if !room.empty():
-		goToRoomTab()
-
-
 func _on_grid_selectedMultiRoom(rooms : Array):
 	if !rooms.empty():
-		goToRoomTab()
+		if !rooms[0].empty():
+			goToRoomTab()
 

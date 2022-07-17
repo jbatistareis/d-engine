@@ -55,7 +55,9 @@ func optionSelected(index : int) -> void:
 			room.clear()
 	
 	updateHint()
-	get_parent().emit_signal("selectedRoom", room)
+	
+	if !room.empty():
+		get_parent().emit_signal("selectedRoom", room)
 
 
 func updateHint() -> void:
@@ -78,6 +80,11 @@ func setRoom(value : Dictionary) -> void:
 
 func closeMenu() -> void:
 	$options.get_popup().hide()
+
+
+func select(value : bool) -> void:
+	color.b = 100 if value else 0
+	color.a = 0.25 if value else 0.15
 
 
 func _on_options_pressed():
