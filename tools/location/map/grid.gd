@@ -14,7 +14,7 @@ var mouseDragged : bool
 var selection : Dictionary = { 'start': Vector2.ZERO, 'end': Vector2.ZERO }
 
 var bitmaskMode : bool = false
-var bitmaskSelection : Array = []
+var altSelection : Array = []
 
 onready var btnAutotile : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile")
 
@@ -49,11 +49,11 @@ func _input(event) -> void:
 		get_node("../selectionArea").global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
 
 
-func clearBitmask() -> void:
-	for item in bitmaskSelection:
+func clearAltSelection() -> void:
+	for item in altSelection:
 		get_child(item.id).select(false, false)
 	
-	bitmaskSelection.clear()
+	altSelection.clear()
 	btnAutotile.disabled = true
 
 
@@ -161,7 +161,7 @@ func _on_selectionArea_body_entered(body):
 			multiRooms.append(body.get_parent().room)
 	else:
 		body.get_parent().select(true, true)
-		bitmaskSelection.append({ 
+		altSelection.append({ 
 			'id': body.get_parent().id,
 			'x': body.get_parent().x,
 			'y': body.get_parent().y

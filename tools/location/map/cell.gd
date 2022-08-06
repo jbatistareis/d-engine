@@ -96,5 +96,5 @@ func select(value : bool, bitmask : bool) -> void:
 
 func _on_options_pressed():
 	get_parent().emit_signal("selectedRoom", room)
-	get_parent().clearBitmask()
+	get_parent().clearAltSelection()
 

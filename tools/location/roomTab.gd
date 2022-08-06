@@ -108,7 +108,7 @@ func _on_btnSave_pressed():
 
 
 func _on_btnBitmask_pressed():
-	for item in grid.bitmaskSelection:
+	for item in grid.altSelection:
 		var room = DefaultValues.roomBase
 		room.id = item.id
 		room.x = item.x
@@ -117,7 +117,7 @@ func _on_btnBitmask_pressed():
 		var value = 0
 		
 		for direction in range(4): # 6 for up/down
-			var index
+			var index = 0
 			
 			if direction == Enums.Direction.NORTH:
 				index = room.x + (room.y - 1) * grid.columns
@@ -131,7 +131,7 @@ func _on_btnBitmask_pressed():
 			if index < 1:
 				break
 			
-			for cell in grid.bitmaskSelection:
+			for cell in grid.altSelection:
 				if (cell.id == index) || !grid.get_child(index).room.empty():
 					value += DefaultValues.BitmaskDirections[direction]
 					break
@@ -141,9 +141,15 @@ func _on_btnBitmask_pressed():
 			room.orientation = DefaultValues.BimaskTileset[value].orientation
 			room.model = DefaultValues.BimaskTileset[value].model
 			
-			grid.get_child(room.id).room = room
+			if grid.get_child(room.id).room.empty():
+				grid.get_child(room.id).room = room
+			else:
+				grid.get_child(room.id).room.type = DefaultValues.BimaskTileset[value].type
+				grid.get_child(room.id).room.orientation = DefaultValues.BimaskTileset[value].orientation
+				grid.get_child(room.id).room.model = DefaultValues.BimaskTileset[value].model
+
 		
 		value = 0
 	
-	grid.clearBitmask()
+	grid.clearAltSelection()
 
