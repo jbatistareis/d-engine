@@ -8,6 +8,8 @@ const _DETAILS_MULTI_TEXT = 'Multiple rooms'
 var locationDto : LocationDTO
 var rooms : Array = [] setget setRooms
 
+onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
+
 
 func setRooms(value : Array):
 	changeCellSelection(false)
@@ -31,7 +33,7 @@ func setRooms(value : Array):
 func changeCellSelection(state : bool) -> void:
 	for room in rooms:
 		if !room.empty():
-			get_node("../../map/scroll/container/grid").get_child(room.id).select(state)
+			grid.get_child(room.id).select(state, false)
 
 
 func saveLogic() -> void:
@@ -103,4 +105,45 @@ func _on_grid_selectedMultiRoom(rooms : Array):
 
 func _on_btnSave_pressed():
 	saveLogic()
+
+
+func _on_btnBitmask_pressed():
+	for item in grid.bitmaskSelection:
+		var room = DefaultValues.roomBase
+		room.id = item.id
+		room.x = item.x
+		room.y = item.y
+		
+		var value = 0
+		
+		for direction in range(4): # 6 for up/down
+			var index
+			
+			if direction == Enums.Direction.NORTH:
+				index = room.x + (room.y - 1) * grid.columns
+			elif direction == Enums.Direction.EAST:
+				index = (room.x + 1) + room.y * grid.columns
+			elif direction == Enums.Direction.SOUTH:
+				index = room.x + (room.y + 1) * grid.columns
+			elif direction == Enums.Direction.WEST:
+				index = (room.x - 1) + room.y * grid.columns
+			
+			if index < 1:
+				break
+			
+			for cell in grid.bitmaskSelection:
+				if (cell.id == index) || !grid.get_child(index).room.empty():
+					value += DefaultValues.BitmaskDirections[direction]
+					break
+		
+		if value > 0:
+			room.type = DefaultValues.BimaskTileset[value].type
+			room.orientation = DefaultValues.BimaskTileset[value].orientation
+			room.model = DefaultValues.BimaskTileset[value].model
+			
+			grid.get_child(room.id).room = room
+		
+		value = 0
+	
+	grid.clearBitmask()
 

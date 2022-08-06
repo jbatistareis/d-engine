@@ -53,6 +53,7 @@ func optionSelected(index : int) -> void:
 			room.model = _BASE_MODELS[index]
 		else:
 			room.clear()
+			select(false, false)
 	
 	updateHint()
 	
@@ -70,7 +71,7 @@ func setRoom(value : Dictionary) -> void:
 	
 	if !room.empty():
 		$icon.frame = room.type
-		$icon.rotate(_ROTATION * room.orientation)
+		$icon.rotation = _ROTATION * room.orientation
 	else:
 		$icon.frame = Enums.RoomType.DUMMY
 		$icon.rotation = 0
@@ -82,11 +83,18 @@ func closeMenu() -> void:
 	$options.get_popup().hide()
 
 
-func select(value : bool) -> void:
-	color.b = 100 if value else 0
-	color.a = 0.25 if value else 0.15
+func select(value : bool, bitmask : bool) -> void:
+	if !bitmask:
+		color.b = 0.8 if value else 0
+		color.r = 0
+	else:
+		color.b = 0
+		color.r = 0.8 if value else 0
+	
+	color.a = 0.4 if value else 0.15
 
 
 func _on_options_pressed():
 	get_parent().emit_signal("selectedRoom", room)
+	get_parent().clearBitmask()
 

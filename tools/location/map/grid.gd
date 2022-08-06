@@ -13,6 +13,11 @@ var mousePressed : bool
 var mouseDragged : bool
 var selection : Dictionary = { 'start': Vector2.ZERO, 'end': Vector2.ZERO }
 
+var bitmaskMode : bool = false
+var bitmaskSelection : Array = []
+
+onready var btnBitmask : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnBitmask")
+
 
 func _ready() -> void:
 	totalRooms = columns * columns
@@ -29,6 +34,7 @@ func _ready() -> void:
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		mousePressed = event.pressed
+		bitmaskMode = event.button_index == 2
 		
 		if !mousePressed && mouseDragged:
 			mouseDragged = false
@@ -41,6 +47,14 @@ func _input(event) -> void:
 		
 		var scroll = get_node("../..")
 		get_node("../selectionArea").global_position = event.position + Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
+
+
+func clearBitmask() -> void:
+	for item in bitmaskSelection:
+		get_child(item.id).select(false, false)
+	
+	bitmaskSelection.clear()
+	btnBitmask.disabled = true
 
 
 func collectRooms() -> Array:
@@ -61,7 +75,8 @@ func collectRooms() -> Array:
 
 func loadRooms(rooms : Array) -> void:
 	for cell in get_children():
-		cell.room = {}
+#		cell.room = {}
+		pass
 	
 	for room in rooms:
 		get_child(room.id).room = room
@@ -141,12 +156,22 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 
 
 func _on_selectionArea_body_entered(body):
-	if mouseDragged and ("room" in body.get_parent()) and (!body.get_parent().room.empty()):
-		print(body.get_parent().room)
-		multiRooms.append(body.get_parent().room)
+	if !bitmaskMode:
+		if mouseDragged && ("room" in body.get_parent()):
+			multiRooms.append(body.get_parent().room)
+	else:
+		body.get_parent().select(true, true)
+		bitmaskSelection.append({ 
+			'id': body.get_parent().id,
+			'x': body.get_parent().x,
+			'y': body.get_parent().y
+		})
+		
+		btnBitmask.disabled = false
 
 
 
 func _on_grid_selectedRoom(room):
+	bitmaskMode = false
 	multiRooms = [room]
 	emit_signal("selectedMultiRoom", multiRooms)
