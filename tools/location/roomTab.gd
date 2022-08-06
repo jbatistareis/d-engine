@@ -150,6 +150,9 @@ func _on_btnBitmask_pressed():
 
 		
 		value = 0
-	
-	grid.clearAltSelection()
+
+
+func _on_btnDelete_pressed():
+	for item in grid.altSelection:
+		grid.get_child(item.id).room = {}
 

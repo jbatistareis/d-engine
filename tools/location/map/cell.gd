@@ -84,11 +84,12 @@ func closeMenu() -> void:
 
 
 func select(value : bool, bitmask : bool) -> void:
+	color.r = 0
+	color.b = 0
+	
 	if !bitmask:
 		color.b = 0.8 if value else 0
-		color.r = 0
 	else:
-		color.b = 0
 		color.r = 0.8 if value else 0
 	
 	color.a = 0.4 if value else 0.15

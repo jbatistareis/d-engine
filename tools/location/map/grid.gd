@@ -2,6 +2,7 @@ extends GridContainer
 
 signal selectedRoom(room)
 signal selectedMultiRoom(rooms)
+signal altSelectionActive()
 
 var cellScene : PackedScene = preload("res://tools/location/map/cell.tscn")
 var totalRooms : int
@@ -17,6 +18,7 @@ var bitmaskMode : bool = false
 var altSelection : Array = []
 
 onready var btnAutotile : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile")
+onready var btnDelete : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnDelete")
 
 
 func _ready() -> void:
@@ -55,6 +57,7 @@ func clearAltSelection() -> void:
 	
 	altSelection.clear()
 	btnAutotile.disabled = true
+	btnDelete.disabled = true
 
 
 func collectRooms() -> Array:
@@ -160,6 +163,9 @@ func _on_selectionArea_body_entered(body):
 		if mouseDragged && ("room" in body.get_parent()):
 			multiRooms.append(body.get_parent().room)
 	else:
+		multiRooms.clear()
+		emit_signal("altSelectionActive")
+		
 		body.get_parent().select(true, true)
 		altSelection.append({ 
 			'id': body.get_parent().id,
@@ -168,6 +174,7 @@ func _on_selectionArea_body_entered(body):
 		})
 		
 		btnAutotile.disabled = false
+		btnDelete.disabled = false
 
 
 
