@@ -9,7 +9,7 @@ var moveList : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedArmor", self, "loadWeapon")
+	EditorSignals.connect("selectedWeapon", self, "loadWeapon")
 	
 	loadAllData()
 	setFields()
