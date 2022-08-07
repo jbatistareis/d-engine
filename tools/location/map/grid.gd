@@ -14,11 +14,13 @@ var mousePressed : bool
 var mouseDragged : bool
 var selection : Dictionary = { 'start': Vector2.ZERO, 'end': Vector2.ZERO }
 
-var bitmaskMode : bool = false
+var altSelectionMode : bool = false
 var altSelection : Array = []
 
 onready var btnAutotile : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile")
 onready var btnDelete : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnDelete")
+onready var scroll : ScrollContainer = get_node("../..")
+onready var selectionArea : Area2D = get_node("../selectionArea")
 
 
 func _ready() -> void:
@@ -36,7 +38,7 @@ func _ready() -> void:
 func _input(event) -> void:
 	if event is InputEventMouseButton:
 		mousePressed = event.pressed
-		bitmaskMode = event.button_index == 2
+		altSelectionMode = mousePressed && (event.button_index == 2)
 		
 		if !mousePressed && mouseDragged:
 			mouseDragged = false
@@ -44,8 +46,7 @@ func _input(event) -> void:
 	elif mousePressed && (event is InputEventMouseMotion):
 		mouseDragged = true
 		
-		var scroll = get_node("../..")
-		get_node("../selectionArea").global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
+		selectionArea.global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
 		
 		if !multiRooms.empty():
 			emit_signal("selectedMultiRoom", multiRooms)
@@ -159,8 +160,12 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 
 
 func _on_selectionArea_body_entered(body):
-	if !bitmaskMode:
-		if mouseDragged && ("room" in body.get_parent()):
+	if !altSelectionMode:
+		if mouseDragged && ("room" in body.get_parent()) && !body.get_parent().room.empty():
+			for room in multiRooms:
+				if room.id == body.get_parent().room.id:
+					return
+			
 			multiRooms.append(body.get_parent().room)
 	else:
 		multiRooms.clear()
@@ -179,6 +184,6 @@ func _on_selectionArea_body_entered(body):
 
 
 func _on_grid_selectedRoom(room):
-	bitmaskMode = false
+	altSelectionMode = false
 	multiRooms = [room]
 	emit_signal("selectedMultiRoom", multiRooms)

@@ -396,11 +396,11 @@ margin_right = 10.0
 margin_bottom = 22.0
 rect_min_size = Vector2( 10, 22 )
 
-[node name="lblMisc" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
+[node name="lblAltSel" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
 margin_left = 25.0
 margin_right = 75.0
 margin_bottom = 22.0
-text = "Misc."
+text = "Alt. selection"
 align = 1
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
