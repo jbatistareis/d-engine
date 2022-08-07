@@ -116,27 +116,46 @@ alignment = 1
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
 margin_right = 606.0
-margin_bottom = 22.0
+margin_bottom = 28.0
 
 [node name="lblActions" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+margin_top = 3.0
 margin_right = 100.0
-margin_bottom = 22.0
+margin_bottom = 25.0
 text = "↳ Actions "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
 margin_left = 104.0
-margin_right = 606.0
-margin_bottom = 22.0
+margin_right = 546.0
+margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="fields" type="MarginContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
-margin_top = 26.0
+[node name="Button" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+margin_left = 550.0
+margin_right = 592.0
+margin_bottom = 28.0
+text = "Add"
+
+[node name="HSeparator3" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+margin_left = 596.0
+margin_right = 606.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 10, 0 )
+
+[node name="data" type="MarginContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
+margin_top = 32.0
 margin_right = 606.0
 margin_bottom = 637.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/fields"]
+[node name="panel" type="Panel" parent="background/mainSeparator/dataPanel/dataContainer/actions/data"]
+margin_right = 606.0
+margin_bottom = 605.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data/panel"]
 margin_right = 606.0
 margin_bottom = 611.0
 size_flags_horizontal = 3
@@ -144,7 +163,7 @@ size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/fields/scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data/panel/scroll"]
 margin_right = 606.0
 margin_bottom = 611.0
 size_flags_horizontal = 3
