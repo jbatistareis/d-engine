@@ -41,25 +41,25 @@ func toDTO() -> VerdictDTO:
 	return verdictDto
 
 
-func decision(auditorCharacter, suspects : Array) -> void:
+func decision(auditor, suspects : Array) -> void:
 	for action in actions:
-		var targets = analyze(DefaultValues.facts[action.fact], auditorCharacter, suspects)
+		var targets = analyze(DefaultValues.facts[action.fact], auditor, suspects)
 		
 		if !targets.empty():
 			var move = Move.new().fromShortName(action.move.shortName)
-			move.cdPre += auditorCharacter.inventory.weapon.cdPre
-			move.cdPos += auditorCharacter.inventory.weapon.cdPos
+			move.cdPre += auditor.inventory.weapon.cdPre
+			move.cdPos += auditor.inventory.weapon.cdPos
 			
 			if Enums.MoveTargetType.keys()[action.move.targetType].ends_with(_ALL):
 				Signals.emit_signal(
 					"commandPublished",
-					ExecuteMoveCommand.new(auditorCharacter, targets, move))
+					ExecuteMoveCommand.new(auditor, targets, move))
 			else:
 				rng.randomize()
 				Signals.emit_signal(
 						"commandPublished",
 						ExecuteMoveCommand.new(
-							auditorCharacter,
+							auditor,
 							[targets[rng.randi_range(0, targets.size() - 1)]],
 							move))
 			
@@ -67,12 +67,12 @@ func decision(auditorCharacter, suspects : Array) -> void:
 	
 	Signals.emit_signal(
 		"commandPublished",
-		WaitCommand.new(VerdictCommand.new(auditorCharacter, GameParameters.WAIT_TICKS))
+		WaitCommand.new(VerdictCommand.new(auditor, GameParameters.WAIT_TICKS))
 	)
 
 
-func analyze(script : String, auditorCharacter, suspects : Array) -> Array:
-	return ScriptTool.getReference(script).execute(auditorCharacter, suspects)
+func analyze(script : String, auditor, suspects : Array) -> Array:
+	return ScriptTool.getReference(script).execute(auditor, suspects)
 
 
 # action is a { fact, move } dict

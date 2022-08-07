@@ -1,9 +1,11 @@
 class_name VerdictCommand
 extends Command
 
+var auditor : Character
 
-func _init(executorCharacter, ticks : int).(executorCharacter, ticks) -> void:
-	pass
+
+func _init(auditor, ticks : int).(auditor, ticks) -> void:
+	self.auditor = executorCharacter
 
 
 func execute() -> void:
@@ -12,12 +14,12 @@ func execute() -> void:
 		remainingTicks = 0
 		return
 	
-	Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
+	Signals.emit_signal("startedBattleAnimation", auditor, 'idle')
 	
-	if executorCharacter.verdictActive:
+	if auditor.verdictActive:
 		var suspects
 		
-		match executorCharacter.type:
+		match auditor.type:
 			Enums.CharacterType.PC:
 				suspects = BattleManager.enemies
 			
@@ -27,5 +29,5 @@ func execute() -> void:
 			_:
 				suspects = []
 		
-		executorCharacter.verdict.decision(executorCharacter, suspects)
+		auditor.verdict.decision(auditor, suspects)
 

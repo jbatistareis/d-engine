@@ -31,20 +31,20 @@ var roomBase : Dictionary = {
 }
 
 var facts : Dictionary = {
-	Enums.Fact.HP_HIGHEST: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(_suspects)',
-	Enums.Fact.HP_LOWEST: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByLowestHp(_suspects)',
-	Enums.Fact.HP_GREATER_95: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.95)',
-	Enums.Fact.HP_GREATER_75: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.75)',
-	Enums.Fact.HP_GREATER_50: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.50)',
-	Enums.Fact.HP_GREATER_35: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.35)',
-	Enums.Fact.HP_GREATER_15: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.15)',
-	Enums.Fact.HP_GREATER_5: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.05)',
-	Enums.Fact.HP_LOWER_95: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.95)',
-	Enums.Fact.HP_LOWER_75: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.75)',
-	Enums.Fact.HP_LOWER_50: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.50)',
-	Enums.Fact.HP_LOWER_35: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.35)',
-	Enums.Fact.HP_LOWER_15: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.15)',
-	Enums.Fact.HP_LOWER_5: 'func execute(_executor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.05)'
+	Enums.Fact.HP_HIGHEST: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(_suspects)',
+	Enums.Fact.HP_LOWEST: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByLowestHp(_suspects)',
+	Enums.Fact.HP_GREATER_95: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.95)',
+	Enums.Fact.HP_GREATER_75: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.75)',
+	Enums.Fact.HP_GREATER_50: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.50)',
+	Enums.Fact.HP_GREATER_35: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.35)',
+	Enums.Fact.HP_GREATER_15: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.15)',
+	Enums.Fact.HP_GREATER_5: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.05)',
+	Enums.Fact.HP_LOWER_95: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.95)',
+	Enums.Fact.HP_LOWER_75: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.75)',
+	Enums.Fact.HP_LOWER_50: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.50)',
+	Enums.Fact.HP_LOWER_35: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.35)',
+	Enums.Fact.HP_LOWER_15: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.15)',
+	Enums.Fact.HP_LOWER_5: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpLt(_suspects, 0.05)'
 }
 
 
