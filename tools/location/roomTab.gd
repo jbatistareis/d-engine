@@ -13,10 +13,7 @@ onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
 
 func setRooms(value : Array):
 	changeCellSelection(false)
-	
 	rooms = value
-	
-	changeCellSelection(true)
 	
 	if (rooms.size() == 1) &&  !rooms[0].empty():
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [rooms[0].id, rooms[0].x, rooms[0].y]
@@ -28,6 +25,8 @@ func setRooms(value : Array):
 		if !rooms[0].empty() && (optModel.get_item_text(index) == rooms[0].model):
 			optModel.select(index)
 			break
+	
+	changeCellSelection(true)
 
 
 func changeCellSelection(state : bool) -> void:

@@ -87,10 +87,10 @@ func select(value : bool, bitmask : bool) -> void:
 	color.r = 0
 	color.b = 0
 	
-	if !bitmask:
-		color.b = 0.8 if value else 0
-	else:
-		color.r = 0.8 if value else 0
+	if bitmask && value:
+		color.r = 0.8
+	elif !bitmask && value:
+		color.b = 0.8
 	
 	color.a = 0.4 if value else 0.15
 

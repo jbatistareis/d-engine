@@ -40,15 +40,15 @@ func _input(event) -> void:
 		
 		if !mousePressed && mouseDragged:
 			mouseDragged = false
-			
-			if !multiRooms.empty():
-				emit_signal("selectedMultiRoom", multiRooms)
 		
 	elif mousePressed && (event is InputEventMouseMotion):
 		mouseDragged = true
 		
 		var scroll = get_node("../..")
 		get_node("../selectionArea").global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
+		
+		if !multiRooms.empty():
+			emit_signal("selectedMultiRoom", multiRooms)
 
 
 func clearAltSelection() -> void:
