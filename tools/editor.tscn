@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://tools/editor.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://tools/armor/armorTab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
 [ext_resource path="res://tools/move/moveTab.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tools/verdict/verdictTab.tscn" type="PackedScene" id=7]
 
 [node name="editor" type="Panel"]
 anchor_right = 1.0
@@ -96,17 +97,8 @@ anchor_bottom = 1.0
 [node name="Move" parent="tabs" instance=ExtResource( 6 )]
 visible = false
 
-[node name="Verdict" type="Tabs" parent="tabs"]
+[node name="Verdict" parent="tabs" instance=ExtResource( 7 )]
 visible = false
-margin_left = 1043.0
-margin_top = 47.0
-margin_right = 1154.0
-margin_bottom = 709.0
-size_flags_horizontal = 3
-
-[node name="background" type="Panel" parent="tabs/Verdict"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="Weapon" parent="tabs" instance=ExtResource( 5 )]
 visible = false

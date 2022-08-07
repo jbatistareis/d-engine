@@ -1,0 +1,155 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tools/verdict/verdictTab.gd" type="Script" id=1]
+
+[node name="Verdict" type="Tabs"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="background" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="mainSeparator" type="HBoxContainer" parent="background"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="fileList" type="ItemList" parent="background/mainSeparator"]
+margin_right = 130.0
+margin_bottom = 768.0
+rect_min_size = Vector2( 130, 0 )
+size_flags_vertical = 3
+
+[node name="dataPanel" type="PanelContainer" parent="background/mainSeparator"]
+margin_left = 134.0
+margin_right = 754.0
+margin_bottom = 768.0
+rect_min_size = Vector2( 620, 0 )
+size_flags_vertical = 3
+
+[node name="dataContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 613.0
+margin_bottom = 761.0
+rect_pivot_offset = Vector2( -674.514, 141.424 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="identification" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_right = 606.0
+margin_bottom = 94.0
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+margin_right = 170.0
+margin_bottom = 22.0
+text = "↳ Identification "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+margin_left = 174.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 94.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields"]
+margin_left = 6.0
+margin_right = 600.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 594, 0 )
+columns = 2
+
+[node name="lblName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_top = 5.0
+margin_right = 110.0
+margin_bottom = 27.0
+text = "Name"
+
+[node name="txtName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_left = 114.0
+margin_right = 594.0
+margin_bottom = 32.0
+clear_button_enabled = true
+
+[node name="lblShortName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_top = 41.0
+margin_right = 110.0
+margin_bottom = 63.0
+text = "Short name "
+
+[node name="txtShortName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+margin_left = 114.0
+margin_top = 36.0
+margin_right = 594.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 98.0
+margin_right = 606.0
+margin_bottom = 113.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="actions" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 117.0
+margin_right = 606.0
+margin_bottom = 754.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblActions" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+margin_right = 100.0
+margin_bottom = 22.0
+text = "↳ Actions "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+margin_left = 104.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="MarginContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 637.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/fields"]
+margin_right = 606.0
+margin_bottom = 611.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+follow_focus = true
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/fields/scroll"]
+margin_right = 606.0
+margin_bottom = 611.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
