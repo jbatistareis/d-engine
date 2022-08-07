@@ -1,7 +1,7 @@
 class_name VerdictCommand
 extends Command
 
-var auditor : Character
+var auditor
 
 
 func _init(auditor, ticks : int).(auditor, ticks) -> void:

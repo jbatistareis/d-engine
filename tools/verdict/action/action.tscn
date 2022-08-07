@@ -73,3 +73,9 @@ margin_left = 538.0
 margin_right = 560.0
 margin_bottom = 28.0
 text = "❌"
+
+[connection signal="item_selected" from="panel/grid/optFact" to="." method="_on_optFact_item_selected"]
+[connection signal="item_selected" from="panel/grid/optMove" to="." method="_on_optMove_item_selected"]
+[connection signal="pressed" from="panel/grid/btnUp" to="." method="_on_btnUp_pressed"]
+[connection signal="pressed" from="panel/grid/btnDown" to="." method="_on_btnDown_pressed"]
+[connection signal="pressed" from="panel/grid/btnDelete" to="." method="_on_btnDelete_pressed"]

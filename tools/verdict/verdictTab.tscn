@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tools/verdict/verdictTab.gd" type="Script" id=1]
+[ext_resource path="res://tools/verdict/saveConfirm.gd" type="Script" id=2]
+[ext_resource path="res://tools/verdict/actionList.gd" type="Script" id=3]
 
 [node name="Verdict" type="Tabs"]
 anchor_right = 1.0
@@ -109,7 +111,7 @@ size_flags_vertical = 0
 [node name="actions" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 117.0
 margin_right = 606.0
-margin_bottom = 754.0
+margin_bottom = 703.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
@@ -130,7 +132,7 @@ margin_right = 546.0
 margin_bottom = 28.0
 size_flags_horizontal = 3
 
-[node name="Button" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
+[node name="btnAdd" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/actions/title"]
 margin_left = 550.0
 margin_right = 592.0
 margin_bottom = 28.0
@@ -142,33 +144,88 @@ margin_right = 606.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 10, 0 )
 
-[node name="data" type="MarginContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
+[node name="data" type="Panel" parent="background/mainSeparator/dataPanel/dataContainer/actions"]
 margin_top = 32.0
 margin_right = 606.0
-margin_bottom = 637.0
+margin_bottom = 586.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="panel" type="Panel" parent="background/mainSeparator/dataPanel/dataContainer/actions/data"]
-margin_right = 606.0
-margin_bottom = 605.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data/panel"]
-margin_right = 606.0
-margin_bottom = 611.0
+[node name="scroll" type="ScrollContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data"]
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 follow_focus = true
 scroll_horizontal_enabled = false
 
-[node name="VBoxContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data/panel/scroll"]
+[node name="VBoxContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/actions/data/scroll"]
 margin_right = 606.0
-margin_bottom = 611.0
+margin_bottom = 554.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource( 3 )
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 707.0
+margin_right = 606.0
+margin_bottom = 722.0
+rect_min_size = Vector2( 0, 15 )
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 726.0
+margin_right = 606.0
+margin_bottom = 754.0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
+margin_right = 606.0
+margin_bottom = 28.0
+alignment = 1
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_right = 126.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="btnSave" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 130.0
+margin_right = 256.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Save|Create"
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 260.0
+margin_right = 310.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 50, 0 )
+
+[node name="btnReload" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 314.0
+margin_right = 476.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+text = "Reload entities"
+
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+margin_left = 480.0
+margin_right = 606.0
+margin_bottom = 28.0
+size_flags_horizontal = 3
+
+[node name="saveConfirm" type="ConfirmationDialog" parent="."]
+margin_right = 218.0
+margin_bottom = 74.0
+script = ExtResource( 2 )
 
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/actions/title/btnAdd" to="." method="_on_btnAdd_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_saveConfirm_confirmed"]
