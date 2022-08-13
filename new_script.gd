@@ -6,13 +6,16 @@ var player : Character
 func _init():
 #	Persistence.saveDTO(CharacterDTO.new())
 #	Persistence.saveDTO(VerdictDTO.new())
-#	Persistence.saveDTO(FactDTO.new())
 #	Persistence.saveDTO(InventoryDTO.new())
 #	Persistence.saveDTO(ItemDTO.new())
 #	Persistence.saveDTO(WeaponDTO.new())
 #	Persistence.saveDTO(ArmorDTO.new())
 #	Persistence.saveDTO(MoveDTO.new())
 #	Persistence.saveDTO(LocationDTO.new())
+#
+#	var enemy = CharacterDTO.new()
+#	enemy.type = Enums.CharacterType.FOE
+#	Persistence.saveDTO(enemy)
 	
 	player = Character.new().fromShortName('BSECHA')
 
@@ -31,7 +34,7 @@ func _ready() -> void:
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
 	Signals.emit_signal("playerEnteredGame", player)
-	Signals.emit_signal("playerTransferedLocation", 'BSELOC', 2)
+	Signals.emit_signal("characterTransferedLocation", GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 
 
 func _process(delta) -> void:

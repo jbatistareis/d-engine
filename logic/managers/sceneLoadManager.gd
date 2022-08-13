@@ -6,23 +6,14 @@ var scenes : Dictionary = {}
 func fromLocation(location : Location) -> void:
 	scenes.clear()
 	
-	var directory = Directory.new()
-	var path = GamePaths.MAP_DATA % location.shortName
+	var locationModels = Persistence.listEntities(Enums.EntityType.LOCATION_MODELS, location.shortName)
+	var locationModelPath = GamePaths.LOCATION_MODELS + '/%s.tscn'
 	
-	directory.open(GamePaths.MAP_DATA % location.shortName)
-	directory.list_dir_begin(true, true)
-	
-	var filename = directory.get_next()
-	while !filename.empty():
-		if filename.ends_with('.tscn'):
-			scenes[filename.substr(0, filename.find_last('.'))] = load(path + '/' + filename)
-		filename = directory.get_next()
+	for model in locationModels:
+		if !scenes.has(model):
+			scenes[model] = load(locationModelPath % [location.shortName, model])
 	
 	for room in location.rooms:
-		if !scenes.has_all(room.friendlyShortNames):
-			for friendly in room.friendlyShortNames:
-				scenes[friendly] = load(GamePaths.CHARACTER_MODEL % friendly)
-		
 		for foeGroup in room.foeShortNameGroups:
 			if !scenes.has_all(foeGroup):
 				for foe in foeGroup:

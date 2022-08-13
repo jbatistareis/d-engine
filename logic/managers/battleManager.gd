@@ -22,32 +22,30 @@ func start(players : Array, enemies : Array) -> void:
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:
 			if player.verdictActive:
-				Signals.emit_signal("commandPublished", VerdictCommand.new(player, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
+				Signals.emit_signal("commandPublished", VerdictCommand.new(player, int(5 * randf())))
 			else:
-				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
+				Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(player, int(5 * randf())))
 		
 		for enemy in enemies:
-			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, 10 * (Dice.rollNormal(Enums.DiceType.D100) / 100.0) + 2))
+			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, int(5 * randf())))
 
 
-func _physics_process(delta) -> void:
+func _process(delta) -> void:
 	if inBattle:
-		if playersAlive() == 0:
+		if playersAlive() == 0: # TODO game over
 			inBattle = false
 			Signals.emit_signal("commandsPaused")
+			Signals.emit_signal("commandsCleared")
 			Signals.emit_signal("battleLost")
-			# TODO game over
-		elif enemiesAlive() == 0:
+			
+		elif enemiesAlive() == 0: # TODO loot
 			inBattle = false
+			Signals.emit_signal("commandsCleared")
 			
 			var battleResult = BattleResult.new()
 			for enemy in enemies:
 				if enemy.currentHp == 0:
 					battleResult.experience += enemy.experiencePoints
-					pass # TODO loot
-				else:
-					#CharactersDatabase.deSpawnEntity(enemy.spawnId)
-					pass
 			
 			Signals.emit_signal("battleWon", players, battleResult)
 			

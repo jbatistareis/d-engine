@@ -1,10 +1,10 @@
 class_name Location
 extends Entity
 
+var roomTile = RoomTile.new()
+
 var description : String
 var rooms : Array = []
-var portals : Array
-var spawns : Array
 
 var entranceLogic : String
 var exitLogic : String
@@ -25,12 +25,7 @@ func fromDTO(locationDto : LocationDTO) -> Location:
 	self.shortName = locationDto.shortName
 	self.description = locationDto.description
 	
-	self.rooms.clear()
-	for room in locationDto.roomDicts:
-		self.rooms.append(RoomTile.new().fromDict(room))
-	
-	self.portals = locationDto.portals
-	self.spawns = locationDto.spawns
+	self.rooms = locationDto.rooms
 	
 	self.entranceLogic = locationDto.entranceLogic
 	self.exitLogic = locationDto.exitLogic
@@ -46,10 +41,7 @@ func toDTO() -> LocationDTO:
 	locationDto.shortName = self.shortName
 	locationDto.description = self.description
 	
-	for room in self.rooms:
-		locationDto.roomDicts.append(room.toDict())
-	
-	locationDto.portals = self.portals
+	locationDto.rooms = self.rooms
 	locationDto.spawns = self.spawns
 	
 	locationDto.entranceLogic = self.entranceLogic
@@ -61,65 +53,62 @@ func toDTO() -> LocationDTO:
 
 
 # used only by the player
-func enter(player, toSpawnId : int) -> void:
+func enter(player, toRoomId : int, facingDirection : int) -> void:
+	var room = findRoom(toRoomId)
+	
 	Signals.emit_signal("playerArrivedLocation", self)
-	
+	Signals.emit_signal("playerSpawned", self, room.x, room.y, facingDirection)
 	executeScript(entranceLogic, player)
-	player.currentLocation = shortName
-	findRoom(findSpawn(toSpawnId).toRoomId).enter(player, false)
-
-
-func exit(character, newLocationName : String, toSpawnId : int) -> void:
-	executeScript(exitLogic, character)
 	
+	player.currentLocation = shortName
+	roomTile.fromDict(room).enter(player, facingDirection, false)
+
+
+# used only by the player
+func exit(player) -> void:
+	executeScript(exitLogic, player)
 	Signals.emit_signal("playerLeftLocation", self)
-	Signals.emit_signal("playerTransferedLocation", newLocationName, toSpawnId)
 
 
 func move(character, direction : int) -> int:
-	var fromRoom = findRoom(character.currentRoom)
-	var portalId = fromRoom.getPortal(direction)
-	var exitPoint = fromRoom.getExit(direction)
-	var canPass = true if (portalId == 0) else canPass(findPortal(portalId).passLogic, character)
+	roomTile.fromDict(findRoom(character.currentRoom))
+	var exitPoint = roomTile.getExit(direction)
 	
-	if (exitPoint > 0) && canPass: # move to a room
+	if exitPoint != -1:
 		var toRoom = findRoom(exitPoint)
-		var battleTriggered = (Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
 		
-		fromRoom.exit(character)
-		toRoom.enter(character, battleTriggered)
-		
-		return Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD
-	
-	if (exitPoint == 0) && canPass: # move to a location
-		var portal = findPortal(portalId)
-		
-		if !portal.newLocationShortName.empty():
-			exit(character, portal.newLocationName, portal.toSpawnId)
+		if canPass(toRoom.canEnterLogic, character, reverseDirection(direction)):
+			roomTile.exit(character, direction)
+			roomTile.fromDict(toRoom)
+			roomTile.enter(character, reverseDirection(direction), Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
+			
+			return Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD
 	
 	return Enums.Direction.NONE
+
+
+func teleport(character : Character, toRoomId : int, facingDirection : int) -> void:
+	var room = findRoom(toRoomId)
+	GameManager.direction = facingDirection
+	roomTile.fromDict(room).enter(character, reverseDirection(facingDirection), false)
 
 
 func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 
-func canPass(passLogic : String, character : Character) -> bool:
-	return ScriptTool.getReference(passLogic).execute(character)
+func canPass(passLogic : String, character : Character, direction : int) -> bool:
+	return ScriptTool.getReference(passLogic).execute(character, direction)
 
 
-func findRoom(id : int) -> RoomTile:
+func findRoom(id : int) -> Dictionary:
 	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
 
 
-func findPortal(id : int) -> Dictionary:
-	return portals[portals.bsearch_custom(id, EntityArrayHelper, 'idFind')]
-
-
-func findSpawn(id : int) -> Dictionary:
-	return spawns[spawns.bsearch_custom(id, EntityArrayHelper, 'idFind')]
-
-
 func changeEncounterRate(value : float) -> void:
-	encounterRate = max(0.0, min(value, 1.0))
+	encounterRate = clamp(value, 0.0, 1.0)
+
+
+func reverseDirection(direction : int) -> int:
+	return (direction + 2) % 4
 

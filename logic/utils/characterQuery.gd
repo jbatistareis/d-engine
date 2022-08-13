@@ -1,9 +1,14 @@
 class_name CharacterQuery
+
+# TODO find by move modifier
+
 #
-# multi queries
+# multi target queries
 #
 
 static func findByHighestHp(characters : Array) -> Array:
+	var matches = []
+	
 	var highest = 0
 	for character in characters:
 		if character.currentHp > highest:
@@ -11,12 +16,14 @@ static func findByHighestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp >= highest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 static func findByLowestHp(characters : Array) -> Array:
+	var matches = []
+	
 	var lowest = 9999
 	for character in characters:
 		if character.currentHp < lowest:
@@ -24,13 +31,15 @@ static func findByLowestHp(characters : Array) -> Array:
 	
 	for character in characters:
 		if character.currentHp <= lowest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 # use Enums.CharacterAbility
 static func findByHighestAbilityScore(characters : Array, ability : int) -> Array:
+	var matches = []
+	
 	var highest = 0
 	for character in characters:
 		if character.getScore(ability) > highest:
@@ -38,13 +47,15 @@ static func findByHighestAbilityScore(characters : Array, ability : int) -> Arra
 	
 	for character in characters:
 		if character.getScore(ability) >= highest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
 # use Enums.CharacterAbility
 static func findByLowestAbilityScore(characters : Array, ability : int) -> Array:
+	var matches = []
+	
 	var lowest = 9999
 	for character in characters:
 		if character.getScore(ability) < lowest:
@@ -52,17 +63,28 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 	
 	for character in characters:
 		if character.getScore(ability) <= lowest:
-			return [character]
+			matches.append(character)
 	
-	return []
+	return matches
 
 
-# percentage is normalized, 0-1
-static func findByPctHp(characters : Array, hpPctTarget : int) -> Array:
+# percentage is normalized, 0.05~0.95
+static func findByHpLt(characters : Array, percent : float) -> Array:
 	var matches = []
 	
 	for character in characters:
-		if max(0, min(1, hpPctTarget)) <= ((character.getCurrentHp() * 100) / character.maxHp):
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) <= clamp(percent, 0.05 ,0.95):
+			matches.append(character)
+	
+	return matches
+
+
+# percentage is normalized, 0.05~0.95
+static func findByHpGt(characters : Array, percent : float) -> Array:
+	var matches = []
+	
+	for character in characters:
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) >= clamp(percent, 0.05 ,0.95):
 			matches.append(character)
 	
 	return matches
@@ -81,11 +103,11 @@ static func findByAfflictionType(characters : Array, type : int) -> Array:
 
 
 #
-# individual queries
+# single target queries
 #
 # TODO
 # use Enums.AfflictionType
-static func characterHasAfflictionType(characterSpawnId : int, type : int) -> bool:
+static func characterHasAfflictionType(character : Character, type : int) -> bool:
 	return RandomNumberGenerator.new().randi_range(0, 1) == 0
 
 

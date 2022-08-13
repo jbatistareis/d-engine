@@ -5,17 +5,17 @@ var name : String = 'Base attack'
 var shortName : String = 'BSEATK'
 var description : String = 'Attack with basic parameters'
 
-var valueExpression : String = GameParameters.MOVE_BASE_VALUE
-var outcomeExpression : String = GameParameters.MOVE_BASE_OUTCOME
-var pickExpression : String = GameParameters.MOVE_BASE_PICK
-var excuteExpression : String = GameParameters.MOVE_BASE_EXECUTE
+var valueExpression : String = DefaultValues.MOVE_BASE_VALUE
+var outcomeExpression : String = DefaultValues.MOVE_BASE_OUTCOME
+var pickExpression : String = DefaultValues.MOVE_BASE_PICK
+var excuteExpression : String = DefaultValues.MOVE_BASE_EXECUTE
 
 var cdPre : int = 1
 var cdPos : int = 1
 
 # use Enums.CharacterTargetType
 # relative to the executor
-var targetType : int = Enums.CharacterTargetType.FOE
+var targetType : int = Enums.MoveTargetType.FOE
 
 var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'

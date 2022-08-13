@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://tools/editor.gd" type="Script" id=1]
+[ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
+[ext_resource path="res://tools/character/characterTab.tscn" type="PackedScene" id=3]
+[ext_resource path="res://tools/armor/armorTab.tscn" type="PackedScene" id=4]
+[ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
+[ext_resource path="res://tools/move/moveTab.tscn" type="PackedScene" id=6]
+[ext_resource path="res://tools/verdict/verdictTab.tscn" type="PackedScene" id=7]
+
+[node name="editor" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tabs" type="TabContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="Armor" parent="tabs" instance=ExtResource( 4 )]
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Character" parent="tabs" instance=ExtResource( 3 )]
+visible = false
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+scrolling_enabled = false
+
+[node name="Event" type="Tabs" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Event"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Inventory" type="Tabs" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Inventory"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Item" type="Tabs" parent="tabs"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Item"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Location" parent="tabs" instance=ExtResource( 2 )]
+visible = false
+margin_left = 4.0
+margin_top = 40.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Message" type="Tabs" parent="tabs"]
+visible = false
+margin_left = 814.0
+margin_top = 47.0
+margin_right = 924.0
+margin_bottom = 709.0
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Message"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Move" parent="tabs" instance=ExtResource( 6 )]
+visible = false
+
+[node name="Verdict" parent="tabs" instance=ExtResource( 7 )]
+visible = false
+
+[node name="Weapon" parent="tabs" instance=ExtResource( 5 )]
+visible = false
+
+[connection signal="tab_changed" from="tabs" to="tabs/Character" method="_on_tabs_tab_changed"]
+[connection signal="tab_changed" from="tabs" to="tabs/Location" method="_on_tabs_tab_changed"]

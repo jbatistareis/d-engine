@@ -15,5 +15,8 @@ var modifier : int = Enums.CharacterModifier.STR
 var cdPre : int = 1
 var cdPos : int = 1
 
-var moveShortNames : Array = ['BSEATK']
+var move1ShortName : String = 'BSEATK'
+var move2ShortName : String = ''
+var move3ShortName : String = ''
+var move4ShortName : String = ''
 

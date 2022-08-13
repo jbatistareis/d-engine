@@ -16,10 +16,10 @@ func handleInput() -> void:
 		
 		else:
 			if Input.is_action_pressed("ui_up"):
-				Signals.emit_signal("playerMoved", GameManager.direction)
+				Signals.emit_signal("characterMoved", GameManager.player, GameManager.direction)
 			
 			elif Input.is_action_pressed("ui_down"):
-				Signals.emit_signal("playerMoved", (GameManager.direction + 2) % 4)
+				Signals.emit_signal("characterMoved", GameManager.player, (GameManager.direction + 2) % 4)
 			
 			elif Input.is_action_pressed("ui_left"):
 				Signals.emit_signal("cameraRotatedLeft")

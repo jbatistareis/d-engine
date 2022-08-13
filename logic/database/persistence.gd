@@ -20,9 +20,6 @@ static func saveDTO(dto : DTO) -> String:
 	elif dto is VerdictDTO:
 		path = GamePaths.VERDICT_DATA
 	
-	elif dto is FactDTO:
-		path = GamePaths.FACT_DATA
-	
 	elif dto is InventoryDTO:
 		path = GamePaths.INVENTORY_DATA
 	
@@ -65,9 +62,6 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 		Enums.EntityType.VERDICT:
 			path = GamePaths.VERDICT_DATA
 		
-		Enums.EntityType.FACT:
-			path = GamePaths.FACT_DATA
-		
 		Enums.EntityType.INVENTORY:
 			path = GamePaths.INVENTORY_DATA
 		
@@ -102,4 +96,63 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	file.close()
 	
 	return dto
+
+
+static func listEntities(entityType : int, subpath : String = '') -> Array:
+	var extensionRegex : RegEx = RegEx.new()
+	extensionRegex.compile(GamePaths.EXTENSION_REGEX)
+	
+	var result = []
+	var path
+	
+	match entityType:
+		Enums.EntityType.CHARACTER:
+			path = GamePaths.CHARACTER_PATH
+		
+		Enums.EntityType.CHARACTER_MODEL:
+			path = GamePaths.CHARACTER_PATH
+		
+		Enums.EntityType.VERDICT:
+			path = GamePaths.VERDICT_PATH
+		
+		Enums.EntityType.INVENTORY:
+			path = GamePaths.INVENTORY_PATH
+		
+		Enums.EntityType.ITEM:
+			path = GamePaths.ITEM_PATH
+		
+		Enums.EntityType.WEAPON:
+			path = GamePaths.WEAPON_PATH
+		
+		Enums.EntityType.MOVE:
+			path = GamePaths.MOVE_PATH
+		
+		Enums.EntityType.ARMOR:
+			path = GamePaths.ARMOR_PATH
+		
+		Enums.EntityType.LOCATION:
+			path = GamePaths.LOCATION_PATH
+		
+		Enums.EntityType.LOCATION_MODELS:
+			path = GamePaths.LOCATION_MODELS % subpath
+	
+	var dir = Directory.new()
+	if dir.open(path) == OK:
+		dir.list_dir_begin(true, true)
+		
+		var file = dir.get_next()
+		while !file.empty():
+			if (entityType != Enums.EntityType.CHARACTER_MODEL) && !dir.current_is_dir():
+				result.append(extensionRegex.sub(file, ''))
+			elif (entityType == Enums.EntityType.CHARACTER_MODEL) && dir.current_is_dir():
+				result.append(extensionRegex.sub(file, ''))
+			
+			file = dir.get_next()
+		
+		dir.list_dir_end()
+	else:
+		push_error(ErrorMessages.DIR_NOT_FOUND % path)
+	
+	result.sort()
+	return result
 

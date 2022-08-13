@@ -26,8 +26,8 @@ It is going to work some day.
 - [x] UI ~~system~~  
 - [x] 3D map  
 - [x] Maps dev tool  
-- [ ] Characters dev tool  
-- [ ] Battles dev tool 
+- [x] Characters dev tool  
+- [x] Battles dev tool 
 - [ ] Dialogs dev tool  
 - [ ] Events dev tool  
 - [ ] Items dev tool  

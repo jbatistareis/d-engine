@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/theme/default/styleBoxFlat_orange.tres" type="StyleBox" id=1]
+[ext_resource path="res://assets/theme/default/styleBoxFlat_teal.tres" type="StyleBox" id=2]
+[ext_resource path="res://assets/theme/default/styleBoxFlat_limegreen.tres" type="StyleBox" id=3]
+[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=4]
+[ext_resource path="res://ui/gui/battle/healthBars.gd" type="Script" id=5]
+
+[node name="health" type="MarginContainer"]
+margin_right = 155.0
+margin_bottom = 22.0
+rect_min_size = Vector2( 150, 0 )
+size_flags_horizontal = 3
+script = ExtResource( 5 )
+
+[node name="armorTween" type="Tween" parent="."]
+
+[node name="hpTween" type="Tween" parent="."]
+
+[node name="hp" type="ProgressBar" parent="."]
+margin_right = 155.0
+margin_bottom = 22.0
+theme = ExtResource( 4 )
+custom_styles/fg = ExtResource( 3 )
+custom_styles/bg = ExtResource( 2 )
+
+[node name="armor" type="ProgressBar" parent="."]
+margin_right = 155.0
+margin_bottom = 22.0
+theme = ExtResource( 4 )
+custom_styles/fg = ExtResource( 1 )

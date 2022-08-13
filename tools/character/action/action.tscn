@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://tools/character/action/action.gd" type="Script" id=1]
+
+[node name="action" type="PanelContainer"]
+margin_right = 445.0
+margin_bottom = 36.0
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="grid" type="GridContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 438.0
+margin_bottom = 29.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="lblActFact" type="Label" parent="grid"]
+margin_right = 60.0
+margin_bottom = 22.0
+text = "Fact: "
+
+[node name="lblAcFactData" type="Label" parent="grid"]
+margin_left = 64.0
+margin_right = 213.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="lblActMove" type="Label" parent="grid"]
+margin_left = 217.0
+margin_right = 277.0
+margin_bottom = 22.0
+text = "Move: "
+
+[node name="lnkActMoveData" type="LinkButton" parent="grid"]
+margin_left = 281.0
+margin_right = 430.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="grid/lnkActMoveData" to="." method="_on_lnkActMoveData_pressed"]

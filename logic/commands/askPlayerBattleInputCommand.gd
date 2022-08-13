@@ -13,5 +13,5 @@ func execute() -> void:
 		return
 	
 	Signals.emit_signal("commandsPaused")
-	Signals.emit_signal("guiOpenWindow", BattleMovesWindow.new(executorCharacter))
+	Signals.emit_signal("battleShowCharacterMoves", executorCharacter)
 

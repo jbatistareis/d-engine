@@ -4,14 +4,14 @@ extends Node
 # player related
 # to start a match: playerEnteredGame -> playerTransferedLocation
 # controls provided by Godots ui_* signals, see each state logic for mappings
-signal playerEnteredGame(playerCharacter) # sets the current player
-signal playerTransferedLocation(newLocationName, toSpawnId) # puts player in a location, at spawn point
+signal playerEnteredGame(playerCharacter) # sets the current GameManager.player
+signal characterTransferedLocation(character, newLocationName, toRoomId, facingDirection) # puts player in a location
+signal characterMoved(character, direction) # moves a character arround rooms
+signal characterTeleported(character, toRoomId, facingDirection) # use to teleport a character inside its current location
+signal changedEncounterRate(value) # changes location rate
 
 # internal use
-signal playerMoved(direction) # moves the player arround rooms, not used with player inputs
-signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera 
-signal characterMoved(character, direction) # moves any other character arround rooms
-signal changedEncounterRate(value) # changes location rate
+signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera
 
 # listen to get annoucements
 signal playerArrivedLocation(location) # when a player spawns
@@ -24,6 +24,7 @@ signal cameraMovedForward()
 signal cameraMovedBackward()
 signal cameraRotatedLeft()
 signal cameraRotatedRight()
+signal cameraSnapped(x, y, facingDirection)
 
 
 # game character related
@@ -39,6 +40,7 @@ signal armorChangedIntegrity(armor, amount)
 # command related
 signal commandsPaused() # pauses all battle timelines
 signal commandsResumed() # resumes all battle timelines
+signal commandsCleared() # removes all commands
 
 # internal use
 signal commandPublished(command) # sends commands to the execution queue
@@ -70,15 +72,19 @@ signal characterDroppedWeapon(character, weaponIndex)
 
 # UI related
 # internal use
-signal guiOpenWindow(window)
-signal guiCloseWindow()
-signal guiClearWindows()
 signal guiUp()
 signal guiDown()
 signal guiLeft()
 signal guiRight()
-signal guiSelect() # used in a 'press A' context
-signal guiConfirm(source) # used in an 'OK' button context
-signal guiCancel(source)
-signal guiHover(data) # listen to get which item the player has his cursor over
+signal guiConfirm()
+signal guiCancel()
+
+signal guiOpenExploringMenu()
+signal guiCloseExploringMenu()
+
+signal battleShowCharacterMoves(character)
+signal battleHideCharacterMoves()
+signal battleCursorMove(title, position)
+signal battleCursorHide()
+signal battleShowResult(battleResult)
 
