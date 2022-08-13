@@ -308,10 +308,6 @@ GameManager="*res://logic/managers/gameManager.gd"
 GuiOverlayManager="*res://ui/gui/guiOverlayManager.gd"
 GuiTheme="*res://guiTheme.gd"
 
-[debug]
-
-settings/fps/force_fps=24
-
 [display]
 
 window/size/width=1366

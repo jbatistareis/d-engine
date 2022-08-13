@@ -7,6 +7,8 @@ var freeFlight : bool = false
 
 var teleportData : Dictionary = {}
 
+onready var tween : Tween = $tween
+
 
 func _ready() -> void:
 	Signals.connect("playerSpawned", self, "setup")
@@ -15,6 +17,8 @@ func _ready() -> void:
 	Signals.connect("cameraRotatedLeft", self, "rotateLeft")
 	Signals.connect("cameraRotatedRight", self, "rotateRight")
 	Signals.connect("cameraSnapped", self, "teleport")
+	
+	tween.connect("tween_all_completed", self, "freeCamera")
 
 
 func _process(delta : float) -> void:
@@ -32,6 +36,10 @@ func setup(location : Location, x : int, y : int, direction : int) -> void:
 func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> void:
 	setup(location, x, y, direction)
 	freeFlight = true
+
+
+func freeCamera() -> void:
+	GameManager.cameraMoving = false
 
 
 func goTo(x : int, y : int, direction : int) -> void:
@@ -58,8 +66,10 @@ func moveForward() -> void:
 	if !teleportData.empty():
 		goTo(teleportData.x, teleportData.y, teleportData.direction)
 		teleportData.clear()
+		
+		GameManager.cameraMoving = false
 	else:
-		$tween.interpolate_property(
+		tween.interpolate_property(
 			self,
 			"transform:origin",
 			transform.origin,
@@ -71,10 +81,7 @@ func moveForward() -> void:
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT_IN
 		)
-		$tween.start()
-		yield($tween, "tween_all_completed")
-	
-	GameManager.cameraMoving = false
+		tween.start()
 
 
 func moveBackward() -> void:
@@ -83,8 +90,10 @@ func moveBackward() -> void:
 	if !teleportData.empty():
 		goTo(teleportData.x, teleportData.y, teleportData.direction)
 		teleportData.clear()
+		
+		GameManager.cameraMoving = false
 	else:
-		$tween.interpolate_property(
+		tween.interpolate_property(
 			self,
 			"transform:origin",
 			transform.origin,
@@ -96,16 +105,13 @@ func moveBackward() -> void:
 			Tween.TRANS_LINEAR,
 			Tween.EASE_OUT_IN
 		)
-		$tween.start()
-		yield($tween, "tween_all_completed")
-	
-	GameManager.cameraMoving = false
+		tween.start()
 
 
 func rotateLeft() -> void:
 	GameManager.cameraMoving = true
 	
-	$tween.interpolate_property(
+	tween.interpolate_property(
 		self,
 		"rotation:y",
 		rotation.y,
@@ -114,16 +120,13 @@ func rotateLeft() -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT_IN
 	)
-	$tween.start()
-	yield($tween, "tween_all_completed")
-	
-	GameManager.cameraMoving = false
+	tween.start()
 
 
 func rotateRight() -> void:
 	GameManager.cameraMoving = true
 	
-	$tween.interpolate_property(
+	tween.interpolate_property(
 		self,
 		"rotation:y",
 		rotation.y,
@@ -132,10 +135,7 @@ func rotateRight() -> void:
 		Tween.TRANS_LINEAR,
 		Tween.EASE_OUT_IN
 	)
-	$tween.start()
-	yield($tween, "tween_all_completed")
-	
-	GameManager.cameraMoving = false
+	tween.start()
 
 
 func inputFreeFlight() -> void:
@@ -144,11 +144,11 @@ func inputFreeFlight() -> void:
 	var pitchUp = Input.is_action_pressed("ui_home")
 	var pitchDown = Input.is_action_pressed("ui_end")
 	
-	if !$tween.is_active():
+	if !tween.is_active():
 		GameManager.cameraMoving = true
 		
 		if elevationUp:
-			$tween.interpolate_property(
+			tween.interpolate_property(
 				self,
 				"transform:origin:y",
 				transform.origin.y,
@@ -157,11 +157,10 @@ func inputFreeFlight() -> void:
 				Tween.TRANS_LINEAR,
 				Tween.EASE_OUT_IN
 			)
-			$tween.start()
-			yield($tween, "tween_all_completed")
+			tween.start()
 		
 		if elevationDown:
-			$tween.interpolate_property(
+			tween.interpolate_property(
 				self,
 				"transform:origin:y",
 				transform.origin.y,
@@ -170,11 +169,10 @@ func inputFreeFlight() -> void:
 				Tween.TRANS_LINEAR,
 				Tween.EASE_OUT_IN
 			)
-			$tween.start()
-			yield($tween, "tween_all_completed")
+			tween.start()
 		
 		if pitchUp && ($camera.rotation.x <= _ROTATE_45):
-			$tween.interpolate_property(
+			tween.interpolate_property(
 				$camera,
 				"rotation:x",
 				$camera.rotation.x,
@@ -183,11 +181,10 @@ func inputFreeFlight() -> void:
 				Tween.TRANS_LINEAR,
 				Tween.EASE_OUT_IN
 			)
-			$tween.start()
-			yield($tween, "tween_all_completed")
+			tween.start()
 		
 		if pitchDown && ($camera.rotation.x >= -_ROTATE_90):
-			$tween.interpolate_property(
+			tween.interpolate_property(
 				$camera,
 				"rotation:x",
 				$camera.rotation.x,
@@ -196,8 +193,5 @@ func inputFreeFlight() -> void:
 				Tween.TRANS_LINEAR,
 				Tween.EASE_OUT_IN
 			)
-			$tween.start()
-			yield($tween, "tween_all_completed")
-		
-		GameManager.cameraMoving = false
+			tween.start()
 
