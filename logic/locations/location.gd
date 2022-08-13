@@ -1,7 +1,13 @@
 class_name Location
 extends Entity
 
-var roomTile = RoomTile.new()
+var roomTile : RoomTile = RoomTile.new()
+var adjacentState : Dictionary = {
+	Enums.Direction.NORTH: false,
+	Enums.Direction.EAST: false,
+	Enums.Direction.SOUTH: false,
+	Enums.Direction.WEST: false
+}
 
 var description : String
 var rooms : Array = []
@@ -10,10 +16,6 @@ var entranceLogic : String
 var exitLogic : String
 
 var encounterRate : float
-
-
-func _init() -> void:
-	Signals.connect("changedEncounterRate", self, "changeEncounterRate")
 
 
 func fromShortName(locationShortName : String) -> Location:
@@ -54,14 +56,15 @@ func toDTO() -> LocationDTO:
 
 # used only by the player
 func enter(player, toRoomId : int, facingDirection : int) -> void:
-	var room = findRoom(toRoomId)
+	roomTile.fromDict(findRoom(toRoomId))
 	
 	Signals.emit_signal("playerArrivedLocation", self)
-	Signals.emit_signal("playerSpawned", self, room.x, room.y, facingDirection)
+	Signals.emit_signal("playerSpawned", self, roomTile.x, roomTile.y, facingDirection)
 	executeScript(entranceLogic, player)
 	
 	player.currentLocation = shortName
-	roomTile.fromDict(room).enter(player, facingDirection, false)
+	roomTile.enter(player, facingDirection, false)
+	checkAdjacentAccess(player)
 
 
 # used only by the player
@@ -71,34 +74,35 @@ func exit(player) -> void:
 
 
 func move(character, direction : int) -> int:
-	roomTile.fromDict(findRoom(character.currentRoom))
-	var exitPoint = roomTile.getExit(direction)
+	var canMove = adjacentState[direction]
 	
-	if exitPoint != -1:
-		var toRoom = findRoom(exitPoint)
+	if canMove:
+		roomTile.exit(character, direction)
+		roomTile.fromDict(findRoom(roomTile.getExit(direction)))
+		roomTile.enter(character, reverseDirection(direction), Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
+	
+	checkAdjacentAccess(character)
+	return Enums.Direction.NONE if !canMove else (Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD)
+
+
+func checkAdjacentAccess(character) -> void:
+	for direction in range(4):
+		var exitPoint = roomTile.getExit(direction)
 		
-		if canPass(toRoom.canEnterLogic, character, reverseDirection(direction)):
-			roomTile.exit(character, direction)
-			roomTile.fromDict(toRoom)
-			roomTile.enter(character, reverseDirection(direction), Dice.rollNormal(Enums.DiceType.D100) <= (100 * encounterRate))
-			
-			return Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD
-	
-	return Enums.Direction.NONE
+		if exitPoint != -1:
+			var nextRoomTile = findRoom(exitPoint)
+			adjacentState[direction] = ScriptTool.getReference(nextRoomTile.canEnterLogic).execute(character, reverseDirection(direction))
+		else:
+			adjacentState[direction] = false
 
 
 func teleport(character : Character, toRoomId : int, facingDirection : int) -> void:
-	var room = findRoom(toRoomId)
 	GameManager.direction = facingDirection
-	roomTile.fromDict(room).enter(character, reverseDirection(facingDirection), false)
+	roomTile.fromDict(findRoom(toRoomId)).enter(character, reverseDirection(facingDirection), false)
 
 
 func executeScript(script : String, character) -> void:
 	ScriptTool.getReference(script).execute(character)
-
-
-func canPass(passLogic : String, character : Character, direction : int) -> bool:
-	return ScriptTool.getReference(passLogic).execute(character, direction)
 
 
 func findRoom(id : int) -> Dictionary:

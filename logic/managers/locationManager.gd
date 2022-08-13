@@ -3,12 +3,7 @@ extends Node
 var location : Location = null
 
 
-func _ready():
-	Signals.connect("characterTransferedLocation", self, "changeLocation")
-	Signals.connect("characterMoved", self, "moveCharacter")
-	Signals.connect("characterTeleported", self, "teleportCharacter")
-
-
+# puts player on a location
 func changeLocation(character : Character, locationShortName : String, toRoomId : int, facingDirection : int) -> void:
 	if location != null:
 		location.exit(character)
@@ -19,6 +14,7 @@ func changeLocation(character : Character, locationShortName : String, toRoomId 
 	location.enter(character, toRoomId, facingDirection)
 
 
+# moves a character around rooms based on an absolute direction
 func moveCharacter(character : Character, direction : int) -> void:
 	var result = location.move(character, direction)
 	
@@ -28,11 +24,16 @@ func moveCharacter(character : Character, direction : int) -> void:
 		
 		Enums.Direction.BACKWARD:
 			Signals.emit_signal("cameraMovedBackward")
+		
+		Enums.Direction.NONE:
+			Signals.emit_signal("playerRoomChangeDenied")
+			return
 	
-	if result == Enums.Direction.NONE:
-		Signals.emit_signal("playerRoomChangeDenied")
-	else:
-		Signals.emit_signal("playerChangedRoom", direction)
+	Signals.emit_signal("playerChangedRoom", direction)
+
+
+func changeEncounterRate(newRate : float) -> void:
+	location.changeEncounterRate(newRate)
 
 
 func teleportCharacter(character : Character, toRoomId : int, facingDirection : int) -> void:

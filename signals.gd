@@ -1,17 +1,12 @@
 extends Node
 
+# signals marked as internal use should not be manually fired
 
 # player related
 # to start a match: playerEnteredGame -> playerTransferedLocation
 # controls provided by Godots ui_* signals, see each state logic for mappings
 signal playerEnteredGame(playerCharacter) # sets the current GameManager.player
-signal characterTransferedLocation(character, newLocationName, toRoomId, facingDirection) # puts player in a location
-signal characterMoved(character, direction) # moves a character arround rooms
-signal characterTeleported(character, toRoomId, facingDirection) # use to teleport a character inside its current location
-signal changedEncounterRate(value) # changes location rate
-
-# internal use
-signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera
+signal changedEncounterRate(value) # changes location encounter rate
 
 # listen to get annoucements
 signal playerArrivedLocation(location) # when a player spawns
@@ -19,7 +14,10 @@ signal playerLeftLocation(location) # when a player leaves
 signal playerChangedRoom(direction) # when a player successfully moves (Direction enum)
 signal playerRoomChangeDenied() # when a player cant change rooms
 
-# moves the camera, fw/bw fired by location manager, l/r fired by exploring state
+# internal use
+signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera
+
+# moves camera, internal use
 signal cameraMovedForward()
 signal cameraMovedBackward()
 signal cameraRotatedLeft()
@@ -40,11 +38,11 @@ signal armorChangedIntegrity(armor, amount)
 # command related
 signal commandsPaused() # pauses all battle timelines
 signal commandsResumed() # resumes all battle timelines
-signal commandsCleared() # removes all commands
 
 # internal use
 signal commandPublished(command) # sends commands to the execution queue
 signal commandOnQueue(command) # when a command is put on execution queue
+signal commandsCleared() # removes all commands
 
 
 # battle related
@@ -59,6 +57,11 @@ signal battleWon(players, battleResult)
 signal battleLost()
 signal startedBattleAnimation(character, animation)
 signal finishedBattleAnimation(character) # cue to resume logic
+signal battleShowCharacterMoves(character)
+signal battleHideCharacterMoves()
+signal battleCursorMove(title, position)
+signal battleCursorHide()
+signal battleShowResult(battleResult)
 
 
 # inventory related
@@ -70,7 +73,7 @@ signal characterDroppedItem(character, itemIndex)
 signal characterDroppedWeapon(character, weaponIndex)
 
 
-# UI related
+# ui related
 # internal use
 signal guiUp()
 signal guiDown()
@@ -78,13 +81,6 @@ signal guiLeft()
 signal guiRight()
 signal guiConfirm()
 signal guiCancel()
-
 signal guiOpenExploringMenu()
 signal guiCloseExploringMenu()
-
-signal battleShowCharacterMoves(character)
-signal battleHideCharacterMoves()
-signal battleCursorMove(title, position)
-signal battleCursorHide()
-signal battleShowResult(battleResult)
 

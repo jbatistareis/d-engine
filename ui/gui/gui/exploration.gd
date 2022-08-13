@@ -6,12 +6,6 @@ const _STATUS_TEXT : String = '[center][\t%s\t][/center]\n[table=3][cell]HP[/cel
 func _ready() -> void:
 	Signals.connect("guiOpenExploringMenu", self, "show")
 	Signals.connect("guiCloseExploringMenu", self, "hide")
-	
-#	$menuContainer/stats/bg.color = GuiTheme.BG_COLOR
-#	$menuContainer/menu/bg.color = GuiTheme.BG_COLOR
-#
-#	for button in $menuContainer/menu/items.get_children():
-#		button.add_stylebox_override("focus", GuiTheme.hoveStyle)
 
 
 func show() -> void:

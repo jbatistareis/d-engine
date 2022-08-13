@@ -30,7 +30,7 @@ func start(players : Array, enemies : Array) -> void:
 			Signals.emit_signal("commandPublished", VerdictCommand.new(enemy, int(5 * randf())))
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	if inBattle:
 		if playersAlive() == 0: # TODO game over
 			inBattle = false

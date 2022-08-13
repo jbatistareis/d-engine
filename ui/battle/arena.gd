@@ -10,12 +10,12 @@ func _ready() -> void:
 	Signals.connect("commandsResumed", self, "resume")
 
 
-func reset(ignore1, ignore2) -> void:
+func reset(_ignore1, _ignore2) -> void:
 	$AnimationPlayer.stop()
 	$AnimationPlayer.play("RESET", 0)
 
 
-func win(ignore1, ignore2) -> void:
+func win(_ignore1, _ignore2) -> void:
 	yield(get_tree().create_timer(1), "timeout")
 	$AnimationPlayer.play("win")
 
