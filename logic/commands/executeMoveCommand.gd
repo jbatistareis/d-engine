@@ -18,7 +18,7 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 
 
 func calculateModOffset(moveModifierProperty : int) -> float:
-	return 0.2 * Util.countIndividualModType(moveModifierProperty, executorCharacter.moveModifiers)
+	return move.modifierScale * Util.countIndividualModType(moveModifierProperty, executorCharacter.moveModifiers)
 
 
 func published() -> void:
