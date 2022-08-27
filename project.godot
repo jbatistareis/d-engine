@@ -314,11 +314,6 @@ window/size/width=1366
 window/size/height=768
 window/stretch/aspect="keep"
 
-[global]
-
-fps=false
-ligh=false
-
 [gui]
 
 theme/custom_font="res://assets/font/IBMPlexMonoMedium.tres"
