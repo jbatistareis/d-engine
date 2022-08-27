@@ -25,3 +25,5 @@ var executorModifiers : Array = []
 # use Enums.MoveModifierProperty
 var targetModifiers : Array = []
 
+var modifierScale : float = 0.1
+

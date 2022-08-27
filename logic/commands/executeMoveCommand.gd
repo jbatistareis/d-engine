@@ -9,12 +9,13 @@ var cdOffset : float
 
 
 func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre) -> void:
-	self.atkOffset = (1 + calculateModOffset(Enums.MoveModifierProperty.ATK_P)) - calculateModOffset(Enums.MoveModifierProperty.ATK_M)
-	self.cdOffset = -(calculateModOffset(Enums.MoveModifierProperty.CD_P) - (1 + calculateModOffset(Enums.MoveModifierProperty.CD_M)))
-	
 	self.targets = targets
 	self.move = move
-	self.totalTicks = ceil(move.cdPre * cdOffset)
+	
+	self.atkOffset = max(0, 1 + (calculateModOffset(Enums.MoveModifierProperty.ATK_P) - calculateModOffset(Enums.MoveModifierProperty.ATK_M)))
+	self.cdOffset = max(0, 1 - (calculateModOffset(Enums.MoveModifierProperty.CD_P) - calculateModOffset(Enums.MoveModifierProperty.CD_M)))
+	
+	self.totalTicks = floor(move.cdPre * cdOffset)
 
 
 func calculateModOffset(moveModifierProperty : int) -> float:
@@ -42,8 +43,7 @@ func execute() -> void:
 	
 	var moveResult = move.getResult(executorCharacter)
 	for target in targets:
-		var sig = sign(moveResult.value)
-		var value = ceil(moveResult.value * atkOffset * sig) * sig
+		var value = floor(moveResult.value * atkOffset)
 		
 		match moveResult.outcome:
 			Enums.DiceOutcome.BEST:
@@ -60,10 +60,11 @@ func execute() -> void:
 	
 	executorCharacter.applyMoveModifiers(move.executorModifiers)
 	
+	var cd = floor(move.cdPos * cdOffset)
 	if executorCharacter.verdictActive:
-		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, ceil(move.cdPos * cdOffset)))
+		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, cd))
 	elif executorCharacter.type == Enums.CharacterType.PC:
-		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, ceil(move.cdPos * cdOffset)))
+		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, cd))
 
 
 func confirmExecution() -> bool:

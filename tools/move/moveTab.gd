@@ -30,6 +30,8 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimPrepare.text = moveDto.prepareAnimation
 	$background/mainSeparator/dataPanel/dataContainer/animations/fields/grid/txtAnimAttack.text = moveDto.attackAnimation
 	
+	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModScale.value = moveDto.modifierScale
+	
 	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModAtkEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.ATK, moveDto.executorModifiers)
 	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModDefEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.DEF, moveDto.executorModifiers)
 	$background/mainSeparator/dataPanel/dataContainer/Modifiers/fields/grid/sbModCdEx.value = Util.countAbsoluteModType(Enums.MoveModifierType.CD, moveDto.executorModifiers)
@@ -96,6 +98,10 @@ func _on_txtAnimAttack_text_changed(new_text):
 	moveDto.attackAnimation = new_text
 
 
+# modifiers
+func _on_sbModScale_value_changed(value):
+	moveDto.modifierScale = value
+
 
 # buttons
 func _on_btnSave_pressed():
@@ -121,7 +127,6 @@ func _on_saveConfirm_confirmed():
 	moveDto.executorModifiers.clear()
 	moveDto.targetModifiers.clear()
 	
-	# find a way to semi automate this in gd script whithout slowing to a crawl
 	match int(sign(ex_atk)):
 		-1:
 			for i in range(abs(ex_atk)):
