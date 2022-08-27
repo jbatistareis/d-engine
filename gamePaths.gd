@@ -25,3 +25,6 @@ const LOCATION_DATA : String = LOCATION_PATH + '/%s.loc'
 const CHARACTER_MODEL : String = CHARACTER_PATH + '/%s/characterModel.tscn'
 const LOCATION_MODELS : String = LOCATION_PATH + '/%s/'
 
+# TODO user path
+const SAVE_DATA : String = DATA_PATH % 'save/%s.sve'
+

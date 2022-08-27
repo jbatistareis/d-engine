@@ -33,7 +33,8 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	Signals.emit_signal("playerEnteredGame", player)
+	# TODO save/load
+	GameManager.player = player
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 
 

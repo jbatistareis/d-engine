@@ -2,7 +2,7 @@ extends Node
 
 onready var currentState : State = getState(Enums.States.EXPLORING)
 
-var player : Character setget setPlayer
+var player : Character
 
 # control vars
 var testing : bool = false
@@ -11,12 +11,25 @@ var direction : int setget setDirection
 
 
 func _ready() -> void :
-	Signals.connect("playerEnteredGame", self, "setPlayer")
+	Signals.connect("playerLoaded", self, "loadData")
 	Signals.connect("battleStarted", self, "startBattleState")
 
 
-func setPlayer(value : Character) -> void:
-	player = value
+# TODO define a save format, load data, transitions, etc...
+func loadData(saveSlotName : String) -> void:
+	var saveDto = Persistence.loadDTO(saveSlotName, Enums.EntityType.SAVE_DATA)
+	# define a save format
+#	LocationManager.changeLocation(player, location, roomId, direction)
+	pass
+
+
+# TODO define a save format, gather data
+func saveData(saveSlotName : String) -> void:
+	var saveDto = SaveDTO.new()
+	
+	saveDto.shortName = saveSlotName
+	
+	Persistence.saveDTO(saveDto)
 
 
 func canMove() -> bool:

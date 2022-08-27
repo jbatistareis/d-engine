@@ -1,16 +1,6 @@
 class_name Persistence
 
 
-# TODO
-static func saveProgress(slot : int) -> bool:
-	return true
-
-
-# TODO
-static func loadProgress(slot : int) -> bool:
-	return true
-
-
 static func saveDTO(dto : DTO) -> String:
 	var path = ''
 	
@@ -37,6 +27,9 @@ static func saveDTO(dto : DTO) -> String:
 	
 	elif dto is LocationDTO:
 		path = GamePaths.LOCATION_DATA
+	
+	elif dto is SaveDTO:
+		path = GamePaths.SAVE_DATA
 	
 	if path.empty():
 		push_error(ErrorMessages.FILE_SAVE_ERR_UNK_TYPE)
@@ -79,6 +72,9 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 		
 		Enums.EntityType.LOCATION:
 			path = GamePaths.LOCATION_DATA
+		
+		Enums.EntityType.SAVE_DATA:
+			path = GamePaths.SAVE_DATA
 		
 		_:
 			push_error(ErrorMessages.FILE_LOAD_ERR_UNK_TYPE)
@@ -135,6 +131,9 @@ static func listEntities(entityType : int, subpath : String = '') -> Array:
 		
 		Enums.EntityType.LOCATION_MODELS:
 			path = GamePaths.LOCATION_MODELS % subpath
+		
+		Enums.EntityType.SAVE_DATA:
+			path = GamePaths.SAVE_DATA
 	
 	var dir = Directory.new()
 	if dir.open(path) == OK:

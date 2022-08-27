@@ -3,9 +3,10 @@ extends Node
 # signals marked as internal use should not be manually fired
 
 # player related
-# to start a match: playerEnteredGame -> playerTransferedLocation
+# start a match by calling 'playerLoaded' with a save filename
 # controls provided by Godots ui_* signals, see each state logic for mappings
-signal playerEnteredGame(playerCharacter) # sets the current GameManager.player
+signal playerLoaded(saveSlotName) # TODO loads all data, changes scene, spawns the player
+signal playerSaved(saveSlotName) # TODO gathers all data, saves to file
 signal changedEncounterRate(value) # changes location encounter rate
 
 # listen for annoucements
@@ -45,9 +46,11 @@ signal commandsCleared() # removes all commands
 
 # battle related
 signal battleStarted(players, enemies) # change to battle state
+
 # listen for announcements
 signal battleWon(players, battleResult)
 signal battleLost()
+
 # internal use
 signal setupBattleScreen(players, enemies) # for transition animation
 signal battleScreenReady() # battle start animation is done, logic starts after this
