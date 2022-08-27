@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://ui/gui/gui/exploration.gd" type="Script" id=1]
-[ext_resource path="res://ui/gui/gui/cursor.gd" type="Script" id=2]
-[ext_resource path="res://ui/gui/gui/battle.gd" type="Script" id=3]
-[ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=5]
+[ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
+[ext_resource path="res://ui/gui/exploration.gd" type="Script" id=3]
+[ext_resource path="res://ui/gui/battle.gd" type="Script" id=4]
+[ext_resource path="res://ui/gui/battle/cursor.gd" type="Script" id=5]
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
@@ -19,7 +19,7 @@ anchor_bottom = 1.0
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+script = ExtResource( 3 )
 
 [node name="menuContainer" type="HBoxContainer" parent="exploration"]
 anchor_left = 0.05
@@ -38,7 +38,7 @@ margin_bottom = 168.0
 [node name="Panel" type="Panel" parent="exploration/menuContainer/stats"]
 margin_right = 192.0
 margin_bottom = 168.0
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="lblStats" type="RichTextLabel" parent="exploration/menuContainer/stats"]
 margin_right = 192.0
@@ -58,7 +58,7 @@ size_flags_vertical = 0
 [node name="Panel" type="Panel" parent="exploration/menuContainer/menu"]
 margin_right = 82.0
 margin_bottom = 168.0
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="items" type="VBoxContainer" parent="exploration/menuContainer/menu"]
 margin_right = 82.0
@@ -72,7 +72,7 @@ margin_right = 82.0
 margin_bottom = 28.0
 focus_neighbour_top = NodePath("../btnClose")
 focus_neighbour_bottom = NodePath("../btnMap")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "Action "
 flat = true
 
@@ -82,7 +82,7 @@ margin_right = 82.0
 margin_bottom = 56.0
 focus_neighbour_top = NodePath("../btnAction")
 focus_neighbour_bottom = NodePath("../btnItems")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "Map   >"
 flat = true
 
@@ -92,7 +92,7 @@ margin_right = 82.0
 margin_bottom = 84.0
 focus_neighbour_top = NodePath("../btnMap")
 focus_neighbour_bottom = NodePath("../btnEquip")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "Items >"
 flat = true
 
@@ -102,7 +102,7 @@ margin_right = 82.0
 margin_bottom = 112.0
 focus_neighbour_top = NodePath("../btnItems")
 focus_neighbour_bottom = NodePath("../btnMoves")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "Equip >"
 flat = true
 
@@ -112,7 +112,7 @@ margin_right = 82.0
 margin_bottom = 140.0
 focus_neighbour_top = NodePath("../btnEquip")
 focus_neighbour_bottom = NodePath("../btnClose")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "Moves >"
 flat = true
 
@@ -122,7 +122,7 @@ margin_right = 82.0
 margin_bottom = 168.0
 focus_neighbour_top = NodePath("../btnMoves")
 focus_neighbour_bottom = NodePath("../btnAction")
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 text = "< Close"
 flat = true
 
@@ -130,15 +130,15 @@ flat = true
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 3 )
+script = ExtResource( 4 )
 
-[node name="enemyStats" parent="battle" instance=ExtResource( 4 )]
+[node name="enemyStats" parent="battle" instance=ExtResource( 1 )]
 anchor_left = 0.025
 anchor_top = 0.025
 anchor_right = 0.025
 anchor_bottom = 0.025
 
-[node name="playerStats" parent="battle" instance=ExtResource( 4 )]
+[node name="playerStats" parent="battle" instance=ExtResource( 1 )]
 anchor_left = 0.025
 anchor_top = 0.95
 anchor_right = 0.025
@@ -188,7 +188,7 @@ margin_bottom = 22.0
 [node name="bg" type="Panel" parent="battle/moves/decription/container"]
 margin_bottom = 22.0
 size_flags_horizontal = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="lblDescription" type="Label" parent="battle/moves/decription/container"]
 margin_bottom = 22.0
@@ -220,7 +220,7 @@ margin_right = 260.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/self"]
 margin_right = 260.0
@@ -268,7 +268,7 @@ margin_right = 260.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/target"]
 margin_right = 260.0
@@ -309,13 +309,13 @@ align = 1
 [node name="cursor" type="MarginContainer" parent="battle"]
 margin_bottom = 22.0
 rect_min_size = Vector2( 0, 22 )
-script = ExtResource( 2 )
+script = ExtResource( 5 )
 
 [node name="bg" type="Panel" parent="battle/cursor"]
 margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 5 )
+theme = ExtResource( 2 )
 
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0

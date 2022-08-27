@@ -13,7 +13,6 @@ var direction : int setget setDirection
 func _ready() -> void :
 	Signals.connect("playerEnteredGame", self, "setPlayer")
 	Signals.connect("battleStarted", self, "startBattleState")
-	Signals.connect("guiCloseExploringMenu", self, "returnToExploring")
 
 
 func setPlayer(value : Character) -> void:
@@ -32,9 +31,6 @@ func setDirection(value : int) -> void:
 func startBattleState(players, enemies) -> void:
 	currentState = getState(Enums.States.BATTLE)
 
-
-func returnToExploring() -> void:
-	currentState = getState(Enums.States.EXPLORING)
 
 
 func getState(id : int) -> State:

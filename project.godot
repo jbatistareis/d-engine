@@ -305,7 +305,7 @@ BattleManager="*res://logic/managers/battleManager.gd"
 InventoryManager="*res://logic/managers/inventoryManager.gd"
 CommandManager="*res://logic/managers/commandManager.gd"
 GameManager="*res://logic/managers/gameManager.gd"
-GuiOverlayManager="*res://ui/gui/guiOverlayManager.gd"
+GuiOverlayManager="*res://logic/managers/guiOverlayManager.gd"
 GuiTheme="*res://guiTheme.gd"
 
 [display]

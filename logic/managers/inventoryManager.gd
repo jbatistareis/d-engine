@@ -5,35 +5,52 @@ func _ready():
 	Signals.connect("characterEquipedArmor", self, "equiArmor")
 	Signals.connect("characterEquipedWeapon", self, "equipWeapon")
 	Signals.connect("characterUsedItem", self, "useItem")
-	Signals.connect("characterReceivedItemOrWeapon", self, "receiveItemOrWeapon")
+	
+	Signals.connect("characterReceivedWeapon", self, "receiveWeapon")
+	Signals.connect("characterReceivedArmor", self, "receiveArmor")
+	Signals.connect("characterReceivedItem", self, "receiveItemOrWeapon")
+	
+	Signals.connect("characterDroppedWeapon", self, "dropWeapon")
+	Signals.connect("characterDroppedArmor", self, "dropArmor")
 	Signals.connect("characterDroppedItem", self, "dropItem")
-	Signals.connect("characterDroppedWeapon", self, "removeWeapon")
+
+
+func equipWeapon(character : Character, weapon : Weapon) -> void:
+	pass
 
 
 func equipArmor(character : Character, armor : Armor) -> void:
-	character.inventory.equipArmor(armor)
+	pass
 
 
-func equipWeapon(character : Character, index : int) -> void:
-	character.inventory.equipWeapon(index)
+func useItem(character : Character, item : Item) -> void:
+	pass
 
 
-func useItem(character : Character, index : int) -> void:
-	var item = character.inventory.removeItem(index)
-	
-	var node = ScriptTool.getNode(item.interactScript)
-	node.execute(character)
-	node.queue_free()
 
 
-func receiveItemOrWeapon(character : Character, entity : Entity) -> void:
-	character.inventory.add(entity)
+func receiveWeapon(character : Character, weapon : Weapon) -> void:
+	pass
+
+
+func receiveArmor(character : Character, armor : Armor) -> void:
+	pass
+
+
+func receiveItem(character : Character, entity : Entity) -> void:
+	pass
+
+
+
+
+func dropWeapon(character : Character, weapon : Weapon) -> void:
+	pass
+
+
+func dropArmor(character : Character, armor : Armor) -> void:
+	pass
 
 
 func dropItem(character : Character, index : int) -> void:
-	character.inventory.removeItem(index)
-
-
-func removeWeapon(character : Character, index : int) -> void:
-	character.inventory.removeWeapon(index)
+	pass
 

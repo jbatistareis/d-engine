@@ -2,7 +2,7 @@
 
 [ext_resource path="res://new_script.gd" type="Script" id=1]
 [ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/gui/gui/gui.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/gui/gui.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/battle/battleArena.tscn" type="PackedScene" id=4]
 
 [node name="root" type="Spatial"]
