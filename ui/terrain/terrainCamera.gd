@@ -2,6 +2,10 @@ extends Spatial
 
 const _ROTATE_45 : float = PI / 4
 const _ROTATE_90 : float = PI / 2
+# sin(rotation.y) * 2
+const _SIN_TABLE : Array = [0, -2, 0, 2]
+# cos(rotation.y) * 2
+const _COS_TABLE : Array = [2, 0, -2, 0]
 
 var freeFlight : bool = false
 
@@ -12,10 +16,10 @@ onready var tween : Tween = $tween
 
 func _ready() -> void:
 	Signals.connect("playerSpawned", self, "setup")
-	Signals.connect("cameraMovedForward", self, "moveForward")
-	Signals.connect("cameraMovedBackward", self, "moveBackward")
-	Signals.connect("cameraRotatedLeft", self, "rotateLeft")
-	Signals.connect("cameraRotatedRight", self, "rotateRight")
+	Signals.connect("cameraMovedForward", self, "moveCamera", [Enums.CameraOffsetDirection.FOWARD])
+	Signals.connect("cameraMovedBackward", self, "moveCamera", [Enums.CameraOffsetDirection.BACKWARD])
+	Signals.connect("cameraRotatedLeft", self, "rotateCamera", [Enums.CameraOffsetRotation.LEFT])
+	Signals.connect("cameraRotatedRight", self, "rotateCamera", [Enums.CameraOffsetRotation.RIGHT])
 	Signals.connect("cameraSnapped", self, "teleport")
 	
 	tween.connect("tween_all_completed", self, "freeCamera")
@@ -60,7 +64,8 @@ func teleport(x : int, y : int, direction : int) -> void:
 	}
 
 
-func moveForward() -> void:
+# use Enums.CameraOffsetDirection
+func moveCamera(offsetDirection : int) -> void:
 	GameManager.cameraMoving = true
 	
 	if !teleportData.empty():
@@ -73,67 +78,25 @@ func moveForward() -> void:
 			self,
 			"transform:origin",
 			transform.origin,
-			transform.origin - Vector3(
-				sin(rotation.y) * 2,
+			transform.origin + (Vector3(
+				_SIN_TABLE[GameManager.direction],
 				0,
-				cos(rotation.y) * 2),
-			0.25,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_OUT_IN
+				_COS_TABLE[GameManager.direction]) * offsetDirection),
+			GameParameters.MOVEMENT_DURATION
 		)
 		tween.start()
 
 
-func moveBackward() -> void:
-	GameManager.cameraMoving = true
-	
-	if !teleportData.empty():
-		goTo(teleportData.x, teleportData.y, teleportData.direction)
-		teleportData.clear()
-		
-		GameManager.cameraMoving = false
-	else:
-		tween.interpolate_property(
-			self,
-			"transform:origin",
-			transform.origin,
-			transform.origin + Vector3(
-				sin(rotation.y) * 2,
-				0,
-				cos(rotation.y) * 2),
-			0.25,
-			Tween.TRANS_LINEAR,
-			Tween.EASE_OUT_IN
-		)
-		tween.start()
-
-
-func rotateLeft() -> void:
+# use Enums.CameraOffsetRotation
+func rotateCamera(offsetRotation : int) -> void:
 	GameManager.cameraMoving = true
 	
 	tween.interpolate_property(
 		self,
 		"rotation:y",
 		rotation.y,
-		rotation.y + _ROTATE_90,
-		0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT_IN
-	)
-	tween.start()
-
-
-func rotateRight() -> void:
-	GameManager.cameraMoving = true
-	
-	tween.interpolate_property(
-		self,
-		"rotation:y",
-		rotation.y,
-		rotation.y - _ROTATE_90,
-		0.25,
-		Tween.TRANS_LINEAR,
-		Tween.EASE_OUT_IN
+		rotation.y + (_ROTATE_90 * offsetRotation),
+		GameParameters.ROTATION_DURATION
 	)
 	tween.start()
 
@@ -153,9 +116,7 @@ func inputFreeFlight() -> void:
 				"transform:origin:y",
 				transform.origin.y,
 				transform.origin.y + 2,
-				0.25,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_OUT_IN
+				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.start()
 		
@@ -165,9 +126,7 @@ func inputFreeFlight() -> void:
 				"transform:origin:y",
 				transform.origin.y,
 				transform.origin.y - 2,
-				0.25,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_OUT_IN
+				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.start()
 		
@@ -177,9 +136,7 @@ func inputFreeFlight() -> void:
 				"rotation:x",
 				$camera.rotation.x,
 				$camera.rotation.x + _ROTATE_45,
-				0.25,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_OUT_IN
+				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.start()
 		
@@ -189,9 +146,7 @@ func inputFreeFlight() -> void:
 				"rotation:x",
 				$camera.rotation.x,
 				$camera.rotation.x - _ROTATE_45,
-				0.25,
-				Tween.TRANS_LINEAR,
-				Tween.EASE_OUT_IN
+				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.start()
 

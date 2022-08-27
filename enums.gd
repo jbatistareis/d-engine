@@ -21,6 +21,9 @@ enum RoomType { DUMMY, _0_EXIT, _1_EXIT, _2_EXITS_I, _2_EXITS_L, _3_EXITS, _4_EX
 
 enum Direction { NORTH, EAST, SOUTH, WEST, UP, DOWN, FORWARD, BACKWARD, LEFT, RIGHT, NONE }
 
+enum CameraOffsetDirection { FOWARD = -1, BACKWARD = 1 }
+enum CameraOffsetRotation { RIGHT = -1, LEFT = 1 }
+
 enum AfflictionType { TODO }
 
 enum MessageType { AUTO_TOP, AUTO_BOTTOM, DIALOG }
