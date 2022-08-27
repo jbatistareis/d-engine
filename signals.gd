@@ -53,7 +53,7 @@ signal setupBattleScreen(players, enemies) # for transition animation
 signal battleScreenReady() # battle start animation is done, logic starts after this
 signal battleEnded()
 signal askedPlayerBattleInput(character)
-signal battleCursorOpen(player, move)
+signal battleCursorShow(player, move)
 signal startedBattleAnimation(character, animation)
 signal finishedBattleAnimation(character) # cue to resume logic
 signal battleShowCharacterMoves(character)

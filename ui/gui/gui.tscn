@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
 [ext_resource path="res://ui/gui/exploration.gd" type="Script" id=3]
 [ext_resource path="res://ui/gui/battle.gd" type="Script" id=4]
 [ext_resource path="res://ui/gui/battle/cursor.gd" type="Script" id=5]
+[ext_resource path="res://assets/theme/default/styleBoxFlat_darkslategray_shadow.tres" type="StyleBox" id=6]
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
@@ -316,6 +317,7 @@ margin_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
+custom_styles/panel = ExtResource( 6 )
 
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0

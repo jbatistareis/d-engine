@@ -16,7 +16,7 @@ var cursorMove : Move
 
 func _ready() -> void:
 	Signals.connect("setupBattleScreen", self, "setup")
-	Signals.connect("battleCursorOpen", self, "showCursor")
+	Signals.connect("battleCursorShow", self, "showCursor")
 	Signals.connect("guiLeft", self, "moveCursor", [Enums.Direction.EAST])
 	Signals.connect("guiRight", self, "moveCursor", [Enums.Direction.WEST])
 	Signals.connect("guiConfirm", self, "confirmCursor")

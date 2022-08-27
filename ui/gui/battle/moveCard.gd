@@ -18,7 +18,7 @@ func _ready() -> void:
 
 func _on_btnConfirm_pressed():
 	Signals.emit_signal("battleHideCharacterMoves")
-	Signals.emit_signal("battleCursorOpen", character, move)
+	Signals.emit_signal("battleCursorShow", character, move)
 
 
 
