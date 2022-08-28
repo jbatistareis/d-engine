@@ -1,6 +1,6 @@
 extends Node
 
-const GCD : float = 0.5
+const GCD : float = 0.1
 const WAIT_TICKS : int = 20
 
 const MOVEMENT_DURATION : float = 0.35

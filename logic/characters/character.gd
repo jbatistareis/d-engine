@@ -135,17 +135,18 @@ func getScore(ability : int) -> int:
 func takeHit(amount : int, bypassArmor : bool = false) -> void:
 	if currentHp == 0:
 		return
-	elif amount < 0:
-		Signals.emit_signal("characterTookDamage", self)
-		
+	
+	if amount < 0:
 		var defP = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_P, moveModifiers)
 		var defM = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_M, moveModifiers)
 		
 		var defOffset = (0.2 * defP) - (1 + 0.2 * defM)
-		amount = -ceil(amount * defOffset)
+		amount = -floor(amount * defOffset)
 		
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_M)
+		
+		Signals.emit_signal("characterTookDamage", self)
 	
 	if (amount < 0) && (extraHp > 0):
 		amount = changeExtraHp(amount)

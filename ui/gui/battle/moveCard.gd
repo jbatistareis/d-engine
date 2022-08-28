@@ -13,8 +13,7 @@ var move : Move
 
 func _ready() -> void:
 	$text/lblName.text = _NAME % move.name
-	$text/lblTimer.text = _TIMER % [move.cdPre * GameParameters.GCD, move.cdPos * GameParameters.GCD]
-
+	$text/lblTimer.text = _TIMER % [(1000 * GameParameters.GCD * move.cdPre / 1000.0), (1000 * GameParameters.GCD * move.cdPos / 1000.0)]
 
 func _on_btnConfirm_pressed():
 	Signals.emit_signal("battleHideCharacterMoves")

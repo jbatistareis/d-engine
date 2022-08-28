@@ -10,8 +10,8 @@ var outcomeExpression : String = DefaultValues.MOVE_BASE_OUTCOME
 var pickExpression : String = DefaultValues.MOVE_BASE_PICK
 var excuteExpression : String = DefaultValues.MOVE_BASE_EXECUTE
 
-var cdPre : int = 1
-var cdPos : int = 1
+var cdPre : int = 15
+var cdPos : int = 25
 
 # use Enums.CharacterTargetType
 # relative to the executor

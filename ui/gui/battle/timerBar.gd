@@ -28,18 +28,18 @@ func commandQueued(command : Command) -> void:
 			start = 100
 			end = 0
 		
-		$Tween.interpolate_property($timer, "value", start, end, GameParameters.GCD * command.totalTicks)
+		$Tween.interpolate_property($timer, "value", start, end, (1000 * GameParameters.GCD * command.totalTicks / 1000.0))
 		$Tween.start()
 
 
 func pause() -> void:
-	paused = true
 	$Tween.stop_all()
+	paused = true
 
 
 func resume() -> void:
-	paused = false
 	$Tween.resume_all()
+	paused = false
 
 
 func dead(character : Character) -> void:
