@@ -21,7 +21,7 @@ var attackAnimation : String
 var executorModifiers : Array = []
 var targetModifiers : Array = []
 
-var modifierScale : float = 0.1
+var modifierScale : float
 
 
 func fromShortName(moveShortName : String) -> Move:

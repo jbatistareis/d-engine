@@ -1,6 +1,8 @@
 class_name ExecuteMoveCommand
 extends Command
 
+const _MIN_CD : int = int(0.5 / GameParameters.GCD)
+
 var targets : Array = []
 var move : Move
 
@@ -12,10 +14,16 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 	self.targets = targets
 	self.move = move
 	
-	self.atkOffset = max(0, 1 + (calculateModOffset(Enums.MoveModifierProperty.ATK_P) - calculateModOffset(Enums.MoveModifierProperty.ATK_M)))
-	self.cdOffset = max(0, 1 - (calculateModOffset(Enums.MoveModifierProperty.CD_P) - calculateModOffset(Enums.MoveModifierProperty.CD_M)))
+	var atkP = Util.countIndividualModType(Enums.MoveModifierProperty.ATK_P, executorCharacter.moveModifiers)
+	var atkM = Util.countIndividualModType(Enums.MoveModifierProperty.ATK_M, executorCharacter.moveModifiers)
 	
-	self.totalTicks = floor(move.cdPre * cdOffset)
+	var cdP = Util.countIndividualModType(Enums.MoveModifierProperty.CD_P, executorCharacter.moveModifiers)
+	var cdM = Util.countIndividualModType(Enums.MoveModifierProperty.CD_M, executorCharacter.moveModifiers)
+	
+	self.atkOffset = max(0, (1 + (move.modifierScale * atkP)) * (1 - (move.modifierScale * atkM)))
+	self.cdOffset = max(0, (1 - (move.modifierScale * cdP)) * (1 + (move.modifierScale * cdM)))
+	
+	self.totalTicks = max(_MIN_CD, floor(move.cdPre * cdOffset))
 
 
 func calculateModOffset(moveModifierProperty : int) -> float:
@@ -60,7 +68,7 @@ func execute() -> void:
 	
 	executorCharacter.applyMoveModifiers(move.executorModifiers)
 	
-	var cd = floor(move.cdPos * cdOffset)
+	var cd = max(_MIN_CD, floor(move.cdPos * cdOffset))
 	if executorCharacter.verdictActive:
 		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, cd))
 	elif executorCharacter.type == Enums.CharacterType.PC:

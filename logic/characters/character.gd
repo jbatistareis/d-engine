@@ -140,8 +140,10 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 		var defP = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_P, moveModifiers)
 		var defM = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_M, moveModifiers)
 		
-		var defOffset = (0.2 * defP) - (1 + 0.2 * defM)
-		amount = -floor(amount * defOffset)
+		var positiveScale = inventory.armor.positiveScale if (inventory.armor != null) else 0.05
+		var negativeScale = inventory.armor.negativeScale if (inventory.armor != null) else 0.33
+		
+		amount = floor(amount * ((1 - (positiveScale * defP)) * (1 + (negativeScale * defM))))
 		
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_M)
@@ -244,6 +246,7 @@ func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
 		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_M)
 
 
+# reduces only when it isnt a new stack
 func _reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
 	var count = Util.countIndividualModType(modifierType, newModifiers)
 	if count == 0:
