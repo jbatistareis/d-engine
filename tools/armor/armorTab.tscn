@@ -103,10 +103,75 @@ margin_right = 606.0
 margin_bottom = 113.0
 rect_min_size = Vector2( 0, 15 )
 
-[node name="integrity" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+[node name="scaling" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 117.0
 margin_right = 606.0
 margin_bottom = 175.0
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/scaling"]
+margin_right = 606.0
+margin_bottom = 22.0
+
+[node name="lblScaling" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/scaling/title"]
+margin_right = 90.0
+margin_bottom = 22.0
+text = "↳ Scaling"
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/scaling/title"]
+margin_left = 94.0
+margin_right = 606.0
+margin_bottom = 22.0
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/scaling"]
+margin_top = 26.0
+margin_right = 606.0
+margin_bottom = 58.0
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/scaling/fields"]
+margin_left = 46.0
+margin_right = 560.0
+margin_bottom = 32.0
+size_flags_horizontal = 3
+columns = 4
+
+[node name="lblPositive" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid"]
+margin_top = 5.0
+margin_right = 90.0
+margin_bottom = 27.0
+text = "Positive "
+
+[node name="sbPositive" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid"]
+margin_left = 94.0
+margin_right = 240.0
+margin_bottom = 32.0
+max_value = 0.33
+step = 0.01
+
+[node name="lblnegative" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid"]
+margin_left = 244.0
+margin_top = 5.0
+margin_right = 364.0
+margin_bottom = 27.0
+text = "   Negative "
+
+[node name="sbNegative" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid"]
+margin_left = 368.0
+margin_right = 514.0
+margin_bottom = 32.0
+max_value = 0.33
+step = 0.01
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 179.0
+margin_right = 606.0
+margin_bottom = 194.0
+rect_min_size = Vector2( 0, 15 )
+
+[node name="integrity" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+margin_top = 198.0
+margin_right = 606.0
+margin_bottom = 256.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/integrity"]
 margin_right = 606.0
@@ -129,37 +194,37 @@ margin_right = 606.0
 margin_bottom = 58.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields"]
-margin_left = 56.0
-margin_right = 550.0
+margin_left = 46.0
+margin_right = 560.0
 margin_bottom = 32.0
 size_flags_horizontal = 3
 columns = 4
 
 [node name="lblCurrIntegrity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
 margin_top = 5.0
-margin_right = 80.0
+margin_right = 90.0
 margin_bottom = 27.0
-text = "Current "
+text = "Current  "
 
 [node name="sbCurrIntegrity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
-margin_left = 84.0
-margin_right = 230.0
+margin_left = 94.0
+margin_right = 240.0
 margin_bottom = 32.0
 
 [node name="lblMaxIntegrity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
-margin_left = 234.0
+margin_left = 244.0
 margin_top = 5.0
-margin_right = 344.0
+margin_right = 364.0
 margin_bottom = 27.0
-text = "   Maximum "
+text = "   Maximum  "
 
 [node name="sbMaxIntegrity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid"]
-margin_left = 348.0
-margin_right = 494.0
+margin_left = 368.0
+margin_right = 514.0
 margin_bottom = 32.0
 
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 179.0
+margin_top = 260.0
 margin_right = 606.0
 margin_bottom = 754.0
 size_flags_horizontal = 3
@@ -167,9 +232,9 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 547.0
+margin_top = 466.0
 margin_right = 606.0
-margin_bottom = 575.0
+margin_bottom = 494.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
@@ -211,6 +276,8 @@ script = ExtResource( 2 )
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
 [connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid/sbPositive" to="." method="_on_sbPositive_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid/sbNegative" to="." method="_on_sbNegative_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid/sbCurrIntegrity" to="." method="_on_sbCurrIntegrity_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid/sbMaxIntegrity" to="." method="_on_sbMaxIntegrity_value_changed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]

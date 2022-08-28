@@ -21,6 +21,8 @@ var attackAnimation : String
 var executorModifiers : Array = []
 var targetModifiers : Array = []
 
+var modifierScale : float
+
 
 func fromShortName(moveShortName : String) -> Move:
 	return fromDTO(Persistence.loadDTO(moveShortName, Enums.EntityType.MOVE))
@@ -47,6 +49,8 @@ func fromDTO(moveDto : MoveDTO) -> Move:
 	self.executorModifiers = moveDto.executorModifiers
 	self.targetModifiers = moveDto.targetModifiers
 	
+	self.modifierScale = moveDto.modifierScale
+	
 	return self
 
 
@@ -71,6 +75,8 @@ func toDTO() -> MoveDTO:
 	
 	moveDto.executorModifiers = self.executorModifiers
 	moveDto.targetModifiers = self.targetModifiers
+	
+	moveDto.modifierScale = self.modifierScale
 	
 	return moveDto
 

@@ -21,6 +21,9 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName.text = armorDto.name
 	$background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName.text = armorDto.shortName
 	
+	$background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid/sbPositive.value = armorDto.positiveScale
+	$background/mainSeparator/dataPanel/dataContainer/scaling/fields/grid/sbNegative.value = armorDto.negativeScale
+	
 	$background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid/sbCurrIntegrity.value = armorDto.currentIntegrity
 	$background/mainSeparator/dataPanel/dataContainer/integrity/fields/grid/sbMaxIntegrity.value = armorDto.maxIntegrity
 
@@ -48,6 +51,14 @@ func _on_txtName_text_changed(new_text):
 func _on_txtShortName_text_changed(new_text):
 	armorDto.shortName = new_text
 
+
+# scaling
+func _on_sbPositive_value_changed(value):
+	armorDto.positiveScale = value
+
+
+func _on_sbNegative_value_changed(value):
+	armorDto.negativeScale = value
 
 
 # integrity

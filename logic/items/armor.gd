@@ -1,10 +1,13 @@
 class_name Armor
 extends Entity
 
-# TODO expand functionality
+# TODO expand functionality with utility slots
 
 var maxIntegrity : int
 var currentIntegrity : int
+
+var positiveScale : float
+var negativeScale : float
 
 
 func fromShortName(armorShortName : String) -> Armor:
@@ -18,6 +21,9 @@ func fromDTO(armorDto : ArmorDTO) -> Armor:
 	self.maxIntegrity = armorDto.maxIntegrity
 	self.currentIntegrity = armorDto.currentIntegrity
 	
+	self.positiveScale = armorDto.positiveScale
+	self.negativeScale = armorDto.negativeScale
+	
 	return self
 
 
@@ -28,6 +34,9 @@ func toDTO() -> ArmorDTO:
 	
 	armorDto.maxIntegrity = self.maxIntegrity
 	armorDto.currentIntegrity = self.currentIntegrity
+	
+	armorDto.positiveScale = self.positiveScale
+	armorDto.negativeScale = self.negativeScale
 	
 	return armorDto
 
