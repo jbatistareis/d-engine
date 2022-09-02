@@ -56,7 +56,7 @@ static func findByHighestAbilityScore(characters : Array, ability : int) -> Arra
 static func findByLowestAbilityScore(characters : Array, ability : int) -> Array:
 	var matches = []
 	
-	var lowest = 9999
+	var lowest = 9999999999
 	for character in characters:
 		if character.getScore(ability) < lowest:
 			lowest = character.getScore(ability)
@@ -68,24 +68,122 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 	return matches
 
 
-# percentage is normalized, 0.05~0.95
+# percentage is clamped, 0.05~0.95
 static func findByHpLt(characters : Array, percent : float) -> Array:
 	var matches = []
+	percent = clamp(percent, 0.05 ,0.95)
 	
 	for character in characters:
-		if ((character.getCurrentHp() * 100.0) / character.maxHp) <= clamp(percent, 0.05 ,0.95):
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) <= percent:
 			matches.append(character)
 	
 	return matches
 
 
-# percentage is normalized, 0.05~0.95
+# percentage is clamped, 0.05~0.95
 static func findByHpGt(characters : Array, percent : float) -> Array:
 	var matches = []
+	percent = clamp(percent, 0.05 ,0.95)
 	
 	for character in characters:
-		if ((character.getCurrentHp() * 100.0) / character.maxHp) >= clamp(percent, 0.05 ,0.95):
+		if ((character.getCurrentHp() * 100.0) / character.maxHp) >= percent:
 			matches.append(character)
+	
+	return matches
+
+
+# use Enums.MoveModifierType, clamps to -3~3
+func findByMovModLt(characters : Array, moveModifierType : int, amount : int) -> Array:
+	var matches = []
+	amount = clamp(amount, -3, 3)
+	
+	match moveModifierType:
+		Enums.MoveModifierType.ATK:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.ATK_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.ATK_P:
+						sum += 1
+				
+				if sum <= amount:
+					matches.append(character)
+		
+		Enums.MoveModifierType.DEF:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.DEF_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.DEF_P:
+						sum += 1
+				
+				if sum <= amount:
+					matches.append(character)
+		
+		Enums.MoveModifierType.CD:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.CD_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.CD_P:
+						sum += 1
+				
+				if sum <= amount:
+					matches.append(character)
+	
+	return matches
+
+
+# use Enums.MoveModifierType, clamps to -3~3
+func findByMovModGt(characters : Array, moveModifierType : int, amount : int) -> Array:
+	var matches = []
+	amount = clamp(amount, -3, 3)
+	
+	match moveModifierType:
+		Enums.MoveModifierType.ATK:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.ATK_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.ATK_P:
+						sum += 1
+				
+				if sum >= amount:
+					matches.append(character)
+		
+		Enums.MoveModifierType.DEF:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.DEF_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.DEF_P:
+						sum += 1
+				
+				if sum >= amount:
+					matches.append(character)
+		
+		Enums.MoveModifierType.CD:
+			for character in characters:
+				var sum = 0
+				
+				for mod in character.moveModifiers:
+					if mod == Enums.MoveModifierProperty.CD_M:
+						sum -= 1
+					elif mod == Enums.MoveModifierProperty.CD_P:
+						sum += 1
+				
+				if sum >= amount:
+					matches.append(character)
 	
 	return matches
 
