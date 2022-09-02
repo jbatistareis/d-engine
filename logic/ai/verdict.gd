@@ -2,6 +2,10 @@ class_name Verdict
 extends Entity
 
 const _ALL : String = "_ALL"
+const _ANY : String = "ANY"
+const _FRIENDLY : String = "FRIENDLY"
+const _FOE : String = "FOE"
+
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -20,7 +24,8 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.actions.clear()
 	for action in verdictDto.actions:
 		self.actions.append({
-			'fact': action.fact,
+			'self': action.self,
+			'target': action.target,
 			'move': Move.new().fromShortName(action.moveShortName)
 		})
 	
@@ -34,23 +39,47 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'fact': action.fact,
+			'self': action.self,
+			'target': action.target,
 			'moveShortName': action.move.shortName
 		})
 	
 	return verdictDto
 
 
-func decision(auditor, suspects : Array) -> void:
+func decision(auditor) -> void:
 	for action in actions:
-		var targets = analyze(DefaultValues.facts[action.fact], auditor, suspects)
+		var targetType = Enums.MoveTargetType.keys()[action.move.targetType]
+		var suspects = []
 		
-		if !targets.empty():
+		match auditor.type:
+			Enums.CharacterType.PC:
+				if targetType.begins_with(_FOE):
+					suspects = BattleManager.enemies
+				elif targetType.begins_with(_FRIENDLY):
+					suspects = BattleManager.players
+				elif targetType.begins_with(_ANY):
+					suspects = BattleManager.players + BattleManager.enemies
+			
+			Enums.CharacterType.FOE:
+				if targetType.begins_with(_FOE):
+					suspects = BattleManager.players
+				elif targetType.begins_with(_FRIENDLY):
+					suspects = BattleManager.enemies
+				elif targetType.begins_with(_ANY):
+					suspects = BattleManager.players + BattleManager.enemies
+		
+		suspects.shuffle()
+		
+		var selfMatch = !analyze(DefaultValues.facts[action.self], auditor, [auditor]).empty()
+		var targets = analyze(DefaultValues.facts[action.target], auditor, suspects)
+		
+		if selfMatch && !targets.empty():
 			var move = Move.new().fromShortName(action.move.shortName)
 			move.cdPre += auditor.inventory.weapon.cdPre
 			move.cdPos += auditor.inventory.weapon.cdPos
 			
-			if Enums.MoveTargetType.keys()[action.move.targetType].ends_with(_ALL):
+			if targetType.ends_with(_ALL):
 				Signals.emit_signal(
 					"commandPublished",
 					ExecuteMoveCommand.new(auditor, targets, move))

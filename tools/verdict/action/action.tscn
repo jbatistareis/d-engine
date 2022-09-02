@@ -5,13 +5,13 @@
 [node name="action" type="CenterContainer"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 567.0
-margin_bottom = 35.0
+margin_right = 821.0
+margin_bottom = 49.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
 
 [node name="panel" type="PanelContainer" parent="."]
-margin_right = 574.0
+margin_right = 814.0
 margin_bottom = 42.0
 size_flags_horizontal = 3
 size_flags_vertical = 0
@@ -19,62 +19,76 @@ size_flags_vertical = 0
 [node name="grid" type="GridContainer" parent="panel"]
 margin_left = 7.0
 margin_top = 7.0
-margin_right = 567.0
+margin_right = 807.0
 margin_bottom = 35.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/hseparation = 10
 columns = 10
 
-[node name="lblActFact" type="Label" parent="panel/grid"]
+[node name="lblActSelf" type="Label" parent="panel/grid"]
 margin_top = 3.0
-margin_right = 60.0
+margin_right = 50.0
 margin_bottom = 25.0
-text = "Fact: "
+text = "Self:"
 
-[node name="optFact" type="OptionButton" parent="panel/grid"]
-margin_left = 70.0
-margin_right = 220.0
+[node name="optSelf" type="OptionButton" parent="panel/grid"]
+margin_left = 60.0
+margin_right = 210.0
+margin_bottom = 28.0
+rect_min_size = Vector2( 150, 0 )
+
+[node name="lblActTarget" type="Label" parent="panel/grid"]
+margin_left = 220.0
+margin_top = 3.0
+margin_right = 300.0
+margin_bottom = 25.0
+text = " Target:"
+
+[node name="optTarget" type="OptionButton" parent="panel/grid"]
+margin_left = 310.0
+margin_right = 460.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="lblActMove" type="Label" parent="panel/grid"]
-margin_left = 230.0
+margin_left = 470.0
 margin_top = 3.0
-margin_right = 290.0
+margin_right = 530.0
 margin_bottom = 25.0
-text = "Move: "
+text = " Move:"
 
 [node name="optMove" type="OptionButton" parent="panel/grid"]
-margin_left = 300.0
-margin_right = 450.0
+margin_left = 540.0
+margin_right = 690.0
 margin_bottom = 28.0
 rect_min_size = Vector2( 150, 0 )
 
 [node name="btnUp" type="Button" parent="panel/grid"]
-margin_left = 460.0
-margin_right = 482.0
+margin_left = 700.0
+margin_right = 722.0
 margin_bottom = 28.0
 text = "↑"
 
 [node name="btnDown" type="Button" parent="panel/grid"]
-margin_left = 492.0
-margin_right = 514.0
+margin_left = 732.0
+margin_right = 754.0
 margin_bottom = 28.0
 text = "↓"
 
 [node name="VSeparator" type="VSeparator" parent="panel/grid"]
-margin_left = 524.0
-margin_right = 528.0
+margin_left = 764.0
+margin_right = 768.0
 margin_bottom = 28.0
 
 [node name="btnDelete" type="Button" parent="panel/grid"]
-margin_left = 538.0
-margin_right = 560.0
+margin_left = 778.0
+margin_right = 800.0
 margin_bottom = 28.0
 text = "❌"
 
-[connection signal="item_selected" from="panel/grid/optFact" to="." method="_on_optFact_item_selected"]
+[connection signal="item_selected" from="panel/grid/optSelf" to="." method="_on_optSelf_item_selected"]
+[connection signal="item_selected" from="panel/grid/optTarget" to="." method="_on_optTarget_item_selected"]
 [connection signal="item_selected" from="panel/grid/optMove" to="." method="_on_optMove_item_selected"]
 [connection signal="pressed" from="panel/grid/btnUp" to="." method="_on_btnUp_pressed"]
 [connection signal="pressed" from="panel/grid/btnDown" to="." method="_on_btnDown_pressed"]

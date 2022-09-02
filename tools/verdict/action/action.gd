@@ -3,7 +3,8 @@ extends CenterContainer
 var moveList : Array = []
 var actionDict : Dictionary setget setActionDict
 
-onready var optFact : OptionButton = $panel/grid/optFact
+onready var optSelf : OptionButton = $panel/grid/optSelf
+onready var optTarget : OptionButton = $panel/grid/optTarget
 onready var optMove : OptionButton = $panel/grid/optMove
 
 
@@ -15,15 +16,18 @@ func _ready() -> void:
 func setActionDict(value : Dictionary) -> void:
 	actionDict = value
 	
-	optFact.select(actionDict.fact)
+	optSelf.select(actionDict.self)
+	optTarget.select(actionDict.target)
 	optMove.select(moveList.find(actionDict.moveShortName))
 
 
 func loadFacts() -> void:
-	optFact.clear()
+	optSelf.clear()
+	optTarget.clear()
 	
 	for fact in Enums.Fact.keys():
-		optFact.add_item(fact)
+		optSelf.add_item(fact)
+		optTarget.add_item(fact)
 
 
 func loadMoves() -> void:
@@ -34,8 +38,12 @@ func loadMoves() -> void:
 		optMove.add_item(move)
 
 
-func _on_optFact_item_selected(index):
-	actionDict.fact = index
+func _on_optSelf_item_selected(index):
+	actionDict.self = index
+
+
+func _on_optTarget_item_selected(index):
+	actionDict.target = index
 
 
 func _on_optMove_item_selected(index):

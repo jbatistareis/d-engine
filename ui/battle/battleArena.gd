@@ -79,9 +79,9 @@ func createCursor() -> void:
 
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
-		# adapt for FRIENDLY_ALL and ANY_ALL
-		if move.targetType == Enums.MoveTargetType.FRIENDLY:
-			publishCommand(player, [], move)
+		# adapt for ANY_ALL
+		if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
+			publishCommand(player, [player], move)
 			return
 		elif move.targetType == Enums.MoveTargetType.FOE_ALL:
 			var targets = []

@@ -11,7 +11,8 @@ const ROOM_NOOP : String = 'func execute(_character : Character, _direction : in
 
 
 var actionBase : Dictionary = {
-	'fact': Enums.Fact.HP_HIGHEST,
+	'self': Enums.Fact.ANY,
+	'target': Enums.Fact.HP_HIGHEST,
 	'moveShortName': 'BSEATK'
 }
 
@@ -31,6 +32,7 @@ var roomBase : Dictionary = {
 }
 
 var facts : Dictionary = {
+	Enums.Fact.ANY: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn _suspects',
 	Enums.Fact.HP_HIGHEST: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHighestHp(_suspects)',
 	Enums.Fact.HP_LOWEST: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByLowestHp(_suspects)',
 	Enums.Fact.HP_GREATER_95: 'func execute(_auditor : Character, _suspects : Array) -> Array:\n\treturn CharacterQuery.findByHpGt(_suspects, 0.95)',

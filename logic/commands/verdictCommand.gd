@@ -14,20 +14,6 @@ func execute() -> void:
 		remainingTicks = 0
 		return
 	
-	Signals.emit_signal("startedBattleAnimation", auditor, 'idle')
-	
 	if auditor.verdictActive:
-		var suspects
-		
-		match auditor.type:
-			Enums.CharacterType.PC:
-				suspects = BattleManager.enemies
-			
-			Enums.CharacterType.FOE:
-				suspects = BattleManager.players
-			
-			_:
-				suspects = []
-		
-		auditor.verdict.decision(auditor, suspects)
+		auditor.verdict.decision(auditor)
 
