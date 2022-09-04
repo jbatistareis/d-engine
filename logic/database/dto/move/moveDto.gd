@@ -5,6 +5,7 @@ var name : String = 'Base attack'
 var shortName : String = 'BSEATK'
 var description : String = 'Attack with basic parameters'
 
+# negative values represent damage, positive represent cure
 var valueExpression : String = DefaultValues.MOVE_BASE_VALUE
 var outcomeExpression : String = DefaultValues.MOVE_BASE_OUTCOME
 var pickExpression : String = DefaultValues.MOVE_BASE_PICK

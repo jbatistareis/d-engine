@@ -77,9 +77,10 @@ func createCursor() -> void:
 	)
 
 
+# TODO pick from the players group
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
-		# adapt for ANY_ALL
+		# TODO adapt for ANY_ALL
 		if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
 			publishCommand(player, [player], move)
 			return
@@ -141,8 +142,16 @@ func confirmCursor() -> void:
 
 
 func publishCommand(player, targets : Array, move : Move) -> void:
+	var command
+	match move.type:
+		Enums.MoveType.ITEM:
+			command = UseItemCommand.new(player, targets, move)
+		
+		Enums.MoveType.SKILL:
+			command = ExecuteMoveCommand.new(player, targets, move)
+	
 	Signals.emit_signal("battleCursorHide")
-	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
+	Signals.emit_signal("commandPublished", command)
 	Signals.emit_signal("commandsResumed")
 	cursorOn = false
 

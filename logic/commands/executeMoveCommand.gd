@@ -1,8 +1,6 @@
 class_name ExecuteMoveCommand
 extends Command
 
-const _MIN_CD : int = int(0.5 / GameParameters.GCD)
-
 var targets : Array = []
 var move : Move
 
@@ -23,7 +21,7 @@ func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, 
 	self.atkOffset = max(0, (1 + (move.modifierScale * atkP)) * (1 - (move.modifierScale * atkM)))
 	self.cdOffset = max(0, (1 - (move.modifierScale * cdP)) * (1 + (move.modifierScale * cdM)))
 	
-	self.totalTicks = max(_MIN_CD, floor(move.cdPre * cdOffset))
+	self.totalTicks = max(GameParameters.MIN_CD, floor(move.cdPre * cdOffset))
 
 
 func calculateModOffset(moveModifierProperty : int) -> float:
@@ -32,14 +30,14 @@ func calculateModOffset(moveModifierProperty : int) -> float:
 
 func published() -> void:
 	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.prepareAnimation)
-	move.pick(executorCharacter)
+	ScriptTool.getReference(move.pickExpression).pick(executorCharacter)
 
 
 func execute() -> void:
 	if !confirmExecution():
 		return
 	
-	move.execute(executorCharacter)
+	ScriptTool.getReference(move.excuteExpression).execute(executorCharacter)
 	
 	# TODO enemy/player animations
 	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
@@ -49,7 +47,11 @@ func execute() -> void:
 				return
 			pass
 	
-	var moveResult = move.getResult(executorCharacter)
+	var reference = ScriptTool.getReference(move.valueExpression + '\n' + move.outcomeExpression)
+	var moveResult = MoveResult.new(
+		reference.getValue(executorCharacter),
+		reference.getOutcome(executorCharacter))
+	
 	for target in targets:
 		var value = floor(moveResult.value * atkOffset)
 		
@@ -68,18 +70,9 @@ func execute() -> void:
 	
 	executorCharacter.applyMoveModifiers(move.executorModifiers)
 	
-	var cd = max(_MIN_CD, floor(move.cdPos * cdOffset))
+	var cd = max(GameParameters.MIN_CD, floor(move.cdPos * cdOffset))
 	if executorCharacter.verdictActive:
 		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, cd))
 	elif executorCharacter.type == Enums.CharacterType.PC:
 		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, cd))
-
-
-func confirmExecution() -> bool:
-	if !BattleManager.inBattle || (executorCharacter.currentHp == 0):
-		toBeExecuted = false
-		remainingTicks = 0
-		return false
-	
-	return true
 
