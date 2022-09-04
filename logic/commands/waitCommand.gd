@@ -4,7 +4,7 @@ extends Command
 var nextCommand : Command
 
 
-func _init(nextCommand : Command, ticks : int = GameParameters.WAIT_TICKS / 2).(nextCommand.executorCharacter, ticks) -> void:
+func _init(nextCommand : Command, ticks : int = GameParameters.WAIT_TICKS).(nextCommand.executorCharacter, ticks) -> void:
 	self.nextCommand = nextCommand
 
 
