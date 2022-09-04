@@ -5,6 +5,7 @@ const _DESCRIPTION : String = 'Use an item'
 
 
 func _init(item : Item).():
+	self.shortName = item.shortName
 	self.type = Enums.MoveType.ITEM
 	self.description = _DESCRIPTION
 	self.excuteExpression = item.actionExpression

@@ -14,6 +14,9 @@ func execute() -> void:
 	if !confirmExecution():
 		return
 	
+	var item = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
+	executorCharacter.inventory.items.erase(item)
+	
 	ScriptTool.getReference(itemMove.excuteExpression).execute(executorCharacter, targets)
 	
 	if executorCharacter.verdictActive:

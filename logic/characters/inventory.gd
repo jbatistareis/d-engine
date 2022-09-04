@@ -21,9 +21,11 @@ func fromDTO(inventoryDto : InventoryDTO) -> Inventory:
 	
 	for itemSrtNm in inventoryDto.itemShortNames:
 		self.items.append(Item.new().fromShortName(itemSrtNm))
+	self.items.sort_custom(EntityArrayHelper, "shortNameSort")
 	
 	for weaponSrtNm in inventoryDto.weaponShortNames:
 		self.weapons.append(Weapon.new().fromShortName(weaponSrtNm))
+	self.weapons.sort_custom(EntityArrayHelper, "shortNameSort")
 	
 	self.weapon = Weapon.new().fromShortName(inventoryDto.weaponShortName)
 	self.armor = Armor.new().fromShortName(inventoryDto.armorShortName)
@@ -54,9 +56,11 @@ func toDTO() -> InventoryDTO:
 func add(entity : Entity) -> void:
 	if entity is Item:
 		items.append(entity as Item)
+		items.sort_custom(EntityArrayHelper, "shortNameSort")
 	
 	if entity is Weapon:
 		weapons.append(entity as Weapon)
+		weapons.sort_custom(EntityArrayHelper, "shortNameSort")
 
 
 func removeItem(index : int) -> Item:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://ui/gui/battle.gd" type="Script" id=4]
 [ext_resource path="res://ui/gui/battle/cursor.gd" type="Script" id=5]
 [ext_resource path="res://assets/theme/default/styleBoxFlat_darkslategray_shadow.tres" type="StyleBox" id=6]
+[ext_resource path="res://ui/gui/battle/inventory.gd" type="Script" id=7]
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
@@ -128,7 +129,6 @@ text = "< Close"
 flat = true
 
 [node name="battle" type="Control" parent="."]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
@@ -148,7 +148,6 @@ margin_top = -22.0
 grow_vertical = 0
 
 [node name="moves" type="VBoxContainer" parent="battle"]
-visible = false
 anchor_left = 0.5
 anchor_top = 0.98
 anchor_right = 0.5
@@ -306,6 +305,43 @@ margin_bottom = 22.0
 size_flags_horizontal = 3
 text = "CD: %d"
 align = 1
+
+[node name="inventory" type="MarginContainer" parent="battle"]
+anchor_left = 0.5
+anchor_top = 0.89
+anchor_right = 0.5
+anchor_bottom = 0.89
+margin_left = -310.0
+margin_top = -215.0
+margin_right = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 620, 215 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+script = ExtResource( 7 )
+
+[node name="Panel" type="Panel" parent="battle/inventory"]
+margin_right = 620.0
+margin_bottom = 215.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+
+[node name="itemList" type="ItemList" parent="battle/inventory/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+items = [ "Item 0", null, false, "Item 1", null, false, "Item 2", null, false, "Item 3", null, false, "Item 4", null, false, "Item 5", null, false, "Suppress. III [x500]", null, false, "Item 7", null, false, "Item 8", null, false, "Item 9", null, false, "Item 10", null, false, "Item 11", null, false, "Item 12", null, false, "Item 13", null, false, "Item 14", null, false, "Item 15", null, false, "Item 16", null, false, "Item 17", null, false, "Item 18", null, false, "Item 19", null, false, "Item 20", null, false, "Item 21", null, false, "Item 22", null, false, "Item 23", null, false, "Item 24", null, false ]
+max_text_lines = 2
+max_columns = 4
+same_column_width = true
+fixed_column_width = 146
+icon_mode = 0
 
 [node name="cursor" type="MarginContainer" parent="battle"]
 margin_bottom = 22.0

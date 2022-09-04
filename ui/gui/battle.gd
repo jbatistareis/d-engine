@@ -20,6 +20,7 @@ func setup(players : Array, enemies : Array) -> void:
 	$playerStats.characters = players
 
 
+# TODO
 func victory(players : Array, battleResult : BattleResult) -> void:
 	hide()
 
