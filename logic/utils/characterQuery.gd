@@ -211,7 +211,7 @@ static func characterHasAfflictionType(character : Character, type : int) -> boo
 
 static func characterHasItem(character : Character, item : Item) -> bool:
 	for presentItem in character.inventory.items:
-		if presentItem.id == item.id:
+		if presentItem.shortName == item.shortName:
 			return true
 	
 	return false
