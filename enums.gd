@@ -11,6 +11,7 @@ enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, W
 enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
 enum CharacterType { PC, NPC, FOE }
 
+enum MoveType { SKILL, ITEM }
 enum MoveTargetType { NONE, ANY, FRIENDLY, FOE, ANY_ALL, FRIENDLY_ALL, FOE_ALL }
 enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
 enum MoveModifierType { ATK, DEF, CD }
