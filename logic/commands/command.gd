@@ -28,12 +28,19 @@ func setTotalTicks(value : int) -> void:
 
 
 func tick() -> void:
-	if (executorCharacter != null) && (executorCharacter.currentHp <= 0):
-		toBeExecuted = false
-		canceled = true
-		remainingTicks = 0
+	if !confirmExecution():
 		return
 	
 	remainingTicks -= 1
 	toBeExecuted = remainingTicks <= 0
+
+
+func confirmExecution() -> bool:
+	if !BattleManager.inBattle || ((executorCharacter != null) && (executorCharacter.currentHp <= 0)):
+		toBeExecuted = false
+		canceled = true
+		remainingTicks = 0
+		return false
+	
+	return true
 
