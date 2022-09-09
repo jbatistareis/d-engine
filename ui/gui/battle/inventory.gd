@@ -36,6 +36,6 @@ func hide() -> void:
 
 
 func _on_ItemList_item_activated(index):
-	var itemMove = ItemMove.new(character.inventory.items[index])
-	
+	hide()
+	Signals.emit_signal("battleCursorShow", character, ItemMove.new(character.inventory.items[index]))
 
