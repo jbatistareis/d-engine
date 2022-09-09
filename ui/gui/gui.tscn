@@ -360,3 +360,4 @@ margin_bottom = 22.0
 [connection signal="pressed" from="exploration/menuContainer/menu/items/btnEquip" to="exploration" method="_on_btnEquip_pressed"]
 [connection signal="pressed" from="exploration/menuContainer/menu/items/btnMoves" to="exploration" method="_on_btnMoves_pressed"]
 [connection signal="pressed" from="exploration/menuContainer/menu/items/btnClose" to="exploration" method="_on_btnClose_pressed"]
+[connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]

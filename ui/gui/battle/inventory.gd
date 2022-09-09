@@ -1,7 +1,5 @@
 extends MarginContainer
 
-const _ITEM_TEXT : String = '%s[x%d]'
-
 var character : Character
 
 
@@ -18,7 +16,11 @@ func showWindow(character : Character) -> void:
 		print('Your inventory is empty')
 	
 	for item in character.inventory.items:
-		$ItemList.add_item(_ITEM_TEXT % item.name.substr(0, 14))
+		var itemName = item.name.substr(0, 14)
+		for i in range(14 - itemName.length()):
+			itemName += ' '
+		
+		$ItemList.add_item(itemName)
 	
 	visible = true
 	$ItemList.grab_focus()
@@ -30,4 +32,10 @@ func hide() -> void:
 	if visible:
 		visible = false
 		Signals.emit_signal("battleShowCharacterMoves", character)
+
+
+
+func _on_ItemList_item_activated(index):
+	var itemMove = ItemMove.new(character.inventory.items[index])
+	
 
