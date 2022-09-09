@@ -156,7 +156,7 @@ func publishCommand(player, targets : Array, move : Move) -> void:
 	cursorOn = false
 
 
-func cancelCursor(ignore) -> void:
+func cancelCursor() -> void:
 	if cursorOn:
 		cursorOn = false
 		Signals.emit_signal("battleCursorHide")

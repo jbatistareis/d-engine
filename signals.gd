@@ -64,6 +64,8 @@ signal battleHideCharacterMoves()
 signal battleCursorMove(title, position)
 signal battleCursorHide()
 signal battleShowResult(battleResult)
+signal battleInventoryShow(character)
+signal battleInventoryHide()
 
 
 # inventory related

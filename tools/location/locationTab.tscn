@@ -33,14 +33,12 @@ size_flags_vertical = 3
 [node name="mainContainer" type="HSplitContainer" parent="background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="map" type="MarginContainer" parent="background/mainContainer"]
 margin_right = 794.0
 margin_bottom = 768.0
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -52,14 +50,12 @@ follow_focus = true
 [node name="container" type="MarginContainer" parent="background/mainContainer/map/scroll"]
 margin_right = 794.0
 margin_bottom = 768.0
-mouse_filter = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="grid" type="GridContainer" parent="background/mainContainer/map/scroll/container"]
 margin_right = 794.0
 margin_bottom = 768.0
-mouse_filter = 2
 columns = 48
 script = ExtResource( 1 )
 

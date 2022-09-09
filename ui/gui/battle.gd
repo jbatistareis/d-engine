@@ -3,6 +3,7 @@ extends Control
 const _MOVE_DESC : String = ' %s '
 
 var moveCardPackedScene : PackedScene = preload("res://ui/gui/battle/moveCard.tscn")
+var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/inventoryCard.tscn")
 
 
 func _ready() -> void:
@@ -33,12 +34,19 @@ func hide() -> void:
 
 
 func showCharacterMoves(character : Character) -> void:
+	$moves/decription/container/lblDescription.text = ''
 	$moves.visible = true
 	
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
 	
 	yield(get_tree(), "idle_frame")
+	
+	var inventoryCard = inventoryCardPackedScene.instance()
+	inventoryCard.character = character
+	inventoryCard.connect("hovered", self, "showMoveDetails")
+	
+	$moves/cards/grid.add_child(inventoryCard)
 	
 	if character.inventory.weapon.move1 != null:
 		var card = moveCardPackedScene.instance()

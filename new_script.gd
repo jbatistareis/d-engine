@@ -4,6 +4,8 @@ var player : Character
 
 
 func _init():
+	OS.low_processor_usage_mode = true
+	
 #	Persistence.saveDTO(CharacterDTO.new())
 #	Persistence.saveDTO(VerdictDTO.new())
 #	Persistence.saveDTO(InventoryDTO.new())
