@@ -42,18 +42,11 @@ func showCharacterMoves(character : Character) -> void:
 	
 	yield(get_tree(), "idle_frame")
 	
-	var inventoryCard = inventoryCardPackedScene.instance()
-	inventoryCard.character = character
-	inventoryCard.connect("hovered", self, "showMoveDetails")
-	
-	$moves/cards/grid.add_child(inventoryCard)
-	
 	if character.inventory.weapon.move1 != null:
 		var card = moveCardPackedScene.instance()
 		card.character = character
 		card.move = character.inventory.weapon.move1
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move2 != null:
@@ -61,7 +54,6 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move2
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move3 != null:
@@ -69,7 +61,6 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move3
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move4 != null:
@@ -77,8 +68,12 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move4
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
+	
+	var inventoryCard = inventoryCardPackedScene.instance()
+	inventoryCard.character = character
+	inventoryCard.connect("hovered", self, "showMoveDetails")
+	$moves/cards/grid.add_child(inventoryCard)
 	
 	$moves/cards/grid.get_child(0).button.grab_focus()
 

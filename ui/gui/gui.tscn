@@ -315,22 +315,29 @@ anchor_right = 0.5
 anchor_bottom = 0.89
 margin_left = -310.0
 margin_top = -215.0
-margin_right = 310.0
+margin_right = 300.0
+margin_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 620, 215 )
+rect_min_size = Vector2( 612, 207 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
 script = ExtResource( 7 )
 
 [node name="Panel" type="Panel" parent="battle/inventory"]
-margin_right = 620.0
-margin_bottom = 215.0
-rect_min_size = Vector2( 620, 215 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_right = 612.0
+margin_bottom = 207.0
+
+[node name="ItemList" type="ItemList" parent="battle/inventory"]
+margin_right = 612.0
+margin_bottom = 207.0
 theme = ExtResource( 2 )
+max_text_lines = 2
+max_columns = 4
+same_column_width = true
+fixed_column_width = 146
+icon_mode = 0
 
 [node name="cursor" type="MarginContainer" parent="battle"]
 margin_bottom = 22.0
