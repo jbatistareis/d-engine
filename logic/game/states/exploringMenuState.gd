@@ -10,6 +10,10 @@ func _init() -> void:
 func handleInput() -> void:
 	if Input.is_action_just_pressed("ui_home"):
 		Signals.emit_signal("guiCloseExploringMenu")
+	elif Input.is_action_just_pressed("ui_accept"):
+		Signals.emit_signal("guiConfirm")
+	elif Input.is_action_just_pressed("ui_cancel"):
+		Signals.emit_signal("guiCancel")
 
 
 func exit() -> void:

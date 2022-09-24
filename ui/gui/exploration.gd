@@ -8,8 +8,17 @@ func _ready() -> void:
 	Signals.connect("guiCloseExploringMenu", self, "hide")
 
 
+func focus() -> void:
+	show()
+
+
+func unfocus() -> void:
+	$menuContainer/menu.visible = false
+
+
 func show() -> void:
 	visible = true
+	$menuContainer/menu.visible = true
 	
 	$menuContainer/menu/items/btnAction.grab_focus()
 	
@@ -46,7 +55,7 @@ func _on_btnMap_pressed():
 
 
 func _on_btnItems_pressed():
-	pass # Replace with function body.
+	$inventory.showWindow(GameManager.player)
 
 
 func _on_btnEquip_pressed():
