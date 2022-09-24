@@ -16,7 +16,7 @@ enum MoveTargetType { NONE, ANY, FRIENDLY, FOE, ANY_ALL, FRIENDLY_ALL, FOE_ALL }
 enum MoveModifierProperty { NONE, ATK_P, DEF_P, CD_P, ATK_M, DEF_M, CD_M }
 enum MoveModifierType { ATK, DEF, CD }
 
-enum ItemType { CONSUMABLE, TOOL, KEY }
+enum ItemType { CONSUMABLE, KEY }
 
 enum RoomType { DUMMY, _0_EXIT, _1_EXIT, _2_EXITS_I, _2_EXITS_L, _3_EXITS, _4_EXITS }
 
