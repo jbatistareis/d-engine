@@ -29,6 +29,8 @@ func handleInput() -> void:
 				Signals.emit_signal("cameraMovedBackward")
 			elif Input.is_action_pressed("ui_left"):
 				Signals.emit_signal("cameraRotatedLeft")
+				GameManager.direction -= 1
 			elif Input.is_action_pressed("ui_right"):
 				Signals.emit_signal("cameraRotatedRight")
+				GameManager.direction += 1
 
