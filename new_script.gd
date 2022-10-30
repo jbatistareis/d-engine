@@ -20,6 +20,12 @@ func _init():
 #	Persistence.saveDTO(enemy)
 	
 	player = Character.new().fromShortName('BSECHA')
+	
+	var item = Item.new().fromShortName("BSEITM")
+	item.targetType = Enums.MoveTargetType.FOE
+	item.name = "TEST ITEM"
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
 
 
 func _ready() -> void:

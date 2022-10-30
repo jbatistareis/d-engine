@@ -5,7 +5,7 @@ var itemMove : Move
 var targets : Array = []
 
 
-func _init(executorCharacter, targets : Array, itemMove : Move).(executorCharacter, GameParameters.MIN_CD) -> void:
+func _init(executorCharacter, targets : Array, itemMove : Move).(executorCharacter, itemMove.cdPre) -> void:
 	self.targets = targets
 	self.itemMove = itemMove
 
@@ -15,7 +15,7 @@ func execute() -> void:
 		return
 	
 	var item = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
-	executorCharacter.inventory.items.erase(item)
+	executorCharacter.inventory.removeItem(item)
 	
 	ScriptTool.getReference(itemMove.excuteExpression).execute(executorCharacter, targets)
 	

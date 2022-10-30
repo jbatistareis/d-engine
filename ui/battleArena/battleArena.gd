@@ -63,18 +63,21 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if index > enemyData.size() - 1:
 			break
 	
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(0.1), "timeout")
 	Signals.emit_signal("battleScreenReady")
 
 
 func createCursor() -> void:
 	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
-	
+
 	Signals.emit_signal(
 		"battleCursorMove",
 		enemyNode.get_child(0).character.name,
 		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
 	)
+	
+	yield(get_tree().create_timer(0.1), "timeout")
+	cursorOn = true
 
 
 # TODO pick from the players group
@@ -106,7 +109,6 @@ func showCursor(player : Character, move : Move) -> void:
 		
 		cursorPlayer = player
 		cursorMove = move
-		cursorOn = true
 		
 		createCursor()
 

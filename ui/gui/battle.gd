@@ -40,7 +40,7 @@ func showCharacterMoves(character : Character) -> void:
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
 	
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(0.1), "timeout")
 	
 	if character.inventory.weapon.move1 != null:
 		var card = moveCardPackedScene.instance()

@@ -21,7 +21,7 @@ func commandQueued(command : Command) -> void:
 		var start
 		var end
 		
-		if command is ExecuteMoveCommand: # pre
+		if (command is ExecuteMoveCommand) || (command is UseItemCommand): # pre
 			start = 0
 			end = 100
 		else: # pos
