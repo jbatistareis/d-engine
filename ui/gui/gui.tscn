@@ -163,17 +163,17 @@ icon_mode = 0
 [node name="menu" type="MarginContainer" parent="exploration/inventory"]
 visible = false
 margin_right = 62.0
-margin_bottom = 60.0
+margin_bottom = 92.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="exploration/inventory/menu"]
 margin_right = 62.0
-margin_bottom = 60.0
+margin_bottom = 92.0
 
 [node name="container" type="VBoxContainer" parent="exploration/inventory/menu"]
 margin_right = 62.0
-margin_bottom = 60.0
+margin_bottom = 92.0
 
 [node name="btnUse" type="Button" parent="exploration/inventory/menu/container"]
 margin_right = 62.0
@@ -212,17 +212,13 @@ flat = true
 
 [node name="party" type="MarginContainer" parent="exploration/inventory"]
 visible = false
-margin_right = 640.0
-margin_bottom = 480.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 script = ExtResource( 9 )
 
 [node name="Panel" type="Panel" parent="exploration/inventory/party"]
-margin_right = 640.0
-margin_bottom = 480.0
 
 [node name="container" type="VBoxContainer" parent="exploration/inventory/party"]
-margin_right = 640.0
-margin_bottom = 480.0
 
 [node name="battle" type="Control" parent="."]
 visible = false

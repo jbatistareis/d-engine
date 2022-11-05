@@ -58,6 +58,7 @@ func hide() -> void:
 	if visible:
 		visible = false
 		$menu.visible = false
+		$party.close()
 		get_parent().focus()
 
 
@@ -65,11 +66,12 @@ func exit() -> void:
 	if visible:
 		visible = false
 		$menu.visible = false
+		$party.close()
 
 
 func _on_ItemList_item_activated(index : int) -> void:
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $ItemList.rect_position + Vector2(index * 148, floor(index / 4) * 51)
+	var menuPosition = $ItemList.rect_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(100, 30)
 	
 	$menu.visible = true
 	$menu.set_deferred("rect_position", menuPosition)
@@ -77,7 +79,8 @@ func _on_ItemList_item_activated(index : int) -> void:
 
 
 func _on_btnUse_pressed() -> void:
-	pass # Replace with function body.
+	var item = inventorySummary.summary[$ItemList.get_selected_items()[0]].item
+	$party.open(item, $menu.rect_position + Vector2($menu.rect_position.x * 2, 0))
 
 
 func _on_btnDrop_pressed() -> void:
@@ -90,5 +93,5 @@ func _on_btnDrop_pressed() -> void:
 
 func _on_btnCancel_pressed() -> void:
 	$menu.visible = false
-	itemFocus($ItemList.get_selected_items()[0])
+	showWindow(character)
 

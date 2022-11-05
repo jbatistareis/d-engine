@@ -25,6 +25,9 @@ func _init():
 	item.targetType = Enums.MoveTargetType.FOE
 	player.inventory.items.append(item)
 	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
 	
 	var item2 = Item.new().fromShortName("BSEITM")
 	item2.targetType = Enums.MoveTargetType.FOE
