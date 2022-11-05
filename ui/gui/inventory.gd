@@ -12,6 +12,11 @@ func _ready() -> void:
 
 
 func showWindow(character : Character) -> void:
+	var currentIndex = 0
+	if !$ItemList.get_selected_items().empty():
+		currentIndex = $ItemList.get_selected_items()[0]
+	
+	$menu.visible = false
 	$ItemList.clear()
 	get_parent().unfocus()
 	self.character = character
@@ -30,31 +35,60 @@ func showWindow(character : Character) -> void:
 			prefix += ' '
 		itemName = prefix + itemName
 		
-		print(itemName)
-		
 		for i in range(14 - itemName.length()):
 			itemName += ' '
 		
 		$ItemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
 	
 	visible = true
+	
+	if currentIndex >= $ItemList.get_item_count():
+		currentIndex -= 1
+	
+	itemFocus(currentIndex)
+
+
+func itemFocus(index : int) -> void:
 	$ItemList.grab_focus()
 	if !$ItemList.items.empty():
-		$ItemList.select(0)
+		$ItemList.select(index)
 
 
 func hide() -> void:
 	if visible:
 		visible = false
+		$menu.visible = false
 		get_parent().focus()
 
 
 func exit() -> void:
 	if visible:
 		visible = false
+		$menu.visible = false
 
 
-# TODO
-func _on_ItemList_item_activated(index: int) -> void:
-	inventorySummary.summary[index].item
+func _on_ItemList_item_activated(index : int) -> void:
+	var item = inventorySummary.summary[index].item
+	var menuPosition = $ItemList.rect_position + Vector2(index * 148, floor(index / 4) * 51)
+	
+	$menu.visible = true
+	$menu.set_deferred("rect_position", menuPosition)
+	$menu/container/btnUse.grab_focus()
+
+
+func _on_btnUse_pressed() -> void:
+	pass # Replace with function body.
+
+
+func _on_btnDrop_pressed() -> void:
+	var item = inventorySummary.summary[$ItemList.get_selected_items()[0]].item
+	var inventoryItem = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
+	character.inventory.removeItem(inventoryItem)
+	
+	showWindow(character)
+
+
+func _on_btnCancel_pressed() -> void:
+	$menu.visible = false
+	itemFocus($ItemList.get_selected_items()[0])
 

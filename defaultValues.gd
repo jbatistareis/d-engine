@@ -10,7 +10,7 @@ const LOCATION_NOOP : String = 'func execute(_executor : Character) -> void:\n\t
 const ROOM_ENTER_NOOP : String = 'func execute(_executor : Character, _direction : int) -> bool:\n\treturn true'
 const ROOM_NOOP : String = 'func execute(_executor : Character, _direction : int) -> void:\n\treturn'
 
-const ITEM_BASE_ACTION : String = 'func execute(_executor : Character, _targets : Array) -> void:\n\treturn'
+const ITEM_BASE_ACTION : String = 'func execute(_targets : Array) -> void:\n\treturn'
 
 
 var actionBase : Dictionary = {

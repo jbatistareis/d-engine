@@ -17,7 +17,7 @@ func execute() -> void:
 	var item = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
 	executorCharacter.inventory.removeItem(item)
 	
-	ScriptTool.getReference(itemMove.excuteExpression).execute(executorCharacter, targets)
+	ScriptTool.getReference(itemMove.excuteExpression).execute(targets)
 	
 	if executorCharacter.verdictActive:
 		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, GameParameters.MIN_CD))
