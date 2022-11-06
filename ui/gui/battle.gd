@@ -3,6 +3,7 @@ extends Control
 const _MOVE_DESC : String = ' %s '
 
 var moveCardPackedScene : PackedScene = preload("res://ui/gui/battle/moveCard.tscn")
+var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/inventoryCard.tscn")
 
 
 func _ready() -> void:
@@ -20,6 +21,7 @@ func setup(players : Array, enemies : Array) -> void:
 	$playerStats.characters = players
 
 
+# TODO
 func victory(players : Array, battleResult : BattleResult) -> void:
 	hide()
 
@@ -32,19 +34,19 @@ func hide() -> void:
 
 
 func showCharacterMoves(character : Character) -> void:
+	$moves/decription/container/lblDescription.text = ''
 	$moves.visible = true
 	
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
 	
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(0.1), "timeout")
 	
 	if character.inventory.weapon.move1 != null:
 		var card = moveCardPackedScene.instance()
 		card.character = character
 		card.move = character.inventory.weapon.move1
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move2 != null:
@@ -52,7 +54,6 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move2
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move3 != null:
@@ -60,7 +61,6 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move3
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
 	
 	if character.inventory.weapon.move4 != null:
@@ -68,8 +68,12 @@ func showCharacterMoves(character : Character) -> void:
 		card.character = character
 		card.move = character.inventory.weapon.move4
 		card.connect("hovered", self, "showMoveDetails")
-		
 		$moves/cards/grid.add_child(card)
+	
+	var inventoryCard = inventoryCardPackedScene.instance()
+	inventoryCard.character = character
+	inventoryCard.connect("hovered", self, "showMoveDetails")
+	$moves/cards/grid.add_child(inventoryCard)
 	
 	$moves/cards/grid.get_child(0).button.grab_focus()
 

@@ -4,6 +4,8 @@ var player : Character
 
 
 func _init():
+	OS.low_processor_usage_mode = true
+	
 #	Persistence.saveDTO(CharacterDTO.new())
 #	Persistence.saveDTO(VerdictDTO.new())
 #	Persistence.saveDTO(InventoryDTO.new())
@@ -18,6 +20,24 @@ func _init():
 #	Persistence.saveDTO(enemy)
 	
 	player = Character.new().fromShortName('BSECHA')
+	
+	var item = Item.new().fromShortName("BSEITM")
+	item.targetType = Enums.MoveTargetType.FOE
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	player.inventory.items.append(item)
+	
+	var item2 = Item.new().fromShortName("BSEITM")
+	item2.targetType = Enums.MoveTargetType.FOE
+	item2.name = "TEST ITEM"
+	item2.shortName = "ITM2"
+	player.inventory.items.append(item2)
+	player.inventory.items.append(item2)
+	player.inventory.items.append(item2)
+	player.inventory.items.append(item2)
+	player.inventory.items.append(item2)
 
 
 func _ready() -> void:

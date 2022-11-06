@@ -1,13 +1,16 @@
 extends Node
 
-const MOVE_BASE_VALUE : String = 'func getValue(_character : Character) -> int:\n\treturn -(_character.baseDamage + _character.strength.score + _character.inventory.weapon.calculateDamage(_character))'
-const MOVE_BASE_OUTCOME : String = 'func getOutcome(_character : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
-const MOVE_BASE_PICK : String = 'func pick(_character : Character) -> void:\n\tpass'
-const MOVE_BASE_EXECUTE : String = 'func execute(_character : Character) -> void:\n\tpass'
+# negative values represent damage, positive represent cure
+const MOVE_BASE_VALUE : String = 'func getValue(_executor : Character) -> int:\n\treturn -(_executor.baseDamage + _executor.strength.score + _executor.inventory.weapon.calculateDamage(_executor))'
+const MOVE_BASE_OUTCOME : String = 'func getOutcome(_executor : Character) -> int:\n\treturn Enums.DiceOutcome.BEST'
+const MOVE_BASE_PICK : String = 'func pick(_executor : Character) -> void:\n\tpass'
+const MOVE_BASE_EXECUTE : String = 'func execute(_executor : Character) -> void:\n\tpass'
 
-const LOCATION_NOOP : String = 'func execute(_character : Character) -> void:\n\treturn'
-const ROOM_ENTER_NOOP : String = 'func execute(_character : Character, _direction : int) -> bool:\n\treturn true'
-const ROOM_NOOP : String = 'func execute(_character : Character, _direction : int) -> void:\n\treturn'
+const LOCATION_NOOP : String = 'func execute(_executor : Character) -> void:\n\treturn'
+const ROOM_ENTER_NOOP : String = 'func execute(_executor : Character, _direction : int) -> bool:\n\treturn true'
+const ROOM_NOOP : String = 'func execute(_executor : Character, _direction : int) -> void:\n\treturn'
+
+const ITEM_BASE_ACTION : String = 'func execute(_targets : Array) -> void:\n\treturn'
 
 
 var actionBase : Dictionary = {

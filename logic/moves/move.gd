@@ -1,8 +1,11 @@
 class_name Move
 extends Entity
 
+var type : int = Enums.MoveType.SKILL
+
 var description : String
 
+# negative values represent damage, positive represent cure
 var valueExpression : String
 var outcomeExpression : String
 var pickExpression : String
@@ -79,20 +82,4 @@ func toDTO() -> MoveDTO:
 	moveDto.modifierScale = self.modifierScale
 	
 	return moveDto
-
-
-# negative values represent damage, positive represent cure
-func getResult(executor) -> MoveResult:
-	var reference = ScriptTool.getReference(valueExpression + '\n' + outcomeExpression)
-	var result = MoveResult.new(reference.getValue(executor), reference.getOutcome(executor))
-	
-	return result
-
-
-func pick(executor) -> void:
-	ScriptTool.getReference(pickExpression).pick(executor)
-
-
-func execute(executor) -> void:
-	ScriptTool.getReference(excuteExpression).execute(executor)
 

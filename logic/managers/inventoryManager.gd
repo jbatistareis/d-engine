@@ -2,13 +2,13 @@ extends Node
 
 
 func _ready():
-	Signals.connect("characterEquipedArmor", self, "equiArmor")
+	Signals.connect("characterEquipedArmor", self, "equipArmor")
 	Signals.connect("characterEquipedWeapon", self, "equipWeapon")
 	Signals.connect("characterUsedItem", self, "useItem")
 	
 	Signals.connect("characterReceivedWeapon", self, "receiveWeapon")
 	Signals.connect("characterReceivedArmor", self, "receiveArmor")
-	Signals.connect("characterReceivedItem", self, "receiveItemOrWeapon")
+	Signals.connect("characterReceivedItem", self, "receiveItem")
 	
 	Signals.connect("characterDroppedWeapon", self, "dropWeapon")
 	Signals.connect("characterDroppedArmor", self, "dropArmor")

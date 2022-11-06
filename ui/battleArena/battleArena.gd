@@ -63,23 +63,27 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if index > enemyData.size() - 1:
 			break
 	
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(0.1), "timeout")
 	Signals.emit_signal("battleScreenReady")
 
 
 func createCursor() -> void:
 	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
-	
+
 	Signals.emit_signal(
 		"battleCursorMove",
 		enemyNode.get_child(0).character.name,
 		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
 	)
+	
+	yield(get_tree().create_timer(0.1), "timeout")
+	cursorOn = true
 
 
+# TODO pick from the players group
 func showCursor(player : Character, move : Move) -> void:
 	if !cursorOn:
-		# adapt for ANY_ALL
+		# TODO adapt for ANY_ALL
 		if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
 			publishCommand(player, [player], move)
 			return
@@ -105,7 +109,6 @@ func showCursor(player : Character, move : Move) -> void:
 		
 		cursorPlayer = player
 		cursorMove = move
-		cursorOn = true
 		
 		createCursor()
 
@@ -141,13 +144,21 @@ func confirmCursor() -> void:
 
 
 func publishCommand(player, targets : Array, move : Move) -> void:
+	var command
+	match move.type:
+		Enums.MoveType.ITEM:
+			command = UseItemCommand.new(player, targets, move)
+		
+		Enums.MoveType.SKILL:
+			command = ExecuteMoveCommand.new(player, targets, move)
+	
 	Signals.emit_signal("battleCursorHide")
-	Signals.emit_signal("commandPublished", ExecuteMoveCommand.new(player, targets, move))
+	Signals.emit_signal("commandPublished", command)
 	Signals.emit_signal("commandsResumed")
 	cursorOn = false
 
 
-func cancelCursor(ignore) -> void:
+func cancelCursor() -> void:
 	if cursorOn:
 		cursorOn = false
 		Signals.emit_signal("battleCursorHide")

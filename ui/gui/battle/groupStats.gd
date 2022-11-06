@@ -10,7 +10,7 @@ func setCharacters(value : Array) -> void:
 	
 	for child in $characters.get_children():
 		child.queue_free()
-	yield(get_tree(), "idle_frame")
+	yield(get_tree().create_timer(0.1), "timeout")
 	
 	for character in characters:
 		var label = Label.new()

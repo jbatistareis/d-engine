@@ -38,8 +38,8 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbBaseDamage.value = characterDto.baseDamage
 	
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict.select(verdicts.find(characterDto.verdictShortName))
-	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory.select(verdicts.find(characterDto.inventoryShortName))
-	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel.select(verdicts.find(characterDto.model))
+	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory.select(inventories.find(characterDto.inventoryShortName))
+	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel.select(models.find(characterDto.model))
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/chkVerdictAct.pressed = characterDto.verdictActive
 
 

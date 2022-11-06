@@ -154,7 +154,7 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 		else:
 			room.exits[direction] = -1
 	
-	for i in 5:
+	for i in 4:
 		if !directions.has(i):
 			room.exits[i] = -1
 

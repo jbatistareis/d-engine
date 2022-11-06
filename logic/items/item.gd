@@ -1,12 +1,13 @@
 class_name Item
 extends Entity
 
-# TODO use logic
-
 var description : String
 
 var price : int
 var type : int # use Enums.ItemType
+
+var targetType : int # use Enums.MoveTargetType
+var actionExpression : String
 
 
 func fromShortName(itemShortName : String) -> Item:
@@ -21,6 +22,9 @@ func fromDTO(itemDto : ItemDTO) -> Item:
 	self.price = itemDto.price
 	self.type = itemDto.type
 	
+	self.targetType = itemDto.targetType
+	self.actionExpression = itemDto.actionExpression
+	
 	return self
 
 
@@ -32,6 +36,9 @@ func toDTO() -> ItemDTO:
 	
 	itemDto.price = self.price
 	itemDto.type = self.type
+	
+	itemDto.targetType = self.targetType
+	itemDto.actionExpression = self.actionExpression
 	
 	return itemDto
 
