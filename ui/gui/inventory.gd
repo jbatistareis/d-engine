@@ -7,19 +7,23 @@ var inventorySummary : InventorySummary
 
 
 func _ready() -> void:
-	Signals.connect("guiCancel", self, "hide")
+	Signals.connect("guiCancel", self, "back")
 	Signals.connect("guiCloseExploringMenu", self, "exit")
 
 
 func showWindow(character : Character) -> void:
-	var currentIndex = 0
-	if !$ItemList.get_selected_items().empty():
-		currentIndex = $ItemList.get_selected_items()[0]
-	
-	$menu.visible = false
-	$ItemList.clear()
-	get_parent().unfocus()
 	self.character = character
+	
+	$itemList.modulate = $itemList.modulate.lightened(1)
+	$Panel.modulate = $Panel.modulate.lightened(1)
+	
+	var currentIndex = 0
+	if !$itemList.get_selected_items().empty():
+		currentIndex = $itemList.get_selected_items()[0]
+	
+	$itemMenu.hide()
+	$partyMenu.hide()
+	$itemList.clear()
 	
 	if character.inventory.items.empty():
 		# TODO show message
@@ -38,60 +42,90 @@ func showWindow(character : Character) -> void:
 		for i in range(14 - itemName.length()):
 			itemName += ' '
 		
-		$ItemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
+		$itemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
 	
 	visible = true
 	
-	if currentIndex >= $ItemList.get_item_count():
+	if currentIndex >= $itemList.get_item_count():
 		currentIndex -= 1
 	
 	itemFocus(currentIndex)
 
 
 func itemFocus(index : int) -> void:
-	$ItemList.grab_focus()
-	if !$ItemList.items.empty():
-		$ItemList.select(index)
+	$itemList.grab_focus()
+	if !$itemList.items.empty():
+		$itemList.select(index)
 
 
-func hide() -> void:
-	if visible:
-		visible = false
-		$menu.visible = false
-		$party.close()
-		get_parent().focus()
+func back() -> void:
+	if $itemMenu.visible && $partyMenu.visible:
+		$itemMenu.modulate = $itemMenu.modulate.lightened(1)
+		$partyMenu.hide()
+	elif $itemMenu.visible && !$partyMenu.visible:
+		$itemList.modulate = $itemList.modulate.lightened(1)
+		$Panel.modulate = $Panel.modulate.lightened(1)
+		$itemMenu.hide()
+	elif !$itemMenu.visible && !$partyMenu.visible:
+		exit()
 
 
 func exit() -> void:
 	if visible:
 		visible = false
-		$menu.visible = false
-		$party.close()
+		$itemMenu.hide()
+		$partyMenu.hide()
+		get_parent().call_deferred("focus")
 
 
-func _on_ItemList_item_activated(index : int) -> void:
+func _on_itemList_item_activated(index : int) -> void:
+	$itemList.modulate = $itemList.modulate.darkened(0.25)
+	$Panel.modulate = $Panel.modulate.darkened(0.25)
+	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
+	
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $ItemList.rect_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(100, 30)
+	var menuPosition = $itemList.rect_global_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(126, 30)
 	
-	$menu.visible = true
-	$menu.set_deferred("rect_position", menuPosition)
-	$menu/container/btnUse.grab_focus()
+	$itemMenu.rect_position = menuPosition
+	$itemMenu.popup()
+	$itemMenu.grab_focus()
+	$itemMenu.set_current_index(0)
 
 
-func _on_btnUse_pressed() -> void:
-	var item = inventorySummary.summary[$ItemList.get_selected_items()[0]].item
-	$party.open(item, $menu.rect_position + Vector2($menu.rect_position.x * 2, 0))
-
-
-func _on_btnDrop_pressed() -> void:
-	var item = inventorySummary.summary[$ItemList.get_selected_items()[0]].item
-	var inventoryItem = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
-	character.inventory.removeItem(inventoryItem)
+# TODO party
+func _on_itemMenu_id_pressed(id : int) -> void:
+	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
 	
-	showWindow(character)
+	match id:
+		0:
+			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
+			$partyMenu.clear()
+			
+			for character in [GameManager.player]:
+				$partyMenu.add_item(character.name)
+			
+			$partyMenu.rect_position = $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0)
+			$partyMenu.popup()
+			$partyMenu.grab_focus()
+			$partyMenu.set_current_index(0)
+		
+		1:
+			var inventoryIndex = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
+			character.inventory.removeItem(inventoryIndex)
+			$itemMenu.hide()
+			showWindow(character)
+		
+		_:
+			$itemList.modulate = $itemList.modulate.lightened(1)
+			$Panel.modulate = $Panel.modulate.lightened(1)
+			$itemMenu.hide()
 
 
-func _on_btnCancel_pressed() -> void:
-	$menu.visible = false
+func _on_partyMenu_id_pressed(id: int) -> void:
+	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
+	var index = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
+	var inventoryItem = character.inventory.removeItem(index)
 	showWindow(character)
+	
+	ScriptTool.getReference(inventoryItem.actionExpression).execute([character])
 

@@ -9,18 +9,15 @@ func _ready() -> void:
 
 
 func focus() -> void:
-	show()
-
-
-func unfocus() -> void:
-	$menuContainer/menu.visible = false
+	$menuContainer/menu.modulate = $menuContainer/menu.modulate.lightened(1)
+	$menuContainer/menu.grab_focus()
 
 
 func show() -> void:
 	visible = true
-	$menuContainer/menu.visible = true
-	
-	$menuContainer/menu/items/btnAction.grab_focus()
+	$menuContainer/menu.rect_position = $menuContainer/stats.rect_global_position + Vector2($menuContainer/stats.rect_size.x + 10, 0)
+	$menuContainer/menu.popup()
+	focus()
 	
 	$menuContainer/stats/lblStats.bbcode_text = _STATUS_TEXT % [
 			GameManager.player.name,
@@ -38,33 +35,32 @@ func show() -> void:
 			GameManager.player.charisma.score
 		]
 	$menuContainer/stats/lblStats.bbcode_enabled = true
-	
+
+
+func _on_menu_about_to_show() -> void:
+	$menuContainer/menu.set_current_index(0)
 
 
 func hide() -> void:
+	$menuContainer/menu.hide()
 	visible = false
 
 
 # buttons
-func _on_btnAction_pressed():
-	pass # Replace with function body.
-
-
-func _on_btnMap_pressed():
-	pass # Replace with function body.
-
-
-func _on_btnItems_pressed():
-	$inventory.showWindow(GameManager.player)
-
-
-func _on_btnEquip_pressed():
-	pass # Replace with function body.
-
-
-func _on_btnMoves_pressed():
-	pass # Replace with function body.
-
-func _on_btnClose_pressed():
-	Signals.emit_signal("guiCloseExploringMenu")
+func _on_PopupMenu_id_pressed(id : int) -> void:
+	$menuContainer/menu.modulate = $menuContainer/menu.modulate.darkened(0.25)
+	
+	match id:
+		0:
+			pass
+		1:
+			pass
+		2:
+			$inventory.showWindow(GameManager.player)
+		3:
+			pass
+		4:
+			pass
+		_:
+			Signals.emit_signal("guiCloseExploringMenu")
 
