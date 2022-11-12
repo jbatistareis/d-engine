@@ -15,6 +15,7 @@ It is going to work some day.
 - [x] Ai system  
 - [x] Command system  
 - [x] Inventory system  
+- [x] Item system  
 - [x] Battle system  
 - [ ] Message system  
 - [ ] Dialog system
@@ -30,5 +31,6 @@ It is going to work some day.
 - [x] Battles dev tool 
 - [ ] Dialogs dev tool  
 - [ ] Events dev tool  
-- [ ] Items dev tool  
+- [x] Items dev tool  
+- [ ] Inventory dev tool  
 
