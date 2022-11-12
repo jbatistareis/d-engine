@@ -900,7 +900,7 @@ custom_constants/hseparation = 15
 columns = 2
 
 [node name="itemsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
-margin_right = 218.0
+margin_right = 219.0
 margin_bottom = 22.0
 
 [node name="lblItems" type="Label" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsTitle"]
@@ -910,13 +910,13 @@ text = "↳ Items "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsTitle"]
 margin_left = 84.0
-margin_right = 218.0
+margin_right = 219.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="weaponsTitle" type="HBoxContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
-margin_left = 233.0
-margin_right = 451.0
+margin_left = 234.0
+margin_right = 452.0
 margin_bottom = 22.0
 
 [node name="lblWeapons" type="Label" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/weaponsTitle"]
@@ -931,24 +931,23 @@ margin_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="itemsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
-margin_left = -345.0
 margin_top = 26.0
-margin_right = -15.0
-margin_bottom = 308.0
+margin_right = 219.0
+margin_bottom = 312.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid/itemsContainer"]
-margin_right = 330.0
+margin_right = 219.0
 size_flags_horizontal = 3
 columns = 2
 
 [node name="weaponsContainer" type="ScrollContainer" parent="background/mainSeparator/visualization/Inventory/data/itmWpnGrid"]
-margin_left = 233.0
-margin_top = -260.0
-margin_right = 451.0
-margin_bottom = 22.0
+margin_left = 234.0
+margin_top = 26.0
+margin_right = 452.0
+margin_bottom = 312.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
