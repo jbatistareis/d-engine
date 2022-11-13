@@ -422,14 +422,12 @@ alignment = 1
 margin_left = 34.0
 margin_right = 126.0
 margin_bottom = 28.0
-disabled = true
 text = "Autotile"
 
 [node name="btnDelete" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer"]
 margin_left = 141.0
 margin_right = 213.0
 margin_bottom = 28.0
-disabled = true
 text = "Delete"
 
 [node name="ViewportContainer" type="ViewportContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
@@ -639,10 +637,6 @@ margin_bottom = 240.0
 rect_min_size = Vector2( 0, 1 )
 size_flags_horizontal = 3
 
-[connection signal="altSelectionActive" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters" method="_on_grid_altSelectionActive"]
-[connection signal="selectedMultiRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters" method="_on_grid_selectedMultiRoom"]
-[connection signal="selectedMultiRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/parameters/Room" method="_on_grid_selectedMultiRoom"]
-[connection signal="selectedRoom" from="background/mainContainer/map/scroll/container/grid" to="background/mainContainer/map/scroll/container/grid" method="_on_grid_selectedRoom"]
 [connection signal="body_entered" from="background/mainContainer/map/scroll/container/selectionArea" to="background/mainContainer/map/scroll/container/grid" method="_on_selectionArea_body_entered"]
 [connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
 [connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]

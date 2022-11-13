@@ -8,3 +8,6 @@ signal selectedInventory(shortName)
 signal selectedItem(shortName)
 signal selectedVerdict(shortName)
 
+signal mapSelectedRoom(room)
+signal mapSelectedMultiRooms(rooms)
+

@@ -11,11 +11,15 @@ var rooms : Array = [] setget setRooms
 onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
 
 
+func _ready() -> void:
+	EditorSignals.connect("mapSelectedRoom", self, "selectedRoom")
+	EditorSignals.connect("mapSelectedMultiRooms", self, "selectedMultiRooms")
+
+
 func setRooms(value : Array):
-	changeCellSelection(false)
 	rooms = value
 	
-	if (rooms.size() == 1) &&  !rooms[0].empty():
+	if (rooms.size() == 1) && (rooms[0] != null) && !rooms[0].empty():
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [rooms[0].id, rooms[0].x, rooms[0].y]
 	elif rooms.size() > 1:
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_MULTI_TEXT
@@ -25,14 +29,6 @@ func setRooms(value : Array):
 		if !rooms[0].empty() && (optModel.get_item_text(index) == rooms[0].model):
 			optModel.select(index)
 			break
-	
-	changeCellSelection(true)
-
-
-func changeCellSelection(state : bool) -> void:
-	for room in rooms:
-		if !room.empty():
-			grid.get_child(room.id).select(state, false)
 
 
 func saveLogic() -> void:
@@ -54,7 +50,7 @@ func setRoomFields(data : Dictionary) -> void:
 
 
 func setLogic() -> void:
-	if !rooms.empty() && !rooms[0].empty():
+	if !rooms[0].empty():
 		var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
 		for group in rooms[0].foeShortNameGroups:
 			if !group.empty():
@@ -93,13 +89,21 @@ func _on_optModel_item_selected(index : int):
 	emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
 
 
-func _on_grid_selectedMultiRoom(rooms : Array):
-	if !rooms[0].empty():
-		self.rooms = rooms
-		emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
-		
+func selectedRoom(room : Dictionary):
+	if (room != null) && !room.empty():
+		self.rooms = [room]
+		emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
+	
 		clearLogic()
 		setLogic()
+
+
+func selectedMultiRooms(rooms : Array):
+	self.rooms = rooms
+	emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
+	
+	clearLogic()
+	setLogic()
 
 
 func _on_btnSave_pressed():
@@ -107,7 +111,7 @@ func _on_btnSave_pressed():
 
 
 func _on_btnBitmask_pressed():
-	for item in grid.altSelection:
+	for item in grid.multiRooms:
 		var room = DefaultValues.roomBase
 		room.id = item.id
 		room.x = item.x
@@ -130,7 +134,7 @@ func _on_btnBitmask_pressed():
 			if index < 1:
 				break
 			
-			for cell in grid.altSelection:
+			for cell in grid.multiRooms:
 				if (cell.id == index) || !grid.get_child(index).room.empty():
 					value += DefaultValues.BitmaskDirections[direction]
 					break
@@ -152,6 +156,7 @@ func _on_btnBitmask_pressed():
 
 
 func _on_btnDelete_pressed():
-	for item in grid.altSelection:
-		grid.get_child(item.id).room = {}
+	for item in grid.multiRooms:
+		if !item.empty():
+			grid.get_child(item.id).room = {}
 

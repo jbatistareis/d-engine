@@ -86,6 +86,7 @@ margin_bottom = 60.0
 rect_min_size = Vector2( 60, 60 )
 focus_mode = 2
 mouse_default_cursor_shape = 2
+toggle_mode = false
 action_mode = 1
 switch_on_hover = true
 
