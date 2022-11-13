@@ -18,7 +18,6 @@ func _ready() -> void:
 
 func loadData() -> void:
 	fileList.clear()
-	
 	list = Persistence.listEntities(Enums.EntityType.VERDICT)
 	for item in list:
 		fileList.add_item(item)
@@ -26,9 +25,8 @@ func loadData() -> void:
 
 func loadVerdict(shortName : String) -> void:
 	verdictDto = Persistence.loadDTO(shortName, Enums.EntityType.VERDICT)
-	setFields()
-	
 	fileList.select(list.find(verdictDto.shortName))
+	setFields()
 
 
 func setFields() -> void:

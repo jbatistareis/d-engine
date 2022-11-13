@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func loadCharacter(shortName : String) -> void:
 	characterDto = Persistence.loadDTO(shortName, Enums.EntityType.CHARACTER)
+	$background/mainSeparator/fileList.select(characters.find(shortName))
 	setFields()
 	$background/mainSeparator/visualization.showData(-1)
 

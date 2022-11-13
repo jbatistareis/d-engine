@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func loadItem(shortName : String) -> void:
 	itemDto = Persistence.loadDTO(shortName, Enums.EntityType.ITEM)
+	$background/mainSeparator/fileList.select(list.find(shortName))
 	setFields()
 
 
