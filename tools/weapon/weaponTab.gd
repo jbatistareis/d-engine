@@ -17,9 +17,8 @@ func _ready() -> void:
 
 func loadWeapon(shortName : String) -> void:
 	weaponDto = Persistence.loadDTO(shortName, Enums.EntityType.WEAPON)
-	setFields()
-	
 	$background/mainSeparator/fileList.select(weaponList.find(shortName))
+	setFields()
 
 
 func setFields() -> void:

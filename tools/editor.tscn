@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://tools/editor.gd" type="Script" id=1]
 [ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
@@ -7,7 +7,8 @@
 [ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
 [ext_resource path="res://tools/move/moveTab.tscn" type="PackedScene" id=6]
 [ext_resource path="res://tools/verdict/verdictTab.tscn" type="PackedScene" id=7]
-[ext_resource path="res://tools/item/Item.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tools/item/itemTab.tscn" type="PackedScene" id=8]
+[ext_resource path="res://tools/inventory/inventoryTab.tscn" type="PackedScene" id=9]
 
 [node name="editor" type="Panel"]
 anchor_right = 1.0
@@ -48,19 +49,8 @@ size_flags_horizontal = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Inventory" type="Tabs" parent="tabs"]
+[node name="Inventory" parent="tabs" instance=ExtResource( 9 )]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
-size_flags_horizontal = 3
-
-[node name="background" type="Panel" parent="tabs/Inventory"]
-anchor_right = 1.0
-anchor_bottom = 1.0
 
 [node name="Item" parent="tabs" instance=ExtResource( 8 )]
 visible = false

@@ -13,9 +13,8 @@ func _ready() -> void:
 
 func loadMove(shortName : String) -> void:
 	moveDto = Persistence.loadDTO(shortName, Enums.EntityType.MOVE)
-	setFields()
-	
 	$background/mainSeparator/fileList.select(list.find(shortName))
+	setFields()
 
 
 func setFields() -> void:

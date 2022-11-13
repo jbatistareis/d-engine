@@ -32,5 +32,5 @@ It is going to work some day.
 - [ ] Dialogs dev tool  
 - [ ] Events dev tool  
 - [x] Items dev tool  
-- [ ] Inventory dev tool  
+- [x] Inventory dev tool  
 
