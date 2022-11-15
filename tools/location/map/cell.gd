@@ -9,6 +9,8 @@ var x : int
 var y : int
 var room : Dictionary = {} setget setRoom
 
+var selected : bool = false
+
 
 func _ready() -> void:
 	updateHint()
@@ -28,23 +30,17 @@ func _ready() -> void:
 
 
 func optionSelected(index : int) -> void:
-	if !room.empty() && (index == 0):
+	if (room.type != Enums.RoomType.DUMMY) && (index == 0):
 		$icon.rotate(_ROTATION)
 		var newOrientation = room.orientation + 1
 		room.orientation = newOrientation if (newOrientation <= Enums.Direction.WEST) else 0
 	
-	elif !room.empty() && (index == 1):
+	elif (room.type != Enums.RoomType.DUMMY) && (index == 1):
 		$icon.rotate(-_ROTATION)
 		var newOrientation = room.orientation - 1
 		room.orientation = newOrientation if (newOrientation >= Enums.Direction.NORTH) else 3
 	
 	elif index >= 3:
-		if room.empty():
-			self.room = DefaultValues.roomBase
-			room.id = id
-			room.x = x
-			room.y = y
-		
 		index -= 3
 		$icon.frame = index
 		
@@ -52,13 +48,11 @@ func optionSelected(index : int) -> void:
 			room.type = index
 			room.model = _BASE_MODELS[index]
 		else:
-			room.clear()
-			select(false, false)
+			self.room = DefaultValues.roomBase
 	
 	updateHint()
 	
-	if !room.empty():
-		get_parent().emit_signal("selectedRoom", room)
+	EditorSignals.emit_signal("mapSelectedRoom", room)
 
 
 func updateHint() -> void:
@@ -69,12 +63,12 @@ func updateHint() -> void:
 func setRoom(value : Dictionary) -> void:
 	room = value.duplicate(true)
 	
-	if !room.empty():
-		$icon.frame = room.type
-		$icon.rotation = _ROTATION * room.orientation
-	else:
-		$icon.frame = Enums.RoomType.DUMMY
-		$icon.rotation = 0
+	room.id = id
+	room.x = x
+	room.y = y
+	
+	$icon.frame = room.type
+	$icon.rotation = (_ROTATION * room.orientation) if (room.type != Enums.RoomType.DUMMY) else 0
 	
 	updateHint()
 
@@ -83,19 +77,16 @@ func closeMenu() -> void:
 	$options.get_popup().hide()
 
 
-func select(value : bool, bitmask : bool) -> void:
-	color.r = 0
-	color.b = 0
-	
-	if bitmask && value:
-		color.r = 0.8
-	elif !bitmask && value:
-		color.b = 0.8
-	
+func toggleSelect() -> void:
+	select(!selected)
+
+
+func select(value : bool) -> void:
+	selected = value
+	color.b = 0.8 if value else 0
 	color.a = 0.4 if value else 0.15
 
 
 func _on_options_pressed():
-	get_parent().emit_signal("selectedRoom", room)
-	get_parent().clearAltSelection()
+	EditorSignals.emit_signal("mapSelectedRoom", room)
 

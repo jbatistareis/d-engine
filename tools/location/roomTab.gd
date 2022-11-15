@@ -11,28 +11,24 @@ var rooms : Array = [] setget setRooms
 onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
 
 
+func _ready() -> void:
+	EditorSignals.connect("mapSelectedRoom", self, "selectedRoom")
+	EditorSignals.connect("mapSelectedMultiRooms", self, "selectedMultiRooms")
+
+
 func setRooms(value : Array):
-	changeCellSelection(false)
 	rooms = value
 	
-	if (rooms.size() == 1) &&  !rooms[0].empty():
+	if rooms.size() == 1:
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_SINGLE_TEXT % [rooms[0].id, rooms[0].x, rooms[0].y]
-	elif rooms.size() > 1:
+	else:
 		$mainContainer/model/controls/lblDetails.text = _DETAILS_MULTI_TEXT
 	
 	var optModel = $mainContainer/model/controls/optModel
 	for index in optModel.get_item_count():
-		if !rooms[0].empty() && (optModel.get_item_text(index) == rooms[0].model):
+		if (rooms[0].type != Enums.RoomType.DUMMY) && (optModel.get_item_text(index) == rooms[0].model):
 			optModel.select(index)
 			break
-	
-	changeCellSelection(true)
-
-
-func changeCellSelection(state : bool) -> void:
-	for room in rooms:
-		if !room.empty():
-			grid.get_child(room.id).select(state, false)
 
 
 func saveLogic() -> void:
@@ -40,21 +36,20 @@ func saveLogic() -> void:
 		setRoomFields(singleRoom)
 
 
-func setRoomFields(data : Dictionary) -> void:
-	if !data.empty():
-		var enemiesText = $mainContainer/logic/Enemies/txtEnemyGroups.text.replace(' ', '')
-		data.foeShortNameGroups.clear()
-		for groupText in enemiesText.split('\n'):
-			if !groupText.empty():
-				data.foeShortNameGroups.append(groupText.split(','))
-		
-		data.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
-		data.enteringLogic = $mainContainer/logic/Entering/txtEntering.text
-		data.exitingLogic = $mainContainer/logic/Exiting/txtExiting.text
+func setRoomFields(room : Dictionary) -> void:
+	var enemiesText = $mainContainer/logic/Enemies/txtEnemyGroups.text.replace(' ', '')
+	room.foeShortNameGroups.clear()
+	for groupText in enemiesText.split('\n'):
+		if !groupText.empty():
+			room.foeShortNameGroups.append(groupText.split(','))
+	
+	room.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
+	room.enteringLogic = $mainContainer/logic/Entering/txtEntering.text
+	room.exitingLogic = $mainContainer/logic/Exiting/txtExiting.text
 
 
 func setLogic() -> void:
-	if !rooms.empty() && !rooms[0].empty():
+	if rooms[0].type != Enums.RoomType.DUMMY:
 		var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
 		for group in rooms[0].foeShortNameGroups:
 			if !group.empty():
@@ -93,13 +88,21 @@ func _on_optModel_item_selected(index : int):
 	emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
 
 
-func _on_grid_selectedMultiRoom(rooms : Array):
-	if !rooms[0].empty():
-		self.rooms = rooms
-		emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
-		
+func selectedRoom(room : Dictionary):
+	if room.type != Enums.RoomType.DUMMY:
+		self.rooms = [room]
+		emit_signal("changeModel", locationDto.shortName, room.model, room.orientation)
+	
 		clearLogic()
 		setLogic()
+
+
+func selectedMultiRooms(rooms : Array):
+	self.rooms = rooms
+	emit_signal("changeModel", locationDto.shortName, rooms[0].model, rooms[0].orientation)
+	
+	clearLogic()
+	setLogic()
 
 
 func _on_btnSave_pressed():
@@ -107,8 +110,8 @@ func _on_btnSave_pressed():
 
 
 func _on_btnBitmask_pressed():
-	for item in grid.altSelection:
-		var room = DefaultValues.roomBase
+	for item in grid.multiRooms:
+		var room = DefaultValues.roomBase.duplicate(true)
 		room.id = item.id
 		room.x = item.x
 		room.y = item.y
@@ -127,11 +130,11 @@ func _on_btnBitmask_pressed():
 			elif direction == Enums.Direction.WEST:
 				index = (room.x - 1) + room.y * grid.columns
 			
-			if index < 1:
-				break
+			if index < 0:
+				continue
 			
-			for cell in grid.altSelection:
-				if (cell.id == index) || !grid.get_child(index).room.empty():
+			for cell in grid.multiRooms:
+				if (cell.id == index) || (grid.get_child(index).room.type != Enums.RoomType.DUMMY):
 					value += DefaultValues.BitmaskDirections[direction]
 					break
 		
@@ -140,7 +143,7 @@ func _on_btnBitmask_pressed():
 			room.orientation = DefaultValues.BimaskTileset[value].orientation
 			room.model = DefaultValues.BimaskTileset[value].model
 			
-			if grid.get_child(room.id).room.empty():
+			if grid.get_child(room.id).room.type == Enums.RoomType.DUMMY:
 				grid.get_child(room.id).room = room
 			else:
 				grid.get_child(room.id).room.type = DefaultValues.BimaskTileset[value].type
@@ -152,6 +155,6 @@ func _on_btnBitmask_pressed():
 
 
 func _on_btnDelete_pressed():
-	for item in grid.altSelection:
-		grid.get_child(item.id).room = {}
+	for item in grid.multiRooms:
+		grid.get_child(item.id).room = DefaultValues.roomBase
 

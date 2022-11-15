@@ -5,20 +5,6 @@ var player : Character
 
 func _init():
 	OS.low_processor_usage_mode = true
-	
-#	Persistence.saveDTO(CharacterDTO.new())
-#	Persistence.saveDTO(VerdictDTO.new())
-#	Persistence.saveDTO(InventoryDTO.new())
-#	Persistence.saveDTO(ItemDTO.new())
-#	Persistence.saveDTO(WeaponDTO.new())
-#	Persistence.saveDTO(ArmorDTO.new())
-#	Persistence.saveDTO(MoveDTO.new())
-#	Persistence.saveDTO(LocationDTO.new())
-#
-#	var enemy = CharacterDTO.new()
-#	enemy.type = Enums.CharacterType.FOE
-#	Persistence.saveDTO(enemy)
-	
 	player = Character.new().fromShortName('BSECHA')
 
 
@@ -35,7 +21,6 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
-	# TODO save/load
 	GameManager.player = player
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 

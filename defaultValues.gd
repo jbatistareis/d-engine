@@ -25,7 +25,7 @@ var roomBase : Dictionary = {
 	'y': 0,
 	'type': Enums.RoomType.DUMMY, # use  Enums.RoomType
 	'orientation': Enums.Direction.NORTH , # use Enums.Direction
-	'model': '4_exits',
+	'model': '0_exits',
 	'exits': [-1, -1, -1, -1, -1, -1],
 	'canEnterLogic': ROOM_ENTER_NOOP,
 	'enteringLogic': ROOM_NOOP,

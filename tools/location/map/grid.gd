@@ -1,24 +1,13 @@
 extends GridContainer
 
-signal selectedRoom(room)
-signal selectedMultiRoom(rooms)
-signal altSelectionActive()
-
 var cellScene : PackedScene = preload("res://tools/location/map/cell.tscn")
 var totalRooms : int
 
 var multiRooms : Array = []
 
-var checkSelection : bool = false
 var mousePressed : bool
 var mouseDragged : bool
-var selection : Dictionary = { 'start': Vector2.ZERO, 'end': Vector2.ZERO }
 
-var altSelectionMode : bool = false
-var altSelection : Array = []
-
-onready var btnAutotile : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile")
-onready var btnDelete : Button = get_node("../../../../parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnDelete")
 onready var scroll : ScrollContainer = get_node("../..")
 onready var selectionArea : Area2D = get_node("../selectionArea")
 
@@ -31,14 +20,16 @@ func _ready() -> void:
 		cell.id = i
 		cell.x = i % columns
 		cell.y = i / columns
+		cell.room = DefaultValues.roomBase
 		
 		add_child(cell)
+	
+	EditorSignals.connect("mapSelectedRoom", self, "clearMultiSelection")
 
 
 func _input(event) -> void:
 	if event is InputEventMouseButton:
-		mousePressed = event.pressed
-		altSelectionMode = mousePressed && (event.button_index == 2)
+		mousePressed = event.pressed && (event.button_index == 2)
 		
 		if !mousePressed && mouseDragged:
 			mouseDragged = false
@@ -49,23 +40,21 @@ func _input(event) -> void:
 		selectionArea.global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
 		
 		if !multiRooms.empty():
-			emit_signal("selectedMultiRoom", multiRooms)
+			EditorSignals.emit_signal("mapSelectedMultiRooms", multiRooms)
 
 
-func clearAltSelection() -> void:
-	for item in altSelection:
-		get_child(item.id).select(false, false)
+func clearMultiSelection(ignore) -> void:
+	for item in multiRooms:
+		get_child(item.id).select(false)
 	
-	altSelection.clear()
-	btnAutotile.disabled = true
-	btnDelete.disabled = true
+	multiRooms.clear()
 
 
 func collectRooms() -> Array:
 	var rooms = []
 	
 	for cell in get_children():
-		if !cell.room.empty():
+		if cell.room.type != Enums.RoomType.DUMMY:
 			connectRoom(cell.room)
 			
 			for idx in range(cell.room.foeShortNameGroups.size()):
@@ -78,19 +67,12 @@ func collectRooms() -> Array:
 
 
 func loadRooms(rooms : Array) -> void:
-	for cell in get_children():
-#		cell.room = {}
-		pass
-	
 	for room in rooms:
 		get_child(room.id).room = room
 
 
 func connectRoom(room : Dictionary) -> void:
 	match room.type:
-		Enums.RoomType._1_EXIT:
-			setConnections(room, [room.orientation])
-		
 		Enums.RoomType._2_EXITS_I:
 			if (room.orientation == Enums.Direction.NORTH) || (room.orientation == Enums.Direction.SOUTH):
 				setConnections(room, [Enums.Direction.NORTH, Enums.Direction.SOUTH])
@@ -129,8 +111,13 @@ func connectRoom(room : Dictionary) -> void:
 		Enums.RoomType._4_EXITS:
 			setConnections(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
 		
-		_: # _0_EXITS
+		Enums.RoomType._1_EXIT:
+			setConnections(room, [room.orientation])
+		
+		Enums.RoomType._0_EXIT:
 			setConnections(room, [])
+		_: # DUMMY
+			return
 
 
 func setConnections(room : Dictionary, directions : Array) -> void:
@@ -160,30 +147,15 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 
 
 func _on_selectionArea_body_entered(body):
-	if !altSelectionMode:
-		if mouseDragged && ("room" in body.get_parent()) && !body.get_parent().room.empty():
-			for room in multiRooms:
-				if room.id == body.get_parent().room.id:
-					return
+	if mousePressed || mouseDragged:
+		if "room" in body.get_parent():
+			body.get_parent().toggleSelect()
 			
-			multiRooms.append(body.get_parent().room)
-	else:
-		multiRooms.clear()
-		emit_signal("altSelectionActive")
-		
-		body.get_parent().select(true, true)
-		altSelection.append({ 
-			'id': body.get_parent().id,
-			'x': body.get_parent().x,
-			'y': body.get_parent().y
-		})
-		
-		btnAutotile.disabled = false
-		btnDelete.disabled = false
+			if multiRooms.has(body.get_parent().room):
+				multiRooms.erase(body.get_parent().room)
+			else:
+				multiRooms.append(body.get_parent().room)
+			
+			if !multiRooms.empty():
+				EditorSignals.emit_signal("mapSelectedMultiRooms", multiRooms)
 
-
-
-func _on_grid_selectedRoom(room):
-	altSelectionMode = false
-	multiRooms = [room]
-	emit_signal("selectedMultiRoom", multiRooms)
