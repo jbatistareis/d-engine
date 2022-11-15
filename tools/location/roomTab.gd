@@ -111,7 +111,7 @@ func _on_btnSave_pressed():
 
 func _on_btnBitmask_pressed():
 	for item in grid.multiRooms:
-		var room = DefaultValues.roomBase
+		var room = DefaultValues.roomBase.duplicate(true)
 		room.id = item.id
 		room.x = item.x
 		room.y = item.y
