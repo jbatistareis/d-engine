@@ -20,7 +20,7 @@ func _ready() -> void:
 		cell.id = i
 		cell.x = i % columns
 		cell.y = i / columns
-		cell.room = {}
+		cell.room = DefaultValues.roomBase
 		
 		add_child(cell)
 	
@@ -54,7 +54,7 @@ func collectRooms() -> Array:
 	var rooms = []
 	
 	for cell in get_children():
-		if !cell.room.empty():
+		if cell.room.type != Enums.RoomType.DUMMY:
 			connectRoom(cell.room)
 			
 			for idx in range(cell.room.foeShortNameGroups.size()):
@@ -73,9 +73,6 @@ func loadRooms(rooms : Array) -> void:
 
 func connectRoom(room : Dictionary) -> void:
 	match room.type:
-		Enums.RoomType._1_EXIT:
-			setConnections(room, [room.orientation])
-		
 		Enums.RoomType._2_EXITS_I:
 			if (room.orientation == Enums.Direction.NORTH) || (room.orientation == Enums.Direction.SOUTH):
 				setConnections(room, [Enums.Direction.NORTH, Enums.Direction.SOUTH])
@@ -114,8 +111,13 @@ func connectRoom(room : Dictionary) -> void:
 		Enums.RoomType._4_EXITS:
 			setConnections(room, [Enums.Direction.NORTH, Enums.Direction.EAST, Enums.Direction.SOUTH, Enums.Direction.WEST])
 		
-		_: # _0_EXITS
+		Enums.RoomType._1_EXIT:
+			setConnections(room, [room.orientation])
+		
+		Enums.RoomType._0_EXIT:
 			setConnections(room, [])
+		_: # DUMMY
+			return
 
 
 func setConnections(room : Dictionary, directions : Array) -> void:
@@ -145,7 +147,7 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 
 
 func _on_selectionArea_body_entered(body):
-	if mousePressed && mouseDragged:
+	if mousePressed || mouseDragged:
 		if "room" in body.get_parent():
 			body.get_parent().toggleSelect()
 			
