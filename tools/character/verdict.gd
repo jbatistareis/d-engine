@@ -11,9 +11,12 @@ func loadData(verdictDto : VerdictDTO) -> void:
 	for child in $scroll/container.get_children():
 		child.queue_free()
 	
+	var index = 1
 	for action in verdictDto.actions:
 		var card = actionPkdScn.instance()
 		card.action = action
+		card.index = index
+		index =+ 1
 		
 		$scroll/container.add_child(card)
 
