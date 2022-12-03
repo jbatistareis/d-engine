@@ -9,6 +9,9 @@ func _ready() -> void:
 
 
 func focus() -> void:
+	if Signals.is_connected("guiBack", self, "focus"):
+		Signals.disconnect("guiBack", self, "focus")
+	
 	$menuContainer/menu.modulate = $menuContainer/menu.modulate.lightened(1)
 	$menuContainer/menu.grab_focus()
 
@@ -58,9 +61,12 @@ func _on_PopupMenu_id_pressed(id : int) -> void:
 		2:
 			$inventory.showWindow(GameManager.player)
 		3:
-			pass
+			$equipment.showWindow(GameManager.player)
 		4:
 			pass
 		_:
 			Signals.emit_signal("guiCloseExploringMenu")
+	
+	if !Signals.is_connected("guiBack", self, "focus"):
+		Signals.connect("guiBack", self, "focus")
 

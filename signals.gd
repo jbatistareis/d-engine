@@ -90,6 +90,7 @@ signal guiLeft()
 signal guiRight()
 signal guiConfirm()
 signal guiCancel()
+signal guiBack()
 signal guiOpenExploringMenu()
 signal guiCloseExploringMenu()
 

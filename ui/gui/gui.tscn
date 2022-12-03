@@ -109,6 +109,50 @@ size_flags_vertical = 0
 theme = ExtResource( 2 )
 popup_exclusive = true
 
+[node name="equipment" type="MarginContainer" parent="exploration"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -315.0
+margin_top = -240.0
+margin_right = 325.0
+margin_bottom = 240.0
+rect_min_size = Vector2( 640, 480 )
+theme = ExtResource( 2 )
+script = ExtResource( 8 )
+
+[node name="Panel" type="Panel" parent="exploration/equipment"]
+margin_right = 640.0
+margin_bottom = 480.0
+
+[node name="itemList" type="ItemList" parent="exploration/equipment"]
+margin_right = 640.0
+margin_bottom = 480.0
+theme = ExtResource( 2 )
+max_text_lines = 2
+max_columns = 4
+same_column_width = true
+fixed_column_width = 146
+icon_mode = 0
+
+[node name="itemMenu" type="PopupMenu" parent="exploration/equipment"]
+margin_right = 60.0
+margin_bottom = 78.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+popup_exclusive = true
+items = [ "Use  >", null, 0, false, false, 0, 0, null, "", false, "Drop ", null, 0, false, false, 1, 0, null, "", false, "< Back", null, 0, false, false, 2, 0, null, "", false ]
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+
+[node name="partyMenu" type="PopupMenu" parent="exploration/equipment"]
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+popup_exclusive = true
+
 [node name="battle" type="Control" parent="."]
 visible = false
 anchor_right = 1.0
@@ -340,4 +384,7 @@ margin_bottom = 22.0
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
 [connection signal="id_pressed" from="exploration/inventory/partyMenu" to="exploration/inventory" method="_on_partyMenu_id_pressed"]
+[connection signal="item_activated" from="exploration/equipment/itemList" to="exploration/equipment" method="_on_itemList_item_activated"]
+[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/equipment" method="_on_itemMenu_id_pressed"]
+[connection signal="id_pressed" from="exploration/equipment/partyMenu" to="exploration/equipment" method="_on_partyMenu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]

@@ -75,7 +75,7 @@ func exit() -> void:
 		visible = false
 		$itemMenu.hide()
 		$partyMenu.hide()
-		get_parent().call_deferred("focus")
+		Signals.emit_signal("guiBack")
 
 
 func _on_itemList_item_activated(index : int) -> void:
