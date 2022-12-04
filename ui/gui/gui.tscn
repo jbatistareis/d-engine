@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
@@ -8,14 +8,15 @@
 [ext_resource path="res://assets/theme/default/styleBoxFlat_darkslategray_shadow.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/gui/battle/inventory.gd" type="Script" id=7]
 [ext_resource path="res://ui/gui/inventory.gd" type="Script" id=8]
+[ext_resource path="res://ui/gui/equipment.gd" type="Script" id=9]
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus_neighbour_top = NodePath("exploration/menuContainer/menu/box/btnClose")
-focus_neighbour_bottom = NodePath("exploration/menuContainer/menu/box/btnMap")
-focus_next = NodePath("exploration/menuContainer/menu/box/btnMap")
-focus_previous = NodePath("exploration/menuContainer/menu/box/btnClose")
+focus_neighbour_top = NodePath("exploration/menu/box/btnClose")
+focus_neighbour_bottom = NodePath("exploration/menu/box/btnMap")
+focus_next = NodePath("exploration/menu/box/btnMap")
+focus_previous = NodePath("exploration/menu/box/btnClose")
 
 [node name="main" type="CenterContainer" parent="."]
 visible = false
@@ -37,26 +38,19 @@ size_flags_vertical = 3
 custom_constants/separation = 10
 script = ExtResource( 3 )
 
-[node name="menuContainer" type="HBoxContainer" parent="exploration"]
-margin_right = 302.0
-margin_bottom = 168.0
-rect_min_size = Vector2( 300, 0 )
-size_flags_vertical = 0
-custom_constants/separation = 10
-
-[node name="stats" type="MarginContainer" parent="exploration/menuContainer"]
+[node name="stats" type="MarginContainer" parent="exploration"]
 margin_right = 210.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 210, 0 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Panel" type="Panel" parent="exploration/menuContainer/stats"]
+[node name="Panel" type="Panel" parent="exploration/stats"]
 margin_right = 210.0
 margin_bottom = 23.0
 theme = ExtResource( 2 )
 
-[node name="lblStats" type="RichTextLabel" parent="exploration/menuContainer/stats"]
+[node name="lblStats" type="RichTextLabel" parent="exploration/stats"]
 margin_right = 210.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 192, 0 )
@@ -64,31 +58,31 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 fit_content_height = true
 
-[node name="menu" type="MarginContainer" parent="exploration/menuContainer"]
+[node name="menu" type="MarginContainer" parent="exploration"]
 margin_left = 220.0
 margin_right = 302.0
 margin_bottom = 168.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[node name="Panel" type="Panel" parent="exploration/menuContainer/menu"]
+[node name="Panel" type="Panel" parent="exploration/menu"]
 margin_right = 82.0
 margin_bottom = 168.0
 theme = ExtResource( 2 )
 
-[node name="box" type="VBoxContainer" parent="exploration/menuContainer/menu"]
+[node name="box" type="VBoxContainer" parent="exploration/menu"]
 margin_right = 82.0
 margin_bottom = 168.0
 custom_constants/separation = 0
 
-[node name="btnAction" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnAction" type="Button" parent="exploration/menu/box"]
 margin_right = 82.0
 margin_bottom = 28.0
 theme = ExtResource( 2 )
 text = "Action "
 flat = true
 
-[node name="btnMap" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnMap" type="Button" parent="exploration/menu/box"]
 margin_top = 28.0
 margin_right = 82.0
 margin_bottom = 56.0
@@ -100,7 +94,7 @@ theme = ExtResource( 2 )
 text = "Map   >"
 flat = true
 
-[node name="btnItems" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnItems" type="Button" parent="exploration/menu/box"]
 margin_top = 56.0
 margin_right = 82.0
 margin_bottom = 84.0
@@ -112,7 +106,7 @@ theme = ExtResource( 2 )
 text = "Items >"
 flat = true
 
-[node name="btnEquip" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnEquip" type="Button" parent="exploration/menu/box"]
 margin_top = 84.0
 margin_right = 82.0
 margin_bottom = 112.0
@@ -124,7 +118,7 @@ theme = ExtResource( 2 )
 text = "Equip >"
 flat = true
 
-[node name="btnMoves" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnMoves" type="Button" parent="exploration/menu/box"]
 margin_top = 112.0
 margin_right = 82.0
 margin_bottom = 140.0
@@ -136,7 +130,7 @@ theme = ExtResource( 2 )
 text = "Moves >"
 flat = true
 
-[node name="btnClose" type="Button" parent="exploration/menuContainer/menu/box"]
+[node name="btnClose" type="Button" parent="exploration/menu/box"]
 margin_top = 140.0
 margin_right = 82.0
 margin_bottom = 168.0
@@ -198,7 +192,7 @@ rect_min_size = Vector2( 640, 480 )
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme = ExtResource( 2 )
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 
 [node name="Panel" type="Panel" parent="exploration/equipment"]
 margin_right = 640.0
@@ -456,12 +450,12 @@ custom_styles/panel = ExtResource( 6 )
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0
 
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnAction" to="exploration" method="_on_btnAction_pressed"]
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnEquip" to="exploration" method="_on_btnEquip_pressed"]
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnMoves" to="exploration" method="_on_btnMoves_pressed"]
-[connection signal="pressed" from="exploration/menuContainer/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnAction" to="exploration" method="_on_btnAction_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnEquip" to="exploration" method="_on_btnEquip_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnMoves" to="exploration" method="_on_btnMoves_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
 [connection signal="id_pressed" from="exploration/inventory/partyMenu" to="exploration/inventory" method="_on_partyMenu_id_pressed"]

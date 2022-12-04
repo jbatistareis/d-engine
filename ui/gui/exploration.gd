@@ -14,20 +14,19 @@ func focus() -> void:
 	if Signals.is_connected("guiBack", self, "focus"):
 		Signals.disconnect("guiBack", self, "focus")
 	
-	for btn in $menuContainer/menu/box.get_children():
+	for btn in $menu/box.get_children():
 		btn.disabled = false
 		btn.focus_mode = Control.FOCUS_ALL
 		btn.mouse_filter = Control.MOUSE_FILTER_STOP
 	
-	$menuContainer/menu.modulate = $menuContainer/menu.modulate.lightened(1)
-	$menuContainer/menu/box.get_child(lastBtnIdx).grab_focus()
+	$menu/box.get_child(lastBtnIdx).grab_focus()
 
 
 func show() -> void:
 	visible = true
 	focus()
 	
-	$menuContainer/stats/lblStats.bbcode_text = _STATUS_TEXT % [
+	$stats/lblStats.bbcode_text = _STATUS_TEXT % [
 			GameManager.player.name,
 			GameManager.player.currentHp,
 			GameManager.player.maxHp,
@@ -42,7 +41,7 @@ func show() -> void:
 			GameManager.player.wisdom.score,
 			GameManager.player.charisma.score
 		]
-	$menuContainer/stats/lblStats.bbcode_enabled = true
+	$stats/lblStats.bbcode_enabled = true
 
 
 func hide() -> void:
@@ -54,10 +53,10 @@ func hide() -> void:
 func buttonPressed(id : int) -> void:
 	lastBtnIdx = id
 	
-	for idx in range($menuContainer/menu/box.get_child_count()):
-		$menuContainer/menu/box.get_child(idx).disabled = (idx != id)
-		$menuContainer/menu/box.get_child(idx).focus_mode = Control.FOCUS_NONE
-		$menuContainer/menu/box.get_child(idx).mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for idx in range($menu/box.get_child_count()):
+		$menu/box.get_child(idx).disabled = (idx != id)
+		$menu/box.get_child(idx).focus_mode = Control.FOCUS_NONE
+		$menu/box.get_child(idx).mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	match id:
 		0:
@@ -65,8 +64,10 @@ func buttonPressed(id : int) -> void:
 		1:
 			pass
 		2:
+			# TODO show party
 			$inventory.showWindow(GameManager.player)
 		3:
+			# TODO show party
 			$equipment.showWindow(GameManager.player)
 		4:
 			pass
