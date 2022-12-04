@@ -12,32 +12,43 @@
 [node name="gui" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+focus_neighbour_top = NodePath("exploration/menuContainer/menu/box/btnClose")
+focus_neighbour_bottom = NodePath("exploration/menuContainer/menu/box/btnMap")
+focus_next = NodePath("exploration/menuContainer/menu/box/btnMap")
+focus_previous = NodePath("exploration/menuContainer/menu/box/btnClose")
 
 [node name="main" type="CenterContainer" parent="."]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="exploration" type="Control" parent="."]
+[node name="exploration" type="HBoxContainer" parent="."]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -475.0
+margin_top = -240.0
+margin_right = 475.0
+margin_bottom = 240.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
 script = ExtResource( 3 )
 
 [node name="menuContainer" type="HBoxContainer" parent="exploration"]
-anchor_left = 0.05
-anchor_top = 0.5
-anchor_right = 0.05
-anchor_bottom = 0.5
-margin_top = -84.0
-margin_right = 312.0
-margin_bottom = 84.0
-custom_constants/separation = 20
+margin_right = 302.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_vertical = 0
+custom_constants/separation = 10
 
 [node name="stats" type="MarginContainer" parent="exploration/menuContainer"]
 margin_right = 210.0
 margin_bottom = 23.0
 rect_min_size = Vector2( 210, 0 )
+size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="exploration/menuContainer/stats"]
@@ -53,29 +64,98 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 fit_content_height = true
 
-[node name="menu" type="PopupMenu" parent="exploration/menuContainer"]
-margin_left = 230.0
-margin_right = 300.0
-margin_bottom = 156.0
+[node name="menu" type="MarginContainer" parent="exploration/menuContainer"]
+margin_left = 220.0
+margin_right = 302.0
+margin_bottom = 168.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
+
+[node name="Panel" type="Panel" parent="exploration/menuContainer/menu"]
+margin_right = 82.0
+margin_bottom = 168.0
 theme = ExtResource( 2 )
-popup_exclusive = true
-items = [ "Action", null, 0, false, false, 0, 0, null, "", false, "Map   >", null, 0, false, false, 1, 0, null, "", false, "Items >", null, 0, false, false, 2, 0, null, "", false, "Equip >", null, 0, false, false, 3, 0, null, "", false, "Moves >", null, 0, false, false, 4, 0, null, "", false, "< Close", null, 0, false, false, 5, 0, null, "", false ]
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
+
+[node name="box" type="VBoxContainer" parent="exploration/menuContainer/menu"]
+margin_right = 82.0
+margin_bottom = 168.0
+custom_constants/separation = 0
+
+[node name="btnAction" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_right = 82.0
+margin_bottom = 28.0
+theme = ExtResource( 2 )
+text = "Action "
+flat = true
+
+[node name="btnMap" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_top = 28.0
+margin_right = 82.0
+margin_bottom = 56.0
+focus_neighbour_top = NodePath("../btnAction")
+focus_neighbour_bottom = NodePath("../btnItems")
+focus_next = NodePath("../btnItems")
+focus_previous = NodePath("../btnAction")
+theme = ExtResource( 2 )
+text = "Map   >"
+flat = true
+
+[node name="btnItems" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_top = 56.0
+margin_right = 82.0
+margin_bottom = 84.0
+focus_neighbour_top = NodePath("../btnMap")
+focus_neighbour_bottom = NodePath("../btnEquip")
+focus_next = NodePath("../btnEquip")
+focus_previous = NodePath("../btnMap")
+theme = ExtResource( 2 )
+text = "Items >"
+flat = true
+
+[node name="btnEquip" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_top = 84.0
+margin_right = 82.0
+margin_bottom = 112.0
+focus_neighbour_top = NodePath("../btnItems")
+focus_neighbour_bottom = NodePath("../btnMoves")
+focus_next = NodePath("../btnMoves")
+focus_previous = NodePath("../btnItems")
+theme = ExtResource( 2 )
+text = "Equip >"
+flat = true
+
+[node name="btnMoves" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_top = 112.0
+margin_right = 82.0
+margin_bottom = 140.0
+focus_neighbour_top = NodePath("../btnEquip")
+focus_neighbour_bottom = NodePath("../btnClose")
+focus_next = NodePath("../btnClose")
+focus_previous = NodePath("../btnEquip")
+theme = ExtResource( 2 )
+text = "Moves >"
+flat = true
+
+[node name="btnClose" type="Button" parent="exploration/menuContainer/menu/box"]
+margin_top = 140.0
+margin_right = 82.0
+margin_bottom = 168.0
+focus_neighbour_top = NodePath("../btnMoves")
+focus_neighbour_bottom = NodePath("../btnAction")
+focus_next = NodePath("../btnAction")
+focus_previous = NodePath("../btnMoves")
+theme = ExtResource( 2 )
+text = "< Close"
+flat = true
 
 [node name="inventory" type="MarginContainer" parent="exploration"]
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -315.0
-margin_top = -240.0
-margin_right = 325.0
-margin_bottom = 240.0
+margin_left = 312.0
+margin_right = 952.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 script = ExtResource( 8 )
 
@@ -111,15 +191,12 @@ popup_exclusive = true
 
 [node name="equipment" type="MarginContainer" parent="exploration"]
 visible = false
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -315.0
-margin_top = -240.0
-margin_right = 325.0
-margin_bottom = 240.0
+margin_left = 310.0
+margin_right = 950.0
+margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource( 2 )
 script = ExtResource( 8 )
 
@@ -379,8 +456,12 @@ custom_styles/panel = ExtResource( 6 )
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0
 
-[connection signal="about_to_show" from="exploration/menuContainer/menu" to="exploration" method="_on_menu_about_to_show"]
-[connection signal="id_pressed" from="exploration/menuContainer/menu" to="exploration" method="_on_PopupMenu_id_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnAction" to="exploration" method="_on_btnAction_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnEquip" to="exploration" method="_on_btnEquip_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnMoves" to="exploration" method="_on_btnMoves_pressed"]
+[connection signal="pressed" from="exploration/menuContainer/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
 [connection signal="id_pressed" from="exploration/inventory/partyMenu" to="exploration/inventory" method="_on_partyMenu_id_pressed"]

@@ -2,6 +2,8 @@ extends Control
 
 const _STATUS_TEXT : String = '[center][\t%s\t][/center]\n[table=3][cell]HP[/cell][cell]\t[/cell][cell]%d/%d[/cell][cell]LV[/cell][cell]\t[/cell][cell]%d[/cell][cell]Pts.[/cell][cell]\t[/cell][cell]%d[/cell][cell]Next[/cell][cell]\t[/cell][cell]%d/%d[/cell][/table]\n[center]- - - - -[/center]\n[table=3][cell]Strength[/cell][cell]\t[/cell][cell]%d[/cell][cell]Dexterity[/cell][cell]\t[/cell][cell]%d[/cell][cell]Constitution[/cell][cell]\t[/cell][cell]%d[/cell][cell]Intelligence[/cell][cell]\t[/cell][cell]%d[/cell][cell]Wisdom[/cell][cell]\t[/cell][cell]%d[/cell][cell]Charisma[/cell][cell]\t[/cell][cell]%d[/cell][/table]'
 
+var lastBtnIdx : int = 0
+
 
 func _ready() -> void:
 	Signals.connect("guiOpenExploringMenu", self, "show")
@@ -12,14 +14,17 @@ func focus() -> void:
 	if Signals.is_connected("guiBack", self, "focus"):
 		Signals.disconnect("guiBack", self, "focus")
 	
+	for btn in $menuContainer/menu/box.get_children():
+		btn.disabled = false
+		btn.focus_mode = Control.FOCUS_ALL
+		btn.mouse_filter = Control.MOUSE_FILTER_STOP
+	
 	$menuContainer/menu.modulate = $menuContainer/menu.modulate.lightened(1)
-	$menuContainer/menu.grab_focus()
+	$menuContainer/menu/box.get_child(lastBtnIdx).grab_focus()
 
 
 func show() -> void:
 	visible = true
-	$menuContainer/menu.rect_position = $menuContainer/stats.rect_global_position + Vector2($menuContainer/stats.rect_size.x + 10, 0)
-	$menuContainer/menu.popup()
 	focus()
 	
 	$menuContainer/stats/lblStats.bbcode_text = _STATUS_TEXT % [
@@ -40,18 +45,19 @@ func show() -> void:
 	$menuContainer/stats/lblStats.bbcode_enabled = true
 
 
-func _on_menu_about_to_show() -> void:
-	$menuContainer/menu.set_current_index(0)
-
-
 func hide() -> void:
-	$menuContainer/menu.hide()
 	visible = false
+	lastBtnIdx = 0
 
 
 # buttons
-func _on_PopupMenu_id_pressed(id : int) -> void:
-	$menuContainer/menu.modulate = $menuContainer/menu.modulate.darkened(0.25)
+func buttonPressed(id : int) -> void:
+	lastBtnIdx = id
+	
+	for idx in range($menuContainer/menu/box.get_child_count()):
+		$menuContainer/menu/box.get_child(idx).disabled = (idx != id)
+		$menuContainer/menu/box.get_child(idx).focus_mode = Control.FOCUS_NONE
+		$menuContainer/menu/box.get_child(idx).mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	match id:
 		0:
@@ -69,4 +75,28 @@ func _on_PopupMenu_id_pressed(id : int) -> void:
 	
 	if !Signals.is_connected("guiBack", self, "focus"):
 		Signals.connect("guiBack", self, "focus")
+
+
+func _on_btnAction_pressed() -> void:
+	buttonPressed(0)
+
+
+func _on_btnMap_pressed() -> void:
+	buttonPressed(1)
+
+
+func _on_btnItems_pressed() -> void:
+	buttonPressed(2)
+
+
+func _on_btnEquip_pressed() -> void:
+	buttonPressed(3)
+
+
+func _on_btnMoves_pressed() -> void:
+	buttonPressed(4)
+
+
+func _on_btnClose_pressed() -> void:
+	buttonPressed(5)
 

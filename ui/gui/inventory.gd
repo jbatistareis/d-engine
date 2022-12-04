@@ -68,14 +68,13 @@ func back() -> void:
 		$itemMenu.hide()
 	elif !$itemMenu.visible && !$partyMenu.visible:
 		exit()
+		Signals.emit_signal("guiBack")
 
 
 func exit() -> void:
-	if visible:
-		visible = false
-		$itemMenu.hide()
-		$partyMenu.hide()
-		Signals.emit_signal("guiBack")
+	visible = false
+	$itemMenu.hide()
+	$partyMenu.hide()
 
 
 func _on_itemList_item_activated(index : int) -> void:
