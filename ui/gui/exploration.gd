@@ -68,7 +68,7 @@ func buttonPressed(id : int) -> void:
 			$inventory.showWindow(GameManager.player)
 		3:
 			# TODO show party
-			$equipment.showWindow(GameManager.player)
+			$equipment.showWindow()
 		4:
 			pass
 		_:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ui/gui/battle/inventory.gd" type="Script" id=7]
 [ext_resource path="res://ui/gui/inventory.gd" type="Script" id=8]
 [ext_resource path="res://ui/gui/equipment.gd" type="Script" id=9]
+[ext_resource path="res://ui/gui/partyMenu.gd" type="Script" id=10]
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
@@ -37,6 +38,15 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 script = ExtResource( 3 )
+
+[node name="partyMenu" type="PopupMenu" parent="exploration"]
+margin_left = 312.0
+margin_right = 312.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource( 2 )
+popup_exclusive = true
+script = ExtResource( 10 )
 
 [node name="stats" type="MarginContainer" parent="exploration"]
 margin_right = 210.0
@@ -177,16 +187,10 @@ items = [ "Use  >", null, 0, false, false, 0, 0, null, "", false, "Drop ", null,
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 
-[node name="partyMenu" type="PopupMenu" parent="exploration/inventory"]
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 2 )
-popup_exclusive = true
-
 [node name="equipment" type="MarginContainer" parent="exploration"]
 visible = false
-margin_left = 310.0
-margin_right = 950.0
+margin_left = 312.0
+margin_right = 952.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
 size_flags_horizontal = 0
@@ -214,15 +218,9 @@ margin_bottom = 78.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 popup_exclusive = true
-items = [ "Use  >", null, 0, false, false, 0, 0, null, "", false, "Drop ", null, 0, false, false, 1, 0, null, "", false, "< Back", null, 0, false, false, 2, 0, null, "", false ]
+items = [ "Equip >", null, 0, false, false, 0, 0, null, "", false, "Drop", null, 0, false, false, 1, 0, null, "", false, "<  Back", null, 0, false, false, 2, 0, null, "", false ]
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
-
-[node name="partyMenu" type="PopupMenu" parent="exploration/equipment"]
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 2 )
-popup_exclusive = true
 
 [node name="battle" type="Control" parent="."]
 visible = false
@@ -450,6 +448,8 @@ custom_styles/panel = ExtResource( 6 )
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0
 
+[connection signal="hide" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_hide"]
+[connection signal="id_pressed" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_id_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnAction" to="exploration" method="_on_btnAction_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
@@ -458,8 +458,6 @@ margin_bottom = 22.0
 [connection signal="pressed" from="exploration/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
-[connection signal="id_pressed" from="exploration/inventory/partyMenu" to="exploration/inventory" method="_on_partyMenu_id_pressed"]
 [connection signal="item_activated" from="exploration/equipment/itemList" to="exploration/equipment" method="_on_itemList_item_activated"]
-[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/equipment" method="_on_itemMenu_id_pressed"]
-[connection signal="id_pressed" from="exploration/equipment/partyMenu" to="exploration/equipment" method="_on_partyMenu_id_pressed"]
+[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]

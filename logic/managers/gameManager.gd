@@ -3,6 +3,7 @@ extends Node
 onready var currentState : State = getState(Enums.States.EXPLORING)
 
 var player : Character
+var party : Array = [] setget ,getParty
 
 # control vars
 var testing : bool = false
@@ -13,6 +14,11 @@ var direction : int setget setDirection
 func _ready() -> void :
 	Signals.connect("playerLoaded", self, "loadData")
 	Signals.connect("battleStarted", self, "startBattleState")
+
+
+# TODO proper party
+func getParty() -> Array:
+	return [player]
 
 
 # TODO define a save format, load data, transitions, etc...
@@ -26,7 +32,6 @@ func loadData(saveSlotName : String) -> void:
 # TODO define a save format, gather data
 func saveData(saveSlotName : String) -> void:
 	var saveDto = SaveDTO.new()
-	
 	saveDto.shortName = saveSlotName
 	
 	Persistence.saveDTO(saveDto)
