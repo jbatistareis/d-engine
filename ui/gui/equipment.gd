@@ -19,20 +19,19 @@ func partyPick(id: int) -> void:
 	self.id = id
 	self.character = GameManager.party[id]
 	
-	$itemList.modulate = $itemList.modulate.lightened(1)
+	$main/itemList.visible = !character.inventory.weapons.empty()
+	$main/lblNoWeap.visible = character.inventory.weapons.empty()
+	
+	$main/itemList.modulate = $main/itemList.modulate.lightened(1)
 	$Panel.modulate = $Panel.modulate.lightened(1)
 	
 	var currentIndex = 0
-	if !$itemList.get_selected_items().empty():
-		currentIndex = $itemList.get_selected_items()[0]
+	if !$main/itemList.get_selected_items().empty():
+		currentIndex = $main/itemList.get_selected_items()[0]
 	
 	$itemMenu.hide()
 	Signals.emit_signal("guiHidePartyMenu")
-	$itemList.clear()
-	
-	if character.inventory.items.empty():
-		# TODO show message
-		print('Your inventory is empty')
+	$main/itemList.clear()
 	
 	inventorySummary = InventorySummary.new(character)
 	
@@ -47,20 +46,20 @@ func partyPick(id: int) -> void:
 		for i in range(14 - itemName.length()):
 			itemName += ' '
 		
-		$itemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
+		$main/itemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
 	
 	visible = true
 	
-	if currentIndex >= $itemList.get_item_count():
+	if currentIndex >= $main/itemList.get_item_count():
 		currentIndex -= 1
 	
 	itemFocus(currentIndex)
 
 
 func itemFocus(index : int) -> void:
-	$itemList.grab_focus()
-	if !$itemList.items.empty():
-		$itemList.select(index)
+	$main/itemList.grab_focus()
+	if !$main/itemList.items.empty():
+		$main/itemList.select(index)
 
 
 func back() -> void:
@@ -68,7 +67,7 @@ func back() -> void:
 		$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 		Signals.emit_signal("guiHidePartyMenu")
 	elif $itemMenu.visible && !$partyMenu.visible:
-		$itemList.modulate = $itemList.modulate.lightened(1)
+		$main/itemList.modulate = $main/itemList.modulate.lightened(1)
 		$Panel.modulate = $Panel.modulate.lightened(1)
 		$itemMenu.hide()
 	elif !$itemMenu.visible && !$"../partyMenu".visible:
@@ -89,12 +88,12 @@ func exit() -> void:
 
 
 func _on_itemList_item_activated(index : int) -> void:
-	$itemList.modulate = $itemList.modulate.darkened(0.25)
+	$main/itemList.modulate = $main/itemList.modulate.darkened(0.25)
 	$Panel.modulate = $Panel.modulate.darkened(0.25)
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $itemList.rect_global_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(126, 30)
+	var menuPosition = $main/itemList.rect_global_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(126, 30)
 	
 	$itemMenu.rect_position = menuPosition
 	$itemMenu.popup()
@@ -104,7 +103,7 @@ func _on_itemList_item_activated(index : int) -> void:
 
 # TODO party
 func _on_itemMenu_id_pressed(id : int) -> void:
-	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
+	var item = inventorySummary.summary[$main/itemList.get_selected_items()[0]].item
 	
 	match id:
 		0:
@@ -119,7 +118,7 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 			partyPick(id)
 		
 		_:
-			$itemList.modulate = $itemList.modulate.lightened(1)
+			$main/itemList.modulate = $main/itemList.modulate.lightened(1)
 			$Panel.modulate = $Panel.modulate.lightened(1)
 			$itemMenu.hide()
 

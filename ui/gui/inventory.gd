@@ -11,6 +11,9 @@ func showWindow(character : Character) -> void:
 	Signals.connect("guiCancel", self, "back")
 	Signals.connect("guiCloseExploringMenu", self, "exit")
 	
+	$itemList.visible = !character.inventory.items.empty()
+	$lblNoItems.visible = character.inventory.items.empty()
+	
 	$itemList.modulate = $itemList.modulate.lightened(1)
 	$Panel.modulate = $Panel.modulate.lightened(1)
 	
