@@ -3,10 +3,10 @@ class_name InventorySummary
 var summary : Array = []
 
 
-func _init(character : Character) -> void:
+func _init(items : Array) -> void:
 	var temp = []
 	
-	for item in character.inventory.items:
+	for item in items:
 		if !temp.has(item.shortName):
 			temp.append(item.shortName)
 	
@@ -14,7 +14,7 @@ func _init(character : Character) -> void:
 		var amount = 0
 		var currItem
 		
-		for item in character.inventory.items:
+		for item in items:
 			if itemShortName == item.shortName:
 				currItem = item
 				amount += 1

@@ -1,6 +1,6 @@
 extends MarginContainer
 
-const _AMOUNT_MASK : String = "[x%d]"
+const _AMOUNT_MASK : String = "x%d"
 
 var id : int
 var character : Character
@@ -33,20 +33,17 @@ func partyPick(id: int) -> void:
 	Signals.emit_signal("guiHidePartyMenu")
 	$main/itemList.clear()
 	
-	inventorySummary = InventorySummary.new(character)
+	inventorySummary = InventorySummary.new(character.inventory.weapons)
 	
 	for itemSummary in inventorySummary.summary:
-		var itemName = itemSummary.name.substr(0, 14)
+		var amountTxt = _AMOUNT_MASK % itemSummary.amount
+		var maxSize = 30 - (amountTxt.length() + 1)
+		var itemName = itemSummary.name.substr(0, maxSize)
 		
-		var prefix = ""
-		for i in range((14 - itemName.length()) / 2):
-			prefix += ' '
-		itemName = prefix + itemName
-		
-		for i in range(14 - itemName.length()):
+		for i in range(maxSize - itemName.length()):
 			itemName += ' '
 		
-		$main/itemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
+		$main/itemList.add_item(' ' + itemName + amountTxt)
 	
 	visible = true
 	
@@ -65,12 +62,11 @@ func itemFocus(index : int) -> void:
 func back() -> void:
 	if $itemMenu.visible && $partyMenu.visible:
 		$itemMenu.modulate = $itemMenu.modulate.lightened(1)
-		Signals.emit_signal("guiHidePartyMenu")
 	elif $itemMenu.visible && !$partyMenu.visible:
 		$main/itemList.modulate = $main/itemList.modulate.lightened(1)
 		$Panel.modulate = $Panel.modulate.lightened(1)
 		$itemMenu.hide()
-	elif !$itemMenu.visible && !$"../partyMenu".visible:
+	elif !$itemMenu.visible:
 		exit()
 		Signals.emit_signal("guiBack")
 
@@ -102,18 +98,19 @@ func _on_itemList_item_activated(index : int) -> void:
 
 
 # TODO party
-func _on_itemMenu_id_pressed(id : int) -> void:
+func _on_itemMenu_id_pressed(menuId : int) -> void:
 	var item = inventorySummary.summary[$main/itemList.get_selected_items()[0]].item
 	
-	match id:
+	match menuId:
 		0:
-			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
-			Signals.connect("guiPartyMenuPick", self, "partyPick")
-			Signals.emit_signal("guiPopupPartyMenu", $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0))
+			var inventoryIndex = character.inventory.weapons.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
+			character.inventory.equipWeapon(inventoryIndex)
+			$itemMenu.hide()
+			partyPick(id)
 		
 		1:
-			var inventoryIndex = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
-			character.inventory.removeItem(inventoryIndex)
+			var inventoryIndex = character.inventory.weapons.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
+			character.inventory.removeWeapon(inventoryIndex)
 			$itemMenu.hide()
 			partyPick(id)
 		

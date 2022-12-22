@@ -29,7 +29,7 @@ func showWindow(character : Character) -> void:
 		# TODO show message
 		print('Your inventory is empty')
 	
-	inventorySummary = InventorySummary.new(character)
+	inventorySummary = InventorySummary.new(character.inventory.items)
 	
 	for itemSummary in inventorySummary.summary:
 		var itemName = itemSummary.name.substr(0, 14)

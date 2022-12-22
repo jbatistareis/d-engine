@@ -13,7 +13,7 @@ func showMenu(position : Vector2) -> void:
 	clear()
 	
 	for character in GameManager.party:
-		add_item(character.name)
+		add_item(' ' + character.name + ' ')
 	
 	rect_position = position
 	popup()

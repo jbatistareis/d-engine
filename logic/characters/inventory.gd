@@ -79,9 +79,12 @@ func removeWeapon(index : int) -> Weapon:
 
 func equipWeapon(index : int) -> void:
 	if weapon != null:
-		weapons.append(weapon)
-	
-	weapon = removeWeapon(index)
+		var oldWeapon = weapon
+		var newWeapon = weapons[index]
+		
+		weapons.remove(index)
+		add(oldWeapon)
+		weapon = newWeapon
 
 
 func equipArmor(newArmor : Armor) -> void:

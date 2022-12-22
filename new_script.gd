@@ -21,6 +21,15 @@ func _ready() -> void:
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
+	# TEST
+	var weapon = Weapon.new().fromShortName("BSEWPN")
+	var weapon2 = Weapon.new().fromShortName("BSEWPN")
+	weapon.name = "Test Weapon"
+	weapon.shortName = "TSTWPN"
+	player.inventory.add(weapon)
+	player.inventory.add(weapon2)
+	player.inventory.add(Item.new().fromShortName("BSEITM"))
+	
 	GameManager.player = player
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 

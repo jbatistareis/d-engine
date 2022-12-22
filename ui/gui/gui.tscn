@@ -88,6 +88,8 @@ custom_constants/separation = 0
 [node name="btnAction" type="Button" parent="exploration/menu/box"]
 margin_right = 82.0
 margin_bottom = 28.0
+focus_neighbour_bottom = NodePath("../btnMap")
+focus_next = NodePath("../btnMap")
 theme = ExtResource( 2 )
 text = "Action "
 flat = true
@@ -145,8 +147,6 @@ margin_top = 140.0
 margin_right = 82.0
 margin_bottom = 168.0
 focus_neighbour_top = NodePath("../btnMoves")
-focus_neighbour_bottom = NodePath("../btnAction")
-focus_next = NodePath("../btnAction")
 focus_previous = NodePath("../btnMoves")
 theme = ExtResource( 2 )
 text = "< Close"
@@ -236,7 +236,7 @@ margin_bottom = 22.0
 [node name="lblCurrWeap" type="Label" parent="exploration/equipment/main/cards/current/label"]
 margin_right = 180.0
 margin_bottom = 22.0
-text = " ↳ Current weapon "
+text = " [ Current weapon ] "
 
 [node name="HSeparator" type="HSeparator" parent="exploration/equipment/main/cards/current/label"]
 margin_left = 184.0
@@ -265,7 +265,7 @@ margin_bottom = 22.0
 [node name="lblNewWeap" type="Label" parent="exploration/equipment/main/cards/new/label"]
 margin_right = 190.0
 margin_bottom = 22.0
-text = " ↳ Selected weapon "
+text = " [ Selected weapon ] "
 
 [node name="HSeparator" type="HSeparator" parent="exploration/equipment/main/cards/new/label"]
 margin_left = 194.0
@@ -280,6 +280,11 @@ margin_bottom = 238.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
+[node name="VSeparator" type="VSeparator" parent="exploration/equipment/main"]
+margin_right = 4.0
+margin_bottom = 40.0
+size_flags_vertical = 3
+
 [node name="itemList" type="ItemList" parent="exploration/equipment/main"]
 visible = false
 margin_left = 322.0
@@ -288,9 +293,6 @@ margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 2 )
-max_text_lines = 2
-same_column_width = true
-fixed_column_width = 146
 icon_mode = 0
 
 [node name="lblNoWeap" type="Label" parent="exploration/equipment/main"]
@@ -561,5 +563,5 @@ margin_bottom = 22.0
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
 [connection signal="item_activated" from="exploration/equipment/main/itemList" to="exploration/equipment" method="_on_itemList_item_activated"]
-[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
+[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/equipment" method="_on_itemMenu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]
