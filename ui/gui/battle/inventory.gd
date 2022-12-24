@@ -15,11 +15,10 @@ func showWindow(character : Character) -> void:
 	$ItemList.clear()
 	self.character = character
 	
-	if character.inventory.items.empty():
-		# TODO show message
-		print('Your inventory is empty')
+	$ItemList.visible = !character.inventory.items.empty()
+	$lblNoItems.visible = character.inventory.items.empty()
 	
-	inventorySummary = InventorySummary.new(character)
+	inventorySummary = InventorySummary.new(character.inventory.items)
 	
 	for itemSummary in inventorySummary.summary:
 		var itemName = itemSummary.name.substr(0, 14)

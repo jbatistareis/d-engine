@@ -6,13 +6,17 @@ var character : Character
 var inventorySummary : InventorySummary
 
 
-func _ready() -> void:
-	Signals.connect("guiCancel", self, "back")
-	Signals.connect("guiCloseExploringMenu", self, "exit")
-
-
 func showWindow(character : Character) -> void:
 	self.character = character
+	
+	if !Signals.is_connected("guiCancel", self, "back"):
+		Signals.connect("guiCancel", self, "back")
+	
+	if !Signals.is_connected("guiCloseExploringMenu", self, "exit"):
+		Signals.connect("guiCloseExploringMenu", self, "exit")
+	
+	$itemList.visible = !character.inventory.items.empty()
+	$lblNoItems.visible = character.inventory.items.empty()
 	
 	$itemList.modulate = $itemList.modulate.lightened(1)
 	$Panel.modulate = $Panel.modulate.lightened(1)
@@ -22,14 +26,10 @@ func showWindow(character : Character) -> void:
 		currentIndex = $itemList.get_selected_items()[0]
 	
 	$itemMenu.hide()
-	$partyMenu.hide()
+	Signals.emit_signal("guiHidePartyMenu")
 	$itemList.clear()
 	
-	if character.inventory.items.empty():
-		# TODO show message
-		print('Your inventory is empty')
-	
-	inventorySummary = InventorySummary.new(character)
+	inventorySummary = InventorySummary.new(character.inventory.items)
 	
 	for itemSummary in inventorySummary.summary:
 		var itemName = itemSummary.name.substr(0, 14)
@@ -59,23 +59,25 @@ func itemFocus(index : int) -> void:
 
 
 func back() -> void:
-	if $itemMenu.visible && $partyMenu.visible:
+	if $itemMenu.visible && $"../partyMenu".visible:
 		$itemMenu.modulate = $itemMenu.modulate.lightened(1)
-		$partyMenu.hide()
-	elif $itemMenu.visible && !$partyMenu.visible:
+		Signals.emit_signal("guiHidePartyMenu")
+	elif $itemMenu.visible && !$"../partyMenu".visible:
 		$itemList.modulate = $itemList.modulate.lightened(1)
 		$Panel.modulate = $Panel.modulate.lightened(1)
 		$itemMenu.hide()
-	elif !$itemMenu.visible && !$partyMenu.visible:
+	elif !$itemMenu.visible && !$"../partyMenu".visible:
 		exit()
+		Signals.emit_signal("guiBack")
 
 
 func exit() -> void:
-	if visible:
-		visible = false
-		$itemMenu.hide()
-		$partyMenu.hide()
-		get_parent().call_deferred("focus")
+	Signals.disconnect("guiCancel", self, "back")
+	Signals.disconnect("guiCloseExploringMenu", self, "exit")
+	
+	visible = false
+	$itemMenu.hide()
+	Signals.emit_signal("guiHidePartyMenu")
 
 
 func _on_itemList_item_activated(index : int) -> void:
@@ -84,7 +86,7 @@ func _on_itemList_item_activated(index : int) -> void:
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $itemList.rect_global_position + Vector2(index * 152, floor(index / 4) * 51) + Vector2(126, 30)
+	var menuPosition = $itemList.rect_global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
 	
 	$itemMenu.rect_position = menuPosition
 	$itemMenu.popup()
@@ -99,20 +101,12 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 	match id:
 		0:
 			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
-			$partyMenu.clear()
-			
-			for character in [GameManager.player]:
-				$partyMenu.add_item(character.name)
-			
-			$partyMenu.rect_position = $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0)
-			$partyMenu.popup()
-			$partyMenu.grab_focus()
-			$partyMenu.set_current_index(0)
+			Signals.connect("guiPartyMenuPick", self, "partyPick")
+			Signals.emit_signal("guiPopupPartyMenu", $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0))
 		
 		1:
 			var inventoryIndex = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
 			character.inventory.removeItem(inventoryIndex)
-			$itemMenu.hide()
 			showWindow(character)
 		
 		_:
@@ -121,11 +115,15 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 			$itemMenu.hide()
 
 
-func _on_partyMenu_id_pressed(id: int) -> void:
+func partyPick(id: int) -> void:
+	Signals.disconnect("guiPartyMenuPick", self, "partyPick")
+	
 	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
 	var index = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
 	var inventoryItem = character.inventory.removeItem(index)
 	showWindow(character)
 	
-	ScriptTool.getReference(inventoryItem.actionExpression).execute([character])
+	ScriptTool.getReference(inventoryItem.actionExpression).execute(
+		GameManager.party if (inventoryItem.targetType > Enums.MoveTargetType.FOE) else [GameManager.party[id]]
+	)
 
