@@ -1,6 +1,6 @@
 extends Control
 
-const _STATUS_TEXT : String = '[center][\t%s\t][/center]\n[table=3][cell]HP[/cell][cell]\t[/cell][cell]%d/%d[/cell][cell]LV[/cell][cell]\t[/cell][cell]%d[/cell][cell]Pts.[/cell][cell]\t[/cell][cell]%d[/cell][cell]Next[/cell][cell]\t[/cell][cell]%d/%d[/cell][/table]\n[center]- - - - -[/center]\n[table=3][cell]Strength[/cell][cell]\t[/cell][cell]%d[/cell][cell]Dexterity[/cell][cell]\t[/cell][cell]%d[/cell][cell]Constitution[/cell][cell]\t[/cell][cell]%d[/cell][cell]Intelligence[/cell][cell]\t[/cell][cell]%d[/cell][cell]Wisdom[/cell][cell]\t[/cell][cell]%d[/cell][cell]Charisma[/cell][cell]\t[/cell][cell]%d[/cell][/table]'
+const _STATUS_TEXT : String = '[center][\t%s\t][/center][table=3][cell]HP[/cell][cell]\t[/cell][cell]%d/%d[/cell][cell]LV[/cell][cell]\t[/cell][cell]%d[/cell][cell]Pts.[/cell][cell]\t[/cell][cell]%d[/cell][cell]Next[/cell][cell]\t[/cell][cell]%d/%d[/cell][/table][center]- - - - -[/center][table=3][cell]Strength[/cell][cell]\t[/cell][cell]%d[/cell][cell]Dexterity[/cell][cell]\t[/cell][cell]%d[/cell][cell]Constitution[/cell][cell]\t[/cell][cell]%d[/cell][cell]Intelligence[/cell][cell]\t[/cell][cell]%d[/cell][cell]Wisdom[/cell][cell]\t[/cell][cell]%d[/cell][cell]Charisma[/cell][cell]\t[/cell][cell]%d[/cell][/table]'
 
 var lastBtnIdx : int = 0
 
@@ -64,11 +64,9 @@ func buttonPressed(id : int) -> void:
 		1:
 			pass
 		2:
-			# TODO show party
 			$inventory.showWindow(GameManager.player)
 		3:
-			# TODO show party
-			$equipment.showWindow()
+			$weapons.showWindow()
 		4:
 			pass
 		_:
@@ -92,10 +90,6 @@ func _on_btnItems_pressed() -> void:
 
 func _on_btnEquip_pressed() -> void:
 	buttonPressed(3)
-
-
-func _on_btnMoves_pressed() -> void:
-	buttonPressed(4)
 
 
 func _on_btnClose_pressed() -> void:

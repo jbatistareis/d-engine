@@ -8,7 +8,7 @@
 [ext_resource path="res://assets/theme/default/styleBoxFlat_darkslategray_shadow.tres" type="StyleBox" id=6]
 [ext_resource path="res://ui/gui/battle/inventory.gd" type="Script" id=7]
 [ext_resource path="res://ui/gui/inventory.gd" type="Script" id=8]
-[ext_resource path="res://ui/gui/equipment.gd" type="Script" id=9]
+[ext_resource path="res://ui/gui/weapons.gd" type="Script" id=9]
 [ext_resource path="res://ui/gui/partyMenu.gd" type="Script" id=10]
 
 [node name="gui" type="Control"]
@@ -71,37 +71,26 @@ fit_content_height = true
 [node name="menu" type="MarginContainer" parent="exploration"]
 margin_left = 220.0
 margin_right = 302.0
-margin_bottom = 168.0
+margin_bottom = 140.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="exploration/menu"]
 margin_right = 82.0
-margin_bottom = 168.0
+margin_bottom = 140.0
 theme = ExtResource( 2 )
 
 [node name="box" type="VBoxContainer" parent="exploration/menu"]
 margin_right = 82.0
-margin_bottom = 168.0
+margin_bottom = 140.0
 custom_constants/separation = 0
-
-[node name="btnAction" type="Button" parent="exploration/menu/box"]
-margin_right = 82.0
-margin_bottom = 28.0
-focus_neighbour_bottom = NodePath("../btnMap")
-focus_next = NodePath("../btnMap")
-theme = ExtResource( 2 )
-text = "Action "
-flat = true
 
 [node name="btnMap" type="Button" parent="exploration/menu/box"]
 margin_top = 28.0
 margin_right = 82.0
 margin_bottom = 56.0
-focus_neighbour_top = NodePath("../btnAction")
 focus_neighbour_bottom = NodePath("../btnItems")
 focus_next = NodePath("../btnItems")
-focus_previous = NodePath("../btnAction")
 theme = ExtResource( 2 )
 text = "Map   >"
 flat = true
@@ -111,45 +100,31 @@ margin_top = 56.0
 margin_right = 82.0
 margin_bottom = 84.0
 focus_neighbour_top = NodePath("../btnMap")
-focus_neighbour_bottom = NodePath("../btnEquip")
-focus_next = NodePath("../btnEquip")
+focus_neighbour_bottom = NodePath("../btnWpns")
+focus_next = NodePath("../btnWpns")
 focus_previous = NodePath("../btnMap")
 theme = ExtResource( 2 )
 text = "Items >"
 flat = true
 
-[node name="btnEquip" type="Button" parent="exploration/menu/box"]
+[node name="btnWpns" type="Button" parent="exploration/menu/box"]
 margin_top = 84.0
 margin_right = 82.0
 margin_bottom = 112.0
 focus_neighbour_top = NodePath("../btnItems")
-focus_neighbour_bottom = NodePath("../btnMoves")
-focus_next = NodePath("../btnMoves")
-focus_previous = NodePath("../btnItems")
-theme = ExtResource( 2 )
-text = "Equip >"
-flat = true
-
-[node name="btnMoves" type="Button" parent="exploration/menu/box"]
-margin_top = 112.0
-margin_right = 82.0
-margin_bottom = 140.0
-focus_neighbour_top = NodePath("../btnEquip")
 focus_neighbour_bottom = NodePath("../btnClose")
 focus_next = NodePath("../btnClose")
-focus_previous = NodePath("../btnEquip")
+focus_previous = NodePath("../btnItems")
 theme = ExtResource( 2 )
-text = "Moves >"
+text = "Wpns  >"
 flat = true
 
 [node name="btnClose" type="Button" parent="exploration/menu/box"]
-margin_top = 140.0
+margin_top = 112.0
 margin_right = 82.0
-margin_bottom = 168.0
-focus_neighbour_top = NodePath("../btnMoves")
-focus_previous = NodePath("../btnMoves")
+margin_bottom = 140.0
 theme = ExtResource( 2 )
-text = "< Close"
+text = "x Close"
 flat = true
 
 [node name="inventory" type="MarginContainer" parent="exploration"]
@@ -198,7 +173,7 @@ items = [ "Use  >", null, 0, false, false, 0, 0, null, "", false, "Drop ", null,
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 
-[node name="equipment" type="MarginContainer" parent="exploration"]
+[node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
 margin_left = 312.0
 margin_right = 952.0
@@ -209,110 +184,88 @@ size_flags_vertical = 0
 theme = ExtResource( 2 )
 script = ExtResource( 9 )
 
-[node name="Panel" type="Panel" parent="exploration/equipment"]
+[node name="Panel" type="Panel" parent="exploration/weapons"]
 margin_right = 640.0
 margin_bottom = 480.0
 
-[node name="main" type="HBoxContainer" parent="exploration/equipment"]
+[node name="main" type="VBoxContainer" parent="exploration/weapons"]
 margin_right = 640.0
 margin_bottom = 480.0
 
-[node name="cards" type="VBoxContainer" parent="exploration/equipment/main"]
+[node name="cards" type="HBoxContainer" parent="exploration/weapons/main"]
+margin_right = 640.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="current" type="VBoxContainer" parent="exploration/weapons/main/cards"]
+margin_right = 314.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/current"]
+margin_right = 314.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="exploration/weapons/main/cards"]
+margin_left = 318.0
+margin_right = 322.0
+margin_bottom = 385.0
+size_flags_vertical = 3
+
+[node name="new" type="VBoxContainer" parent="exploration/weapons/main/cards"]
+margin_left = 326.0
+margin_right = 640.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/new"]
+margin_right = 314.0
+margin_bottom = 385.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSeparator" type="HSeparator" parent="exploration/weapons/main"]
+margin_top = 389.0
+margin_right = 640.0
+margin_bottom = 393.0
+
+[node name="itemList" type="ItemList" parent="exploration/weapons/main"]
+margin_top = 397.0
 margin_right = 640.0
 margin_bottom = 480.0
+rect_min_size = Vector2( 0, 83 )
 size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="current" type="VBoxContainer" parent="exploration/equipment/main/cards"]
-margin_right = 640.0
-margin_bottom = 238.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="label" type="HBoxContainer" parent="exploration/equipment/main/cards/current"]
-margin_right = 640.0
-margin_bottom = 22.0
-
-[node name="lblCurrWeap" type="Label" parent="exploration/equipment/main/cards/current/label"]
-margin_right = 180.0
-margin_bottom = 22.0
-text = " [ Current weapon ] "
-
-[node name="HSeparator" type="HSeparator" parent="exploration/equipment/main/cards/current/label"]
-margin_left = 184.0
-margin_right = 640.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="data" type="Label" parent="exploration/equipment/main/cards/current"]
-margin_top = 26.0
-margin_right = 640.0
-margin_bottom = 238.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="new" type="VBoxContainer" parent="exploration/equipment/main/cards"]
-margin_top = 242.0
-margin_right = 640.0
-margin_bottom = 480.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="label" type="HBoxContainer" parent="exploration/equipment/main/cards/new"]
-margin_right = 640.0
-margin_bottom = 22.0
-
-[node name="lblNewWeap" type="Label" parent="exploration/equipment/main/cards/new/label"]
-margin_right = 190.0
-margin_bottom = 22.0
-text = " [ Selected weapon ] "
-
-[node name="HSeparator" type="HSeparator" parent="exploration/equipment/main/cards/new/label"]
-margin_left = 194.0
-margin_right = 640.0
-margin_bottom = 22.0
-size_flags_horizontal = 3
-
-[node name="data" type="Label" parent="exploration/equipment/main/cards/new"]
-margin_top = 26.0
-margin_right = 640.0
-margin_bottom = 238.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VSeparator" type="VSeparator" parent="exploration/equipment/main"]
-margin_right = 4.0
-margin_bottom = 40.0
-size_flags_vertical = 3
-
-[node name="itemList" type="ItemList" parent="exploration/equipment/main"]
-visible = false
-margin_left = 322.0
-margin_right = 640.0
-margin_bottom = 480.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
 theme = ExtResource( 2 )
+max_columns = 2
+same_column_width = true
+fixed_column_width = 310
 icon_mode = 0
 
-[node name="lblNoWeap" type="Label" parent="exploration/equipment/main"]
+[node name="lblNoWeap" type="Label" parent="exploration/weapons/main"]
 visible = false
-margin_left = 322.0
-margin_right = 640.0
+margin_left = 200.0
+margin_top = 458.0
+margin_right = 440.0
 margin_bottom = 480.0
-size_flags_horizontal = 3
-size_flags_vertical = 7
+rect_min_size = Vector2( 0, 83 )
+size_flags_horizontal = 6
+size_flags_vertical = 5
 text = "No weapons being carried"
 align = 1
 valign = 1
 
-[node name="itemMenu" type="PopupMenu" parent="exploration/equipment"]
-margin_right = 70.0
+[node name="itemMenu" type="PopupMenu" parent="exploration/weapons"]
+margin_right = 60.0
 margin_bottom = 78.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 popup_exclusive = true
-items = [ "Equip >", null, 0, false, false, 0, 0, null, "", false, "Drop", null, 0, false, false, 1, 0, null, "", false, "<  Back", null, 0, false, false, 2, 0, null, "", false ]
+items = [ "Equip", null, 0, false, false, 0, 0, null, "", false, "Drop", null, 0, false, false, 1, 0, null, "", false, "< Back", null, 0, false, false, 2, 0, null, "", false ]
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 
@@ -554,14 +507,13 @@ margin_bottom = 22.0
 
 [connection signal="hide" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_hide"]
 [connection signal="id_pressed" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_id_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnAction" to="exploration" method="_on_btnAction_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnEquip" to="exploration" method="_on_btnEquip_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnMoves" to="exploration" method="_on_btnMoves_pressed"]
+[connection signal="pressed" from="exploration/menu/box/btnWpns" to="exploration" method="_on_btnEquip_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
-[connection signal="item_activated" from="exploration/equipment/main/itemList" to="exploration/equipment" method="_on_itemList_item_activated"]
-[connection signal="id_pressed" from="exploration/equipment/itemMenu" to="exploration/equipment" method="_on_itemMenu_id_pressed"]
+[connection signal="item_activated" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_activated"]
+[connection signal="item_selected" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_selected"]
+[connection signal="id_pressed" from="exploration/weapons/itemMenu" to="exploration/weapons" method="_on_itemMenu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]

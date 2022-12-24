@@ -63,13 +63,6 @@ func showCharacterMoves(character : Character) -> void:
 		card.connect("hovered", self, "showMoveDetails")
 		$moves/cards/grid.add_child(card)
 	
-	if character.inventory.weapon.move4 != null:
-		var card = moveCardPackedScene.instance()
-		card.character = character
-		card.move = character.inventory.weapon.move4
-		card.connect("hovered", self, "showMoveDetails")
-		$moves/cards/grid.add_child(card)
-	
 	var inventoryCard = inventoryCardPackedScene.instance()
 	inventoryCard.character = character
 	inventoryCard.connect("hovered", self, "showMoveDetails")

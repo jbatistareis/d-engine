@@ -13,7 +13,6 @@ var cdPos : int
 var move1 : Move = null
 var move2 : Move = null
 var move3 : Move = null
-var move4 : Move = null
 
 
 func fromShortName(weaponShortName : String) -> Weapon:
@@ -46,11 +45,6 @@ func fromDTO(weaponDto : WeaponDTO) -> Weapon:
 		self.move3 = Move.new().fromShortName(weaponDto.move3ShortName)
 		self.move3.cdPre += self.cdPre
 		self.move3.cdPos += self.cdPos
-	
-	if !weaponDto.move4ShortName.empty():
-		self.move4 = Move.new().fromShortName(weaponDto.move4ShortName)
-		self.move4.cdPre += self.cdPre
-		self.move4.cdPos += self.cdPos
 	
 	return self
 
