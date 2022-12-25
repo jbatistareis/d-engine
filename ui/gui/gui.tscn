@@ -30,9 +30,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -475.0
+margin_left = -558.0
 margin_top = -240.0
-margin_right = 475.0
+margin_right = 558.0
 margin_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -48,47 +48,29 @@ theme = ExtResource( 2 )
 popup_exclusive = true
 script = ExtResource( 10 )
 
-[node name="stats" type="MarginContainer" parent="exploration"]
-margin_right = 210.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 210, 0 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-
-[node name="Panel" type="Panel" parent="exploration/stats"]
-margin_right = 210.0
-margin_bottom = 23.0
-theme = ExtResource( 2 )
-
-[node name="lblStats" type="RichTextLabel" parent="exploration/stats"]
-margin_right = 210.0
-margin_bottom = 23.0
-rect_min_size = Vector2( 192, 0 )
-size_flags_horizontal = 3
-size_flags_vertical = 3
-fit_content_height = true
+[node name="party" type="GridContainer" parent="exploration"]
+columns = 2
 
 [node name="menu" type="MarginContainer" parent="exploration"]
-margin_left = 220.0
-margin_right = 302.0
-margin_bottom = 140.0
+margin_left = 384.0
+margin_right = 466.0
+margin_bottom = 112.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="exploration/menu"]
 margin_right = 82.0
-margin_bottom = 140.0
+margin_bottom = 112.0
 theme = ExtResource( 2 )
 
 [node name="box" type="VBoxContainer" parent="exploration/menu"]
 margin_right = 82.0
-margin_bottom = 140.0
+margin_bottom = 112.0
 custom_constants/separation = 0
 
 [node name="btnMap" type="Button" parent="exploration/menu/box"]
-margin_top = 28.0
 margin_right = 82.0
-margin_bottom = 56.0
+margin_bottom = 28.0
 focus_neighbour_bottom = NodePath("../btnItems")
 focus_next = NodePath("../btnItems")
 theme = ExtResource( 2 )
@@ -96,9 +78,9 @@ text = "Map   >"
 flat = true
 
 [node name="btnItems" type="Button" parent="exploration/menu/box"]
-margin_top = 56.0
+margin_top = 28.0
 margin_right = 82.0
-margin_bottom = 84.0
+margin_bottom = 56.0
 focus_neighbour_top = NodePath("../btnMap")
 focus_neighbour_bottom = NodePath("../btnWpns")
 focus_next = NodePath("../btnWpns")
@@ -108,9 +90,9 @@ text = "Items >"
 flat = true
 
 [node name="btnWpns" type="Button" parent="exploration/menu/box"]
-margin_top = 84.0
+margin_top = 56.0
 margin_right = 82.0
-margin_bottom = 112.0
+margin_bottom = 84.0
 focus_neighbour_top = NodePath("../btnItems")
 focus_neighbour_bottom = NodePath("../btnClose")
 focus_next = NodePath("../btnClose")
@@ -120,17 +102,17 @@ text = "Wpns  >"
 flat = true
 
 [node name="btnClose" type="Button" parent="exploration/menu/box"]
-margin_top = 112.0
+margin_top = 84.0
 margin_right = 82.0
-margin_bottom = 140.0
+margin_bottom = 112.0
 theme = ExtResource( 2 )
 text = "x Close"
 flat = true
 
 [node name="inventory" type="MarginContainer" parent="exploration"]
 visible = false
-margin_left = 312.0
-margin_right = 952.0
+margin_left = 476.0
+margin_right = 1116.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
 size_flags_horizontal = 0
@@ -175,8 +157,8 @@ hide_on_checkable_item_selection = false
 
 [node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
-margin_left = 312.0
-margin_right = 952.0
+margin_left = 414.0
+margin_right = 1054.0
 margin_bottom = 480.0
 rect_min_size = Vector2( 640, 480 )
 size_flags_horizontal = 0

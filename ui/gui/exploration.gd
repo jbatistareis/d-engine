@@ -1,7 +1,6 @@
 extends Control
 
-const _STATUS_TEXT : String = '[center][\t%s\t][/center][table=3][cell]HP[/cell][cell]\t[/cell][cell]%d/%d[/cell][cell]LV[/cell][cell]\t[/cell][cell]%d[/cell][cell]Pts.[/cell][cell]\t[/cell][cell]%d[/cell][cell]Next[/cell][cell]\t[/cell][cell]%d/%d[/cell][/table][center]- - - - -[/center][table=3][cell]Strength[/cell][cell]\t[/cell][cell]%d[/cell][cell]Dexterity[/cell][cell]\t[/cell][cell]%d[/cell][cell]Constitution[/cell][cell]\t[/cell][cell]%d[/cell][cell]Intelligence[/cell][cell]\t[/cell][cell]%d[/cell][cell]Wisdom[/cell][cell]\t[/cell][cell]%d[/cell][cell]Charisma[/cell][cell]\t[/cell][cell]%d[/cell][/table]'
-
+var statsScene : PackedScene = preload("res://ui/gui/stats.tscn") 
 var lastBtnIdx : int = 0
 
 
@@ -23,25 +22,16 @@ func focus() -> void:
 
 
 func show() -> void:
+	for stat in $party.get_children():
+		stat.queue_free()
+	
+	for character in GameManager.party:
+		var stats = statsScene.instance()
+		stats.setCharacter(character)
+		$party.add_child(stats)
+	
 	visible = true
 	focus()
-	
-	$stats/lblStats.bbcode_text = _STATUS_TEXT % [
-			GameManager.player.name,
-			GameManager.player.currentHp,
-			GameManager.player.maxHp,
-			GameManager.player.currentLevel,
-			GameManager.player.sparePoints,
-			GameManager.player.experiencePoints,
-			GameManager.player.experienceToNextLevel,
-			GameManager.player.strength.score,
-			GameManager.player.dexterity.score,
-			GameManager.player.constitution.score,
-			GameManager.player.intelligence.score,
-			GameManager.player.wisdom.score,
-			GameManager.player.charisma.score
-		]
-	$stats/lblStats.bbcode_enabled = true
 
 
 func hide() -> void:
@@ -62,13 +52,9 @@ func buttonPressed(id : int) -> void:
 		0:
 			pass
 		1:
-			pass
-		2:
 			$inventory.showWindow(GameManager.player)
-		3:
+		2:
 			$weapons.showWindow()
-		4:
-			pass
 		_:
 			Signals.emit_signal("guiCloseExploringMenu")
 	
@@ -76,22 +62,18 @@ func buttonPressed(id : int) -> void:
 		Signals.connect("guiBack", self, "focus")
 
 
-func _on_btnAction_pressed() -> void:
+func _on_btnMap_pressed() -> void:
 	buttonPressed(0)
 
 
-func _on_btnMap_pressed() -> void:
+func _on_btnItems_pressed() -> void:
 	buttonPressed(1)
 
 
-func _on_btnItems_pressed() -> void:
+func _on_btnEquip_pressed() -> void:
 	buttonPressed(2)
 
 
-func _on_btnEquip_pressed() -> void:
-	buttonPressed(3)
-
-
 func _on_btnClose_pressed() -> void:
-	buttonPressed(5)
+	buttonPressed(3)
 

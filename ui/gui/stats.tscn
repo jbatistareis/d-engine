@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=1]
+[ext_resource path="res://ui/gui/stats.gd" type="Script" id=2]
+
+[node name="stats" type="MarginContainer"]
+margin_right = 180.0
+margin_bottom = 327.0
+rect_min_size = Vector2( 185, 0 )
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 185.0
+margin_bottom = 327.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 1 )
+
+[node name="vContainer" type="VBoxContainer" parent="."]
+margin_right = 185.0
+margin_bottom = 327.0
+
+[node name="lblName" type="RichTextLabel" parent="vContainer"]
+margin_right = 185.0
+margin_bottom = 23.0
+fit_content_height = true
+
+[node name="stats1" type="HBoxContainer" parent="vContainer"]
+margin_top = 27.0
+margin_right = 185.0
+margin_bottom = 119.0
+
+[node name="lblHead1" type="RichTextLabel" parent="vContainer/stats1"]
+margin_right = 42.0
+margin_bottom = 92.0
+rect_min_size = Vector2( 42, 0 )
+bbcode_enabled = true
+bbcode_text = " HP
+ LV
+ NXT
+ PTS"
+text = " HP
+ LV
+ NXT
+ PTS"
+fit_content_height = true
+
+[node name="lblValues1" type="RichTextLabel" parent="vContainer/stats1"]
+margin_left = 46.0
+margin_right = 185.0
+margin_bottom = 92.0
+size_flags_horizontal = 11
+fit_content_height = true
+
+[node name="HSeparator" type="HSeparator" parent="vContainer"]
+margin_top = 123.0
+margin_right = 185.0
+margin_bottom = 127.0
+
+[node name="armor" type="HBoxContainer" parent="vContainer"]
+margin_top = 131.0
+margin_right = 185.0
+margin_bottom = 177.0
+
+[node name="lblArmorHead" type="RichTextLabel" parent="vContainer/armor"]
+margin_right = 42.0
+margin_bottom = 46.0
+rect_min_size = Vector2( 42, 0 )
+bbcode_enabled = true
+bbcode_text = " ARM
+ SCL"
+text = " ARM
+ SCL"
+fit_content_height = true
+
+[node name="lblArmorValues" type="RichTextLabel" parent="vContainer/armor"]
+margin_left = 46.0
+margin_right = 185.0
+margin_bottom = 46.0
+size_flags_horizontal = 11
+fit_content_height = true
+
+[node name="HSeparator2" type="HSeparator" parent="vContainer"]
+margin_top = 181.0
+margin_right = 185.0
+margin_bottom = 185.0
+
+[node name="stats2" type="HBoxContainer" parent="vContainer"]
+margin_top = 189.0
+margin_right = 185.0
+margin_bottom = 327.0
+
+[node name="lblHead2" type="RichTextLabel" parent="vContainer/stats2"]
+margin_right = 132.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 132, 0 )
+bbcode_enabled = true
+bbcode_text = " Strength
+ Dexterity
+ Constitution
+ Intelligence
+ Wisdom
+ Charisma"
+text = " Strength
+ Dexterity
+ Constitution
+ Intelligence
+ Wisdom
+ Charisma"
+fit_content_height = true
+
+[node name="lblValues2" type="RichTextLabel" parent="vContainer/stats2"]
+margin_left = 136.0
+margin_right = 185.0
+margin_bottom = 138.0
+size_flags_horizontal = 11
+fit_content_height = true

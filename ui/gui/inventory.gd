@@ -75,9 +75,13 @@ func exit() -> void:
 	Signals.disconnect("guiCancel", self, "back")
 	Signals.disconnect("guiCloseExploringMenu", self, "exit")
 	
-	visible = false
-	$itemMenu.hide()
+	if Signals.is_connected("guiPartyMenuPick", self, "partyPick"):
+		Signals.disconnect("guiPartyMenuPick", self, "partyPick")
+	
 	Signals.emit_signal("guiHidePartyMenu")
+	
+	$itemMenu.hide()
+	visible = false
 
 
 func _on_itemList_item_activated(index : int) -> void:
