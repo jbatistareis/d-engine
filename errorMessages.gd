@@ -9,3 +9,6 @@ const BATTLE_CANT_START : String = 'Can\'t start battle: %s, %s'
 
 const UNK_CHARACTER_DATA : String = 'Unknown character data: %s, type %d'
 
+const ITM_NO_FOUND : String = 'Item not in character inventory'
+const WPN_NO_FOUND : String = 'Weapon not in character inventory'
+

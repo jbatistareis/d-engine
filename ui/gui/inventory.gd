@@ -100,8 +100,6 @@ func _on_itemList_item_activated(index : int) -> void:
 
 # TODO party
 func _on_itemMenu_id_pressed(id : int) -> void:
-	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
-	
 	match id:
 		0:
 			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
@@ -109,8 +107,9 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 			Signals.emit_signal("guiPopupPartyMenu", $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0))
 		
 		1:
-			var inventoryIndex = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
-			character.inventory.removeItem(inventoryIndex)
+			Signals.emit_signal("characterDroppedItem",
+				character,
+				inventorySummary.summary[$itemList.get_selected_items()[0]].item)
 			showWindow(character)
 		
 		_:
@@ -123,11 +122,10 @@ func partyPick(id: int) -> void:
 	Signals.disconnect("guiPartyMenuPick", self, "partyPick")
 	
 	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
-	var index = character.inventory.items.bsearch_custom(item.shortName, EntityArrayHelper, 'shortNameFind')
-	var inventoryItem = character.inventory.removeItem(index)
-	showWindow(character)
+	Signals.emit_signal("characterUsedItem",
+		character,
+		GameManager.party if (item.targetType > Enums.MoveTargetType.FOE) else [GameManager.party[id]],
+		item)
 	
-	ScriptTool.getReference(inventoryItem.actionExpression).execute(
-		GameManager.party if (inventoryItem.targetType > Enums.MoveTargetType.FOE) else [GameManager.party[id]]
-	)
+	showWindow(character)
 

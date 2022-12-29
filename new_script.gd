@@ -39,11 +39,11 @@ func _ready() -> void:
 	weapon5.name = "Test Weapon5"
 	weapon5.shortName = "TSTWPN5"
 	
-	player.inventory.add(weapon)
-	player.inventory.add(weapon2)
-	player.inventory.add(weapon3)
-	player.inventory.add(weapon4)
-	player.inventory.add(weapon5)
+	Signals.emit_signal("characterReceivedWeapon", player, weapon)
+	Signals.emit_signal("characterReceivedWeapon", player, weapon2)
+	Signals.emit_signal("characterReceivedWeapon", player, weapon3)
+	Signals.emit_signal("characterReceivedWeapon", player, weapon4)
+	Signals.emit_signal("characterReceivedWeapon", player, weapon5)
 	
 	var item1 = Item.new().fromShortName("BSEITM")
 	var item2 = Item.new().fromShortName("BSEITM")
@@ -57,11 +57,11 @@ func _ready() -> void:
 	item4.shortName = "ITM4"
 	item5.shortName = "ITM5"
 	
-	player.inventory.add(item1)
-	player.inventory.add(item2)
-	player.inventory.add(item3)
-	player.inventory.add(item4)
-	player.inventory.add(item5)
+	Signals.emit_signal("characterReceivedItem", player, item1)
+	Signals.emit_signal("characterReceivedItem", player, item2)
+	Signals.emit_signal("characterReceivedItem", player, item3)
+	Signals.emit_signal("characterReceivedItem", player, item4)
+	Signals.emit_signal("characterReceivedItem", player, item5)
 	
 	GameManager.player = player
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)

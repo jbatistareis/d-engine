@@ -53,7 +53,7 @@ signal battleLost()
 
 # internal use
 signal setupBattleScreen(players, enemies) # for transition animation
-signal battleScreenReady() # battle start animation is done, logic starts after this
+signal battleScreenReady() # fired when animation is done, logic starts after this
 signal battleEnded()
 signal askedPlayerBattleInput(character)
 signal battleCursorShow(player, move)
@@ -71,7 +71,7 @@ signal battleInventoryHide()
 # inventory related
 signal characterEquipedWeapon(character, weapon)
 signal characterEquipedArmor(character, armor)
-signal characterUsedItem(character, item)
+signal characterUsedItem(user, receivers, item)
 
 signal characterReceivedWeapon(character, weapon)
 signal characterReceivedArmor(character, armor)

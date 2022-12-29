@@ -15,7 +15,9 @@ var inventorySummary : InventorySummary
 
 func updateLabels() -> void:
 	setWpnData(character.inventory.weapon, true)
-	setWpnData(selectedWeapon(), false)
+	setWpnData(
+		inventorySummary.summary[$main/itemList.get_selected_items()[0]].item,
+		false)
 
 
 func setWpnData(weapon : Weapon, current : bool) -> void:
@@ -104,16 +106,6 @@ func targetTypeStr(targetType : int) -> String:
 			return "All friends"
 		_:
 			return "None"
-
-
-func selectedWeapon() -> Weapon:
-	return inventorySummary.summary[$main/itemList.get_selected_items()[0]].item if !$main/itemList.items.empty() else null
-
-
-func findInventoryIndex() -> int:
-	return character.inventory.weapons.bsearch_custom(
-		selectedWeapon().shortName,
-		EntityArrayHelper, 'shortNameFind')
 
 
 func _on_itemList_item_selected(index: int) -> void:
@@ -210,11 +202,16 @@ func _on_itemList_item_activated(index : int) -> void:
 func _on_itemMenu_id_pressed(menuId : int) -> void:
 	match menuId:
 		0:
-			character.inventory.equipWeapon(findInventoryIndex())
+			Signals.emit_signal(
+				"characterEquipedWeapon",
+				character,
+				inventorySummary.summary[$main/itemList.get_selected_items()[0]].item)
 			partyPick(id)
 		
 		1:
-			character.inventory.removeWeapon(findInventoryIndex())
+			Signals.emit_signal("characterDroppedWeapon",
+				character,
+				inventorySummary.summary[$main/itemList.get_selected_items()[0]].item)
 			partyPick(id)
 		
 		_:
