@@ -2,8 +2,8 @@ extends MarginContainer
 
 const _STATUS_NAME : String = "[center][ %s ][/center]"
 const _STATUS_VALUE_1 : String = "[right]%d/%d [/right][right]%d [/right][right]%d/%d [/right][right]%d [/right]"
-const _STATUS_VALUE_2 : String = "[right]%d [/right][right]%d [/right][right]%d [/right][right]%d [/right][right]%d [/right][right]%d [/right]"
-const _ARMOR_VALUES : String = "[right]%d/%d [/right][right]+%d%% -%d%% [/right]"
+const _STATUS_VALUE_2 : String = "[right]%d [/right][right]%d [/right][right]%d [/right]"
+const _ARMOR_VALUES : String = "[right]%d/%d [/right][right]+%d%%/-%d%% [/right]"
 
 
 func setCharacter(character : Character) -> void:
@@ -29,12 +29,9 @@ func setCharacter(character : Character) -> void:
 		]
 	
 	$vContainer/stats2/lblValues2.bbcode_text = _STATUS_VALUE_2 % [
-		character.strength.score,
-		character.dexterity.score,
-		character.constitution.score,
-		character.intelligence.score,
-		character.wisdom.score,
-		character.charisma.score
+		character.getScore(Enums.CharacterAbility.STRENGTH),
+		character.getScore(Enums.CharacterAbility.DEXTERITY),
+		character.getScore(Enums.CharacterAbility.CONSTITUTION)
 	]
 	
 	$vContainer/lblName.bbcode_enabled = true

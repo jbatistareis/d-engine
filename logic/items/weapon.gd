@@ -71,39 +71,16 @@ func toDTO() -> WeaponDTO:
 
 
 func calculateDamage(character) -> int:
-	var modifierValue
-	match modifier:
-		Enums.CharacterModifier.STR:
-			modifierValue = character.strength.modifier
-		
-		Enums.CharacterModifier.DEX:
-			modifierValue = character.dexterity.modifier
-		
-		Enums.CharacterModifier.CON:
-			modifierValue = character.constitution.modifier
-		
-		Enums.CharacterModifier.INT:
-			modifierValue = character.intelligence.modifier
-		
-		Enums.CharacterModifier.WIS:
-			modifierValue = character.wisdom.modifier
-		
-		Enums.CharacterModifier.CHA:
-			modifierValue = character.charisma.modifier
-			
-		_: # Character.Modifier.NONE
-			modifierValue = 0
-	
 	match modifierRollType:
 		Enums.DiceRollType.NORMAL:
-			return Dice.rollNormal(modifierDice) + damage + modifierValue
+			return Dice.rollNormal(modifierDice) + damage + character.getModifier(modifier)
 		
 		Enums.DiceRollType.BEST:
-			return Dice.rollBest(modifierDice) + damage + modifierValue
+			return Dice.rollBest(modifierDice) + damage + character.getModifier(modifier)
 		
 		Enums.DiceRollType.WORST:
-			return Dice.rollWorst(modifierDice) + damage + modifierValue
+			return Dice.rollWorst(modifierDice) + damage + character.getModifier(modifier)
 		
 		_: # Dice.RollType.NONE
-			return damage + modifierValue
+			return damage + character.getModifier(modifier)
 

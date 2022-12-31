@@ -49,11 +49,12 @@ popup_exclusive = true
 script = ExtResource( 10 )
 
 [node name="party" type="GridContainer" parent="exploration"]
+margin_bottom = 480.0
 columns = 2
 
 [node name="menu" type="MarginContainer" parent="exploration"]
-margin_left = 384.0
-margin_right = 466.0
+margin_left = 10.0
+margin_right = 92.0
 margin_bottom = 112.0
 size_flags_horizontal = 0
 size_flags_vertical = 0

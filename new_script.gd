@@ -14,14 +14,20 @@ func _ready() -> void:
 	
 	player.name = 'Player'
 	player.shortName = 'PLAYER'
-	player.currentHp = 20
-	player.constitution.score = 20
+	player.currentHp = 25
+	player.getStat(Enums.CharacterAbility.CONSTITUTION).score = 15
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
 	Signals.connect("playerArrivedLocation", self, 'printEntering')
 	Signals.connect("playerChangedRoom", self, 'printTraveling')
 	
 	# TEST
+	var armor = Armor.new().fromShortName("BSEARM")
+	armor.maxIntegrity = 10
+	armor.currentIntegrity = 10
+	
+	Signals.emit_signal("characterEquipedArmor", player, armor)
+	
 	var weapon = Weapon.new().fromShortName("BSEWPN")
 	var weapon2 = Weapon.new().fromShortName("BSEWPN")
 	var weapon3 = Weapon.new().fromShortName("BSEWPN")
@@ -30,6 +36,10 @@ func _ready() -> void:
 	
 	weapon.name = "Test Weapon1"
 	weapon.shortName = "TSTWPN1"
+	weapon.damage = 1
+	weapon.modifierRollType = Enums.DiceRollType.BEST
+	weapon.modifierDice = Enums.DiceType.D4
+	
 	weapon2.name = "Test Weapon2"
 	weapon2.shortName = "TSTWPN2"
 	weapon3.name = "Test Weapon3"

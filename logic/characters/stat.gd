@@ -11,6 +11,7 @@ func _init(score : int) -> void:
 	self.score = score
 
 
+# TODO more dynamic thresholds, AP or GP maybe
 func getModifier() -> int:
 	if score <= 3:
 		return -3

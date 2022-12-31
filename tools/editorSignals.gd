@@ -11,3 +11,5 @@ signal selectedVerdict(shortName)
 signal mapSelectedRoom(room)
 signal mapSelectedMultiRooms(rooms)
 
+signal charaterStatChanged(score)
+

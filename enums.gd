@@ -7,8 +7,10 @@ enum DiceType { NONE = 0, D4 = 4, D6 = 6, D8 = 8, D10 = 10, D12 = 12, D20 = 20, 
 enum DiceOutcome { BEST, WITH_CONSEQUENCE, WORST }
 enum DiceRollType { NONE, BEST, NORMAL, WORST }
 
-enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION, INTELLIGENCE, WISDOM, CHARISMA }
-enum CharacterModifier { NONE, STR, DEX, CON, INT, WIS, CHA }
+# used to set character class stats
+enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION }
+enum CharacterModifier { NONE, STR, DEX, CON }
+
 enum CharacterType { PC, NPC, FOE }
 
 enum MoveType { SKILL, ITEM }

@@ -223,7 +223,7 @@ rect_min_size = Vector2( 0, 15 )
 [node name="stats" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
 margin_top = 234.0
 margin_right = 606.0
-margin_bottom = 400.0
+margin_bottom = 328.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
 margin_right = 606.0
@@ -243,110 +243,74 @@ size_flags_horizontal = 3
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
 margin_top = 26.0
 margin_right = 606.0
-margin_bottom = 166.0
+margin_bottom = 94.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields"]
 margin_left = 6.0
 margin_right = 600.0
-margin_bottom = 140.0
+margin_bottom = 68.0
 size_flags_horizontal = 3
 columns = 4
 
-[node name="lblStrength" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 5.0
-margin_right = 130.0
-margin_bottom = 27.0
-text = "Strength "
-
-[node name="sbStrength" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 134.0
-margin_right = 280.0
-margin_bottom = 32.0
-
-[node name="lblDexterity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 284.0
-margin_top = 5.0
-margin_right = 444.0
-margin_bottom = 27.0
-text = "   Dexterity "
-
-[node name="sbDexterity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 448.0
-margin_right = 594.0
-margin_bottom = 32.0
-
-[node name="lblConstitution" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 41.0
-margin_right = 130.0
-margin_bottom = 63.0
-text = "Constitution "
-
-[node name="sbConstitution" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 134.0
-margin_top = 36.0
-margin_right = 280.0
-margin_bottom = 68.0
-
-[node name="lblIntelligence" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 284.0
-margin_top = 41.0
-margin_right = 444.0
-margin_bottom = 63.0
-text = "   Intelligence "
-
-[node name="sbIntelligence" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 448.0
-margin_top = 36.0
-margin_right = 594.0
-margin_bottom = 68.0
-
-[node name="lblWisdom" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 77.0
-margin_right = 130.0
-margin_bottom = 99.0
-text = "Wisdom "
-
-[node name="sbWisdom" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 134.0
-margin_top = 72.0
-margin_right = 280.0
-margin_bottom = 104.0
-
-[node name="lblCharisma" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 284.0
-margin_top = 77.0
-margin_right = 444.0
-margin_bottom = 99.0
-text = "   Charisma "
-
-[node name="sbCharisma" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 448.0
-margin_top = 72.0
-margin_right = 594.0
-margin_bottom = 104.0
-
 [node name="lblBaseDamage" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 113.0
+margin_top = 5.0
 margin_right = 130.0
-margin_bottom = 135.0
-text = "Base damage "
+margin_bottom = 27.0
+text = "Base damage  "
 
 [node name="sbBaseDamage" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
 margin_left = 134.0
-margin_top = 108.0
 margin_right = 280.0
-margin_bottom = 140.0
+margin_bottom = 32.0
+
+[node name="lblStrength" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 284.0
+margin_top = 5.0
+margin_right = 444.0
+margin_bottom = 27.0
+size_flags_horizontal = 3
+text = "   Strength     "
+
+[node name="sbStrength" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 448.0
+margin_right = 594.0
+margin_bottom = 32.0
+
+[node name="lblDexterity" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_top = 41.0
+margin_right = 130.0
+margin_bottom = 63.0
+text = "Dexterity "
+
+[node name="sbDexterity" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 134.0
+margin_top = 36.0
+margin_right = 280.0
+margin_bottom = 68.0
+
+[node name="lblConstitution" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 284.0
+margin_top = 41.0
+margin_right = 444.0
+margin_bottom = 63.0
+text = "   Constitution"
+
+[node name="sbConstitution" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
+margin_left = 448.0
+margin_top = 36.0
+margin_right = 594.0
+margin_bottom = 68.0
 
 [node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 404.0
+margin_top = 332.0
 margin_right = 606.0
-margin_bottom = 419.0
+margin_bottom = 347.0
 rect_min_size = Vector2( 0, 15 )
 
 [node name="misc" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 423.0
+margin_top = 351.0
 margin_right = 606.0
-margin_bottom = 555.0
+margin_bottom = 483.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/misc"]
 margin_right = 606.0
@@ -457,7 +421,7 @@ margin_right = 420.0
 margin_bottom = 106.0
 
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 559.0
+margin_top = 487.0
 margin_right = 606.0
 margin_bottom = 754.0
 size_flags_horizontal = 3
@@ -465,9 +429,9 @@ size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 167.0
+margin_top = 239.0
 margin_right = 606.0
-margin_bottom = 195.0
+margin_bottom = 267.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
@@ -1085,13 +1049,10 @@ script = ExtResource( 7 )
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbBaseHp" to="." method="_on_sbBaseHp_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp" to="." method="_on_sbCurrentHp_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbExtraHp" to="." method="_on_sbExtraHp_value_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbBaseDamage" to="." method="_on_sbBaseDamage_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbStrength" to="." method="_on_sbStrength_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbDexterity" to="." method="_on_sbDexterity_value_changed"]
 [connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbConstitution" to="." method="_on_sbConstitution_value_changed"]
-[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbIntelligence" to="." method="_on_sbIntelligence_value_changed"]
-[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbWisdom" to="." method="_on_sbWisdom_value_changed"]
-[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbCharisma" to="." method="_on_sbCharisma_value_changed"]
-[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbBaseDamage" to="." method="_on_sbBaseDamage_value_changed"]
 [connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict" to="." method="_on_optVerdict_item_selected"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/btnViewVerdict" to="." method="_on_btnViewVerdict_pressed"]
 [connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/chkVerdictAct" to="." method="_on_chkVerdictAct_pressed"]

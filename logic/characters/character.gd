@@ -16,12 +16,7 @@ var experiencePoints : int
 var experienceToNextLevel : int setget ,getExperienceToNextLevel
 var sparePoints : int
 
-var strength : Stat
-var dexterity : Stat
-var constitution : Stat
-var intelligence : Stat
-var wisdom : Stat
-var charisma : Stat
+var stats : Array = []
 
 # does not persist
 var moveModifiers : Array = []
@@ -56,12 +51,9 @@ func fromDTO(characterDto : CharacterDTO) -> Character:
 	self.experiencePoints = characterDto.experiencePoints
 	self.sparePoints = characterDto.sparePoints
 	
-	self.strength = Stat.new(characterDto.strength)
-	self.dexterity = Stat.new(characterDto.dexterity)
-	self.constitution = Stat.new(characterDto.constitution)
-	self.intelligence = Stat.new(characterDto.intelligence)
-	self.wisdom = Stat.new(characterDto.wisdom)
-	self.charisma = Stat.new(characterDto.charisma)
+	stats.clear()
+	for stat in Enums.CharacterAbility.values():
+		stats.append(Stat.new(characterDto.stats[stat]))
 	
 	self.inventory = Inventory.new().fromShortName(characterDto.inventoryShortName)
 	
@@ -92,12 +84,13 @@ func toDTO() -> CharacterDTO:
 	characterDto.experiencePoints = self.experiencePoints
 	characterDto.sparePoints = self.sparePoints
 	
+	characterDto.stats.clear()
+	for stat in stats:
+		characterDto.stats.append(stat.score)
+	
 	characterDto.strength = self.strength.score
 	characterDto.dexterity = self.dexterity.score
 	characterDto.constitution = self.constitution.score
-	characterDto.intelligence = self.intelligence.score
-	characterDto.wisdom = self.wisdom.score
-	characterDto.charisma = self.charisma.score
 	
 	characterDto.inventoryShortName = self.inventory.shortName
 	
@@ -111,25 +104,25 @@ func toDTO() -> CharacterDTO:
 
 
 func getMaxHp() -> int:
-	return baseHp + constitution.score
+	if stats.size() > Enums.CharacterAbility.CONSTITUTION:
+		return baseHp + stats[Enums.CharacterAbility.CONSTITUTION].score
+	else:
+		return 0
+
+
+# use Enums.CharacterAbility
+func getStat(ability : int) -> Stat:
+	return stats[ability]
+
 
 # use Enums.CharacterAbility
 func getScore(ability : int) -> int:
-	match ability:
-		Enums.CharacterAbility.CHARISMA:
-			return charisma.score
-		Enums.CharacterAbility.CONSTITUTION:
-			return constitution.score
-		Enums.CharacterAbility.DEXTERITY:
-			return dexterity.score
-		Enums.CharacterAbility.INTELLIGENCE:
-			return intelligence.score
-		Enums.CharacterAbility.STRENGTH:
-			return strength.score
-		Enums.CharacterAbility.WISDOM:
-			return wisdom.score
-		_:
-			return 0
+	return stats[ability].score
+
+
+# use Enums.CharacterModifier
+func getModifier(modifier : int) -> int:
+	return stats[modifier].modifier
 
 
 func takeHit(amount : int, bypassArmor : bool = false) -> void:

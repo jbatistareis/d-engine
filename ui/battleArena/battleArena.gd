@@ -33,6 +33,8 @@ func updateSize() -> void:
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
+	var cursorPos = 0
+	
 	if playerData.empty() || enemyData.empty():
 		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])
 		return
@@ -87,6 +89,7 @@ func showCursor(player : Character, move : Move) -> void:
 		if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
 			publishCommand(player, [player], move)
 			return
+		# FIXME this will crash for sure
 		elif move.targetType == Enums.MoveTargetType.FOE_ALL:
 			var targets = []
 			for index in range(3):
@@ -113,7 +116,7 @@ func showCursor(player : Character, move : Move) -> void:
 		createCursor()
 
 
-# TODO fix this repetition
+# FIXME repetition
 # TODO error out if no one is alive
 func moveCursor(direction : int) -> void:
 	if cursorOn:

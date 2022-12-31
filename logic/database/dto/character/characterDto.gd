@@ -7,7 +7,7 @@ var shortName : String = 'BSECHA'
 var type : int = Enums.CharacterType.NPC
 var model : String = 'BSECHA'
 
-var baseHp : int = 9
+var baseHp : int = 10
 var currentHp : int = 10
 var extraHp : int = 0
 
@@ -17,12 +17,7 @@ var currentLevel : int = 1
 var experiencePoints : int = 0
 var sparePoints : int = 0
 
-var strength : int = 1
-var dexterity : int = 1
-var constitution : int = 1
-var intelligence : int = 1
-var wisdom : int = 1
-var charisma : int = 1
+var stats : Array = [0, 0, 0, 0, 0, 0, 0]
 
 var inventoryShortName : String = 'BSEINV'
 

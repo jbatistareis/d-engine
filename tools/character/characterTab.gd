@@ -28,14 +28,11 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbBaseHp.value = characterDto.baseHp
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.value = characterDto.currentHp
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbExtraHp.value = characterDto.extraHp
-	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbMaxHp.value = characterDto.baseHp + characterDto.constitution
+	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbMaxHp.value = characterDto.baseHp + characterDto.stats[Enums.CharacterAbility.CONSTITUTION]
 	
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbStrength.value = characterDto.strength
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbDexterity.value = characterDto.dexterity
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbConstitution.value = characterDto.constitution
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbIntelligence.value = characterDto.intelligence
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbWisdom.value = characterDto.wisdom
-	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbCharisma.value = characterDto.charisma
+	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbStrength.value = characterDto.stats[Enums.CharacterAbility.STRENGTH]
+	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbDexterity.value = characterDto.stats[Enums.CharacterAbility.DEXTERITY]
+	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbConstitution.value = characterDto.stats[Enums.CharacterAbility.CONSTITUTION]
 	$background/mainSeparator/dataPanel/dataContainer/stats/fields/grid/sbBaseDamage.value = characterDto.baseDamage
 	
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict.select(verdicts.find(characterDto.verdictShortName))
@@ -91,7 +88,7 @@ func _on_optType_item_selected(index):
 func _on_sbBaseHp_value_changed(value):
 	characterDto.baseHp = value
 	
-	var hp = characterDto.baseHp + characterDto.constitution
+	var hp = characterDto.baseHp + characterDto.stats[Enums.CharacterAbility.CONSTITUTION]
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbMaxHp.value = hp
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.max_value = hp
 	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.value = hp
@@ -107,38 +104,25 @@ func _on_sbExtraHp_value_changed(value):
 
 
 # stats
-func _on_sbStrength_value_changed(value):
-	characterDto.strength = value
-
-
-func _on_sbDexterity_value_changed(value):
-	characterDto.dexterity = value
-
-
-func _on_sbConstitution_value_changed(value):
-	characterDto.constitution = value
-	
-	var hp = characterDto.baseHp + characterDto.constitution
-	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbMaxHp.value = hp
-	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.max_value = hp
-	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.value = hp
-
-
-func _on_sbIntelligence_value_changed(value):
-	characterDto.intelligence = value
-
-
-func _on_sbWisdom_value_changed(value):
-	characterDto.wisdom = value
-
-
-func _on_sbCharisma_value_changed(value):
-	characterDto.charisma = value
-
-
 func _on_sbBaseDamage_value_changed(value):
 	characterDto.baseDamage = value
 
+
+func _on_sbStrength_value_changed(value):
+	characterDto.stats[Enums.CharacterAbility.STRENGTH] = value
+
+
+func _on_sbDexterity_value_changed(value):
+	characterDto.stats[Enums.CharacterAbility.DEXTERITY] = value
+
+
+func _on_sbConstitution_value_changed(value):
+	characterDto.stats[Enums.CharacterAbility.CONSTITUTION] = value
+	
+	var hp = characterDto.baseHp + characterDto.stats[Enums.CharacterAbility.CONSTITUTION]
+	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbMaxHp.value = hp
+	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.max_value = hp
+	$background/mainSeparator/dataPanel/dataContainer/hp/fields/grid/sbCurrentHp.value = hp
 
 
 # misc
