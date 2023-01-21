@@ -213,6 +213,7 @@ func gainExperience(amount : int) -> void:
 	Signals.emit_signal("characterGotExperience", self, amount)
 
 
+# TODO a better curve
 func getExperienceToNextLevel() -> int:
 	return int(round(7 * pow(currentLevel, 1.3)))
 
@@ -227,12 +228,12 @@ func removeModifierByType(modifierType : int) -> void:
 	moveModifiers.erase(modifierType)
 
 
-func applyMoveModifiers(newModifiers : Array, onlyApply : bool = false) -> void:
+func applyMoveModifiers(newModifiers : Array, applyOnly : bool = false) -> void:
 	for modifier in newModifiers:
 		if Util.countIndividualModType(modifier, moveModifiers) < 3:
 			moveModifiers.append(modifier)
 	
-	if !onlyApply:
+	if !applyOnly:
 		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_P)
 		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_M)
 		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_P)
