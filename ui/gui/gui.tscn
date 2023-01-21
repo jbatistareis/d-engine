@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
@@ -10,6 +10,118 @@
 [ext_resource path="res://ui/gui/inventory.gd" type="Script" id=8]
 [ext_resource path="res://ui/gui/weapons.gd" type="Script" id=9]
 [ext_resource path="res://ui/gui/partyMenu.gd" type="Script" id=10]
+[ext_resource path="res://ui/gui/toast.gd" type="Script" id=11]
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("toast/container:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 433, -40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "hide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("toast/container:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433, 30 ), Vector2( 433, -40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "normal"
+length = 5.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("toast/container:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 5.3, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433, -40 ), Vector2( 433, 30 ), Vector2( 433, 30 ), Vector2( 433, -40 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 5.3, 5.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=1]
+resource_name = "show"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("toast/container:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 433, -40 ), Vector2( 433, 30 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="gui" type="Control"]
 anchor_right = 1.0
@@ -487,6 +599,43 @@ custom_styles/panel = ExtResource( 6 )
 
 [node name="lblTgt" type="Label" parent="battle/cursor"]
 margin_bottom = 22.0
+
+[node name="toast" type="Control" parent="."]
+anchor_right = 1.0
+rect_min_size = Vector2( 0, 240 )
+script = ExtResource( 11 )
+
+[node name="animation" type="AnimationPlayer" parent="toast"]
+root_node = NodePath("../..")
+autoplay = "RESET"
+anims/RESET = SubResource( 2 )
+anims/hide = SubResource( 3 )
+anims/normal = SubResource( 4 )
+anims/show = SubResource( 1 )
+blend_times = [ "hide", "RESET", 0.3, "hide", "hide", 0.3, "hide", "normal", 0.3, "hide", "show", 0.3, "normal", "RESET", 0.3, "normal", "hide", 0.3, "normal", "normal", 0.3, "normal", "show", 0.3, "show", "RESET", 0.3, "show", "hide", 0.3, "show", "normal", 0.3, "show", "show", 0.3 ]
+
+[node name="container" type="CenterContainer" parent="toast"]
+modulate = Color( 1, 1, 1, 0 )
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -250.0
+margin_top = -40.0
+margin_right = 250.0
+margin_bottom = -9.99993
+
+[node name="Panel" type="Panel" parent="toast/container"]
+margin_right = 500.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 500, 30 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource( 2 )
+
+[node name="lblMessage" type="Label" parent="toast/container"]
+margin_left = 250.0
+margin_top = 4.0
+margin_right = 250.0
+margin_bottom = 26.0
 
 [connection signal="hide" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_hide"]
 [connection signal="id_pressed" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_id_pressed"]

@@ -11,6 +11,7 @@ func _ready():
 
 func start(players : Array, enemies : Array) -> void:
 	if !inBattle:
+		Signals.emit_signal("hideToast")
 		inBattle = true
 		
 		self.players = players

@@ -93,9 +93,14 @@ signal guiCancel()
 signal guiBack()
 signal guiOpenExploringMenu()
 signal guiCloseExploringMenu()
-
 signal guiPartyMenuPick(index)
 signal guiPopupPartyMenu(position)
 signal guiHidePartyMenu()
 signal guiPartyMenuHidden()
+
+
+# toast related
+signal permanentToast(message)
+signal normalToast(message)
+signal hideToast()
 
