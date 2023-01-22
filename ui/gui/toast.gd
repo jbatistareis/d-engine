@@ -8,7 +8,9 @@ func _ready() -> void:
 
 
 func permanentToast(message : String) -> void:
-	$container/lblMessage.text = message
+	hideToast()
+	
+	$container/lblMessage.text = message.substr(0, 50)
 	$animation.play("show")
 
 
@@ -18,7 +20,9 @@ func hideToast() -> void:
 
 
 func normalToast(message : String) -> void:
-	$container/lblMessage.text = message
+	hideToast()
+	
+	$container/lblMessage.text = message.substr(0, 50)
 	$animation.play("normal")
 
 
