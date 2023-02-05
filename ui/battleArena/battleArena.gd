@@ -79,6 +79,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 
 
 func createCursor() -> void:
+	cursorOn = true
 	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
 
 	Signals.emit_signal(
@@ -86,9 +87,6 @@ func createCursor() -> void:
 		enemyNode.get_child(0).character.name,
 		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
 	)
-	
-	yield(get_tree().create_timer(0.1), "timeout")
-	cursorOn = true
 
 
 # TODO pick from the players group
