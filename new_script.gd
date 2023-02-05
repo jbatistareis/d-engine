@@ -65,7 +65,7 @@ func _ready() -> void:
 	item2.shortName = "ITM2"
 	item3.shortName = "ITM3"
 	item4.shortName = "ITM4"
-	item5.shortName = "ITM5"
+	item5.shortName = "ITM4"
 	
 	Signals.emit_signal("characterReceivedItem", player, item1)
 	Signals.emit_signal("characterReceivedItem", player, item2)
