@@ -3,11 +3,14 @@ extends Spatial
 const _ENEMY_FRAME_RATIO : float = 1.875
 const _ENEMY_MAP : Array = [1, 2, 0]
 const _PREFIXES : Array = ["[A] ", "[B] ", "[C] "]
+const _ENEMIES_TRANSLATION : Array = [0.0, -1.25, 0.0]
+const _ENEMY_ROTAION : Array = [[25, 0, -25], [25, 10, -10], [25, 0, -25]]
 
 var enemyFrameSize : Vector2
 onready var enemiesNode : Node = $ViewportContainer/Viewport/arena/enemies
 onready var battleCamera : Camera = $ViewportContainer/Viewport/arena/pivot/Camera
 
+var enemySize : int = 0
 var cursorOn : bool = false
 var cursorPos : int = 0
 var cursorPlayer : Character
@@ -34,16 +37,22 @@ func updateSize() -> void:
 
 func setup(playerData : Array, enemyData : Array) -> void:
 	var cursorPos = 0
+	var enemySize = enemyData.size()
 	
 	if playerData.empty() || enemyData.empty():
 		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])
 		return
 	
-	for node in enemiesNode.get_children():
-		for enemy in node.get_children():
-			enemy.queue_free()
-	
 	var i = 0
+	for enemy in enemiesNode.get_children():
+		for model in enemy.get_children():
+			model.queue_free()
+		
+		enemy.rotation_degrees.y = _ENEMY_ROTAION[enemyData.size() - 1][i]
+		i += 1
+	enemiesNode.transform.origin.x = _ENEMIES_TRANSLATION[enemyData.size() - 1]
+	
+	i = 0
 	for enemy in enemyData:
 		enemy.shortName = _PREFIXES[i] + enemy.shortName
 		enemy.name = _PREFIXES[i] + enemy.name
@@ -55,7 +64,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	var heigth = width * _ENEMY_FRAME_RATIO
 	enemyFrameSize = Vector2(width, heigth)
 	
-	for index in range(5):
+	for index in range(3):
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName.substr(4)].instance()
 			scene.character = enemyData[index]
@@ -102,6 +111,7 @@ func showCursor(player : Character, move : Move) -> void:
 			return
 		
 		# TODO error out if no one is alive
+		cursorPos = cursorPos % (enemySize - 1)
 		if enemiesNode.get_child(_ENEMY_MAP[cursorPos]).get_child(0).character.currentHp <= 0:
 			for index in range(3):
 				if enemiesNode.get_child(_ENEMY_MAP[index]).get_child(0).character.currentHp > 0:
