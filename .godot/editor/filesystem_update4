@@ -8,3 +8,7 @@ res://ui/gui/partyMenu.gd
 res://ui/gui/inventory.gd
 res://ui/gui/weapons.gd
 res://ui/gui/battle.gd
+res://ui/gui/battle/inventory.gd
+res://ui/gui/battle/cursor.gd
+res://ui/gui/toast.gd
+res://ui/battleArena/arena.gd

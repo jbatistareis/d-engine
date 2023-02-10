@@ -1,13 +1,17 @@
 extends Node3D
 
+var tween : Tween
+
 
 func _ready() -> void:
-	Signals.connect("battleStarted",Callable(self,"reset"))
-	Signals.connect("battleWon",Callable(self,"win"))
-	Signals.connect("battleLost",Callable(self,"lose"))
-	Signals.connect("battleEnded",Callable(self,"exit"))
-	Signals.connect("commandsPaused",Callable(self,"pause"))
-	Signals.connect("commandsResumed",Callable(self,"resume"))
+	Signals.battleStarted.connect(reset)
+	Signals.battleWon.connect(win)
+	Signals.battleLost.connect(lose)
+	Signals.battleEnded.connect(exit)
+	Signals.commandsPaused.connect(pause)
+	Signals.commandsResumed.connect(resume)
+	
+	tween = get_tree().create_tween()
 
 
 func reset(_ignore1, _ignore2) -> void:
@@ -29,15 +33,15 @@ func exit() -> void:
 
 
 func pause() -> void:
-	$Tween.remove_all()
-	$Tween.interpolate_method(self, "enemyPlaybackSpeed", 1, 0, 0.25)
-	$Tween.start()
+	tween.remove_all()
+	tween.tween_method(enemyPlaybackSpeed, 1, 0, 0.25)
+	tween.start()
 
 
 func resume() -> void:
-	$Tween.remove_all()
-	$Tween.interpolate_method(self, "enemyPlaybackSpeed", 0, 1, 0.25)
-	$Tween.start()
+	tween.remove_all()
+	tween.tween_method(enemyPlaybackSpeed, 0, 1, 0.25)
+	tween.start()
 
 
 func enemyPlaybackSpeed(value : float) -> void:
