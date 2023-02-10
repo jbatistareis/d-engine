@@ -113,11 +113,11 @@ func _on_itemList_item_selected(index: int) -> void:
 
 
 func showWindow() -> void:
-	Signals.connect("guiPartyMenuPick",Callable(self,"partyPick"))
-	Signals.connect("guiCancel",Callable(self,"back"))
-	Signals.connect("guiCloseExploringMenu",Callable(self,"exit"))
+	Signals.guiPartyMenuPick.connect(partyPick)
+	Signals.guiCancel.connect(back)
+	Signals.guiCloseExploringMenu.connect(exit)
 	
-	Signals.emit_signal("guiPopupPartyMenu", $"../menu/box/btnWpns".global_position + Vector2($"../menu/box/btnWpns".size.x + 10, 0))
+	Signals.guiPopupPartyMenu.emit($"../menu/box/btnWpns".global_position + Vector2($"../menu/box/btnWpns".size.x + 10, 0))
 
 
 func partyPick(id: int) -> void:
@@ -135,7 +135,7 @@ func partyPick(id: int) -> void:
 		currentIndex = $main/itemList.get_selected_items()[0]
 	
 	$itemMenu.hide()
-	Signals.emit_signal("guiHidePartyMenu")
+	Signals.guiHidePartyMenu.emit()
 	$main/itemList.clear()
 	
 	inventorySummary = InventorySummary.new(character.inventory.weapons)
@@ -169,19 +169,19 @@ func back() -> void:
 		$itemMenu.hide()
 	elif !$itemMenu.visible:
 		exit()
-		Signals.emit_signal("guiBack")
+		Signals.guiBack.emit()
 
 
 func exit() -> void:
-	Signals.disconnect("guiPartyMenuPick",Callable(self,"partyPick"))
-	Signals.disconnect("guiCancel",Callable(self,"back"))
-	Signals.disconnect("guiCloseExploringMenu",Callable(self,"exit"))
-	if Signals.is_connected("guiPartyMenuHidden",Callable(self,"back")):
-		Signals.disconnect("guiPartyMenuHidden",Callable(self,"back"))
+	Signals.guiPartyMenuPick.disconnect(partyPick)
+	Signals.guiCancel.disconnect(back)
+	Signals.guiCloseExploringMenu.disconnect(exit)
+	if Signals.guiPartyMenuHidden.is_connected(back):
+		Signals.guiPartyMenuHidden.disconnect(back)
 	
 	visible = false
 	$itemMenu.hide()
-	Signals.emit_signal("guiHidePartyMenu")
+	Signals.guiHidePartyMenu.emit()
 
 
 func _on_itemList_item_activated(index : int) -> void:
@@ -198,18 +198,16 @@ func _on_itemList_item_activated(index : int) -> void:
 	$itemMenu.set_current_index(0)
 
 
-# TODO party
 func _on_itemMenu_id_pressed(menuId : int) -> void:
 	match menuId:
 		0:
-			Signals.emit_signal(
-				"characterEquipedWeapon",
+			Signals.characterEquipedWeapon.emit(
 				character,
 				inventorySummary.summary[$main/itemList.get_selected_items()[0]].item)
 			partyPick(id)
 		
 		1:
-			Signals.emit_signal("characterDroppedWeapon",
+			Signals.characterDroppedWeapon.emit(
 				character,
 				inventorySummary.summary[$main/itemList.get_selected_items()[0]].item)
 			partyPick(id)

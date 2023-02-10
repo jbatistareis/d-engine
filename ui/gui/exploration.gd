@@ -5,13 +5,13 @@ var lastBtnIdx : int = 0
 
 
 func _ready() -> void:
-	Signals.connect("guiOpenExploringMenu",Callable(self,"show"))
-	Signals.connect("guiCloseExploringMenu",Callable(self,"hide"))
+	Signals.guiOpenExploringMenu.connect(showMenu)
+	Signals.guiCloseExploringMenu.connect(hideMenu)
 
 
 func focus() -> void:
-	if Signals.is_connected("guiBack",Callable(self,"focus")):
-		Signals.disconnect("guiBack",Callable(self,"focus"))
+	if Signals.guiBack.is_connected(focus):
+		Signals.guiBack.disconnect(focus)
 	
 	for btn in $menu/box.get_children():
 		btn.disabled = false
@@ -21,7 +21,7 @@ func focus() -> void:
 	$menu/box.get_child(lastBtnIdx).grab_focus()
 
 
-func show() -> void:
+func showMenu() -> void:
 	for stat in $party.get_children():
 		stat.queue_free()
 	
@@ -34,7 +34,7 @@ func show() -> void:
 	focus()
 
 
-func hide() -> void:
+func hideMenu() -> void:
 	visible = false
 	lastBtnIdx = 0
 
@@ -58,8 +58,8 @@ func buttonPressed(id : int) -> void:
 		_:
 			Signals.emit_signal("guiCloseExploringMenu")
 	
-	if !Signals.is_connected("guiBack",Callable(self,"focus")):
-		Signals.connect("guiBack",Callable(self,"focus"))
+	if !Signals.guiBack.is_connected(focus):
+		Signals.guiBack.connect(focus)
 
 
 func _on_btnMap_pressed() -> void:
