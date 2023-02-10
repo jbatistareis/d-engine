@@ -2,9 +2,9 @@ extends Control
 
 
 func _ready() -> void:
-	Signals.connect("permanentToast",Callable(self,"permanentToast"))
-	Signals.connect("hideToast",Callable(self,"hideToast"))
-	Signals.connect("normalToast",Callable(self,"normalToast"))
+	Signals.permanentToast.connect(permanentToast)
+	Signals.hideToast.connect(hideToast)
+	Signals.normalToast.connect(normalToast)
 
 
 func permanentToast(message : String) -> void:
