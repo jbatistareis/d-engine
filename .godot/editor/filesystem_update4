@@ -7,3 +7,4 @@ res://ui/gui/exploration.gd
 res://ui/gui/partyMenu.gd
 res://ui/gui/inventory.gd
 res://ui/gui/weapons.gd
+res://ui/gui/battle.gd
