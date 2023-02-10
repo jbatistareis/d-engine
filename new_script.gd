@@ -18,8 +18,8 @@ func _ready() -> void:
 	player.getStat(Enums.CharacterAbility.CONSTITUTION).score = 15
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
-	Signals.connect("playerArrivedLocation",Callable(self,'printEntering'))
-	Signals.connect("playerChangedRoom",Callable(self,'printTraveling'))
+	Signals.playerArrivedLocation.connect(printEntering)
+	Signals.playerChangedRoom.connect(printTraveling)
 	
 	# TEST
 	var armor = Armor.new().fromShortName("BSEARM")
