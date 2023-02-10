@@ -35,13 +35,13 @@ func exit() -> void:
 func pause() -> void:
 	tween.remove_all()
 	tween.tween_method(enemyPlaybackSpeed, 1, 0, 0.25)
-	tween.start()
+	tween.play()
 
 
 func resume() -> void:
 	tween.remove_all()
 	tween.tween_method(enemyPlaybackSpeed, 0, 1, 0.25)
-	tween.start()
+	tween.play()
 
 
 func enemyPlaybackSpeed(value : float) -> void:

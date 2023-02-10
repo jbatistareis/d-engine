@@ -23,7 +23,7 @@ func _ready() -> void:
 	Signals.cameraSnapped.connect(teleport)
 	
 	tween = get_tree().create_tween()
-	tween.connect("tween_all_completed",Callable(self,"freeCamera"))
+	tween.tween_all_completed.connect(freeCamera)
 
 
 func _process(delta : float) -> void:
@@ -75,31 +75,29 @@ func moveCamera(offsetDirection : int) -> void:
 		
 		GameManager.cameraMoving = false
 	else:
-		tween.interpolate_property(
+		tween.tween_property(
 			self,
 			"transform:origin",
-			transform.origin,
 			transform.origin + (Vector3(
 				_SIN_TABLE[GameManager.direction],
 				0,
 				_COS_TABLE[GameManager.direction]) * offsetDirection),
 			GameParameters.MOVEMENT_DURATION
 		)
-		tween.start()
+		tween.play()
 
 
 # use Enums.CameraOffsetRotation
 func rotateCamera(offsetRotation : int) -> void:
 	GameManager.cameraMoving = true
 	
-	tween.interpolate_property(
+	tween.tween_property(
 		self,
 		"rotation:y",
-		rotation.y,
 		rotation.y + (_ROTATE_90 * offsetRotation),
 		GameParameters.ROTATION_DURATION
 	)
-	tween.start()
+	tween.play()
 
 
 func inputFreeFlight() -> void:
@@ -112,42 +110,38 @@ func inputFreeFlight() -> void:
 		GameManager.cameraMoving = true
 		
 		if elevationUp:
-			tween.interpolate_property(
+			tween.tween_property(
 				self,
 				"transform:origin:y",
-				transform.origin.y,
 				transform.origin.y + 2,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
-			tween.start()
+			tween.play()
 		
 		if elevationDown:
-			tween.interpolate_property(
+			tween.tween_property(
 				self,
 				"transform:origin:y",
-				transform.origin.y,
 				transform.origin.y - 2,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
-			tween.start()
+			tween.play()
 		
 		if pitchUp && ($camera.rotation.x <= _ROTATE_45):
-			tween.interpolate_property(
+			tween.tween_property(
 				$camera,
 				"rotation:x",
-				$camera.rotation.x,
 				$camera.rotation.x + _ROTATE_45,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
-			tween.start()
+			tween.play()
 		
 		if pitchDown && ($camera.rotation.x >= -_ROTATE_90):
-			tween.interpolate_property(
+			tween.tween_property(
 				$camera,
 				"rotation:x",
-				$camera.rotation.x,
 				$camera.rotation.x - _ROTATE_45,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
-			tween.start()
+			tween.play()
 
