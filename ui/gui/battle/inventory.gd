@@ -7,8 +7,8 @@ var inventorySummary : InventorySummary
 
 
 func _ready() -> void:
-	Signals.connect("battleInventoryShow",Callable(self,"showWindow"))
-	Signals.connect("guiCancel",Callable(self,"hide"))
+	Signals.battleInventoryShow.connect(showWindow)
+	Signals.guiCancel.connect(hideWindow)
 
 
 func showWindow(character : Character) -> void:
@@ -39,13 +39,13 @@ func showWindow(character : Character) -> void:
 		$ItemList.select(0)
 
 
-func hide() -> void:
+func hideWindow() -> void:
 	if visible:
 		visible = false
-		Signals.emit_signal("battleShowCharacterMoves", character)
+		Signals.battleShowCharacterMoves.emit(character)
 
 
 func _on_ItemList_item_activated(index):
 	visible = false
-	Signals.emit_signal("battleCursorShow", character, ItemMove.new(inventorySummary.summary[index].item))
+	Signals.battleCursorShow.emit(character, ItemMove.new(inventorySummary.summary[index].item))
 
