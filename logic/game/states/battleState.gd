@@ -2,8 +2,8 @@ class_name BattleState
 extends State
 
 
-func _init() -> void:
-	Signals.connect("battleEnded", self, "exitState")
+func _init():
+	Signals.connect("battleEnded",Callable(self,"exitState"))
 
 
 func handleInput() -> void:

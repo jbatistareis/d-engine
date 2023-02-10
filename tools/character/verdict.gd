@@ -13,7 +13,7 @@ func loadData(verdictDto : VerdictDTO) -> void:
 	
 	var index = 1
 	for action in verdictDto.actions:
-		var card = actionPkdScn.instance()
+		var card = actionPkdScn.instantiate()
 		card.action = action
 		card.index = index
 		index =+ 1

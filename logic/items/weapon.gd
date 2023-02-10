@@ -9,7 +9,7 @@ var modifier : int # returns Character.Modifier enum
 var cdPre : int
 var cdPos : int
 
-# moves should access calculateDamage on its logic
+# moves should access calculateDamage checked its logic
 var move1 : Move = null
 var move2 : Move = null
 var move3 : Move = null
@@ -31,17 +31,17 @@ func fromDTO(weaponDto : WeaponDTO) -> Weapon:
 	self.cdPre = weaponDto.cdPre
 	self.cdPos = weaponDto.cdPos
 	
-	if !weaponDto.move1ShortName.empty():
+	if !weaponDto.move1ShortName.is_empty():
 		self.move1 = Move.new().fromShortName(weaponDto.move1ShortName)
 		self.move1.cdPre += self.cdPre
 		self.move1.cdPos += self.cdPos
 	
-	if !weaponDto.move2ShortName.empty():
+	if !weaponDto.move2ShortName.is_empty():
 		self.move2 = Move.new().fromShortName(weaponDto.move2ShortName)
 		self.move2.cdPre += self.cdPre
 		self.move2.cdPos += self.cdPos
 	
-	if !weaponDto.move3ShortName.empty():
+	if !weaponDto.move3ShortName.is_empty():
 		self.move3 = Move.new().fromShortName(weaponDto.move3ShortName)
 		self.move3.cdPre += self.cdPre
 		self.move3.cdPos += self.cdPos

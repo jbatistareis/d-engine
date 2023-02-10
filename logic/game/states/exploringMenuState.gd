@@ -2,9 +2,9 @@ class_name ExploringMenuState
 extends State
 
 
-func _init() -> void:
+func _init():
 	Signals.emit_signal("guiOpenExploringMenu")
-	Signals.connect("guiCloseExploringMenu", self, "exit")
+	Signals.connect("guiCloseExploringMenu",Callable(self,"exit"))
 
 
 func handleInput() -> void:

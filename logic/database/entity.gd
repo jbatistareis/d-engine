@@ -2,7 +2,7 @@ class_name Entity
 
 var id : int
 var name : String
-var shortName : String = 'ENTITY' setget setShortName
+var shortName : String = 'ENTITY' : set = setShortName
 
 
 func setShortName(value : String) -> void:

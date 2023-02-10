@@ -65,12 +65,12 @@ func enter(character, direction : int, battleTriggered : bool) -> void:
 	character.currentRoom = id
 	
 	if character.type == Enums.CharacterType.PC:
-		if !foeShortNameGroups.empty() && battleTriggered:
+		if !foeShortNameGroups.is_empty() && battleTriggered:
 			var enemies = []
 			
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size(), -1)]
 			for shortName in chosenGroup:
-				if !shortName.empty():
+				if !shortName.is_empty():
 					var enemy = Character.new().fromShortName(shortName)
 					enemy.currentRoom = id
 					enemies.append(enemy)

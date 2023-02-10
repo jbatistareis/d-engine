@@ -1,11 +1,11 @@
-extends Tabs
+extends TabBar
 
 signal loadedLocationDto(locationDto)
 
 const _SAVE_MESSAGE : String = 'Do you wish to save/overwrite the file \'%s\'?'
 const _PREVIEW_TITLE : String = '%s (%s) preview'
 
-var locationDto : LocationDTO setget setLocationDto
+var locationDto : LocationDTO : set = setLocationDto
 
 
 func _ready() -> void:
@@ -42,7 +42,7 @@ func _on_txtName_text_changed(new_text):
 
 func _on_txtShortName_text_changed(new_text : String):
 	locationDto.shortName = new_text
-	$mainContainer/buttons/btnSave.disabled = new_text.empty()
+	$mainContainer/buttons/btnSave.disabled = new_text.is_empty()
 
 
 func _on_txtDescription_text_changed(new_text):

@@ -8,7 +8,7 @@ var atkOffset : float
 var cdOffset : float
 
 
-func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre) -> void:
+func _init(executorCharacter,targets : Array,move : Move,executorCharacter,move.cdPre):
 	self.targets = targets
 	self.move = move
 	
@@ -42,7 +42,7 @@ func execute() -> void:
 	# TODO enemy/player animations
 	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
 	if executorCharacter.type != Enums.CharacterType.PC:
-		while yield(Signals, "finishedBattleAnimation") != executorCharacter:
+		while await Signals.finishedBattleAnimation != executorCharacter:
 			if !confirmExecution():
 				return
 			pass

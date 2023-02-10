@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 # Every battle character must have the following animations:
 # idle, damage, death, attack[...]
@@ -12,20 +12,20 @@ var character : Character
 
 
 func _ready() -> void:
-	Signals.connect("startedBattleAnimation", self, "play")
-	Signals.connect("characterTookDamage", self, "damage")
-	Signals.connect("characterDied", self, "die")
+	Signals.connect("startedBattleAnimation",Callable(self,"play"))
+	Signals.connect("characterTookDamage",Callable(self,"damage"))
+	Signals.connect("characterDied",Callable(self,"die"))
 	
 	$AnimationPlayer.play("idle")
 	$AnimationPlayer.seek(randf() * $AnimationPlayer.current_animation_length)
 
 
 func play(character : Character, animation : String) -> void:
-	if (character == self.character) && (character.currentHp > 0) && (!animation.empty() || (animation != null)):
+	if (character == self.character) && (character.currentHp > 0) && (!animation.is_empty() || (animation != null)):
 		$AnimationPlayer.play(animation)
 		
 		if animation.begins_with("attack"):
-			yield($AnimationPlayer, "animation_finished")
+			await $AnimationPlayer.animation_finished
 			if character.currentHp > 0:
 				$AnimationPlayer.play("idle")
 
@@ -36,7 +36,7 @@ func damage(character : Character) -> void:
 		var previousPosition = $AnimationPlayer.current_animation_position
 		
 		$AnimationPlayer.play("damage")
-		yield($AnimationPlayer, "animation_finished")
+		await $AnimationPlayer.animation_finished
 		
 		play(character, previousAnimation)
 		if character.currentHp > 0:

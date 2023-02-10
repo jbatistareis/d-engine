@@ -2,7 +2,7 @@ extends MarginContainer
 
 var healthBarsPackedScene : PackedScene = preload("res://ui/gui/battle/healthBars.tscn")
 var timerBarPackedScene : PackedScene = preload("res://ui/gui/battle/timerBar.tscn")
-var characters : Array = [] setget setCharacters
+var characters : Array = [] : set = setCharacters
 
 
 func setCharacters(value : Array) -> void:
@@ -10,16 +10,16 @@ func setCharacters(value : Array) -> void:
 	
 	for child in $characters.get_children():
 		child.queue_free()
-	yield(get_tree().create_timer(0.1), "timeout")
+	await get_tree().create_timer(0.1).timeout
 	
 	for character in characters:
 		var label = Label.new()
 		label.text = character.name
 		
-		var healthBars = healthBarsPackedScene.instance()
+		var healthBars = healthBarsPackedScene.instantiate()
 		healthBars.character = character
 		
-		var timerBar = timerBarPackedScene.instance()
+		var timerBar = timerBarPackedScene.instantiate()
 		timerBar.character = character
 		
 		$characters.add_child(label)

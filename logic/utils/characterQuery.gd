@@ -68,7 +68,7 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 	return matches
 
 
-# percentage is clamped, 0.05~0.95
+# percentage is clamp, 0.05~0.95
 static func findByHpLt(characters : Array, percent : float) -> Array:
 	var matches = []
 	percent = clamp(percent, 0.05 ,0.95)
@@ -80,7 +80,7 @@ static func findByHpLt(characters : Array, percent : float) -> Array:
 	return matches
 
 
-# percentage is clamped, 0.05~0.95
+# percentage is clamp, 0.05~0.95
 static func findByHpGt(characters : Array, percent : float) -> Array:
 	var matches = []
 	percent = clamp(percent, 0.05 ,0.95)

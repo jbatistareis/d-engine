@@ -2,12 +2,12 @@ extends TabContainer
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedArmor", self, "changeTab", [0])
-	EditorSignals.connect("selectedInventory", self, "changeTab", [3])
-	EditorSignals.connect("selectedItem", self, "changeTab", [4])
-	EditorSignals.connect("selectedMove", self, "changeTab", [7])
-	EditorSignals.connect("selectedVerdict", self, "changeTab", [8])
-	EditorSignals.connect("selectedWeapon", self, "changeTab", [9])
+	EditorSignals.connect("selectedArmor",Callable(self,"changeTab").bind(0))
+	EditorSignals.connect("selectedInventory",Callable(self,"changeTab").bind(3))
+	EditorSignals.connect("selectedItem",Callable(self,"changeTab").bind(4))
+	EditorSignals.connect("selectedMove",Callable(self,"changeTab").bind(7))
+	EditorSignals.connect("selectedVerdict",Callable(self,"changeTab").bind(8))
+	EditorSignals.connect("selectedWeapon",Callable(self,"changeTab").bind(9))
 	
 	GameManager.testing = true
 

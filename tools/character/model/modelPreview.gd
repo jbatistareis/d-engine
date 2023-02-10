@@ -1,9 +1,9 @@
-extends Spatial
+extends Node3D
 
 const _ROTATE_BUTTON : float = PI / 4
 
 
-func view(model : Spatial) -> void:
+func view(model : Node3D) -> void:
 	for node in $blockArea.get_children():
 		node.queue_free()
 	

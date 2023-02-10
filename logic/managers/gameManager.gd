@@ -1,19 +1,19 @@
 extends Node
 
-onready var currentState : State = getState(Enums.States.EXPLORING)
+@onready var currentState : State = getState(Enums.States.EXPLORING)
 
 var player : Character
-var party : Array = [] setget ,getParty
+var party : Array = [] : get = getParty
 
 # control vars
 var testing : bool = false
 var cameraMoving : bool = false
-var direction : int setget setDirection
+var direction : int : set = setDirection
 
 
 func _ready() -> void :
-	Signals.connect("playerLoaded", self, "loadData")
-	Signals.connect("battleStarted", self, "startBattleState")
+	Signals.connect("playerLoaded",Callable(self,"loadData"))
+	Signals.connect("battleStarted",Callable(self,"startBattleState"))
 
 
 # TODO proper party

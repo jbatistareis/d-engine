@@ -24,7 +24,7 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 	var lbl = $main/cards/current/data if current else $main/cards/new/data
 	
 	if weapon != null:
-		lbl.bbcode_text = _WEAPON_STATS_MASK_MAIN % [
+		lbl.text = _WEAPON_STATS_MASK_MAIN % [
 			weapon.name,
 			_EQUIPED_MASK if current else _NOT_EQUIPED_MASK,
 			Enums.CharacterModifier.keys()[weapon.modifier],
@@ -37,7 +37,7 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 		
 		for move in [weapon.move1, weapon.move2, weapon.move3]:
 			if move != null:
-				lbl.bbcode_text += _WEAPON_STATS_MASK_MOVE % [
+				lbl.text += _WEAPON_STATS_MASK_MOVE % [
 					move.name,
 					targetTypeStr(move.targetType),
 					1000.0 * GameParameters.GCD * move.cdPre / 1000.0,
@@ -51,9 +51,9 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 					Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.targetModifiers)
 				]
 			else:
-				lbl.bbcode_text += _WEAPON_STATS_MASK_NO_MOVE
+				lbl.text += _WEAPON_STATS_MASK_NO_MOVE
 	else:
-		lbl.bbcode_text = _WEAPON_NO_STATS_MASK
+		lbl.text = _WEAPON_NO_STATS_MASK
 	
 	lbl.bbcode_enabled = true
 
@@ -113,25 +113,25 @@ func _on_itemList_item_selected(index: int) -> void:
 
 
 func showWindow() -> void:
-	Signals.connect("guiPartyMenuPick", self, "partyPick")
-	Signals.connect("guiCancel", self, "back")
-	Signals.connect("guiCloseExploringMenu", self, "exit")
+	Signals.connect("guiPartyMenuPick",Callable(self,"partyPick"))
+	Signals.connect("guiCancel",Callable(self,"back"))
+	Signals.connect("guiCloseExploringMenu",Callable(self,"exit"))
 	
-	Signals.emit_signal("guiPopupPartyMenu", $"../menu/box/btnWpns".rect_global_position + Vector2($"../menu/box/btnWpns".rect_size.x + 10, 0))
+	Signals.emit_signal("guiPopupPartyMenu", $"../menu/box/btnWpns".global_position + Vector2($"../menu/box/btnWpns".size.x + 10, 0))
 
 
 func partyPick(id: int) -> void:
 	self.id = id
 	self.character = GameManager.party[id]
 	
-	$main/itemList.visible = !character.inventory.weapons.empty()
-	$main/lblNoWeap.visible = character.inventory.weapons.empty()
+	$main/itemList.visible = !character.inventory.weapons.is_empty()
+	$main/lblNoWeap.visible = character.inventory.weapons.is_empty()
 	
 	$main/itemList.modulate = $main/itemList.modulate.lightened(1)
 	$Panel.modulate = $Panel.modulate.lightened(1)
 	
 	var currentIndex = 0
-	if !$main/itemList.get_selected_items().empty():
+	if !$main/itemList.get_selected_items().is_empty():
 		currentIndex = $main/itemList.get_selected_items()[0]
 	
 	$itemMenu.hide()
@@ -156,7 +156,7 @@ func partyPick(id: int) -> void:
 		currentIndex -= 1
 	
 	$main/itemList.grab_focus()
-	if !$main/itemList.items.empty():
+	if !$main/itemList.items.is_empty():
 		$main/itemList.select(currentIndex)
 	
 	updateLabels()
@@ -173,11 +173,11 @@ func back() -> void:
 
 
 func exit() -> void:
-	Signals.disconnect("guiPartyMenuPick", self, "partyPick")
-	Signals.disconnect("guiCancel", self, "back")
-	Signals.disconnect("guiCloseExploringMenu", self, "exit")
-	if Signals.is_connected("guiPartyMenuHidden", self, "back"):
-		Signals.disconnect("guiPartyMenuHidden", self, "back")
+	Signals.disconnect("guiPartyMenuPick",Callable(self,"partyPick"))
+	Signals.disconnect("guiCancel",Callable(self,"back"))
+	Signals.disconnect("guiCloseExploringMenu",Callable(self,"exit"))
+	if Signals.is_connected("guiPartyMenuHidden",Callable(self,"back")):
+		Signals.disconnect("guiPartyMenuHidden",Callable(self,"back"))
 	
 	visible = false
 	$itemMenu.hide()
@@ -190,9 +190,9 @@ func _on_itemList_item_activated(index : int) -> void:
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $main/itemList.rect_global_position + Vector2((index % 2) * 312 + 190, floor(index / 2) * 27 + 10)
+	var menuPosition = $main/itemList.global_position + Vector2((index % 2) * 312 + 190, floor(index / 2) * 27 + 10)
 	
-	$itemMenu.rect_position = menuPosition
+	$itemMenu.position = menuPosition
 	$itemMenu.popup()
 	$itemMenu.grab_focus()
 	$itemMenu.set_current_index(0)

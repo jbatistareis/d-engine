@@ -7,13 +7,13 @@ var model : String
 var baseHp : int
 var currentHp : int
 var extraHp : int
-var maxHp : int setget ,getMaxHp
+var maxHp : int : get = getMaxHp
 
 var baseDamage : int
 
 var currentLevel : int
 var experiencePoints : int
-var experienceToNextLevel : int setget ,getExperienceToNextLevel
+var experienceToNextLevel : int : get = getExperienceToNextLevel
 var sparePoints : int
 
 var stats : Array = []

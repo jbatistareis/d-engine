@@ -1,11 +1,11 @@
-extends Tabs
+extends TabBar
 
 var itemDto : ItemDTO = ItemDTO.new()
 var list : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedItem", self, "loadItem")
+	EditorSignals.connect("selectedItem",Callable(self,"loadItem"))
 	
 	loadAllData()
 	setFields()

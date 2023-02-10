@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const _ROTATE_ORIENTATION : float = PI / 2
 const _ROTATE_BUTTON : float = PI / 4
@@ -25,7 +25,7 @@ func _on_Room_changeModel(locationShortName : String, model : String, orientatio
 	for node in $blockArea.get_children():
 		node.queue_free()
 	
-	$blockArea.add_child(load(_MODEL_FILE % [locationShortName, model]).instance())
+	$blockArea.add_child(load(_MODEL_FILE % [locationShortName, model]).instantiate())
 	$pivot.rotation.y = (_ROTATE_ORIENTATION * orientation) + _ROTATE_BUTTON
 
 

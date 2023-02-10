@@ -3,78 +3,78 @@
 [ext_resource path="res://tools/character/action/action.gd" type="Script" id=1]
 
 [node name="action" type="PanelContainer"]
-margin_right = 445.0
-margin_bottom = 62.0
+offset_right = 445.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 script = ExtResource( 1 )
 
 [node name="container" type="HBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 438.0
-margin_bottom = 55.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 438.0
+offset_bottom = 55.0
 
 [node name="lblPosition" type="Label" parent="container"]
-margin_right = 30.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 30, 0 )
+offset_right = 30.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 30, 0 )
 size_flags_vertical = 3
 text = "%d "
 align = 2
 valign = 1
 
 [node name="grid" type="GridContainer" parent="container"]
-margin_left = 34.0
-margin_right = 431.0
-margin_bottom = 48.0
+offset_left = 34.0
+offset_right = 431.0
+offset_bottom = 48.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 4
 
 [node name="lblActSelf" type="Label" parent="container/grid"]
-margin_right = 60.0
-margin_bottom = 22.0
+offset_right = 60.0
+offset_bottom = 22.0
 size_flags_vertical = 3
 text = "Self: "
 valign = 1
 
 [node name="lblAcSelfData" type="Label" parent="container/grid"]
-margin_left = 64.0
-margin_right = 187.0
-margin_bottom = 22.0
+offset_left = 64.0
+offset_right = 187.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 valign = 1
 
 [node name="lblActTarget" type="Label" parent="container/grid"]
-margin_left = 191.0
-margin_right = 271.0
-margin_bottom = 22.0
+offset_left = 191.0
+offset_right = 271.0
+offset_bottom = 22.0
 size_flags_vertical = 3
 text = "Target: "
 valign = 1
 
 [node name="lblAcTargetData" type="Label" parent="container/grid"]
-margin_left = 275.0
-margin_right = 397.0
-margin_bottom = 22.0
+offset_left = 275.0
+offset_right = 397.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 size_flags_vertical = 1
 valign = 1
 
 [node name="lblActMove" type="Label" parent="container/grid"]
-margin_top = 26.0
-margin_right = 60.0
-margin_bottom = 48.0
+offset_top = 26.0
+offset_right = 60.0
+offset_bottom = 48.0
 size_flags_vertical = 3
 text = "Move: "
 valign = 1
 
 [node name="lnkActMoveData" type="LinkButton" parent="container/grid"]
-margin_left = 64.0
-margin_top = 26.0
-margin_right = 187.0
-margin_bottom = 48.0
+offset_left = 64.0
+offset_top = 26.0
+offset_right = 187.0
+offset_bottom = 48.0
 size_flags_horizontal = 3
 
 [connection signal="pressed" from="container/grid/lnkActMoveData" to="." method="_on_lnkActMoveData_pressed"]

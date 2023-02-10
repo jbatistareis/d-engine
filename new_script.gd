@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 var player : Character
 
@@ -18,8 +18,8 @@ func _ready() -> void:
 	player.getStat(Enums.CharacterAbility.CONSTITUTION).score = 15
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
-	Signals.connect("playerArrivedLocation", self, 'printEntering')
-	Signals.connect("playerChangedRoom", self, 'printTraveling')
+	Signals.connect("playerArrivedLocation",Callable(self,'printEntering'))
+	Signals.connect("playerChangedRoom",Callable(self,'printTraveling'))
 	
 	# TEST
 	var armor = Armor.new().fromShortName("BSEARM")

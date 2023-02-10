@@ -2,9 +2,9 @@ extends Control
 
 
 func _ready() -> void:
-	Signals.connect("permanentToast", self, "permanentToast")
-	Signals.connect("hideToast", self, "hideToast")
-	Signals.connect("normalToast", self, "normalToast")
+	Signals.connect("permanentToast",Callable(self,"permanentToast"))
+	Signals.connect("hideToast",Callable(self,"hideToast"))
+	Signals.connect("normalToast",Callable(self,"normalToast"))
 
 
 func permanentToast(message : String) -> void:
@@ -15,7 +15,7 @@ func permanentToast(message : String) -> void:
 
 
 func hideToast() -> void:
-	if $container.rect_position.y > -35:
+	if $container.position.y > -35:
 		$animation.play("hide")
 
 

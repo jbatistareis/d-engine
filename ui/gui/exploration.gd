@@ -5,13 +5,13 @@ var lastBtnIdx : int = 0
 
 
 func _ready() -> void:
-	Signals.connect("guiOpenExploringMenu", self, "show")
-	Signals.connect("guiCloseExploringMenu", self, "hide")
+	Signals.connect("guiOpenExploringMenu",Callable(self,"show"))
+	Signals.connect("guiCloseExploringMenu",Callable(self,"hide"))
 
 
 func focus() -> void:
-	if Signals.is_connected("guiBack", self, "focus"):
-		Signals.disconnect("guiBack", self, "focus")
+	if Signals.is_connected("guiBack",Callable(self,"focus")):
+		Signals.disconnect("guiBack",Callable(self,"focus"))
 	
 	for btn in $menu/box.get_children():
 		btn.disabled = false
@@ -26,7 +26,7 @@ func show() -> void:
 		stat.queue_free()
 	
 	for character in GameManager.party:
-		var stats = statsScene.instance()
+		var stats = statsScene.instantiate()
 		stats.setCharacter(character)
 		$party.add_child(stats)
 	
@@ -58,8 +58,8 @@ func buttonPressed(id : int) -> void:
 		_:
 			Signals.emit_signal("guiCloseExploringMenu")
 	
-	if !Signals.is_connected("guiBack", self, "focus"):
-		Signals.connect("guiBack", self, "focus")
+	if !Signals.is_connected("guiBack",Callable(self,"focus")):
+		Signals.connect("guiBack",Callable(self,"focus"))
 
 
 func _on_btnMap_pressed() -> void:

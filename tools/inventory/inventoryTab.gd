@@ -1,4 +1,4 @@
-extends Tabs
+extends TabBar
 
 var inventoryDto : InventoryDTO = InventoryDTO.new()
 var list : Array = []
@@ -9,7 +9,7 @@ var armorsList : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedInventory", self, "loadInventory")
+	EditorSignals.connect("selectedInventory",Callable(self,"loadInventory"))
 	
 	loadAllData()
 	setFields()

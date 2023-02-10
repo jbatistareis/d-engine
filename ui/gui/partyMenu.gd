@@ -2,20 +2,20 @@ extends PopupMenu
 
 
 func _ready() -> void:
-	Signals.connect("guiPopupPartyMenu", self, "showMenu")
-	Signals.connect("guiHidePartyMenu", self, "hide")
+	Signals.connect("guiPopupPartyMenu",Callable(self,"showMenu"))
+	Signals.connect("guiHidePartyMenu",Callable(self,"hide"))
 
 
 func showMenu(position : Vector2) -> void:
-	Signals.connect("guiCancel", self, "hide")
-	Signals.connect("guiCloseExploringMenu", self, "hide")
+	Signals.connect("guiCancel",Callable(self,"hide"))
+	Signals.connect("guiCloseExploringMenu",Callable(self,"hide"))
 	
 	clear()
 	
 	for character in GameManager.party:
 		add_item(' ' + character.name + ' ')
 	
-	rect_position = position
+	position = position
 	popup()
 	
 	grab_focus()
@@ -27,7 +27,7 @@ func _on_partyMenu_id_pressed(id : int) -> void:
 
 
 func _on_partyMenu_hide() -> void:
-	Signals.disconnect("guiCancel", self, "hide")
-	Signals.disconnect("guiCloseExploringMenu", self, "hide")
+	Signals.disconnect("guiCancel",Callable(self,"hide"))
+	Signals.disconnect("guiCloseExploringMenu",Callable(self,"hide"))
 	Signals.emit_signal("guiPartyMenuHidden")
 

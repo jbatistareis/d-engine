@@ -3,7 +3,7 @@ extends Node
 var location : Location = null
 
 
-# puts player on a location
+# puts player checked a location
 func changeLocation(character : Character, locationShortName : String, toRoomId : int, facingDirection : int) -> void:
 	if location != null:
 		location.exit(character)
@@ -14,7 +14,7 @@ func changeLocation(character : Character, locationShortName : String, toRoomId 
 	location.enter(character, toRoomId, facingDirection)
 
 
-# moves a character around rooms based on an absolute direction
+# moves a character around rooms based checked an absolute direction
 func moveCharacter(character : Character, direction : int) -> void:
 	var result = location.move(character, direction)
 	

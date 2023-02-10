@@ -71,10 +71,10 @@ func decision(auditor) -> void:
 		
 		suspects.shuffle()
 		
-		var selfMatch = !analyze(DefaultValues.facts[action.self], auditor, [auditor]).empty()
+		var selfMatch = !analyze(DefaultValues.facts[action.self], auditor, [auditor]).is_empty()
 		var targets = analyze(DefaultValues.facts[action.target], auditor, suspects)
 		
-		if selfMatch && !targets.empty():
+		if selfMatch && !targets.is_empty():
 			var move = Move.new().fromShortName(action.move.shortName)
 			move.cdPre += auditor.inventory.weapon.cdPre
 			move.cdPos += auditor.inventory.weapon.cdPos
@@ -110,15 +110,15 @@ func addAction(action : Dictionary) -> void:
 
 
 func removeConcreteFact(index : int) -> void:
-	actions.remove(index)
+	actions.remove_at(index)
 
 
 func swapActions(chosenActionIndex : int, targetActionIndex : int) -> void:
 	var chosen = actions[chosenActionIndex]
 	var target = actions[targetActionIndex]
 	
-	actions.remove(chosenActionIndex)
-	actions.remove(targetActionIndex)
+	actions.remove_at(chosenActionIndex)
+	actions.remove_at(targetActionIndex)
 	
 	actions.insert(targetActionIndex, chosen)
 	actions.insert(chosenActionIndex, target)

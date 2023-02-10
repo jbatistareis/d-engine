@@ -4,15 +4,15 @@ var enemyFrameSize : Vector2
 
 
 func _ready() -> void:
-	Signals.connect("battleCursorMove", self, "moveCursor")
-	Signals.connect("battleCursorHide", self, "hideCursor")
+	Signals.connect("battleCursorMove",Callable(self,"moveCursor"))
+	Signals.connect("battleCursorHide",Callable(self,"hideCursor"))
 
 
 func moveCursor(title : String, position : Vector2) -> void:
 	visible = true
 	$lblTgt.text = title
 	
-	rect_position = position
+	position = position
 
 
 func hideCursor() -> void:

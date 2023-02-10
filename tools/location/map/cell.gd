@@ -7,7 +7,7 @@ const _HINT_TEXT : String = 'id: %d\nx: %d, y: %d'
 var id : int
 var x : int
 var y : int
-var room : Dictionary = {} setget setRoom
+var room : Dictionary = {} : set = setRoom
 
 var selected : bool = false
 
@@ -15,7 +15,7 @@ var selected : bool = false
 func _ready() -> void:
 	updateHint()
 	
-	$options.get_popup().connect("mouse_exited", self, "closeMenu")
+	$options.get_popup().connect("mouse_exited",Callable(self,"closeMenu"))
 	$options.get_popup().add_multistate_item("Rotate R", 1)
 	$options.get_popup().add_multistate_item("Rotate L", 1)
 	$options.get_popup().add_separator()
@@ -26,7 +26,7 @@ func _ready() -> void:
 	$options.get_popup().add_multistate_item("2 Exits L", 1)
 	$options.get_popup().add_multistate_item("3 Exits", 1)
 	$options.get_popup().add_multistate_item("4 Exits", 1)
-	$options.get_popup().connect("index_pressed", self, "optionSelected")
+	$options.get_popup().connect("index_pressed",Callable(self,"optionSelected"))
 
 
 func optionSelected(index : int) -> void:
@@ -56,8 +56,8 @@ func optionSelected(index : int) -> void:
 
 
 func updateHint() -> void:
-	$options.hint_tooltip = _HINT_TEXT % [id, x, y]
-	$icon/pointer.visible = !room.empty() && (room.type != Enums.RoomType.DUMMY)
+	$options.tooltip_text = _HINT_TEXT % [id, x, y]
+	$icon/pointer.visible = !room.is_empty() && (room.type != Enums.RoomType.DUMMY)
 
 
 func setRoom(value : Dictionary) -> void:

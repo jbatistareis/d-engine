@@ -7,9 +7,9 @@
 [ext_resource path="res://ui/gui/battle/healthBars.gd" type="Script" id=5]
 
 [node name="health" type="MarginContainer"]
-margin_right = 155.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 150, 0 )
+offset_right = 155.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
 script = ExtResource( 5 )
 
@@ -18,14 +18,14 @@ script = ExtResource( 5 )
 [node name="hpTween" type="Tween" parent="."]
 
 [node name="hp" type="ProgressBar" parent="."]
-margin_right = 155.0
-margin_bottom = 22.0
+offset_right = 155.0
+offset_bottom = 22.0
 theme = ExtResource( 4 )
 custom_styles/fg = ExtResource( 3 )
-custom_styles/bg = ExtResource( 2 )
+custom_styles/panel = ExtResource( 2 )
 
 [node name="armor" type="ProgressBar" parent="."]
-margin_right = 155.0
-margin_bottom = 22.0
+offset_right = 155.0
+offset_bottom = 22.0
 theme = ExtResource( 4 )
 custom_styles/fg = ExtResource( 1 )

@@ -4,7 +4,7 @@ extends Command
 var auditor
 
 
-func _init(auditor, ticks : int).(auditor, ticks) -> void:
+func _init(auditor,ticks : int,auditor,ticks):
 	self.auditor = executorCharacter
 
 

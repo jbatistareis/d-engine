@@ -5,7 +5,7 @@ var itemMove : Move
 var targets : Array = []
 
 
-func _init(executorCharacter, targets : Array, itemMove : Move).(executorCharacter, itemMove.cdPre) -> void:
+func _init(executorCharacter,targets : Array,itemMove : Move,executorCharacter,itemMove.cdPre):
 	self.targets = targets
 	self.itemMove = itemMove
 

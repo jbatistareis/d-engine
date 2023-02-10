@@ -1,13 +1,13 @@
 class_name Command
 
 var executorCharacter
-var totalTicks : int setget setTotalTicks
+var totalTicks : int : set = setTotalTicks
 var remainingTicks : int
 var toBeExecuted : bool = false
 var canceled : bool = false
 
 
-func _init(executorCharacter, ticks : int) -> void:
+func _init(executorCharacter,ticks : int):
 	self.executorCharacter = executorCharacter
 	self.totalTicks = ticks
 

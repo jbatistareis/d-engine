@@ -6,7 +6,7 @@ var inBattle : bool = false
 
 
 func _ready():
-	Signals.connect("battleStarted", self, "start")
+	Signals.connect("battleStarted",Callable(self,"start"))
 
 
 func start(players : Array, enemies : Array) -> void:
@@ -18,7 +18,7 @@ func start(players : Array, enemies : Array) -> void:
 		self.enemies = enemies
 		
 		Signals.emit_signal("setupBattleScreen", players, enemies)
-		yield(Signals, "battleScreenReady")
+		await Signals.battleScreenReady
 		
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:

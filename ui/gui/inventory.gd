@@ -9,20 +9,20 @@ var inventorySummary : InventorySummary
 func showWindow(character : Character) -> void:
 	self.character = character
 	
-	if !Signals.is_connected("guiCancel", self, "back"):
-		Signals.connect("guiCancel", self, "back")
+	if !Signals.is_connected("guiCancel",Callable(self,"back")):
+		Signals.connect("guiCancel",Callable(self,"back"))
 	
-	if !Signals.is_connected("guiCloseExploringMenu", self, "exit"):
-		Signals.connect("guiCloseExploringMenu", self, "exit")
+	if !Signals.is_connected("guiCloseExploringMenu",Callable(self,"exit")):
+		Signals.connect("guiCloseExploringMenu",Callable(self,"exit"))
 	
-	$itemList.visible = !character.inventory.items.empty()
-	$lblNoItems.visible = character.inventory.items.empty()
+	$itemList.visible = !character.inventory.items.is_empty()
+	$lblNoItems.visible = character.inventory.items.is_empty()
 	
 	$itemList.modulate = $itemList.modulate.lightened(1)
 	$Panel.modulate = $Panel.modulate.lightened(1)
 	
 	var currentIndex = 0
-	if !$itemList.get_selected_items().empty():
+	if !$itemList.get_selected_items().is_empty():
 		currentIndex = $itemList.get_selected_items()[0]
 	
 	$itemMenu.hide()
@@ -54,7 +54,7 @@ func showWindow(character : Character) -> void:
 
 func itemFocus(index : int) -> void:
 	$itemList.grab_focus()
-	if !$itemList.items.empty():
+	if !$itemList.items.is_empty():
 		$itemList.select(index)
 
 
@@ -72,11 +72,11 @@ func back() -> void:
 
 
 func exit() -> void:
-	Signals.disconnect("guiCancel", self, "back")
-	Signals.disconnect("guiCloseExploringMenu", self, "exit")
+	Signals.disconnect("guiCancel",Callable(self,"back"))
+	Signals.disconnect("guiCloseExploringMenu",Callable(self,"exit"))
 	
-	if Signals.is_connected("guiPartyMenuPick", self, "partyPick"):
-		Signals.disconnect("guiPartyMenuPick", self, "partyPick")
+	if Signals.is_connected("guiPartyMenuPick",Callable(self,"partyPick")):
+		Signals.disconnect("guiPartyMenuPick",Callable(self,"partyPick"))
 	
 	Signals.emit_signal("guiHidePartyMenu")
 	
@@ -90,9 +90,9 @@ func _on_itemList_item_activated(index : int) -> void:
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
 	var item = inventorySummary.summary[index].item
-	var menuPosition = $itemList.rect_global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
+	var menuPosition = $itemList.global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
 	
-	$itemMenu.rect_position = menuPosition
+	$itemMenu.position = menuPosition
 	$itemMenu.popup()
 	$itemMenu.grab_focus()
 	$itemMenu.set_current_index(0)
@@ -103,8 +103,8 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 	match id:
 		0:
 			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
-			Signals.connect("guiPartyMenuPick", self, "partyPick")
-			Signals.emit_signal("guiPopupPartyMenu", $itemMenu.rect_position + Vector2($itemMenu.rect_size.x + 10, 0))
+			Signals.connect("guiPartyMenuPick",Callable(self,"partyPick"))
+			Signals.emit_signal("guiPopupPartyMenu", $itemMenu.position + Vector2($itemMenu.size.x + 10, 0))
 		
 		1:
 			Signals.emit_signal("characterDroppedItem",
@@ -119,7 +119,7 @@ func _on_itemMenu_id_pressed(id : int) -> void:
 
 
 func partyPick(id: int) -> void:
-	Signals.disconnect("guiPartyMenuPick", self, "partyPick")
+	Signals.disconnect("guiPartyMenuPick",Callable(self,"partyPick"))
 	
 	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
 	Signals.emit_signal("characterUsedItem",

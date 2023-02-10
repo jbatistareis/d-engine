@@ -6,7 +6,7 @@
 [node name="groupStats" type="MarginContainer"]
 script = ExtResource( 2 )
 
-[node name="bg" type="Panel" parent="."]
+[node name="panel" type="Panel" parent="."]
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 4 )

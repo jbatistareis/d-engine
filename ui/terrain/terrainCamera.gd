@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const _ROTATE_45 : float = PI / 4
 const _ROTATE_90 : float = PI / 2
@@ -11,18 +11,18 @@ var freeFlight : bool = false
 
 var teleportData : Dictionary = {}
 
-onready var tween : Tween = $tween
+@onready var tween : Tween = $tween
 
 
 func _ready() -> void:
-	Signals.connect("playerSpawned", self, "setup")
-	Signals.connect("cameraMovedForward", self, "moveCamera", [Enums.CameraOffsetDirection.FOWARD])
-	Signals.connect("cameraMovedBackward", self, "moveCamera", [Enums.CameraOffsetDirection.BACKWARD])
-	Signals.connect("cameraRotatedLeft", self, "rotateCamera", [Enums.CameraOffsetRotation.LEFT])
-	Signals.connect("cameraRotatedRight", self, "rotateCamera", [Enums.CameraOffsetRotation.RIGHT])
-	Signals.connect("cameraSnapped", self, "teleport")
+	Signals.connect("playerSpawned",Callable(self,"setup"))
+	Signals.connect("cameraMovedForward",Callable(self,"moveCamera").bind(Enums.CameraOffsetDirection.FOWARD))
+	Signals.connect("cameraMovedBackward",Callable(self,"moveCamera").bind(Enums.CameraOffsetDirection.BACKWARD))
+	Signals.connect("cameraRotatedLeft",Callable(self,"rotateCamera").bind(Enums.CameraOffsetRotation.LEFT))
+	Signals.connect("cameraRotatedRight",Callable(self,"rotateCamera").bind(Enums.CameraOffsetRotation.RIGHT))
+	Signals.connect("cameraSnapped",Callable(self,"teleport"))
 	
-	tween.connect("tween_all_completed", self, "freeCamera")
+	tween.connect("tween_all_completed",Callable(self,"freeCamera"))
 
 
 func _process(delta : float) -> void:
@@ -68,7 +68,7 @@ func teleport(x : int, y : int, direction : int) -> void:
 func moveCamera(offsetDirection : int) -> void:
 	GameManager.cameraMoving = true
 	
-	if !teleportData.empty():
+	if !teleportData.is_empty():
 		goTo(teleportData.x, teleportData.y, teleportData.direction)
 		teleportData.clear()
 		

@@ -40,7 +40,7 @@ signal commandsResumed() # resumes all battle timelines
 
 # internal use
 signal commandPublished(command) # sends commands to the execution queue
-signal commandOnQueue(command) # when a command is put on execution queue
+signal commandOnQueue(command) # when a command is put checked execution queue
 signal commandsCleared() # removes all commands
 
 

@@ -3,9 +3,9 @@ extends MarginContainer
 var character : Character
 
 func _ready() -> void:
-	Signals.connect("armorChangedIntegrity", self, "armorBarChange")
-	Signals.connect("characterChangedHp", self, "hpBarChange")
-	Signals.connect("characterChangedExtraHp", self, "extraHpBarChange") # necessary?
+	Signals.connect("armorChangedIntegrity",Callable(self,"armorBarChange"))
+	Signals.connect("characterChangedHp",Callable(self,"hpBarChange"))
+	Signals.connect("characterChangedExtraHp",Callable(self,"extraHpBarChange")) # necessary?
 	
 	$armor.value = 0 if (character.inventory.armor == null) else (character.inventory.armor.currentIntegrity * 100.0 / character.inventory.armor.maxIntegrity)
 	$hp.value = character.currentHp * 100.0 / character.maxHp

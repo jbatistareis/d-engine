@@ -5,16 +5,16 @@ var paused : bool = false
 
 
 func _ready() -> void:
-	Signals.connect("commandOnQueue", self, "commandQueued")
-	Signals.connect("commandsPaused", self, "pause")
-	Signals.connect("commandsResumed", self, "resume")
-	Signals.connect("characterDied", self, "dead")
+	Signals.connect("commandOnQueue",Callable(self,"commandQueued"))
+	Signals.connect("commandsPaused",Callable(self,"pause"))
+	Signals.connect("commandsResumed",Callable(self,"resume"))
+	Signals.connect("characterDied",Callable(self,"dead"))
 
 
 func commandQueued(command : Command) -> void:
 	if command.executorCharacter == character:
 		while paused:
-			yield(Signals, "commandsResumed")
+			await Signals.commandsResumed
 		
 		$Tween.remove_all()
 		
@@ -45,6 +45,6 @@ func resume() -> void:
 func dead(character : Character) -> void:
 	if character == self.character:
 		$Tween.interpolate_property($timer, "value", $timer.value, 0, 0.25)
-		yield($Tween, "tween_all_completed")
+		await $Tween.tween_all_completed
 		$Tween.remove_all()
 

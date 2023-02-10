@@ -6,19 +6,19 @@
 [ext_resource path="res://ui/gui/battle/timerBar.gd" type="Script" id=4]
 
 [node name="timerBar" type="MarginContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 4 )
 
 [node name="Tween" type="Tween" parent="."]
 
 [node name="timer" type="ProgressBar" parent="."]
-margin_right = 150.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 150, 0 )
+offset_right = 150.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 150, 0 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource( 3 )
 custom_styles/fg = ExtResource( 1 )
-custom_styles/bg = ExtResource( 2 )
+custom_styles/panel = ExtResource( 2 )
 value = 100.0
