@@ -19,7 +19,7 @@ func showMenu(position : Vector2) -> void:
 	popup()
 	
 	grab_focus()
-	set_current_index(0)
+	set_focused_item(0)
 
 
 func _on_partyMenu_id_pressed(id : int) -> void:
