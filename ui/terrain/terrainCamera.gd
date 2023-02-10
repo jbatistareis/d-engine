@@ -11,17 +11,18 @@ var freeFlight : bool = false
 
 var teleportData : Dictionary = {}
 
-@onready var tween : Tween = $tween
+var tween : Tween
 
 
 func _ready() -> void:
-	Signals.connect("playerSpawned",Callable(self,"setup"))
-	Signals.connect("cameraMovedForward",Callable(self,"moveCamera").bind(Enums.CameraOffsetDirection.FOWARD))
-	Signals.connect("cameraMovedBackward",Callable(self,"moveCamera").bind(Enums.CameraOffsetDirection.BACKWARD))
-	Signals.connect("cameraRotatedLeft",Callable(self,"rotateCamera").bind(Enums.CameraOffsetRotation.LEFT))
-	Signals.connect("cameraRotatedRight",Callable(self,"rotateCamera").bind(Enums.CameraOffsetRotation.RIGHT))
-	Signals.connect("cameraSnapped",Callable(self,"teleport"))
+	Signals.playerSpawned.connect(setup)
+	Signals.cameraMovedForward.connect(moveCamera.bind(Enums.CameraOffsetDirection.FOWARD))
+	Signals.cameraMovedBackwardconnect.connect(moveCamera.bind(Enums.CameraOffsetDirection.BACKWARD))
+	Signals.cameraRotatedLeftconnect.connect(rotateCamera.bind(Enums.CameraOffsetRotation.LEFT))
+	Signals.cameraRotatedRightconnect.connect(rotateCamera.bind(Enums.CameraOffsetRotation.RIGHT))
+	Signals.cameraSnapped.connect(teleport)
 	
+	tween = get_tree().create_tween()
 	tween.connect("tween_all_completed",Callable(self,"freeCamera"))
 
 
