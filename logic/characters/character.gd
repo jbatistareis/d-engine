@@ -141,7 +141,7 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
 		moveModifiers.erase(Enums.MoveModifierProperty.DEF_M)
 		
-		Signals.emit_signal("characterTookDamage", self)
+		Signals.characterTookDamage.emit(self)
 	
 	if (amount < 0) && (extraHp > 0):
 		amount = changeExtraHp(amount)
@@ -164,11 +164,11 @@ func changeHp(amount : int) -> void:
 			currentHp = min(self.maxHp, result)
 		else:
 			currentHp = 0
-			Signals.emit_signal("characterDied", self)
+			Signals.characterDied.emit(self)
 		
-		Signals.emit_signal("characterChangedHp", self, currentHp - self.maxHp)
+		Signals.characterChangedHp.emit(self, currentHp - self.maxHp)
 	else:
-		Signals.emit_signal("characterChangedHp", self, 0)
+		Signals.characterChangedHp.emit(self, 0)
 
 
 # returns unsoaked damage
@@ -180,12 +180,12 @@ func changeExtraHp(amount : int) -> int:
 		var prevExtraHp = extraHp
 		var result = extraHp + amount
 		extraHp = max(0, result)
-		Signals.emit_signal("characterChangedExtraHp", self, extraHp - prevExtraHp)
+		Signals.characterChangedExtraHp.emit(self, extraHp - prevExtraHp)
 		
 		return int(min(0, result))
 	
 	else:
-		Signals.emit_signal("characterChangedExtraHp", self, 0)
+		Signals.characterChangedExtraHp.emit(self, 0)
 		
 		return 0
 
@@ -204,13 +204,13 @@ func levelUp() -> void:
 		sparePoints += 1
 		currentLevel += 1
 		
-		Signals.emit_signal("characterLeveledUp", self)
+		Signals.characterLeveledUp.emit(self)
 
 
 func gainExperience(amount : int) -> void:
 	experiencePoints += amount
 	
-	Signals.emit_signal("characterGotExperience", self, amount)
+	Signals.characterGotExperience.emit(self, amount)
 
 
 # TODO a better curve

@@ -24,7 +24,7 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.actions.clear()
 	for action in verdictDto.actions:
 		self.actions.append({
-			'self': action.self,
+			'self': action.own,
 			'target': action.target,
 			'move': Move.new().fromShortName(action.moveShortName)
 		})
@@ -39,7 +39,7 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'self': action.self,
+			'self': action.own,
 			'target': action.target,
 			'moveShortName': action.move.shortName
 		})
@@ -71,7 +71,7 @@ func decision(auditor) -> void:
 		
 		suspects.shuffle()
 		
-		var selfMatch = !analyze(DefaultValues.facts[action.self], auditor, [auditor]).is_empty()
+		var selfMatch = !analyze(DefaultValues.facts[action.own], auditor, [auditor]).is_empty()
 		var targets = analyze(DefaultValues.facts[action.target], auditor, suspects)
 		
 		if selfMatch && !targets.is_empty():
@@ -80,13 +80,10 @@ func decision(auditor) -> void:
 			move.cdPos += auditor.inventory.weapon.cdPos
 			
 			if targetType.ends_with(_ALL):
-				Signals.emit_signal(
-					"commandPublished",
-					ExecuteMoveCommand.new(auditor, targets, move))
+				Signals.commandPublished.emit(ExecuteMoveCommand.new(auditor, targets, move))
 			else:
 				rng.randomize()
-				Signals.emit_signal(
-						"commandPublished",
+				Signals.commandPublished.emit(
 						ExecuteMoveCommand.new(
 							auditor,
 							[targets[rng.randi_range(0, targets.size() - 1)]],
@@ -94,8 +91,7 @@ func decision(auditor) -> void:
 			
 			return
 	
-	Signals.emit_signal(
-		"commandPublished",
+	Signals.commandPublished.emit(
 		WaitCommand.new(VerdictCommand.new(auditor, GameParameters.WAIT_TICKS))
 	)
 
