@@ -8,7 +8,7 @@ var ratioDiff : float = 1.0
 
 
 func _ready() -> void:
-	get_viewport().connect("size_changed",Callable(self,"changeSize"))
+	get_viewport().size_changed.connect(changeSize)
 
 
 func changeSize() -> void:
