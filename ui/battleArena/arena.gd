@@ -1,7 +1,5 @@
 extends Node3D
 
-var tween : Tween
-
 
 func _ready() -> void:
 	Signals.battleStarted.connect(reset)
@@ -10,8 +8,6 @@ func _ready() -> void:
 	Signals.battleEnded.connect(exit)
 	Signals.commandsPaused.connect(pause)
 	Signals.commandsResumed.connect(resume)
-	
-	tween = get_tree().create_tween()
 
 
 func reset(_ignore1, _ignore2) -> void:
@@ -33,13 +29,13 @@ func exit() -> void:
 
 
 func pause() -> void:
-	tween.remove_all()
+	var tween = create_tween()
 	tween.tween_method(enemyPlaybackSpeed, 1, 0, 0.25)
 	tween.play()
 
 
 func resume() -> void:
-	tween.remove_all()
+	var tween = create_tween()
 	tween.tween_method(enemyPlaybackSpeed, 0, 1, 0.25)
 	tween.play()
 
