@@ -2,7 +2,13 @@ extends MarginContainer
 
 var character : Character
 
+var armorTween : Tween
+var hpTween : Tween
+
 func _ready() -> void:
+	armorTween = get_tree().create_tween()
+	hpTween = get_tree().create_tween()
+	
 	Signals.connect("armorChangedIntegrity",Callable(self,"armorBarChange"))
 	Signals.connect("characterChangedHp",Callable(self,"hpBarChange"))
 	Signals.connect("characterChangedExtraHp",Callable(self,"extraHpBarChange")) # necessary?
@@ -13,16 +19,16 @@ func _ready() -> void:
 
 func armorBarChange(armor : Armor, amount : int) -> void:
 	if armor == character.inventory.armor:
-		barChange($armorTween, $armor, armor.currentIntegrity * 100.0 / armor.maxIntegrity)
+		barChange(armorTween, $armor, armor.currentIntegrity * 100.0 / armor.maxIntegrity)
 
 
 func hpBarChange(character : Character, amount : int) -> void:
 	if character == self.character:
-		barChange($hpTween, $hp, character.currentHp * 100.0 / character.maxHp)
+		barChange(hpTween, $hp, character.currentHp * 100.0 / character.maxHp)
 
 
 func barChange(tween : Tween, bar : ProgressBar, end : float) -> void:
 	tween.remove_all()
-	tween.interpolate_property(bar, "value", bar.value, end, 0.25)
-	tween.start()
+	tween.tween_property(bar, "value", end, 0.25)
+	tween.play()
 
