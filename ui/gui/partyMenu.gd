@@ -2,13 +2,13 @@ extends PopupMenu
 
 
 func _ready() -> void:
-	Signals.connect("guiPopupPartyMenu",Callable(self,"showMenu"))
-	Signals.connect("guiHidePartyMenu",Callable(self,"hide"))
+	Signals.guiPopupPartyMenu.connect(showMenu)
+	Signals.guiHidePartyMenu.connect(hide)
 
 
 func showMenu(position : Vector2) -> void:
-	Signals.connect("guiCancel",Callable(self,"hide"))
-	Signals.connect("guiCloseExploringMenu",Callable(self,"hide"))
+	Signals.guiCancel.connect(hide)
+	Signals.guiCloseExploringMenu.connect(hide)
 	
 	clear()
 	
@@ -23,11 +23,11 @@ func showMenu(position : Vector2) -> void:
 
 
 func _on_partyMenu_id_pressed(id : int) -> void:
-	Signals.emit_signal("guiPartyMenuPick", id)
+	Signals.guiPartyMenuPick.emit(id)
 
 
 func _on_partyMenu_hide() -> void:
-	Signals.disconnect("guiCancel",Callable(self,"hide"))
-	Signals.disconnect("guiCloseExploringMenu",Callable(self,"hide"))
-	Signals.emit_signal("guiPartyMenuHidden")
+	Signals.guiCancel.disconnect(hide)
+	Signals.guiCloseExploringMenu.disconnect(hide)
+	Signals.guiPartyMenuHidden.emit()
 
