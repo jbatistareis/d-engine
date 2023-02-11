@@ -10,6 +10,6 @@ func _init(nextCommand : Command,ticks : int = GameParameters.WAIT_TICKS):
 
 
 func execute() -> void:
-	Signals.emit_signal("startedBattleAnimation", executorCharacter, 'idle')
-	Signals.emit_signal("commandPublished", nextCommand)
+	Signals.startedBattleAnimation.emit(executorCharacter, 'idle')
+	Signals.commandPublished.emit(nextCommand)
 
