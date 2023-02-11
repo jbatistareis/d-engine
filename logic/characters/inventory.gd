@@ -21,11 +21,11 @@ func fromDTO(inventoryDto : InventoryDTO) -> Inventory:
 	
 	for itemSrtNm in inventoryDto.itemShortNames:
 		self.items.append(Item.new().fromShortName(itemSrtNm))
-	self.items.sort_custom(Callable(EntityArrayHelper,"shortNameSort"))
+	self.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
 	
 	for weaponSrtNm in inventoryDto.weaponShortNames:
 		self.weapons.append(Weapon.new().fromShortName(weaponSrtNm))
-	self.weapons.sort_custom(Callable(EntityArrayHelper,"shortNameSort"))
+	self.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
 	
 	self.weapon = Weapon.new().fromShortName(inventoryDto.weaponShortName)
 	self.armor = Armor.new().fromShortName(inventoryDto.armorShortName)
