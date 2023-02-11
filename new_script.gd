@@ -77,7 +77,7 @@ func _ready() -> void:
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	pass
 
 

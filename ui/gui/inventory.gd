@@ -89,7 +89,7 @@ func _on_itemList_item_activated(index : int) -> void:
 	$Panel.modulate = $Panel.modulate.darkened(0.25)
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
-	var item = inventorySummary.summary[index].item
+#	var item = inventorySummary.summary[index].item
 	var menuPosition = $itemList.global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
 	
 	$itemMenu.position = menuPosition

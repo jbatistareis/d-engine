@@ -46,7 +46,7 @@ func setDirection(value : int) -> void:
 	direction = correctedValue % 4
 
 
-func startBattleState(players, enemies) -> void:
+func startBattleState(_players, _enemies) -> void:
 	currentState = getState(Enums.States.BATTLE)
 
 
@@ -81,7 +81,7 @@ func getState(id : int) -> State:
 			return null
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	currentState.handleInput()
 	currentState = currentState.next
 

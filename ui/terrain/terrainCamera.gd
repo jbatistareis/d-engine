@@ -26,12 +26,12 @@ func _ready() -> void:
 	tween.tween_all_completed.connect(freeCamera)
 
 
-func _process(delta : float) -> void:
+func _process(_delta : float) -> void:
 	if freeFlight:
 		inputFreeFlight()
 
 
-func setup(location : Location, x : int, y : int, direction : int) -> void:
+func setup(_location : Location, x : int, y : int, direction : int) -> void:
 	$camera.current = true
 	GameManager.direction = direction
 	freeFlight = false

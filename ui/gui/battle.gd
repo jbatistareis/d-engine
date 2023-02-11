@@ -22,7 +22,7 @@ func setup(players : Array, enemies : Array) -> void:
 
 
 # TODO
-func victory(players : Array, battleResult : BattleResult) -> void:
+func victory(_players : Array, _battleResult : BattleResult) -> void:
 	hide()
 
 

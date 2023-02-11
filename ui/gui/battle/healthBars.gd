@@ -17,12 +17,12 @@ func _ready() -> void:
 	$hp.value = character.currentHp * 100.0 / character.maxHp
 
 
-func armorBarChange(armor : Armor, amount : int) -> void:
+func armorBarChange(armor : Armor, _amount : int) -> void:
 	if armor == character.inventory.armor:
 		barChange(armorTween, $armor, armor.currentIntegrity * 100.0 / armor.maxIntegrity)
 
 
-func hpBarChange(character : Character, amount : int) -> void:
+func hpBarChange(character : Character, _amount : int) -> void:
 	if character == self.character:
 		barChange(hpTween, $hp, character.currentHp * 100.0 / character.maxHp)
 

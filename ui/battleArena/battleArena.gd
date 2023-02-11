@@ -36,8 +36,8 @@ func updateSize() -> void:
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-	var cursorPos = 0
-	var enemySize = enemyData.size()
+#	var cursorPos = 0
+#	var enemySize = enemyData.size()
 	
 	if playerData.is_empty() || enemyData.is_empty():
 		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])

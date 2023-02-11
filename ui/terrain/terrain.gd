@@ -8,7 +8,7 @@ func _ready() -> void:
 	Signals.connect("playerSpawned",Callable(self,"loadMap"))
 
 
-func loadMap(location : Location, x : int, y : int, direction : int) -> void:
+func loadMap(location : Location, x : int, y : int, _direction : int) -> void:
 	SceneLoadManager.fromLocation(location)
 	
 	blocks.clear()

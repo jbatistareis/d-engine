@@ -108,7 +108,7 @@ func targetTypeStr(targetType : int) -> String:
 			return "None"
 
 
-func _on_itemList_item_selected(index: int) -> void:
+func _on_itemList_item_selected(_index: int) -> void:
 	updateLabels()
 
 
@@ -189,7 +189,7 @@ func _on_itemList_item_activated(index : int) -> void:
 	$Panel.modulate = $Panel.modulate.darkened(0.25)
 	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
-	var item = inventorySummary.summary[index].item
+#	var item = inventorySummary.summary[index].item
 	var menuPosition = $main/itemList.global_position + Vector2((index % 2) * 312 + 190, floor(index / 2) * 27 + 10)
 	
 	$itemMenu.position = menuPosition

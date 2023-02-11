@@ -59,7 +59,7 @@ func receiveWeapon(character : Character, weapon : Weapon) -> void:
 
 
 # TODO
-func receiveArmor(character : Character, armor : Armor) -> void:
+func receiveArmor(_character : Character, _armor : Armor) -> void:
 	pass
 
 
@@ -83,7 +83,7 @@ func dropWeapon(character : Character, weapon : Weapon) -> void:
 
 
 # TODO
-func dropArmor(character : Character, armor : Armor) -> void:
+func dropArmor(_character : Character, _armor : Armor) -> void:
 	pass
 
 
