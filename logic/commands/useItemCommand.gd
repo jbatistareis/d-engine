@@ -17,8 +17,7 @@ func execute() -> void:
 		return
 	
 	var index = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
-	Signals.emit_signal(
-		"characterUsedItem",
+	Signals.characterUsedItem.emit(
 		executorCharacter,
 		targets,
 		executorCharacter.inventory.items[index])
