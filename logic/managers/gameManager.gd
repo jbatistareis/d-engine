@@ -12,8 +12,8 @@ var direction : int : set = setDirection
 
 
 func _ready() -> void :
-	Signals.connect("playerLoaded",Callable(self,"loadData"))
-	Signals.connect("battleStarted",Callable(self,"startBattleState"))
+	Signals.playerLoaded.connect(loadData)
+	Signals.battleStarted.connect(startBattleState)
 
 
 # TODO proper party
