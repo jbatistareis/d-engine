@@ -7,7 +7,7 @@ var toBeExecuted : bool = false
 var canceled : bool = false
 
 
-func _init(executorCharacter,ticks : int):
+func _init(executorCharacter, ticks : int):
 	self.executorCharacter = executorCharacter
 	self.totalTicks = ticks
 
