@@ -83,8 +83,9 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	
 	var file = FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	
-	if !FileAccess.file_exists(path):
+	if file == null:
 		push_error(ErrorMessages.FILE_NOT_FOUND % path)
+		return null
 	
 	var dto = dict_to_inst(file.get_var())
 	
