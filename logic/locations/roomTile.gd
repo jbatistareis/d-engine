@@ -75,8 +75,7 @@ func enter(character, direction : int, battleTriggered : bool) -> void:
 					enemy.currentRoom = id
 					enemies.append(enemy)
 			
-			# TODO form a player party
-			Signals.emit_signal("battleStarted", [character], enemies)
+			Signals.battleStarted.emit(GameManager.party, enemies)
 
 
 func exit(character, direction : int) -> void:
