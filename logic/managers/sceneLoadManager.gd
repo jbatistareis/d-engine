@@ -15,7 +15,7 @@ func fromLocation(location : Location) -> void:
 	
 	for room in location.rooms:
 		for foeGroup in room.foeShortNameGroups:
-			if !scenes.has_all(foeGroup):
-				for foe in foeGroup:
+			for foe in foeGroup:
+				if !scenes.has(foe):
 					scenes[foe] = load(GamePaths.CHARACTER_MODEL % foe)
 
