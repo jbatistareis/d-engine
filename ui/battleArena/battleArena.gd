@@ -18,16 +18,16 @@ var cursorMove : Move
 
 
 func _ready() -> void:
-	Signals.connect("setupBattleScreen",Callable(self,"setup"))
-	Signals.connect("battleCursorShow",Callable(self,"showCursor"))
-	Signals.connect("guiLeft",Callable(self,"moveCursor").bind(Enums.Direction.EAST))
-	Signals.connect("guiRight",Callable(self,"moveCursor").bind(Enums.Direction.WEST))
-	Signals.connect("guiConfirm",Callable(self,"confirmCursor"))
-	Signals.connect("guiCancel",Callable(self,"cancelCursor"))
-	Signals.connect("battleEnded",Callable(self,"finish"))
-	Signals.connect("battleWon",Callable(self,"showBattleResult"))
+	Signals.setupBattleScreen.connect(setup)
+	Signals.battleCursorShow.connect(showCursor)
+	Signals.guiLeft.connect(moveCursor.bind(Enums.Direction.EAST))
+	Signals.guiRight.connect(moveCursor.bind(Enums.Direction.WEST))
+	Signals.guiConfirm.connect(confirmCursor)
+	Signals.guiCancel.connect(cancelCursor)
+	Signals.battleEnded.connect(finish)
+	Signals.battleWon.connect(showBattleResult)
 	
-	get_viewport().connect("size_changed",Callable(self,"updateSize"))
+	get_viewport().size_changed.connect(updateSize)
 	updateSize()
 
 
@@ -75,15 +75,14 @@ func setup(playerData : Array, enemyData : Array) -> void:
 			break
 	
 	await get_tree().create_timer(0.1).timeout
-	Signals.emit_signal("battleScreenReady")
+	Signals.battleScreenReady.emit()
 
 
 func createCursor() -> void:
 	cursorOn = true
 	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
 
-	Signals.emit_signal(
-		"battleCursorMove",
+	Signals.battleCursorMove.emit(
 		enemyNode.get_child(0).character.name,
 		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
 	)
@@ -163,17 +162,17 @@ func publishCommand(player, targets : Array, move : Move) -> void:
 		Enums.MoveType.SKILL:
 			command = ExecuteMoveCommand.new(player, targets, move)
 	
-	Signals.emit_signal("battleCursorHide")
-	Signals.emit_signal("commandPublished", command)
-	Signals.emit_signal("commandsResumed")
+	Signals.battleCursorHide.emit()
+	Signals.commandPublished.emit(command)
+	Signals.commandsResumed.emit()
 	cursorOn = false
 
 
 func cancelCursor() -> void:
 	if cursorOn:
 		cursorOn = false
-		Signals.emit_signal("battleCursorHide")
-		Signals.emit_signal("battleShowCharacterMoves", cursorPlayer)
+		Signals.battleCursorHide.emit()
+		Signals.battleShowCharacterMoves.emit(cursorPlayer)
 
 
 func finish() -> void:
@@ -186,9 +185,9 @@ func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 		player.gainExperience(battleResult.experience)
 	
 	await get_tree().create_timer(1.5).timeout
-	Signals.emit_signal("battleShowResult", battleResult)
+	Signals.battleShowResult.emit(battleResult)
 	
 	# should be checked the window
 	await get_tree().create_timer(2).timeout
-	Signals.emit_signal("battleEnded")
+	Signals.battleEnded.emit()
 
