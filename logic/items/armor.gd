@@ -49,12 +49,12 @@ func changeIntegrity(amount : int) -> int:
 	elif amount != 0:
 		var result = currentIntegrity + amount
 		currentIntegrity = clamp(result, 0, maxIntegrity)
-		Signals.emit_signal("armorChangedIntegrity", self, currentIntegrity - maxIntegrity)
+		Signals.armorChangedIntegrity.emit(self, currentIntegrity - maxIntegrity)
 		
 		return int(min(0, result))
 	
 	else:
-		Signals.emit_signal("armorChangedIntegrity", self, 0)
+		Signals.armorChangedIntegrity.emit(self, 0)
 		
 		return 0
 
