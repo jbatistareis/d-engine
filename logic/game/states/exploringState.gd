@@ -6,11 +6,11 @@ func handleInput() -> void:
 	if GameManager.canMove():
 		if !GameManager.testing:
 			if Input.is_action_pressed("ui_left"):
-				Signals.emit_signal("cameraRotatedLeft")
+				Signals.cameraRotatedLeft.emit()
 				GameManager.direction -= 1
 			
 			elif Input.is_action_pressed("ui_right"):
-				Signals.emit_signal("cameraRotatedRight")
+				Signals.cameraRotatedRight.emit()
 				GameManager.direction += 1
 			
 			elif Input.is_action_pressed("ui_up"):
@@ -24,13 +24,13 @@ func handleInput() -> void:
 			
 		else:
 			if Input.is_action_pressed("ui_up"):
-				Signals.emit_signal("cameraMovedForward")
+				Signals.cameraMovedForward.emit()
 			elif Input.is_action_pressed("ui_down"):
-				Signals.emit_signal("cameraMovedBackward")
+				Signals.cameraMovedBackward.emit()
 			elif Input.is_action_pressed("ui_left"):
-				Signals.emit_signal("cameraRotatedLeft")
+				Signals.cameraRotatedLeft.emit()
 				GameManager.direction -= 1
 			elif Input.is_action_pressed("ui_right"):
-				Signals.emit_signal("cameraRotatedRight")
+				Signals.cameraRotatedRight.emit()
 				GameManager.direction += 1
 
