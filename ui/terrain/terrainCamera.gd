@@ -11,19 +11,14 @@ var freeFlight : bool = false
 
 var teleportData : Dictionary = {}
 
-var tween : Tween
-
 
 func _ready() -> void:
 	Signals.playerSpawned.connect(setup)
 	Signals.cameraMovedForward.connect(moveCamera.bind(Enums.CameraOffsetDirection.FOWARD))
-	Signals.cameraMovedBackwardconnect.connect(moveCamera.bind(Enums.CameraOffsetDirection.BACKWARD))
-	Signals.cameraRotatedLeftconnect.connect(rotateCamera.bind(Enums.CameraOffsetRotation.LEFT))
-	Signals.cameraRotatedRightconnect.connect(rotateCamera.bind(Enums.CameraOffsetRotation.RIGHT))
+	Signals.cameraMovedBackward.connect(moveCamera.bind(Enums.CameraOffsetDirection.BACKWARD))
+	Signals.cameraRotatedLeft.connect(rotateCamera.bind(Enums.CameraOffsetRotation.LEFT))
+	Signals.cameraRotatedRight.connect(rotateCamera.bind(Enums.CameraOffsetRotation.RIGHT))
 	Signals.cameraSnapped.connect(teleport)
-	
-	tween = get_tree().create_tween()
-	tween.tween_all_completed.connect(freeCamera)
 
 
 func _process(_delta : float) -> void:
@@ -75,6 +70,7 @@ func moveCamera(offsetDirection : int) -> void:
 		
 		GameManager.cameraMoving = false
 	else:
+		var tween = create_tween()
 		tween.tween_property(
 			self,
 			"transform:origin",
@@ -85,12 +81,14 @@ func moveCamera(offsetDirection : int) -> void:
 			GameParameters.MOVEMENT_DURATION
 		)
 		tween.play()
+		tween.tween_callback(freeCamera)
 
 
 # use Enums.CameraOffsetRotation
 func rotateCamera(offsetRotation : int) -> void:
 	GameManager.cameraMoving = true
 	
+	var tween = create_tween()
 	tween.tween_property(
 		self,
 		"rotation:y",
@@ -98,6 +96,7 @@ func rotateCamera(offsetRotation : int) -> void:
 		GameParameters.ROTATION_DURATION
 	)
 	tween.play()
+	tween.tween_callback(freeCamera)
 
 
 func inputFreeFlight() -> void:
@@ -106,9 +105,10 @@ func inputFreeFlight() -> void:
 	var pitchUp = Input.is_action_pressed("ui_home")
 	var pitchDown = Input.is_action_pressed("ui_end")
 	
-	if !tween.is_active():
+	if !GameManager.cameraMoving:
 		GameManager.cameraMoving = true
 		
+		var tween = create_tween()
 		if elevationUp:
 			tween.tween_property(
 				self,
@@ -117,6 +117,7 @@ func inputFreeFlight() -> void:
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()
+			tween.tween_callback(freeCamera)
 		
 		if elevationDown:
 			tween.tween_property(
@@ -126,6 +127,7 @@ func inputFreeFlight() -> void:
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()
+			tween.tween_callback(freeCamera)
 		
 		if pitchUp && ($camera.rotation.x <= _ROTATE_45):
 			tween.tween_property(
@@ -135,6 +137,7 @@ func inputFreeFlight() -> void:
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()
+			tween.tween_callback(freeCamera)
 		
 		if pitchDown && ($camera.rotation.x >= -_ROTATE_90):
 			tween.tween_property(
@@ -144,4 +147,5 @@ func inputFreeFlight() -> void:
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()
+			tween.tween_callback(freeCamera)
 
