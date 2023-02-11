@@ -37,10 +37,9 @@ static func saveDTO(dto : DTO) -> String:
 	
 	path %= dto.shortName
 	
-	var file = File.new()
-	file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
+	var file = FileAccess.open_compressed(path, FileAccess.WRITE, FileAccess.COMPRESSION_ZSTD)
 	file.store_var(inst_to_dict(dto))
-	file.close()
+	file.flush()
 	
 	return path
 
@@ -82,14 +81,13 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	
 	path %= shortName
 	
-	var file = File.new()
-	file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+	var file = FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	
 	if !file.file_exists(path):
 		push_error(ErrorMessages.FILE_NOT_FOUND % path)
 	
 	var dto = dict_to_inst(file.get_var())
-	file.close()
+	file.flush()
 	
 	return dto
 
@@ -135,8 +133,8 @@ static func listEntities(entityType : int, subpath : String = '') -> Array:
 		Enums.EntityType.SAVE_DATA:
 			path = GamePaths.SAVE_DATA
 	
-	var dir = Directory.new()
-	if dir.open(path) == OK:
+	var dir = DirAccess.open(path)
+	if dir != null:
 		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		
 		var file = dir.get_next()
