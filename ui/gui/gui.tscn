@@ -1,14 +1,15 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca87vmea8a6dd"]
+[gd_scene load_steps=17 format=3 uid="uid://ca87vmea8a6dd"]
 
 [ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
+[ext_resource type="Script" path="res://ui/gui/menu.gd" id="1_6354c"]
 [ext_resource type="Theme" path="res://assets/theme/default/default.theme" id="2"]
 [ext_resource type="Script" path="res://ui/gui/exploration.gd" id="3"]
 [ext_resource type="Script" path="res://ui/gui/battle.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://g7exmacfpak" path="res://ui/gui/partyMenu.tscn" id="4_t0bnm"]
 [ext_resource type="Script" path="res://ui/gui/battle/cursor.gd" id="5"]
 [ext_resource type="Script" path="res://ui/gui/battle/inventory.gd" id="7"]
 [ext_resource type="Script" path="res://ui/gui/inventory.gd" id="8"]
 [ext_resource type="Script" path="res://ui/gui/weapons.gd" id="9"]
-[ext_resource type="Script" path="res://ui/gui/partyMenu.gd" id="10"]
 [ext_resource type="Script" path="res://ui/gui/toast.gd" id="11"]
 
 [sub_resource type="Animation" id="2"]
@@ -137,10 +138,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-focus_neighbor_top = NodePath("exploration/menu/box/btnClose")
-focus_neighbor_bottom = NodePath("exploration/menu/box/btnMap")
-focus_next = NodePath("exploration/menu/box/btnMap")
-focus_previous = NodePath("exploration/menu/box/btnClose")
 
 [node name="main" type="CenterContainer" parent="."]
 visible = false
@@ -149,74 +146,47 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="exploration" type="HBoxContainer" parent="."]
-visible = false
-layout_mode = 0
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -558.0
-offset_top = -240.0
-offset_right = 558.0
-offset_bottom = 240.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3")
 
-[node name="partyMenu" type="PopupMenu" parent="exploration"]
-exclusive = true
-theme = ExtResource("2")
-script = ExtResource("10")
-
-[node name="party" type="GridContainer" parent="exploration"]
+[node name="statusSide" type="HFlowContainer" parent="exploration"]
+custom_minimum_size = Vector2(390, 0)
 layout_mode = 2
-columns = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+alignment = 2
 
-[node name="menu" type="MarginContainer" parent="exploration"]
+[node name="menuSide" type="Control" parent="exploration"]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 4
 
-[node name="Panel" type="Panel" parent="exploration/menu"]
-layout_mode = 2
-theme = ExtResource("2")
+[node name="menu" type="PopupMenu" parent="exploration/menuSide"]
+size = Vector2i(96, 112)
+item_count = 4
+item_0/text = "Map"
+item_0/id = 0
+item_1/text = "Items"
+item_1/id = 1
+item_2/text = "Weapons"
+item_2/id = 2
+item_3/text = "< Back"
+item_3/id = 3
+script = ExtResource("1_6354c")
 
-[node name="box" type="VBoxContainer" parent="exploration/menu"]
-layout_mode = 2
+[node name="map" type="PopupPanel" parent="exploration/menuSide/menu"]
 
-[node name="btnMap" type="Button" parent="exploration/menu/box"]
-layout_mode = 2
-focus_neighbor_bottom = NodePath("../btnItems")
-focus_next = NodePath("../btnItems")
-theme = ExtResource("2")
-text = "Map   >"
-flat = true
+[node name="items" type="PopupPanel" parent="exploration/menuSide/menu"]
 
-[node name="btnItems" type="Button" parent="exploration/menu/box"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../btnMap")
-focus_neighbor_bottom = NodePath("../btnWpns")
-focus_next = NodePath("../btnWpns")
-focus_previous = NodePath("../btnMap")
-theme = ExtResource("2")
-text = "Items >"
-flat = true
-
-[node name="btnWpns" type="Button" parent="exploration/menu/box"]
-layout_mode = 2
-focus_neighbor_top = NodePath("../btnItems")
-focus_neighbor_bottom = NodePath("../btnClose")
-focus_next = NodePath("../btnClose")
-focus_previous = NodePath("../btnItems")
-theme = ExtResource("2")
-text = "Wpns  >"
-flat = true
-
-[node name="btnClose" type="Button" parent="exploration/menu/box"]
-layout_mode = 2
-theme = ExtResource("2")
-text = "x Close"
-flat = true
+[node name="equipment" type="PopupPanel" parent="exploration/menuSide/menu"]
 
 [node name="inventory" type="MarginContainer" parent="exploration"]
 visible = false
@@ -248,16 +218,20 @@ size_flags_vertical = 3
 text = "No items being carried"
 
 [node name="itemMenu" type="PopupMenu" parent="exploration/inventory"]
+size = Vector2i(82, 78)
 exclusive = true
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 item_count = 3
-item_0/text = "Use  >"
+item_0/text = "Use"
 item_0/id = 0
-item_1/text = "Drop "
+item_1/text = "Drop"
 item_1/id = 1
 item_2/text = "< Back"
 item_2/id = 2
+
+[node name="partyMenu" parent="exploration/inventory/itemMenu" instance=ExtResource("4_t0bnm")]
+title = "Party"
 
 [node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
@@ -523,6 +497,7 @@ theme = ExtResource("2")
 layout_mode = 2
 
 [node name="toast" type="Control" parent="."]
+visible = false
 custom_minimum_size = Vector2(0, 240)
 anchors_preset = 0
 anchor_right = 1.0
@@ -558,13 +533,10 @@ theme = ExtResource("2")
 layout_mode = 2
 text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-[connection signal="id_pressed" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_id_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnWpns" to="exploration" method="_on_btnEquip_pressed"]
-[connection signal="pressed" from="exploration/menu/box/btnClose" to="exploration" method="_on_btnClose_pressed"]
+[connection signal="index_pressed" from="exploration/menuSide/menu" to="exploration/menuSide/menu" method="_on_index_pressed"]
 [connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
 [connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
+[connection signal="about_to_popup" from="exploration/inventory/itemMenu/partyMenu" to="exploration/inventory/itemMenu/partyMenu" method="_on_about_to_popup"]
 [connection signal="item_activated" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_activated"]
 [connection signal="item_selected" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_selected"]
 [connection signal="id_pressed" from="exploration/weapons/itemMenu" to="exploration/weapons" method="_on_itemMenu_id_pressed"]

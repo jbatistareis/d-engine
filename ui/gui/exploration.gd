@@ -1,79 +1,37 @@
-extends Control
+extends HBoxContainer
 
 var statsScene : PackedScene = preload("res://ui/gui/stats.tscn") 
-var lastBtnIdx : int = 0
 
 
 func _ready() -> void:
-	Signals.guiOpenExploringMenu.connect(showMenu)
-	Signals.guiCloseExploringMenu.connect(hideMenu)
+	Signals.guiOpenExploringMenu.connect(showMenus)
+	Signals.guiCloseExploringMenu.connect(hideMenus)
 
 
-func focus() -> void:
-	if Signals.guiBack.is_connected(focus):
-		Signals.guiBack.disconnect(focus)
-	
-	for btn in $menu/box.get_children():
-		btn.disabled = false
-		btn.focus_mode = Control.FOCUS_ALL
-		btn.mouse_filter = Control.MOUSE_FILTER_STOP
-	
-	$menu/box.get_child(lastBtnIdx).grab_focus()
-
-
-func showMenu() -> void:
-	for stat in $party.get_children():
+func showMenus() -> void:
+	for stat in $statusSide.get_children():
 		stat.queue_free()
 	
 	for character in GameManager.party:
 		var stats = statsScene.instantiate()
 		stats.setCharacter(character)
-		$party.add_child(stats)
+		$statusSide.add_child(stats)
+	show()
 	
-	visible = true
-	focus()
+	$menuSide/menu.position = $menuSide.position + Vector2(5, 0)
+	$menuSide/menu.popup()
+	$menuSide/menu.set_focused_item(0)
+	$menuSide/menu.grab_focus()
 
 
-func hideMenu() -> void:
-	visible = false
-	lastBtnIdx = 0
-
-
-# buttons
-func buttonPressed(id : int) -> void:
-	lastBtnIdx = id
+func hideMenus() -> void:
+	for panel in $menuSide/menu.get_children():
+		for menu in panel.get_children():
+			for submenu in menu.get_children():
+				submenu.hide()
+			menu.hide()
+		panel.hide()
+	$menuSide/menu.hide()
 	
-	for idx in range($menu/box.get_child_count()):
-		$menu/box.get_child(idx).disabled = (idx != id)
-		$menu/box.get_child(idx).focus_mode = Control.FOCUS_NONE
-		$menu/box.get_child(idx).mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	match id:
-		0:
-			pass
-		1:
-			$inventory.showWindow(GameManager.player)
-		2:
-			$weapons.showWindow()
-		_:
-			Signals.emit_signal("guiCloseExploringMenu")
-	
-	if !Signals.guiBack.is_connected(focus):
-		Signals.guiBack.connect(focus)
-
-
-func _on_btnMap_pressed() -> void:
-	buttonPressed(0)
-
-
-func _on_btnItems_pressed() -> void:
-	buttonPressed(1)
-
-
-func _on_btnEquip_pressed() -> void:
-	buttonPressed(2)
-
-
-func _on_btnClose_pressed() -> void:
-	buttonPressed(3)
+	hide()
 

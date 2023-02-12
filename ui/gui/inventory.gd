@@ -6,6 +6,10 @@ var character : Character
 var inventorySummary : InventorySummary
 
 
+func _ready() -> void:
+	$itemMenu.set_item_submenu(0, "partyMenu")
+
+
 func showWindow(character : Character) -> void:
 	self.character = character
 	
@@ -80,14 +84,15 @@ func exit() -> void:
 	
 	Signals.guiHidePartyMenu.emit()
 	
+	$itemMenu/partyMenu.hide()
 	$itemMenu.hide()
-	visible = false
+	hide()
 
 
 func _on_itemList_item_activated(index : int) -> void:
 	$itemList.modulate = $itemList.modulate.darkened(0.25)
 	$Panel.modulate = $Panel.modulate.darkened(0.25)
-	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
+#	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
 	
 #	var item = inventorySummary.summary[index].item
 	var menuPosition = $itemList.global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
@@ -95,7 +100,7 @@ func _on_itemList_item_activated(index : int) -> void:
 	$itemMenu.position = menuPosition
 	$itemMenu.popup()
 	$itemMenu.grab_focus()
-	$itemMenu.set_current_index(0)
+	$itemMenu.set_focused_item(0)
 
 
 # TODO party
