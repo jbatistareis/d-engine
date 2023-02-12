@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://g7exmacfpak"]
 
-[ext_resource type="Theme" path="res://assets/theme/default/default.theme" id="1_fex7q"]
+[ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="1_fex7q"]
 [ext_resource type="Script" path="res://ui/gui/partyMenu.gd" id="2_a2wuf"]
 
 [node name="partyMenu" type="PopupMenu"]
+visible = true
 exclusive = true
 theme = ExtResource("1_fex7q")
 script = ExtResource("2_a2wuf")
-
-[connection signal="id_pressed" from="." to="." method="_on_partyMenu_id_pressed"]

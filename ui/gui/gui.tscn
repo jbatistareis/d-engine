@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
 [ext_resource type="Script" path="res://ui/gui/menu.gd" id="1_6354c"]
-[ext_resource type="Theme" path="res://assets/theme/default/default.theme" id="2"]
+[ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="2"]
 [ext_resource type="Script" path="res://ui/gui/exploration.gd" id="3"]
 [ext_resource type="Script" path="res://ui/gui/battle.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://g7exmacfpak" path="res://ui/gui/partyMenu.tscn" id="4_t0bnm"]
@@ -171,10 +171,11 @@ size_flags_vertical = 4
 
 [node name="menu" type="PopupMenu" parent="exploration/menuSide"]
 size = Vector2i(96, 112)
+theme = ExtResource("2")
 item_count = 4
 item_0/text = "Map"
 item_0/id = 0
-item_1/text = "Items"
+item_1/text = "Inventory"
 item_1/id = 1
 item_2/text = "Weapons"
 item_2/id = 2
@@ -184,42 +185,49 @@ script = ExtResource("1_6354c")
 
 [node name="map" type="PopupPanel" parent="exploration/menuSide/menu"]
 
-[node name="items" type="PopupPanel" parent="exploration/menuSide/menu"]
-
-[node name="equipment" type="PopupPanel" parent="exploration/menuSide/menu"]
-
-[node name="inventory" type="MarginContainer" parent="exploration"]
-visible = false
-custom_minimum_size = Vector2(640, 480)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("2")
+[node name="inventory" type="PopupPanel" parent="exploration/menuSide/menu"]
 script = ExtResource("8")
 
-[node name="Panel" type="Panel" parent="exploration/inventory"]
-layout_mode = 2
-
-[node name="itemList" type="ItemList" parent="exploration/inventory"]
+[node name="lblNoItems" type="Label" parent="exploration/menuSide/menu/inventory"]
 visible = false
-layout_mode = 2
-theme = ExtResource("2")
-max_text_lines = 2
-max_columns = 4
-same_column_width = true
-fixed_column_width = 146
-icon_mode = 0
-
-[node name="lblNoItems" type="Label" parent="exploration/inventory"]
-visible = false
-layout_mode = 2
+custom_minimum_size = Vector2(640, 480)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "No items being carried"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="itemMenu" type="PopupMenu" parent="exploration/inventory"]
+[node name="itemList" type="ItemList" parent="exploration/menuSide/menu/inventory"]
+visible = false
+custom_minimum_size = Vector2(640, 480)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 129.0
+offset_bottom = -31.0
+grow_horizontal = 2
+grow_vertical = 2
+max_text_lines = 2
+max_columns = 4
+same_column_width = true
+fixed_column_width = 150
+icon_mode = 0
+
+[node name="itemMenu" type="PopupMenu" parent="exploration/menuSide/menu/inventory/itemList"]
 size = Vector2i(82, 78)
 exclusive = true
+theme = ExtResource("2")
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
 item_count = 3
@@ -230,8 +238,11 @@ item_1/id = 1
 item_2/text = "< Back"
 item_2/id = 2
 
-[node name="partyMenu" parent="exploration/inventory/itemMenu" instance=ExtResource("4_t0bnm")]
+[node name="partyMenu" parent="exploration/menuSide/menu/inventory/itemList/itemMenu" instance=ExtResource("4_t0bnm")]
 title = "Party"
+visible = false
+
+[node name="equipment" type="PopupPanel" parent="exploration/menuSide/menu"]
 
 [node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
@@ -534,9 +545,11 @@ layout_mode = 2
 text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 [connection signal="index_pressed" from="exploration/menuSide/menu" to="exploration/menuSide/menu" method="_on_index_pressed"]
-[connection signal="item_activated" from="exploration/inventory/itemList" to="exploration/inventory" method="_on_itemList_item_activated"]
-[connection signal="id_pressed" from="exploration/inventory/itemMenu" to="exploration/inventory" method="_on_itemMenu_id_pressed"]
-[connection signal="about_to_popup" from="exploration/inventory/itemMenu/partyMenu" to="exploration/inventory/itemMenu/partyMenu" method="_on_about_to_popup"]
+[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory" to="exploration/menuSide/menu/inventory" method="_on_about_to_popup"]
+[connection signal="item_activated" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_itemList_item_activated"]
+[connection signal="id_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu" to="exploration/menuSide/menu/inventory" method="_on_itemMenu_id_pressed"]
+[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" method="_on_about_to_popup"]
+[connection signal="index_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_index_pressed"]
 [connection signal="item_activated" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_activated"]
 [connection signal="item_selected" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_selected"]
 [connection signal="id_pressed" from="exploration/weapons/itemMenu" to="exploration/weapons" method="_on_itemMenu_id_pressed"]

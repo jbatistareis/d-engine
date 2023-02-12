@@ -5,7 +5,7 @@ var lastBtnIdx : int = 0
 
 func _ready() -> void:
 	set_item_submenu(0, "map")
-	set_item_submenu(1, "items")
+	set_item_submenu(1, "inventory")
 	set_item_submenu(2, "equipment")
 
 

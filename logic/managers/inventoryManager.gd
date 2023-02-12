@@ -38,12 +38,8 @@ func equipArmor(character : Character, armor : Armor) -> void:
 
 
 func useItem(user : Character, receivers : Array, item : Item) -> void:
-	var index = user.inventory.items.bsearch_custom(
-		item.shortName,
-		func(a, b): EntityArrayHelper.shortNameFind(a, b))
-	
-	if user.inventory.items[index].shortName == item.shortName:
-		user.inventory.items.remove_at(index)
+	if user.inventory.items.has(item):
+		user.inventory.items.erase(item)
 		user.inventory.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
 		
 		ScriptTool.getReference(item.actionExpression).execute(receivers)
@@ -88,13 +84,5 @@ func dropArmor(_character : Character, _armor : Armor) -> void:
 
 
 func dropItem(character : Character, item : Item) -> void:
-	var index = character.inventory.items.bsearch_custom(
-		item.shortName,
-		func(a, b): EntityArrayHelper.shortNameFind(a, b))
-	
-	if character.inventory.items[index].shortName == item.shortName:
-		character.inventory.items.remove_at(index)
-		character.inventory.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
-	else:
-		push_error(ErrorMessages.ITM_NO_FOUND)
+	character.inventory.items.erase(item)
 

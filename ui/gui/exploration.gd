@@ -24,10 +24,13 @@ func showMenus() -> void:
 	$menuSide/menu.grab_focus()
 
 
+# TODO remove this wasp nest
 func hideMenus() -> void:
 	for panel in $menuSide/menu.get_children():
 		for menu in panel.get_children():
 			for submenu in menu.get_children():
+				for subsubmenu in submenu.get_children():
+					subsubmenu.hide()
 				submenu.hide()
 			menu.hide()
 		panel.hide()

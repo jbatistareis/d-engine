@@ -1,4 +1,4 @@
-extends MarginContainer
+extends PopupPanel
 
 const _AMOUNT_MASK : String = "[x%d]"
 
@@ -7,29 +7,20 @@ var inventorySummary : InventorySummary
 
 
 func _ready() -> void:
-	$itemMenu.set_item_submenu(0, "partyMenu")
+	$itemList/itemMenu.set_item_submenu(0, "partyMenu")
 
 
-func showWindow(character : Character) -> void:
-	self.character = character
-	
-	if !Signals.guiCancel.is_connected(back):
-		Signals.guiCancel.connect(back)
-	
-	if !Signals.guiCloseExploringMenu.is_connected(exit):
-		Signals.guiCloseExploringMenu.connect(exit)
+func _on_about_to_popup() -> void:
+	character = GameManager.player
 	
 	$itemList.visible = !character.inventory.items.is_empty()
 	$lblNoItems.visible = character.inventory.items.is_empty()
-	
-	$itemList.modulate = $itemList.modulate.lightened(1)
-	$Panel.modulate = $Panel.modulate.lightened(1)
 	
 	var currentIndex = 0
 	if !$itemList.get_selected_items().is_empty():
 		currentIndex = $itemList.get_selected_items()[0]
 	
-	$itemMenu.hide()
+	$itemList/itemMenu.hide()
 	Signals.emit_signal("guiHidePartyMenu")
 	$itemList.clear()
 	
@@ -62,75 +53,42 @@ func itemFocus(index : int) -> void:
 		$itemList.select(index)
 
 
-func back() -> void:
-	if $itemMenu.visible && $"../partyMenu".visible:
-		$itemMenu.modulate = $itemMenu.modulate.lightened(1)
-		Signals.guiHidePartyMenu.emit()
-	elif $itemMenu.visible && !$"../partyMenu".visible:
-		$itemList.modulate = $itemList.modulate.lightened(1)
-		$Panel.modulate = $Panel.modulate.lightened(1)
-		$itemMenu.hide()
-	elif !$itemMenu.visible && !$"../partyMenu".visible:
-		exit()
-		Signals.guiBack.emit()
-
-
-func exit() -> void:
-	Signals.guiCancel.disconnect(back)
-	Signals.guiCloseExploringMenu.disconnect(exit)
-	
-	if Signals.guiPartyMenuPick.is_connected(partyPick):
-		Signals.guiPartyMenuPick.disconnect(partyPick)
-	
-	Signals.guiHidePartyMenu.emit()
-	
-	$itemMenu/partyMenu.hide()
-	$itemMenu.hide()
-	hide()
-
-
 func _on_itemList_item_activated(index : int) -> void:
-	$itemList.modulate = $itemList.modulate.darkened(0.25)
-	$Panel.modulate = $Panel.modulate.darkened(0.25)
-#	$itemMenu.modulate = $itemMenu.modulate.lightened(1)
+	var menuPosition = Vector2(position) + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
 	
-#	var item = inventorySummary.summary[index].item
-	var menuPosition = $itemList.global_position + Vector2((index % 4) * 150 + 105, floor(index / 4) * 51 + 35)
-	
-	$itemMenu.position = menuPosition
-	$itemMenu.popup()
-	$itemMenu.grab_focus()
-	$itemMenu.set_focused_item(0)
+	$itemList/itemMenu.position = menuPosition
+	$itemList/itemMenu.popup()
+	$itemList/itemMenu.grab_focus()
+	$itemList/itemMenu.set_focused_item(0)
 
 
 # TODO party
 func _on_itemMenu_id_pressed(id : int) -> void:
 	match id:
 		0:
-			$itemMenu.modulate = $itemMenu.modulate.darkened(0.25)
-			Signals.guiPartyMenuPick.connect(partyPick)
-			Signals.guiPopupPartyMenu.emit($itemMenu.position + Vector2($itemMenu.size.x + 10, 0))
+			return
 		
 		1:
 			Signals.characterDroppedItem.emit(
 				character,
 				inventorySummary.summary[$itemList.get_selected_items()[0]].item)
-			showWindow(character)
+			
+			$itemList/itemMenu.hide()
+			_on_about_to_popup()
 		
 		_:
-			$itemList.modulate = $itemList.modulate.lightened(1)
-			$Panel.modulate = $Panel.modulate.lightened(1)
-			$itemMenu.hide()
+			$itemList/itemMenu.hide()
 
 
-func partyPick(id: int) -> void:
-	Signals.guiPartyMenuPick.disconnect(partyPick)
+func _on_party_menu_index_pressed(index: int) -> void:
+	print(index)
 	
 	var item = inventorySummary.summary[$itemList.get_selected_items()[0]].item
 	Signals.characterUsedItem.emit(
 		character,
-		GameManager.party if (item.targetType > Enums.MoveTargetType.FOE) else [GameManager.party[id]],
+		GameManager.party if (item.targetType > Enums.MoveTargetType.FOE) else [GameManager.party[index]],
 		item)
 	
-	showWindow(character)
+	$itemList/itemMenu.hide()
+	_on_about_to_popup()
 

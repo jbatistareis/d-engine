@@ -17,6 +17,7 @@ static func shortNameSort(a, b) -> bool:
 	return a.shortName.nocasecmp_to(b.shortName) == -1
 
 
+# TODO not working as intended
 static func shortNameFind(entity, shortName : String) -> bool:
-	return entity.shortName.nocasecmp_to(shortName) == -1
+	return entity.shortName == shortName
 
