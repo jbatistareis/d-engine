@@ -26,19 +26,9 @@ func _ready() -> void:
 	Signals.guiCancel.connect(cancelCursor)
 	Signals.battleEnded.connect(finish)
 	Signals.battleWon.connect(showBattleResult)
-	
-	get_viewport().size_changed.connect(updateSize)
-	updateSize()
-
-
-func updateSize() -> void:
-	$SubViewportContainer/SubViewport.size = GuiOverlayManager.currentSize
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-#	var cursorPos = 0
-#	var enemySize = enemyData.size()
-	
 	if playerData.is_empty() || enemyData.is_empty():
 		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])
 		return
@@ -164,7 +154,6 @@ func publishCommand(player, targets : Array, move : Move) -> void:
 	
 	Signals.battleCursorHide.emit()
 	Signals.commandPublished.emit(command)
-	Signals.commandsResumed.emit()
 	cursorOn = false
 
 

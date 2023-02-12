@@ -135,6 +135,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 focus_neighbor_top = NodePath("exploration/menu/box/btnClose")
 focus_neighbor_bottom = NodePath("exploration/menu/box/btnMap")
 focus_next = NodePath("exploration/menu/box/btnMap")
@@ -532,7 +534,7 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_60sy5")
 }
-blend_times = [&"normal", &"normal", 0.3, &"normal", &"RESET", 0.3, &"normal", &"hide", 0.3, &"normal", &"show", 0.3, &"hide", &"normal", 0.3, &"hide", &"RESET", 0.3, &"hide", &"hide", 0.3, &"hide", &"show", 0.3, &"show", &"normal", 0.3, &"show", &"RESET", 0.3, &"show", &"hide", 0.3, &"show", &"show", 0.3]
+blend_times = [&"normal", &"normal", 0.3, &"normal", &"RESET", 0.3, &"normal", &"show", 0.3, &"normal", &"hide", 0.3, &"show", &"normal", 0.3, &"show", &"RESET", 0.3, &"show", &"show", 0.3, &"show", &"hide", 0.3, &"hide", &"normal", 0.3, &"hide", &"RESET", 0.3, &"hide", &"show", 0.3, &"hide", &"hide", 0.3]
 
 [node name="container" type="CenterContainer" parent="toast"]
 modulate = Color(1, 1, 1, 0)

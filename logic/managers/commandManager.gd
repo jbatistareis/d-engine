@@ -70,4 +70,5 @@ func publishCommand(command : Command) -> void:
 		return
 	
 	newCommands.append(command)
+	resume()
 

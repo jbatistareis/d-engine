@@ -54,7 +54,7 @@ func showWindow(character : Character) -> void:
 
 func itemFocus(index : int) -> void:
 	$itemList.grab_focus()
-	if !$itemList.items.is_empty():
+	if $itemList.item_count > 0:
 		$itemList.select(index)
 
 
