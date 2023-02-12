@@ -1,19 +1,19 @@
 extends Node
 
-onready var currentState : State = getState(Enums.States.EXPLORING)
+@onready var currentState : State = getState(Enums.States.EXPLORING)
 
 var player : Character
-var party : Array = [] setget ,getParty
+var party : Array = [] : get = getParty
 
 # control vars
 var testing : bool = false
 var cameraMoving : bool = false
-var direction : int setget setDirection
+var direction : int : set = setDirection
 
 
 func _ready() -> void :
-	Signals.connect("playerLoaded", self, "loadData")
-	Signals.connect("battleStarted", self, "startBattleState")
+	Signals.playerLoaded.connect(loadData)
+	Signals.battleStarted.connect(startBattleState)
 
 
 # TODO proper party
@@ -46,7 +46,7 @@ func setDirection(value : int) -> void:
 	direction = correctedValue % 4
 
 
-func startBattleState(players, enemies) -> void:
+func startBattleState(_players, _enemies) -> void:
 	currentState = getState(Enums.States.BATTLE)
 
 
@@ -81,7 +81,7 @@ func getState(id : int) -> State:
 			return null
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	currentState.handleInput()
 	currentState = currentState.next
 

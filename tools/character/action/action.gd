@@ -1,7 +1,7 @@
 extends PanelContainer
 
 var action : Dictionary = DefaultValues.actionBase
-var index : int setget setIndex
+var index : int : set = setIndex
 
 func _enter_tree() -> void:
 	$container/grid/lblAcSelfData.text = Enums.Fact.keys()[action.self]

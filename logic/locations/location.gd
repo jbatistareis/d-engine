@@ -106,7 +106,7 @@ func executeScript(script : String, character) -> void:
 
 
 func findRoom(id : int) -> Dictionary:
-	return rooms[rooms.bsearch_custom(id, EntityArrayHelper, 'idFind')]
+	return rooms[rooms.bsearch_custom(id, func(a, b): EntityArrayHelper.idFind(a, b))]
 
 
 func changeEncounterRate(value : float) -> void:

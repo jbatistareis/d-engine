@@ -7,16 +7,16 @@ var inventorySummary : InventorySummary
 
 
 func _ready() -> void:
-	Signals.connect("battleInventoryShow", self, "showWindow")
-	Signals.connect("guiCancel", self, "hide")
+	Signals.battleInventoryShow.connect(showWindow)
+	Signals.guiCancel.connect(hideWindow)
 
 
 func showWindow(character : Character) -> void:
 	$ItemList.clear()
 	self.character = character
 	
-	$ItemList.visible = !character.inventory.items.empty()
-	$lblNoItems.visible = character.inventory.items.empty()
+	$ItemList.visible = !character.inventory.items.is_empty()
+	$lblNoItems.visible = character.inventory.items.is_empty()
 	
 	inventorySummary = InventorySummary.new(character.inventory.items)
 	
@@ -35,17 +35,17 @@ func showWindow(character : Character) -> void:
 	
 	visible = true
 	$ItemList.grab_focus()
-	if !$ItemList.items.empty():
+	if !$ItemList.items.is_empty():
 		$ItemList.select(0)
 
 
-func hide() -> void:
+func hideWindow() -> void:
 	if visible:
 		visible = false
-		Signals.emit_signal("battleShowCharacterMoves", character)
+		Signals.battleShowCharacterMoves.emit(character)
 
 
 func _on_ItemList_item_activated(index):
 	visible = false
-	Signals.emit_signal("battleCursorShow", character, ItemMove.new(inventorySummary.summary[index].item))
+	Signals.battleCursorShow.emit(character, ItemMove.new(inventorySummary.summary[index].item))
 

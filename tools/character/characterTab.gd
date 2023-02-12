@@ -1,4 +1,4 @@
-extends Tabs
+extends TabBar
 
 var characterDto : CharacterDTO = CharacterDTO.new()
 
@@ -38,7 +38,7 @@ func setFields() -> void:
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optVerdict.select(verdicts.find(characterDto.verdictShortName))
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optInventory.select(inventories.find(characterDto.inventoryShortName))
 	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/optModel.select(models.find(characterDto.model))
-	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/chkVerdictAct.pressed = characterDto.verdictActive
+	$background/mainSeparator/dataPanel/dataContainer/misc/fields/grid/chkVerdictAct.button_pressed = characterDto.verdictActive
 
 
 func loadAllData() -> void:
@@ -181,7 +181,7 @@ func _on_btnReload_pressed():
 
 func _on_tabs_tab_changed(tab : int):
 	if tab == get_index():
-		get_node("background/mainSeparator/visualization/Model/data/container/Viewport/area").visible = true
+		get_node("background/mainSeparator/visualization/Model/data/container/SubViewport/area").visible = true
 	else:
-		get_node("background/mainSeparator/visualization/Model/data/container/Viewport/area").visible = false
+		get_node("background/mainSeparator/visualization/Model/data/container/SubViewport/area").visible = false
 

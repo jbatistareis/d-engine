@@ -1,247 +1,239 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://ca87vmea8a6dd"]
 
-[ext_resource path="res://ui/gui/battle/groupStats.tscn" type="PackedScene" id=1]
-[ext_resource path="res://assets/theme/default/default.theme" type="Theme" id=2]
-[ext_resource path="res://ui/gui/exploration.gd" type="Script" id=3]
-[ext_resource path="res://ui/gui/battle.gd" type="Script" id=4]
-[ext_resource path="res://ui/gui/battle/cursor.gd" type="Script" id=5]
-[ext_resource path="res://assets/theme/default/styleBoxFlat_darkslategray_shadow.tres" type="StyleBox" id=6]
-[ext_resource path="res://ui/gui/battle/inventory.gd" type="Script" id=7]
-[ext_resource path="res://ui/gui/inventory.gd" type="Script" id=8]
-[ext_resource path="res://ui/gui/weapons.gd" type="Script" id=9]
-[ext_resource path="res://ui/gui/partyMenu.gd" type="Script" id=10]
-[ext_resource path="res://ui/gui/toast.gd" type="Script" id=11]
+[ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
+[ext_resource type="Theme" path="res://assets/theme/default/default.theme" id="2"]
+[ext_resource type="Script" path="res://ui/gui/exploration.gd" id="3"]
+[ext_resource type="Script" path="res://ui/gui/battle.gd" id="4"]
+[ext_resource type="Script" path="res://ui/gui/battle/cursor.gd" id="5"]
+[ext_resource type="Script" path="res://ui/gui/battle/inventory.gd" id="7"]
+[ext_resource type="Script" path="res://ui/gui/inventory.gd" id="8"]
+[ext_resource type="Script" path="res://ui/gui/weapons.gd" id="9"]
+[ext_resource type="Script" path="res://ui/gui/partyMenu.gd" id="10"]
+[ext_resource type="Script" path="res://ui/gui/toast.gd" id="11"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("toast/container:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("toast/container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector2( 433, -40 ) ]
+"values": [Vector2(433, -40)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("toast/container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "hide"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("toast/container:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("toast/container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 433, 30 ), Vector2( 433, -40 ) ]
+"values": [Vector2(433, 30), Vector2(433, -40)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("toast/container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 resource_name = "normal"
 length = 5.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("toast/container:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("toast/container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 5.3, 5.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 5.3, 5.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Vector2( 433, -40 ), Vector2( 433, 30 ), Vector2( 433, 30 ), Vector2( 433, -40 ) ]
+"values": [Vector2(433, -40), Vector2(433, 30), Vector2(433, 30), Vector2(433, -40)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("toast/container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3, 5.3, 5.6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 5.3, 5.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "show"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("toast/container:rect_position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("toast/container:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector2( 433, -40 ), Vector2( 433, 30 ) ]
+"values": [Vector2(433, -40), Vector2(433, 30)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("toast/container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.3 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_60sy5"]
+_data = {
+"RESET": SubResource("2"),
+"hide": SubResource("3"),
+"normal": SubResource("4"),
+"show": SubResource("1")
 }
 
 [node name="gui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-focus_neighbour_top = NodePath("exploration/menu/box/btnClose")
-focus_neighbour_bottom = NodePath("exploration/menu/box/btnMap")
+grow_horizontal = 2
+grow_vertical = 2
+focus_neighbor_top = NodePath("exploration/menu/box/btnClose")
+focus_neighbor_bottom = NodePath("exploration/menu/box/btnMap")
 focus_next = NodePath("exploration/menu/box/btnMap")
 focus_previous = NodePath("exploration/menu/box/btnClose")
 
 [node name="main" type="CenterContainer" parent="."]
 visible = false
+layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="exploration" type="HBoxContainer" parent="."]
 visible = false
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -558.0
-margin_top = -240.0
-margin_right = 558.0
-margin_bottom = 240.0
+offset_left = -558.0
+offset_top = -240.0
+offset_right = 558.0
+offset_bottom = 240.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_constants/separation = 10
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="partyMenu" type="PopupMenu" parent="exploration"]
-margin_left = 312.0
-margin_right = 312.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource( 2 )
-popup_exclusive = true
-script = ExtResource( 10 )
+exclusive = true
+theme = ExtResource("2")
+script = ExtResource("10")
 
 [node name="party" type="GridContainer" parent="exploration"]
-margin_bottom = 480.0
+layout_mode = 2
 columns = 2
 
 [node name="menu" type="MarginContainer" parent="exploration"]
-margin_left = 10.0
-margin_right = 92.0
-margin_bottom = 112.0
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Panel" type="Panel" parent="exploration/menu"]
-margin_right = 82.0
-margin_bottom = 112.0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
 
 [node name="box" type="VBoxContainer" parent="exploration/menu"]
-margin_right = 82.0
-margin_bottom = 112.0
-custom_constants/separation = 0
+layout_mode = 2
 
 [node name="btnMap" type="Button" parent="exploration/menu/box"]
-margin_right = 82.0
-margin_bottom = 28.0
-focus_neighbour_bottom = NodePath("../btnItems")
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../btnItems")
 focus_next = NodePath("../btnItems")
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 text = "Map   >"
 flat = true
 
 [node name="btnItems" type="Button" parent="exploration/menu/box"]
-margin_top = 28.0
-margin_right = 82.0
-margin_bottom = 56.0
-focus_neighbour_top = NodePath("../btnMap")
-focus_neighbour_bottom = NodePath("../btnWpns")
+layout_mode = 2
+focus_neighbor_top = NodePath("../btnMap")
+focus_neighbor_bottom = NodePath("../btnWpns")
 focus_next = NodePath("../btnWpns")
 focus_previous = NodePath("../btnMap")
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 text = "Items >"
 flat = true
 
 [node name="btnWpns" type="Button" parent="exploration/menu/box"]
-margin_top = 56.0
-margin_right = 82.0
-margin_bottom = 84.0
-focus_neighbour_top = NodePath("../btnItems")
-focus_neighbour_bottom = NodePath("../btnClose")
+layout_mode = 2
+focus_neighbor_top = NodePath("../btnItems")
+focus_neighbor_bottom = NodePath("../btnClose")
 focus_next = NodePath("../btnClose")
 focus_previous = NodePath("../btnItems")
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 text = "Wpns  >"
 flat = true
 
 [node name="btnClose" type="Button" parent="exploration/menu/box"]
-margin_top = 84.0
-margin_right = 82.0
-margin_bottom = 112.0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
 text = "x Close"
 flat = true
 
 [node name="inventory" type="MarginContainer" parent="exploration"]
 visible = false
-margin_left = 476.0
-margin_right = 1116.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 640, 480 )
+custom_minimum_size = Vector2(640, 480)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 2 )
-script = ExtResource( 8 )
+theme = ExtResource("2")
+script = ExtResource("8")
 
 [node name="Panel" type="Panel" parent="exploration/inventory"]
-margin_right = 640.0
-margin_bottom = 480.0
+layout_mode = 2
 
 [node name="itemList" type="ItemList" parent="exploration/inventory"]
 visible = false
-margin_right = 640.0
-margin_bottom = 480.0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
 max_text_lines = 2
 max_columns = 4
 same_column_width = true
@@ -250,92 +242,75 @@ icon_mode = 0
 
 [node name="lblNoItems" type="Label" parent="exploration/inventory"]
 visible = false
-margin_right = 640.0
-margin_bottom = 480.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "No items being carried"
-align = 1
-valign = 1
 
 [node name="itemMenu" type="PopupMenu" parent="exploration/inventory"]
-margin_right = 60.0
-margin_bottom = 78.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-popup_exclusive = true
-items = [ "Use  >", null, 0, false, false, 0, 0, null, "", false, "Drop ", null, 0, false, false, 1, 0, null, "", false, "< Back", null, 0, false, false, 2, 0, null, "", false ]
+exclusive = true
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
+item_count = 3
+item_0/text = "Use  >"
+item_0/id = 0
+item_1/text = "Drop "
+item_1/id = 1
+item_2/text = "< Back"
+item_2/id = 2
 
 [node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
-margin_left = 414.0
-margin_right = 1054.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 640, 480 )
+custom_minimum_size = Vector2(640, 480)
+layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-theme = ExtResource( 2 )
-script = ExtResource( 9 )
+theme = ExtResource("2")
+script = ExtResource("9")
 
 [node name="Panel" type="Panel" parent="exploration/weapons"]
-margin_right = 640.0
-margin_bottom = 480.0
+layout_mode = 2
 
 [node name="main" type="VBoxContainer" parent="exploration/weapons"]
-margin_right = 640.0
-margin_bottom = 480.0
+layout_mode = 2
 
 [node name="cards" type="HBoxContainer" parent="exploration/weapons/main"]
-margin_right = 640.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="current" type="VBoxContainer" parent="exploration/weapons/main/cards"]
-margin_right = 314.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/current"]
-margin_right = 314.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="VSeparator" type="VSeparator" parent="exploration/weapons/main/cards"]
-margin_left = 318.0
-margin_right = 322.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_vertical = 3
 
 [node name="new" type="VBoxContainer" parent="exploration/weapons/main/cards"]
-margin_left = 326.0
-margin_right = 640.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/new"]
-margin_right = 314.0
-margin_bottom = 385.0
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HSeparator" type="HSeparator" parent="exploration/weapons/main"]
-margin_top = 389.0
-margin_right = 640.0
-margin_bottom = 393.0
+layout_mode = 2
 
 [node name="itemList" type="ItemList" parent="exploration/weapons/main"]
-margin_top = 397.0
-margin_right = 640.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 83 )
+custom_minimum_size = Vector2(0, 83)
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 max_columns = 2
 same_column_width = true
 fixed_column_width = 310
@@ -343,233 +318,183 @@ icon_mode = 0
 
 [node name="lblNoWeap" type="Label" parent="exploration/weapons/main"]
 visible = false
-margin_left = 200.0
-margin_top = 458.0
-margin_right = 440.0
-margin_bottom = 480.0
-rect_min_size = Vector2( 0, 83 )
+custom_minimum_size = Vector2(0, 83)
+layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 5
 text = "No weapons being carried"
-align = 1
-valign = 1
 
 [node name="itemMenu" type="PopupMenu" parent="exploration/weapons"]
-margin_right = 60.0
-margin_bottom = 78.0
-size_flags_horizontal = 0
-size_flags_vertical = 0
-popup_exclusive = true
-items = [ "Equip", null, 0, false, false, 0, 0, null, "", false, "Drop", null, 0, false, false, 1, 0, null, "", false, "< Back", null, 0, false, false, 2, 0, null, "", false ]
+exclusive = true
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
+item_count = 3
+item_0/text = "Equip"
+item_0/id = 0
+item_1/text = "Drop"
+item_1/id = 1
+item_2/text = "< Back"
+item_2/id = 2
 
 [node name="battle" type="Control" parent="."]
 visible = false
+anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 4 )
+script = ExtResource("4")
 
-[node name="enemyStats" parent="battle" instance=ExtResource( 1 )]
+[node name="enemyStats" parent="battle" instance=ExtResource("1")]
+layout_mode = 0
 anchor_left = 0.025
 anchor_top = 0.025
 anchor_right = 0.025
 anchor_bottom = 0.025
 
-[node name="playerStats" parent="battle" instance=ExtResource( 1 )]
+[node name="playerStats" parent="battle" instance=ExtResource("1")]
+layout_mode = 0
 anchor_left = 0.025
 anchor_top = 0.95
 anchor_right = 0.025
 anchor_bottom = 0.95
-margin_top = -22.0
+offset_top = -22.0
 grow_vertical = 0
 
 [node name="moves" type="VBoxContainer" parent="battle"]
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.98
 anchor_right = 0.5
 anchor_bottom = 0.98
-margin_left = -265.0
-margin_top = -64.0
-margin_right = 265.0
+offset_left = -265.0
+offset_top = -64.0
+offset_right = 265.0
 grow_horizontal = 2
 grow_vertical = 0
-custom_constants/separation = 10
 
 [node name="cards" type="CenterContainer" parent="battle/moves"]
-margin_right = 530.0
-grow_horizontal = 2
+layout_mode = 2
 
 [node name="grid" type="GridContainer" parent="battle/moves/cards"]
-margin_left = 265.0
-margin_right = 265.0
-grow_horizontal = 2
-grow_vertical = 0
-custom_constants/vseparation = 10
-custom_constants/hseparation = 10
+layout_mode = 2
 columns = 4
 
 [node name="decription" type="CenterContainer" parent="battle/moves"]
-margin_top = 10.0
-margin_right = 530.0
-margin_bottom = 32.0
-grow_horizontal = 2
-rect_min_size = Vector2( 0, 22 )
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="container" type="MarginContainer" parent="battle/moves/decription"]
-margin_left = 265.0
-margin_right = 265.0
-margin_bottom = 22.0
+layout_mode = 2
 
-[node name="bg" type="Panel" parent="battle/moves/decription/container"]
-margin_bottom = 22.0
+[node name="panel" type="Panel" parent="battle/moves/decription/container"]
+layout_mode = 2
 size_flags_horizontal = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 
 [node name="lblDescription" type="Label" parent="battle/moves/decription/container"]
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
-align = 1
 
 [node name="mods" type="CenterContainer" parent="battle/moves"]
-margin_top = 42.0
-margin_right = 530.0
-margin_bottom = 64.0
-grow_horizontal = 2
-rect_min_size = Vector2( 0, 22 )
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 2
 
 [node name="data" type="HBoxContainer" parent="battle/moves/mods"]
-margin_left = 265.0
-margin_top = 11.0
-margin_right = 265.0
-margin_bottom = 11.0
-custom_constants/separation = 10
+layout_mode = 2
 alignment = 1
 
 [node name="self" type="MarginContainer" parent="battle/moves/mods/data"]
 visible = false
-margin_right = 260.0
-margin_bottom = 22.0
+layout_mode = 2
 
-[node name="bg" type="Panel" parent="battle/moves/mods/data/self"]
-margin_right = 260.0
-margin_bottom = 22.0
+[node name="panel" type="Panel" parent="battle/moves/mods/data/self"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 
 [node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/self"]
-margin_right = 260.0
-margin_bottom = 22.0
-custom_constants/separation = 10
+layout_mode = 2
 
 [node name="lblSelf" type="Label" parent="battle/moves/mods/data/self/fields"]
-margin_right = 50.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "[SLF]"
-align = 1
 
 [node name="lblAtkMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-margin_left = 60.0
-margin_right = 120.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "AT: %d"
-align = 1
 
 [node name="lblDefMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-margin_left = 130.0
-margin_right = 190.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "DF: %d"
-align = 1
 
 [node name="lblCdMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-margin_left = 200.0
-margin_right = 260.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "CD: %d"
-align = 1
 
 [node name="target" type="MarginContainer" parent="battle/moves/mods/data"]
 visible = false
-margin_right = 260.0
-margin_bottom = 22.0
+layout_mode = 2
 
-[node name="bg" type="Panel" parent="battle/moves/mods/data/target"]
-margin_right = 260.0
-margin_bottom = 22.0
+[node name="panel" type="Panel" parent="battle/moves/mods/data/target"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 2 )
+theme = ExtResource("2")
 
 [node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/target"]
-margin_right = 260.0
-margin_bottom = 22.0
-custom_constants/separation = 10
+layout_mode = 2
 
 [node name="lblTarget" type="Label" parent="battle/moves/mods/data/target/fields"]
-margin_right = 50.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "[TGT]"
-align = 1
 
 [node name="lblAtkMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-margin_left = 60.0
-margin_right = 120.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "AT: %d"
-align = 1
 
 [node name="lblDefMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-margin_left = 130.0
-margin_right = 190.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "DF: %d"
-align = 1
 
 [node name="lblCdMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-margin_left = 200.0
-margin_right = 260.0
-margin_bottom = 22.0
+layout_mode = 2
 size_flags_horizontal = 3
 text = "CD: %d"
-align = 1
 
 [node name="inventory" type="MarginContainer" parent="battle"]
 visible = false
+custom_minimum_size = Vector2(612, 207)
+layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.89
 anchor_right = 0.5
 anchor_bottom = 0.89
-margin_left = -310.0
-margin_top = -215.0
-margin_right = 300.0
-margin_bottom = -8.0
+offset_left = -310.0
+offset_top = -215.0
+offset_right = 300.0
+offset_bottom = -8.0
 grow_horizontal = 2
 grow_vertical = 2
-rect_min_size = Vector2( 612, 207 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 2 )
-script = ExtResource( 7 )
+theme = ExtResource("2")
+script = ExtResource("7")
 
 [node name="Panel" type="Panel" parent="battle/inventory"]
-margin_right = 612.0
-margin_bottom = 207.0
+layout_mode = 2
 
 [node name="ItemList" type="ItemList" parent="battle/inventory"]
 visible = false
-margin_right = 612.0
-margin_bottom = 207.0
-theme = ExtResource( 2 )
+layout_mode = 2
+theme = ExtResource("2")
 max_text_lines = 2
 max_columns = 4
 same_column_width = true
@@ -578,68 +503,61 @@ icon_mode = 0
 
 [node name="lblNoItems" type="Label" parent="battle/inventory"]
 visible = false
-margin_right = 612.0
-margin_bottom = 207.0
+layout_mode = 2
 size_flags_vertical = 3
 text = "No items being carried"
-align = 1
-valign = 1
 
 [node name="cursor" type="MarginContainer" parent="battle"]
-margin_bottom = 22.0
-rect_min_size = Vector2( 0, 22 )
-script = ExtResource( 5 )
+custom_minimum_size = Vector2(0, 22)
+layout_mode = 0
+offset_bottom = 22.0
+script = ExtResource("5")
 
-[node name="bg" type="Panel" parent="battle/cursor"]
-margin_bottom = 22.0
+[node name="panel" type="Panel" parent="battle/cursor"]
+layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = ExtResource( 2 )
-custom_styles/panel = ExtResource( 6 )
+theme = ExtResource("2")
 
 [node name="lblTgt" type="Label" parent="battle/cursor"]
-margin_bottom = 22.0
+layout_mode = 2
 
 [node name="toast" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 240)
+anchors_preset = 0
 anchor_right = 1.0
-rect_min_size = Vector2( 0, 240 )
-script = ExtResource( 11 )
+script = ExtResource("11")
 
 [node name="animation" type="AnimationPlayer" parent="toast"]
 root_node = NodePath("../..")
 autoplay = "RESET"
-anims/RESET = SubResource( 2 )
-anims/hide = SubResource( 3 )
-anims/normal = SubResource( 4 )
-anims/show = SubResource( 1 )
-blend_times = [ "hide", "RESET", 0.3, "hide", "hide", 0.3, "hide", "normal", 0.3, "hide", "show", 0.3, "normal", "RESET", 0.3, "normal", "hide", 0.3, "normal", "normal", 0.3, "normal", "show", 0.3, "show", "RESET", 0.3, "show", "hide", 0.3, "show", "normal", 0.3, "show", "show", 0.3 ]
+libraries = {
+"": SubResource("AnimationLibrary_60sy5")
+}
+blend_times = [&"normal", &"normal", 0.3, &"normal", &"RESET", 0.3, &"normal", &"show", 0.3, &"normal", &"hide", 0.3, &"show", &"normal", 0.3, &"show", &"RESET", 0.3, &"show", &"show", 0.3, &"show", &"hide", 0.3, &"hide", &"normal", 0.3, &"hide", &"RESET", 0.3, &"hide", &"show", 0.3, &"hide", &"hide", 0.3]
 
 [node name="container" type="CenterContainer" parent="toast"]
-modulate = Color( 1, 1, 1, 0 )
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(510, 30)
+layout_mode = 0
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -250.0
-margin_top = -40.0
-margin_right = 260.0
-margin_bottom = -9.99993
-rect_min_size = Vector2( 510, 30 )
+offset_left = -250.0
+offset_top = -40.0
+offset_right = 260.0
+offset_bottom = -9.99993
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Panel" type="Panel" parent="toast/container"]
-margin_right = 510.0
-margin_bottom = 30.0
-rect_min_size = Vector2( 510, 30 )
-theme = ExtResource( 2 )
+custom_minimum_size = Vector2(510, 30)
+layout_mode = 2
+theme = ExtResource("2")
 
 [node name="lblMessage" type="Label" parent="toast/container"]
-margin_left = 5.0
-margin_top = 4.0
-margin_right = 505.0
-margin_bottom = 26.0
+layout_mode = 2
 text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
-[connection signal="hide" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_hide"]
 [connection signal="id_pressed" from="exploration/partyMenu" to="exploration/partyMenu" method="_on_partyMenu_id_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnMap" to="exploration" method="_on_btnMap_pressed"]
 [connection signal="pressed" from="exploration/menu/box/btnItems" to="exploration" method="_on_btnItems_pressed"]

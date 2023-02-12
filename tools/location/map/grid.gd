@@ -8,15 +8,15 @@ var multiRooms : Array = []
 var mousePressed : bool
 var mouseDragged : bool
 
-onready var scroll : ScrollContainer = get_node("../..")
-onready var selectionArea : Area2D = get_node("../selectionArea")
+@onready var scroll : ScrollContainer = get_node("../..")
+@onready var selectionArea : Area2D = get_node("../selectionArea")
 
 
 func _ready() -> void:
 	totalRooms = columns * columns
 	
 	for i in range(totalRooms):
-		var cell = cellScene.instance()
+		var cell = cellScene.instantiate()
 		cell.id = i
 		cell.x = i % columns
 		cell.y = i / columns
@@ -24,7 +24,7 @@ func _ready() -> void:
 		
 		add_child(cell)
 	
-	EditorSignals.connect("mapSelectedRoom", self, "clearMultiSelection")
+	EditorSignals.connect("mapSelectedRoom",Callable(self,"clearMultiSelection"))
 
 
 func _input(event) -> void:
@@ -39,7 +39,7 @@ func _input(event) -> void:
 		
 		selectionArea.global_position = event.position #+ Vector2(scroll.scroll_horizontal, scroll.scroll_vertical)
 		
-		if !multiRooms.empty():
+		if !multiRooms.is_empty():
 			EditorSignals.emit_signal("mapSelectedMultiRooms", multiRooms)
 
 
@@ -58,8 +58,8 @@ func collectRooms() -> Array:
 			connectRoom(cell.room)
 			
 			for idx in range(cell.room.foeShortNameGroups.size()):
-				if cell.room.foeShortNameGroups[idx].empty() || (cell.room.foeShortNameGroups[idx][0].empty()):
-					cell.room.foeShortNameGroups.remove(idx)
+				if cell.room.foeShortNameGroups[idx].is_empty() || (cell.room.foeShortNameGroups[idx][0].is_empty()):
+					cell.room.foeShortNameGroups.remove_at(idx)
 			
 			rooms.append(cell.room)
 	
@@ -136,7 +136,7 @@ func setConnections(room : Dictionary, directions : Array) -> void:
 			Enums.Direction.WEST:
 				index = (room.x - 1) + room.y * columns
 		
-		if ((index >= 0) && (index < totalRooms)) && !get_child(index).room.empty() && (get_child(index).room.type != Enums.RoomType.DUMMY):
+		if ((index >= 0) && (index < totalRooms)) && !get_child(index).room.is_empty() && (get_child(index).room.type != Enums.RoomType.DUMMY):
 			room.exits[direction] = get_child(index).room.id
 		else:
 			room.exits[direction] = -1
@@ -156,6 +156,6 @@ func _on_selectionArea_body_entered(body):
 			else:
 				multiRooms.append(body.get_parent().room)
 			
-			if !multiRooms.empty():
+			if !multiRooms.is_empty():
 				EditorSignals.emit_signal("mapSelectedMultiRooms", multiRooms)
 

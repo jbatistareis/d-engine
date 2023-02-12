@@ -1,11 +1,9 @@
 class_name VerdictCommand
 extends Command
 
-var auditor
 
-
-func _init(auditor, ticks : int).(auditor, ticks) -> void:
-	self.auditor = executorCharacter
+func _init(auditor, ticks : int):
+	super(auditor, ticks)
 
 
 func execute() -> void:
@@ -14,6 +12,6 @@ func execute() -> void:
 		remainingTicks = 0
 		return
 	
-	if auditor.verdictActive:
-		auditor.verdict.decision(auditor)
+	if executorCharacter.verdictActive:
+		executorCharacter.verdict.decision(executorCharacter)
 

@@ -1,10 +1,11 @@
-extends Spatial
+extends Node3D
 
 var player : Character
 
 
 func _init():
 	OS.low_processor_usage_mode = true
+	
 	player = Character.new().fromShortName('BSECHA')
 
 
@@ -18,8 +19,8 @@ func _ready() -> void:
 	player.getStat(Enums.CharacterAbility.CONSTITUTION).score = 15
 	player.type = Enums.CharacterType.PC
 	player.verdictActive = false
-	Signals.connect("playerArrivedLocation", self, 'printEntering')
-	Signals.connect("playerChangedRoom", self, 'printTraveling')
+	Signals.playerArrivedLocation.connect(printEntering)
+	Signals.playerChangedRoom.connect(printTraveling)
 	
 	# TEST
 	var armor = Armor.new().fromShortName("BSEARM")
@@ -77,7 +78,7 @@ func _ready() -> void:
 	LocationManager.changeLocation(GameManager.player, 'BSELOC', 0, Enums.Direction.EAST)
 
 
-func _process(delta) -> void:
+func _process(_delta) -> void:
 	pass
 
 

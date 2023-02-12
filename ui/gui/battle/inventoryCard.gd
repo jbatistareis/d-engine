@@ -5,13 +5,13 @@ signal hovered(move)
 const _NAME : String = '[ %s ]'
 const _TIMER : String = '%0.2fs / %0.2fs'
 
-onready var button : Button = $btnConfirm
+@onready var button : Button = $btnConfirm
 
 var character : Character
 var move : Move = Move.new()
 
 
-func _init() -> void:
+func _init():
 	move.description = 'Opens inventory'
 
 

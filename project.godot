@@ -6,316 +6,13 @@
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
 
-config_version=4
-
-_global_script_classes=[ {
-"base": "Entity",
-"class": "Armor",
-"language": "GDScript",
-"path": "res://logic/items/armor.gd"
-}, {
-"base": "DTO",
-"class": "ArmorDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/item/armorDto.gd"
-}, {
-"base": "Command",
-"class": "AskPlayerBattleInputCommand",
-"language": "GDScript",
-"path": "res://logic/commands/askPlayerBattleInputCommand.gd"
-}, {
-"base": "Reference",
-"class": "BattleResult",
-"language": "GDScript",
-"path": "res://logic/game/battleResult.gd"
-}, {
-"base": "State",
-"class": "BattleState",
-"language": "GDScript",
-"path": "res://logic/game/states/battleState.gd"
-}, {
-"base": "State",
-"class": "BootState",
-"language": "GDScript",
-"path": "res://logic/game/states/bootState.gd"
-}, {
-"base": "Entity",
-"class": "Character",
-"language": "GDScript",
-"path": "res://logic/characters/character.gd"
-}, {
-"base": "DTO",
-"class": "CharacterDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/character/characterDto.gd"
-}, {
-"base": "Reference",
-"class": "CharacterQuery",
-"language": "GDScript",
-"path": "res://logic/utils/characterQuery.gd"
-}, {
-"base": "Reference",
-"class": "Command",
-"language": "GDScript",
-"path": "res://logic/commands/command.gd"
-}, {
-"base": "EntityArrayHelper",
-"class": "CommandArrayHelper",
-"language": "GDScript",
-"path": "res://logic/utils/commandArrayHelper.gd"
-}, {
-"base": "Reference",
-"class": "DTO",
-"language": "GDScript",
-"path": "res://logic/database/dto.gd"
-}, {
-"base": "Reference",
-"class": "Entity",
-"language": "GDScript",
-"path": "res://logic/database/entity.gd"
-}, {
-"base": "Reference",
-"class": "EntityArrayHelper",
-"language": "GDScript",
-"path": "res://logic/utils/entityArrayHelper.gd"
-}, {
-"base": "Reference",
-"class": "Enums",
-"language": "GDScript",
-"path": "res://enums.gd"
-}, {
-"base": "State",
-"class": "EquipmentState",
-"language": "GDScript",
-"path": "res://logic/game/states/equipmentState.gd"
-}, {
-"base": "Reference",
-"class": "ErrorMessages",
-"language": "GDScript",
-"path": "res://errorMessages.gd"
-}, {
-"base": "Command",
-"class": "ExecuteMoveCommand",
-"language": "GDScript",
-"path": "res://logic/commands/executeMoveCommand.gd"
-}, {
-"base": "State",
-"class": "ExploringMenuState",
-"language": "GDScript",
-"path": "res://logic/game/states/exploringMenuState.gd"
-}, {
-"base": "State",
-"class": "ExploringState",
-"language": "GDScript",
-"path": "res://logic/game/states/exploringState.gd"
-}, {
-"base": "Reference",
-"class": "GamePaths",
-"language": "GDScript",
-"path": "res://gamePaths.gd"
-}, {
-"base": "Entity",
-"class": "Inventory",
-"language": "GDScript",
-"path": "res://logic/characters/inventory.gd"
-}, {
-"base": "DTO",
-"class": "InventoryDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/character/inventoryDto.gd"
-}, {
-"base": "State",
-"class": "InventoryState",
-"language": "GDScript",
-"path": "res://logic/game/states/inventoryState.gd"
-}, {
-"base": "Reference",
-"class": "InventorySummary",
-"language": "GDScript",
-"path": "res://ui/gui/inventory/InventorySummary.gd"
-}, {
-"base": "Reference",
-"class": "InventorySummaryItem",
-"language": "GDScript",
-"path": "res://ui/gui/inventory/inventorySummaryItem.gd"
-}, {
-"base": "Entity",
-"class": "Item",
-"language": "GDScript",
-"path": "res://logic/items/item.gd"
-}, {
-"base": "DTO",
-"class": "ItemDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/item/itemDto.gd"
-}, {
-"base": "Move",
-"class": "ItemMove",
-"language": "GDScript",
-"path": "res://logic/moves/itemMove.gd"
-}, {
-"base": "Entity",
-"class": "Location",
-"language": "GDScript",
-"path": "res://logic/locations/location.gd"
-}, {
-"base": "DTO",
-"class": "LocationDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/location/locationDto.gd"
-}, {
-"base": "State",
-"class": "MainMenuState",
-"language": "GDScript",
-"path": "res://logic/game/states/mainMenuState.gd"
-}, {
-"base": "Entity",
-"class": "Move",
-"language": "GDScript",
-"path": "res://logic/moves/move.gd"
-}, {
-"base": "DTO",
-"class": "MoveDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/move/moveDto.gd"
-}, {
-"base": "Reference",
-"class": "MoveResult",
-"language": "GDScript",
-"path": "res://logic/moves/moveResult.gd"
-}, {
-"base": "Reference",
-"class": "Persistence",
-"language": "GDScript",
-"path": "res://logic/database/persistence.gd"
-}, {
-"base": "Reference",
-"class": "RoomTile",
-"language": "GDScript",
-"path": "res://logic/locations/roomTile.gd"
-}, {
-"base": "DTO",
-"class": "SaveDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/data/saveDto.gd"
-}, {
-"base": "Reference",
-"class": "ScriptTool",
-"language": "GDScript",
-"path": "res://logic/utils/scriptTool.gd"
-}, {
-"base": "Reference",
-"class": "Stat",
-"language": "GDScript",
-"path": "res://logic/characters/stat.gd"
-}, {
-"base": "Reference",
-"class": "State",
-"language": "GDScript",
-"path": "res://logic/game/states/state.gd"
-}, {
-"base": "State",
-"class": "TitleState",
-"language": "GDScript",
-"path": "res://logic/game/states/titleState.gd"
-}, {
-"base": "Command",
-"class": "UseItemCommand",
-"language": "GDScript",
-"path": "res://logic/commands/useItemCommand.gd"
-}, {
-"base": "Reference",
-"class": "Util",
-"language": "GDScript",
-"path": "res://logic/utils/util.gd"
-}, {
-"base": "Entity",
-"class": "Verdict",
-"language": "GDScript",
-"path": "res://logic/ai/verdict.gd"
-}, {
-"base": "Command",
-"class": "VerdictCommand",
-"language": "GDScript",
-"path": "res://logic/commands/verdictCommand.gd"
-}, {
-"base": "DTO",
-"class": "VerdictDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/ai/verdictDto.gd"
-}, {
-"base": "Command",
-"class": "WaitCommand",
-"language": "GDScript",
-"path": "res://logic/commands/waitCommand.gd"
-}, {
-"base": "Entity",
-"class": "Weapon",
-"language": "GDScript",
-"path": "res://logic/items/weapon.gd"
-}, {
-"base": "DTO",
-"class": "WeaponDTO",
-"language": "GDScript",
-"path": "res://logic/database/dto/item/weaponDto.gd"
-} ]
-_global_script_class_icons={
-"Armor": "",
-"ArmorDTO": "",
-"AskPlayerBattleInputCommand": "",
-"BattleResult": "",
-"BattleState": "",
-"BootState": "",
-"Character": "",
-"CharacterDTO": "",
-"CharacterQuery": "",
-"Command": "",
-"CommandArrayHelper": "",
-"DTO": "",
-"Entity": "",
-"EntityArrayHelper": "",
-"Enums": "",
-"EquipmentState": "",
-"ErrorMessages": "",
-"ExecuteMoveCommand": "",
-"ExploringMenuState": "",
-"ExploringState": "",
-"GamePaths": "",
-"Inventory": "",
-"InventoryDTO": "",
-"InventoryState": "",
-"InventorySummary": "",
-"InventorySummaryItem": "",
-"Item": "",
-"ItemDTO": "",
-"ItemMove": "",
-"Location": "",
-"LocationDTO": "",
-"MainMenuState": "",
-"Move": "",
-"MoveDTO": "",
-"MoveResult": "",
-"Persistence": "",
-"RoomTile": "",
-"SaveDTO": "",
-"ScriptTool": "",
-"Stat": "",
-"State": "",
-"TitleState": "",
-"UseItemCommand": "",
-"Util": "",
-"Verdict": "",
-"VerdictCommand": "",
-"VerdictDTO": "",
-"WaitCommand": "",
-"Weapon": "",
-"WeaponDTO": ""
-}
+config_version=5
 
 [application]
 
 config/name="D Engine"
 run/main_scene="res://root.tscn"
+config/features=PackedStringArray("4.0")
 config/icon="res://icon.png"
 
 [audio]
@@ -340,9 +37,8 @@ GuiTheme="*res://guiTheme.gd"
 
 [display]
 
-window/size/width=1366
-window/size/height=768
-window/stretch/aspect="keep"
+window/size/viewport_width=1366
+window/size/viewport_height=768
 
 [gui]
 
@@ -352,13 +48,13 @@ theme/custom_font="res://assets/font/IBMPlexMonoMedium.tres"
 
 left_click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+]
 }
 right_click={
 "deadzone": 0.5,
-"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
- ]
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"pressed":false,"double_click":false,"script":null)
+]
 }
 
 [rendering]

@@ -1,15 +1,17 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://dp8i8mx45j8sd"]
 
-[ext_resource path="res://new_script.gd" type="Script" id=1]
-[ext_resource path="res://ui/terrain/terrain.tscn" type="PackedScene" id=2]
-[ext_resource path="res://ui/gui/gui.tscn" type="PackedScene" id=3]
-[ext_resource path="res://ui/battleArena/battleArena.tscn" type="PackedScene" id=4]
+[ext_resource type="Script" path="res://new_script.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://1hyjnmipuiba" path="res://ui/terrain/terrain.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://ca87vmea8a6dd" path="res://ui/gui/gui.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://d07e7uwoqpmbt" path="res://ui/battleArena/battleArena.tscn" id="4"]
 
-[node name="root" type="Spatial"]
-script = ExtResource( 1 )
+[node name="root" type="Node3D"]
+script = ExtResource("1")
 
-[node name="terrain" parent="." instance=ExtResource( 2 )]
+[node name="terrain" parent="." instance=ExtResource("2")]
 
-[node name="battleArena" parent="." instance=ExtResource( 4 )]
+[node name="battleArena" parent="." instance=ExtResource("4")]
 
-[node name="gui" parent="." instance=ExtResource( 3 )]
+[node name="gui" parent="." instance=ExtResource("3")]
+grow_horizontal = 2
+grow_vertical = 2

@@ -2,8 +2,8 @@ class_name AskPlayerBattleInputCommand
 extends Command
 
 
-func _init(player, ticks : int).(player, ticks) -> void:
-	return
+func _init(player, ticks : int):
+	super(player, ticks)
 
 
 func execute() -> void:
@@ -12,6 +12,6 @@ func execute() -> void:
 		remainingTicks = 0
 		return
 	
-	Signals.emit_signal("commandsPaused")
-	Signals.emit_signal("battleShowCharacterMoves", executorCharacter)
+	Signals.commandsPaused.emit()
+	Signals.battleShowCharacterMoves.emit(executorCharacter)
 

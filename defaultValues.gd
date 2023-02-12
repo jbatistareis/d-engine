@@ -14,7 +14,7 @@ const ITEM_BASE_ACTION : String = 'func execute(_targets : Array) -> void:\n\tre
 
 
 var actionBase : Dictionary = {
-	'self': Enums.Fact.ANY,
+	'own': Enums.Fact.ANY,
 	'target': Enums.Fact.HP_HIGHEST,
 	'moveShortName': 'BSEATK'
 }

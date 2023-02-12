@@ -2,19 +2,19 @@ class_name BattleState
 extends State
 
 
-func _init() -> void:
-	Signals.connect("battleEnded", self, "exitState")
+func _init():
+	Signals.battleEnded.connect(exitState)
 
 
 func handleInput() -> void:
 	if Input.is_action_just_pressed("ui_left"):
-		Signals.emit_signal("guiLeft")
+		Signals.guiLeft.emit()
 	elif Input.is_action_just_pressed("ui_right"):
-		Signals.emit_signal("guiRight")
+		Signals.guiRight.emit()
 	elif Input.is_action_just_pressed("ui_accept"):
-		Signals.emit_signal("guiConfirm")
+		Signals.guiConfirm.emit()
 	elif Input.is_action_just_pressed("ui_cancel"):
-		Signals.emit_signal("guiCancel")
+		Signals.guiCancel.emit()
 
 
 func exitState() -> void:

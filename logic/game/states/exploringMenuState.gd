@@ -2,18 +2,18 @@ class_name ExploringMenuState
 extends State
 
 
-func _init() -> void:
-	Signals.emit_signal("guiOpenExploringMenu")
-	Signals.connect("guiCloseExploringMenu", self, "exit")
+func _init():
+	Signals.guiOpenExploringMenu.emit()
+	Signals.guiCloseExploringMenu.connect(exit)
 
 
 func handleInput() -> void:
 	if Input.is_action_just_pressed("ui_home"):
-		Signals.emit_signal("guiCloseExploringMenu")
+		Signals.guiCloseExploringMenu.emit()
 	elif Input.is_action_just_pressed("ui_accept"):
-		Signals.emit_signal("guiConfirm")
+		Signals.guiConfirm.emit()
 	elif Input.is_action_just_pressed("ui_cancel"):
-		Signals.emit_signal("guiCancel")
+		Signals.guiCancel.emit()
 
 
 func exit() -> void:

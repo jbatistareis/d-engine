@@ -4,7 +4,7 @@ extends Move
 const _DESCRIPTION : String = 'Using %s'
 
 
-func _init(item : Item).():
+func _init(item : Item):
 	self.shortName = item.shortName
 	self.type = Enums.MoveType.ITEM
 	self.description = _DESCRIPTION % item.name

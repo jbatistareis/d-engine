@@ -2,13 +2,13 @@ extends Node
 
 var windowQueue : Array = []
 
-onready var oldSize : Vector2 = get_viewport().size
-onready var currentSize : Vector2 = get_viewport().size
+@onready var oldSize : Vector2 = get_viewport().size
+@onready var currentSize : Vector2 = get_viewport().size
 var ratioDiff : float = 1.0
 
 
 func _ready() -> void:
-	get_viewport().connect("size_changed", self, "changeSize")
+	get_viewport().size_changed.connect(changeSize)
 
 
 func changeSize() -> void:

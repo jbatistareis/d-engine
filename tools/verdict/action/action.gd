@@ -1,11 +1,11 @@
 extends CenterContainer
 
 var moveList : Array = []
-var actionDict : Dictionary setget setActionDict
+var actionDict : Dictionary : set = setActionDict
 
-onready var optSelf : OptionButton = $panel/grid/optSelf
-onready var optTarget : OptionButton = $panel/grid/optTarget
-onready var optMove : OptionButton = $panel/grid/optMove
+@onready var optSelf : OptionButton = $panel/grid/optSelf
+@onready var optTarget : OptionButton = $panel/grid/optTarget
+@onready var optMove : OptionButton = $panel/grid/optMove
 
 
 func _ready() -> void:

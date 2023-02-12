@@ -8,7 +8,9 @@ var atkOffset : float
 var cdOffset : float
 
 
-func _init(executorCharacter, targets : Array, move : Move).(executorCharacter, move.cdPre) -> void:
+func _init(executorCharacter,targets : Array,move : Move):
+	super(executorCharacter, move.cdPre)
+	
 	self.targets = targets
 	self.move = move
 	
@@ -29,7 +31,7 @@ func calculateModOffset(moveModifierProperty : int) -> float:
 
 
 func published() -> void:
-	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.prepareAnimation)
+	Signals.startedBattleAnimation.emit(executorCharacter, move.prepareAnimation)
 	ScriptTool.getReference(move.pickExpression).pick(executorCharacter)
 
 
@@ -40,9 +42,9 @@ func execute() -> void:
 	ScriptTool.getReference(move.excuteExpression).execute(executorCharacter)
 	
 	# TODO enemy/player animations
-	Signals.emit_signal("startedBattleAnimation", executorCharacter, move.attackAnimation)
+	Signals.startedBattleAnimation.emit(executorCharacter, move.attackAnimation)
 	if executorCharacter.type != Enums.CharacterType.PC:
-		while yield(Signals, "finishedBattleAnimation") != executorCharacter:
+		while await Signals.finishedBattleAnimation != executorCharacter:
 			if !confirmExecution():
 				return
 			pass
@@ -72,7 +74,7 @@ func execute() -> void:
 	
 	var cd = max(GameParameters.MIN_CD, floor(move.cdPos * cdOffset))
 	if executorCharacter.verdictActive:
-		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, cd))
+		Signals.commandPublished.emit(VerdictCommand.new(executorCharacter, cd))
 	elif executorCharacter.type == Enums.CharacterType.PC:
-		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, cd))
+		Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(executorCharacter, cd))
 

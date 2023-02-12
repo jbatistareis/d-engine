@@ -24,7 +24,7 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.actions.clear()
 	for action in verdictDto.actions:
 		self.actions.append({
-			'self': action.self,
+			'self': action.own,
 			'target': action.target,
 			'move': Move.new().fromShortName(action.moveShortName)
 		})
@@ -39,7 +39,7 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'self': action.self,
+			'self': action.own,
 			'target': action.target,
 			'moveShortName': action.move.shortName
 		})
@@ -71,22 +71,19 @@ func decision(auditor) -> void:
 		
 		suspects.shuffle()
 		
-		var selfMatch = !analyze(DefaultValues.facts[action.self], auditor, [auditor]).empty()
+		var selfMatch = !analyze(DefaultValues.facts[action.own], auditor, [auditor]).is_empty()
 		var targets = analyze(DefaultValues.facts[action.target], auditor, suspects)
 		
-		if selfMatch && !targets.empty():
+		if selfMatch && !targets.is_empty():
 			var move = Move.new().fromShortName(action.move.shortName)
 			move.cdPre += auditor.inventory.weapon.cdPre
 			move.cdPos += auditor.inventory.weapon.cdPos
 			
 			if targetType.ends_with(_ALL):
-				Signals.emit_signal(
-					"commandPublished",
-					ExecuteMoveCommand.new(auditor, targets, move))
+				Signals.commandPublished.emit(ExecuteMoveCommand.new(auditor, targets, move))
 			else:
 				rng.randomize()
-				Signals.emit_signal(
-						"commandPublished",
+				Signals.commandPublished.emit(
 						ExecuteMoveCommand.new(
 							auditor,
 							[targets[rng.randi_range(0, targets.size() - 1)]],
@@ -94,8 +91,7 @@ func decision(auditor) -> void:
 			
 			return
 	
-	Signals.emit_signal(
-		"commandPublished",
+	Signals.commandPublished.emit(
 		WaitCommand.new(VerdictCommand.new(auditor, GameParameters.WAIT_TICKS))
 	)
 
@@ -110,15 +106,15 @@ func addAction(action : Dictionary) -> void:
 
 
 func removeConcreteFact(index : int) -> void:
-	actions.remove(index)
+	actions.remove_at(index)
 
 
 func swapActions(chosenActionIndex : int, targetActionIndex : int) -> void:
 	var chosen = actions[chosenActionIndex]
 	var target = actions[targetActionIndex]
 	
-	actions.remove(chosenActionIndex)
-	actions.remove(targetActionIndex)
+	actions.remove_at(chosenActionIndex)
+	actions.remove_at(targetActionIndex)
 	
 	actions.insert(targetActionIndex, chosen)
 	actions.insert(chosenActionIndex, target)

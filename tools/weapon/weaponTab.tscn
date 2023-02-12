@@ -3,10 +3,10 @@
 [ext_resource path="res://tools/weapon/weaponTab.gd" type="Script" id=1]
 [ext_resource path="res://tools/weapon/saveConfirm.gd" type="Script" id=2]
 
-[node name="Weapon" type="Tabs"]
+[node name="Weapon" type="TabBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -556.42, -42.8121 )
+pivot_offset = Vector2( -556.42, -42.8121 )
 size_flags_horizontal = 3
 script = ExtResource( 1 )
 
@@ -17,434 +17,434 @@ anchor_bottom = 1.0
 [node name="mainSeparator" type="HBoxContainer" parent="background"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-rect_pivot_offset = Vector2( -665.796, 0 )
+pivot_offset = Vector2( -665.796, 0 )
 
 [node name="fileList" type="ItemList" parent="background/mainSeparator"]
-margin_right = 130.0
-margin_bottom = 768.0
-rect_min_size = Vector2( 130, 0 )
+offset_right = 130.0
+offset_bottom = 768.0
+custom_minimum_size = Vector2( 130, 0 )
 size_flags_vertical = 3
 
 [node name="dataPanel" type="PanelContainer" parent="background/mainSeparator"]
-margin_left = 134.0
-margin_right = 754.0
-margin_bottom = 768.0
-rect_min_size = Vector2( 620, 0 )
+offset_left = 134.0
+offset_right = 754.0
+offset_bottom = 768.0
+custom_minimum_size = Vector2( 620, 0 )
 size_flags_vertical = 3
 
 [node name="dataContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel"]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 613.0
-margin_bottom = 761.0
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 613.0
+offset_bottom = 761.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="identification" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_right = 606.0
-margin_bottom = 94.0
+offset_right = 606.0
+offset_bottom = 94.0
 alignment = 1
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
-margin_right = 606.0
-margin_bottom = 22.0
+offset_right = 606.0
+offset_bottom = 22.0
 
 [node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
-margin_right = 170.0
-margin_bottom = 22.0
+offset_right = 170.0
+offset_bottom = 22.0
 text = "↳ Identification "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
-margin_left = 174.0
-margin_right = 606.0
-margin_bottom = 22.0
+offset_left = 174.0
+offset_right = 606.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
-margin_top = 26.0
-margin_right = 606.0
-margin_bottom = 94.0
+offset_top = 26.0
+offset_right = 606.0
+offset_bottom = 94.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields"]
-margin_left = 6.0
-margin_right = 600.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 594, 0 )
+offset_left = 6.0
+offset_right = 600.0
+offset_bottom = 68.0
+custom_minimum_size = Vector2( 594, 0 )
 columns = 2
 
 [node name="lblName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
-margin_top = 5.0
-margin_right = 110.0
-margin_bottom = 27.0
+offset_top = 5.0
+offset_right = 110.0
+offset_bottom = 27.0
 text = "Name"
 
 [node name="txtName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
-margin_left = 114.0
-margin_right = 594.0
-margin_bottom = 32.0
+offset_left = 114.0
+offset_right = 594.0
+offset_bottom = 32.0
 clear_button_enabled = true
 
 [node name="lblShortName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
-margin_top = 41.0
-margin_right = 110.0
-margin_bottom = 63.0
+offset_top = 41.0
+offset_right = 110.0
+offset_bottom = 63.0
 text = "Short name "
 
 [node name="txtShortName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
-margin_left = 114.0
-margin_top = 36.0
-margin_right = 594.0
-margin_bottom = 68.0
+offset_left = 114.0
+offset_top = 36.0
+offset_right = 594.0
+offset_bottom = 68.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 98.0
-margin_right = 606.0
-margin_bottom = 113.0
-rect_min_size = Vector2( 0, 15 )
+offset_top = 98.0
+offset_right = 606.0
+offset_bottom = 113.0
+custom_minimum_size = Vector2( 0, 15 )
 
 [node name="stats" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 117.0
-margin_right = 606.0
-margin_bottom = 226.0
+offset_top = 117.0
+offset_right = 606.0
+offset_bottom = 226.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
-margin_right = 606.0
-margin_bottom = 22.0
+offset_right = 606.0
+offset_bottom = 22.0
 
 [node name="lblStats" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
-margin_right = 80.0
-margin_bottom = 22.0
+offset_right = 80.0
+offset_bottom = 22.0
 text = "↳ Stats "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/stats/title"]
-margin_left = 84.0
-margin_right = 606.0
-margin_bottom = 22.0
+offset_left = 84.0
+offset_right = 606.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
-margin_top = 26.0
-margin_right = 606.0
-margin_bottom = 90.0
+offset_top = 26.0
+offset_right = 606.0
+offset_bottom = 90.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields"]
-margin_left = 84.0
-margin_right = 522.0
-margin_bottom = 64.0
+offset_left = 84.0
+offset_right = 522.0
+offset_bottom = 64.0
 size_flags_horizontal = 3
 columns = 4
 
 [node name="lblDamage" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 5.0
-margin_right = 70.0
-margin_bottom = 27.0
+offset_top = 5.0
+offset_right = 70.0
+offset_bottom = 27.0
 text = "Damage "
 
 [node name="sbDamage" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 74.0
-margin_right = 220.0
-margin_bottom = 32.0
+offset_left = 74.0
+offset_right = 220.0
+offset_bottom = 32.0
 
 [node name="lblModifier" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 224.0
-margin_top = 5.0
-margin_right = 354.0
-margin_bottom = 27.0
+offset_left = 224.0
+offset_top = 5.0
+offset_right = 354.0
+offset_bottom = 27.0
 text = "   Modifier "
 
 [node name="optModifier" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 358.0
-margin_right = 438.0
-margin_bottom = 32.0
-rect_min_size = Vector2( 80, 0 )
+offset_left = 358.0
+offset_right = 438.0
+offset_bottom = 32.0
+custom_minimum_size = Vector2( 80, 0 )
 text = "None"
 align = 1
 items = [ "None", null, false, 0, null, "D4", null, false, 1, null, "D6", null, false, 2, null, "D8", null, false, 3, null, "D10", null, false, 4, null, "D12", null, false, 5, null, "D20", null, false, 6, null, "D100", null, false, 7, null ]
 selected = 0
 
 [node name="lblRoll" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_top = 39.0
-margin_right = 70.0
-margin_bottom = 61.0
+offset_top = 39.0
+offset_right = 70.0
+offset_bottom = 61.0
 text = "Roll "
 
 [node name="optRoll" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 74.0
-margin_top = 36.0
-margin_right = 220.0
-margin_bottom = 64.0
+offset_left = 74.0
+offset_top = 36.0
+offset_right = 220.0
+offset_bottom = 64.0
 text = "None"
 align = 1
 items = [ "None", null, false, 0, null, "Best", null, false, 1, null, "Normal", null, false, 2, null, "Worst", null, false, 3, null ]
 selected = 0
 
 [node name="lblStat" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 224.0
-margin_top = 39.0
-margin_right = 354.0
-margin_bottom = 61.0
+offset_left = 224.0
+offset_top = 39.0
+offset_right = 354.0
+offset_bottom = 61.0
 text = "   Stat mod. "
 
 [node name="optStat" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/stats/fields/grid"]
-margin_left = 358.0
-margin_top = 36.0
-margin_right = 438.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 80, 0 )
+offset_left = 358.0
+offset_top = 36.0
+offset_right = 438.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2( 80, 0 )
 text = "None"
 align = 1
 items = [ "None", null, false, 0, null, "STR", null, false, 1, null, "DEX", null, false, 2, null, "CON", null, false, 3, null, "INT", null, false, 4, null, "WIS", null, false, 5, null, "CHA", null, false, 6, null ]
 selected = 0
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/stats"]
-margin_top = 94.0
-margin_right = 606.0
-margin_bottom = 109.0
-rect_min_size = Vector2( 0, 15 )
+offset_top = 94.0
+offset_right = 606.0
+offset_bottom = 109.0
+custom_minimum_size = Vector2( 0, 15 )
 
 [node name="cd" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 230.0
-margin_right = 606.0
-margin_bottom = 307.0
+offset_top = 230.0
+offset_right = 606.0
+offset_bottom = 307.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
-margin_right = 606.0
-margin_bottom = 22.0
+offset_right = 606.0
+offset_bottom = 22.0
 
 [node name="lblCd" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/title"]
-margin_right = 120.0
-margin_bottom = 22.0
+offset_right = 120.0
+offset_bottom = 22.0
 text = "↳ Cooldowns "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/cd/title"]
-margin_left = 124.0
-margin_right = 606.0
-margin_bottom = 22.0
+offset_left = 124.0
+offset_right = 606.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
-margin_top = 26.0
-margin_right = 606.0
-margin_bottom = 58.0
+offset_top = 26.0
+offset_right = 606.0
+offset_bottom = 58.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields"]
-margin_left = 91.0
-margin_right = 515.0
-margin_bottom = 32.0
+offset_left = 91.0
+offset_right = 515.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
 columns = 4
 
 [node name="lblCdPre" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
-margin_top = 5.0
-margin_right = 40.0
-margin_bottom = 27.0
+offset_top = 5.0
+offset_right = 40.0
+offset_bottom = 27.0
 text = "Pre "
 
 [node name="sbCdPre" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
-margin_left = 44.0
-margin_right = 190.0
-margin_bottom = 32.0
+offset_left = 44.0
+offset_right = 190.0
+offset_bottom = 32.0
 
 [node name="lblCdPos" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
-margin_left = 194.0
-margin_top = 5.0
-margin_right = 274.0
-margin_bottom = 27.0
+offset_left = 194.0
+offset_top = 5.0
+offset_right = 274.0
+offset_bottom = 27.0
 text = "   Post "
 
 [node name="sbCdPos" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/cd/fields/grid"]
-margin_left = 278.0
-margin_right = 424.0
-margin_bottom = 32.0
+offset_left = 278.0
+offset_right = 424.0
+offset_bottom = 32.0
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/cd"]
-margin_top = 62.0
-margin_right = 606.0
-margin_bottom = 77.0
-rect_min_size = Vector2( 0, 15 )
+offset_top = 62.0
+offset_right = 606.0
+offset_bottom = 77.0
+custom_minimum_size = Vector2( 0, 15 )
 
 [node name="moves" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 311.0
-margin_right = 606.0
-margin_bottom = 496.0
+offset_top = 311.0
+offset_right = 606.0
+offset_bottom = 496.0
 
 [node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
-margin_right = 606.0
-margin_bottom = 22.0
+offset_right = 606.0
+offset_bottom = 22.0
 
 [node name="lblMoves" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/title"]
-margin_right = 80.0
-margin_bottom = 22.0
+offset_right = 80.0
+offset_bottom = 22.0
 text = "↳ Moves "
 
 [node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/moves/title"]
-margin_left = 84.0
-margin_right = 606.0
-margin_bottom = 22.0
+offset_left = 84.0
+offset_right = 606.0
+offset_bottom = 22.0
 size_flags_horizontal = 3
 
 [node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
-margin_top = 26.0
-margin_right = 606.0
-margin_bottom = 166.0
+offset_top = 26.0
+offset_right = 606.0
+offset_bottom = 166.0
 
 [node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields"]
-margin_left = 113.0
-margin_right = 493.0
-margin_bottom = 140.0
+offset_left = 113.0
+offset_right = 493.0
+offset_bottom = 140.0
 size_flags_horizontal = 3
-custom_constants/vseparation = 20
-custom_constants/hseparation = 10
+custom_constants/v_separation = 20
+custom_constants/h_separation = 10
 columns = 4
 
 [node name="lblMove1" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_top = 19.0
-margin_right = 30.0
-margin_bottom = 41.0
+offset_top = 19.0
+offset_right = 30.0
+offset_bottom = 41.0
 text = "1. "
 
 [node name="moveBtn1" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 40.0
-margin_right = 170.0
-margin_bottom = 60.0
+offset_left = 40.0
+offset_right = 170.0
+offset_bottom = 60.0
 
 [node name="optMove1" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1"]
-margin_right = 130.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 130, 0 )
+offset_right = 130.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 130, 0 )
 
 [node name="btnEditMove1" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn1"]
-margin_top = 32.0
-margin_right = 130.0
-margin_bottom = 60.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 60.0
 text = "Edit"
 
 [node name="lblMove2" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 180.0
-margin_top = 19.0
-margin_right = 240.0
-margin_bottom = 41.0
+offset_left = 180.0
+offset_top = 19.0
+offset_right = 240.0
+offset_bottom = 41.0
 text = "   2. "
 
 [node name="moveBtn2" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 250.0
-margin_right = 380.0
-margin_bottom = 60.0
+offset_left = 250.0
+offset_right = 380.0
+offset_bottom = 60.0
 
 [node name="optMove2" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2"]
-margin_right = 130.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 130, 0 )
+offset_right = 130.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 130, 0 )
 
 [node name="btnEditMove2" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn2"]
-margin_top = 32.0
-margin_right = 130.0
-margin_bottom = 60.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 60.0
 text = "Edit"
 
 [node name="lblMove3" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_top = 99.0
-margin_right = 30.0
-margin_bottom = 121.0
+offset_top = 99.0
+offset_right = 30.0
+offset_bottom = 121.0
 text = "3. "
 
 [node name="moveBtn3" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 40.0
-margin_top = 80.0
-margin_right = 170.0
-margin_bottom = 140.0
+offset_left = 40.0
+offset_top = 80.0
+offset_right = 170.0
+offset_bottom = 140.0
 
 [node name="optMove3" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3"]
-margin_right = 130.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 130, 0 )
+offset_right = 130.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 130, 0 )
 
 [node name="btnEditMove3" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn3"]
-margin_top = 32.0
-margin_right = 130.0
-margin_bottom = 60.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 60.0
 text = "Edit"
 
 [node name="lblMove4" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 180.0
-margin_top = 99.0
-margin_right = 240.0
-margin_bottom = 121.0
+offset_left = 180.0
+offset_top = 99.0
+offset_right = 240.0
+offset_bottom = 121.0
 text = "   4. "
 
 [node name="moveBtn4" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid"]
-margin_left = 250.0
-margin_top = 80.0
-margin_right = 380.0
-margin_bottom = 140.0
+offset_left = 250.0
+offset_top = 80.0
+offset_right = 380.0
+offset_bottom = 140.0
 
 [node name="optMove4" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4"]
-margin_right = 130.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 130, 0 )
+offset_right = 130.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 130, 0 )
 
 [node name="btnEditMove4" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn4"]
-margin_top = 32.0
-margin_right = 130.0
-margin_bottom = 60.0
+offset_top = 32.0
+offset_right = 130.0
+offset_bottom = 60.0
 text = "Edit"
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/moves"]
-margin_top = 170.0
-margin_right = 606.0
-margin_bottom = 185.0
-rect_min_size = Vector2( 0, 15 )
+offset_top = 170.0
+offset_right = 606.0
+offset_bottom = 185.0
+custom_minimum_size = Vector2( 0, 15 )
 
 [node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
-margin_top = 500.0
-margin_right = 606.0
-margin_bottom = 754.0
+offset_top = 500.0
+offset_right = 606.0
+offset_bottom = 754.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
-margin_top = 226.0
-margin_right = 606.0
-margin_bottom = 254.0
+offset_top = 226.0
+offset_right = 606.0
+offset_bottom = 254.0
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
-margin_right = 126.0
-margin_bottom = 28.0
+offset_right = 126.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="btnSave" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
-margin_left = 130.0
-margin_right = 256.0
-margin_bottom = 28.0
+offset_left = 130.0
+offset_right = 256.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Save|Create"
 
 [node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
-margin_left = 260.0
-margin_right = 310.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 50, 0 )
+offset_left = 260.0
+offset_right = 310.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 50, 0 )
 
 [node name="btnReload" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
-margin_left = 314.0
-margin_right = 476.0
-margin_bottom = 28.0
+offset_left = 314.0
+offset_right = 476.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Reload entities"
 
 [node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
-margin_left = 480.0
-margin_right = 606.0
-margin_bottom = 28.0
+offset_left = 480.0
+offset_right = 606.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="saveConfirm" type="ConfirmationDialog" parent="."]
-margin_right = 218.0
-margin_bottom = 74.0
+offset_right = 218.0
+offset_bottom = 74.0
 script = ExtResource( 2 )
 
 [connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]

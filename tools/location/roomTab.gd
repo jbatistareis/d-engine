@@ -1,4 +1,4 @@
-extends Tabs
+extends TabBar
 
 signal changeModel(locationShortName, model, orientation)
 
@@ -6,14 +6,14 @@ const _DETAILS_SINGLE_TEXT = 'id: %d @ (%d, %d)'
 const _DETAILS_MULTI_TEXT = 'Multiple rooms'
 
 var locationDto : LocationDTO
-var rooms : Array = [] setget setRooms
+var rooms : Array = [] : set = setRooms
 
-onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
+@onready var grid : GridContainer = get_node("../../map/scroll/container/grid")
 
 
 func _ready() -> void:
-	EditorSignals.connect("mapSelectedRoom", self, "selectedRoom")
-	EditorSignals.connect("mapSelectedMultiRooms", self, "selectedMultiRooms")
+	EditorSignals.connect("mapSelectedRoom",Callable(self,"selectedRoom"))
+	EditorSignals.connect("mapSelectedMultiRooms",Callable(self,"selectedMultiRooms"))
 
 
 func setRooms(value : Array):
@@ -40,7 +40,7 @@ func setRoomFields(room : Dictionary) -> void:
 	var enemiesText = $mainContainer/logic/Enemies/txtEnemyGroups.text.replace(' ', '')
 	room.foeShortNameGroups.clear()
 	for groupText in enemiesText.split('\n'):
-		if !groupText.empty():
+		if !groupText.is_empty():
 			room.foeShortNameGroups.append(groupText.split(','))
 	
 	room.canEnterLogic = $"mainContainer/logic/Can enter/txtCanEnter".text
@@ -52,7 +52,7 @@ func setLogic() -> void:
 	if rooms[0].type != Enums.RoomType.DUMMY:
 		var enemyGroups = $mainContainer/logic/Enemies/txtEnemyGroups
 		for group in rooms[0].foeShortNameGroups:
-			if !group.empty():
+			if !group.is_empty():
 				var line = ''
 				for enemy in group:
 					line += enemy + ', '

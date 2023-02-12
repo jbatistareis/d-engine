@@ -15,7 +15,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 2, 2 )
 
-[node name="locationTab" type="Tabs"]
+[node name="locationTab" type="TabBar"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -37,25 +37,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="map" type="MarginContainer" parent="background/mainContainer"]
-margin_right = 794.0
-margin_bottom = 768.0
+offset_right = 794.0
+offset_bottom = 768.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="scroll" type="ScrollContainer" parent="background/mainContainer/map"]
-margin_right = 794.0
-margin_bottom = 768.0
+offset_right = 794.0
+offset_bottom = 768.0
 follow_focus = true
 
 [node name="container" type="MarginContainer" parent="background/mainContainer/map/scroll"]
-margin_right = 794.0
-margin_bottom = 768.0
+offset_right = 794.0
+offset_bottom = 768.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="grid" type="GridContainer" parent="background/mainContainer/map/scroll/container"]
-margin_right = 794.0
-margin_bottom = 768.0
+offset_right = 794.0
+offset_bottom = 768.0
 columns = 48
 script = ExtResource( 1 )
 
@@ -65,20 +65,20 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="parameters" type="TabContainer" parent="background/mainContainer"]
-margin_left = 806.0
-margin_right = 1366.0
-margin_bottom = 768.0
-rect_min_size = Vector2( 560, 0 )
+offset_left = 806.0
+offset_right = 1366.0
+offset_bottom = 768.0
+custom_minimum_size = Vector2( 560, 0 )
 size_flags_vertical = 3
 script = ExtResource( 10 )
 
-[node name="General" type="Tabs" parent="background/mainContainer/parameters"]
+[node name="General" type="TabBar" parent="background/mainContainer/parameters"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 9 )
@@ -90,86 +90,86 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="group1" type="GridContainer" parent="background/mainContainer/parameters/General/mainContainer"]
-margin_right = 552.0
-margin_bottom = 142.0
+offset_right = 552.0
+offset_bottom = 142.0
 size_flags_horizontal = 3
-custom_constants/vseparation = 8
-custom_constants/hseparation = 8
+custom_constants/v_separation = 8
+custom_constants/h_separation = 8
 columns = 2
 script = ExtResource( 3 )
 
 [node name="lblName" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_top = 5.0
-margin_right = 110.0
-margin_bottom = 27.0
+offset_top = 5.0
+offset_right = 110.0
+offset_bottom = 27.0
 text = "Name"
 
 [node name="txtName" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_left = 118.0
-margin_right = 552.0
-margin_bottom = 32.0
+offset_left = 118.0
+offset_right = 552.0
+offset_bottom = 32.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 
 [node name="lblShortName" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_top = 45.0
-margin_right = 110.0
-margin_bottom = 67.0
+offset_top = 45.0
+offset_right = 110.0
+offset_bottom = 67.0
 text = "Short name"
 
 [node name="txtShortName" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_left = 118.0
-margin_top = 40.0
-margin_right = 552.0
-margin_bottom = 72.0
+offset_left = 118.0
+offset_top = 40.0
+offset_right = 552.0
+offset_bottom = 72.0
 size_flags_horizontal = 3
 max_length = 10
 clear_button_enabled = true
 
 [node name="lblDescription" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_top = 85.0
-margin_right = 110.0
-margin_bottom = 107.0
+offset_top = 85.0
+offset_right = 110.0
+offset_bottom = 107.0
 text = "Description"
 
 [node name="txtDescription" type="LineEdit" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_left = 118.0
-margin_top = 80.0
-margin_right = 552.0
-margin_bottom = 112.0
+offset_left = 118.0
+offset_top = 80.0
+offset_right = 552.0
+offset_bottom = 112.0
 size_flags_horizontal = 3
 clear_button_enabled = true
 
 [node name="lblEncounter" type="Label" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_top = 120.0
-margin_right = 110.0
-margin_bottom = 142.0
+offset_top = 120.0
+offset_right = 110.0
+offset_bottom = 142.0
 text = "Enc.: 0%"
 
 [node name="sldEncounter" type="HSlider" parent="background/mainContainer/parameters/General/mainContainer/group1"]
-margin_left = 118.0
-margin_top = 120.0
-margin_right = 552.0
-margin_bottom = 136.0
+offset_left = 118.0
+offset_top = 120.0
+offset_right = 552.0
+offset_bottom = 136.0
 max_value = 1.0
 step = 0.01
 tick_count = 11
 
 [node name="logic" type="TabContainer" parent="background/mainContainer/parameters/General/mainContainer"]
-margin_top = 146.0
-margin_right = 552.0
-margin_bottom = 674.0
+offset_top = 146.0
+offset_right = 552.0
+offset_bottom = 674.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
 
-[node name="Entrance" type="Tabs" parent="background/mainContainer/parameters/General/mainContainer/logic"]
+[node name="Entrance" type="TabBar" parent="background/mainContainer/parameters/General/mainContainer/logic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -179,21 +179,21 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 fold_gutter = true
 highlight_all_occurrences = true
 
-[node name="Exit" type="Tabs" parent="background/mainContainer/parameters/General/mainContainer/logic"]
+[node name="Exit" type="TabBar" parent="background/mainContainer/parameters/General/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -203,7 +203,7 @@ anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
@@ -211,368 +211,368 @@ fold_gutter = true
 highlight_all_occurrences = true
 
 [node name="Control" type="Control" parent="background/mainContainer/parameters/General/mainContainer"]
-margin_top = 678.0
-margin_right = 552.0
-margin_bottom = 683.0
-rect_min_size = Vector2( 0, 5 )
+offset_top = 678.0
+offset_right = 552.0
+offset_bottom = 683.0
+custom_minimum_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
 [node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/General/mainContainer"]
-margin_top = 687.0
-margin_right = 552.0
-margin_bottom = 715.0
+offset_top = 687.0
+offset_right = 552.0
+offset_bottom = 715.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="Control" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_right = 30.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 30, 0 )
+offset_right = 30.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 30, 0 )
 
 [node name="btnOpen" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 34.0
-margin_right = 170.0
-margin_bottom = 28.0
+offset_left = 34.0
+offset_right = 170.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Open"
 
 [node name="Control2" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 174.0
-margin_right = 204.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 30, 0 )
+offset_left = 174.0
+offset_right = 204.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 30, 0 )
 
 [node name="btnSave" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 208.0
-margin_right = 344.0
-margin_bottom = 28.0
+offset_left = 208.0
+offset_right = 344.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Save"
 
 [node name="Control3" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 348.0
-margin_right = 378.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 30, 0 )
+offset_left = 348.0
+offset_right = 378.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 30, 0 )
 
 [node name="btnPreview" type="Button" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 382.0
-margin_right = 518.0
-margin_bottom = 28.0
+offset_left = 382.0
+offset_right = 518.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Preview"
 
 [node name="Control4" type="Control" parent="background/mainContainer/parameters/General/mainContainer/buttons"]
-margin_left = 522.0
-margin_right = 552.0
-margin_bottom = 28.0
-rect_min_size = Vector2( 30, 0 )
+offset_left = 522.0
+offset_right = 552.0
+offset_bottom = 28.0
+custom_minimum_size = Vector2( 30, 0 )
 
 [node name="Control2" type="Control" parent="background/mainContainer/parameters/General/mainContainer"]
-margin_top = 719.0
-margin_right = 552.0
-margin_bottom = 724.0
-rect_min_size = Vector2( 0, 5 )
+offset_top = 719.0
+offset_right = 552.0
+offset_bottom = 724.0
+custom_minimum_size = Vector2( 0, 5 )
 size_flags_horizontal = 3
 
-[node name="Room" type="Tabs" parent="background/mainContainer/parameters"]
+[node name="Node3D" type="TabBar" parent="background/mainContainer/parameters"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 script = ExtResource( 2 )
 
-[node name="mainContainer" type="VBoxContainer" parent="background/mainContainer/parameters/Room"]
+[node name="mainContainer" type="VBoxContainer" parent="background/mainContainer/parameters/Node3D"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_vertical = 3
 
-[node name="model" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer"]
-margin_right = 552.0
-margin_bottom = 250.0
+[node name="model" type="HBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer"]
+offset_right = 552.0
+offset_bottom = 250.0
 size_flags_horizontal = 3
 
-[node name="controls" type="VBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
-margin_right = 248.0
-margin_bottom = 250.0
+[node name="controls" type="VBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model"]
+offset_right = 248.0
+offset_bottom = 250.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="lblDetails" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_right = 248.0
-margin_bottom = 22.0
+[node name="lblDetails" type="Label" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_right = 248.0
+offset_bottom = 22.0
 align = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 26.0
-margin_right = 248.0
-margin_bottom = 48.0
+[node name="HBoxContainer" type="HBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 26.0
+offset_right = 248.0
+offset_bottom = 48.0
 custom_constants/separation = 15
 
-[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer"]
-margin_right = 10.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 10, 22 )
+[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer"]
+offset_right = 10.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 10, 22 )
 
-[node name="lblModel" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer"]
-margin_left = 25.0
-margin_right = 75.0
-margin_bottom = 22.0
+[node name="lblModel" type="Label" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer"]
+offset_left = 25.0
+offset_right = 75.0
+offset_bottom = 22.0
 text = "Model"
 align = 1
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer"]
-margin_left = 90.0
-margin_right = 248.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 0, 22 )
+[node name="HSeparator2" type="HSeparator" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer"]
+offset_left = 90.0
+offset_right = 248.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 0, 22 )
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 52.0
-margin_right = 248.0
-margin_bottom = 54.0
-rect_min_size = Vector2( 0, 2 )
+[node name="Control" type="Control" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 52.0
+offset_right = 248.0
+offset_bottom = 54.0
+custom_minimum_size = Vector2( 0, 2 )
 
-[node name="optModel" type="OptionButton" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 58.0
-margin_right = 248.0
-margin_bottom = 86.0
+[node name="optModel" type="OptionButton" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 58.0
+offset_right = 248.0
+offset_bottom = 86.0
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 90.0
-margin_right = 248.0
-margin_bottom = 92.0
-rect_min_size = Vector2( 0, 2 )
+[node name="Control2" type="Control" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 90.0
+offset_right = 248.0
+offset_bottom = 92.0
+custom_minimum_size = Vector2( 0, 2 )
 
-[node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 96.0
-margin_right = 248.0
-margin_bottom = 124.0
+[node name="buttons" type="HBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 96.0
+offset_right = 248.0
+offset_bottom = 124.0
 
-[node name="btnRotateL" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
-margin_right = 70.0
-margin_bottom = 28.0
+[node name="btnRotateL" type="Button" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/buttons"]
+offset_right = 70.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "↩"
 
-[node name="lblCamera" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
-margin_left = 74.0
-margin_top = 3.0
-margin_right = 174.0
-margin_bottom = 25.0
-text = "  Camera  "
+[node name="lblCamera" type="Label" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/buttons"]
+offset_left = 74.0
+offset_top = 3.0
+offset_right = 174.0
+offset_bottom = 25.0
+text = "  Camera3D  "
 align = 1
 
-[node name="btnRotateR" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons"]
-margin_left = 178.0
-margin_right = 248.0
-margin_bottom = 28.0
+[node name="btnRotateR" type="Button" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/buttons"]
+offset_left = 178.0
+offset_right = 248.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "↪"
 
-[node name="Control3" type="Control" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 128.0
-margin_right = 248.0
-margin_bottom = 150.0
-rect_min_size = Vector2( 0, 22 )
+[node name="Control3" type="Control" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 128.0
+offset_right = 248.0
+offset_bottom = 150.0
+custom_minimum_size = Vector2( 0, 22 )
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 154.0
-margin_right = 248.0
-margin_bottom = 176.0
+[node name="HBoxContainer2" type="HBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 154.0
+offset_right = 248.0
+offset_bottom = 176.0
 custom_constants/separation = 15
 
-[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
-margin_right = 10.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 10, 22 )
+[node name="HSeparator" type="HSeparator" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer2"]
+offset_right = 10.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 10, 22 )
 
-[node name="lblAltSel" type="Label" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
-margin_left = 25.0
-margin_right = 75.0
-margin_bottom = 22.0
+[node name="lblAltSel" type="Label" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer2"]
+offset_left = 25.0
+offset_right = 75.0
+offset_bottom = 22.0
 text = "Alt. selection"
 align = 1
 
-[node name="HSeparator2" type="HSeparator" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/HBoxContainer2"]
-margin_left = 90.0
-margin_right = 248.0
-margin_bottom = 22.0
-rect_min_size = Vector2( 0, 22 )
+[node name="HSeparator2" type="HSeparator" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/HBoxContainer2"]
+offset_left = 90.0
+offset_right = 248.0
+offset_bottom = 22.0
+custom_minimum_size = Vector2( 0, 22 )
 size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls"]
-margin_top = 180.0
-margin_right = 248.0
-margin_bottom = 250.0
+[node name="VBoxContainer" type="VBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls"]
+offset_top = 180.0
+offset_right = 248.0
+offset_bottom = 250.0
 size_flags_vertical = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer"]
-margin_right = 248.0
-margin_bottom = 28.0
+[node name="HBoxContainer" type="HBoxContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/VBoxContainer"]
+offset_right = 248.0
+offset_bottom = 28.0
 custom_constants/separation = 15
 alignment = 1
 
-[node name="btnAutotile" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer"]
-margin_left = 34.0
-margin_right = 126.0
-margin_bottom = 28.0
+[node name="btnAutotile" type="Button" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/VBoxContainer/HBoxContainer"]
+offset_left = 34.0
+offset_right = 126.0
+offset_bottom = 28.0
 text = "Autotile"
 
-[node name="btnDelete" type="Button" parent="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer"]
-margin_left = 141.0
-margin_right = 213.0
-margin_bottom = 28.0
+[node name="btnDelete" type="Button" parent="background/mainContainer/parameters/Node3D/mainContainer/model/controls/VBoxContainer/HBoxContainer"]
+offset_left = 141.0
+offset_right = 213.0
+offset_bottom = 28.0
 text = "Delete"
 
-[node name="ViewportContainer" type="ViewportContainer" parent="background/mainContainer/parameters/Room/mainContainer/model"]
-margin_left = 252.0
-margin_right = 552.0
-margin_bottom = 250.0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="background/mainContainer/parameters/Node3D/mainContainer/model"]
+offset_left = 252.0
+offset_right = 552.0
+offset_bottom = 250.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Viewport" type="Viewport" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer"]
 size = Vector2( 300, 250 )
 handle_input_locally = false
 render_target_update_mode = 0
 
-[node name="area" parent="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport" instance=ExtResource( 8 )]
+[node name="area" parent="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport" instance=ExtResource( 8 )]
 
-[node name="logic" type="TabContainer" parent="background/mainContainer/parameters/Room/mainContainer"]
-margin_top = 254.0
-margin_right = 552.0
-margin_bottom = 692.0
+[node name="logic" type="TabContainer" parent="background/mainContainer/parameters/Node3D/mainContainer"]
+offset_top = 254.0
+offset_right = 552.0
+offset_bottom = 692.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Enemies" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
+[node name="Enemies" type="TabBar" parent="background/mainContainer/parameters/Node3D/mainContainer/logic"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 
-[node name="txtEnemyGroups" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Enemies"]
+[node name="txtEnemyGroups" type="TextEdit" parent="background/mainContainer/parameters/Node3D/mainContainer/logic/Enemies"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Can enter" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
+[node name="Can enter" type="TabBar" parent="background/mainContainer/parameters/Node3D/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 
-[node name="txtCanEnter" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Can enter"]
+[node name="txtCanEnter" type="TextEdit" parent="background/mainContainer/parameters/Node3D/mainContainer/logic/Can enter"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Entering" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
+[node name="Entering" type="TabBar" parent="background/mainContainer/parameters/Node3D/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 
-[node name="txtEntering" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Entering"]
+[node name="txtEntering" type="TextEdit" parent="background/mainContainer/parameters/Node3D/mainContainer/logic/Entering"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="Exiting" type="Tabs" parent="background/mainContainer/parameters/Room/mainContainer/logic"]
+[node name="Exiting" type="TabBar" parent="background/mainContainer/parameters/Node3D/mainContainer/logic"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 40.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 40.0
+offset_right = -4.0
+offset_bottom = -4.0
 
-[node name="txtExiting" type="TextEdit" parent="background/mainContainer/parameters/Room/mainContainer/logic/Exiting"]
+[node name="txtExiting" type="TextEdit" parent="background/mainContainer/parameters/Node3D/mainContainer/logic/Exiting"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 highlight_current_line = true
-syntax_highlighting = true
+syntax_highlighter = true
 show_line_numbers = true
 draw_tabs = true
 bookmark_gutter = true
 highlight_all_occurrences = true
 
-[node name="btnSave" type="Button" parent="background/mainContainer/parameters/Room/mainContainer"]
-margin_top = 696.0
-margin_right = 552.0
-margin_bottom = 724.0
+[node name="btnSave" type="Button" parent="background/mainContainer/parameters/Node3D/mainContainer"]
+offset_top = 696.0
+offset_right = 552.0
+offset_bottom = 724.0
 text = "Save logic"
 
 [node name="saveConfirmation" type="ConfirmationDialog" parent="."]
-margin_right = 218.0
-margin_bottom = 74.0
-popup_exclusive = true
+offset_right = 218.0
+offset_bottom = 74.0
+exclusive = true
 window_title = "Confirm"
 script = ExtResource( 5 )
 
-[node name="previewWindow" type="WindowDialog" parent="."]
-margin_right = 48.0
-margin_bottom = 40.0
+[node name="previewWindow" type="Window" parent="."]
+offset_right = 48.0
+offset_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-popup_exclusive = true
+exclusive = true
 window_title = "Terrain preview"
 script = ExtResource( 6 )
 
-[node name="ViewportContainer" type="ViewportContainer" parent="previewWindow"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="previewWindow"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Viewport" type="Viewport" parent="previewWindow/ViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="previewWindow/SubViewportContainer"]
 handle_input_locally = false
 render_target_update_mode = 0
 
-[node name="terrain" parent="previewWindow/ViewportContainer/Viewport" instance=ExtResource( 7 )]
+[node name="terrain" parent="previewWindow/SubViewportContainer/SubViewport" instance=ExtResource( 7 )]
 
-[node name="openWindow" type="WindowDialog" parent="."]
-margin_right = 48.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 180, 240 )
-popup_exclusive = true
+[node name="openWindow" type="Window" parent="."]
+offset_right = 48.0
+offset_bottom = 40.0
+custom_minimum_size = Vector2( 180, 240 )
+exclusive = true
 window_title = "Choose a file"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="openWindow"]
@@ -582,65 +582,65 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ScrollContainer" type="ScrollContainer" parent="openWindow/VBoxContainer"]
-margin_right = 180.0
-margin_bottom = 203.0
+offset_right = 180.0
+offset_bottom = 203.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 scroll_horizontal_enabled = false
 
 [node name="lstFiles" type="ItemList" parent="openWindow/VBoxContainer/ScrollContainer"]
-margin_right = 180.0
-margin_bottom = 203.0
+offset_right = 180.0
+offset_bottom = 203.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="openWindow/VBoxContainer"]
-margin_top = 207.0
-margin_right = 180.0
-margin_bottom = 235.0
+offset_top = 207.0
+offset_right = 180.0
+offset_bottom = 235.0
 
 [node name="Control" type="Control" parent="openWindow/VBoxContainer/HBoxContainer"]
-margin_right = 6.0
-margin_bottom = 28.0
+offset_right = 6.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="btnOpenConfirm" type="Button" parent="openWindow/VBoxContainer/HBoxContainer"]
-margin_left = 10.0
-margin_right = 82.0
-margin_bottom = 28.0
+offset_left = 10.0
+offset_right = 82.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = " Open "
 
 [node name="Control2" type="Control" parent="openWindow/VBoxContainer/HBoxContainer"]
-margin_left = 86.0
-margin_right = 93.0
-margin_bottom = 28.0
+offset_left = 86.0
+offset_right = 93.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="btnCancel" type="Button" parent="openWindow/VBoxContainer/HBoxContainer"]
-margin_left = 97.0
-margin_right = 169.0
-margin_bottom = 28.0
+offset_left = 97.0
+offset_right = 169.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 text = "Cancel"
 
 [node name="Control3" type="Control" parent="openWindow/VBoxContainer/HBoxContainer"]
-margin_left = 173.0
-margin_right = 180.0
-margin_bottom = 28.0
+offset_left = 173.0
+offset_right = 180.0
+offset_bottom = 28.0
 size_flags_horizontal = 3
 
 [node name="Control" type="Control" parent="openWindow/VBoxContainer"]
-margin_top = 239.0
-margin_right = 180.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 0, 1 )
+offset_top = 239.0
+offset_right = 180.0
+offset_bottom = 240.0
+custom_minimum_size = Vector2( 0, 1 )
 size_flags_horizontal = 3
 
 [connection signal="body_entered" from="background/mainContainer/map/scroll/container/selectionArea" to="background/mainContainer/map/scroll/container/grid" method="_on_selectionArea_body_entered"]
 [connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/group1" method="_on_General_loadedLocationDto"]
 [connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/General/mainContainer/logic" method="_on_General_loadedLocationDto"]
-[connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/Room" method="_on_General_loadedLocationDto"]
+[connection signal="loadedLocationDto" from="background/mainContainer/parameters/General" to="background/mainContainer/parameters/Node3D" method="_on_General_loadedLocationDto"]
 [connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtName" to="background/mainContainer/parameters/General" method="_on_txtName_text_changed"]
 [connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtShortName" to="background/mainContainer/parameters/General" method="_on_txtShortName_text_changed"]
 [connection signal="text_changed" from="background/mainContainer/parameters/General/mainContainer/group1/txtDescription" to="background/mainContainer/parameters/General" method="_on_txtDescription_text_changed"]
@@ -649,17 +649,17 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnOpen" to="background/mainContainer/parameters/General" method="_on_btnOpen_pressed"]
 [connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnSave" to="background/mainContainer/parameters/General" method="_on_btnSave_pressed"]
 [connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/General" method="_on_btnPreview_pressed"]
-[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnPreview_pressed"]
-[connection signal="changeModel" from="background/mainContainer/parameters/Room" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_Room_changeModel"]
-[connection signal="item_selected" from="background/mainContainer/parameters/Room/mainContainer/model/controls/optModel" to="background/mainContainer/parameters/Room" method="_on_optModel_item_selected"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateL" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateL_pressed"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/buttons/btnRotateR" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_btnRotateR_pressed"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile" to="background/mainContainer/parameters/Room" method="_on_btnBitmask_pressed"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnDelete" to="background/mainContainer/parameters/Room" method="_on_btnDelete_pressed"]
-[connection signal="pressed" from="background/mainContainer/parameters/Room/mainContainer/btnSave" to="background/mainContainer/parameters/Room" method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/General/mainContainer/buttons/btnPreview" to="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport/area" method="_on_btnPreview_pressed"]
+[connection signal="changeModel" from="background/mainContainer/parameters/Node3D" to="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport/area" method="_on_Room_changeModel"]
+[connection signal="item_selected" from="background/mainContainer/parameters/Node3D/mainContainer/model/controls/optModel" to="background/mainContainer/parameters/Node3D" method="_on_optModel_item_selected"]
+[connection signal="pressed" from="background/mainContainer/parameters/Node3D/mainContainer/model/controls/buttons/btnRotateL" to="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport/area" method="_on_btnRotateL_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Node3D/mainContainer/model/controls/buttons/btnRotateR" to="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport/area" method="_on_btnRotateR_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Node3D/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnAutotile" to="background/mainContainer/parameters/Node3D" method="_on_btnBitmask_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Node3D/mainContainer/model/controls/VBoxContainer/HBoxContainer/btnDelete" to="background/mainContainer/parameters/Node3D" method="_on_btnDelete_pressed"]
+[connection signal="pressed" from="background/mainContainer/parameters/Node3D/mainContainer/btnSave" to="background/mainContainer/parameters/Node3D" method="_on_btnSave_pressed"]
 [connection signal="confirmed" from="saveConfirmation" to="background/mainContainer/parameters/General" method="_on_saveConfirmation_confirmed"]
-[connection signal="about_to_show" from="previewWindow" to="previewWindow" method="_on_previewWindow_about_to_show"]
-[connection signal="popup_hide" from="previewWindow" to="background/mainContainer/parameters/Room/mainContainer/model/ViewportContainer/Viewport/area" method="_on_previewWindow_popup_hide"]
+[connection signal="about_to_popup" from="previewWindow" to="previewWindow" method="_on_previewWindow_about_to_show"]
+[connection signal="popup_hide" from="previewWindow" to="background/mainContainer/parameters/Node3D/mainContainer/model/SubViewportContainer/SubViewport/area" method="_on_previewWindow_popup_hide"]
 [connection signal="popup_hide" from="previewWindow" to="previewWindow" method="_on_previewWindow_popup_hide"]
 [connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnOpenConfirm" to="background/mainContainer/parameters/General" method="_on_btnOpenConfirm_pressed"]
 [connection signal="pressed" from="openWindow/VBoxContainer/HBoxContainer/btnCancel" to="background/mainContainer/parameters/General" method="_on_btnCancel_pressed"]

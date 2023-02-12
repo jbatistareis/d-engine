@@ -1,297 +1,304 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://d07e7uwoqpmbt"]
 
-[ext_resource path="res://ui/battleArena/battleArena.gd" type="Script" id=1]
-[ext_resource path="res://assets/kenney_prototypetextures/Light/texture_07.png" type="Texture" id=3]
-[ext_resource path="res://ui/battleArena/arenaEnvironment.tres" type="Environment" id=4]
-[ext_resource path="res://ui/battleArena/arena.gd" type="Script" id=5]
+[ext_resource type="Script" path="res://ui/battleArena/battleArena.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dbqcbw7eai18h" path="res://assets/kenney_prototypetextures/Light/texture_07.png" id="3"]
+[ext_resource type="Environment" path="res://ui/battleArena/arenaEnvironment.tres" id="4"]
+[ext_resource type="Script" path="res://ui/battleArena/arena.gd" id="5"]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("ViewportContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "finish"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("ViewportContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "start"
 length = 0.5
 tracks/0/type = "value"
-tracks/0/path = NodePath("ViewportContainer:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewportContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_htn3a"]
+_data = {
+"RESET": SubResource("3"),
+"finish": SubResource("1"),
+"start": SubResource("2")
+}
+
+[sub_resource type="Animation" id="8"]
 length = 0.001
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("pivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("pivot:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [Vector3(0, 0, 0)]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("pivot/Camera:translation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
+tracks/2/path = NodePath("pivot/Camera3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 0, 1, 6 ) ]
+"values": [Vector3(0, 1, 6)]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("pivot/Camera/bulb:light_energy")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
 tracks/3/imported = false
 tracks/3/enabled = true
+tracks/3/path = NodePath("pivot/Camera3D/bulb:light_energy")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.5 ]
+"values": [0.5]
 }
 tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
 tracks/4/path = NodePath("pivot/lantern:light_energy")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
 tracks/4/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ 0.5 ]
+"values": [0.5]
 }
 tracks/5/type = "value"
-tracks/5/path = NodePath("pivot/Camera:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
+tracks/5/path = NodePath("pivot/Camera3D:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ) ]
+"values": [Vector3(0, 0, 0)]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id="9"]
 resource_name = "exit"
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Camera:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 1, 7 ) ]
+"values": [Vector3(0, 1, 6), Vector3(0, 1, 7)]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("pivot/Camera3D/bulb:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0.5, 0.0 ]
+"values": [0.5, 0.0]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id="11"]
 resource_name = "lose"
 length = 5.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("pivot/Camera:translation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("pivot/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector3( 0, 1, 6 ), Vector3( 0, 0, 25 ) ]
+"values": [Vector3(0, 1, 6), Vector3(0, 0, 25)]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("pivot/Camera/bulb:light_energy")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("pivot/Camera3D/bulb:light_energy")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0.5, 0.0 ]
+"values": [0.5, 0.0]
 }
 tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
 tracks/2/path = NodePath("pivot/lantern:light_energy")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0, 4.8 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 4.8),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 0.5, 0.0 ]
+"values": [0.5, 0.0]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id="10"]
 resource_name = "win"
 length = 30.0
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("pivot:rotation_degrees")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 30 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 30),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 360, 0 ) ]
+"values": [Vector3(0, 0, 0), Vector3(0, 360, 0)]
 }
 
-[sub_resource type="CylinderMesh" id=6]
-height = 0.5
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dfyma"]
+_data = {
+"RESET": SubResource("8"),
+"exit": SubResource("9"),
+"lose": SubResource("11"),
+"win": SubResource("10")
+}
 
-[sub_resource type="SpatialMaterial" id=7]
-albedo_texture = ExtResource( 3 )
-metallic = 0.5
-roughness = 0.0
-uv1_scale = Vector3( 15, 15, 15 )
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5yrok"]
+albedo_texture = ExtResource("3")
+uv1_scale = Vector3(21, 21, 21)
 
-[node name="battleArena" type="Spatial"]
-script = ExtResource( 1 )
+[sub_resource type="PlaneMesh" id="PlaneMesh_3pa5b"]
+material = SubResource("StandardMaterial3D_5yrok")
+
+[node name="battleArena" type="Node3D"]
+script = ExtResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "RESET"
-anims/RESET = SubResource( 3 )
-anims/finish = SubResource( 1 )
-anims/start = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_htn3a")
+}
 
-[node name="ViewportContainer" type="ViewportContainer" parent="."]
-modulate = Color( 1, 1, 1, 0 )
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 stretch = true
 
-[node name="Viewport" type="Viewport" parent="ViewportContainer"]
-size = Vector2( 1366, 768 )
-own_world = true
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
 handle_input_locally = false
-debanding = true
-render_target_update_mode = 3
-shadow_atlas_size = 3072
+size = Vector2i(1366, 768)
+render_target_update_mode = 4
 
-[node name="arena" type="Spatial" parent="ViewportContainer/Viewport"]
-script = ExtResource( 5 )
+[node name="arena" type="Node3D" parent="SubViewportContainer/SubViewport"]
+script = ExtResource("5")
 
-[node name="Tween" type="Tween" parent="ViewportContainer/Viewport/arena"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ViewportContainer/Viewport/arena"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/arena"]
 autoplay = "RESET"
-anims/RESET = SubResource( 8 )
-anims/exit = SubResource( 9 )
-anims/lose = SubResource( 11 )
-anims/win = SubResource( 10 )
+libraries = {
+"": SubResource("AnimationLibrary_dfyma")
+}
 
-[node name="pivot" type="Spatial" parent="ViewportContainer/Viewport/arena"]
+[node name="pivot" type="Node3D" parent="SubViewportContainer/SubViewport/arena"]
 
-[node name="Camera" type="Camera" parent="ViewportContainer/Viewport/arena/pivot"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6 )
-environment = ExtResource( 4 )
+[node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/arena/pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+environment = ExtResource("4")
 current = true
 fov = 43.0
 size = 0.1
 
-[node name="bulb" type="OmniLight" parent="ViewportContainer/Viewport/arena/pivot/Camera"]
+[node name="bulb" type="OmniLight3D" parent="SubViewportContainer/SubViewport/arena/pivot/Camera3D"]
 light_energy = 0.5
 shadow_enabled = true
 omni_range = 8.0
-omni_shadow_detail = 0
 
-[node name="lantern" type="SpotLight" parent="ViewportContainer/Viewport/arena/pivot"]
-transform = Transform( 1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 7.45058e-08, 5, 6.26015 )
+[node name="lantern" type="SpotLight3D" parent="SubViewportContainer/SubViewport/arena/pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 7.45058e-08, 5, 6.26015)
 light_energy = 0.5
 shadow_enabled = true
 spot_range = 4096.0
 
-[node name="enemies" type="Spatial" parent="ViewportContainer/Viewport/arena"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0 )
+[node name="enemies" type="Node3D" parent="SubViewportContainer/SubViewport/arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0)
 
-[node name="enemy1" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
-transform = Transform( 0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -2.5, 0, 0 )
+[node name="enemy1" type="Node3D" parent="SubViewportContainer/SubViewport/arena/enemies"]
+transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -2.5, 0, 0)
 
-[node name="enemy2" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
-transform = Transform( 0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 0, 0, 0 )
+[node name="enemy2" type="Node3D" parent="SubViewportContainer/SubViewport/arena/enemies"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 0, 0, 0)
 
-[node name="enemy3" type="Spatial" parent="ViewportContainer/Viewport/arena/enemies"]
-transform = Transform( 0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 2.5, 0, 0 )
+[node name="enemy3" type="Node3D" parent="SubViewportContainer/SubViewport/arena/enemies"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 2.5, 0, 0)
 
-[node name="ground" type="MeshInstance" parent="ViewportContainer/Viewport/arena"]
-transform = Transform( 21, 0, 0, 0, 1, 0, 0, 0, 21, 0, -0.25, 0 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 7 )
+[node name="ground" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/arena"]
+transform = Transform3D(21, 0, 0, 0, 1, 0, 0, 0, 21, 0, -0.25, 0)
+mesh = SubResource("PlaneMesh_3pa5b")

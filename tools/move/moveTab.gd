@@ -1,11 +1,11 @@
-extends Tabs
+extends TabBar
 
 var moveDto : MoveDTO = MoveDTO.new()
 var list : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedMove", self, "loadMove")
+	EditorSignals.connect("selectedMove",Callable(self,"loadMove"))
 	
 	loadAllData()
 	setFields()

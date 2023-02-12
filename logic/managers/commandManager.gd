@@ -1,6 +1,6 @@
 extends Node
 
-onready var timer : Timer = Timer.new()
+@onready var timer : Timer = Timer.new()
 
 var paused : bool = false
 var executingCommand : bool = false
@@ -9,14 +9,14 @@ var newCommands : Array = []
 
 
 func _ready():
-	Signals.connect("commandsPaused", self, "pause")
-	Signals.connect("commandsResumed", self, "resume")
-	Signals.connect("commandPublished", self, "publishCommand")
-	Signals.connect("battleScreenReady", self, "reset")
-	Signals.connect("commandsCleared", self, "clearCommands")
+	Signals.commandsPaused.connect(pause)
+	Signals.commandsResumed.connect(resume)
+	Signals.commandPublished.connect(publishCommand)
+	Signals.battleScreenReady.connect(reset)
+	Signals.commandsCleared.connect(clearCommands)
 	
 	add_child(timer)
-	timer.connect("timeout", self, "tick")
+	timer.timeout.connect(tick)
 	
 	reset()
 
@@ -38,14 +38,14 @@ func tick() -> void:
 		
 		executingCommand = false
 	
-	while !newCommands.empty():
+	while !newCommands.is_empty():
 		var command = newCommands.pop_front()
 		commandsQueue.append(command)
 		command.published()
 		
-		Signals.emit_signal("commandOnQueue", command)
+		Signals.commandOnQueue.emit(command)
 	
-	commandsQueue.sort_custom(CommandArrayHelper, 'tickSortReverse')
+	commandsQueue.sort_custom(func(a, b): CommandArrayHelper.tickSortReverse(a, b))
 
 
 func pause() -> void:
@@ -70,4 +70,5 @@ func publishCommand(command : Command) -> void:
 		return
 	
 	newCommands.append(command)
+	resume()
 

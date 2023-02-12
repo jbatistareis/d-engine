@@ -5,7 +5,9 @@ var itemMove : Move
 var targets : Array = []
 
 
-func _init(executorCharacter, targets : Array, itemMove : Move).(executorCharacter, itemMove.cdPre) -> void:
+func _init(executorCharacter,targets : Array,itemMove : Move):
+	super(executorCharacter, itemMove.cdPre)
+	
 	self.targets = targets
 	self.itemMove = itemMove
 
@@ -15,14 +17,13 @@ func execute() -> void:
 		return
 	
 	var index = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
-	Signals.emit_signal(
-		"characterUsedItem",
+	Signals.characterUsedItem.emit(
 		executorCharacter,
 		targets,
 		executorCharacter.inventory.items[index])
 	
 	if executorCharacter.verdictActive:
-		Signals.emit_signal("commandPublished", VerdictCommand.new(executorCharacter, GameParameters.MIN_CD))
+		Signals.commandPublished.emit(VerdictCommand.new(executorCharacter, GameParameters.MIN_CD))
 	elif executorCharacter.type == Enums.CharacterType.PC:
-		Signals.emit_signal("commandPublished", AskPlayerBattleInputCommand.new(executorCharacter, GameParameters.MIN_CD))
+		Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(executorCharacter, GameParameters.MIN_CD))
 

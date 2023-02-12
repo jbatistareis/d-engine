@@ -31,16 +31,15 @@ static func saveDTO(dto : DTO) -> String:
 	elif dto is SaveDTO:
 		path = GamePaths.SAVE_DATA
 	
-	if path.empty():
+	if path.is_empty():
 		push_error(ErrorMessages.FILE_SAVE_ERR_UNK_TYPE)
 		return ''
 	
 	path %= dto.shortName
 	
-	var file = File.new()
-	file.open_compressed(path, File.WRITE, File.COMPRESSION_ZSTD)
-	file.store_var(inst2dict(dto))
-	file.close()
+	var file = FileAccess.open_compressed(path, FileAccess.WRITE, FileAccess.COMPRESSION_ZSTD)
+	file.store_var(inst_to_dict(dto))
+	file.flush()
 	
 	return path
 
@@ -82,14 +81,13 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	
 	path %= shortName
 	
-	var file = File.new()
-	file.open_compressed(path, File.READ, File.COMPRESSION_ZSTD)
+	var file = FileAccess.open_compressed(path, FileAccess.READ, FileAccess.COMPRESSION_ZSTD)
 	
-	if !file.file_exists(path):
+	if file == null:
 		push_error(ErrorMessages.FILE_NOT_FOUND % path)
+		return null
 	
-	var dto = dict2inst(file.get_var())
-	file.close()
+	var dto = dict_to_inst(file.get_var())
 	
 	return dto
 
@@ -135,12 +133,12 @@ static func listEntities(entityType : int, subpath : String = '') -> Array:
 		Enums.EntityType.SAVE_DATA:
 			path = GamePaths.SAVE_DATA
 	
-	var dir = Directory.new()
-	if dir.open(path) == OK:
-		dir.list_dir_begin(true, true)
+	var dir = DirAccess.open(path)
+	if dir != null:
+		dir.list_dir_begin() # TODOGODOT4 fill missing arguments https://github.com/godotengine/godot/pull/40547
 		
 		var file = dir.get_next()
-		while !file.empty():
+		while !file.is_empty():
 			if (entityType != Enums.EntityType.CHARACTER_MODEL) && !dir.current_is_dir():
 				result.append(extensionRegex.sub(file, ''))
 			elif (entityType == Enums.EntityType.CHARACTER_MODEL) && dir.current_is_dir():

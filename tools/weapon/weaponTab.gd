@@ -1,4 +1,4 @@
-extends Tabs
+extends TabBar
 
 const _PROP_MASK : String = 'move%dShortName'
 const _OPT_MASK : String = 'background/mainSeparator/dataPanel/dataContainer/moves/fields/grid/moveBtn%d/optMove%d'
@@ -9,7 +9,7 @@ var moveList : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedWeapon", self, "loadWeapon")
+	EditorSignals.connect("selectedWeapon",Callable(self,"loadWeapon"))
 	
 	loadAllData()
 	setFields()
@@ -108,7 +108,7 @@ func _on_optMove1_item_selected(index):
 
 
 func _on_btnEditMove1_pressed():
-	if !weaponDto.move1ShortName.empty():
+	if !weaponDto.move1ShortName.is_empty():
 		EditorSignals.emit_signal("selectedMove", weaponDto.move1ShortName)
 
 
@@ -120,7 +120,7 @@ func _on_optMove2_item_selected(index):
 
 
 func _on_btnEditMove2_pressed():
-	if !weaponDto.move2ShortName.empty():
+	if !weaponDto.move2ShortName.is_empty():
 		EditorSignals.emit_signal("selectedMove", weaponDto.move2ShortName)
 
 
@@ -132,7 +132,7 @@ func _on_optMove3_item_selected(index):
 
 
 func _on_btnEditMove3_pressed():
-	if !weaponDto.move3ShortName.empty():
+	if !weaponDto.move3ShortName.is_empty():
 		EditorSignals.emit_signal("selectedMove", weaponDto.move3ShortName)
 
 
@@ -144,7 +144,7 @@ func _on_optMove4_item_selected(index):
 
 
 func _on_btnEditMove4_pressed():
-	if !weaponDto.move4ShortName.empty():
+	if !weaponDto.move4ShortName.is_empty():
 		EditorSignals.emit_signal("selectedMove", weaponDto.move4ShortName)
 
 
@@ -176,5 +176,5 @@ func selectCurrentMoves() -> void:
 		var opt = get_node(_OPT_MASK % [idx, idx])
 		var propName = _PROP_MASK % idx
 		
-		opt.select(0 if weaponDto[propName].empty() else (moveList.find(weaponDto[propName]) + 1))
+		opt.select(0 if weaponDto[propName].is_empty() else (moveList.find(weaponDto[propName]) + 1))
 

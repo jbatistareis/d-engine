@@ -1,4 +1,4 @@
-extends Spatial
+extends Node3D
 
 const _ENEMY_FRAME_RATIO : float = 1.875
 const _ENEMY_MAP : Array = [1, 2, 0]
@@ -7,8 +7,8 @@ const _ENEMIES_TRANSLATION : Array = [0.0, -1.25, 0.0]
 const _ENEMY_ROTAION : Array = [[25, 0, -25], [25, 10, -10], [25, 0, -25]]
 
 var enemyFrameSize : Vector2
-onready var enemiesNode : Node = $ViewportContainer/Viewport/arena/enemies
-onready var battleCamera : Camera = $ViewportContainer/Viewport/arena/pivot/Camera
+@onready var enemiesNode : Node = $SubViewportContainer/SubViewport/arena/enemies
+@onready var battleCamera : Camera3D = $SubViewportContainer/SubViewport/arena/pivot/Camera3D
 
 var enemySize : int = 0
 var cursorOn : bool = false
@@ -18,28 +18,18 @@ var cursorMove : Move
 
 
 func _ready() -> void:
-	Signals.connect("setupBattleScreen", self, "setup")
-	Signals.connect("battleCursorShow", self, "showCursor")
-	Signals.connect("guiLeft", self, "moveCursor", [Enums.Direction.EAST])
-	Signals.connect("guiRight", self, "moveCursor", [Enums.Direction.WEST])
-	Signals.connect("guiConfirm", self, "confirmCursor")
-	Signals.connect("guiCancel", self, "cancelCursor")
-	Signals.connect("battleEnded", self, "finish")
-	Signals.connect("battleWon", self, "showBattleResult")
-	
-	get_viewport().connect("size_changed", self, "updateSize")
-	updateSize()
-
-
-func updateSize() -> void:
-	$ViewportContainer/Viewport.size = GuiOverlayManager.currentSize
+	Signals.setupBattleScreen.connect(setup)
+	Signals.battleCursorShow.connect(showCursor)
+	Signals.guiLeft.connect(moveCursor.bind(Enums.Direction.EAST))
+	Signals.guiRight.connect(moveCursor.bind(Enums.Direction.WEST))
+	Signals.guiConfirm.connect(confirmCursor)
+	Signals.guiCancel.connect(cancelCursor)
+	Signals.battleEnded.connect(finish)
+	Signals.battleWon.connect(showBattleResult)
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
-	var cursorPos = 0
-	var enemySize = enemyData.size()
-	
-	if playerData.empty() || enemyData.empty():
+	if playerData.is_empty() || enemyData.is_empty():
 		push_error(ErrorMessages.BATTLE_CANT_START % [str(playerData), str(enemyData)])
 		return
 	
@@ -66,7 +56,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	
 	for index in range(3):
 		if enemyData[index] != null:
-			var scene = SceneLoadManager.scenes[enemyData[index].shortName.substr(4)].instance()
+			var scene = SceneLoadManager.scenes[enemyData[index].shortName.substr(4)].instantiate()
 			scene.character = enemyData[index]
 			enemiesNode.get_child(_ENEMY_MAP[index]).add_child(scene)
 		
@@ -74,16 +64,15 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if index > enemyData.size() - 1:
 			break
 	
-	yield(get_tree().create_timer(0.1), "timeout")
-	Signals.emit_signal("battleScreenReady")
+	await get_tree().create_timer(0.1).timeout
+	Signals.battleScreenReady.emit()
 
 
 func createCursor() -> void:
 	cursorOn = true
 	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
 
-	Signals.emit_signal(
-		"battleCursorMove",
+	Signals.battleCursorMove.emit(
 		enemyNode.get_child(0).character.name,
 		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
 	)
@@ -163,17 +152,16 @@ func publishCommand(player, targets : Array, move : Move) -> void:
 		Enums.MoveType.SKILL:
 			command = ExecuteMoveCommand.new(player, targets, move)
 	
-	Signals.emit_signal("battleCursorHide")
-	Signals.emit_signal("commandPublished", command)
-	Signals.emit_signal("commandsResumed")
+	Signals.battleCursorHide.emit()
+	Signals.commandPublished.emit(command)
 	cursorOn = false
 
 
 func cancelCursor() -> void:
 	if cursorOn:
 		cursorOn = false
-		Signals.emit_signal("battleCursorHide")
-		Signals.emit_signal("battleShowCharacterMoves", cursorPlayer)
+		Signals.battleCursorHide.emit()
+		Signals.battleShowCharacterMoves.emit(cursorPlayer)
 
 
 func finish() -> void:
@@ -185,10 +173,10 @@ func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 	for player in players:
 		player.gainExperience(battleResult.experience)
 	
-	yield(get_tree().create_timer(1.5), "timeout")
-	Signals.emit_signal("battleShowResult", battleResult)
+	await get_tree().create_timer(1.5).timeout
+	Signals.battleShowResult.emit(battleResult)
 	
-	# should be on the window
-	yield(get_tree().create_timer(2), "timeout")
-	Signals.emit_signal("battleEnded")
+	# should be checked the window
+	await get_tree().create_timer(2).timeout
+	Signals.battleEnded.emit()
 

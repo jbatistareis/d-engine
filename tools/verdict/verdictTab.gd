@@ -1,16 +1,16 @@
-extends Tabs
+extends TabBar
 
 var verdictDto : VerdictDTO = VerdictDTO.new()
 var list : Array = []
 
 var actionScene : PackedScene = preload("res://tools/verdict/action/action.tscn")
 
-onready var fileList : ItemList = $background/mainSeparator/fileList
-onready var actionList : VBoxContainer = $background/mainSeparator/dataPanel/dataContainer/actions/data/scroll/VBoxContainer
+@onready var fileList : ItemList = $background/mainSeparator/fileList
+@onready var actionList : VBoxContainer = $background/mainSeparator/dataPanel/dataContainer/actions/data/scroll/VBoxContainer
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedVerdict", self, "loadVerdict")
+	EditorSignals.connect("selectedVerdict",Callable(self,"loadVerdict"))
 	
 	loadData()
 	setFields()
@@ -38,7 +38,7 @@ func setFields() -> void:
 	
 	for action in verdictDto.actions:
 		
-		var actionCard = actionScene.instance()
+		var actionCard = actionScene.instantiate()
 		actionList.add_child(actionCard)
 		
 		actionCard.actionDict = action
@@ -77,7 +77,7 @@ func _on_saveConfirm_confirmed():
 
 
 func _on_btnAdd_pressed():
-	var actionCard = actionScene.instance()
+	var actionCard = actionScene.instantiate()
 	actionList.add_child(actionCard)
 	
 	actionCard.actionDict = DefaultValues.actionBase

@@ -3,7 +3,7 @@ class_name InventorySummary
 var summary : Array = []
 
 
-func _init(items : Array) -> void:
+func _init(items : Array):
 	var temp = []
 	
 	for item in items:

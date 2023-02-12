@@ -7,11 +7,11 @@ var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/invent
 
 
 func _ready() -> void:
-	Signals.connect("battleStarted", self, "setup")
-	Signals.connect("battleWon", self, "victory")
-	Signals.connect("battleLost", self, "hide")
-	Signals.connect("battleShowCharacterMoves", self, "showCharacterMoves")
-	Signals.connect("battleHideCharacterMoves", self, "hideCharacterMoves")
+	Signals.battleStarted.connect(setup)
+	Signals.battleWon.connect(victory)
+	Signals.battleLost.connect(hideBattle)
+	Signals.battleShowCharacterMoves.connect(showCharacterMoves)
+	Signals.battleHideCharacterMoves.connect(hideCharacterMoves)
 
 
 func setup(players : Array, enemies : Array) -> void:
@@ -22,11 +22,11 @@ func setup(players : Array, enemies : Array) -> void:
 
 
 # TODO
-func victory(players : Array, battleResult : BattleResult) -> void:
+func victory(_players : Array, _battleResult : BattleResult) -> void:
 	hide()
 
 
-func hide() -> void:
+func hideBattle() -> void:
 	visible = false
 	
 	$enemyStats.clear()
@@ -40,32 +40,19 @@ func showCharacterMoves(character : Character) -> void:
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
 	
-	yield(get_tree().create_timer(0.1), "timeout")
+#	await get_tree().create_timer(0.1).timeout
 	
-	if character.inventory.weapon.move1 != null:
-		var card = moveCardPackedScene.instance()
-		card.character = character
-		card.move = character.inventory.weapon.move1
-		card.connect("hovered", self, "showMoveDetails")
-		$moves/cards/grid.add_child(card)
+	for move in [character.inventory.weapon.move1, character.inventory.weapon.move2, character.inventory.weapon.move3]:
+		if move != null:
+			var card = moveCardPackedScene.instantiate()
+			card.character = character
+			card.move = move
+			card.hovered.connect(showMoveDetails)
+			$moves/cards/grid.add_child(card)
 	
-	if character.inventory.weapon.move2 != null:
-		var card = moveCardPackedScene.instance()
-		card.character = character
-		card.move = character.inventory.weapon.move2
-		card.connect("hovered", self, "showMoveDetails")
-		$moves/cards/grid.add_child(card)
-	
-	if character.inventory.weapon.move3 != null:
-		var card = moveCardPackedScene.instance()
-		card.character = character
-		card.move = character.inventory.weapon.move3
-		card.connect("hovered", self, "showMoveDetails")
-		$moves/cards/grid.add_child(card)
-	
-	var inventoryCard = inventoryCardPackedScene.instance()
+	var inventoryCard = inventoryCardPackedScene.instantiate()
 	inventoryCard.character = character
-	inventoryCard.connect("hovered", self, "showMoveDetails")
+	inventoryCard.hovered.connect(showMoveDetails)
 	$moves/cards/grid.add_child(inventoryCard)
 	
 	$moves/cards/grid.get_child(0).button.grab_focus()
@@ -76,8 +63,8 @@ func hideCharacterMoves() -> void:
 
 
 func showMoveDetails(move : Move) -> void:
-	$moves/mods/data/self.visible = !move.executorModifiers.empty()
-	$moves/mods/data/target.visible = !move.targetModifiers.empty()
+	$moves/mods/data/self.visible = !move.executorModifiers.is_empty()
+	$moves/mods/data/target.visible = !move.targetModifiers.is_empty()
 	
 	$moves/decription/container/lblDescription.text = _MOVE_DESC % move.description
 	

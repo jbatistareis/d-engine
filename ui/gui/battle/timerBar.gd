@@ -2,49 +2,47 @@ extends Control
 
 var character : Character
 var paused : bool = false
+var foward : bool = true
 
 
 func _ready() -> void:
-	Signals.connect("commandOnQueue", self, "commandQueued")
-	Signals.connect("commandsPaused", self, "pause")
-	Signals.connect("commandsResumed", self, "resume")
-	Signals.connect("characterDied", self, "dead")
+	Signals.commandOnQueue.connect(commandQueued)
+	Signals.commandsPaused.connect(pause)
+	Signals.commandsResumed.connect(resume)
+	Signals.characterDied.connect(dead)
 
 
 func commandQueued(command : Command) -> void:
 	if command.executorCharacter == character:
 		while paused:
-			yield(Signals, "commandsResumed")
+			await Signals.commandsResumed
 		
-		$Tween.remove_all()
-		
-		var start
-		var end
+		$player.speed_scale = 1000 * GameParameters.GCD * command.totalTicks / 1000.0
 		
 		if (command is ExecuteMoveCommand) || (command is UseItemCommand): # pre
-			start = 0
-			end = 100
+			$player.play("run")
+			foward = true
 		else: # pos
-			start = 100
-			end = 0
-		
-		$Tween.interpolate_property($timer, "value", start, end, (1000 * GameParameters.GCD * command.totalTicks / 1000.0))
-		$Tween.start()
+			$player.play_backwards("run")
+			foward = false
 
 
 func pause() -> void:
-	$Tween.stop_all()
+	$player.pause()
 	paused = true
 
 
 func resume() -> void:
-	$Tween.resume_all()
+	if foward:
+		$player.play()
+	else:
+		$player.play_backwards()
+	
 	paused = false
 
 
 func dead(character : Character) -> void:
 	if character == self.character:
-		$Tween.interpolate_property($timer, "value", $timer.value, 0, 0.25)
-		yield($Tween, "tween_all_completed")
-		$Tween.remove_all()
+		$player.speed_scale = 1
+		$player.play_backwards("run")
 

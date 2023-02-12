@@ -1,11 +1,11 @@
-extends Tabs
+extends TabBar
 
 var armorDto : ArmorDTO = ArmorDTO.new()
 var list : Array = []
 
 
 func _ready() -> void:
-	EditorSignals.connect("selectedArmor", self, "loadArmor")
+	EditorSignals.connect("selectedArmor",Callable(self,"loadArmor"))
 	
 	loadAllData()
 	setFields()
