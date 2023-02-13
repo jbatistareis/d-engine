@@ -38,3 +38,7 @@ func hideMenus() -> void:
 	
 	hide()
 
+
+func _on_menu_popup_hide() -> void:
+	Signals.guiCloseExploringMenu.emit()
+

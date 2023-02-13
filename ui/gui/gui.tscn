@@ -172,6 +172,7 @@ size_flags_vertical = 4
 [node name="menu" type="PopupMenu" parent="exploration/menuSide"]
 size = Vector2i(96, 112)
 theme = ExtResource("2")
+hide_on_item_selection = false
 item_count = 4
 item_0/text = "Map"
 item_0/id = 0
@@ -186,50 +187,48 @@ script = ExtResource("1_6354c")
 [node name="map" type="PopupPanel" parent="exploration/menuSide/menu"]
 
 [node name="inventory" type="PopupPanel" parent="exploration/menuSide/menu"]
+size = Vector2i(233, 272)
 script = ExtResource("8")
 
 [node name="lblNoItems" type="Label" parent="exploration/menuSide/menu/inventory"]
 visible = false
-custom_minimum_size = Vector2(640, 480)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 129.0
-offset_bottom = -31.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "No items being carried"
+text = " No items being carried "
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="itemList" type="ItemList" parent="exploration/menuSide/menu/inventory"]
 visible = false
-custom_minimum_size = Vector2(640, 480)
+custom_minimum_size = Vector2(233, 280)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 129.0
-offset_bottom = -31.0
+offset_right = 1.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
-max_text_lines = 2
-max_columns = 4
+size_flags_horizontal = 4
+size_flags_vertical = 4
 same_column_width = true
-fixed_column_width = 150
+fixed_column_width = 233
 icon_mode = 0
 
 [node name="itemMenu" type="PopupMenu" parent="exploration/menuSide/menu/inventory/itemList"]
 size = Vector2i(82, 78)
 exclusive = true
 theme = ExtResource("2")
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
 item_count = 3
 item_0/text = "Use"
 item_0/id = 0
@@ -238,11 +237,11 @@ item_1/id = 1
 item_2/text = "< Back"
 item_2/id = 2
 
-[node name="partyMenu" parent="exploration/menuSide/menu/inventory/itemList/itemMenu" instance=ExtResource("4_t0bnm")]
+[node name="partyMenu" parent="exploration/menuSide/menu/inventory/itemList" instance=ExtResource("4_t0bnm")]
 title = "Party"
-visible = false
+size = Vector2i(26, 8)
 
-[node name="equipment" type="PopupPanel" parent="exploration/menuSide/menu"]
+[node name="weapons" type="PopupPanel" parent="exploration/menuSide/menu"]
 
 [node name="weapons" type="MarginContainer" parent="exploration"]
 visible = false
@@ -545,11 +544,14 @@ layout_mode = 2
 text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 
 [connection signal="index_pressed" from="exploration/menuSide/menu" to="exploration/menuSide/menu" method="_on_index_pressed"]
+[connection signal="popup_hide" from="exploration/menuSide/menu" to="exploration" method="_on_menu_popup_hide"]
 [connection signal="about_to_popup" from="exploration/menuSide/menu/inventory" to="exploration/menuSide/menu/inventory" method="_on_about_to_popup"]
-[connection signal="item_activated" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_itemList_item_activated"]
+[connection signal="popup_hide" from="exploration/menuSide/menu/inventory" to="exploration/menuSide/menu/inventory" method="_on_popup_hide"]
+[connection signal="item_activated" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_item_list_item_activated"]
+[connection signal="item_selected" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_item_list_item_selected"]
 [connection signal="id_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu" to="exploration/menuSide/menu/inventory" method="_on_itemMenu_id_pressed"]
-[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" method="_on_about_to_popup"]
-[connection signal="index_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_index_pressed"]
+[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory/itemList/partyMenu" to="exploration/menuSide/menu/inventory/itemList/partyMenu" method="_on_about_to_popup"]
+[connection signal="index_pressed" from="exploration/menuSide/menu/inventory/itemList/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_index_pressed"]
 [connection signal="item_activated" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_activated"]
 [connection signal="item_selected" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_selected"]
 [connection signal="id_pressed" from="exploration/weapons/itemMenu" to="exploration/weapons" method="_on_itemMenu_id_pressed"]

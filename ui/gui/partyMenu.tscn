@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ui/gui/partyMenu.gd" id="2_a2wuf"]
 
 [node name="partyMenu" type="PopupMenu"]
-visible = true
+size = Vector2i(26, 2)
 exclusive = true
 theme = ExtResource("1_fex7q")
 script = ExtResource("2_a2wuf")
