@@ -43,12 +43,16 @@ func _ready() -> void:
 	
 	weapon2.name = "Test Weapon2"
 	weapon2.shortName = "TSTWPN2"
+	weapon2.damage = 2
 	weapon3.name = "Test Weapon3"
 	weapon3.shortName = "TSTWPN3"
+	weapon3.damage = 3
 	weapon4.name = "Test Weapon4"
 	weapon4.shortName = "TSTWPN4"
+	weapon4.damage = 4
 	weapon5.name = "Test Weapon5"
 	weapon5.shortName = "TSTWPN5"
+	weapon5.damage = 5
 	
 	Signals.emit_signal("characterReceivedWeapon", player, weapon)
 	Signals.emit_signal("characterReceivedWeapon", player, weapon2)

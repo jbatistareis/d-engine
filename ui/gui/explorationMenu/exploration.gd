@@ -1,7 +1,6 @@
 extends HBoxContainer
 
-var statsScene : PackedScene = preload("res://ui/gui/stats.tscn") 
-
+var statsScene : PackedScene = preload("res://ui/gui/explorationMenu/stats.tscn")
 
 func _ready() -> void:
 	Signals.guiOpenExploringMenu.connect(showMenus)
@@ -18,7 +17,7 @@ func showMenus() -> void:
 		$statusSide.add_child(stats)
 	show()
 	
-	$menuSide/menu.position = $menuSide.position + Vector2(5, 0)
+	$menuSide/menu.position = $menuSide.position + Vector2(5, -145)
 	$menuSide/menu.popup()
 	$menuSide/menu.set_focused_item(0)
 	$menuSide/menu.grab_focus()

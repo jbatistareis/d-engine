@@ -1,35 +1,35 @@
-[gd_scene load_steps=17 format=3 uid="uid://ca87vmea8a6dd"]
+[gd_scene load_steps=16 format=3 uid="uid://b28bid03inu88"]
 
 [ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
 [ext_resource type="Script" path="res://ui/gui/menu.gd" id="1_6354c"]
+[ext_resource type="Script" path="res://ui/gui/explorationMenu/exploration.gd" id="1_xx7lt"]
 [ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="2"]
-[ext_resource type="Script" path="res://ui/gui/exploration.gd" id="3"]
-[ext_resource type="Script" path="res://ui/gui/battle.gd" id="4"]
+[ext_resource type="Script" path="res://ui/gui/explorationMenu/inventory.gd" id="4_owbn0"]
 [ext_resource type="PackedScene" uid="uid://g7exmacfpak" path="res://ui/gui/partyMenu.tscn" id="4_t0bnm"]
 [ext_resource type="Script" path="res://ui/gui/battle/cursor.gd" id="5"]
+[ext_resource type="Script" path="res://ui/gui/explorationMenu/weapons.gd" id="6_bsl3b"]
 [ext_resource type="Script" path="res://ui/gui/battle/inventory.gd" id="7"]
-[ext_resource type="Script" path="res://ui/gui/inventory.gd" id="8"]
-[ext_resource type="Script" path="res://ui/gui/weapons.gd" id="9"]
+[ext_resource type="Script" path="res://ui/gui/battle/battle.gd" id="7_ks84m"]
 [ext_resource type="Script" path="res://ui/gui/toast.gd" id="11"]
 
-[sub_resource type="Animation" id="2"]
+[sub_resource type="Animation" id="Animation_d06rd"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("toast/container:position")
+tracks/0/path = NodePath("container:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(433, -40)]
+"values": [Vector2(428, -40)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/path = NodePath("container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -39,96 +39,67 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="3"]
-resource_name = "hide"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("toast/container:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(433, 30), Vector2(433, -40)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("toast/container:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="4"]
+[sub_resource type="Animation" id="Animation_4dctu"]
 resource_name = "normal"
-length = 5.6
+length = 5.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("toast/container:position")
+tracks/0/path = NodePath("container:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 5.3, 5.6),
+"times": PackedFloat32Array(0, 0.2, 5, 5.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(433, -40), Vector2(433, 30), Vector2(433, 30), Vector2(433, -40)]
+"values": [Vector2(428, -40), Vector2(428, 20), Vector2(428, 20), Vector2(428, -40)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/path = NodePath("container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 5.3, 5.6),
+"times": PackedFloat32Array(0, 0.2, 5, 5.2),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id="1"]
+[sub_resource type="Animation" id="Animation_q42ic"]
 resource_name = "show"
-length = 0.3
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("toast/container:position")
+tracks/0/path = NodePath("container:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(433, -40), Vector2(433, 30)]
+"values": [Vector2(428, -40), Vector2(428, 20)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("toast/container:modulate")
+tracks/1/path = NodePath("container:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_60sy5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qil61"]
 _data = {
-"RESET": SubResource("2"),
-"hide": SubResource("3"),
-"normal": SubResource("4"),
-"show": SubResource("1")
+"RESET": SubResource("Animation_d06rd"),
+"normal": SubResource("Animation_4dctu"),
+"show": SubResource("Animation_q42ic")
 }
 
 [node name="gui" type="Control"]
@@ -154,10 +125,10 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("3")
+script = ExtResource("1_xx7lt")
 
 [node name="statusSide" type="HFlowContainer" parent="exploration"]
-custom_minimum_size = Vector2(390, 0)
+custom_minimum_size = Vector2(195, 0)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_constants/h_separation = 10
@@ -170,7 +141,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 4
 
 [node name="menu" type="PopupMenu" parent="exploration/menuSide"]
-size = Vector2i(96, 112)
+size = Vector2i(113, 112)
 theme = ExtResource("2")
 hide_on_item_selection = false
 item_count = 4
@@ -187,11 +158,111 @@ script = ExtResource("1_6354c")
 [node name="map" type="PopupPanel" parent="exploration/menuSide/menu"]
 
 [node name="inventory" type="PopupPanel" parent="exploration/menuSide/menu"]
-size = Vector2i(233, 272)
-script = ExtResource("8")
+size = Vector2i(282, 282)
+script = ExtResource("4_owbn0")
 
 [node name="lblNoItems" type="Label" parent="exploration/menuSide/menu/inventory"]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 281.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = " No item carried "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="itemList" type="ItemList" parent="exploration/menuSide/menu/inventory"]
+visible = false
+custom_minimum_size = Vector2(280, 280)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 281.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+same_column_width = true
+fixed_column_width = 280
+icon_mode = 0
+
+[node name="itemMenu" type="PopupMenu" parent="exploration/menuSide/menu/inventory/itemList"]
+size = Vector2i(84, 80)
+exclusive = true
+theme = ExtResource("2")
+hide_on_item_selection = false
+item_count = 3
+item_0/text = "Use"
+item_0/id = 0
+item_1/text = "Drop"
+item_1/id = 1
+item_2/text = "< Back"
+item_2/id = 2
+
+[node name="partyMenu" parent="exploration/menuSide/menu/inventory/itemList/itemMenu" instance=ExtResource("4_t0bnm")]
+title = "Party"
+hide_on_item_selection = false
+
+[node name="wpnPartyMenu" parent="exploration/menuSide/menu" instance=ExtResource("4_t0bnm")]
+hide_on_item_selection = false
+
+[node name="weapons" type="PopupPanel" parent="exploration/menuSide/menu/wpnPartyMenu"]
+size = Vector2i(282, 282)
+script = ExtResource("6_bsl3b")
+
+[node name="lblNoWpns" type="Label" parent="exploration/menuSide/menu/wpnPartyMenu/weapons"]
+visible = false
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 281.0
+offset_bottom = 281.0
+size_flags_vertical = 1
+text = "No weapon carried"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="wpnList" type="ItemList" parent="exploration/menuSide/menu/wpnPartyMenu/weapons"]
+visible = false
+custom_minimum_size = Vector2(280, 280)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 281.0
+offset_bottom = 281.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("2")
+same_column_width = true
+fixed_column_width = 280
+icon_mode = 0
+
+[node name="wpnMenu" type="PopupMenu" parent="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList"]
+size = Vector2i(84, 80)
+item_count = 3
+item_0/text = "Equip"
+item_0/id = 0
+item_1/text = "Drop"
+item_1/id = 1
+item_2/text = "< Back"
+item_2/id = 2
+
+[node name="info" type="PopupPanel" parent="exploration/menuSide/menu/wpnPartyMenu/weapons"]
+size = Vector2i(564, 355)
+
+[node name="container" type="HBoxContainer" parent="exploration/menuSide/menu/wpnPartyMenu/weapons/info"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -202,130 +273,31 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-text = " No items being carried "
-horizontal_alignment = 1
-vertical_alignment = 1
 
-[node name="itemList" type="ItemList" parent="exploration/menuSide/menu/inventory"]
-visible = false
-custom_minimum_size = Vector2(233, 280)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 1.0
-offset_bottom = 9.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-same_column_width = true
-fixed_column_width = 233
-icon_mode = 0
+[node name="new" type="RichTextLabel" parent="exploration/menuSide/menu/wpnPartyMenu/weapons/info/container"]
+custom_minimum_size = Vector2(0, 355)
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+autowrap_mode = 2
 
-[node name="itemMenu" type="PopupMenu" parent="exploration/menuSide/menu/inventory/itemList"]
-size = Vector2i(82, 78)
-exclusive = true
+[node name="VSeparator" type="VSeparator" parent="exploration/menuSide/menu/wpnPartyMenu/weapons/info/container"]
+layout_mode = 2
 theme = ExtResource("2")
-item_count = 3
-item_0/text = "Use"
-item_0/id = 0
-item_1/text = "Drop"
-item_1/id = 1
-item_2/text = "< Back"
-item_2/id = 2
 
-[node name="partyMenu" parent="exploration/menuSide/menu/inventory/itemList" instance=ExtResource("4_t0bnm")]
-title = "Party"
-size = Vector2i(26, 8)
-
-[node name="weapons" type="PopupPanel" parent="exploration/menuSide/menu"]
-
-[node name="weapons" type="MarginContainer" parent="exploration"]
-visible = false
-custom_minimum_size = Vector2(640, 480)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme = ExtResource("2")
-script = ExtResource("9")
-
-[node name="Panel" type="Panel" parent="exploration/weapons"]
-layout_mode = 2
-
-[node name="main" type="VBoxContainer" parent="exploration/weapons"]
-layout_mode = 2
-
-[node name="cards" type="HBoxContainer" parent="exploration/weapons/main"]
+[node name="current" type="RichTextLabel" parent="exploration/menuSide/menu/wpnPartyMenu/weapons/info/container"]
+custom_minimum_size = Vector2(0, 355)
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="current" type="VBoxContainer" parent="exploration/weapons/main/cards"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/current"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VSeparator" type="VSeparator" parent="exploration/weapons/main/cards"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="new" type="VBoxContainer" parent="exploration/weapons/main/cards"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="data" type="RichTextLabel" parent="exploration/weapons/main/cards/new"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HSeparator" type="HSeparator" parent="exploration/weapons/main"]
-layout_mode = 2
-
-[node name="itemList" type="ItemList" parent="exploration/weapons/main"]
-custom_minimum_size = Vector2(0, 83)
-layout_mode = 2
-size_flags_horizontal = 3
-theme = ExtResource("2")
-max_columns = 2
-same_column_width = true
-fixed_column_width = 310
-icon_mode = 0
-
-[node name="lblNoWeap" type="Label" parent="exploration/weapons/main"]
-visible = false
-custom_minimum_size = Vector2(0, 83)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 5
-text = "No weapons being carried"
-
-[node name="itemMenu" type="PopupMenu" parent="exploration/weapons"]
-exclusive = true
-hide_on_item_selection = false
-hide_on_checkable_item_selection = false
-item_count = 3
-item_0/text = "Equip"
-item_0/id = 0
-item_1/text = "Drop"
-item_1/id = 1
-item_2/text = "< Back"
-item_2/id = 2
+bbcode_enabled = true
+autowrap_mode = 2
 
 [node name="battle" type="Control" parent="."]
 visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource("4")
+script = ExtResource("7_ks84m")
 
 [node name="enemyStats" parent="battle" instance=ExtResource("1")]
 layout_mode = 0
@@ -507,41 +479,42 @@ theme = ExtResource("2")
 layout_mode = 2
 
 [node name="toast" type="Control" parent="."]
-visible = false
 custom_minimum_size = Vector2(0, 240)
-anchors_preset = 0
+layout_mode = 1
+anchors_preset = 10
 anchor_right = 1.0
+grow_horizontal = 2
 script = ExtResource("11")
 
 [node name="animation" type="AnimationPlayer" parent="toast"]
-root_node = NodePath("../..")
 autoplay = "RESET"
 libraries = {
-"": SubResource("AnimationLibrary_60sy5")
+"": SubResource("AnimationLibrary_qil61")
 }
-blend_times = [&"normal", &"normal", 0.3, &"normal", &"RESET", 0.3, &"normal", &"show", 0.3, &"normal", &"hide", 0.3, &"show", &"normal", 0.3, &"show", &"RESET", 0.3, &"show", &"show", 0.3, &"show", &"hide", 0.3, &"hide", &"normal", 0.3, &"hide", &"RESET", 0.3, &"hide", &"show", 0.3, &"hide", &"hide", 0.3]
 
-[node name="container" type="CenterContainer" parent="toast"]
+[node name="container" type="MarginContainer" parent="toast"]
 modulate = Color(1, 1, 1, 0)
-custom_minimum_size = Vector2(510, 30)
-layout_mode = 0
+layout_mode = 1
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -250.0
+offset_left = -255.0
 offset_top = -40.0
-offset_right = 260.0
-offset_bottom = -9.99993
-size_flags_horizontal = 3
-size_flags_vertical = 3
+offset_right = 255.0
+offset_bottom = -10.0
+grow_horizontal = 2
 
-[node name="Panel" type="Panel" parent="toast/container"]
-custom_minimum_size = Vector2(510, 30)
+[node name="panel" type="Panel" parent="toast/container"]
 layout_mode = 2
 theme = ExtResource("2")
 
 [node name="lblMessage" type="Label" parent="toast/container"]
+custom_minimum_size = Vector2(510, 30)
 layout_mode = 2
-text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [connection signal="index_pressed" from="exploration/menuSide/menu" to="exploration/menuSide/menu" method="_on_index_pressed"]
 [connection signal="popup_hide" from="exploration/menuSide/menu" to="exploration" method="_on_menu_popup_hide"]
@@ -550,9 +523,12 @@ text = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 [connection signal="item_activated" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_item_list_item_activated"]
 [connection signal="item_selected" from="exploration/menuSide/menu/inventory/itemList" to="exploration/menuSide/menu/inventory" method="_on_item_list_item_selected"]
 [connection signal="id_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu" to="exploration/menuSide/menu/inventory" method="_on_itemMenu_id_pressed"]
-[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory/itemList/partyMenu" to="exploration/menuSide/menu/inventory/itemList/partyMenu" method="_on_about_to_popup"]
-[connection signal="index_pressed" from="exploration/menuSide/menu/inventory/itemList/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_index_pressed"]
-[connection signal="item_activated" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_activated"]
-[connection signal="item_selected" from="exploration/weapons/main/itemList" to="exploration/weapons" method="_on_itemList_item_selected"]
-[connection signal="id_pressed" from="exploration/weapons/itemMenu" to="exploration/weapons" method="_on_itemMenu_id_pressed"]
+[connection signal="about_to_popup" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_about_to_popup"]
+[connection signal="index_pressed" from="exploration/menuSide/menu/inventory/itemList/itemMenu/partyMenu" to="exploration/menuSide/menu/inventory" method="_on_party_menu_index_pressed"]
+[connection signal="menu_changed" from="exploration/menuSide/menu/wpnPartyMenu" to="exploration/menuSide/menu" method="_on_wpn_party_menu_menu_changed"]
+[connection signal="about_to_popup" from="exploration/menuSide/menu/wpnPartyMenu/weapons" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_about_to_popup"]
+[connection signal="popup_hide" from="exploration/menuSide/menu/wpnPartyMenu/weapons" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_popup_hide"]
+[connection signal="item_activated" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_list_item_activated"]
+[connection signal="item_selected" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_list_item_selected"]
+[connection signal="id_pressed" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList/wpnMenu" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_menu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]

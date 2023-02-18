@@ -16,19 +16,12 @@ func _ready():
 
 
 func equipWeapon(character : Character, weapon : Weapon) -> void:
-	var index = character.inventory.weapons.bsearch_custom(
-		weapon.shortName,
-		func(a, b): EntityArrayHelper.shortNameFind(a, b))
-	
-	if character.inventory.weapons[index].shortName == weapon.shortName:
-		var oldWeapon = character.inventory.weapon
-		var newWeapon = character.inventory.weapons[index]
-		
-		character.inventory.weapons.remove_at(index)
-		character.inventory.weapons.append(oldWeapon)
+	if character.inventory.weapons.has(weapon):
+		character.inventory.weapons.erase(weapon)
+		character.inventory.weapons.append(character.inventory.weapon)
 		character.inventory.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
 		
-		character.inventory.weapon = newWeapon
+		character.inventory.weapon = weapon
 	else:
 		push_error(ErrorMessages.WPN_NO_FOUND)
 
@@ -67,12 +60,8 @@ func receiveItem(character : Character, item : Item) -> void:
 
 
 func dropWeapon(character : Character, weapon : Weapon) -> void:
-	var index = character.inventory.weapons.bsearch_custom(
-		weapon.shortName,
-		func(a, b): EntityArrayHelper.shortNameFind(a, b))
-	
-	if character.inventory.weapons[index].shortName == weapon.shortName:
-		character.inventory.weapons.remove_at(index)
+	if character.inventory.weapons.has(weapon):
+		character.inventory.weapons.erase(weapon)
 		character.inventory.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
 	else:
 		push_error(ErrorMessages.WPN_NO_FOUND)
@@ -84,5 +73,9 @@ func dropArmor(_character : Character, _armor : Armor) -> void:
 
 
 func dropItem(character : Character, item : Item) -> void:
-	character.inventory.items.erase(item)
+	if character.inventory.items.has(item):
+		character.inventory.items.erase(item)
+		character.inventory.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+	else:
+		push_error(ErrorMessages.ITM_NO_FOUND)
 
