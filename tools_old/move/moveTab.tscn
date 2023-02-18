@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource path="res://tools/move/moveTab.gd" type="Script" id=1]
-[ext_resource path="res://tools/move/saveConfirm.gd" type="Script" id=2]
+[ext_resource type="Script" path="res://tools_old/move/moveTab.gd" id="1"]
+[ext_resource type="Script" path="res://tools_old/move/saveConfirm.gd" id="2"]
+
 
 [node name="Move" type="TabBar"]
 anchor_right = 1.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3]
 
-[ext_resource path="res://tools/character/action/action.gd" type="Script" id=1]
+[ext_resource type="Script" path="res://tools_old/character/action/action.gd" id="1"]
+
 
 [node name="action" type="PanelContainer"]
 offset_right = 445.0

@@ -1,12 +1,13 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=8 format=3]
 
-[ext_resource path="res://tools/character/characterTab.gd" type="Script" id=1]
-[ext_resource path="res://tools/character/verdict.gd" type="Script" id=2]
-[ext_resource path="res://tools/character/model.gd" type="Script" id=3]
-[ext_resource path="res://tools/character/visualization.gd" type="Script" id=4]
-[ext_resource path="res://tools/character/inventory.gd" type="Script" id=5]
-[ext_resource path="res://tools/character/model/modelPreview.tscn" type="PackedScene" id=6]
-[ext_resource path="res://tools/character/saveConfigmation.gd" type="Script" id=7]
+[ext_resource type="Script" path="res://tools_old/character/characterTab.gd" id="1"]
+[ext_resource type="Script" path="res://tools_old/character/verdict.gd" id="2"]
+[ext_resource type="Script" path="res://tools_old/character/model.gd" id="3"]
+[ext_resource type="Script" path="res://tools_old/character/visualization.gd" id="4"]
+[ext_resource type="Script" path="res://tools_old/character/inventory.gd" id="5"]
+[ext_resource type="PackedScene" path="res://tools_old/character/model/modelPreview.tscn" id="6"]
+[ext_resource type="Script" path="res://tools_old/character/saveConfigmation.gd" id="7"]
+
 
 [node name="Character" type="TabBar"]
 anchor_right = 1.0

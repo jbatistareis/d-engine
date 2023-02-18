@@ -1,87 +1,66 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cqduwk0b3qp05"]
 
-[ext_resource path="res://tools/editor.gd" type="Script" id=1]
-[ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tools/character/characterTab.tscn" type="PackedScene" id=3]
-[ext_resource path="res://tools/armor/armorTab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
-[ext_resource path="res://tools/move/moveTab.tscn" type="PackedScene" id=6]
-[ext_resource path="res://tools/verdict/verdictTab.tscn" type="PackedScene" id=7]
-[ext_resource path="res://tools/item/itemTab.tscn" type="PackedScene" id=8]
-[ext_resource path="res://tools/inventory/inventoryTab.tscn" type="PackedScene" id=9]
+[ext_resource type="Script" path="res://tools/editor.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://b31yo7du5faif" path="res://tools/armor/armorTab.tscn" id="4"]
 
 [node name="editor" type="Panel"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1")
 
 [node name="tabs" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
 
-[node name="Armor" parent="tabs" instance=ExtResource( 4 )]
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
+[node name="Armor" type="TabBar" parent="tabs"]
+layout_mode = 2
 
-[node name="Character" parent="tabs" instance=ExtResource( 3 )]
+[node name="armorTab" parent="tabs/Armor" instance=ExtResource("4")]
+layout_mode = 0
+anchors_preset = 0
+
+[node name="Character" type="TabBar" parent="tabs"]
 visible = false
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
-scrolling_enabled = false
+layout_mode = 2
+
+[node name="Dialog" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
 
 [node name="Event" type="TabBar" parent="tabs"]
 visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
-size_flags_horizontal = 3
+layout_mode = 2
 
-[node name="background" type="Panel" parent="tabs/Event"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Inventory" parent="tabs" instance=ExtResource( 9 )]
+[node name="Inventory" type="TabBar" parent="tabs"]
 visible = false
+layout_mode = 2
 
-[node name="Item" parent="tabs" instance=ExtResource( 8 )]
+[node name="Item" type="TabBar" parent="tabs"]
 visible = false
+layout_mode = 2
 
-[node name="Location" parent="tabs" instance=ExtResource( 2 )]
+[node name="Location" type="TabBar" parent="tabs"]
 visible = false
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
+layout_mode = 2
 
-[node name="Message" type="TabBar" parent="tabs"]
+[node name="Move" type="TabBar" parent="tabs"]
 visible = false
-offset_left = 814.0
-offset_top = 47.0
-offset_right = 924.0
-offset_bottom = 709.0
-size_flags_horizontal = 3
+layout_mode = 2
 
-[node name="background" type="Panel" parent="tabs/Message"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Move" parent="tabs" instance=ExtResource( 6 )]
+[node name="Verdict" type="TabBar" parent="tabs"]
 visible = false
+layout_mode = 2
 
-[node name="Verdict" parent="tabs" instance=ExtResource( 7 )]
+[node name="Weapon" type="TabBar" parent="tabs"]
 visible = false
-
-[node name="Weapon" parent="tabs" instance=ExtResource( 5 )]
-visible = false
-
-[connection signal="tab_changed" from="tabs" to="tabs/Character" method="_on_tabs_tab_changed"]
-[connection signal="tab_changed" from="tabs" to="tabs/Location" method="_on_tabs_tab_changed"]
+layout_mode = 2
