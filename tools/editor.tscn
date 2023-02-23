@@ -26,8 +26,7 @@ tab_alignment = 1
 layout_mode = 2
 
 [node name="armorTab" parent="tabs/Armor" instance=ExtResource("4")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
 
 [node name="Character" type="TabBar" parent="tabs"]
 visible = false
