@@ -20,6 +20,10 @@ func _ready() -> void:
 		$dlgDelete.dialog_text = _DELETE_TXT % dto.shortName
 		$dlgDelete.popup_centered())
 	
-	$dlgSave.confirmed.connect(func(): Persistence.saveDTO(dto))
-	$dlgDelete.confirmed.connect(func(): Persistence.deleteDTO(dto))
+	$dlgSave.confirmed.connect(func():
+		Persistence.saveDTO(dto)
+		reloadFunc.call())
+	$dlgDelete.confirmed.connect(func():
+		Persistence.deleteDTO(dto)
+		reloadFunc.call())
 
