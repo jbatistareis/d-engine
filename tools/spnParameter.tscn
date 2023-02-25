@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx2vm3l1ragdd"]
+
+[ext_resource type="Script" path="res://tools/spnParameter.gd" id="1_wka8f"]
+
+[node name="spnParameter" type="SpinBox"]
+update_on_text_changed = true
+script = ExtResource("1_wka8f")
+
+[connection signal="value_changed" from="." to="." method="_on_value_changed"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://b31yo7du5faif"]
+[gd_scene load_steps=5 format=3 uid="uid://b31yo7du5faif"]
 
 [ext_resource type="Script" path="res://tools/armor/armorTab.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://2t2sepdgivdg" path="res://tools/parameterTitle.tscn" id="2_et35c"]
 [ext_resource type="PackedScene" uid="uid://dkcuvgwjl2wnm" path="res://tools/txtParameter.tscn" id="3_rerr5"]
+[ext_resource type="PackedScene" uid="uid://dx2vm3l1ragdd" path="res://tools/spnParameter.tscn" id="4_agwls"]
 
 [node name="armorTab" type="HBoxContainer"]
 anchors_preset = 15
@@ -61,3 +62,37 @@ vertical_alignment = 1
 layout_mode = 2
 max_length = 10
 parameter = "shortName"
+
+[node name="Control" type="Control" parent="fields/scroll/container"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="scalingTitle" parent="fields/scroll/container" instance=ExtResource("2_et35c")]
+layout_mode = 2
+title = "Scaling"
+
+[node name="scalingGrid" type="GridContainer" parent="fields/scroll/container"]
+layout_mode = 2
+columns = 4
+
+[node name="lblPositive" type="Label" parent="fields/scroll/container/scalingGrid"]
+layout_mode = 2
+text = "Positive "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnPositive" parent="fields/scroll/container/scalingGrid" instance=ExtResource("4_agwls")]
+layout_mode = 2
+max_value = 0.33
+step = 0.01
+
+[node name="lblNegative" type="Label" parent="fields/scroll/container/scalingGrid"]
+layout_mode = 2
+text = "Positive "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnNegative" parent="fields/scroll/container/scalingGrid" instance=ExtResource("4_agwls")]
+layout_mode = 2
+max_value = 0.33
+step = 0.01

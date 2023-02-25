@@ -1,8 +1,10 @@
 extends LineEdit
 
-var dto : DTO = DTO.new()
 @export
 var parameter : String
+var dto : DTO :
+	set(value):
+		text = dto[parameter]
 
 
 func _on_text_changed(new_text: String) -> void:
