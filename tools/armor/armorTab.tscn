@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://b31yo7du5faif"]
+[gd_scene load_steps=4 format=3 uid="uid://b31yo7du5faif"]
 
 [ext_resource type="Script" path="res://tools/armor/armorTab.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://2t2sepdgivdg" path="res://tools/parameterTitle.tscn" id="2_et35c"]
+[ext_resource type="PackedScene" uid="uid://dkcuvgwjl2wnm" path="res://tools/txtParameter.tscn" id="3_rerr5"]
 
 [node name="armorTab" type="HBoxContainer"]
 anchors_preset = 15
@@ -32,6 +33,31 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="parameterTitle" parent="fields/scroll/container" instance=ExtResource("2_et35c")]
+[node name="idTitle" parent="fields/scroll/container" instance=ExtResource("2_et35c")]
 layout_mode = 2
 title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="fields/scroll/container"]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="fields/scroll/container/idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="fields/scroll/container/idGrid" instance=ExtResource("3_rerr5")]
+layout_mode = 2
+parameter = "name"
+
+[node name="lblShortName" type="Label" parent="fields/scroll/container/idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortName" parent="fields/scroll/container/idGrid" instance=ExtResource("3_rerr5")]
+layout_mode = 2
+max_length = 10
+parameter = "shortName"
