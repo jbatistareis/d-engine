@@ -8,6 +8,6 @@ var dto : DTO :
 		value = dto[parameter]
 
 
-func _on_value_changed(value: float) -> void:
-	dto[parameter] = value
+func _ready() -> void:
+	value_changed.connect(func(value): dto[parameter] = value)
 

@@ -7,7 +7,6 @@ var dto : DTO :
 		dto = value
 		text = dto[parameter]
 
-
-func _on_text_changed(new_text: String) -> void:
-	dto[parameter] = new_text
+func _ready() -> void:
+	text_changed.connect(func(value): dto[parameter] = value)
 

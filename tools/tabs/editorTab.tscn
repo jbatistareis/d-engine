@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3qchadcmjlhf"]
+
+[ext_resource type="Script" path="res://tools/tabs/editorTab.gd" id="1_a37fk"]
+[ext_resource type="PackedScene" path="res://tools/tabs/persistenceBtns.tscn" id="3_vbj71"]
+
+[node name="editorTab" type="HBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+script = ExtResource("1_a37fk")
+
+[node name="files" type="ItemList" parent="."]
+custom_minimum_size = Vector2(115, 0)
+layout_mode = 2
+allow_reselect = true
+
+[node name="fields" type="MarginContainer" parent="."]
+custom_minimum_size = Vector2(621, 0)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="fields"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="container" type="VBoxContainer" parent="fields"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="scroll" type="ScrollContainer" parent="fields/container"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="persistenceBtns" parent="fields/container" instance=ExtResource("3_vbj71")]
+layout_mode = 2
