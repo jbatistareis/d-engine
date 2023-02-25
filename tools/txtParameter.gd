@@ -4,6 +4,7 @@ extends LineEdit
 var parameter : String
 var dto : DTO :
 	set(value):
+		dto = value
 		text = dto[parameter]
 
 

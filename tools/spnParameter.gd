@@ -4,6 +4,7 @@ extends SpinBox
 var parameter : String
 var dto : DTO :
 	set(newValue):
+		dto = newValue
 		value = dto[parameter]
 
 
