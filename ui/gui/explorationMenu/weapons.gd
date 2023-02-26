@@ -110,12 +110,12 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 					1000.0 * GameParameters.GCD * move.cdPre / 1000.0,
 					1000.0 * GameParameters.GCD * move.cdPos / 1000.0,
 					move.modifierScale * 100,
-					Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.targetModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.targetModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.targetModifiers)
+					move.executorAtkModifier,
+					move.executorDefModifier,
+					move.executorCdModifier,
+					move.targetAtkModifier,
+					move.targetDefModifier,
+					move.targetCdModifier
 				]
 			else:
 				text += _WEAPON_STATS_MASK_NO_MOVE
