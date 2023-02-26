@@ -6,6 +6,7 @@ var dtoType : Enums.EntityType
 var parametersScene : PackedScene
 
 var list : Array
+var currentIndex : int = -1
 
 
 func _ready() -> void:
@@ -23,13 +24,25 @@ func reload() -> void:
 	$files.clear()
 	
 	list = Persistence.listEntities(dtoType)
+	if list.is_empty():
+		return
 	
 	for item in list:
 		$files.add_item(item)
+	
+	if currentIndex == -1:
+		currentIndex = 0
+	else:
+		currentIndex = min(currentIndex, list.size() - 1)
+	
+	$files.select(currentIndex)
+	itemSelected(currentIndex)
 
 
 func itemSelected(index : int) -> void:
 	var dto = Persistence.loadDTO(list[index], dtoType)
 	$fields/container/scroll/parameters.dto = dto
 	$fields/container/persistenceBtns.dto = dto
+	
+	currentIndex = index
 

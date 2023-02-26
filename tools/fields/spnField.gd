@@ -6,6 +6,7 @@ var dto : DTO :
 	set(newValue):
 		dto = newValue
 		value = dto[parameter]
+		editable = (dto != null)
 
 
 func _ready() -> void:
