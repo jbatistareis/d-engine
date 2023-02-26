@@ -1,14 +1,14 @@
 extends SpinBox
 
 @export
-var parameter : String
+var property : String
 var dto : DTO :
 	set(newValue):
 		dto = newValue
-		value = dto[parameter]
+		value = dto[property]
 		editable = (dto != null)
 
 
 func _ready() -> void:
-	value_changed.connect(func(newValue): dto[parameter] = newValue)
+	value_changed.connect(func(newValue): dto[property] = newValue)
 

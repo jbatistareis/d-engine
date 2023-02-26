@@ -1,13 +1,13 @@
 extends LineEdit
 
 @export
-var parameter : String
+var property : String
 var dto : DTO :
 	set(value):
 		dto = value
-		text = dto[parameter]
+		text = dto[property]
 		editable = (dto != null)
 
 func _ready() -> void:
-	text_changed.connect(func(value): dto[parameter] = value)
+	text_changed.connect(func(value): dto[property] = value)
 
