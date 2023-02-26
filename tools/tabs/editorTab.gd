@@ -33,7 +33,7 @@ func reload() -> void:
 	if currentIndex == -1:
 		currentIndex = 0
 	else:
-		currentIndex = min(currentIndex, list.size() - 1)
+		currentIndex = clamp(currentIndex, 0, list.size() - 1)
 	
 	$files.select(currentIndex)
 	itemSelected(currentIndex)

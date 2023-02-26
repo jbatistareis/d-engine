@@ -2,10 +2,15 @@
 
 [ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="1_g18qb"]
 [ext_resource type="Script" path="res://tools/tabs/armor/parameters.gd" id="1_mm3wp"]
-[ext_resource type="PackedScene" path="res://tools/fields/txtField.tscn" id="2_5m4eg"]
-[ext_resource type="PackedScene" path="res://tools/fields/spnField.tscn" id="3_ceshb"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="2_5m4eg"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="3_ceshb"]
 
 [node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_mm3wp")

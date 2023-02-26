@@ -45,10 +45,6 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Event" type="TabBar" parent="tabs"]
-visible = false
-layout_mode = 2
-
 [node name="Inventory" type="TabBar" parent="tabs"]
 visible = false
 layout_mode = 2

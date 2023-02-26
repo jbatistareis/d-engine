@@ -10,5 +10,5 @@ var dto : DTO :
 
 
 func _ready() -> void:
-	value_changed.connect(func(value): dto[parameter] = value)
+	value_changed.connect(func(newValue): dto[parameter] = newValue)
 

@@ -1,6 +1,209 @@
-[gd_scene load_steps=2 format=3 uid="uid://uutlxsh0mt4s"]
+[gd_scene load_steps=6 format=3 uid="uid://uutlxsh0mt4s"]
 
 [ext_resource type="Script" path="res://tools/tabs/weapon/parameters.gd" id="1_juphs"]
+[ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="2_4qt6g"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_6pm4b"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="4_3oebx"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="5_ph237"]
 
 [node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_juphs")
+
+[node name="idTitle" parent="." instance=ExtResource("2_4qt6g")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("3_6pm4b")]
+layout_mode = 2
+parameter = "name"
+
+[node name="lblShortname" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="idGrid" instance=ExtResource("3_6pm4b")]
+layout_mode = 2
+parameter = "shortName"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="statsTitle" parent="." instance=ExtResource("2_4qt6g")]
+layout_mode = 2
+title = "Stats"
+
+[node name="statsGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="lblDamage" type="Label" parent="statsGrid"]
+layout_mode = 2
+text = "Damage "
+horizontal_alignment = 2
+
+[node name="spnDamage" parent="statsGrid" instance=ExtResource("4_3oebx")]
+layout_mode = 2
+max_value = 9999.0
+parameter = "damage"
+
+[node name="lblStatMod" type="Label" parent="statsGrid"]
+layout_mode = 2
+text = "  Stat mod. "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optStatMod" parent="statsGrid" instance=ExtResource("5_ph237")]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "STR"
+popup/item_1/id = 1
+popup/item_2/text = "DEX"
+popup/item_2/id = 2
+popup/item_3/text = "CON"
+popup/item_3/id = 3
+parameter = "modifier"
+
+[node name="lblDamageDice" type="Label" parent="statsGrid"]
+layout_mode = 2
+text = "  Mod. dice "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optModifierDice" parent="statsGrid" instance=ExtResource("5_ph237")]
+layout_mode = 2
+item_count = 8
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "D4"
+popup/item_1/id = 1
+popup/item_2/text = "D6"
+popup/item_2/id = 2
+popup/item_3/text = "D8"
+popup/item_3/id = 3
+popup/item_4/text = "D10"
+popup/item_4/id = 4
+popup/item_5/text = "D12"
+popup/item_5/id = 5
+popup/item_6/text = "D20"
+popup/item_6/id = 6
+popup/item_7/text = "D100"
+popup/item_7/id = 7
+parameter = "modifierDice"
+
+[node name="lblRollType" type="Label" parent="statsGrid"]
+layout_mode = 2
+text = "Roll type "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optRollType" parent="statsGrid" instance=ExtResource("5_ph237")]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = "None"
+popup/item_0/id = 0
+popup/item_1/text = "Best"
+popup/item_1/id = 1
+popup/item_2/text = "Normal"
+popup/item_2/id = 2
+popup/item_3/text = "Worst"
+popup/item_3/id = 3
+parameter = "modifierRollType"
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="statsMove" parent="." instance=ExtResource("2_4qt6g")]
+layout_mode = 2
+title = "Moves"
+
+[node name="moveGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 3
+
+[node name="lblMove1" type="Label" parent="moveGrid"]
+layout_mode = 2
+text = "1:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optMove1" parent="moveGrid" instance=ExtResource("5_ph237")]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+parameter = "move1ShortName"
+dataType = 1
+
+[node name="btnEditMove1" type="Button" parent="moveGrid"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Edit"
+
+[node name="lblMove2" type="Label" parent="moveGrid"]
+layout_mode = 2
+text = "2:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optMove2" parent="moveGrid" instance=ExtResource("5_ph237")]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+parameter = "move2ShortName"
+dataType = 1
+
+[node name="btnEditMove2" type="Button" parent="moveGrid"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Edit"
+
+[node name="lblMove3" type="Label" parent="moveGrid"]
+layout_mode = 2
+text = "3:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optMove3" parent="moveGrid" instance=ExtResource("5_ph237")]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+parameter = "move3ShortName"
+dataType = 1
+
+[node name="btnEditMove3" type="Button" parent="moveGrid"]
+custom_minimum_size = Vector2(70, 0)
+layout_mode = 2
+text = "Edit"
+
+[connection signal="item_selected" from="moveGrid/optMove1" to="." method="_on_opt_move_1_item_selected"]
+[connection signal="pressed" from="moveGrid/btnEditMove1" to="." method="_on_btn_edit_move_1_pressed"]
+[connection signal="item_selected" from="moveGrid/optMove2" to="." method="_on_opt_move_2_item_selected"]
+[connection signal="pressed" from="moveGrid/btnEditMove2" to="." method="_on_btn_edit_move_2_pressed"]
+[connection signal="item_selected" from="moveGrid/optMove3" to="." method="_on_opt_move_3_item_selected"]
+[connection signal="pressed" from="moveGrid/btnEditMove3" to="." method="_on_btn_edit_move_3_pressed"]

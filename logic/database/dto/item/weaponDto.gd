@@ -18,5 +18,4 @@ var cdPos : int = 1
 var move1ShortName : String = 'BSEATK'
 var move2ShortName : String = ''
 var move3ShortName : String = ''
-var move4ShortName : String = ''
 
