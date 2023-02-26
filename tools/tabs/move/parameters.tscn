@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://dv4ugt81haiso"]
+[gd_scene load_steps=6 format=3 uid="uid://dv4ugt81haiso"]
 
 [ext_resource type="Script" path="res://tools/tabs/move/parameters.gd" id="1_ylfqf"]
 [ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="2_fqlxs"]
 [ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_vbpvo"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="4_ffy2k"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="5_ccs23"]
 
 [node name="parameters" type="VBoxContainer"]
 anchors_preset = 15
@@ -42,6 +44,242 @@ vertical_alignment = 1
 layout_mode = 2
 property = "shortName"
 
+[node name="lblDescription" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Description "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtDescription" parent="idGrid" instance=ExtResource("3_vbpvo")]
+layout_mode = 2
+property = "description"
+
+[node name="lblTarget" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Target "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optTarget" parent="idGrid" instance=ExtResource("4_ffy2k")]
+layout_mode = 2
+size_flags_horizontal = 0
+property = "targetType"
+
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+
+[node name="cdTitle" parent="." instance=ExtResource("2_fqlxs")]
+layout_mode = 2
+title = "Cooldowns"
+
+[node name="cdGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 6
+
+[node name="lblPre" type="Label" parent="cdGrid"]
+layout_mode = 2
+text = "Pre "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnPre" parent="cdGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+property = "cdPre"
+
+[node name="lblPrePreview" type="Label" parent="cdGrid"]
+layout_mode = 2
+
+[node name="lblPost" type="Label" parent="cdGrid"]
+layout_mode = 2
+text = "  Post "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnPost" parent="cdGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = 1.0
+value = 1.0
+property = "cdPos"
+
+[node name="lblPostPreview" type="Label" parent="cdGrid"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="animTitle" parent="." instance=ExtResource("2_fqlxs")]
+layout_mode = 2
+title = "Animations"
+
+[node name="animGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblPrepare" type="Label" parent="animGrid"]
+layout_mode = 2
+text = "Prepare "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtPrepare" parent="animGrid" instance=ExtResource("3_vbpvo")]
+layout_mode = 2
+property = "prepareAnimation"
+
+[node name="lblAttack" type="Label" parent="animGrid"]
+layout_mode = 2
+text = "Attack "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtAttack" parent="animGrid" instance=ExtResource("3_vbpvo")]
+layout_mode = 2
+property = "attackAnimation"
+
+[node name="Control3" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="modsTitle" parent="." instance=ExtResource("2_fqlxs")]
+layout_mode = 2
+title = "Modifiers"
+
+[node name="modsGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="empty0" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lblScale" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Scaling "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnParameter" parent="modsGrid" instance=ExtResource("5_ccs23")]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+suffix = "x"
+property = "modifierScale"
+
+[node name="empty1" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="empty2" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="empty3" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="empty4" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="empty5" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lblExecutor" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Executor ⬎"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="empty6" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lblTarget" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Target ⬎"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="empty7" type="Control" parent="modsGrid"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="lblAtkExc" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Attack "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnAtkExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="lblAtkTgt" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "  Attack "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnAtkTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="lblDefExc" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Defense "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnDefExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="lblDefTgt" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "  Defense "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnDefTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="lblCdExc" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "Cooldown "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCdExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="lblCdTgt" type="Label" parent="modsGrid"]
+layout_mode = 2
+text = "  Cooldown "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCdTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+layout_mode = 2
+min_value = -3.0
+max_value = 3.0
+
+[node name="Control4" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[connection signal="value_changed" from="cdGrid/spnPre" to="." method="_on_spn_pre_value_changed"]
+[connection signal="value_changed" from="cdGrid/spnPost" to="." method="_on_spn_post_value_changed"]

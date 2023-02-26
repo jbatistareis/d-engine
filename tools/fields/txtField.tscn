@@ -4,6 +4,5 @@
 
 [node name="txtField" type="LineEdit"]
 size_flags_horizontal = 3
-max_length = 20
 editable = false
 script = ExtResource("1_vln00")

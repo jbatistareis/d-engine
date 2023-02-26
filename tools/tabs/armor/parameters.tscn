@@ -31,7 +31,6 @@ vertical_alignment = 1
 
 [node name="txtName" parent="idGrid" instance=ExtResource("2_5m4eg")]
 layout_mode = 2
-parameter = "name"
 property = "name"
 
 [node name="lblShortName" type="Label" parent="idGrid"]
@@ -43,7 +42,6 @@ vertical_alignment = 1
 [node name="txtShortName" parent="idGrid" instance=ExtResource("2_5m4eg")]
 layout_mode = 2
 max_length = 10
-parameter = "shortName"
 property = "shortName"
 
 [node name="Control" type="Control" parent="."]
@@ -66,10 +64,11 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="spnPositive" parent="scalingGrid" instance=ExtResource("3_ceshb")]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 max_value = 0.33
 step = 0.01
-parameter = "positiveScale"
+suffix = "x"
 property = "positiveScale"
 
 [node name="lblNegative" type="Label" parent="scalingGrid"]
@@ -79,10 +78,11 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="spnNegative" parent="scalingGrid" instance=ExtResource("3_ceshb")]
+custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 max_value = 0.33
 step = 0.01
-parameter = "negativeScale"
+suffix = "x"
 property = "negativeScale"
 
 [node name="Control2" type="Control" parent="."]
@@ -107,7 +107,6 @@ vertical_alignment = 1
 [node name="spnCurrent" parent="integGrid" instance=ExtResource("3_ceshb")]
 layout_mode = 2
 max_value = 9999.0
-parameter = "currentIntegrity"
 property = "currentIntegrity"
 
 [node name="lblMaximum" type="Label" parent="integGrid"]
@@ -119,5 +118,4 @@ vertical_alignment = 1
 [node name="spnMaximum" parent="integGrid" instance=ExtResource("3_ceshb")]
 layout_mode = 2
 max_value = 9999.0
-parameter = "maxIntegrity"
 property = "maxIntegrity"
