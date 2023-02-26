@@ -31,6 +31,10 @@ layout_mode = 2
 [node name="editorTab" parent="tabs/Armor" instance=ExtResource("4")]
 layout_mode = 1
 anchors_preset = 15
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 dtoType = 6
 parametersScene = ExtResource("3_0java")
 
@@ -61,6 +65,10 @@ layout_mode = 2
 [node name="editorTab" parent="tabs/Move" instance=ExtResource("4")]
 layout_mode = 1
 anchors_preset = 15
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 dtoType = 1
 parametersScene = ExtResource("4_opl7l")
 
@@ -75,5 +83,9 @@ layout_mode = 2
 [node name="editorTab" parent="tabs/Weapon" instance=ExtResource("4")]
 layout_mode = 1
 anchors_preset = 15
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
 dtoType = 5
 parametersScene = ExtResource("4_ler5g")

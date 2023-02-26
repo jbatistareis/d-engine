@@ -16,6 +16,13 @@ func setDto(value : MoveDTO) -> void:
 	$cdGrid/spnPost.dto = value
 	$animGrid/txtPrepare.dto = value
 	$animGrid/txtAttack.dto = value
+	$modsGrid/spnScale.dto = value
+	$modsGrid/spnAtkExc.dto = value
+	$modsGrid/spnDefExc.dto = value
+	$modsGrid/spnCdExc.dto = value
+	$modsGrid/spnAtkTgt.dto = value
+	$modsGrid/spnDefTgt.dto = value
+	$modsGrid/spnCdTgt.dto = value
 	
 	_on_spn_pre_value_changed(value.cdPre)
 	_on_spn_post_value_changed(value.cdPos)

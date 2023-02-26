@@ -163,7 +163,7 @@ text = "Scaling "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnParameter" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnScale" parent="modsGrid" instance=ExtResource("5_ccs23")]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 max_value = 1.0
@@ -221,6 +221,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "executorAtkModifier"
 
 [node name="lblAtkTgt" type="Label" parent="modsGrid"]
 layout_mode = 2
@@ -232,6 +233,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "targetAtkModifier"
 
 [node name="lblDefExc" type="Label" parent="modsGrid"]
 layout_mode = 2
@@ -243,6 +245,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "executorDefModifier"
 
 [node name="lblDefTgt" type="Label" parent="modsGrid"]
 layout_mode = 2
@@ -254,6 +257,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "targetDefModifier"
 
 [node name="lblCdExc" type="Label" parent="modsGrid"]
 layout_mode = 2
@@ -265,6 +269,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "executorCdModifier"
 
 [node name="lblCdTgt" type="Label" parent="modsGrid"]
 layout_mode = 2
@@ -276,6 +281,7 @@ vertical_alignment = 1
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
+property = "targetCdModifier"
 
 [node name="Control4" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 20)
