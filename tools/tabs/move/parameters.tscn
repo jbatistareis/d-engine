@@ -1,0 +1,47 @@
+[gd_scene load_steps=4 format=3 uid="uid://dv4ugt81haiso"]
+
+[ext_resource type="Script" path="res://tools/tabs/move/parameters.gd" id="1_ylfqf"]
+[ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="2_fqlxs"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_vbpvo"]
+
+[node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_ylfqf")
+
+[node name="idTitle" parent="." instance=ExtResource("2_fqlxs")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("3_vbpvo")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="idGrid" instance=ExtResource("3_vbpvo")]
+layout_mode = 2
+property = "shortName"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2

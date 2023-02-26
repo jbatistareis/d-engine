@@ -4,16 +4,25 @@ var moves : Array
 
 
 func _ready() -> void:
-	moves.clear()
-	moves.append("None")
-	moves.append_array(Persistence.listEntities(Enums.EntityType.MOVE))
+	$statsGrid/optStatMod.valuesFunc = func(): return ["None", "STR", "DEX", "CON"]
+	$statsGrid/optModifierDice.valuesFunc = func(): return ["None", "D4", "D6", "D8", "D10", "D12", "D20", "D100"]
+	$statsGrid/optRollType.valuesFunc = func(): return ["None", "Best", "Normal", "Worst"]
 	
-	$moveGrid/optMove1.itemList = moves
-	$moveGrid/optMove2.itemList = moves
-	$moveGrid/optMove3.itemList = moves
+	$moveGrid/optMove1.valuesFunc = _createMovesList
+	$moveGrid/optMove2.valuesFunc = _createMovesList
+	$moveGrid/optMove3.valuesFunc = _createMovesList
+
+
+func _createMovesList() -> Array:
+	var result = ["None"]
+	result.append_array(Persistence.listEntities(Enums.EntityType.MOVE))
+	
+	return result
 
 
 func setDto(value : WeaponDTO) -> void:
+	moves = _createMovesList()
+	
 	$idGrid/txtName.dto = value
 	$idGrid/txtShortname.dto = value
 	$statsGrid/spnDamage.dto = value

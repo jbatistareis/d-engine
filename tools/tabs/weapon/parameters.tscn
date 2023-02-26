@@ -33,6 +33,7 @@ vertical_alignment = 1
 [node name="txtName" parent="idGrid" instance=ExtResource("3_6pm4b")]
 layout_mode = 2
 parameter = "name"
+property = "name"
 
 [node name="lblShortname" type="Label" parent="idGrid"]
 layout_mode = 2
@@ -43,6 +44,7 @@ vertical_alignment = 1
 [node name="txtShortname" parent="idGrid" instance=ExtResource("3_6pm4b")]
 layout_mode = 2
 parameter = "shortName"
+property = "shortName"
 
 [node name="Control" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 20)
@@ -66,6 +68,7 @@ horizontal_alignment = 2
 layout_mode = 2
 max_value = 9999.0
 parameter = "damage"
+property = "damage"
 
 [node name="lblStatMod" type="Label" parent="statsGrid"]
 layout_mode = 2
@@ -75,17 +78,7 @@ vertical_alignment = 1
 
 [node name="optStatMod" parent="statsGrid" instance=ExtResource("5_ph237")]
 layout_mode = 2
-item_count = 4
-selected = 0
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "STR"
-popup/item_1/id = 1
-popup/item_2/text = "DEX"
-popup/item_2/id = 2
-popup/item_3/text = "CON"
-popup/item_3/id = 3
-parameter = "modifier"
+property = "modifier"
 
 [node name="lblDamageDice" type="Label" parent="statsGrid"]
 layout_mode = 2
@@ -95,25 +88,7 @@ vertical_alignment = 1
 
 [node name="optModifierDice" parent="statsGrid" instance=ExtResource("5_ph237")]
 layout_mode = 2
-item_count = 8
-selected = 0
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "D4"
-popup/item_1/id = 1
-popup/item_2/text = "D6"
-popup/item_2/id = 2
-popup/item_3/text = "D8"
-popup/item_3/id = 3
-popup/item_4/text = "D10"
-popup/item_4/id = 4
-popup/item_5/text = "D12"
-popup/item_5/id = 5
-popup/item_6/text = "D20"
-popup/item_6/id = 6
-popup/item_7/text = "D100"
-popup/item_7/id = 7
-parameter = "modifierDice"
+property = "modifierDice"
 
 [node name="lblRollType" type="Label" parent="statsGrid"]
 layout_mode = 2
@@ -123,17 +98,7 @@ vertical_alignment = 1
 
 [node name="optRollType" parent="statsGrid" instance=ExtResource("5_ph237")]
 layout_mode = 2
-item_count = 4
-selected = 0
-popup/item_0/text = "None"
-popup/item_0/id = 0
-popup/item_1/text = "Best"
-popup/item_1/id = 1
-popup/item_2/text = "Normal"
-popup/item_2/id = 2
-popup/item_3/text = "Worst"
-popup/item_3/id = 3
-parameter = "modifierRollType"
+property = "modifierRollType"
 
 [node name="Control2" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 20)
@@ -159,7 +124,7 @@ vertical_alignment = 1
 [node name="optMove1" parent="moveGrid" instance=ExtResource("5_ph237")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-parameter = "move1ShortName"
+property = "move1ShortName"
 dataType = 1
 
 [node name="btnEditMove1" type="Button" parent="moveGrid"]
@@ -176,7 +141,7 @@ vertical_alignment = 1
 [node name="optMove2" parent="moveGrid" instance=ExtResource("5_ph237")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-parameter = "move2ShortName"
+property = "move2ShortName"
 dataType = 1
 
 [node name="btnEditMove2" type="Button" parent="moveGrid"]
@@ -193,7 +158,7 @@ vertical_alignment = 1
 [node name="optMove3" parent="moveGrid" instance=ExtResource("5_ph237")]
 custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-parameter = "move3ShortName"
+property = "move3ShortName"
 dataType = 1
 
 [node name="btnEditMove3" type="Button" parent="moveGrid"]

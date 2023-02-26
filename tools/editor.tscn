@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://byav18k0rh6h1"]
+[gd_scene load_steps=6 format=3 uid="uid://byav18k0rh6h1"]
 
 [ext_resource type="Script" path="res://tools/editor.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://brxd56tgryn4u" path="res://tools/tabs/armor/parameters.tscn" id="3_0java"]
 [ext_resource type="PackedScene" uid="uid://b3qchadcmjlhf" path="res://tools/tabs/editorTab.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://uutlxsh0mt4s" path="res://tools/tabs/weapon/parameters.tscn" id="4_ler5g"]
+[ext_resource type="PackedScene" uid="uid://dv4ugt81haiso" path="res://tools/tabs/move/parameters.tscn" id="4_opl7l"]
 
 [node name="editor" type="Panel"]
 anchors_preset = 15
@@ -60,6 +61,16 @@ layout_mode = 2
 [node name="Move" type="TabBar" parent="tabs"]
 visible = false
 layout_mode = 2
+
+[node name="editorTab" parent="tabs/Move" instance=ExtResource("4")]
+layout_mode = 1
+anchors_preset = -1
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+dtoType = 1
+parametersScene = ExtResource("4_opl7l")
 
 [node name="Verdict" type="TabBar" parent="tabs"]
 visible = false
