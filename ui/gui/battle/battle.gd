@@ -69,12 +69,12 @@ func showMoveDetails(move : Move) -> void:
 	$moves/decription/container/lblDescription.text = _MOVE_DESC % move.description
 	
 	if $moves/mods/data/self.visible:
-		$moves/mods/data/self/fields/lblAtkMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.executorModifiers)
-		$moves/mods/data/self/fields/lblDefMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.executorModifiers)
-		$moves/mods/data/self/fields/lblCdMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.executorModifiers)
+		$moves/mods/data/self/fields/lblAtkMod.text = move.executorAtkModifier
+		$moves/mods/data/self/fields/lblDefMod.text = move.executorDefModifier
+		$moves/mods/data/self/fields/lblCdMod.text = move.executorCdModifier
 	
 	if $moves/mods/data/target.visible:
-		$moves/mods/data/target/fields/lblAtkMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.targetModifiers)
-		$moves/mods/data/target/fields/lblDefMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.targetModifiers)
-		$moves/mods/data/target/fields/lblCdMod.text = Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.targetModifiers)
+		$moves/mods/data/target/fields/lblAtkMod.text = move.targetAtkModifier
+		$moves/mods/data/target/fields/lblDefMod.text = move.targetDefModifier
+		$moves/mods/data/target/fields/lblCdMod.text = move.targetCdModifier
 

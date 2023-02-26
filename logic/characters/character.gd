@@ -19,7 +19,15 @@ var sparePoints : int
 var stats : Array = []
 
 # does not persist
-var moveModifiers : Array = []
+var atkMod : int = 0 :
+	set(value):
+		atkMod = clamp(value, -3, 3)
+var defMod : int = 0 :
+	set(value):
+		defMod = clamp(value, -3, 3)
+var cdMod : int = 0 :
+	set(value):
+		cdMod = clamp(value, -3, 3)
 
 var inventory : Inventory
 
@@ -130,16 +138,18 @@ func takeHit(amount : int, bypassArmor : bool = false) -> void:
 		return
 	
 	if amount < 0:
-		var defP = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_P, moveModifiers)
-		var defM = Util.countIndividualModType(Enums.MoveModifierProperty.DEF_M, moveModifiers)
-		
 		var positiveScale = inventory.armor.positiveScale if (inventory.armor != null) else 0.05
 		var negativeScale = inventory.armor.negativeScale if (inventory.armor != null) else 0.33
 		
-		amount = floor(amount * ((1 - (positiveScale * defP)) * (1 + (negativeScale * defM))))
+		var finalMod = 1
+		if defMod > 0:
+			finalMod = (1 - positiveScale * defMod)
+			defMod = max(0, defMod - 1)
+		elif defMod < 0:
+			finalMod = (1 + negativeScale * abs(defMod))
+			defMod = min(0, defMod + 1)
 		
-		moveModifiers.erase(Enums.MoveModifierProperty.DEF_P)
-		moveModifiers.erase(Enums.MoveModifierProperty.DEF_M)
+		amount = floor(amount * finalMod)
 		
 		Signals.characterTookDamage.emit(self)
 	
@@ -216,33 +226,4 @@ func gainExperience(amount : int) -> void:
 # TODO a better curve
 func getExperienceToNextLevel() -> int:
 	return int(round(7 * pow(currentLevel, 1.3)))
-
-
-func clearModifiersByType(modifierType : int) -> void:
-	for modifier in moveModifiers:
-		if modifier == modifierType:
-			moveModifiers.erase(modifier)
-
-
-func removeModifierByType(modifierType : int) -> void:
-	moveModifiers.erase(modifierType)
-
-
-func applyMoveModifiers(newModifiers : Array, applyOnly : bool = false) -> void:
-	for modifier in newModifiers:
-		if Util.countIndividualModType(modifier, moveModifiers) < 3:
-			moveModifiers.append(modifier)
-	
-	if !applyOnly:
-		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_P)
-		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.ATK_M)
-		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_P)
-		_reduceModifierStack(newModifiers, Enums.MoveModifierProperty.CD_M)
-
-
-# reduces only when it isnt a new stack
-func _reduceModifierStack(newModifiers : Array, modifierType : int) -> void:
-	var count = Util.countIndividualModType(modifierType, newModifiers)
-	if count == 0:
-		moveModifiers.erase(modifierType)
 
