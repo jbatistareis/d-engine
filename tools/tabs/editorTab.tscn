@@ -4,9 +4,13 @@
 [ext_resource type="PackedScene" uid="uid://cs34fc2804mo2" path="res://tools/tabs/persistenceBtns.tscn" id="3_vbj71"]
 
 [node name="editorTab" type="HBoxContainer"]
-anchors_preset = 15
+anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
