@@ -148,22 +148,20 @@ layout_mode = 2
 layout_mode = 2
 title = "Modifiers"
 
-[node name="modsGrid" type="GridContainer" parent="."]
-layout_mode = 2
-size_flags_horizontal = 4
-columns = 4
-
-[node name="empty0" type="Control" parent="modsGrid"]
-custom_minimum_size = Vector2(0, 15)
+[node name="mods" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="lblScale" type="Label" parent="modsGrid"]
+[node name="scaling" type="HBoxContainer" parent="mods"]
 layout_mode = 2
-text = "Scaling "
+alignment = 1
+
+[node name="lblScale" type="Label" parent="mods/scaling"]
+layout_mode = 2
+text = "Self ATK/CD scaling "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnScale" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnScale" parent="mods/scaling" instance=ExtResource("5_ccs23")]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 max_value = 1.0
@@ -171,113 +169,102 @@ step = 0.01
 suffix = "x"
 property = "modifierScale"
 
-[node name="empty1" type="Control" parent="modsGrid"]
+[node name="empty1" type="Control" parent="mods"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="empty2" type="Control" parent="modsGrid"]
-custom_minimum_size = Vector2(0, 15)
+[node name="grid" type="GridContainer" parent="mods"]
 layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
 
-[node name="empty3" type="Control" parent="modsGrid"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-
-[node name="empty4" type="Control" parent="modsGrid"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-
-[node name="empty5" type="Control" parent="modsGrid"]
-custom_minimum_size = Vector2(0, 15)
-layout_mode = 2
-
-[node name="lblExecutor" type="Label" parent="modsGrid"]
+[node name="lblExecutor" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "Executor ⬎"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="empty6" type="Control" parent="modsGrid"]
+[node name="empty2" type="Control" parent="mods/grid"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="lblTarget" type="Label" parent="modsGrid"]
+[node name="lblTarget" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "Target ⬎"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="empty7" type="Control" parent="modsGrid"]
+[node name="empty3" type="Control" parent="mods/grid"]
 custom_minimum_size = Vector2(0, 15)
 layout_mode = 2
 
-[node name="lblAtkExc" type="Label" parent="modsGrid"]
+[node name="lblAtkExc" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "Attack "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnAtkExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnAtkExc" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
 property = "executorAtkModifier"
 
-[node name="lblAtkTgt" type="Label" parent="modsGrid"]
+[node name="lblAtkTgt" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "  Attack "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnAtkTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnAtkTgt" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
 property = "targetAtkModifier"
 
-[node name="lblDefExc" type="Label" parent="modsGrid"]
+[node name="lblDefExc" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "Defense "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnDefExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnDefExc" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
 property = "executorDefModifier"
 
-[node name="lblDefTgt" type="Label" parent="modsGrid"]
+[node name="lblDefTgt" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "  Defense "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnDefTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnDefTgt" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
 property = "targetDefModifier"
 
-[node name="lblCdExc" type="Label" parent="modsGrid"]
+[node name="lblCdExc" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "Cooldown "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnCdExc" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnCdExc" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
 property = "executorCdModifier"
 
-[node name="lblCdTgt" type="Label" parent="modsGrid"]
+[node name="lblCdTgt" type="Label" parent="mods/grid"]
 layout_mode = 2
 text = "  Cooldown "
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="spnCdTgt" parent="modsGrid" instance=ExtResource("5_ccs23")]
+[node name="spnCdTgt" parent="mods/grid" instance=ExtResource("5_ccs23")]
 layout_mode = 2
 min_value = -3.0
 max_value = 3.0
