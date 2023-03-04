@@ -270,9 +270,5 @@ min_value = -3.0
 max_value = 3.0
 property = "targetCdModifier"
 
-[node name="Control4" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-
 [connection signal="value_changed" from="cdGrid/spnPre" to="." method="_on_spn_pre_value_changed"]
 [connection signal="value_changed" from="cdGrid/spnPost" to="." method="_on_spn_post_value_changed"]

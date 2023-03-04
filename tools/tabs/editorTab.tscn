@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cs34fc2804mo2" path="res://tools/tabs/persistenceBtns.tscn" id="3_vbj71"]
 
 [node name="editorTab" type="HBoxContainer"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
@@ -31,7 +31,6 @@ size_flags_vertical = 3
 
 [node name="container" type="VBoxContainer" parent="fields"]
 layout_mode = 2
-theme_override_constants/separation = 15
 
 [node name="scroll" type="ScrollContainer" parent="fields/container"]
 layout_mode = 2

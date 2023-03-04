@@ -112,7 +112,3 @@ title = "Action"
 layout_mode = 2
 size_flags_vertical = 3
 property = "actionExpression"
-
-[node name="Control3" type="Control" parent="."]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2

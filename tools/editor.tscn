@@ -32,7 +32,6 @@ layout_mode = 2
 
 [node name="editorTab" parent="tabs/Armor" instance=ExtResource("4")]
 layout_mode = 1
-anchors_preset = 15
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
@@ -58,7 +57,6 @@ layout_mode = 2
 
 [node name="editorTab" parent="tabs/Item" instance=ExtResource("4")]
 layout_mode = 1
-anchors_preset = 15
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
@@ -101,7 +99,6 @@ layout_mode = 2
 
 [node name="editorTab" parent="tabs/Weapon" instance=ExtResource("4")]
 layout_mode = 1
-anchors_preset = 15
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0
