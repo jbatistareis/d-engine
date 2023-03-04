@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsl8mnf1f6jo4"]
+
+[ext_resource type="Script" path="res://tools/tabs/character/preview.gd" id="1_cj1fd"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_hpjmu"]
+
+[node name="preview" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cj1fd")
+
+[node name="pvwTitle" parent="." instance=ExtResource("2_hpjmu")]
+layout_mode = 2
+title = "Preview"
+
+[node name="windows" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="lblNone" type="Label" parent="windows"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Select a misc. item, or click 'View'"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="verdict" type="VBoxContainer" parent="windows"]
+visible = false
+layout_mode = 2
+
+[node name="inventory" type="VBoxContainer" parent="windows"]
+visible = false
+layout_mode = 2
+
+[node name="model" type="SubViewportContainer" parent="windows"]
+visible = false
+layout_mode = 2
+
+[node name="viewport" type="SubViewport" parent="windows/model"]
+handle_input_locally = false
+render_target_update_mode = 0
