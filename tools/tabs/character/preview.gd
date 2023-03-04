@@ -81,6 +81,8 @@ func showModel(shortName : String) -> void:
 	$windows/verdict.visible = false
 	$windows/inventory.visible = false
 	$windows/model.visible = true
+	
+	$windows/model/container/viewport.size = $windows/model/container.size
 
 
 func _on_btn_verdict_shortname_pressed() -> void:
