@@ -10,4 +10,9 @@ signal selectedMove(shortName)
 signal selectedVerdict(shortName)
 signal selectedWeapon(shortName)
 
-signal loadedMove(move)
+signal loadedMove(dto)
+
+signal previewedVerdict(shortName)
+signal previewedInventory(shortName)
+signal previewedModel(shortName)
+

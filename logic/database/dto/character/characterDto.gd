@@ -17,7 +17,9 @@ var currentLevel : int = 1
 var experiencePoints : int = 0
 var sparePoints : int = 0
 
-var stats : Array = [0, 0, 0, 0, 0, 0, 0]
+var constitution : int = 0
+var strength : int = 0
+var dexterity : int = 0
 
 var inventoryShortName : String = 'BSEINV'
 

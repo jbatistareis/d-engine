@@ -60,8 +60,10 @@ func fromDTO(characterDto : CharacterDTO) -> Character:
 	self.sparePoints = characterDto.sparePoints
 	
 	stats.clear()
-	for stat in Enums.CharacterAbility.values():
-		stats.append(Stat.new(characterDto.stats[stat]))
+	stats.append(Stat.new(0))
+	stats.append(Stat.new(characterDto.constitution))
+	stats.append(Stat.new(characterDto.strength))
+	stats.append(Stat.new(characterDto.dexterity))
 	
 	self.inventory = Inventory.new().fromShortName(characterDto.inventoryShortName)
 	
@@ -92,9 +94,9 @@ func toDTO() -> CharacterDTO:
 	characterDto.experiencePoints = self.experiencePoints
 	characterDto.sparePoints = self.sparePoints
 	
-	characterDto.stats.clear()
-	for stat in stats:
-		characterDto.stats.append(stat.score)
+	characterDto.constitution = self.stats[1].score
+	characterDto.strength = self.stats[2].score
+	characterDto.dexterity = self.stats[3].score
 	
 	characterDto.strength = self.strength.score
 	characterDto.dexterity = self.dexterity.score
