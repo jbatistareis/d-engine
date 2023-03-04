@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://byav18k0rh6h1"]
+[gd_scene load_steps=8 format=3 uid="uid://byav18k0rh6h1"]
 
 [ext_resource type="Script" path="res://tools/editor.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://brxd56tgryn4u" path="res://tools/tabs/armor/parameters.tscn" id="3_0java"]
 [ext_resource type="PackedScene" uid="uid://b3qchadcmjlhf" path="res://tools/tabs/editorTab.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://sgk25galjl0v" path="res://tools/tabs/move/logic.tscn" id="4_0vhin"]
+[ext_resource type="PackedScene" uid="uid://ll4k4h2yxapa" path="res://tools/tabs/item/parameters.tscn" id="4_1ydon"]
 [ext_resource type="PackedScene" uid="uid://uutlxsh0mt4s" path="res://tools/tabs/weapon/parameters.tscn" id="4_ler5g"]
 [ext_resource type="PackedScene" uid="uid://dv4ugt81haiso" path="res://tools/tabs/move/parameters.tscn" id="4_opl7l"]
 
@@ -54,6 +55,16 @@ layout_mode = 2
 [node name="Item" type="TabBar" parent="tabs"]
 visible = false
 layout_mode = 2
+
+[node name="editorTab" parent="tabs/Item" instance=ExtResource("4")]
+layout_mode = 1
+anchors_preset = 15
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 4
+parametersScene = ExtResource("4_1ydon")
 
 [node name="Location" type="TabBar" parent="tabs"]
 visible = false

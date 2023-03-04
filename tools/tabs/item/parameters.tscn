@@ -1,0 +1,118 @@
+[gd_scene load_steps=7 format=3 uid="uid://ll4k4h2yxapa"]
+
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="1_6jkr6"]
+[ext_resource type="Script" path="res://tools/tabs/item/parameters.gd" id="1_cwr4h"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="2_io5rg"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="3_qjv2r"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="5_ngxtm"]
+[ext_resource type="PackedScene" uid="uid://bg10pfnfxdvvn" path="res://tools/fields/cdeField.tscn" id="6_kob6n"]
+
+[node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_cwr4h")
+
+[node name="idTitle" parent="." instance=ExtResource("1_6jkr6")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("2_io5rg")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="idGrid" instance=ExtResource("2_io5rg")]
+layout_mode = 2
+property = "shortName"
+
+[node name="lblDescription" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Description "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtDescription" parent="idGrid" instance=ExtResource("2_io5rg")]
+layout_mode = 2
+property = "description"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="paramsTitle" parent="." instance=ExtResource("1_6jkr6")]
+layout_mode = 2
+title = "Parameters"
+
+[node name="paramsGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 4
+
+[node name="lblTarget" type="Label" parent="paramsGrid"]
+layout_mode = 2
+text = "Target "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optTarget" parent="paramsGrid" instance=ExtResource("3_qjv2r")]
+layout_mode = 2
+size_flags_horizontal = 0
+property = "targetType"
+
+[node name="lblType" type="Label" parent="paramsGrid"]
+layout_mode = 2
+text = "  Type "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optType" parent="paramsGrid" instance=ExtResource("3_qjv2r")]
+layout_mode = 2
+size_flags_horizontal = 0
+property = "type"
+
+[node name="lblPrice" type="Label" parent="paramsGrid"]
+layout_mode = 2
+text = "  Price "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnPrice" parent="paramsGrid" instance=ExtResource("5_ngxtm")]
+layout_mode = 2
+max_value = 9999.0
+property = "price"
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="actionTitle" parent="." instance=ExtResource("1_6jkr6")]
+layout_mode = 2
+title = "Action"
+
+[node name="cdeAction" parent="." instance=ExtResource("6_kob6n")]
+layout_mode = 2
+size_flags_vertical = 3
+property = "actionExpression"
+
+[node name="Control3" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2

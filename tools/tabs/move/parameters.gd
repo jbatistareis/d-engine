@@ -4,7 +4,10 @@ const _PREVIEW_MASK : String = "(%0.2fs)"
 
 
 func _ready() -> void:
-	$idGrid/optTarget.valuesFunc = func(): return ["None", "Single any", "Single friendly", "Single foe", "Multi any", "Multi friendly", "Multi foe"]
+	$idGrid/optTarget.valuesFunc = func(): return [
+		"None",
+		"Single any", "Single friendly", "Single foe",
+		"Multi any", "Multi friendly", "Multi foe"]
 
 
 func setDto(value : MoveDTO) -> void:
