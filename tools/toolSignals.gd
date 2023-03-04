@@ -10,3 +10,4 @@ signal selectedMove(shortName)
 signal selectedVerdict(shortName)
 signal selectedWeapon(shortName)
 
+signal loadedMove(move)

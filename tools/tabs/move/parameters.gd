@@ -16,16 +16,19 @@ func setDto(value : MoveDTO) -> void:
 	$cdGrid/spnPost.dto = value
 	$animGrid/txtPrepare.dto = value
 	$animGrid/txtAttack.dto = value
-	$modsGrid/spnScale.dto = value
-	$modsGrid/spnAtkExc.dto = value
-	$modsGrid/spnDefExc.dto = value
-	$modsGrid/spnCdExc.dto = value
-	$modsGrid/spnAtkTgt.dto = value
-	$modsGrid/spnDefTgt.dto = value
-	$modsGrid/spnCdTgt.dto = value
+	$mods/scaling/spnScale.dto = value
+	$mods/grid/spnAtkExc.dto = value
+	$mods/grid/spnDefExc.dto = value
+	$mods/grid/spnCdExc.dto = value
+	$mods/grid/spnAtkTgt.dto = value
+	$mods/grid/spnDefTgt.dto = value
+	$mods/grid/spnCdTgt.dto = value
 	
 	_on_spn_pre_value_changed(value.cdPre)
 	_on_spn_post_value_changed(value.cdPos)
+	
+	await get_tree().process_frame
+	ToolSignals.loadedMove.emit(value)
 
 
 func _getCdPreview(cd : int) -> String:
