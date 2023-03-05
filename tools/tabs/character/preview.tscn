@@ -177,10 +177,12 @@ theme_override_constants/separation = 15
 
 [node name="container" type="SubViewportContainer" parent="windows/model"]
 layout_mode = 2
-size_flags_vertical = 3
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="viewport" type="SubViewport" parent="windows/model/container"]
 handle_input_locally = false
+size = Vector2i(600, 620)
 render_target_update_mode = 0
 
 [node name="modelPreview" parent="windows/model/container/viewport" instance=ExtResource("3_km3s3")]
@@ -204,3 +206,5 @@ text = "↪"
 layout_mode = 2
 
 [connection signal="pressed" from="windows/verdict/idGrid/btnVerdictShortname" to="." method="_on_btn_verdict_shortname_pressed"]
+[connection signal="pressed" from="windows/model/camera/rotateLeft" to="." method="_on_rotate_left_pressed"]
+[connection signal="pressed" from="windows/model/camera/rotateRight" to="." method="_on_rotate_right_pressed"]

@@ -88,3 +88,11 @@ func showModel(shortName : String) -> void:
 func _on_btn_verdict_shortname_pressed() -> void:
 	ToolSignals.selectedVerdict.emit($windows/verdict/idGrid/btnVerdictShortname.text)
 
+
+func _on_rotate_left_pressed() -> void:
+	$windows/model/container/viewport/modelPreview.rotateLeft()
+
+
+func _on_rotate_right_pressed() -> void:
+	$windows/model/container/viewport/modelPreview.rotateRight()
+
