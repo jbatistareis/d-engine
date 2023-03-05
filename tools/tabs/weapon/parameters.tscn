@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://uutlxsh0mt4s"]
 
 [ext_resource type="Script" path="res://tools/tabs/weapon/parameters.gd" id="1_juphs"]
-[ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="2_4qt6g"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_4qt6g"]
 [ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_6pm4b"]
 [ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="4_3oebx"]
 [ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="5_ph237"]
@@ -32,7 +32,6 @@ vertical_alignment = 1
 
 [node name="txtName" parent="idGrid" instance=ExtResource("3_6pm4b")]
 layout_mode = 2
-parameter = "name"
 property = "name"
 
 [node name="lblShortname" type="Label" parent="idGrid"]
@@ -43,7 +42,6 @@ vertical_alignment = 1
 
 [node name="txtShortname" parent="idGrid" instance=ExtResource("3_6pm4b")]
 layout_mode = 2
-parameter = "shortName"
 property = "shortName"
 
 [node name="Control" type="Control" parent="."]
@@ -67,7 +65,6 @@ horizontal_alignment = 2
 [node name="spnDamage" parent="statsGrid" instance=ExtResource("4_3oebx")]
 layout_mode = 2
 max_value = 9999.0
-parameter = "damage"
 property = "damage"
 
 [node name="lblStatMod" type="Label" parent="statsGrid"]

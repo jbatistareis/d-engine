@@ -16,3 +16,7 @@ signal previewedVerdict(shortName)
 signal previewedInventory(shortName)
 signal previewedModel(shortName)
 
+signal factMovedUp(node)
+signal factMovedDown(node)
+signal factRemoved(node)
+
