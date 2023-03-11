@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://byav18k0rh6h1"]
+[gd_scene load_steps=12 format=3 uid="uid://byav18k0rh6h1"]
 
 [ext_resource type="Script" path="res://tools/editor.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://brxd56tgryn4u" path="res://tools/tabs/armor/parameters.tscn" id="3_0java"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dv4ugt81haiso" path="res://tools/tabs/move/parameters.tscn" id="4_opl7l"]
 [ext_resource type="PackedScene" uid="uid://c8eajlttni7dl" path="res://tools/tabs/character/parameters.tscn" id="4_wj5cb"]
 [ext_resource type="PackedScene" uid="uid://bsl8mnf1f6jo4" path="res://tools/tabs/character/preview.tscn" id="5_djl36"]
+[ext_resource type="PackedScene" uid="uid://c5x2fv28qqro0" path="res://tools/tabs/inventory/parameters.tscn" id="6_jluau"]
 [ext_resource type="PackedScene" uid="uid://cewyj6rje0gdo" path="res://tools/tabs/verdict/parameters.tscn" id="9_p1i6a"]
 
 [node name="editor" type="Panel"]
@@ -68,6 +69,15 @@ layout_mode = 2
 [node name="Inventory" type="TabBar" parent="tabs"]
 visible = false
 layout_mode = 2
+
+[node name="editorTab" parent="tabs/Inventory" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 3
+parametersScene = ExtResource("6_jluau")
 
 [node name="Item" type="TabBar" parent="tabs"]
 visible = false
