@@ -27,9 +27,9 @@ var roomBase : Dictionary = {
 	'orientation': Enums.Direction.NORTH , # use Enums.Direction
 	'model': '0_exits',
 	'exits': [-1, -1, -1, -1, -1, -1],
-	'canEnterLogic': ROOM_ENTER_NOOP,
-	'enteringLogic': ROOM_NOOP,
-	'exitingLogic': ROOM_NOOP,
+	'entryLogic': ROOM_ENTER_NOOP,
+	'entranceLogic': ROOM_NOOP,
+	'exitLogic': ROOM_NOOP,
 	'foeShortNameGroups': [], # 2D array representing possible enemy groups
 	'visited': false,
 }

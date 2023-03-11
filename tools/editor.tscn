@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://byav18k0rh6h1"]
+[gd_scene load_steps=13 format=3 uid="uid://byav18k0rh6h1"]
 
 [ext_resource type="Script" path="res://tools/editor.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://brxd56tgryn4u" path="res://tools/tabs/armor/parameters.tscn" id="3_0java"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://c8eajlttni7dl" path="res://tools/tabs/character/parameters.tscn" id="4_wj5cb"]
 [ext_resource type="PackedScene" uid="uid://bsl8mnf1f6jo4" path="res://tools/tabs/character/preview.tscn" id="5_djl36"]
 [ext_resource type="PackedScene" uid="uid://c5x2fv28qqro0" path="res://tools/tabs/inventory/parameters.tscn" id="6_jluau"]
+[ext_resource type="PackedScene" uid="uid://bem4lcys6lps4" path="res://tools/tabs/location/locationTab.tscn" id="8_8ou71"]
 [ext_resource type="PackedScene" uid="uid://cewyj6rje0gdo" path="res://tools/tabs/verdict/parameters.tscn" id="9_p1i6a"]
 
 [node name="editor" type="Panel"]
@@ -95,6 +96,9 @@ parametersScene = ExtResource("4_1ydon")
 [node name="Location" type="TabBar" parent="tabs"]
 visible = false
 layout_mode = 2
+
+[node name="locationTab" parent="tabs/Location" instance=ExtResource("8_8ou71")]
+layout_mode = 1
 
 [node name="Move" type="TabBar" parent="tabs"]
 visible = false

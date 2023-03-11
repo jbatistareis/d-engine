@@ -1,0 +1,167 @@
+[gd_scene load_steps=5 format=3 uid="uid://bem4lcys6lps4"]
+
+[ext_resource type="Script" path="res://tools/tabs/location/locationTab.gd" id="1_j2i7n"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_ibee7"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_6ac1u"]
+[ext_resource type="PackedScene" uid="uid://bg10pfnfxdvvn" path="res://tools/fields/cdeField.tscn" id="4_w4cj5"]
+
+[node name="locationTab" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 5
+script = ExtResource("1_j2i7n")
+
+[node name="map" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="grid" type="GridContainer" parent="map"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="parameters" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="tabs" type="TabContainer" parent="parameters"]
+custom_minimum_size = Vector2(456, 0)
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+
+[node name="General" type="TabBar" parent="parameters/tabs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="parameters" type="VBoxContainer" parent="parameters/tabs/General"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="idTitle" parent="parameters/tabs/General/parameters" instance=ExtResource("2_ibee7")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="parameters/tabs/General/parameters"]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "shortName"
+
+[node name="lblDescription" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Description "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtDescription" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "description"
+
+[node name="lblEnc" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Enc.:   0% "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="sldEnc" type="HSlider" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Control" type="Control" parent="parameters/tabs/General/parameters"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="logic" type="TabContainer" parent="parameters/tabs/General/parameters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Entrance logic" type="TabBar" parent="parameters/tabs/General/parameters/logic"]
+layout_mode = 2
+
+[node name="cdeEntrance" parent="parameters/tabs/General/parameters/logic/Entrance logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "entranceLogic"
+
+[node name="Exit logic" type="TabBar" parent="parameters/tabs/General/parameters/logic"]
+visible = false
+layout_mode = 2
+
+[node name="cdeExit" parent="parameters/tabs/General/parameters/logic/Exit logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 38.0
+delimiter_strings = Array[String](["\" \"", "' '"])
+property = "exitLogic"
+
+[node name="Room" type="TabBar" parent="parameters/tabs"]
+layout_mode = 2
+
+[node name="tabs" type="TabContainer" parent="parameters/tabs/Room"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="Tile" type="TabBar" parent="parameters/tabs/Room/tabs"]
+layout_mode = 2
+
+[node name="Entry check" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeEntry" parent="parameters/tabs/Room/tabs/Entry check" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "entryLogic"
+
+[node name="Entrance logic" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeEntrance" parent="parameters/tabs/Room/tabs/Entrance logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+delimiter_strings = Array[String](["\" \"", "' '"])
+property = "entranceLogic"
+
+[node name="Exit logic" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeExit" parent="parameters/tabs/Room/tabs/Exit logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "exitLogic"
+
+[connection signal="drag_ended" from="parameters/tabs/General/parameters/idGrid/sldEnc" to="." method="_on_sld_enc_drag_ended"]
