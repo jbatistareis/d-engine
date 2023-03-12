@@ -70,5 +70,5 @@ func _getDtoPropertyValue(index : int):
 			return index
 		
 		1:
-			return "" if (get_item_text(index) == "None") else _itemList[_itemList.find(index)]
+			return "" if (get_item_text(index) == "None") else _itemList[index]
 

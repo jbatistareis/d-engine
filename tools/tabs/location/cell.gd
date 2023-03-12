@@ -11,15 +11,11 @@ func _ready() -> void:
 	gui_input.connect(_mouseMove)
 	
 	ToolSignals.selectedRooms.connect(func(rooms): $overlay.visible = rooms.has(room))
-	ToolSignals.roomSet.connect(_roomSet)
 	
 	tooltip_text = _TOOLTIP % [room.id, room.x, room.y]
 
 
-func _roomSet(roomSet : Dictionary) -> void:
-	if roomSet != room:
-		return
-	
+func _process(delta : float) -> void:
 	$icon.frame = room.type
 	$lblDirection.visible = (room.type != Enums.RoomType.DUMMY)
 	rotation = _90_ROTATION * room.orientation

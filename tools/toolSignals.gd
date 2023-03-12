@@ -22,5 +22,4 @@ signal factRemoved(node)
 
 signal selectedRooms(rooms)
 signal hoveredRoom(room)
-signal roomSet(room)
 

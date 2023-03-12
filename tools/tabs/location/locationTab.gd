@@ -51,12 +51,15 @@ func _on_sld_enc_value_changed(value: float) -> void:
 func hoveredRoom(room : Dictionary) -> void:
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		self.selectedRooms = [room]
+		
 		ToolSignals.selectedRooms.emit(selectedRooms)
-	
+		$parameters/tabs.current_tab = 1
+		
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		if !selectedRooms.has(room):
 			self.selectedRooms += [room]
 		ToolSignals.selectedRooms.emit(selectedRooms)
+		$parameters/tabs.current_tab = 1
 
 
 func fillRooms() -> void:
@@ -76,25 +79,21 @@ func fillRooms() -> void:
 func _on_btn_north_pressed() -> void:
 	for room in selectedRooms:
 		room.orientation = Enums.Direction.NORTH
-		ToolSignals.roomSet.emit(room)
 
 
 func _on_btn_west_pressed() -> void:
 	for room in selectedRooms:
 		room.orientation = Enums.Direction.WEST
-		ToolSignals.roomSet.emit(room)
 
 
 func _on_btn_east_pressed() -> void:
 	for room in selectedRooms:
 		room.orientation = Enums.Direction.EAST
-		ToolSignals.roomSet.emit(room)
 
 
 func _on_btn_south_pressed() -> void:
 	for room in selectedRooms:
 		room.orientation = Enums.Direction.SOUTH
-		ToolSignals.roomSet.emit(room)
 
 
 
@@ -140,7 +139,6 @@ func _on_btn_autotile_pressed() -> void:
 				$map/grid.get_child(room.id).room.orientation = DefaultValues.BimaskTileset[value].orientation
 				$map/grid.get_child(room.id).room.model = DefaultValues.BimaskTileset[value].model
 		
-		ToolSignals.roomSet.emit($map/grid.get_child(room.id).room)
 		value = 0
 
 
@@ -155,14 +153,6 @@ func _on_btn_rotate_right_pressed() -> void:
 func _on_btn_delete_pressed() -> void:
 	for room in self.selectedRooms:
 		room.type = Enums.RoomType.DUMMY
-		ToolSignals.roomSet.emit(room)
-
-
-func _on_opt_type_item_selected(index: int) -> void:
-	for room in self.selectedRooms:
-		await get_tree().process_frame
-		ToolSignals.roomSet.emit(room)
-
 
 
 # persistence
