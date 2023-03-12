@@ -16,7 +16,7 @@ func _ready() -> void:
 	tooltip_text = _TOOLTIP % [room.id, room.x, room.y]
 
 
-func _roomSet(roomSet) -> void:
+func _roomSet(roomSet : Dictionary) -> void:
 	if roomSet != room:
 		return
 	

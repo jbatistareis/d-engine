@@ -12,8 +12,8 @@ var dto : DTO :
 	set(value):
 		dto = value
 		
-		clear()
 		_itemList = valuesFunc.call()
+		clear()
 		for item in _itemList:
 			add_item(item)
 		
@@ -34,8 +34,8 @@ var multiDto : Array = [] :
 	set(value):
 		multiDto = value
 		
-		clear()
 		_itemList = valuesFunc.call()
+		clear()
 		for item in _itemList:
 			add_item(item)
 		
@@ -59,8 +59,9 @@ func _ready() -> void:
 			if dto != null:
 				dto[property] = _getDtoPropertyValue(index)
 			else:
+				var value = _getDtoPropertyValue(index)
 				for dto in multiDto:
-					dto[property] = _getDtoPropertyValue(index))
+					dto[property] = value)
 
 
 func _getDtoPropertyValue(index : int):

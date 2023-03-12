@@ -344,6 +344,7 @@ text = "Preview"
 [connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnWest" to="." method="_on_btn_west_pressed"]
 [connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnEast" to="." method="_on_btn_east_pressed"]
 [connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnSouth" to="." method="_on_btn_south_pressed"]
+[connection signal="item_selected" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid/optType" to="." method="_on_opt_type_item_selected"]
 [connection signal="pressed" from="parameters/button/btnOpen" to="." method="_on_btn_open_pressed"]
 [connection signal="pressed" from="parameters/button/btnSave" to="." method="_on_btn_save_pressed"]
 [connection signal="pressed" from="parameters/button/btnPreview" to="." method="_on_btn_preview_pressed"]

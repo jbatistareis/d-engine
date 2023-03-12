@@ -14,6 +14,7 @@ func _ready() -> void:
 	
 	$parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid/optType.valuesFunc = func():
 		return ["None", "0 Exits", "1 Exit", "2 Exits I", "2 Exits L", "3 Exits", "4 Exits"]
+	
 	$parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid/optModel.valuesFunc = func():
 		return Persistence.listEntities(Enums.EntityType.LOCATION_MODELS, self.location.shortName)
 	
@@ -154,6 +155,12 @@ func _on_btn_rotate_right_pressed() -> void:
 func _on_btn_delete_pressed() -> void:
 	for room in self.selectedRooms:
 		room.type = Enums.RoomType.DUMMY
+		ToolSignals.roomSet.emit(room)
+
+
+func _on_opt_type_item_selected(index: int) -> void:
+	for room in self.selectedRooms:
+		await get_tree().process_frame
 		ToolSignals.roomSet.emit(room)
 
 
