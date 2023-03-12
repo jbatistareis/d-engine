@@ -24,6 +24,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="lblNone" type="Label" parent="windows"]
+visible = false
 layout_mode = 2
 size_flags_vertical = 1
 text = "Select a misc. item, or click 'View'"
@@ -171,19 +172,18 @@ size_flags_vertical = 3
 columns = 3
 
 [node name="model" type="VBoxContainer" parent="windows"]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="container" type="SubViewportContainer" parent="windows/model"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_vertical = 3
+stretch = true
 
 [node name="viewport" type="SubViewport" parent="windows/model/container"]
 handle_input_locally = false
-size = Vector2i(600, 620)
-render_target_update_mode = 0
+size = Vector2i(1366, 668)
+render_target_update_mode = 4
 
 [node name="modelPreview" parent="windows/model/container/viewport" instance=ExtResource("3_km3s3")]
 

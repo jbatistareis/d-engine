@@ -1,0 +1,94 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc774nikt3brh"]
+
+[ext_resource type="Texture2D" uid="uid://bct5drty1nakx" path="res://assets/base_icons/room_icons_60.png" id="1_3sdqp"]
+[ext_resource type="Script" path="res://tools/tabs/location/cell.gd" id="1_hg31d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1je3p"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(0, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_re3be"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(60, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d67le"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(120, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p161q"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(180, 0, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vaif1"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(0, 60, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r33pg"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(60, 60, 60, 60)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwjy8"]
+atlas = ExtResource("1_3sdqp")
+region = Rect2(120, 60, 60, 60)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a4dk0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1je3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_re3be")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d67le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p161q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vaif1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r33pg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwjy8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="cell" type="MarginContainer"]
+custom_minimum_size = Vector2(64, 64)
+offset_right = 64.0
+offset_bottom = 64.0
+pivot_offset = Vector2(32, 32)
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+script = ExtResource("1_hg31d")
+
+[node name="background" type="ColorRect" parent="."]
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.0509804)
+
+[node name="overlay" type="ColorRect" parent="."]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+color = Color(0, 0.5, 1, 0.4)
+
+[node name="icon" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_a4dk0")
+centered = false
+offset = Vector2(2, 2)
+
+[node name="lblDirection" type="Label" parent="."]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -30,7 +30,7 @@ var roomBase : Dictionary = {
 	'entryLogic': ROOM_ENTER_NOOP,
 	'entranceLogic': ROOM_NOOP,
 	'exitLogic': ROOM_NOOP,
-	'foeShortNameGroups': [], # 2D array representing possible enemy groups
+	'foeShortNameGroups': [], # 2D string array representing possible enemy groups
 	'visited': false,
 }
 

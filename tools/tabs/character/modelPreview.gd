@@ -31,5 +31,5 @@ func rotateLeft() -> void:
 
 
 func rotateRight() -> void:
-	_rotatePivot(+_ROTATION)
+	_rotatePivot(-_ROTATION)
 

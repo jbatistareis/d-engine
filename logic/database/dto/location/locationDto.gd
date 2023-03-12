@@ -7,7 +7,7 @@ var name : String = 'Base Location'
 var shortName : String = 'BSELOC'
 var description : String = 'Placeholder location'
 
-# { id, x, y, type, orientation, mesh, exits, portals, entranceLogic, exitLogic, friendlyShortNames, foeShortNameGroups, visited } dict
+# { id, x, y, type, orientation, model, exits, entryLogic, entranceLogic, exitLogic, foeShortNameGroups, visited } dict
 var rooms: Array = [DefaultValues.roomBase]
 
 var entranceLogic : String = DefaultValues.LOCATION_NOOP

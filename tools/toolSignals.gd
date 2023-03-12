@@ -20,3 +20,7 @@ signal factMovedUp(node)
 signal factMovedDown(node)
 signal factRemoved(node)
 
+signal selectedRooms(rooms)
+signal hoveredRoom(room)
+signal roomSet(room)
+

@@ -30,9 +30,37 @@ var dto : DTO :
 		
 		disabled = (dto == null)
 
+var multiDto : Array = [] :
+	set(value):
+		multiDto = value
+		
+		clear()
+		_itemList = valuesFunc.call()
+		for item in _itemList:
+			add_item(item)
+		
+		if multiDto.is_empty():
+			select(-1)
+		else:
+			match dataType:
+				0:
+					select(multiDto[0][property])
+				
+				1:
+					var index = _itemList.find(multiDto[0][property]) 
+					select(index if (index > -1) else 0)
+		
+		disabled = multiDto.is_empty()
+
 
 func _ready() -> void:
-	item_selected.connect(func(index): dto[property] = _getDtoPropertyValue(index))
+	item_selected.connect(
+		func(index):
+			if dto != null:
+				dto[property] = _getDtoPropertyValue(index)
+			else:
+				for dto in multiDto:
+					dto[property] = _getDtoPropertyValue(index))
 
 
 func _getDtoPropertyValue(index : int):
@@ -42,6 +70,4 @@ func _getDtoPropertyValue(index : int):
 		
 		1:
 			return "" if (get_item_text(index) == "None") else _itemList[_itemList.find(index)]
-	
-	return null
 

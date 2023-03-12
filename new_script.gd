@@ -7,6 +7,7 @@ func _init():
 	OS.low_processor_usage_mode = true
 	
 	player = Character.new().fromShortName('BSECHA')
+#	Persistence.saveDTO(LocationDTO.new())
 
 
 func _ready() -> void:
