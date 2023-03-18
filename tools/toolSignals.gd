@@ -22,4 +22,5 @@ signal factRemoved(node)
 
 signal selectedRooms(rooms)
 signal hoveredRoom(room)
+signal previewTile(locationShortName, modelName)
 

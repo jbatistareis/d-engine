@@ -41,6 +41,19 @@ func setSelectedRooms(value : Array) -> void:
 	$"parameters/tabs/Room/tabs/Entry check/cdeEntry".multiDto = selectedRooms
 	$"parameters/tabs/Room/tabs/Entrance logic/cdeEntrance".multiDto = selectedRooms
 	$"parameters/tabs/Room/tabs/Exit logic/cdeExit".multiDto = selectedRooms
+	
+	$parameters/tabs/Room/tabs/Tile/container/enemies/cdeEnemies.clear()
+	if !selectedRooms.is_empty():
+		await get_tree().process_frame
+		ToolSignals.previewTile.emit(location.shortName, selectedRooms[0].model)
+		
+		var text = ""
+		for group in selectedRooms[0].foeShortNameGroups:
+			for enemy in group:
+				text += enemy + ","
+			text = text.substr(0, text.length() - 1) + "\n"
+		
+		$parameters/tabs/Room/tabs/Tile/container/enemies/cdeEnemies.text = text.strip_edges()
 
 
 func _on_sld_enc_value_changed(value: float) -> void:
@@ -73,6 +86,23 @@ func fillRooms() -> void:
 		cell.room.y = (i / $map/grid.columns)
 		
 		$map/grid.add_child(cell)
+
+
+func _on_btn_set_group_pressed() -> void:
+	var result = []
+	var rawText = $parameters/tabs/Room/tabs/Tile/container/enemies/cdeEnemies.text.replace(" ", "")
+	var groups = rawText.split("\n")
+	
+	for singleGroup in groups:
+		result.append(singleGroup.split(","))
+	
+	for room in selectedRooms:
+		room.foeShortNameGroups = result
+
+
+func _on_opt_model_item_selected(index: int) -> void:
+	await get_tree().process_frame
+	ToolSignals.previewTile.emit(location.shortName, selectedRooms[0].model)
 
 
 # room direction
@@ -143,11 +173,11 @@ func _on_btn_autotile_pressed() -> void:
 
 
 func _on_btn_rotate_left_pressed() -> void:
-	pass # Replace with function body.
+	$parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport/tileView.rotateLeft()
 
 
 func _on_btn_rotate_right_pressed() -> void:
-	pass # Replace with function body.
+	$parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport/tileView.rotateRight()
 
 
 func _on_btn_delete_pressed() -> void:
