@@ -1,6 +1,8 @@
 extends HSplitContainer
 
+const _SAVE_MESSAGE : String = "Do you wish to save the file '%s.loc'?"
 const _ENCOUNTER_LABEL : String = "Enc.: %3d%% "
+const _LBL_ID : String = "id: %4d\n x: %4d\n y: %4d"
 var _cellScene : PackedScene = preload("res://tools/tabs/location/cell.tscn")
 
 var location : LocationDTO : set = setLocation
@@ -44,6 +46,8 @@ func setSelectedRooms(value : Array) -> void:
 	
 	$parameters/tabs/Room/tabs/Tile/container/enemies/cdeEnemies.clear()
 	if !selectedRooms.is_empty():
+		$parameters/tabs/Room/tabs/Tile/container/parameters/settings/lblId.text = _LBL_ID % [selectedRooms[0].id, selectedRooms[0].x, selectedRooms[0].y]
+		
 		await get_tree().process_frame
 		ToolSignals.previewTile.emit(location.shortName, selectedRooms[0].model)
 		
@@ -84,6 +88,11 @@ func fillRooms() -> void:
 		cell.room.id = i
 		cell.room.x = (i % $map/grid.columns)
 		cell.room.y = (i / $map/grid.columns)
+		
+		for room in location.rooms:
+			if room.id == i:
+				cell.room = room
+				break
 		
 		$map/grid.add_child(cell)
 
@@ -187,11 +196,24 @@ func _on_btn_delete_pressed() -> void:
 
 # persistence
 func _on_btn_open_pressed() -> void:
-	pass
+	$fileDialog.mode = FileDialog.FILE_MODE_OPEN_FILE
+	$fileDialog.popup_centered()
 
 
 func _on_btn_save_pressed() -> void:
-	pass
+	$saveConfirm.dialog_text = _SAVE_MESSAGE % location.shortName
+	$saveConfirm.popup_centered()
+
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	var shortName = path.substr(path.rfind("/") + 1).replace(".loc", "")
+	location = Persistence.loadDTO(shortName, Enums.EntityType.LOCATION)
+	fillRooms()
+
+
+func _on_save_confirm_confirmed() -> void:
+	location.rooms = $map/grid.collectRooms()
+	Persistence.saveDTO(location)
 
 
 func _on_btn_preview_pressed() -> void:

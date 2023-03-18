@@ -41,6 +41,7 @@ size_flags_vertical = 3
 tab_alignment = 1
 
 [node name="General" type="TabBar" parent="parameters/tabs"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -131,7 +132,6 @@ offset_bottom = 38.0
 property = "exitLogic"
 
 [node name="Room" type="TabBar" parent="parameters/tabs"]
-visible = false
 layout_mode = 2
 
 [node name="tabs" type="TabContainer" parent="parameters/tabs/Room"]
@@ -163,7 +163,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview"]
 handle_input_locally = false
 size = Vector2i(456, 338)
-render_target_update_mode = 0
+render_target_update_mode = 4
 
 [node name="tileView" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport" instance=ExtResource("6_y4nfk")]
 
@@ -215,6 +215,11 @@ layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 alignment = 1
+
+[node name="lblId" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="directionGrid" type="GridContainer" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings"]
 layout_mode = 2
@@ -365,6 +370,26 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Preview"
 
+[node name="fileDialog" type="FileDialog" parent="."]
+initial_position = 2
+title = ""
+size = Vector2i(640, 480)
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "data/locations"
+filters = PackedStringArray("*.loc")
+
+[node name="saveConfirm" type="ConfirmationDialog" parent="."]
+unresizable = true
+borderless = true
+always_on_top = true
+ok_button_text = "Yes"
+cancel_button_text = "No"
+
 [connection signal="value_changed" from="parameters/tabs/General/parameters/idGrid/sldEnc" to="." method="_on_sld_enc_value_changed"]
 [connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnAutotile" to="." method="_on_btn_autotile_pressed"]
 [connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnRotateLeft" to="." method="_on_btn_rotate_left_pressed"]
@@ -379,3 +404,5 @@ text = "Preview"
 [connection signal="pressed" from="parameters/button/btnOpen" to="." method="_on_btn_open_pressed"]
 [connection signal="pressed" from="parameters/button/btnSave" to="." method="_on_btn_save_pressed"]
 [connection signal="pressed" from="parameters/button/btnPreview" to="." method="_on_btn_preview_pressed"]
+[connection signal="file_selected" from="fileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_save_confirm_confirmed"]
