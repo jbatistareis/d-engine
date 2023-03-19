@@ -14,22 +14,22 @@ func _view(shortName : String) -> void:
 	var model = load(GamePaths.CHARACTER_MODEL % shortName)
 	
 	$modelArea.add_child(model.instantiate())
-	$pivot.rotation.y = 0
+	$modelArea.get_child(0).rotation.y = 0
 
 
 func _rotatePivot(angle : float) -> void:
 	var tween = create_tween()
 	
-	tween.tween_property($pivot, "rotation:y", $pivot.rotation.y + angle, 0.1)
+	tween.tween_property($modelArea.get_child(0), "rotation:y", $modelArea.get_child(0).rotation.y + angle, 0.1)
 	tween.play()
 	
 	await tween.finished
 
 
 func rotateLeft() -> void:
-	_rotatePivot(_ROTATION)
+	_rotatePivot(-_ROTATION)
 
 
 func rotateRight() -> void:
-	_rotatePivot(-_ROTATION)
+	_rotatePivot(_ROTATION)
 
