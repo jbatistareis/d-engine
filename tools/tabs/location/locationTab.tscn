@@ -41,7 +41,6 @@ size_flags_vertical = 3
 tab_alignment = 1
 
 [node name="General" type="TabBar" parent="parameters/tabs"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -132,6 +131,7 @@ offset_bottom = 38.0
 property = "exitLogic"
 
 [node name="Room" type="TabBar" parent="parameters/tabs"]
+visible = false
 layout_mode = 2
 
 [node name="tabs" type="TabContainer" parent="parameters/tabs/Room"]
@@ -163,7 +163,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview"]
 handle_input_locally = false
 size = Vector2i(456, 338)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="tileView" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport" instance=ExtResource("6_y4nfk")]
 
@@ -372,7 +372,7 @@ text = "Preview"
 
 [node name="fileDialog" type="FileDialog" parent="."]
 initial_position = 2
-title = ""
+title = "Open a File"
 size = Vector2i(640, 480)
 unresizable = true
 borderless = true

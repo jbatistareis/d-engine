@@ -19,7 +19,7 @@ func equipWeapon(character : Character, weapon : Weapon) -> void:
 	if character.inventory.weapons.has(weapon):
 		character.inventory.weapons.erase(weapon)
 		character.inventory.weapons.append(character.inventory.weapon)
-		character.inventory.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+		character.inventory.weapons.sort_custom(func(a, b): return EntityArrayHelper.shortNameSort(a, b))
 		
 		character.inventory.weapon = weapon
 	else:
@@ -44,7 +44,7 @@ func useItem(user : Character, receivers : Array, item : Item) -> void:
 
 func receiveWeapon(character : Character, weapon : Weapon) -> void:
 	character.inventory.weapons.append(weapon)
-	character.inventory.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+	character.inventory.weapons.sort_custom(func(a, b): return EntityArrayHelper.shortNameSort(a, b))
 
 
 # TODO
@@ -54,7 +54,7 @@ func receiveArmor(_character : Character, _armor : Armor) -> void:
 
 func receiveItem(character : Character, item : Item) -> void:
 	character.inventory.items.append(item)
-	character.inventory.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+	character.inventory.items.sort_custom(func(a, b): return EntityArrayHelper.shortNameSort(a, b))
 
 
 
@@ -62,7 +62,7 @@ func receiveItem(character : Character, item : Item) -> void:
 func dropWeapon(character : Character, weapon : Weapon) -> void:
 	if character.inventory.weapons.has(weapon):
 		character.inventory.weapons.erase(weapon)
-		character.inventory.weapons.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+		character.inventory.weapons.sort_custom(func(a, b): return EntityArrayHelper.shortNameSort(a, b))
 	else:
 		push_error(ErrorMessages.WPN_NO_FOUND)
 
@@ -75,7 +75,7 @@ func dropArmor(_character : Character, _armor : Armor) -> void:
 func dropItem(character : Character, item : Item) -> void:
 	if character.inventory.items.has(item):
 		character.inventory.items.erase(item)
-		character.inventory.items.sort_custom(func(a, b): EntityArrayHelper.shortNameSort(a, b))
+		character.inventory.items.sort_custom(func(a, b): return EntityArrayHelper.shortNameSort(a, b))
 	else:
 		push_error(ErrorMessages.ITM_NO_FOUND)
 

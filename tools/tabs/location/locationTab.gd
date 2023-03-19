@@ -207,7 +207,8 @@ func _on_btn_save_pressed() -> void:
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	var shortName = path.substr(path.rfind("/") + 1).replace(".loc", "")
-	location = Persistence.loadDTO(shortName, Enums.EntityType.LOCATION)
+	var newLocation = Persistence.loadDTO(shortName, Enums.EntityType.LOCATION)
+	location = newLocation
 	fillRooms()
 
 

@@ -5,7 +5,7 @@ const _EQUIPED_MASK : String = "[E]"
 const _NOT_EQUIPED_MASK : String = ""
 const _WEAPON_STATS_MASK_MAIN : String = "[center][ %s ]%s[/center][table=5][cell][center]STA[/center][/cell][cell][center]DMG[/center][/cell][cell][center]CRT[/center][/cell][cell][center]CLV[/center][/cell][cell][center]CD (base)[/center][/cell][cell][center]%s[/center][/cell][cell][center]%d[/center][/cell][cell][center]%s[/center][/cell][cell][center]%s[/center][/cell][cell][center]%0.2fs/%0.2fs[/center][/cell][/table]"
 const _WEAPON_NO_STATS_MASK : String = "[center] - - - - - [/center]"
-const _WEAPON_STATS_MASK_MOVE : String = "\n[center]----------------------------[/center]\n>%s (%s)[table=4][cell][center]CD: [/center][/cell][cell]%0.2fs/%0.2fs[/cell][cell] SCL:[/cell][cell]%s%%[/cell][cell][center]SLF:[/center][/cell][cell]%d/%d/%d[/cell][cell] FOE:[/cell][cell]%d/%d/%d[/cell][/table]"
+const _WEAPON_STATS_MASK_MOVE : String = "\n[center]----------------------------[/center]\n>%s (%s)[table=4][cell][center]CD: [/center][/cell][cell]%0.2fs/%0.2fs[/cell][cell]   SCL:[/cell][cell]%s%%[/cell][/table]\n[table=4][cell][center]SLF:[/center][/cell][cell]%d/%d/%d[/cell][cell]      FOE:[/cell][cell]%d/%d/%d[/cell][/table]"
 const _WEAPON_STATS_MASK_NO_MOVE : String = "\n[center]----------------------------[/center]\n>N/A\n \n "
 
 var character : Character

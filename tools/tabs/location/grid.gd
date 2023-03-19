@@ -4,7 +4,7 @@ var totalRooms : int
 
 
 func collectRooms() -> Array:
-	totalRooms = pow(columns, 2)
+	totalRooms = get_child_count()
 	var rooms = []
 	
 	for cell in get_children():
