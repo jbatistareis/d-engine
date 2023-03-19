@@ -24,7 +24,6 @@ func hpBarChange(character : Character, _amount : int) -> void:
 
 func barChange(bar : ProgressBar, end : float) -> void:
 	var tween = create_tween()
-	tween.remove_all()
 	tween.tween_property(bar, "value", end, 0.25)
 	tween.play()
 

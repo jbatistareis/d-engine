@@ -35,7 +35,7 @@ func showWindow(character : Character) -> void:
 	
 	visible = true
 	$ItemList.grab_focus()
-	if !$ItemList.items.is_empty():
+	if !$ItemList.item_count == 0:
 		$ItemList.select(0)
 
 

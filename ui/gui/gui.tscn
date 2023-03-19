@@ -239,8 +239,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 281.0
+offset_bottom = 281.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -268,8 +268,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 563.0
+offset_bottom = 364.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -347,83 +347,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2")
 
-[node name="lblDescription" type="Label" parent="battle/moves/decription/container"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="mods" type="CenterContainer" parent="battle/moves"]
-custom_minimum_size = Vector2(0, 22)
-layout_mode = 2
-
-[node name="data" type="HBoxContainer" parent="battle/moves/mods"]
+[node name="vBox" type="VBoxContainer" parent="battle/moves/decription/container"]
 layout_mode = 2
 alignment = 1
 
-[node name="self" type="MarginContainer" parent="battle/moves/mods/data"]
-visible = false
-layout_mode = 2
-
-[node name="panel" type="Panel" parent="battle/moves/mods/data/self"]
+[node name="lblDescription" type="Label" parent="battle/moves/decription/container/vBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/self"]
+[node name="lblMods" type="Label" parent="battle/moves/decription/container/vBox"]
 layout_mode = 2
-
-[node name="lblSelf" type="Label" parent="battle/moves/mods/data/self/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "[SLF]"
-
-[node name="lblAtkMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "AT: %d"
-
-[node name="lblDefMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "DF: %d"
-
-[node name="lblCdMod" type="Label" parent="battle/moves/mods/data/self/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "CD: %d"
-
-[node name="target" type="MarginContainer" parent="battle/moves/mods/data"]
-visible = false
-layout_mode = 2
-
-[node name="panel" type="Panel" parent="battle/moves/mods/data/target"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2")
-
-[node name="fields" type="HBoxContainer" parent="battle/moves/mods/data/target"]
-layout_mode = 2
-
-[node name="lblTarget" type="Label" parent="battle/moves/mods/data/target/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "[TGT]"
-
-[node name="lblAtkMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "AT: %d"
-
-[node name="lblDefMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "DF: %d"
-
-[node name="lblCdMod" type="Label" parent="battle/moves/mods/data/target/fields"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "CD: %d"
+size_flags_vertical = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="inventory" type="MarginContainer" parent="battle"]
 visible = false

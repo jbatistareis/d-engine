@@ -43,4 +43,4 @@ func resume() -> void:
 func enemyPlaybackSpeed(value : float) -> void:
 	for enemyPos in $enemies.get_children():
 		if enemyPos.get_child_count() > 0:
-			enemyPos.get_child(0).get_node("AnimationPlayer").playback_speed = value
+			enemyPos.get_child(0).get_node("AnimationPlayer").speed_scale = value

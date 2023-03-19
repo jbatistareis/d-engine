@@ -1,6 +1,7 @@
 extends Control
 
-const _MOVE_DESC : String = ' %s '
+const _MOVE_DESC : String = '%s'
+const _MODS : String = "[SLF] AT:%2d, DF:%2d, CD:%2d | [TGT] AT:%2d, DF:%2d, CD:%2d"
 
 var moveCardPackedScene : PackedScene = preload("res://ui/gui/battle/moveCard.tscn")
 var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/inventoryCard.tscn")
@@ -34,7 +35,7 @@ func hideBattle() -> void:
 
 
 func showCharacterMoves(character : Character) -> void:
-	$moves/decription/container/lblDescription.text = ''
+	$moves/decription/container/vBox/lblDescription.text = ''
 	$moves.visible = true
 	
 	for child in $moves/cards/grid.get_children():
@@ -63,18 +64,12 @@ func hideCharacterMoves() -> void:
 
 
 func showMoveDetails(move : Move) -> void:
-	$moves/mods/data/self.visible = !move.executorModifiers.is_empty()
-	$moves/mods/data/target.visible = !move.targetModifiers.is_empty()
-	
-	$moves/decription/container/lblDescription.text = _MOVE_DESC % move.description
-	
-	if $moves/mods/data/self.visible:
-		$moves/mods/data/self/fields/lblAtkMod.text = move.executorAtkModifier
-		$moves/mods/data/self/fields/lblDefMod.text = move.executorDefModifier
-		$moves/mods/data/self/fields/lblCdMod.text = move.executorCdModifier
-	
-	if $moves/mods/data/target.visible:
-		$moves/mods/data/target/fields/lblAtkMod.text = move.targetAtkModifier
-		$moves/mods/data/target/fields/lblDefMod.text = move.targetDefModifier
-		$moves/mods/data/target/fields/lblCdMod.text = move.targetCdModifier
+	$moves/decription/container/vBox/lblDescription.text = _MOVE_DESC % move.description
+	$moves/decription/container/vBox/lblMods.text = _MODS % [
+		move.executorAtkModifier,
+		move.executorDefModifier,
+		move.executorCdModifier,
+		move.targetAtkModifier,
+		move.targetDefModifier,
+		move.targetCdModifier]
 

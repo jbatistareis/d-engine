@@ -24,7 +24,7 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.actions.clear()
 	for action in verdictDto.actions:
 		self.actions.append({
-			'self': action.own,
+			'own': action.own,
 			'target': action.target,
 			'move': Move.new().fromShortName(action.moveShortName)
 		})
@@ -39,7 +39,7 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'self': action.own,
+			'own': action.own,
 			'target': action.target,
 			'moveShortName': action.move.shortName
 		})
