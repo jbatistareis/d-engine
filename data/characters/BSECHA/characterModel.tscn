@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://c84gxdia0fd1c"]
+[gd_scene load_steps=3 format=3 uid="uid://c84gxdia0fd1c"]
 
 [ext_resource type="PackedScene" uid="uid://ded41bihue3a8" path="res://assets/base_character/BSECHA.gltf" id="1_cem55"]
+[ext_resource type="Script" path="res://data/characters/BSECHA/characterModel.gd" id="2_h03su"]
 
 [node name="BSECHA" instance=ExtResource("1_cem55")]
+script = ExtResource("2_h03su")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
 bones/0/position = Vector3(0.00309811, 0.89603, -0.00965959)
