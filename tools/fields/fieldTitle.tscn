@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bge3nde7sbbqn"]
+
+[ext_resource type="Script" path="res://tools/fields/fieldTitle.gd" id="1_ajjyn"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cfnv1"]
+color = Color(1, 1, 1, 1)
+grow_begin = -5.0
+grow_end = -5.0
+thickness = 2
+
+[node name="parameterTitle" type="HBoxContainer"]
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_ajjyn")
+
+[node name="arrow" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+text = "↳"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="title" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Title"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="separator" type="HSeparator" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxLine_cfnv1")

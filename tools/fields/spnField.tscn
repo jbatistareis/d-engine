@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ort6q68cvhx8"]
+
+[ext_resource type="Script" path="res://tools/fields/spnField.gd" id="1_wka8f"]
+
+[node name="spnParameter" type="SpinBox"]
+custom_minimum_size = Vector2(70, 0)
+alignment = 1
+editable = false
+update_on_text_changed = true
+script = ExtResource("1_wka8f")

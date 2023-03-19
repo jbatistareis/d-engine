@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://sgk25galjl0v"]
+
+[ext_resource type="Script" path="res://tools/tabs/move/logic.gd" id="1_aih34"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_utdqj"]
+[ext_resource type="PackedScene" uid="uid://bg10pfnfxdvvn" path="res://tools/fields/cdeField.tscn" id="3_upu14"]
+
+[node name="logic" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_aih34")
+
+[node name="title" parent="." instance=ExtResource("2_utdqj")]
+layout_mode = 2
+title = "Logic"
+
+[node name="tabs" type="TabContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Value" type="TabBar" parent="tabs"]
+layout_mode = 2
+
+[node name="cdeValue" parent="tabs/Value" instance=ExtResource("3_upu14")]
+layout_mode = 1
+delimiter_strings = Array[String](["\" \"", "' '"])
+property = "valueExpression"
+
+[node name="Outcome" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeOutcome" parent="tabs/Outcome" instance=ExtResource("3_upu14")]
+layout_mode = 1
+property = "outcomeExpression"
+
+[node name="Pick" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdePick" parent="tabs/Pick" instance=ExtResource("3_upu14")]
+layout_mode = 1
+delimiter_strings = Array[String](["\" \"", "' '"])
+property = "pickExpression"
+
+[node name="Execute" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeExecute" parent="tabs/Execute" instance=ExtResource("3_upu14")]
+layout_mode = 1
+property = "excuteExpression"

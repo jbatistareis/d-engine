@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://765lwn1t8ttc"]
+
+[ext_resource type="Script" path="res://tools/fields/chkField.gd" id="1_a1fkj"]
+
+[node name="chkField" type="CheckBox"]
+script = ExtResource("1_a1fkj")

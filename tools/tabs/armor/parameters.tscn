@@ -1,0 +1,121 @@
+[gd_scene load_steps=5 format=3 uid="uid://brxd56tgryn4u"]
+
+[ext_resource type="PackedScene" path="res://tools/fields/fieldTitle.tscn" id="1_g18qb"]
+[ext_resource type="Script" path="res://tools/tabs/armor/parameters.gd" id="1_mm3wp"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="2_5m4eg"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="3_ceshb"]
+
+[node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_mm3wp")
+
+[node name="idTitle" parent="." instance=ExtResource("1_g18qb")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("2_5m4eg")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortName" parent="idGrid" instance=ExtResource("2_5m4eg")]
+layout_mode = 2
+max_length = 10
+property = "shortName"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="scalingTitle" parent="." instance=ExtResource("1_g18qb")]
+layout_mode = 2
+title = "Scaling"
+
+[node name="scalingGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="lblPositive" type="Label" parent="scalingGrid"]
+layout_mode = 2
+text = "Positive "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnPositive" parent="scalingGrid" instance=ExtResource("3_ceshb")]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 0.33
+step = 0.01
+suffix = "x"
+property = "positiveScale"
+
+[node name="lblNegative" type="Label" parent="scalingGrid"]
+layout_mode = 2
+text = "  Negative "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnNegative" parent="scalingGrid" instance=ExtResource("3_ceshb")]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+max_value = 0.33
+step = 0.01
+suffix = "x"
+property = "negativeScale"
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="integTitle" parent="." instance=ExtResource("1_g18qb")]
+layout_mode = 2
+title = "Integrity"
+
+[node name="integGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="lblCurrent" type="Label" parent="integGrid"]
+layout_mode = 2
+text = "Current "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCurrent" parent="integGrid" instance=ExtResource("3_ceshb")]
+layout_mode = 2
+max_value = 9999.0
+property = "currentIntegrity"
+
+[node name="lblMaximum" type="Label" parent="integGrid"]
+layout_mode = 2
+text = "  Maximum "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnMaximum" parent="integGrid" instance=ExtResource("3_ceshb")]
+layout_mode = 2
+max_value = 9999.0
+property = "maxIntegrity"

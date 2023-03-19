@@ -10,9 +10,9 @@ var model : String
 
 var exits : Array
 
-var canEnterLogic : String
-var enteringLogic : String
-var exitingLogic : String
+var entryLogic : String
+var entranceLogic : String
+var exitLogic : String
 
 var foeShortNameGroups : Array
 
@@ -30,9 +30,9 @@ func fromDict(roomTileDict : Dictionary) -> RoomTile:
 	
 	self.exits = roomTileDict.exits
 	
-	self.canEnterLogic = roomTileDict.canEnterLogic
-	self.enteringLogic = roomTileDict.enteringLogic
-	self.exitingLogic = roomTileDict.exitingLogic
+	self.entryLogic = roomTileDict.entryLogic
+	self.entranceLogic = roomTileDict.entranceLogic
+	self.exitLogic = roomTileDict.exitLogic
 	
 	self.foeShortNameGroups = roomTileDict.foeShortNameGroups
 	
@@ -50,9 +50,9 @@ func toDict() -> Dictionary:
 		'orientation': self.orientation, # use Enums.Direction
 		'model': self.model,
 		'exits': self.exits,
-		'canEnterLogic': self.canEnterLogic,
-		'enteringLogic': self.enteringLogic,
-		'exitingLogic': self.exitingLogic,
+		'entryLogic': self.entryLogic,
+		'entranceLogic': self.entranceLogic,
+		'exitLogic': self.exitLogic,
 		'foeShortNameGroups': self.foeShortNameGroups, # 2D array representing possible enemy groups
 		'visited': self.visited,
 	}
@@ -60,7 +60,7 @@ func toDict() -> Dictionary:
 
 func enter(character, direction : int, battleTriggered : bool) -> void:
 	visited = true
-	executeScript(enteringLogic, character, direction)
+	executeScript(entranceLogic, character, direction)
 	
 	character.currentRoom = id
 	
@@ -79,7 +79,7 @@ func enter(character, direction : int, battleTriggered : bool) -> void:
 
 
 func exit(character, direction : int) -> void:
-	executeScript(exitingLogic, character, direction)
+	executeScript(exitLogic, character, direction)
 
 
 func executeScript(script : String, character, direction : int) -> void:

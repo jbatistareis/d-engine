@@ -24,7 +24,7 @@ default_bus_layout=""
 DefaultValues="*res://defaultValues.gd"
 GameParameters="*res://gameParameters.gd"
 Signals="*res://signals.gd"
-EditorSignals="*res://tools/editorSignals.gd"
+ToolSignals="*res://tools/toolSignals.gd"
 Dice="*res://dice.gd"
 SceneLoadManager="*res://logic/managers/sceneLoadManager.gd"
 LocationManager="*res://logic/managers/locationManager.gd"
@@ -59,4 +59,5 @@ right_click={
 
 [rendering]
 
+renderer/rendering_method="mobile"
 environment/default_environment="res://default_env.tres"

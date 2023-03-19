@@ -1,0 +1,291 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8eajlttni7dl"]
+
+[ext_resource type="Script" path="res://tools/tabs/character/parameters.gd" id="1_7dsmf"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_1nrat"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_0f0l4"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="4_dmdnq"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="5_e0x3e"]
+[ext_resource type="PackedScene" uid="uid://765lwn1t8ttc" path="res://tools/fields/chkField.tscn" id="6_qt1gs"]
+
+[node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_7dsmf")
+
+[node name="idTitle" parent="." instance=ExtResource("2_1nrat")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("3_0f0l4")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="idGrid" instance=ExtResource("3_0f0l4")]
+layout_mode = 2
+property = "shortName"
+
+[node name="lblType" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Type "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optType" parent="idGrid" instance=ExtResource("4_dmdnq")]
+layout_mode = 2
+size_flags_horizontal = 0
+property = "type"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="lvlTitle" parent="." instance=ExtResource("2_1nrat")]
+layout_mode = 2
+title = "Level"
+
+[node name="lvlGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 6
+
+[node name="lblCurr" type="Label" parent="lvlGrid"]
+layout_mode = 2
+text = "Current "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCurrLvl" parent="lvlGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "currentLevel"
+
+[node name="lblExp" type="Label" parent="lvlGrid"]
+layout_mode = 2
+text = "  Experience "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnExp" parent="lvlGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "experiencePoints"
+
+[node name="lblSparePts" type="Label" parent="lvlGrid"]
+layout_mode = 2
+text = "  Spare pts. "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnSparePts" parent="lvlGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "sparePoints"
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="hpTitle" parent="." instance=ExtResource("2_1nrat")]
+layout_mode = 2
+title = "HP"
+
+[node name="hpGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 6
+
+[node name="lblBase" type="Label" parent="hpGrid"]
+layout_mode = 2
+text = "Base "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnBase" parent="hpGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "baseHp"
+
+[node name="lblCurr" type="Label" parent="hpGrid"]
+layout_mode = 2
+text = "  Current "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCurr" parent="hpGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "currentHp"
+
+[node name="lblExtra" type="Label" parent="hpGrid"]
+layout_mode = 2
+text = "  Extra  "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnExtra" parent="hpGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "extraHp"
+
+[node name="Control3" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="statsTitle" parent="." instance=ExtResource("2_1nrat")]
+layout_mode = 2
+title = "Stats"
+
+[node name="statsContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="dmg" type="HBoxContainer" parent="statsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="lblDmg" type="Label" parent="statsContainer/dmg"]
+layout_mode = 2
+text = "Base damage "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnBase" parent="statsContainer/dmg" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "baseDamage"
+
+[node name="statsGrid" type="GridContainer" parent="statsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 6
+
+[node name="lblCon" type="Label" parent="statsContainer/statsGrid"]
+layout_mode = 2
+text = "Constitution "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnCon" parent="statsContainer/statsGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "constitution"
+
+[node name="lblStr" type="Label" parent="statsContainer/statsGrid"]
+layout_mode = 2
+text = "   Strength "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnStr" parent="statsContainer/statsGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "strength"
+
+[node name="lblDex" type="Label" parent="statsContainer/statsGrid"]
+layout_mode = 2
+text = "  Dexterity "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnDex" parent="statsContainer/statsGrid" instance=ExtResource("5_e0x3e")]
+layout_mode = 2
+max_value = 9999.0
+property = "dexterity"
+
+[node name="Control4" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="miscTitle" parent="." instance=ExtResource("2_1nrat")]
+layout_mode = 2
+title = "Miscellaneous"
+
+[node name="miscGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="lblVerdict" type="Label" parent="miscGrid"]
+layout_mode = 2
+text = "Verdict "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optVerdict" parent="miscGrid" instance=ExtResource("4_dmdnq")]
+layout_mode = 2
+property = "verdictShortName"
+dataType = 1
+
+[node name="btnVwVerdict" type="Button" parent="miscGrid"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "View"
+
+[node name="chkVerdict" parent="miscGrid" instance=ExtResource("6_qt1gs")]
+layout_mode = 2
+text = "Active"
+property = "verdictActive"
+
+[node name="lblInventory" type="Label" parent="miscGrid"]
+layout_mode = 2
+text = "Inventory "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optInventory" parent="miscGrid" instance=ExtResource("4_dmdnq")]
+layout_mode = 2
+property = "inventoryShortName"
+dataType = 1
+
+[node name="btnVwInventory" type="Button" parent="miscGrid"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "View"
+
+[node name="Control" type="Control" parent="miscGrid"]
+layout_mode = 2
+
+[node name="lblModel" type="Label" parent="miscGrid"]
+layout_mode = 2
+text = "Model "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optModel" parent="miscGrid" instance=ExtResource("4_dmdnq")]
+layout_mode = 2
+property = "model"
+dataType = 1
+
+[node name="btnVwModel" type="Button" parent="miscGrid"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "View"
+
+[connection signal="value_changed" from="statsContainer/statsGrid/spnCon" to="." method="_on_spn_con_value_changed"]
+[connection signal="item_selected" from="miscGrid/optVerdict" to="." method="_on_opt_verdict_item_selected"]
+[connection signal="pressed" from="miscGrid/btnVwVerdict" to="." method="_on_btn_vw_verdict_pressed"]
+[connection signal="item_selected" from="miscGrid/optInventory" to="." method="_on_opt_inventory_item_selected"]
+[connection signal="pressed" from="miscGrid/btnVwInventory" to="." method="_on_btn_vw_inventory_pressed"]
+[connection signal="item_selected" from="miscGrid/optModel" to="." method="_on_opt_model_item_selected"]
+[connection signal="pressed" from="miscGrid/btnVwModel" to="." method="_on_btn_vw_model_pressed"]

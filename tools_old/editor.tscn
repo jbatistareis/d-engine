@@ -1,0 +1,79 @@
+[gd_scene load_steps=10 format=3 uid="uid://cduv4alb1d2re"]
+
+[ext_resource type="Script" path="res://tools_old/editor.gd" id="1"]
+[ext_resource type="PackedScene" path="res://tools_old/location/locationTab.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://tools_old/character/characterTab.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://tools_old/armor/armorTab.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://tools_old/weapon/weaponTab.tscn" id="5"]
+[ext_resource type="PackedScene" path="res://tools_old/move/moveTab.tscn" id="6"]
+[ext_resource type="PackedScene" path="res://tools_old/verdict/verdictTab.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://tools_old/item/itemTab.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://tools_old/inventory/inventoryTab.tscn" id="9"]
+
+[node name="editor" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="tabs" type="TabContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Armor" parent="tabs" instance=ExtResource("4")]
+layout_mode = 2
+
+[node name="Character" parent="tabs" instance=ExtResource("3")]
+visible = false
+layout_mode = 2
+scrolling_enabled = false
+
+[node name="Event" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Event"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Inventory" parent="tabs" instance=ExtResource("9")]
+visible = false
+layout_mode = 2
+
+[node name="Item" parent="tabs" instance=ExtResource("8")]
+visible = false
+layout_mode = 2
+
+[node name="Location" parent="tabs" instance=ExtResource("2")]
+visible = false
+layout_mode = 2
+
+[node name="Message" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="background" type="Panel" parent="tabs/Message"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Move" parent="tabs" instance=ExtResource("6")]
+visible = false
+layout_mode = 2
+
+[node name="Verdict" parent="tabs" instance=ExtResource("7")]
+visible = false
+layout_mode = 2
+
+[node name="Weapon" parent="tabs" instance=ExtResource("5")]
+visible = false
+layout_mode = 2
+
+[connection signal="tab_changed" from="tabs" to="tabs/Character" method="_on_tabs_tab_changed"]
+[connection signal="tab_changed" from="tabs" to="tabs/Location" method="_on_tabs_tab_changed"]

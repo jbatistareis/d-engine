@@ -1,0 +1,99 @@
+[gd_scene load_steps=2 format=3 uid="uid://ceckqvvyvv7oo"]
+
+[ext_resource type="Script" path="res://tools/tabs/verdict/factEdit.gd" id="1_2td5f"]
+
+[node name="factEdit" type="VBoxContainer"]
+offset_left = 575.0
+offset_right = 575.0
+offset_bottom = 59.0
+script = ExtResource("1_2td5f")
+
+[node name="data" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+
+[node name="lblPosition" type="Label" parent="data"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="grid" type="GridContainer" parent="data"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 4
+
+[node name="lblOwn" type="Label" parent="data/grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Own: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optOwn" type="OptionButton" parent="data/grid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="lblTarget" type="Label" parent="data/grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "  Target: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optTarget" type="OptionButton" parent="data/grid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+
+[node name="lblMove" type="Label" parent="data/grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "  Move: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optMoves" type="OptionButton" parent="data/grid"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Control" type="Control" parent="data/grid"]
+layout_mode = 2
+
+[node name="buttons" type="HBoxContainer" parent="data/grid"]
+layout_mode = 2
+alignment = 2
+
+[node name="btnUp" type="Button" parent="data/grid/buttons"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "↑"
+
+[node name="btnDown" type="Button" parent="data/grid/buttons"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "↓"
+
+[node name="Control" type="Control" parent="data/grid/buttons"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="btnDelete" type="Button" parent="data/grid/buttons"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "❌"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+
+[connection signal="item_selected" from="data/grid/optOwn" to="." method="_on_opt_own_item_selected"]
+[connection signal="item_selected" from="data/grid/optTarget" to="." method="_on_opt_target_item_selected"]
+[connection signal="item_selected" from="data/grid/optMoves" to="." method="_on_opt_moves_item_selected"]
+[connection signal="pressed" from="data/grid/buttons/btnUp" to="." method="_on_btn_up_pressed"]
+[connection signal="pressed" from="data/grid/buttons/btnDown" to="." method="_on_btn_down_pressed"]
+[connection signal="pressed" from="data/grid/buttons/btnDelete" to="." method="_on_btn_delete_pressed"]

@@ -91,7 +91,7 @@ func checkAdjacentAccess(character) -> void:
 		
 		if exitPoint != -1:
 			var nextRoomTile = findRoom(exitPoint)
-			adjacentState[direction] = ScriptTool.getReference(nextRoomTile.canEnterLogic).execute(character, reverseDirection(direction))
+			adjacentState[direction] = ScriptTool.getReference(nextRoomTile.entryLogic).execute(character, reverseDirection(direction))
 		else:
 			adjacentState[direction] = false
 

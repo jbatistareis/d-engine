@@ -20,9 +20,13 @@ var targetType : int
 var prepareAnimation : String
 var attackAnimation : String
 
-# use Enums.MoveModifierProperty in both
-var executorModifiers : Array = []
-var targetModifiers : Array = []
+var executorAtkModifier : int
+var executorDefModifier : int
+var executorCdModifier : int
+
+var targetAtkModifier : int
+var targetDefModifier : int
+var targetCdModifier : int
 
 var modifierScale : float
 
@@ -49,8 +53,13 @@ func fromDTO(moveDto : MoveDTO) -> Move:
 	self.prepareAnimation = moveDto.prepareAnimation
 	self.attackAnimation = moveDto.attackAnimation
 	
-	self.executorModifiers = moveDto.executorModifiers
-	self.targetModifiers = moveDto.targetModifiers
+	self.executorAtkModifier = moveDto.executorAtkModifier
+	self.executorDefModifier = moveDto.executorDefModifier
+	self.executorCdModifier = moveDto.executorCdModifier
+	
+	self.targetAtkModifier = moveDto.targetAtkModifier
+	self.targetDefModifier = moveDto.targetDefModifier
+	self.targetCdModifier = moveDto.targetCdModifier
 	
 	self.modifierScale = moveDto.modifierScale
 	
@@ -76,8 +85,13 @@ func toDTO() -> MoveDTO:
 	moveDto.prepareAnimation = self.prepareAnimation
 	moveDto.attackAnimation = self.attackAnimation
 	
-	moveDto.executorModifiers = self.executorModifiers
-	moveDto.targetModifiers = self.targetModifiers
+	moveDto.executorAtkModifier = self.executorAtkModifier
+	moveDto.executorDefModifier = self.executorDefModifier
+	moveDto.executorCdModifier = self.executorCdModifier
+	
+	moveDto.targetAtkModifier = self.targetAtkModifier
+	moveDto.targetDefModifier = self.targetDefModifier
+	moveDto.targetCdModifier = self.targetCdModifier
 	
 	moveDto.modifierScale = self.modifierScale
 	

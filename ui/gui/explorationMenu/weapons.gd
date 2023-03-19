@@ -6,7 +6,7 @@ const _NOT_EQUIPED_MASK : String = ""
 const _WEAPON_STATS_MASK_MAIN : String = "[center][ %s ]%s[/center][table=5][cell][center]STA[/center][/cell][cell][center]DMG[/center][/cell][cell][center]CRT[/center][/cell][cell][center]CLV[/center][/cell][cell][center]CD (base)[/center][/cell][cell][center]%s[/center][/cell][cell][center]%d[/center][/cell][cell][center]%s[/center][/cell][cell][center]%s[/center][/cell][cell][center]%0.2fs/%0.2fs[/center][/cell][/table]"
 const _WEAPON_NO_STATS_MASK : String = "[center] - - - - - [/center]"
 const _WEAPON_STATS_MASK_MOVE : String = "\n[center]----------------------------[/center]\n>%s (%s)[table=4][cell][center]CD: [/center][/cell][cell]%0.2fs/%0.2fs[/cell][cell] SCL:[/cell][cell]%s%%[/cell][cell][center]SLF:[/center][/cell][cell]%d/%d/%d[/cell][cell] FOE:[/cell][cell]%d/%d/%d[/cell][/table]"
-const _WEAPON_STATS_MASK_NO_MOVE : String = "\n[center]----------------------------[/center]\n>..."
+const _WEAPON_STATS_MASK_NO_MOVE : String = "\n[center]----------------------------[/center]\n>N/A\n \n "
 
 var character : Character
 var inventorySummary : InventorySummary
@@ -102,7 +102,7 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 			1000.0 * GameParameters.GCD * weapon.cdPos / 1000.0
 		]
 		
-		for move in [weapon.move1, weapon.move1, weapon.move1]:
+		for move in [weapon.move1, weapon.move2, weapon.move3]:
 			if move != null:
 				text += _WEAPON_STATS_MASK_MOVE % [
 					move.name,
@@ -110,12 +110,12 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 					1000.0 * GameParameters.GCD * move.cdPre / 1000.0,
 					1000.0 * GameParameters.GCD * move.cdPos / 1000.0,
 					move.modifierScale * 100,
-					Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.executorModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.ATK, move.targetModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.DEF, move.targetModifiers),
-					Util.countAbsoluteModType(Enums.MoveModifierType.CD, move.targetModifiers)
+					move.executorAtkModifier,
+					move.executorDefModifier,
+					move.executorCdModifier,
+					move.targetAtkModifier,
+					move.targetDefModifier,
+					move.targetCdModifier
 				]
 			else:
 				text += _WEAPON_STATS_MASK_NO_MOVE
