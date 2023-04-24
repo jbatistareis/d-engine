@@ -1,7 +1,6 @@
 extends Control
 
-const _MOVE_DESC : String = '%s'
-const _MODS : String = "[SLF] AT:%2d, DF:%2d, CD:%2d | [TGT] AT:%2d, DF:%2d, CD:%2d"
+const _MOVE_DESC : String = '%s\n[SLF] AT:%2d, DF:%2d, CD:%2d | [TGT] AT:%2d, DF:%2d, CD:%2d'
 
 var moveCardPackedScene : PackedScene = preload("res://ui/gui/battle/moveCard.tscn")
 var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/inventoryCard.tscn")
@@ -11,8 +10,8 @@ func _ready() -> void:
 	Signals.battleStarted.connect(setup)
 	Signals.battleWon.connect(victory)
 	Signals.battleLost.connect(hideBattle)
-	Signals.battleShowCharacterMoves.connect(showCharacterMoves)
-	Signals.battleHideCharacterMoves.connect(hideCharacterMoves)
+	Signals.battleAskedMove.connect(showCharacterMoves)
+	Signals.battlePickedMove.connect(hideCharacterMoves)
 
 
 func setup(players : Array, enemies : Array) -> void:
@@ -35,13 +34,10 @@ func hideBattle() -> void:
 
 
 func showCharacterMoves(character : Character) -> void:
-	$moves/decription/container/vBox/lblDescription.text = ''
 	$moves.visible = true
 	
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
-	
-#	await get_tree().create_timer(0.1).timeout
 	
 	for move in [character.inventory.weapon.move1, character.inventory.weapon.move2, character.inventory.weapon.move3]:
 		if move != null:
@@ -56,20 +52,24 @@ func showCharacterMoves(character : Character) -> void:
 	inventoryCard.hovered.connect(showMoveDetails)
 	$moves/cards/grid.add_child(inventoryCard)
 	
+	await get_tree().process_frame
 	$moves/cards/grid.get_child(0).button.grab_focus()
 
 
-func hideCharacterMoves() -> void:
+func hideCharacterMoves(character : Character, move : Move) -> void:
 	$moves.visible = false
 
 
 func showMoveDetails(move : Move) -> void:
-	$moves/decription/container/vBox/lblDescription.text = _MOVE_DESC % move.description
-	$moves/decription/container/vBox/lblMods.text = _MODS % [
+	var text = _MOVE_DESC % [
+		move.description,
 		move.executorAtkModifier,
 		move.executorDefModifier,
 		move.executorCdModifier,
 		move.targetAtkModifier,
 		move.targetDefModifier,
-		move.targetCdModifier]
+		move.targetCdModifier
+	]
+	
+	Signals.battleMoveDescription.emit(text)
 

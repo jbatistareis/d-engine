@@ -37,15 +37,20 @@ func showWindow(character : Character) -> void:
 	$ItemList.grab_focus()
 	if !$ItemList.item_count == 0:
 		$ItemList.select(0)
+		Signals.battleMoveDescription.emit(inventorySummary.summary[0].item.description)
 
 
 func hideWindow() -> void:
 	if visible:
 		visible = false
-		Signals.battleShowCharacterMoves.emit(character)
+		Signals.battleAskedMove.emit(character)
 
 
 func _on_ItemList_item_activated(index):
 	visible = false
 	Signals.battleCursorShow.emit(character, ItemMove.new(inventorySummary.summary[index].item))
+
+
+func _on_item_list_item_selected(index: int) -> void:
+	Signals.battleMoveDescription.emit(inventorySummary.summary[index].item.description)
 

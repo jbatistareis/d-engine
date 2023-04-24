@@ -14,9 +14,10 @@ var move : Move
 func _ready() -> void:
 	$text/lblName.text = _NAME % move.name
 	$text/lblTimer.text = _TIMER % [(1000.0 * GameParameters.GCD * move.cdPre / 1000.0), (1000 * GameParameters.GCD * move.cdPos / 1000.0)]
+	
+	Signals.battleCursorShow.connect(func(character, move): queue_free())
 
 func _on_btnConfirm_pressed():
-	Signals.emit_signal("battleHideCharacterMoves")
 	Signals.emit_signal("battleCursorShow", character, move)
 
 

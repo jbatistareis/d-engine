@@ -258,7 +258,7 @@ handle_input_locally = false
 size = Vector2i(1366, 768)
 render_target_update_mode = 4
 
-[node name="arena" type="Node3D" parent="SubViewportContainer/SubViewport"]
+[node name="arena" type="Node" parent="SubViewportContainer/SubViewport"]
 script = ExtResource("5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SubViewportContainer/SubViewport/arena"]
@@ -288,7 +288,6 @@ shadow_enabled = true
 spot_range = 4096.0
 
 [node name="enemies" type="Node3D" parent="SubViewportContainer/SubViewport/arena"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.25, 0, 0)
 
 [node name="enemy1" type="Node3D" parent="SubViewportContainer/SubViewport/arena/enemies"]
 transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -2.5, 0, 0)

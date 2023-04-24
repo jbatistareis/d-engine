@@ -13,5 +13,5 @@ func execute() -> void:
 		return
 	
 	Signals.commandsPaused.emit()
-	Signals.battleShowCharacterMoves.emit(executorCharacter)
+	Signals.battleAskedMove.emit(executorCharacter)
 

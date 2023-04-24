@@ -19,11 +19,6 @@ var cursorMove : Move
 
 func _ready() -> void:
 	Signals.setupBattleScreen.connect(setup)
-	Signals.battleCursorShow.connect(showCursor)
-	Signals.guiLeft.connect(moveCursor.bind(Enums.Direction.EAST))
-	Signals.guiRight.connect(moveCursor.bind(Enums.Direction.WEST))
-	Signals.guiConfirm.connect(confirmCursor)
-	Signals.guiCancel.connect(cancelCursor)
 	Signals.battleEnded.connect(finish)
 	Signals.battleWon.connect(showBattleResult)
 
@@ -66,102 +61,6 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	
 	await get_tree().create_timer(0.1).timeout
 	Signals.battleScreenReady.emit()
-
-
-func createCursor() -> void:
-	cursorOn = true
-	var enemyNode = enemiesNode.get_child(_ENEMY_MAP[cursorPos])
-
-	Signals.battleCursorMove.emit(
-		enemyNode.get_child(0).character.name,
-		battleCamera.unproject_position(enemyNode.global_transform.origin) - (enemyFrameSize / 9.0)
-	)
-
-
-# TODO pick from the players group
-func showCursor(player : Character, move : Move) -> void:
-	if !cursorOn:
-		# TODO adapt for ANY_ALL
-		if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
-			publishCommand(player, [player], move)
-			return
-		# FIXME this will crash for sure
-		elif move.targetType == Enums.MoveTargetType.FOE_ALL:
-			var targets = []
-			for index in range(3):
-				var character = enemiesNode.get_child(_ENEMY_MAP[index]).get_child(0).character
-				
-				if character.currentHp > 0:
-					targets.append(character)
-			
-			publishCommand(player, targets, move)
-			return
-		
-		# TODO error out if no one is alive
-		cursorPos = cursorPos % (enemySize - 1)
-		if enemiesNode.get_child(_ENEMY_MAP[cursorPos]).get_child(0).character.currentHp <= 0:
-			for index in range(3):
-				if enemiesNode.get_child(_ENEMY_MAP[index]).get_child(0).character.currentHp > 0:
-					cursorPos = index
-					break
-				elif enemiesNode.get_child(_ENEMY_MAP[index]).get_child_count() == 0:
-					return
-		
-		cursorPlayer = player
-		cursorMove = move
-		
-		createCursor()
-
-
-# FIXME repetition
-# TODO error out if no one is alive
-func moveCursor(direction : int) -> void:
-	if cursorOn:
-		var newPos = cursorPos
-		
-		if direction == Enums.Direction.EAST: # left
-			newPos = (newPos - 1) if newPos > 0 else 2
-		elif direction == Enums.Direction.WEST: # right
-			newPos = (newPos + 1) if newPos < 2 else 0
-		
-		while (enemiesNode.get_child(_ENEMY_MAP[newPos]).get_child_count() == 0) || (enemiesNode.get_child(_ENEMY_MAP[newPos]).get_child(0).character.currentHp == 0):
-			if direction == Enums.Direction.EAST: # left
-				newPos = (newPos - 1) if newPos > 0 else 2
-			elif direction == Enums.Direction.WEST: # right
-				newPos = (newPos + 1) if newPos < 2 else 0
-		
-		cursorPos = newPos
-		
-		createCursor()
-
-
-func confirmCursor() -> void:
-	if cursorOn:
-		publishCommand(
-			cursorPlayer,
-			[enemiesNode.get_child(_ENEMY_MAP[cursorPos]).get_child(0).character],
-			cursorMove)
-
-
-func publishCommand(player, targets : Array, move : Move) -> void:
-	var command
-	match move.type:
-		Enums.MoveType.ITEM:
-			command = UseItemCommand.new(player, targets, move)
-		
-		Enums.MoveType.SKILL:
-			command = ExecuteMoveCommand.new(player, targets, move)
-	
-	Signals.battleCursorHide.emit()
-	Signals.commandPublished.emit(command)
-	cursorOn = false
-
-
-func cancelCursor() -> void:
-	if cursorOn:
-		cursorOn = false
-		Signals.battleCursorHide.emit()
-		Signals.battleShowCharacterMoves.emit(cursorPlayer)
 
 
 func finish() -> void:

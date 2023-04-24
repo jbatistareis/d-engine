@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://ui/gui/battle/moveCard.gd" id="2"]
 
 [node name="moveCard" type="MarginContainer"]
-custom_minimum_size = Vector2(200, 0)
+custom_minimum_size = Vector2(200, 54)
 offset_right = 200.0
 offset_bottom = 48.0
 script = ExtResource("2")

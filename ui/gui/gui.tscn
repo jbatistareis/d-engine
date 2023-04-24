@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b28bid03inu88"]
+[gd_scene load_steps=17 format=3 uid="uid://b28bid03inu88"]
 
 [ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
 [ext_resource type="Script" path="res://ui/gui/menu.gd" id="1_6354c"]
@@ -6,11 +6,12 @@
 [ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="2"]
 [ext_resource type="Script" path="res://ui/gui/explorationMenu/inventory.gd" id="4_owbn0"]
 [ext_resource type="PackedScene" uid="uid://g7exmacfpak" path="res://ui/gui/partyMenu.tscn" id="4_t0bnm"]
-[ext_resource type="Script" path="res://ui/gui/battle/cursor.gd" id="5"]
 [ext_resource type="Script" path="res://ui/gui/explorationMenu/weapons.gd" id="6_bsl3b"]
 [ext_resource type="Script" path="res://ui/gui/battle/inventory.gd" id="7"]
 [ext_resource type="Script" path="res://ui/gui/battle/battle.gd" id="7_ks84m"]
+[ext_resource type="Script" path="res://ui/gui/moves.gd" id="9_sc645"]
 [ext_resource type="Script" path="res://ui/gui/toast.gd" id="11"]
+[ext_resource type="Script" path="res://ui/gui/cursor.gd" id="11_x3j0n"]
 
 [sub_resource type="Animation" id="Animation_d06rd"]
 length = 0.001
@@ -316,6 +317,7 @@ offset_top = -22.0
 grow_vertical = 0
 
 [node name="moves" type="VBoxContainer" parent="battle"]
+custom_minimum_size = Vector2(200, 54)
 layout_mode = 0
 anchor_left = 0.5
 anchor_top = 0.98
@@ -326,6 +328,7 @@ offset_top = -64.0
 offset_right = 265.0
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("9_sc645")
 
 [node name="cards" type="CenterContainer" parent="battle/moves"]
 layout_mode = 2
@@ -347,19 +350,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("2")
 
-[node name="vBox" type="VBoxContainer" parent="battle/moves/decription/container"]
-layout_mode = 2
-alignment = 1
-
-[node name="lblDescription" type="Label" parent="battle/moves/decription/container/vBox"]
+[node name="lblDescription" type="Label" parent="battle/moves/decription/container"]
 layout_mode = 2
 size_flags_horizontal = 3
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="lblMods" type="Label" parent="battle/moves/decription/container/vBox"]
-layout_mode = 2
-size_flags_vertical = 1
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -401,20 +394,15 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "No items being carried"
 
-[node name="cursor" type="MarginContainer" parent="battle"]
+[node name="cursor" type="Container" parent="battle"]
 custom_minimum_size = Vector2(0, 22)
-layout_mode = 0
-offset_bottom = 22.0
-script = ExtResource("5")
-
-[node name="panel" type="Panel" parent="battle/cursor"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("2")
-
-[node name="lblTgt" type="Label" parent="battle/cursor"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_x3j0n")
 
 [node name="toast" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 240)
@@ -470,3 +458,4 @@ autowrap_mode = 2
 [connection signal="item_selected" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_list_item_selected"]
 [connection signal="id_pressed" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList/wpnMenu" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_menu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]
+[connection signal="item_selected" from="battle/inventory/ItemList" to="battle/inventory" method="_on_item_list_item_selected"]

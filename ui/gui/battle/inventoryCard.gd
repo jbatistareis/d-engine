@@ -20,10 +20,11 @@ func _ready() -> void:
 	
 	$text/lblName.text = _NAME % 'Inventory'
 	$text/lblTimer.text = _TIMER % [cd, cd]
+	
+	Signals.battleCursorShow.connect(func(character, move): queue_free())
 
 
 func _on_btnConfirm_pressed():
-	Signals.emit_signal("battleHideCharacterMoves")
 	Signals.emit_signal("battleInventoryShow", character)
 
 
