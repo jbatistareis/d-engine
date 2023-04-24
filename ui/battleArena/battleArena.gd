@@ -60,7 +60,20 @@ func setup(playerData : Array, enemyData : Array) -> void:
 			break
 	
 	await get_tree().create_timer(0.1).timeout
+	
+	for j in range(3):
+		setEnemyCursor(j)
+	
 	Signals.battleScreenReady.emit()
+
+
+func setEnemyCursor(index : int) -> void:
+	var enemy = $SubViewportContainer/SubViewport/arena/enemies.get_child(index)
+	
+	if enemy.get_child_count() == 1:
+		Signals.battleSetCursorPosition.emit(
+			enemy.get_child(0).character,
+			battleCamera.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
 
 
 func finish() -> void:

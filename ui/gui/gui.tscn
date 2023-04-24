@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://ui/gui/battle/battle.gd" id="7_ks84m"]
 [ext_resource type="Script" path="res://ui/gui/moves.gd" id="9_sc645"]
 [ext_resource type="Script" path="res://ui/gui/toast.gd" id="11"]
-[ext_resource type="Script" path="res://ui/gui/cursor.gd" id="11_x3j0n"]
+[ext_resource type="Script" path="res://ui/gui/cursors.gd" id="11_v0pet"]
 
 [sub_resource type="Animation" id="Animation_d06rd"]
 length = 0.001
@@ -169,8 +169,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -187,8 +187,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -240,8 +240,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -269,8 +269,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 563.0
-offset_bottom = 364.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -338,6 +338,7 @@ layout_mode = 2
 columns = 4
 
 [node name="decription" type="CenterContainer" parent="battle/moves"]
+visible = false
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -394,7 +395,8 @@ layout_mode = 2
 size_flags_vertical = 3
 text = "No items being carried"
 
-[node name="cursor" type="Container" parent="battle"]
+[node name="cursors" type="Container" parent="battle"]
+visible = false
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 1
 anchors_preset = 15
@@ -402,7 +404,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("11_x3j0n")
+script = ExtResource("11_v0pet")
 
 [node name="toast" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 240)

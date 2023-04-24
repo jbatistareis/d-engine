@@ -1,6 +1,6 @@
 extends MarginContainer
 
-const _AMOUNT_MASK : String = "[x%d]"
+const _LABEL : String = "%s\n[x%d]"
 
 var character : Character
 var inventorySummary : InventorySummary
@@ -21,17 +21,7 @@ func showWindow(character : Character) -> void:
 	inventorySummary = InventorySummary.new(character.inventory.items)
 	
 	for itemSummary in inventorySummary.summary:
-		var itemName = itemSummary.name.substr(0, 14)
-		
-		var prefix = ""
-		for i in range((14 - itemName.length()) / 2):
-			prefix += ' '
-		itemName = prefix + itemName
-		
-		for i in range(14 - itemName.length()):
-			itemName += ' '
-		
-		$ItemList.add_item((itemName + _AMOUNT_MASK) % itemSummary.amount)
+		$ItemList.add_item(_LABEL % [itemSummary.name.substr(0, 14), itemSummary.amount])
 	
 	visible = true
 	$ItemList.grab_focus()

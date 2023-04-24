@@ -17,11 +17,11 @@ func _ready() -> void:
 	
 	Signals.battleCursorShow.connect(func(character, move): queue_free())
 
-func _on_btnConfirm_pressed():
-	Signals.emit_signal("battleCursorShow", character, move)
 
+func _on_btnConfirm_pressed():
+	Signals.battleCursorShow.emit(character, move)
 
 
 func _on_btnConfirm_focus_entered():
-	emit_signal("hovered", move)
+	hovered.emit(move)
 

@@ -30,7 +30,8 @@ func _on_about_to_popup(onIndex : int = 0) -> void:
 	
 	$wpnList.grab_focus()
 	if !inventorySummary.summary.is_empty():
-		$wpnList.select(onIndex)
+		var index = onIndex if (onIndex < $wpnList.item_count) else ($wpnList.item_count - 1)
+		$wpnList.select(index)
 		updateLabels()
 
 
@@ -76,9 +77,11 @@ func _on_wpn_list_item_selected(index: int) -> void:
 
 
 func updateLabels() -> void:
+	var index = $wpnList.get_selected_items()[0] if ($wpnList.get_selected_items().size() > 0) else ($wpnList.item_count - 1)
+	
 	setWpnData(character.inventory.weapon, true)
 	setWpnData(
-		inventorySummary.summary[$wpnList.get_selected_items()[0]].item,
+		inventorySummary.summary[index].item,
 		false)
 	
 	$info.position = position + Vector2i(size.x + 10, 0)

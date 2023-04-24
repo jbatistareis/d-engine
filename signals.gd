@@ -60,7 +60,7 @@ signal finishedBattleAnimation(character) # cue to resume logic
 signal battleAskedMove(character)
 signal battlePickedMove(player, move)
 signal battleMoveDescription(text)
-signal battleSetCursorPosition(position)
+signal battleSetCursorPosition(character, position)
 signal battleCursorShow(player, move)
 signal battleShowResult(battleResult)
 signal battleInventoryShow(character)
