@@ -169,8 +169,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 281.0
+offset_bottom = 281.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -187,8 +187,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 281.0
+offset_bottom = 281.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -240,8 +240,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 281.0
+offset_bottom = 281.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -269,8 +269,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = -1.0
-offset_bottom = -1.0
+offset_right = 563.0
+offset_bottom = 364.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -294,7 +294,6 @@ bbcode_enabled = true
 autowrap_mode = 2
 
 [node name="battle" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -334,16 +333,17 @@ script = ExtResource("9_sc645")
 layout_mode = 2
 
 [node name="grid" type="GridContainer" parent="battle/moves/cards"]
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
 columns = 4
 
 [node name="decription" type="CenterContainer" parent="battle/moves"]
-visible = false
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="container" type="MarginContainer" parent="battle/moves/decription"]
+visible = false
 layout_mode = 2
 
 [node name="panel" type="Panel" parent="battle/moves/decription/container"]

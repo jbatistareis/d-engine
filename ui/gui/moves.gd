@@ -4,7 +4,7 @@ extends VBoxContainer
 func _ready() -> void:
 	Signals.battleMoveDescription.connect(
 		func(text):
-			$decription.visible = true
+			$decription/container.visible = true
 			$decription/container/lblDescription.text = text)
 	
 	Signals.commandPublished.connect(func(command): visible = false)
