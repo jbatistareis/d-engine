@@ -1,6 +1,7 @@
 extends Control
 
 var character : Character
+var forward : bool = true
 
 
 func _ready() -> void:
@@ -12,14 +13,14 @@ func _ready() -> void:
 
 func commandQueued(command : Command) -> void:
 	if command.executorCharacter == character:
-		var newScale = 1 / (GameParameters.GCD * command.totalTicks)
+		$player.speed_scale = 1.0 / (GameParameters.GCD * command.totalTicks)
 		
 		if (command is ExecuteMoveCommand) || (command is UseItemCommand): # pre
-			$player.speed_scale = newScale
+			forward = true
+			$player.play("run")
 		else: # pos
-			$player.speed_scale = -newScale
-		
-		$player.play("run")
+			forward = false
+			$player.play_backwards("run")
 
 
 func pause() -> void:
@@ -27,11 +28,14 @@ func pause() -> void:
 
 
 func resume() -> void:
-	$player.play("run")
+	if forward:
+		$player.play("run")
+	else:
+		$player.play_backwards("run")
 
 
 func dead(character : Character) -> void:
 	if character == self.character:
 		$player.speed_scale = -1.0
-		$player.play("run")
+		$player.play_backwards("run")
 
