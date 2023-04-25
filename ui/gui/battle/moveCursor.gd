@@ -30,6 +30,7 @@ func _on_btnConfirm_pressed() -> void:
 			command = ExecuteMoveCommand.new(executor, [target], move)
 	
 	Signals.commandPublished.emit(command)
+	Signals.commandsResumed.emit()
 	confirmed.emit()
 
 

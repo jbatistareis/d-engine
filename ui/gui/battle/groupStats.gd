@@ -8,8 +8,7 @@ var characters : Array = [] : set = setCharacters
 func setCharacters(value : Array) -> void:
 	characters = value
 	
-	for child in $characters.get_children():
-		child.queue_free()
+	clear()
 	
 	for character in characters:
 		var label = Label.new()
@@ -27,5 +26,6 @@ func setCharacters(value : Array) -> void:
 
 
 func clear() -> void:
-	$characters.get_children().clear()
+	for child in $characters.get_children():
+		child.queue_free()
 

@@ -23,12 +23,12 @@ func start(players : Array, enemies : Array) -> void:
 		# TODO pick order, ramdomize initial cd (or not)
 		for player in players:
 			if player.verdictActive:
-				Signals.commandPublished.emit(VerdictCommand.new(player, int(30 * randf())))
+				Signals.commandPublished.emit(VerdictCommand.new(player, 30))
 			else:
-				Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(player, int(30 * randf())))
-		
+				Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(player, 30))
+
 		for enemy in enemies:
-			Signals.commandPublished.emit(VerdictCommand.new(enemy, int(30 * randf())))
+			Signals.commandPublished.emit(VerdictCommand.new(enemy, int(randf_range(0.5, 0.8) * 30)))
 
 
 func _process(_delta) -> void:

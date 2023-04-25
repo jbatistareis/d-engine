@@ -26,6 +26,7 @@ func showCursors(player : Character, move : Move) -> void:
 	# TODO adapt for ANY_ALL
 	if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
 		Signals.commandPublished.emit(createCommand(player, GameManager.party, move))
+		Signals.commandsResumed.emit()
 		return
 	
 	elif move.targetType == Enums.MoveTargetType.FOE_ALL:
@@ -35,6 +36,7 @@ func showCursors(player : Character, move : Move) -> void:
 				targets.append(cursor.target)
 		
 		Signals.commandPublished.emit(createCommand(player, targets, move))
+		Signals.commandsResumed.emit()
 		return
 	
 	visible = true

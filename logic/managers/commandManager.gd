@@ -27,7 +27,7 @@ func tick() -> void:
 	
 	if !executingCommand:
 		for command in commandsQueue:
-			executingCommand=true
+			executingCommand = true
 			command.tick()
 			
 			if command.toBeExecuted:
@@ -63,6 +63,7 @@ func reset() -> void:
 func clearCommands() -> void:
 	commandsQueue.clear()
 	newCommands.clear()
+	reset()
 
 
 func publishCommand(command : Command) -> void:
@@ -70,5 +71,4 @@ func publishCommand(command : Command) -> void:
 		return
 	
 	newCommands.append(command)
-	resume()
 

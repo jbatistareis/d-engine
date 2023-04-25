@@ -3,7 +3,7 @@
 [ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="3"]
 [ext_resource type="Script" path="res://ui/gui/battle/timerBar.gd" id="4"]
 
-[sub_resource type="Animation" id="Animation_1bi0m"]
+[sub_resource type="Animation" id="Animation_34vnk"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -18,7 +18,7 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_dyeyj"]
+[sub_resource type="Animation" id="Animation_g587y"]
 resource_name = "run"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -33,10 +33,10 @@ tracks/0/keys = {
 "values": [0.0, 100.0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_fepgl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c0quh"]
 _data = {
-"RESET": SubResource("Animation_1bi0m"),
-"run": SubResource("Animation_dyeyj")
+"RESET": SubResource("Animation_34vnk"),
+"run": SubResource("Animation_g587y")
 }
 
 [node name="timerBar" type="MarginContainer"]
@@ -47,7 +47,7 @@ script = ExtResource("4")
 
 [node name="player" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_fepgl")
+"": SubResource("AnimationLibrary_c0quh")
 }
 
 [node name="timer" type="ProgressBar" parent="."]

@@ -12,12 +12,15 @@ var character : Character
 
 
 func _ready() -> void:
-	Signals.connect("startedBattleAnimation",Callable(self,"play"))
-	Signals.connect("characterTookDamage",Callable(self,"damage"))
-	Signals.connect("characterDied",Callable(self,"die"))
+	Signals.startedBattleAnimation.connect(play)
+	Signals.characterTookDamage.connect(damage)
+	Signals.characterDied.connect(die)
 	
 	$AnimationPlayer.play("idle")
 	$AnimationPlayer.seek(randf() * $AnimationPlayer.current_animation_length)
+	
+	Signals.commandsPaused.connect(pause)
+	Signals.commandsResumed.connect(resume)
 
 
 func play(character : Character, animation : String) -> void:
@@ -55,5 +58,17 @@ func die(character : Character) -> void:
 # this method must be called from every attack animation (add a Call Mathod track)
 func done() -> void:
 	if character.currentHp > 0:
-		Signals.emit_signal("finishedBattleAnimation", character)
+		Signals.finishedBattleAnimation.emit(character)
+
+
+func pause() -> void:
+	var tween = create_tween()
+	tween.tween_property($AnimationPlayer, "speed_scale", 0, 0.25)
+	tween.play()
+
+
+func resume() -> void:
+	var tween = create_tween()
+	tween.tween_property($AnimationPlayer, "speed_scale", 1, 0.25)
+	tween.play()
 
