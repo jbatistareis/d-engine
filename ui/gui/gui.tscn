@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b28bid03inu88"]
 
-[ext_resource type="PackedScene" path="res://ui/gui/battle/groupStats.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://cgpy2jtnk31i6" path="res://ui/gui/battle/groupStats.tscn" id="1"]
 [ext_resource type="Script" path="res://ui/gui/menu.gd" id="1_6354c"]
 [ext_resource type="Script" path="res://ui/gui/explorationMenu/exploration.gd" id="1_xx7lt"]
 [ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="2"]
@@ -426,9 +426,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -255.0
+offset_left = 428.0
 offset_top = -40.0
-offset_right = 255.0
+offset_right = 938.0
 offset_bottom = -10.0
 grow_horizontal = 2
 

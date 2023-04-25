@@ -28,21 +28,20 @@ func commandQueued(command : Command) -> void:
 
 
 func pause() -> void:
-	$player.pause()
 	paused = true
+	$player.pause()
 
 
 func resume() -> void:
-	if foward:
-		$player.play()
-	else:
-		$player.play_backwards()
-	
 	paused = false
+	if foward:
+		$player.play("run")
+	else:
+		$player.play_backwards("run")
 
 
 func dead(character : Character) -> void:
 	if character == self.character:
-		$player.speed_scale = 1
+		$player.speed_scale = 1.0
 		$player.play_backwards("run")
 

@@ -59,7 +59,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if index > enemyData.size() - 1:
 			break
 	
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().process_frame
 	
 	for j in range(3):
 		setEnemyCursor(j)
