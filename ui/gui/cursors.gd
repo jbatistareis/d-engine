@@ -1,7 +1,8 @@
 extends Container
 
 var cursorPackedScene : PackedScene = preload("res://ui/gui/battle/moveCursor.tscn")
-var character : Character
+var player : Character
+var move : Move
 
 
 func _ready() -> void:
@@ -13,48 +14,56 @@ func _ready() -> void:
 func setCursorPosition(target : Character, pos : Vector2) -> void:
 	var cursor = cursorPackedScene.instantiate()
 	cursor.target = target
-	
-	add_child(cursor)
+	$foes.add_child(cursor)
 	cursor.position = pos
 	
-	cursor.confirmed.connect(func(): visible = false)
+	cursor.confirmed.connect(func(): $foes.visible = false)
 
 
 func showCursors(player : Character, move : Move) -> void:
-	self.character = player
+	self.player = player
+	self.move = move
 	
 	# TODO adapt for ANY_ALL
-	if (move.targetType == Enums.MoveTargetType.FRIENDLY) || (move.targetType == Enums.MoveTargetType.FRIENDLY_ALL):
-		Signals.commandPublished.emit(createCommand(player, GameManager.party, move))
-		Signals.commandsResumed.emit()
+	if move.targetType == Enums.MoveTargetType.FRIENDLY:
+		$party.clear()
+		for friend in GameManager.party:
+			$party.add_item(friend.name)
+		
+		$party.popup_centered()
+		$party.set_focused_item(0)
+		$party.grab_focus()
+		return
+	
+	elif move.targetType == Enums.MoveTargetType.FRIENDLY_ALL:
+		$allParty.popup_centered()
+		$allParty.set_focused_item(0)
+		$allParty.grab_focus()
 		return
 	
 	elif move.targetType == Enums.MoveTargetType.FOE_ALL:
-		var targets = []
-		for cursor in get_children():
-			if cursor.target.currentHp > 0:
-				targets.append(cursor.target)
-		
-		Signals.commandPublished.emit(createCommand(player, targets, move))
-		Signals.commandsResumed.emit()
+		$allEnemies.popup_centered()
+		$allEnemies.set_focused_item(0)
+		$allEnemies.grab_focus()
 		return
 	
-	visible = true
+	$foes.visible = true
 	
-	for cursor in get_children():
+	for cursor in $foes.get_children():
 		cursor.executor = player
 		cursor.move = move
 	
-	if get_child_count() == 3:
-		get_child(1).get_child(1).grab_focus()
+	if $foes.get_child_count() == 3:
+		$foes.get_child(1).focus()
 	else:
-		get_child(0).get_child(1).grab_focus()
+		$foes.get_child(0).focus()
 
 
 func hideCursors() -> void:
-	if visible:
-		visible = false
-		Signals.battleAskedMove.emit(character)
+	if $foes.visible and (!$allEnemies.visible and !$party.visible):
+		$foes.visible = false
+		
+		Signals.battleAskedMove.emit(player)
 
 
 func createCommand(player, targets, move) -> Command:
@@ -67,4 +76,28 @@ func createCommand(player, targets, move) -> Command:
 		
 		_:
 			return null
+
+
+func _on_all_enemies_index_pressed(index: int) -> void:
+	var targets = []
+	for cursor in get_children():
+		if cursor.target.currentHp > 0:
+			targets.append(cursor.target)
+	
+	Signals.commandPublished.emit(createCommand(player, targets, move))
+	Signals.commandsResumed.emit()
+
+
+func _on_party_id_pressed(id: int) -> void:
+	Signals.commandPublished.emit(createCommand(player, [GameManager.party[id]], move))
+	Signals.commandsResumed.emit()
+
+
+func _on_all_party_id_pressed(id: int) -> void:
+	Signals.commandPublished.emit(createCommand(player, GameManager.party, move))
+	Signals.commandsResumed.emit()
+
+
+func _on_menu_popup_hide() -> void:
+	Signals.battleAskedMove.emit(player)
 

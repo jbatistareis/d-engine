@@ -52,7 +52,8 @@ func showCharacterMoves(character : Character) -> void:
 	inventoryCard.hovered.connect(showMoveDetails)
 	$moves/cards/grid.add_child(inventoryCard)
 	
-	$moves/cards/grid.get_child(0).button.grab_focus()
+	await get_tree().process_frame
+	$moves/cards/grid.get_child(0).focus()
 
 
 func hideCharacterMoves(character : Character, move : Move) -> void:

@@ -20,6 +20,18 @@ func _process(delta : float) -> void:
 		queue_free()
 
 
+func focus() -> void:
+	$btnConfirm.grab_focus()
+
+
+func enable() -> void:
+	$btnConfirm.disabled = false
+
+
+func disable() -> void:
+	$btnConfirm.disabled = true
+
+
 func _on_btnConfirm_pressed() -> void:
 	var command
 	match move.type:

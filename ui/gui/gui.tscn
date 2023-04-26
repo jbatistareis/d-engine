@@ -396,7 +396,6 @@ size_flags_vertical = 3
 text = "No items being carried"
 
 [node name="cursors" type="Container" parent="battle"]
-visible = false
 custom_minimum_size = Vector2(0, 22)
 layout_mode = 1
 anchors_preset = 15
@@ -405,6 +404,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("11_v0pet")
+
+[node name="foes" type="Control" parent="battle/cursors"]
+visible = false
+layout_mode = 2
+
+[node name="allEnemies" type="PopupMenu" parent="battle/cursors"]
+size = Vector2i(134, 34)
+theme = ExtResource("2")
+item_count = 1
+item_0/text = "All enemies"
+item_0/id = 0
+
+[node name="allParty" type="PopupMenu" parent="battle/cursors"]
+size = Vector2i(134, 34)
+theme = ExtResource("2")
+item_count = 1
+item_0/text = "Entire party"
+item_0/id = 0
+
+[node name="party" type="PopupMenu" parent="battle/cursors"]
+size = Vector2i(134, 34)
+theme = ExtResource("2")
 
 [node name="toast" type="Control" parent="."]
 custom_minimum_size = Vector2(0, 240)
@@ -426,9 +447,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 428.0
+offset_left = -255.0
 offset_top = -40.0
-offset_right = 938.0
+offset_right = 255.0
 offset_bottom = -10.0
 grow_horizontal = 2
 
@@ -461,3 +482,9 @@ autowrap_mode = 2
 [connection signal="id_pressed" from="exploration/menuSide/menu/wpnPartyMenu/weapons/wpnList/wpnMenu" to="exploration/menuSide/menu/wpnPartyMenu/weapons" method="_on_wpn_menu_id_pressed"]
 [connection signal="item_activated" from="battle/inventory/ItemList" to="battle/inventory" method="_on_ItemList_item_activated"]
 [connection signal="item_selected" from="battle/inventory/ItemList" to="battle/inventory" method="_on_item_list_item_selected"]
+[connection signal="index_pressed" from="battle/cursors/allEnemies" to="battle/cursors" method="_on_all_enemies_index_pressed"]
+[connection signal="popup_hide" from="battle/cursors/allEnemies" to="battle/cursors" method="_on_menu_popup_hide"]
+[connection signal="id_pressed" from="battle/cursors/allParty" to="battle/cursors" method="_on_all_party_id_pressed"]
+[connection signal="popup_hide" from="battle/cursors/allParty" to="battle/cursors" method="_on_menu_popup_hide"]
+[connection signal="id_pressed" from="battle/cursors/party" to="battle/cursors" method="_on_party_id_pressed"]
+[connection signal="popup_hide" from="battle/cursors/party" to="battle/cursors" method="_on_menu_popup_hide"]
