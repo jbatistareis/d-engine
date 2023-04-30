@@ -6,6 +6,7 @@ var move : Move
 
 
 func _ready() -> void:
+	Signals.setupBattleScreen.connect(clearCursors)
 	Signals.battleSetCursorPosition.connect(setCursorPosition)
 	Signals.battleCursorShow.connect(showCursors)
 	Signals.guiCancel.connect(hideCursors)
@@ -64,6 +65,11 @@ func hideCursors() -> void:
 		$foes.visible = false
 		
 		Signals.battleAskedMove.emit(player)
+
+
+func clearCursors(playerData : Array = [], enemyData : Array = []) -> void:
+	for cursor in $foes.get_children():
+		cursor.queue_free()
 
 
 func createCommand(player, targets, move) -> Command:
