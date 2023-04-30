@@ -16,6 +16,8 @@ func setCursorPosition(target : Character, pos : Vector2) -> void:
 	var cursor = cursorPackedScene.instantiate()
 	cursor.target = target
 	$foes.add_child(cursor)
+	
+	await get_tree().process_frame
 	cursor.position = pos
 	
 	cursor.confirmed.connect(func(): $foes.visible = false)
