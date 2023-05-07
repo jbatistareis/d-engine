@@ -43,11 +43,7 @@ func damage(character : Character) -> void:
 		
 		play(character, previousAnimation)
 		if character.currentHp > 0:
-			if previousAnimation.begins_with("attack"):
-				# return 1/5 of the attack animation
-				$AnimationPlayer.seek(max(0, previousPosition - ($AnimationPlayer.current_animation_length / 5.0)))
-			else:
-				$AnimationPlayer.seek(previousPosition)
+			$AnimationPlayer.seek(previousPosition)
 
 
 func die(character : Character) -> void:
@@ -63,12 +59,12 @@ func done() -> void:
 
 func pause() -> void:
 	var tween = create_tween()
-	tween.tween_property($AnimationPlayer, "speed_scale", 0, 0.25)
+	tween.tween_property($AnimationPlayer, "speed_scale", 0, 0.15)
 	tween.play()
 
 
 func resume() -> void:
 	var tween = create_tween()
-	tween.tween_property($AnimationPlayer, "speed_scale", 1, 0.25)
+	tween.tween_property($AnimationPlayer, "speed_scale", 1, 0.15)
 	tween.play()
 
