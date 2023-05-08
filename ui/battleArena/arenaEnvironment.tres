@@ -1,7 +1,4 @@
-[gd_resource type="Environment" format=2]
+[gd_resource type="Environment" format=3 uid="uid://bfnggwe7mdd08"]
 
 [resource]
 background_mode = 1
-tonemap_mode = 4
-auto_exposure_scale = 0.05
-ss_reflections_enabled = true

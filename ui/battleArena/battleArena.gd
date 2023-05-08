@@ -1,4 +1,4 @@
-extends Node3D
+extends SubViewportContainer
 
 const _ENEMY_FRAME_RATIO : float = 1.875
 const _ENEMY_MAP : Array = [1, 2, 0]
@@ -7,8 +7,6 @@ const _ENEMIES_TRANSLATION : Array = [0.0, -1.25, 0.0]
 const _ENEMY_ROTAION : Array = [[25, 0, -25], [25, 10, -10], [25, 0, -25]]
 
 var enemyFrameSize : Vector2
-@onready var enemiesNode : Node = $SubViewportContainer/SubViewport/arena/enemies
-@onready var battleCamera : Camera3D = $SubViewportContainer/SubViewport/arena/pivot/Camera3D
 
 var enemySize : int = 0
 var cursorOn : bool = false
@@ -21,6 +19,7 @@ func _ready() -> void:
 	Signals.setupBattleScreen.connect(setup)
 	Signals.battleEnded.connect(finish)
 	Signals.battleWon.connect(showBattleResult)
+	Signals.battleLost.connect(lose)
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
@@ -29,13 +28,13 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		return
 	
 	var i = 0
-	for enemy in enemiesNode.get_children():
+	for enemy in $viewport/enemies.get_children():
 		for model in enemy.get_children():
 			model.queue_free()
 		
 		enemy.rotation_degrees.y = _ENEMY_ROTAION[enemyData.size() - 1][i]
 		i += 1
-	enemiesNode.transform.origin.x = _ENEMIES_TRANSLATION[enemyData.size() - 1]
+	$viewport/enemies.transform.origin.x = _ENEMIES_TRANSLATION[enemyData.size() - 1]
 	
 	i = 0
 	for enemy in enemyData:
@@ -53,7 +52,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName.substr(4)].instantiate()
 			scene.character = enemyData[index]
-			enemiesNode.get_child(_ENEMY_MAP[index]).add_child(scene)
+			$viewport/enemies.get_child(_ENEMY_MAP[index]).add_child(scene)
 		
 		index += 1
 		if index > enemyData.size() - 1:
@@ -68,12 +67,12 @@ func setup(playerData : Array, enemyData : Array) -> void:
 
 
 func setEnemyCursor(index : int) -> void:
-	var enemy = $SubViewportContainer/SubViewport/arena/enemies.get_child(index)
+	var enemy = $viewport/enemies.get_child(index)
 	
 	if enemy.get_child_count() == 1:
 		Signals.battleSetCursorPosition.emit(
 			enemy.get_child(0).character,
-			battleCamera.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
+			$viewport/pivot/Camera3D.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
 
 
 func finish() -> void:
@@ -82,6 +81,8 @@ func finish() -> void:
 
 # TODO loot
 func showBattleResult(players : Array, battleResult : BattleResult) -> void:
+	$AnimationPlayer.play("win")
+	
 	for player in players:
 		player.gainExperience(battleResult.experience)
 	
@@ -92,3 +93,6 @@ func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 	await get_tree().create_timer(2).timeout
 	Signals.battleEnded.emit()
 
+
+func lose() -> void:
+	$AnimationPlayer.play("lose")
