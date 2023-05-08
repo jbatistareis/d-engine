@@ -1,4 +1,4 @@
-extends Node3D
+extends Camera3D
 
 const _ROTATE_45 : float = PI / 4
 const _ROTATE_90 : float = PI / 2
@@ -27,7 +27,7 @@ func _process(_delta : float) -> void:
 
 
 func setup(_location : Location, x : int, y : int, direction : int) -> void:
-	$camera.current = true
+	current = true
 	GameManager.direction = direction
 	freeFlight = false
 	goTo(x, y, direction)
@@ -43,7 +43,7 @@ func freeCamera() -> void:
 
 
 func goTo(x : int, y : int, direction : int) -> void:
-	$camera.rotation.x = 0
+	rotation.x = 0
 	
 	transform.origin.x = x * 2 + 1
 	transform.origin.y = 1
@@ -129,21 +129,21 @@ func inputFreeFlight() -> void:
 			tween.play()
 			tween.tween_callback(freeCamera)
 		
-		if pitchUp && ($camera.rotation.x <= _ROTATE_45):
+		if pitchUp && (rotation.x <= _ROTATE_45):
 			tween.tween_property(
-				$camera,
+				self,
 				"rotation:x",
-				$camera.rotation.x + _ROTATE_45,
+				rotation.x + _ROTATE_45,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()
 			tween.tween_callback(freeCamera)
 		
-		if pitchDown && ($camera.rotation.x >= -_ROTATE_90):
+		if pitchDown && (rotation.x >= -_ROTATE_90):
 			tween.tween_property(
-				$camera,
+				self,
 				"rotation:x",
-				$camera.rotation.x - _ROTATE_45,
+				rotation.x - _ROTATE_45,
 				GameParameters.FREE_FLIGHT_DURATION
 			)
 			tween.play()

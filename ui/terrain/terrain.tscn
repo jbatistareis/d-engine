@@ -1,19 +1,28 @@
 [gd_scene load_steps=4 format=3 uid="uid://1hyjnmipuiba"]
 
 [ext_resource type="Script" path="res://ui/terrain/terrain.gd" id="1"]
-[ext_resource type="Script" path="res://ui/terrain/terrainCamera.gd" id="2"]
 [ext_resource type="Environment" path="res://ui/terrain/terrainEnvironment.tres" id="3"]
+[ext_resource type="Script" path="res://ui/terrain/camera.gd" id="3_225vv"]
 
-[node name="terrain" type="Node3D"]
+[node name="terrainViewport" type="SubViewportContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="viewport" type="SubViewport" parent="."]
+size = Vector2i(1366, 768)
+
+[node name="terrain" type="Node3D" parent="viewport"]
 script = ExtResource("1")
 
-[node name="camera" type="Node3D" parent="."]
-script = ExtResource("2")
-
-[node name="camera" type="Camera3D" parent="camera"]
+[node name="camera" type="Camera3D" parent="viewport/terrain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 environment = ExtResource("3")
 current = true
 fov = 84.0
+script = ExtResource("3_225vv")
 
-[node name="blocks" type="Node3D" parent="."]
+[node name="blocks" type="Node3D" parent="viewport/terrain"]

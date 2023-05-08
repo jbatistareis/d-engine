@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://d07e7uwoqpmbt"]
+[gd_scene load_steps=15 format=3 uid="uid://d07e7uwoqpmbt"]
 
 [ext_resource type="Script" path="res://ui/battleArena/battleArena.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://dbqcbw7eai18h" path="res://assets/kenney_prototypetextures/Light/texture_07.png" id="3"]
-[ext_resource type="Environment" path="res://ui/battleArena/arenaEnvironment.tres" id="4"]
 [ext_resource type="Script" path="res://ui/battleArena/arena.gd" id="5"]
 
 [sub_resource type="Animation" id="3"]
@@ -271,7 +270,6 @@ libraries = {
 
 [node name="Camera3D" type="Camera3D" parent="SubViewportContainer/SubViewport/arena/pivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
-environment = ExtResource("4")
 current = true
 fov = 43.0
 size = 0.1
