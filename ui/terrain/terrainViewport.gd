@@ -1,18 +1,18 @@
-extends Node3D
+extends SubViewportContainer
 
-const ROTATE_90 : float = PI / 2
+const _ROTATE_90 : float = PI / 2
 var blocks : Dictionary = {}
 
 
 func _ready() -> void:
-	Signals.connect("playerSpawned",Callable(self,"loadMap"))
+	Signals.playerSpawned.connect(loadMap)
 
 
 func loadMap(location : Location, x : int, y : int, _direction : int) -> void:
 	SceneLoadManager.fromLocation(location)
 	
 	blocks.clear()
-	for node in $blocks.get_children():
+	for node in $viewport/blocks.get_children():
 		node.queue_free()
 	
 	for room in location.rooms:
@@ -20,7 +20,7 @@ func loadMap(location : Location, x : int, y : int, _direction : int) -> void:
 		block.transform.origin.x = room.x * 2 + 1
 		block.transform.origin.y = 1
 		block.transform.origin.z = room.y * 2 + 1
-		block.rotation.y = ROTATE_90 * -room.orientation
+		block.rotation.y = _ROTATE_90 * -room.orientation
 		
-		$blocks.add_child(block)
+		$viewport/blocks.add_child(block)
 
