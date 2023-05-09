@@ -195,11 +195,10 @@ autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_e6atu")
 }
-blend_times = [&"win", &"finish", 1.0, &"win", &"start", 1.0, &"win", &"win", 1.0, &"win", &"lose", 1.0]
+blend_times = [&"win", &"finish", 1.0, &"win", &"start", 1.0, &"win", &"lose", 1.0, &"win", &"win", 1.0]
 
 [node name="viewport" type="SubViewport" parent="."]
 world_3d = ExtResource("2_ylblj")
-transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1366, 768)
 render_target_update_mode = 0

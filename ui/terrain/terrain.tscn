@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://ui/terrain/terrainViewport.gd" id="1_40hxx"]
 [ext_resource type="Script" path="res://ui/terrain/terrainCamera.gd" id="2"]
 [ext_resource type="World3D" uid="uid://dget5o5jms5al" path="res://ui/terrain/terrainWorld.tres" id="2_seku1"]
-[ext_resource type="Environment" path="res://ui/terrain/terrainEnvironment.tres" id="3"]
+[ext_resource type="Environment" uid="uid://h1hqwd28x5n1" path="res://ui/terrain/terrainEnvironment.tres" id="3"]
 
 [node name="terrain" type="SubViewportContainer"]
 anchors_preset = 15
