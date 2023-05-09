@@ -2,10 +2,10 @@ class_name UseItemCommand
 extends Command
 
 var itemMove : Move
-var targets : Array = []
+var targets : Array[Character] = []
 
 
-func _init(executorCharacter,targets : Array,itemMove : Move):
+func _init(executorCharacter : Character, targets : Array[Character], itemMove : Move):
 	super(executorCharacter, itemMove.cdPre)
 	
 	self.targets = targets

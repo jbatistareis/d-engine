@@ -6,8 +6,8 @@ class_name CharacterQuery
 # multi target queries
 #
 
-static func findByHighestHp(characters : Array) -> Array:
-	var matches = []
+static func findByHighestHp(characters : Array[Character]) -> Array[Character]:
+	var matches : Array[Character] = []
 	
 	var highest = 0
 	for character in characters:
@@ -21,8 +21,8 @@ static func findByHighestHp(characters : Array) -> Array:
 	return matches
 
 
-static func findByLowestHp(characters : Array) -> Array:
-	var matches = []
+static func findByLowestHp(characters : Array[Character]) -> Array[Character]:
+	var matches : Array[Character] = []
 	
 	var lowest = 9999
 	for character in characters:
@@ -37,8 +37,8 @@ static func findByLowestHp(characters : Array) -> Array:
 
 
 # use Enums.CharacterAbility
-static func findByHighestAbilityScore(characters : Array, ability : int) -> Array:
-	var matches = []
+static func findByHighestAbilityScore(characters : Array[Character], ability : int) -> Array[Character]:
+	var matches : Array[Character] = []
 	
 	var highest = 0
 	for character in characters:
@@ -53,8 +53,8 @@ static func findByHighestAbilityScore(characters : Array, ability : int) -> Arra
 
 
 # use Enums.CharacterAbility
-static func findByLowestAbilityScore(characters : Array, ability : int) -> Array:
-	var matches = []
+static func findByLowestAbilityScore(characters : Array[Character], ability : int) -> Array[Character]:
+	var matches : Array[Character] = []
 	
 	var lowest = 9999999999
 	for character in characters:
@@ -69,8 +69,8 @@ static func findByLowestAbilityScore(characters : Array, ability : int) -> Array
 
 
 # percentage is clamp, 0.05~0.95
-static func findByHpLt(characters : Array, percent : float) -> Array:
-	var matches = []
+static func findByHpLt(characters : Array[Character], percent : float) -> Array[Character]:
+	var matches : Array[Character] = []
 	percent = clamp(percent, 0.05 ,0.95)
 	
 	for character in characters:
@@ -81,8 +81,8 @@ static func findByHpLt(characters : Array, percent : float) -> Array:
 
 
 # percentage is clamp, 0.05~0.95
-static func findByHpGt(characters : Array, percent : float) -> Array:
-	var matches = []
+static func findByHpGt(characters : Array[Character], percent : float) -> Array[Character]:
+	var matches : Array[Character] = []
 	percent = clamp(percent, 0.05 ,0.95)
 	
 	for character in characters:
@@ -93,8 +93,8 @@ static func findByHpGt(characters : Array, percent : float) -> Array:
 
 
 # use Enums.MoveModifierType, clamps to -3~3
-func findByMovModLt(characters : Array, moveModifierType : int, amount : int) -> Array:
-	var matches = []
+func findByMovModLt(characters : Array[Character], moveModifierType : int, amount : int) -> Array[Character]:
+	var matches : Array[Character] = []
 	amount = clamp(amount, -3, 3)
 	
 	match moveModifierType:
@@ -141,8 +141,8 @@ func findByMovModLt(characters : Array, moveModifierType : int, amount : int) ->
 
 
 # use Enums.MoveModifierType, clamps to -3~3
-func findByMovModGt(characters : Array, moveModifierType : int, amount : int) -> Array:
-	var matches = []
+func findByMovModGt(characters : Array[Character], moveModifierType : int, amount : int) -> Array[Character]:
+	var matches : Array[Character] = []
 	amount = clamp(amount, -3, 3)
 	
 	match moveModifierType:
@@ -190,8 +190,8 @@ func findByMovModGt(characters : Array, moveModifierType : int, amount : int) ->
 
 # TODO
 # use Enums.AfflictionType
-static func findByAfflictionType(characters : Array, type : int) -> Array:
-	var matches = []
+static func findByAfflictionType(characters : Array[Character], type : int) -> Array[Character]:
+	var matches : Array[Character] = []
 	
 	for character in characters:
 		if characterHasAfflictionType(character, type):

@@ -47,7 +47,7 @@ func toDTO() -> VerdictDTO:
 	return verdictDto
 
 
-func decision(auditor) -> void:
+func decision(auditor : Character) -> void:
 	for action in actions:
 		var targetType = Enums.MoveTargetType.keys()[action.move.targetType]
 		var suspects = []
@@ -96,7 +96,7 @@ func decision(auditor) -> void:
 	)
 
 
-func analyze(script : String, auditor, suspects : Array) -> Array:
+func analyze(script : String, auditor : Character, suspects : Array[Character]) -> Array[Character]:
 	return ScriptTool.getReference(script).execute(auditor, suspects)
 
 

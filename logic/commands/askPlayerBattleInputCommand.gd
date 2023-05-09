@@ -2,7 +2,7 @@ class_name AskPlayerBattleInputCommand
 extends Command
 
 
-func _init(player, ticks : int):
+func _init(player : Character, ticks : int):
 	super(player, ticks)
 
 

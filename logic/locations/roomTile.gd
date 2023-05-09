@@ -58,7 +58,7 @@ func toDict() -> Dictionary:
 	}
 
 
-func enter(character, direction : int, battleTriggered : bool) -> void:
+func enter(character : Character, direction : int, battleTriggered : bool) -> void:
 	visited = true
 	executeScript(entranceLogic, character, direction)
 	
@@ -66,7 +66,7 @@ func enter(character, direction : int, battleTriggered : bool) -> void:
 	
 	if character.type == Enums.CharacterType.PC:
 		if !foeShortNameGroups.is_empty() && battleTriggered:
-			var enemies = []
+			var enemies : Array[Character] = []
 			
 			var chosenGroup = foeShortNameGroups[Dice.rollNormal(foeShortNameGroups.size(), -1)]
 			for shortName in chosenGroup:
@@ -78,11 +78,11 @@ func enter(character, direction : int, battleTriggered : bool) -> void:
 			Signals.battleStarted.emit(GameManager.party, enemies)
 
 
-func exit(character, direction : int) -> void:
+func exit(character : Character, direction : int) -> void:
 	executeScript(exitLogic, character, direction)
 
 
-func executeScript(script : String, character, direction : int) -> void:
+func executeScript(script : String, character : Character, direction : int) -> void:
 	ScriptTool.getReference(script).execute(character, direction)
 
 

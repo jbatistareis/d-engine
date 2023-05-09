@@ -1,16 +1,14 @@
 class_name ExecuteMoveCommand
 extends Command
 
-var targets : Array = []
+var targets : Array[Character] = []
 var move : Move
 
 var atkOffset : float = 1
 var cdOffset : float = 1
 
-var confirmedExecutions : Array[Character] = []
 
-
-func _init(executorCharacter,targets : Array,move : Move):
+func _init(executorCharacter : Character, targets : Array[Character], move : Move):
 	super(executorCharacter, move.cdPre)
 	
 	self.targets = targets

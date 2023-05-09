@@ -69,12 +69,12 @@ func hideCursors() -> void:
 		Signals.battleAskedMove.emit(player)
 
 
-func clearCursors(playerData : Array = [], enemyData : Array = []) -> void:
+func clearCursors(playerData : Array[Character] = [], enemyData : Array[Character] = []) -> void:
 	for cursor in $foes.get_children():
 		cursor.queue_free()
 
 
-func createCommand(player, targets, move) -> Command:
+func createCommand(player : Character, targets : Array[Character], move : Move) -> Command:
 	match move.type:
 		Enums.MoveType.ITEM:
 			return UseItemCommand.new(player, targets, move)

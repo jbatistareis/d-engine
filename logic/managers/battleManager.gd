@@ -9,7 +9,7 @@ func _ready():
 	Signals.battleStarted.connect(start)
 
 
-func start(players : Array, enemies : Array) -> void:
+func start(players : Array[Character], enemies : Array[Character]) -> void:
 	if !inBattle:
 		Signals.hideToast.emit()
 		inBattle = true
@@ -31,7 +31,7 @@ func start(players : Array, enemies : Array) -> void:
 			Signals.commandPublished.emit(VerdictCommand.new(enemy, int(randf_range(0.5, 0.8) * 30)))
 
 
-func _process(_delta) -> void:
+func _process(_delta : float) -> void:
 	if inBattle:
 		if playersAlive() == 0: # TODO game over
 			inBattle = false

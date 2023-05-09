@@ -16,7 +16,7 @@ var experiencePoints : int
 var experienceToNextLevel : int : get = getExperienceToNextLevel
 var sparePoints : int
 
-var stats : Array = []
+var stats : Array[Stat] = []
 
 # does not persist
 var atkMod : int = 0 :
