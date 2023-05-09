@@ -42,6 +42,12 @@ func execute() -> void:
 	Signals.startedBattleAnimation.emit(executorCharacter, move.attackAnimation)
 	
 	# TODO player animations, change this after player animations are implemented
+	if executorCharacter.type != Enums.CharacterType.PC:
+		while await Signals.finishedBattleAnimation != executorCharacter:
+			if !confirmExecution():
+				return
+			continue
+		
 	continueExecution(executorCharacter)
 
 

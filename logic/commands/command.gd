@@ -1,4 +1,5 @@
 class_name Command
+extends Node
 
 var executorCharacter
 var totalTicks : int : set = setTotalTicks
