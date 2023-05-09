@@ -8,6 +8,7 @@ extends Node3D
 # Preparation animations are optional, but recommended
 
 
+const _BLEND : float = 0.3
 var character : Character
 
 
@@ -25,12 +26,12 @@ func _ready() -> void:
 
 func play(character : Character, animation : String) -> void:
 	if (character == self.character) && (character.currentHp > 0) && (!animation.is_empty() || (animation != null)):
-		$AnimationPlayer.play(animation)
+		$AnimationPlayer.play(animation, _BLEND)
 		
 		if animation.begins_with("attack"):
 			await $AnimationPlayer.animation_finished
 			if character.currentHp > 0:
-				$AnimationPlayer.play("idle")
+				$AnimationPlayer.play("idle", _BLEND)
 
 
 func damage(character : Character) -> void:
@@ -38,7 +39,7 @@ func damage(character : Character) -> void:
 		var previousAnimation = $AnimationPlayer.current_animation
 		var previousPosition = $AnimationPlayer.current_animation_position
 		
-		$AnimationPlayer.play("damage")
+		$AnimationPlayer.play("damage", _BLEND)
 		await $AnimationPlayer.animation_finished
 		
 		play(character, previousAnimation)
@@ -48,7 +49,7 @@ func damage(character : Character) -> void:
 
 func die(character : Character) -> void:
 	if character == self.character:
-		$AnimationPlayer.play("death")
+		$AnimationPlayer.play("death", _BLEND)
 
 
 # this method must be called from every attack animation (add a Call Mathod track)
