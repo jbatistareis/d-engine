@@ -1,0 +1,64 @@
+[gd_scene load_steps=6 format=3 uid="uid://boiguols60sw5"]
+
+[ext_resource type="Environment" uid="uid://bfnggwe7mdd08" path="res://ui/battleArena/arenaEnvironment.tres" id="1_53lsp"]
+[ext_resource type="PackedScene" uid="uid://ded41bihue3a8" path="res://assets/base_character/BSECHA.gltf" id="1_esuop"]
+[ext_resource type="Texture2D" uid="uid://dbqcbw7eai18h" path="res://assets/kenney_prototypetextures/Light/texture_07.png" id="3_qr3hd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pmh2i"]
+albedo_texture = ExtResource("3_qr3hd")
+metallic = 0.5
+roughness = 0.5
+uv1_scale = Vector3(6, 6, 6)
+uv1_triplanar = true
+distance_fade_min_distance = 1.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_xiorh"]
+material = SubResource("StandardMaterial3D_pmh2i")
+size = Vector2(100, 100)
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="arena3d" type="Node3D"]
+
+[node name="mainLight" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 50, 0)
+
+[node name="pivot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 6)
+environment = ExtResource("1_53lsp")
+current = true
+fov = 43.0
+size = 0.1
+
+[node name="bulb" type="OmniLight3D" parent="pivot/Camera3D"]
+shadow_enabled = true
+omni_range = 8.0
+
+[node name="lantern" type="SpotLight3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 7.45058e-08, 5, 6.26015)
+shadow_enabled = true
+spot_range = 50.0
+
+[node name="enemies" type="Node3D" parent="."]
+
+[node name="enemy1" type="Node3D" parent="enemies"]
+transform = Transform3D(0.906308, 0, 0.422618, 0, 1, 0, -0.422618, 0, 0.906308, -2.5, 0, 0)
+
+[node name="BSECHA" parent="enemies/enemy1" instance=ExtResource("1_esuop")]
+
+[node name="enemy2" type="Node3D" parent="enemies"]
+transform = Transform3D(0.984808, 0, 0.173648, 0, 1, 0, -0.173648, 0, 0.984808, 0, 0, 0)
+
+[node name="BSECHA" parent="enemies/enemy2" instance=ExtResource("1_esuop")]
+
+[node name="enemy3" type="Node3D" parent="enemies"]
+transform = Transform3D(0.984808, 0, -0.173648, 0, 1, 0, 0.173648, 0, 0.984808, 2.5, 0, 0)
+
+[node name="BSECHA" parent="enemies/enemy3" instance=ExtResource("1_esuop")]
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(21, 0, 0, 0, 1, 0, 0, 0, 21, 0, -0.01, 0)
+mesh = SubResource("PlaneMesh_xiorh")
+skeleton = NodePath("")

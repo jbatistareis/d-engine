@@ -28,13 +28,13 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		return
 	
 	var i = 0
-	for enemy in $viewport/enemies.get_children():
+	for enemy in $viewport/arena3d/enemies.get_children():
 		for model in enemy.get_children():
 			model.queue_free()
 		
 		enemy.rotation_degrees.y = _ENEMY_ROTAION[enemyData.size() - 1][i]
 		i += 1
-	$viewport/enemies.transform.origin.x = _ENEMIES_TRANSLATION[enemyData.size() - 1]
+	$viewport/arena3d/enemies.transform.origin.x = _ENEMIES_TRANSLATION[enemyData.size() - 1]
 	
 	i = 0
 	for enemy in enemyData:
@@ -52,7 +52,7 @@ func setup(playerData : Array, enemyData : Array) -> void:
 		if enemyData[index] != null:
 			var scene = SceneLoadManager.scenes[enemyData[index].shortName.substr(4)].instantiate()
 			scene.character = enemyData[index]
-			$viewport/enemies.get_child(_ENEMY_MAP[index]).add_child(scene)
+			$viewport/arena3d/enemies.get_child(_ENEMY_MAP[index]).add_child(scene)
 		
 		index += 1
 		if index > enemyData.size() - 1:
@@ -67,12 +67,12 @@ func setup(playerData : Array, enemyData : Array) -> void:
 
 
 func setEnemyCursor(index : int) -> void:
-	var enemy = $viewport/enemies.get_child(index)
+	var enemy = $viewport/arena3d/enemies.get_child(index)
 	
 	if enemy.get_child_count() == 1:
 		Signals.battleSetCursorPosition.emit(
 			enemy.get_child(0).character,
-			$viewport/pivot/Camera3D.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
+			$viewport/arena3d/pivot/Camera3D.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
 
 
 func finish() -> void:
@@ -89,7 +89,7 @@ func showBattleResult(players : Array, battleResult : BattleResult) -> void:
 	await get_tree().create_timer(1.5).timeout
 	Signals.battleShowResult.emit(battleResult)
 	
-	# should be checked the window
+	# should be a button on a window
 	await get_tree().create_timer(2).timeout
 	Signals.battleEnded.emit()
 
