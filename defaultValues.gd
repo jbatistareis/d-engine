@@ -9,6 +9,7 @@ const MOVE_BASE_EXECUTE : String = 'func execute(_executor : Character) -> void:
 const LOCATION_NOOP : String = 'func execute(_executor : Character) -> void:\n\treturn'
 const ROOM_ENTER_NOOP : String = 'func execute(_executor : Character, _direction : int) -> bool:\n\treturn true'
 const ROOM_NOOP : String = 'func execute(_executor : Character, _direction : int) -> void:\n\treturn'
+const INTERACTION_LOGIC_NOOP : String = 'func execute(_direction : int) -> void:\n\treturn'
 
 const ITEM_BASE_ACTION : String = 'func execute(_targets : Array[Character]) -> void:\n\treturn'
 
@@ -30,6 +31,7 @@ var roomBase : Dictionary = {
 	'entryLogic': ROOM_ENTER_NOOP,
 	'entranceLogic': ROOM_NOOP,
 	'exitLogic': ROOM_NOOP,
+	'interationLogic': INTERACTION_LOGIC_NOOP,
 	'foeShortNameGroups': [], # 2D string array representing possible enemy groups
 	'visited': false,
 }

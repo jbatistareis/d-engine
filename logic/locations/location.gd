@@ -17,6 +17,13 @@ var exitLogic : String
 
 var encounterRate : float
 
+# TODO persistence
+var variables : Dictionary = {}
+
+
+func _init() -> void:
+	Signals.playerInteracted.connect(interaction)
+
 
 func fromShortName(locationShortName : String) -> Location:
 	return fromDTO(Persistence.loadDTO(locationShortName, Enums.EntityType.LOCATION))
@@ -99,6 +106,10 @@ func checkAdjacentAccess(character : Character) -> void:
 func teleport(character : Character, toRoomId : int, facingDirection : int) -> void:
 	GameManager.direction = facingDirection
 	roomTile.fromDict(findRoom(toRoomId)).enter(character, reverseDirection(facingDirection), false)
+
+
+func interaction(direction : int) -> void:
+	pass
 
 
 func executeScript(script : String, character : Character) -> void:

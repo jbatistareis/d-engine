@@ -19,6 +19,9 @@ func handleInput() -> void:
 			elif Input.is_action_pressed("ui_down"):
 				LocationManager.moveCharacter(GameManager.player, (GameManager.direction + 2) % 4)
 			
+			elif Input.is_action_just_pressed("ui_accept"):
+				Signals.playerInteracted.emit(GameManager.direction)
+			
 			elif Input.is_action_just_pressed("ui_home"):
 				next = GameManager.getState(Enums.States.EXPLORING_MENU)
 			
