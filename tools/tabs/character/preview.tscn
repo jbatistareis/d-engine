@@ -1,0 +1,210 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsl8mnf1f6jo4"]
+
+[ext_resource type="Script" path="res://tools/tabs/character/preview.gd" id="1_cj1fd"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_hpjmu"]
+[ext_resource type="PackedScene" uid="uid://bwa4o6julyvl6" path="res://tools/tabs/character/modelPreview.tscn" id="3_km3s3"]
+
+[node name="preview" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15
+script = ExtResource("1_cj1fd")
+
+[node name="pvwTitle" parent="." instance=ExtResource("2_hpjmu")]
+layout_mode = 2
+title = "Preview"
+
+[node name="windows" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="lblNone" type="Label" parent="windows"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 1
+text = "Select a misc. item, or click 'View'"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="verdict" type="VBoxContainer" parent="windows"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="idGrid" type="GridContainer" parent="windows/verdict"]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="windows/verdict/idGrid"]
+layout_mode = 2
+text = "Name: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblNameValue" type="Label" parent="windows/verdict/idGrid"]
+layout_mode = 2
+vertical_alignment = 1
+
+[node name="lblShortname" type="Label" parent="windows/verdict/idGrid"]
+layout_mode = 2
+text = "Short name: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="btnVerdictShortname" type="LinkButton" parent="windows/verdict/idGrid"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="facts" type="ScrollContainer" parent="windows/verdict"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="container" type="VBoxContainer" parent="windows/verdict/facts"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+
+[node name="inventory" type="VBoxContainer" parent="windows"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="data" type="GridContainer" parent="windows/inventory"]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+text = "Name: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblNameValue" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+vertical_alignment = 1
+
+[node name="lblShortname" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+text = "Short name: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="btnInvShortname" type="LinkButton" parent="windows/inventory/data"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lblArmor" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+text = "Armor: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="btnArmName" type="LinkButton" parent="windows/inventory/data"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lblWpnName" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+text = "Weapon: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="btnWpnName" type="LinkButton" parent="windows/inventory/data"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="lblMoney" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+text = "Money: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblMoneyValue" type="Label" parent="windows/inventory/data"]
+layout_mode = 2
+size_flags_horizontal = 3
+vertical_alignment = 1
+
+[node name="items" type="VBoxContainer" parent="windows/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="lblItems" type="Label" parent="windows/inventory/items"]
+layout_mode = 2
+text = "Items ⬎"
+
+[node name="scroll" type="ScrollContainer" parent="windows/inventory/items"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="container" type="GridContainer" parent="windows/inventory/items/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="weapons" type="VBoxContainer" parent="windows/inventory"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="lblWeapons" type="Label" parent="windows/inventory/weapons"]
+layout_mode = 2
+text = "Weapons ⬎"
+
+[node name="scroll" type="ScrollContainer" parent="windows/inventory/weapons"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="container" type="GridContainer" parent="windows/inventory/weapons/scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="model" type="VBoxContainer" parent="windows"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="container" type="SubViewportContainer" parent="windows/model"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="viewport" type="SubViewport" parent="windows/model/container"]
+handle_input_locally = false
+size = Vector2i(1366, 668)
+render_target_update_mode = 4
+
+[node name="modelPreview" parent="windows/model/container/viewport" instance=ExtResource("3_km3s3")]
+
+[node name="camera" type="HBoxContainer" parent="windows/model"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+
+[node name="rotateLeft" type="Button" parent="windows/model/camera"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "↩"
+
+[node name="rotateRight" type="Button" parent="windows/model/camera"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+text = "↪"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="windows/verdict/idGrid/btnVerdictShortname" to="." method="_on_btn_verdict_shortname_pressed"]
+[connection signal="pressed" from="windows/model/camera/rotateLeft" to="." method="_on_rotate_left_pressed"]
+[connection signal="pressed" from="windows/model/camera/rotateRight" to="." method="_on_rotate_right_pressed"]

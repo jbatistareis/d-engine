@@ -2,10 +2,10 @@ class_name UseItemCommand
 extends Command
 
 var itemMove : Move
-var targets : Array = []
+var targets : Array[Character] = []
 
 
-func _init(executorCharacter,targets : Array,itemMove : Move):
+func _init(executorCharacter : Character, targets : Array[Character], itemMove : Move):
 	super(executorCharacter, itemMove.cdPre)
 	
 	self.targets = targets
@@ -16,7 +16,7 @@ func execute() -> void:
 	if !confirmExecution():
 		return
 	
-	var index = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, EntityArrayHelper, 'shortNameFind')
+	var index = executorCharacter.inventory.items.bsearch_custom(itemMove.shortName, func(a, b): return EntityArrayHelper.shortNameFind(a, b))
 	Signals.characterUsedItem.emit(
 		executorCharacter,
 		targets,

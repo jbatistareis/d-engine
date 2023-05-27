@@ -8,8 +8,8 @@ enum DiceOutcome { BEST, WITH_CONSEQUENCE, WORST }
 enum DiceRollType { NONE, BEST, NORMAL, WORST }
 
 # used to set character class stats
-enum CharacterAbility { NONE, STRENGTH, DEXTERITY, CONSTITUTION }
-enum CharacterModifier { NONE, STR, DEX, CON }
+enum CharacterAbility { NONE, CONSTITUTION, STRENGTH, DEXTERITY }
+enum CharacterModifier { NONE, CON, STR, DEX }
 
 enum CharacterType { PC, NPC, FOE }
 

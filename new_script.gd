@@ -7,6 +7,7 @@ func _init():
 	OS.low_processor_usage_mode = true
 	
 	player = Character.new().fromShortName('BSECHA')
+#	Persistence.saveDTO(LocationDTO.new())
 
 
 func _ready() -> void:
@@ -43,12 +44,16 @@ func _ready() -> void:
 	
 	weapon2.name = "Test Weapon2"
 	weapon2.shortName = "TSTWPN2"
+	weapon2.damage = 2
 	weapon3.name = "Test Weapon3"
 	weapon3.shortName = "TSTWPN3"
+	weapon3.damage = 3
 	weapon4.name = "Test Weapon4"
 	weapon4.shortName = "TSTWPN4"
+	weapon4.damage = 4
 	weapon5.name = "Test Weapon5"
 	weapon5.shortName = "TSTWPN5"
+	weapon5.damage = 5
 	
 	Signals.emit_signal("characterReceivedWeapon", player, weapon)
 	Signals.emit_signal("characterReceivedWeapon", player, weapon2)
@@ -66,7 +71,13 @@ func _ready() -> void:
 	item2.shortName = "ITM2"
 	item3.shortName = "ITM3"
 	item4.shortName = "ITM4"
-	item5.shortName = "ITM4"
+	item5.shortName = "ITM5"
+	
+	item1.name = "ITM1"
+	item2.name = "ITM2"
+	item3.name = "ITM3"
+	item4.name = "ITM4"
+	item5.name = "ITM5"
 	
 	Signals.emit_signal("characterReceivedItem", player, item1)
 	Signals.emit_signal("characterReceivedItem", player, item2)

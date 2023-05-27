@@ -1,0 +1,408 @@
+[gd_scene load_steps=8 format=3 uid="uid://bem4lcys6lps4"]
+
+[ext_resource type="Script" path="res://tools/tabs/location/locationTab.gd" id="1_j2i7n"]
+[ext_resource type="Script" path="res://tools/tabs/location/grid.gd" id="2_a4lmr"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_ibee7"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_6ac1u"]
+[ext_resource type="PackedScene" uid="uid://bg10pfnfxdvvn" path="res://tools/fields/cdeField.tscn" id="4_w4cj5"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="5_omfsx"]
+[ext_resource type="PackedScene" uid="uid://d0hok0wqivpy0" path="res://tools/tabs/location/tileView.tscn" id="6_y4nfk"]
+
+[node name="locationTab" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 5
+script = ExtResource("1_j2i7n")
+
+[node name="map" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="grid" type="GridContainer" parent="map"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 64
+script = ExtResource("2_a4lmr")
+
+[node name="parameters" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="tabs" type="TabContainer" parent="parameters"]
+custom_minimum_size = Vector2(456, 0)
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+
+[node name="General" type="TabBar" parent="parameters/tabs"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="parameters" type="VBoxContainer" parent="parameters/tabs/General"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="idTitle" parent="parameters/tabs/General/parameters" instance=ExtResource("2_ibee7")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="parameters/tabs/General/parameters"]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "shortName"
+
+[node name="lblDescription" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Description "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtDescription" parent="parameters/tabs/General/parameters/idGrid" instance=ExtResource("3_6ac1u")]
+layout_mode = 2
+property = "description"
+
+[node name="lblEnc" type="Label" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+text = "Enc.:   0% "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="sldEnc" type="HSlider" parent="parameters/tabs/General/parameters/idGrid"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+tick_count = 5
+ticks_on_borders = true
+
+[node name="Control" type="Control" parent="parameters/tabs/General/parameters"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="logic" type="TabContainer" parent="parameters/tabs/General/parameters"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Entrance logic" type="TabBar" parent="parameters/tabs/General/parameters/logic"]
+layout_mode = 2
+
+[node name="cdeEntrance" parent="parameters/tabs/General/parameters/logic/Entrance logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "entranceLogic"
+
+[node name="Exit logic" type="TabBar" parent="parameters/tabs/General/parameters/logic"]
+visible = false
+layout_mode = 2
+
+[node name="cdeExit" parent="parameters/tabs/General/parameters/logic/Exit logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+offset_top = 30.0
+offset_right = 8.0
+offset_bottom = 38.0
+property = "exitLogic"
+
+[node name="Room" type="TabBar" parent="parameters/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="tabs" type="TabContainer" parent="parameters/tabs/Room"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
+
+[node name="Tile" type="TabBar" parent="parameters/tabs/Room/tabs"]
+layout_mode = 2
+
+[node name="container" type="VBoxContainer" parent="parameters/tabs/Room/tabs/Tile"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="tilePreview" type="SubViewportContainer" parent="parameters/tabs/Room/tabs/Tile/container"]
+layout_mode = 2
+size_flags_vertical = 3
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview"]
+handle_input_locally = false
+size = Vector2i(456, 338)
+render_target_update_mode = 0
+
+[node name="tileView" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport" instance=ExtResource("6_y4nfk")]
+
+[node name="parameters" type="VBoxContainer" parent="parameters/tabs/Room/tabs/Tile/container"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="buttons" type="HBoxContainer" parent="parameters/tabs/Room/tabs/Tile/container/parameters"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="btnAutotile" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Autotile"
+
+[node name="HSeparator" type="HSeparator" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="btnRotateLeft" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "↩"
+
+[node name="btnRotateRight" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "↪"
+
+[node name="HSeparator2" type="HSeparator" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="btnDelete" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/buttons"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+text = "Delete"
+
+[node name="settings" type="HBoxContainer" parent="parameters/tabs/Room/tabs/Tile/container/parameters"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="lblId" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="directionGrid" type="GridContainer" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings"]
+layout_mode = 2
+columns = 3
+
+[node name="lblPoint1" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+layout_mode = 2
+text = "•"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="btnNorth" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "↑"
+
+[node name="lblPoint2" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+layout_mode = 2
+text = "•"
+vertical_alignment = 2
+
+[node name="btnWest" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "←"
+
+[node name="lblCross" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+layout_mode = 2
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="btnEast" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "→"
+
+[node name="lblPoint3" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+layout_mode = 2
+text = "•"
+horizontal_alignment = 2
+
+[node name="btnSouth" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "↓"
+
+[node name="lblPoint4" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid"]
+layout_mode = 2
+text = "•"
+
+[node name="appearenceGrid" type="GridContainer" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings"]
+layout_mode = 2
+size_flags_vertical = 4
+columns = 2
+
+[node name="lblType" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid"]
+layout_mode = 2
+text = "Type "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optType" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid" instance=ExtResource("5_omfsx")]
+layout_mode = 2
+property = "type"
+
+[node name="lblModel" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid"]
+layout_mode = 2
+text = "Model "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optModel" parent="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid" instance=ExtResource("5_omfsx")]
+layout_mode = 2
+property = "model"
+dataType = 1
+
+[node name="enemies" type="VBoxContainer" parent="parameters/tabs/Room/tabs/Tile/container"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="container" type="HBoxContainer" parent="parameters/tabs/Room/tabs/Tile/container/enemies"]
+layout_mode = 2
+
+[node name="lblEnemies" type="Label" parent="parameters/tabs/Room/tabs/Tile/container/enemies/container"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Enemy groups⬎"
+vertical_alignment = 1
+
+[node name="btnSetGroup" type="Button" parent="parameters/tabs/Room/tabs/Tile/container/enemies/container"]
+layout_mode = 2
+text = "Set groups"
+
+[node name="cdeEnemies" type="CodeEdit" parent="parameters/tabs/Room/tabs/Tile/container/enemies"]
+custom_minimum_size = Vector2(0, 138)
+layout_mode = 2
+size_flags_vertical = 3
+gutters_draw_executing_lines = true
+gutters_draw_line_numbers = true
+gutters_zero_pad_line_numbers = true
+
+[node name="Entry check" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeEntry" parent="parameters/tabs/Room/tabs/Entry check" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "entryLogic"
+
+[node name="Entrance logic" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeEntrance" parent="parameters/tabs/Room/tabs/Entrance logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "entranceLogic"
+
+[node name="Exit logic" type="TabBar" parent="parameters/tabs/Room/tabs"]
+visible = false
+layout_mode = 2
+
+[node name="cdeExit" parent="parameters/tabs/Room/tabs/Exit logic" instance=ExtResource("4_w4cj5")]
+layout_mode = 1
+property = "exitLogic"
+
+[node name="button" type="HBoxContainer" parent="parameters"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="btnOpen" type="Button" parent="parameters/button"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Open"
+
+[node name="btnSave" type="Button" parent="parameters/button"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Save"
+
+[node name="Control" type="Control" parent="parameters/button"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btnPreview" type="Button" parent="parameters/button"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Preview"
+
+[node name="fileDialog" type="FileDialog" parent="."]
+initial_position = 2
+title = "Open a File"
+size = Vector2i(640, 480)
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+ok_button_text = "Open"
+file_mode = 0
+root_subfolder = "data/locations"
+filters = PackedStringArray("*.loc")
+
+[node name="saveConfirm" type="ConfirmationDialog" parent="."]
+unresizable = true
+borderless = true
+always_on_top = true
+ok_button_text = "Yes"
+cancel_button_text = "No"
+
+[connection signal="value_changed" from="parameters/tabs/General/parameters/idGrid/sldEnc" to="." method="_on_sld_enc_value_changed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnAutotile" to="." method="_on_btn_autotile_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnRotateLeft" to="." method="_on_btn_rotate_left_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnRotateRight" to="." method="_on_btn_rotate_right_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/buttons/btnDelete" to="." method="_on_btn_delete_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnNorth" to="." method="_on_btn_north_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnWest" to="." method="_on_btn_west_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnEast" to="." method="_on_btn_east_pressed"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/directionGrid/btnSouth" to="." method="_on_btn_south_pressed"]
+[connection signal="item_selected" from="parameters/tabs/Room/tabs/Tile/container/parameters/settings/appearenceGrid/optModel" to="." method="_on_opt_model_item_selected"]
+[connection signal="pressed" from="parameters/tabs/Room/tabs/Tile/container/enemies/container/btnSetGroup" to="." method="_on_btn_set_group_pressed"]
+[connection signal="pressed" from="parameters/button/btnOpen" to="." method="_on_btn_open_pressed"]
+[connection signal="pressed" from="parameters/button/btnSave" to="." method="_on_btn_save_pressed"]
+[connection signal="pressed" from="parameters/button/btnPreview" to="." method="_on_btn_preview_pressed"]
+[connection signal="file_selected" from="fileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_save_confirm_confirmed"]

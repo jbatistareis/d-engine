@@ -1,0 +1,201 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5x2fv28qqro0"]
+
+[ext_resource type="Script" path="res://tools/tabs/inventory/parameters.gd" id="1_tifjv"]
+[ext_resource type="PackedScene" uid="uid://bge3nde7sbbqn" path="res://tools/fields/fieldTitle.tscn" id="2_7lanj"]
+[ext_resource type="PackedScene" uid="uid://cq3ev7a3n7imb" path="res://tools/fields/txtField.tscn" id="3_f3j63"]
+[ext_resource type="PackedScene" uid="uid://0hy4spnwr4hg" path="res://tools/fields/optField.tscn" id="4_pqdgn"]
+[ext_resource type="PackedScene" uid="uid://ort6q68cvhx8" path="res://tools/fields/spnField.tscn" id="5_1ykdv"]
+
+[node name="parameters" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_tifjv")
+
+[node name="idTitle" parent="." instance=ExtResource("2_7lanj")]
+layout_mode = 2
+title = "Identification"
+
+[node name="idGrid" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtName" parent="idGrid" instance=ExtResource("3_f3j63")]
+layout_mode = 2
+property = "name"
+
+[node name="lblShortname" type="Label" parent="idGrid"]
+layout_mode = 2
+text = "Short name "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="txtShortname" parent="idGrid" instance=ExtResource("3_f3j63")]
+layout_mode = 2
+property = "shortName"
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="equipTitle" parent="." instance=ExtResource("2_7lanj")]
+layout_mode = 2
+title = "Equipment"
+
+[node name="equipGrid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 4
+
+[node name="lblArmor" type="Label" parent="equipGrid"]
+layout_mode = 2
+text = "Armor "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optArmor" parent="equipGrid" instance=ExtResource("4_pqdgn")]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+property = "weaponShortName"
+dataType = 1
+
+[node name="lblWpn" type="Label" parent="equipGrid"]
+layout_mode = 2
+text = "  Weapon "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="optWpn" parent="equipGrid" instance=ExtResource("4_pqdgn")]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+property = "armorShortName"
+dataType = 1
+
+[node name="Control2" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="contTitle" parent="." instance=ExtResource("2_7lanj")]
+layout_mode = 2
+title = "Equipment"
+
+[node name="container" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="money" type="HBoxContainer" parent="container"]
+layout_mode = 2
+alignment = 1
+
+[node name="lblMoney" type="Label" parent="container/money"]
+layout_mode = 2
+text = "Money "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="spnParameter" parent="container/money" instance=ExtResource("5_1ykdv")]
+layout_mode = 2
+max_value = 9999.0
+property = "money"
+
+[node name="Control3" type="Control" parent="container"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="itemControl" type="HBoxContainer" parent="container"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="lblItems" type="Label" parent="container/itemControl"]
+layout_mode = 2
+text = "Items ⬎"
+
+[node name="Control" type="Control" parent="container/itemControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="optItems" type="OptionButton" parent="container/itemControl"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="btnAddItem" type="Button" parent="container/itemControl"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "+"
+
+[node name="VSeparator" type="VSeparator" parent="container/itemControl"]
+layout_mode = 2
+
+[node name="btnDelItem" type="Button" parent="container/itemControl"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "❌"
+
+[node name="items" type="ItemList" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+auto_height = true
+max_columns = 5
+same_column_width = true
+fixed_column_width = 140
+
+[node name="Control4" type="Control" parent="container"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="wpnControl" type="HBoxContainer" parent="container"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="lblWpns" type="Label" parent="container/wpnControl"]
+layout_mode = 2
+text = "Weapons ⬎"
+
+[node name="Control" type="Control" parent="container/wpnControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="optWpns" type="OptionButton" parent="container/wpnControl"]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+
+[node name="btnAddWpn" type="Button" parent="container/wpnControl"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "+"
+
+[node name="VSeparator" type="VSeparator" parent="container/wpnControl"]
+layout_mode = 2
+
+[node name="btnDelWpn" type="Button" parent="container/wpnControl"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "❌"
+
+[node name="weapons" type="ItemList" parent="container"]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+auto_height = true
+item_count = 2
+max_columns = 5
+same_column_width = true
+fixed_column_width = 140
+item_0/text = ""
+item_1/text = ""
+
+[connection signal="pressed" from="container/itemControl/btnAddItem" to="." method="_on_btn_add_item_pressed"]
+[connection signal="pressed" from="container/itemControl/btnDelItem" to="." method="_on_btn_del_item_pressed"]
+[connection signal="pressed" from="container/wpnControl/btnAddWpn" to="." method="_on_btn_add_wpn_pressed"]
+[connection signal="pressed" from="container/wpnControl/btnDelWpn" to="." method="_on_btn_del_wpn_pressed"]

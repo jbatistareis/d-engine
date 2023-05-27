@@ -1,87 +1,148 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=3 uid="uid://byav18k0rh6h1"]
 
-[ext_resource path="res://tools/editor.gd" type="Script" id=1]
-[ext_resource path="res://tools/location/locationTab.tscn" type="PackedScene" id=2]
-[ext_resource path="res://tools/character/characterTab.tscn" type="PackedScene" id=3]
-[ext_resource path="res://tools/armor/armorTab.tscn" type="PackedScene" id=4]
-[ext_resource path="res://tools/weapon/weaponTab.tscn" type="PackedScene" id=5]
-[ext_resource path="res://tools/move/moveTab.tscn" type="PackedScene" id=6]
-[ext_resource path="res://tools/verdict/verdictTab.tscn" type="PackedScene" id=7]
-[ext_resource path="res://tools/item/itemTab.tscn" type="PackedScene" id=8]
-[ext_resource path="res://tools/inventory/inventoryTab.tscn" type="PackedScene" id=9]
+[ext_resource type="Script" path="res://tools/editor.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://brxd56tgryn4u" path="res://tools/tabs/armor/parameters.tscn" id="3_0java"]
+[ext_resource type="PackedScene" uid="uid://b3qchadcmjlhf" path="res://tools/tabs/editorTab.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://sgk25galjl0v" path="res://tools/tabs/move/logic.tscn" id="4_0vhin"]
+[ext_resource type="PackedScene" uid="uid://ll4k4h2yxapa" path="res://tools/tabs/item/parameters.tscn" id="4_1ydon"]
+[ext_resource type="PackedScene" uid="uid://uutlxsh0mt4s" path="res://tools/tabs/weapon/parameters.tscn" id="4_ler5g"]
+[ext_resource type="PackedScene" uid="uid://dv4ugt81haiso" path="res://tools/tabs/move/parameters.tscn" id="4_opl7l"]
+[ext_resource type="PackedScene" uid="uid://c8eajlttni7dl" path="res://tools/tabs/character/parameters.tscn" id="4_wj5cb"]
+[ext_resource type="PackedScene" uid="uid://bsl8mnf1f6jo4" path="res://tools/tabs/character/preview.tscn" id="5_djl36"]
+[ext_resource type="PackedScene" uid="uid://c5x2fv28qqro0" path="res://tools/tabs/inventory/parameters.tscn" id="6_jluau"]
+[ext_resource type="PackedScene" uid="uid://bem4lcys6lps4" path="res://tools/tabs/location/locationTab.tscn" id="8_8ou71"]
+[ext_resource type="PackedScene" uid="uid://cewyj6rje0gdo" path="res://tools/tabs/verdict/parameters.tscn" id="9_p1i6a"]
 
 [node name="editor" type="Panel"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1")
 
 [node name="tabs" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
+grow_horizontal = 2
+grow_vertical = 2
+tab_alignment = 1
 
-[node name="Armor" parent="tabs" instance=ExtResource( 4 )]
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
+[node name="Armor" type="TabBar" parent="tabs"]
+layout_mode = 2
 
-[node name="Character" parent="tabs" instance=ExtResource( 3 )]
+[node name="editorTab" parent="tabs/Armor" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 6
+parametersScene = ExtResource("3_0java")
+
+[node name="Character" type="TabBar" parent="tabs"]
 visible = false
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
-scrolling_enabled = false
+layout_mode = 2
 
-[node name="Event" type="TabBar" parent="tabs"]
-visible = false
+[node name="container" type="HBoxContainer" parent="tabs/Character"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
-size_flags_horizontal = 3
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="background" type="Panel" parent="tabs/Event"]
+[node name="editorTab" parent="tabs/Character/container" instance=ExtResource("4")]
+layout_mode = 2
+parametersScene = ExtResource("4_wj5cb")
+
+[node name="preview" parent="tabs/Character/container" instance=ExtResource("5_djl36")]
+layout_mode = 2
+
+[node name="Dialog" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="Inventory" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="editorTab" parent="tabs/Inventory" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 3
+parametersScene = ExtResource("6_jluau")
+
+[node name="Item" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="editorTab" parent="tabs/Item" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 4
+parametersScene = ExtResource("4_1ydon")
+
+[node name="Location" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="locationTab" parent="tabs/Location" instance=ExtResource("8_8ou71")]
+layout_mode = 1
+
+[node name="Move" type="TabBar" parent="tabs"]
+visible = false
+layout_mode = 2
+
+[node name="container" type="HBoxContainer" parent="tabs/Move"]
+layout_mode = 1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Inventory" parent="tabs" instance=ExtResource( 9 )]
+[node name="editorTab" parent="tabs/Move/container" instance=ExtResource("4")]
+layout_mode = 2
+dtoType = 1
+parametersScene = ExtResource("4_opl7l")
+
+[node name="logic" parent="tabs/Move/container" instance=ExtResource("4_0vhin")]
+layout_mode = 2
+size_flags_vertical = 1
+
+[node name="Verdict" type="TabBar" parent="tabs"]
 visible = false
+layout_mode = 2
 
-[node name="Item" parent="tabs" instance=ExtResource( 8 )]
+[node name="editorTab" parent="tabs/Verdict" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 2
+parametersScene = ExtResource("9_p1i6a")
+
+[node name="Weapon" type="TabBar" parent="tabs"]
 visible = false
+layout_mode = 2
 
-[node name="Location" parent="tabs" instance=ExtResource( 2 )]
-visible = false
-offset_left = 4.0
-offset_top = 40.0
-offset_right = -4.0
-offset_bottom = -4.0
-
-[node name="Message" type="TabBar" parent="tabs"]
-visible = false
-offset_left = 814.0
-offset_top = 47.0
-offset_right = 924.0
-offset_bottom = 709.0
-size_flags_horizontal = 3
-
-[node name="background" type="Panel" parent="tabs/Message"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Move" parent="tabs" instance=ExtResource( 6 )]
-visible = false
-
-[node name="Verdict" parent="tabs" instance=ExtResource( 7 )]
-visible = false
-
-[node name="Weapon" parent="tabs" instance=ExtResource( 5 )]
-visible = false
-
-[connection signal="tab_changed" from="tabs" to="tabs/Character" method="_on_tabs_tab_changed"]
-[connection signal="tab_changed" from="tabs" to="tabs/Location" method="_on_tabs_tab_changed"]
+[node name="editorTab" parent="tabs/Weapon" instance=ExtResource("4")]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+dtoType = 5
+parametersScene = ExtResource("4_ler5g")

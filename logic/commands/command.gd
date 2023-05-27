@@ -1,13 +1,14 @@
 class_name Command
+extends Node
 
-var executorCharacter
+var executorCharacter : Character
 var totalTicks : int : set = setTotalTicks
 var remainingTicks : int
 var toBeExecuted : bool = false
 var canceled : bool = false
 
 
-func _init(executorCharacter, ticks : int):
+func _init(executorCharacter : Character, ticks : int):
 	self.executorCharacter = executorCharacter
 	self.totalTicks = ticks
 

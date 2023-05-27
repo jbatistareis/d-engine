@@ -1,33 +1,30 @@
 class_name ExecuteMoveCommand
 extends Command
 
-var targets : Array = []
+var targets : Array[Character] = []
 var move : Move
 
-var atkOffset : float
-var cdOffset : float
+var atkOffset : float = 1
+var cdOffset : float = 1
 
 
-func _init(executorCharacter,targets : Array,move : Move):
+func _init(executorCharacter : Character, targets : Array[Character], move : Move):
 	super(executorCharacter, move.cdPre)
 	
 	self.targets = targets
 	self.move = move
 	
-	var atkP = Util.countIndividualModType(Enums.MoveModifierProperty.ATK_P, executorCharacter.moveModifiers)
-	var atkM = Util.countIndividualModType(Enums.MoveModifierProperty.ATK_M, executorCharacter.moveModifiers)
+	if executorCharacter.atkMod > 0:
+		self.atkOffset = (1 + move.modifierScale * executorCharacter.atkMod)
+	elif executorCharacter.atkMod < 0:
+		self.atkOffset = (1 - move.modifierScale * abs(executorCharacter.atkMod))
 	
-	var cdP = Util.countIndividualModType(Enums.MoveModifierProperty.CD_P, executorCharacter.moveModifiers)
-	var cdM = Util.countIndividualModType(Enums.MoveModifierProperty.CD_M, executorCharacter.moveModifiers)
+	if executorCharacter.cdMod > 0:
+		self.cdOffset = (1 - move.modifierScale * executorCharacter.cdMod)
+	elif executorCharacter.atkMod < 0:
+		self.cdOffset = (1 + move.modifierScale * abs(executorCharacter.cdMod))
 	
-	self.atkOffset = max(0, (1 + (move.modifierScale * atkP)) * (1 - (move.modifierScale * atkM)))
-	self.cdOffset = max(0, (1 - (move.modifierScale * cdP)) * (1 + (move.modifierScale * cdM)))
-	
-	self.totalTicks = max(GameParameters.MIN_CD, floor(move.cdPre * cdOffset))
-
-
-func calculateModOffset(moveModifierProperty : int) -> float:
-	return move.modifierScale * Util.countIndividualModType(moveModifierProperty, executorCharacter.moveModifiers)
+	self.totalTicks = max(GameParameters.MIN_CD, floor(move.cdPre * self.cdOffset))
 
 
 func published() -> void:
@@ -40,19 +37,26 @@ func execute() -> void:
 		return
 	
 	ScriptTool.getReference(move.excuteExpression).execute(executorCharacter)
-	
-	# TODO enemy/player animations
 	Signals.startedBattleAnimation.emit(executorCharacter, move.attackAnimation)
+	
+	# TODO player animations, change this after player animations are implemented
 	if executorCharacter.type != Enums.CharacterType.PC:
 		while await Signals.finishedBattleAnimation != executorCharacter:
 			if !confirmExecution():
 				return
-			pass
+			continue
+		
+	continueExecution(executorCharacter)
+
+
+func continueExecution(character : Character) -> void:
+	if character != executorCharacter:
+		return
 	
 	var reference = ScriptTool.getReference(move.valueExpression + '\n' + move.outcomeExpression)
 	var moveResult = MoveResult.new(
-		reference.getValue(executorCharacter),
-		reference.getOutcome(executorCharacter))
+		reference.getValue(character),
+		reference.getOutcome(character))
 	
 	for target in targets:
 		var value = floor(moveResult.value * atkOffset)
@@ -68,13 +72,33 @@ func execute() -> void:
 			_: # Enums.DiceOutcome.WORST
 				target.takeHit(0) # TODO miss
 		
-		target.applyMoveModifiers(move.targetModifiers, true)
+		target.atkMod += move.targetAtkModifier
+		target.defMod += move.targetDefModifier
+		target.cdMod += move.targetCdModifier
 	
-	executorCharacter.applyMoveModifiers(move.executorModifiers)
+	if character.atkMod <= 0:
+		character.atkMod += move.executorAtkModifier if (move.executorAtkModifier != 0) else 1
+	elif character.atkMod >= 0:
+		character.atkMod += move.executorAtkModifier if (move.executorAtkModifier != 0) else -1
+	else:
+		character.atkMod += move.executorAtkModifier
+	
+	if character.defMod <= 0:
+		character.defMod += move.executorDefModifier if (move.executorDefModifier != 0) else 1
+	elif character.defMod >= 0:
+		character.defMod += move.executorDefModifier if (move.executorDefModifier != 0) else -1
+	else:
+		character.defMod += move.executorDefModifier
+	
+	if character.cdMod <= 0:
+		character.cdMod += move.executorCdModifier if (move.executorCdModifier != 0) else 1
+	elif character.cdMod >= 0:
+		character.cdMod += move.executorCdModifier if (move.executorCdModifier != 0) else -1
+	else:
+		character.cdMod += move.executorCdModifier
 	
 	var cd = max(GameParameters.MIN_CD, floor(move.cdPos * cdOffset))
-	if executorCharacter.verdictActive:
-		Signals.commandPublished.emit(VerdictCommand.new(executorCharacter, cd))
-	elif executorCharacter.type == Enums.CharacterType.PC:
-		Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(executorCharacter, cd))
-
+	if character.verdictActive:
+		Signals.commandPublished.emit(VerdictCommand.new(character, cd))
+	elif character.type == Enums.CharacterType.PC:
+		Signals.commandPublished.emit(AskPlayerBattleInputCommand.new(character, cd))

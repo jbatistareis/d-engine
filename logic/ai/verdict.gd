@@ -24,7 +24,7 @@ func fromDTO(verdictDto : VerdictDTO) -> Verdict:
 	self.actions.clear()
 	for action in verdictDto.actions:
 		self.actions.append({
-			'self': action.own,
+			'own': action.own,
 			'target': action.target,
 			'move': Move.new().fromShortName(action.moveShortName)
 		})
@@ -39,7 +39,7 @@ func toDTO() -> VerdictDTO:
 	
 	for action in self.actions:
 		verdictDto.actions.append({
-			'self': action.own,
+			'own': action.own,
 			'target': action.target,
 			'moveShortName': action.move.shortName
 		})
@@ -47,7 +47,7 @@ func toDTO() -> VerdictDTO:
 	return verdictDto
 
 
-func decision(auditor) -> void:
+func decision(auditor : Character) -> void:
 	for action in actions:
 		var targetType = Enums.MoveTargetType.keys()[action.move.targetType]
 		var suspects = []
@@ -96,7 +96,7 @@ func decision(auditor) -> void:
 	)
 
 
-func analyze(script : String, auditor, suspects : Array) -> Array:
+func analyze(script : String, auditor : Character, suspects : Array[Character]) -> Array[Character]:
 	return ScriptTool.getReference(script).execute(auditor, suspects)
 
 

@@ -2,7 +2,7 @@ class_name VerdictCommand
 extends Command
 
 
-func _init(auditor, ticks : int):
+func _init(auditor : Character, ticks : int):
 	super(auditor, ticks)
 
 

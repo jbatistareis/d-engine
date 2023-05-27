@@ -1,7 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://de3lhe1asq3yc"]
+[gd_scene load_steps=7 format=3 uid="uid://de3lhe1asq3yc"]
 
-[ext_resource type="Theme" path="res://assets/theme/default/default.theme" id="4"]
+[ext_resource type="StyleBox" path="res://assets/theme/default/styleBoxFlat_orange.tres" id="3_h83at"]
+[ext_resource type="StyleBox" path="res://assets/theme/default/styleBoxFlat_grey.tres" id="3_j2lvm"]
+[ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="4"]
+[ext_resource type="StyleBox" path="res://assets/theme/default/styleBoxFlat_limegreen.tres" id="4_bv3ch"]
 [ext_resource type="Script" path="res://ui/gui/battle/healthBars.gd" id="5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uv6hp"]
 
 [node name="health" type="MarginContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -12,8 +17,14 @@ script = ExtResource("5")
 
 [node name="hp" type="ProgressBar" parent="."]
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("4")
+theme_override_styles/background = ExtResource("3_j2lvm")
+theme_override_styles/fill = ExtResource("4_bv3ch")
 
 [node name="armor" type="ProgressBar" parent="."]
 layout_mode = 2
+size_flags_vertical = 1
 theme = ExtResource("4")
+theme_override_styles/background = SubResource("StyleBoxEmpty_uv6hp")
+theme_override_styles/fill = ExtResource("3_h83at")

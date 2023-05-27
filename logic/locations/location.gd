@@ -55,7 +55,7 @@ func toDTO() -> LocationDTO:
 
 
 # used only by the player
-func enter(player, toRoomId : int, facingDirection : int) -> void:
+func enter(player : Character, toRoomId : int, facingDirection : int) -> void:
 	roomTile.fromDict(findRoom(toRoomId))
 	
 	Signals.emit_signal("playerArrivedLocation", self)
@@ -68,12 +68,12 @@ func enter(player, toRoomId : int, facingDirection : int) -> void:
 
 
 # used only by the player
-func exit(player) -> void:
+func exit(player : Character) -> void:
 	executeScript(exitLogic, player)
 	Signals.emit_signal("playerLeftLocation", self)
 
 
-func move(character, direction : int) -> int:
+func move(character : Character, direction : int) -> int:
 	var canMove = adjacentState[direction]
 	
 	if canMove:
@@ -85,13 +85,13 @@ func move(character, direction : int) -> int:
 	return Enums.Direction.NONE if !canMove else (Enums.Direction.FORWARD if (GameManager.direction == direction) else Enums.Direction.BACKWARD)
 
 
-func checkAdjacentAccess(character) -> void:
+func checkAdjacentAccess(character : Character) -> void:
 	for direction in range(4):
 		var exitPoint = roomTile.getExit(direction)
 		
 		if exitPoint != -1:
 			var nextRoomTile = findRoom(exitPoint)
-			adjacentState[direction] = ScriptTool.getReference(nextRoomTile.canEnterLogic).execute(character, reverseDirection(direction))
+			adjacentState[direction] = ScriptTool.getReference(nextRoomTile.entryLogic).execute(character, reverseDirection(direction))
 		else:
 			adjacentState[direction] = false
 
@@ -101,12 +101,12 @@ func teleport(character : Character, toRoomId : int, facingDirection : int) -> v
 	roomTile.fromDict(findRoom(toRoomId)).enter(character, reverseDirection(facingDirection), false)
 
 
-func executeScript(script : String, character) -> void:
+func executeScript(script : String, character : Character) -> void:
 	ScriptTool.getReference(script).execute(character)
 
 
 func findRoom(id : int) -> Dictionary:
-	return rooms[rooms.bsearch_custom(id, func(a, b): EntityArrayHelper.idFind(a, b))]
+	return rooms[rooms.bsearch_custom(id, func(a, b): return EntityArrayHelper.idFind(a, b))]
 
 
 func changeEncounterRate(value : float) -> void:

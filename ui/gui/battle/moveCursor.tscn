@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://we2oc4vqmr80"]
+
+[ext_resource type="Script" path="res://ui/gui/battle/moveCursor.gd" id="1_s35sv"]
+[ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="2_clap3"]
+
+[node name="moveCursor" type="MarginContainer"]
+modulate = Color(1, 1, 1, 0.15)
+offset_right = 8.0
+offset_bottom = 22.0
+script = ExtResource("1_s35sv")
+
+[node name="panel" type="Panel" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_clap3")
+
+[node name="btnConfirm" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_clap3")
+flat = true
+
+[node name="lblName" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="focus_entered" from="btnConfirm" to="." method="_on_btnConfirm_focus_entered"]
+[connection signal="focus_exited" from="btnConfirm" to="." method="_on_btn_confirm_focus_exited"]
+[connection signal="pressed" from="btnConfirm" to="." method="_on_btnConfirm_pressed"]

@@ -1,6 +1,10 @@
 extends MarginContainer
 
+const _TIME : float = 0.30
+
 var character : Character
+var armorTween : Tween
+var hpTween : Tween
 
 
 func _ready() -> void:
@@ -14,17 +18,18 @@ func _ready() -> void:
 
 func armorBarChange(armor : Armor, _amount : int) -> void:
 	if armor == character.inventory.armor:
-		barChange($armor, armor.currentIntegrity * 100.0 / armor.maxIntegrity)
+		if armorTween:
+			armorTween.kill()
+		
+		armorTween = create_tween()
+		armorTween.tween_property($armor, "value", armor.currentIntegrity * 100.0 / armor.maxIntegrity, _TIME)
 
 
 func hpBarChange(character : Character, _amount : int) -> void:
 	if character == self.character:
-		barChange($hp, character.currentHp * 100.0 / character.maxHp)
-
-
-func barChange(bar : ProgressBar, end : float) -> void:
-	var tween = create_tween()
-	tween.remove_all()
-	tween.tween_property(bar, "value", end, 0.25)
-	tween.play()
+		if hpTween:
+			hpTween.kill()
+		
+		hpTween = create_tween()
+		hpTween.tween_property($hp, "value", character.currentHp * 100.0 / character.maxHp, _TIME)
 

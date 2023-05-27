@@ -32,7 +32,7 @@ static func saveDTO(dto : DTO) -> String:
 		path = GamePaths.SAVE_DATA
 	
 	if path.is_empty():
-		push_error(ErrorMessages.FILE_SAVE_ERR_UNK_TYPE)
+		push_error(ErrorMessages.FILE_SAVE_ERR_UNK_TYPE % dto.shortName)
 		return ''
 	
 	path %= dto.shortName
@@ -76,7 +76,7 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 			path = GamePaths.SAVE_DATA
 		
 		_:
-			push_error(ErrorMessages.FILE_LOAD_ERR_UNK_TYPE)
+			push_error(ErrorMessages.FILE_LOAD_ERR_UNK_TYPE % shortName)
 			return null
 	
 	path %= shortName
@@ -90,6 +90,48 @@ static func loadDTO(shortName : String, entityType : int) -> DTO:
 	var dto = dict_to_inst(file.get_var())
 	
 	return dto
+
+
+# TODO
+static func deleteDTO(dto : DTO) -> String:
+	var path = ''
+	
+	if dto is CharacterDTO:
+		path = GamePaths.CHARACTER_DATA
+	
+	elif dto is VerdictDTO:
+		path = GamePaths.VERDICT_DATA
+	
+	elif dto is InventoryDTO:
+		path = GamePaths.INVENTORY_DATA
+	
+	elif dto is ItemDTO:
+		path = GamePaths.ITEM_DATA
+	
+	elif dto is WeaponDTO:
+		path = GamePaths.WEAPON_DATA
+	
+	elif dto is MoveDTO:
+		path = GamePaths.MOVE_DATA
+	
+	elif dto is ArmorDTO:
+		path = GamePaths.ARMOR_DATA
+	
+	elif dto is LocationDTO:
+		path = GamePaths.LOCATION_DATA
+	
+	elif dto is SaveDTO:
+		path = GamePaths.SAVE_DATA
+	
+	if path.is_empty():
+		push_error(ErrorMessages.FILE_DELETE_ERR_UNK_TYPE % dto.shortName)
+		return ''
+	
+	path %= dto.shortName
+	
+	push_error("FILE DELETION NOT IMPLEMENTED")
+	
+	return path
 
 
 static func listEntities(entityType : int, subpath : String = '') -> Array:

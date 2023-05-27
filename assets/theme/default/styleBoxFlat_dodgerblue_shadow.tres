@@ -1,7 +1,17 @@
-[gd_resource type="StyleBoxFlat" format=2]
+[gd_resource type="StyleBoxFlat" format=3 uid="uid://dwlphovplisg8"]
 
 [resource]
-bg_color = Color( 0.117647, 0.560784, 1, 1 )
+content_margin_left = 1.0
+content_margin_top = 1.0
+content_margin_right = 1.0
+content_margin_bottom = 1.0
+bg_color = Color(0.117647, 0.560784, 1, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.25098)
+border_blend = true
 corner_detail = 1
 shadow_size = 1
-shadow_offset = Vector2( 4, 4 )
+shadow_offset = Vector2(4, 4)

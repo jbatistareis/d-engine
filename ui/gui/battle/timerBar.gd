@@ -1,8 +1,7 @@
 extends Control
 
 var character : Character
-var paused : bool = false
-var foward : bool = true
+var charDead : bool = false
 
 
 func _ready() -> void:
@@ -13,36 +12,36 @@ func _ready() -> void:
 
 
 func commandQueued(command : Command) -> void:
+	if charDead:
+		return
+	
 	if command.executorCharacter == character:
-		while paused:
-			await Signals.commandsResumed
-		
-		$player.speed_scale = 1000 * GameParameters.GCD * command.totalTicks / 1000.0
+		$player.speed_scale = 1.0 / (GameParameters.GCD * command.totalTicks)
 		
 		if (command is ExecuteMoveCommand) || (command is UseItemCommand): # pre
 			$player.play("run")
-			foward = true
 		else: # pos
 			$player.play_backwards("run")
-			foward = false
 
 
 func pause() -> void:
+	if charDead:
+		return
+	
 	$player.pause()
-	paused = true
 
 
 func resume() -> void:
-	if foward:
-		$player.play()
-	else:
-		$player.play_backwards()
+	if charDead:
+		return
 	
-	paused = false
+	$player.play("run")
 
 
 func dead(character : Character) -> void:
 	if character == self.character:
-		$player.speed_scale = 1
+		charDead = true
+		
+		$player.speed_scale = 1.0
 		$player.play_backwards("run")
 

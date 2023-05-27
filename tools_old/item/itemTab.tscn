@@ -1,0 +1,221 @@
+[gd_scene load_steps=3 format=3 uid="uid://tldqddur53yj"]
+
+[ext_resource type="Script" path="res://tools_old/item/itemTab.gd" id="1"]
+[ext_resource type="Script" path="res://tools_old/item/saveConfirm.gd" id="2"]
+
+[node name="Item" type="TabBar"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+script = ExtResource("1")
+
+[node name="background" type="Panel" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="mainSeparator" type="HBoxContainer" parent="background"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+pivot_offset = Vector2(-665.796, 0)
+
+[node name="fileList" type="ItemList" parent="background/mainSeparator"]
+custom_minimum_size = Vector2(130, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="dataPanel" type="PanelContainer" parent="background/mainSeparator"]
+custom_minimum_size = Vector2(620, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="dataContainer" type="VBoxContainer" parent="background/mainSeparator/dataPanel"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="identification" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+layout_mode = 2
+
+[node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+layout_mode = 2
+text = "↳ Identification "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/identification/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification"]
+layout_mode = 2
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields"]
+custom_minimum_size = Vector2(594, 0)
+layout_mode = 2
+columns = 2
+
+[node name="lblName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+text = "Name"
+
+[node name="txtName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+clear_button_enabled = true
+
+[node name="lblShortName" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+text = "Short name "
+
+[node name="txtShortName" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+size_flags_horizontal = 3
+clear_button_enabled = true
+
+[node name="lblDescription" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+text = "Description"
+
+[node name="txtDescription" type="LineEdit" parent="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid"]
+layout_mode = 2
+max_length = 128
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="parameters" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/parameters"]
+layout_mode = 2
+
+[node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/parameters/title"]
+layout_mode = 2
+text = "↳ Parameters "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/parameters/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="fields" type="CenterContainer" parent="background/mainSeparator/dataPanel/dataContainer/parameters"]
+layout_mode = 2
+
+[node name="grid" type="GridContainer" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields"]
+custom_minimum_size = Vector2(594, 0)
+layout_mode = 2
+columns = 4
+
+[node name="lblPrice" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "Price"
+
+[node name="spnPrice" type="SpinBox" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="txtType" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+custom_minimum_size = Vector2(110, 0)
+layout_mode = 2
+text = "   Item type"
+
+[node name="optType" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+layout_mode = 2
+
+[node name="txtTarget" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+text = "   Target type "
+
+[node name="optTarget" type="OptionButton" parent="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid"]
+custom_minimum_size = Vector2(170, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="logic" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="title" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/logic"]
+layout_mode = 2
+
+[node name="lblIdentification" type="Label" parent="background/mainSeparator/dataPanel/dataContainer/logic/title"]
+layout_mode = 2
+text = "↳ Action expression "
+
+[node name="HSeparator2" type="HSeparator" parent="background/mainSeparator/dataPanel/dataContainer/logic/title"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="txtExpression" type="TextEdit" parent="background/mainSeparator/dataPanel/dataContainer/logic"]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+highlight_current_line = true
+draw_tabs = true
+
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="buttons" type="VBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="background/mainSeparator/dataPanel/dataContainer/buttons"]
+layout_mode = 2
+alignment = 1
+
+[node name="Control" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="btnSave" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Save|Create"
+
+[node name="Control2" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="btnReload" type="Button" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Reload entities"
+
+[node name="Control3" type="Control" parent="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="saveConfirm" type="ConfirmationDialog" parent="."]
+script = ExtResource("2")
+
+[connection signal="item_selected" from="background/mainSeparator/fileList" to="." method="_on_fileList_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtName" to="." method="_on_txtName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtShortName" to="." method="_on_txtShortName_text_changed"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/identification/fields/grid/txtDescription" to="." method="_on_txtDescription_text_changed"]
+[connection signal="value_changed" from="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid/spnPrice" to="." method="_on_spnPrice_value_changed"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid/optType" to="." method="_on_optType_item_selected"]
+[connection signal="item_selected" from="background/mainSeparator/dataPanel/dataContainer/parameters/fields/grid/optTarget" to="." method="_on_optTarget_item_selected"]
+[connection signal="text_changed" from="background/mainSeparator/dataPanel/dataContainer/logic/txtExpression" to="." method="_on_txtExpression_text_changed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnSave" to="." method="_on_btnSave_pressed"]
+[connection signal="pressed" from="background/mainSeparator/dataPanel/dataContainer/buttons/HBoxContainer/btnReload" to="." method="_on_btnReload_pressed"]
+[connection signal="confirmed" from="saveConfirm" to="." method="_on_saveConfirm_confirmed"]

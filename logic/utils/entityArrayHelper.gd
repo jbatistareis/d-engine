@@ -2,15 +2,11 @@ class_name EntityArrayHelper
 
 
 static func idSort(a, b) -> bool:
-	if (a.id < b.id):
-		return true
-	return false
+	return a.id < b.id
 
 
 static func idFind(entity, id : int) -> bool:
-	if entity.id < id:
-		return true
-	return false
+	return entity.id < id
 
 
 static func shortNameSort(a, b) -> bool:
@@ -18,5 +14,5 @@ static func shortNameSort(a, b) -> bool:
 
 
 static func shortNameFind(entity, shortName : String) -> bool:
-	return entity.shortName.nocasecmp_to(shortName) == -1
+	return entity.shortName < shortName
 

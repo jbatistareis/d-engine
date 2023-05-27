@@ -3,7 +3,7 @@ extends Node
 @onready var currentState : State = getState(Enums.States.EXPLORING)
 
 var player : Character
-var party : Array = [] : get = getParty
+var party : Array[Character] = [] : get = getParty
 
 # control vars
 var testing : bool = false
@@ -17,7 +17,7 @@ func _ready() -> void :
 
 
 # TODO proper party
-func getParty() -> Array:
+func getParty() -> Array[Character]:
 	return [player]
 
 

@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpo5g0dmhq485"]
+
+[ext_resource type="Script" path="res://tools/tabs/character/factPreview.gd" id="1_qrwt8"]
+
+[node name="factPreview" type="HBoxContainer"]
+offset_right = 430.0
+offset_bottom = 54.0
+scale = Vector2(1, 0.991448)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 5
+script = ExtResource("1_qrwt8")
+
+[node name="lblPosition" type="Label" parent="."]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "XXX"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="grid" type="GridContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+columns = 4
+
+[node name="lblOwn" type="Label" parent="grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Own: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblOwnValue" type="Label" parent="grid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="lblTarget" type="Label" parent="grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "  Target: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblTargetValue" type="Label" parent="grid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="lblMove" type="Label" parent="grid"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "  Move: "
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="lblMoveValue" type="LinkButton" parent="grid"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[connection signal="pressed" from="grid/lblMoveValue" to="." method="_on_lbl_move_value_pressed"]

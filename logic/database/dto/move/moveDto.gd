@@ -21,10 +21,13 @@ var targetType : int = Enums.MoveTargetType.FOE
 var prepareAnimation : String = 'prepare1'
 var attackAnimation : String = 'attack1'
 
-# use Enums.MoveModifierProperty
-var executorModifiers : Array = []
-# use Enums.MoveModifierProperty
-var targetModifiers : Array = []
+var executorAtkModifier : int = 0
+var executorDefModifier : int = 0
+var executorCdModifier : int = 0
+
+var targetAtkModifier : int = 0
+var targetDefModifier : int = 0
+var targetCdModifier : int = 0
 
 var modifierScale : float = 0.1
 

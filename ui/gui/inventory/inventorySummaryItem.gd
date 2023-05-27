@@ -6,7 +6,7 @@ var amount : int
 var name : String : get = getName
 
 
-func _init(item : Entity,amount : int):
+func _init(item : Entity, amount : int):
 	self.item = item
 	self.amount = amount
 

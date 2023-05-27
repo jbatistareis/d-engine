@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://0hy4spnwr4hg"]
+
+[ext_resource type="Script" path="res://tools/fields/optField.gd" id="1_lqmdt"]
+
+[node name="optField" type="OptionButton"]
+disabled = true
+alignment = 1
+script = ExtResource("1_lqmdt")

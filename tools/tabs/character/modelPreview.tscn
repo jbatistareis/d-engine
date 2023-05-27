@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwa4o6julyvl6"]
+
+[ext_resource type="Script" path="res://tools/tabs/character/modelPreview.gd" id="1_cxehc"]
+
+[node name="modelPreview" type="Node3D"]
+script = ExtResource("1_cxehc")
+
+[node name="modelArea" type="Node3D" parent="."]
+
+[node name="pivot" type="Node3D" parent="."]
+
+[node name="camera" type="Camera3D" parent="pivot"]
+transform = Transform3D(1, 0, 0, 0, 0.999314, -0.0370275, 0, 0.0370275, 0.999314, 0, 0.925077, 2.47607)
+keep_aspect = 0
+fov = 84.0
+
+[node name="light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 2.41038, 1.51472)
+light_energy = 2.0
+omni_range = 50.0
