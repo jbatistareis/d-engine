@@ -109,7 +109,7 @@ func teleport(character : Character, toRoomId : int, facingDirection : int) -> v
 
 
 func interaction(direction : int) -> void:
-	pass
+	ScriptTool.getReference(roomTile.interationLogic).execute(direction)
 
 
 func executeScript(script : String, character : Character) -> void:
