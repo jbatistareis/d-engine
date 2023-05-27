@@ -17,7 +17,8 @@ func permanentToast(message : String) -> void:
 
 
 func hideToast() -> void:
-	$animation.play_backwards("show")
+	if $container.position.y >= 0:
+		$animation.play_backwards("show")
 
 
 func normalToast(message : String) -> void:
