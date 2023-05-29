@@ -10,6 +10,16 @@ var testing : bool = false
 var cameraMoving : bool = false
 var direction : int : set = setDirection
 
+# format:
+#	{
+#		'LOCATION': {
+#			'VARIABLE': <String, int, float, bool>
+#		}
+#	}
+#
+# cells that reacts to variables (eg.: doors) must have code that checks the variable state on its script
+var variables : Dictionary = {}
+
 
 func _ready() -> void :
 	Signals.playerLoaded.connect(loadData)
@@ -19,6 +29,21 @@ func _ready() -> void :
 # TODO proper party
 func getParty() -> Array[Character]:
 	return [player]
+
+
+func storeVariable(location : String, variableName : String, value) -> void:
+	if !variables.has(location):
+		variables[location] = {}
+	
+	variables[location][variableName] = value
+
+
+func accessVariable(location : String, variableName : String):
+	if !variables.has(location) || !variables[location].has(variableName):
+		push_error(ErrorMessages.VARIABLE_NOT_FOUND % [variableName, location])
+		return null
+	
+	return variables[location][variableName]
 
 
 # TODO define a save format, load data, transitions, etc...

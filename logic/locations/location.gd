@@ -17,9 +17,6 @@ var exitLogic : String
 
 var encounterRate : float
 
-# TODO persistence
-var variables : Dictionary = {}
-
 
 func _init() -> void:
 	Signals.playerInteracted.connect(interaction)
