@@ -13,6 +13,7 @@ var exits : Array
 var entryLogic : String
 var entranceLogic : String
 var exitLogic : String
+var interationLogic : String
 
 var foeShortNameGroups : Array
 
@@ -33,6 +34,7 @@ func fromDict(roomTileDict : Dictionary) -> RoomTile:
 	self.entryLogic = roomTileDict.entryLogic
 	self.entranceLogic = roomTileDict.entranceLogic
 	self.exitLogic = roomTileDict.exitLogic
+	self.interationLogic = roomTileDict.interationLogic
 	
 	self.foeShortNameGroups = roomTileDict.foeShortNameGroups
 	
@@ -53,6 +55,7 @@ func toDict() -> Dictionary:
 		'entryLogic': self.entryLogic,
 		'entranceLogic': self.entranceLogic,
 		'exitLogic': self.exitLogic,
+		'interationLogic': self.interationLogic,
 		'foeShortNameGroups': self.foeShortNameGroups, # 2D array representing possible enemy groups
 		'visited': self.visited,
 	}

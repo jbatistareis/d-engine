@@ -129,7 +129,7 @@ static func deleteDTO(dto : DTO) -> String:
 	
 	path %= dto.shortName
 	
-	push_error("FILE DELETION NOT IMPLEMENTED")
+	push_error(ErrorMessages.FILE_DELETE_NO_IMPL)
 	
 	return path
 

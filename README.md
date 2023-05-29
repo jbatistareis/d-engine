@@ -45,12 +45,12 @@ It is going to work some day.
 - [x] Armors dev tool
 - [x] Inventory dev tool
 - [x] AI dev tool
+- [x] Map interation system
 
 
 ## TODO  
 - [ ] Dialog system
 - [ ] Quest system
-- [ ] Map interation system
 - [ ] Event system
 - [ ] Save system
 - [ ] Dialogs dev tool

@@ -17,11 +17,19 @@ signal playerRoomChangeDenied() # when a player cant change rooms
 
 # internal use
 signal playerSpawned(location, x, y, direction) # fired to set up 3d map and camera
+signal playerInteracted(direction) # fired when players presses the action button while idle
 signal cameraMovedForward()
 signal cameraMovedBackward()
 signal cameraRotatedLeft()
 signal cameraRotatedRight()
 signal cameraSnapped(x, y, facingDirection)
+
+
+# animation related
+# fired to start/wait for an animation on the scenery
+# the listener has to be hardcoded on the scene that will run the animation
+signal startedMiscAnimation(animationName)
+signal endedMiscAnimation(animationName) 
 
 
 # character related, listen for announcements
