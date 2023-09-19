@@ -40,6 +40,7 @@ func setupFreeFlight(location : Location, x : int, y : int, direction : int) -> 
 
 func freeCamera() -> void:
 	GameManager.cameraMoving = false
+	transform.orthonormalized()
 
 
 func goTo(x : int, y : int, direction : int) -> void:

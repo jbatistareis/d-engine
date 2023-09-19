@@ -20,6 +20,7 @@ func _ready() -> void:
 	Signals.battleEnded.connect(finish)
 	Signals.battleWon.connect(showBattleResult)
 	Signals.battleLost.connect(lose)
+	Signals.battleCursorShow.connect(setEnemyCursors)
 
 
 func setup(playerData : Array, enemyData : Array) -> void:
@@ -60,19 +61,19 @@ func setup(playerData : Array, enemyData : Array) -> void:
 	
 	await get_tree().process_frame
 	
-	for j in range(3):
-		setEnemyCursor(j)
+	setEnemyCursors()
 	
 	Signals.battleScreenReady.emit()
 
 
-func setEnemyCursor(index : int) -> void:
-	var enemy = $viewport/arena3d/enemies.get_child(index)
-	
-	if enemy.get_child_count() == 1:
-		Signals.battleSetCursorPosition.emit(
-			enemy.get_child(0).character,
-			$viewport/arena3d/pivot/Camera3D.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
+func setEnemyCursors(character = null, move = null) -> void:
+	for index in range(3):
+		var enemy = $viewport/arena3d/enemies.get_child(index)
+		
+		if enemy.get_child_count() == 1:
+			Signals.battleSetCursorPosition.emit(
+				enemy.get_child(0).character,
+				$viewport/arena3d/pivot/Camera3D.unproject_position(enemy.get_child(0).global_transform.origin) - (enemyFrameSize / 9.0))
 
 
 func finish() -> void:

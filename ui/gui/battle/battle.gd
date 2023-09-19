@@ -34,8 +34,6 @@ func hideBattle() -> void:
 
 
 func showCharacterMoves(character : Character) -> void:
-	$moves.visible = true
-	
 	for child in $moves/cards/grid.get_children():
 		child.queue_free()
 	
@@ -51,9 +49,10 @@ func showCharacterMoves(character : Character) -> void:
 	inventoryCard.character = character
 	inventoryCard.hovered.connect(showMoveDetails)
 	$moves/cards/grid.add_child(inventoryCard)
+	$moves/cards/grid.get_child(0).focus()
 	
 	await get_tree().process_frame
-	$moves/cards/grid.get_child(0).focus()
+	$moves.visible = true
 
 
 func hideCharacterMoves(character : Character, move : Move) -> void:
