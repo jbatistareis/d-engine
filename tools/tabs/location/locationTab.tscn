@@ -161,8 +161,9 @@ size_flags_vertical = 3
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview"]
+own_world_3d = true
 handle_input_locally = false
-size = Vector2i(456, 338)
+size = Vector2i(2, 2)
 render_target_update_mode = 0
 
 [node name="tileView" parent="parameters/tabs/Room/tabs/Tile/container/tilePreview/SubViewport" instance=ExtResource("6_y4nfk")]
@@ -371,8 +372,8 @@ layout_mode = 2
 text = "Preview"
 
 [node name="fileDialog" type="FileDialog" parent="."]
-initial_position = 2
 title = "Open a File"
+initial_position = 2
 size = Vector2i(640, 480)
 unresizable = true
 borderless = true
