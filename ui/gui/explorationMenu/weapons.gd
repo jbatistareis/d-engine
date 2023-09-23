@@ -3,10 +3,13 @@ extends PopupPanel
 const _NAME_MASK : String = "%-20s [x%02d]"
 const _EQUIPED_MASK : String = "[E]"
 const _NOT_EQUIPED_MASK : String = ""
-const _WEAPON_STATS_MASK_MAIN : String = "[center][ %s ]%s[/center][table=5][cell][center]STA[/center][/cell][cell][center]DMG[/center][/cell][cell][center]CRT[/center][/cell][cell][center]CLV[/center][/cell][cell][center]CD (base)[/center][/cell][cell][center]%s[/center][/cell][cell][center]%d[/center][/cell][cell][center]%s[/center][/cell][cell][center]%s[/center][/cell][cell][center]%0.2fs/%0.2fs[/center][/cell][/table]"
+const _WEAPON_STATS_MASK_MAIN : String = "[center][ %s ]%s[/center][table=4][cell][left]Stat: [/left][/cell][cell][center]%s[/center][/cell][cell][left]   Damage: [/left][/cell][cell][center][bgcolor=%s][color=%s]%d[/color][/bgcolor][/center][/cell][cell][left]Crt.rt: [/left][/cell][cell][center][bgcolor=%s][color=%s]%s[/color][/bgcolor][/center][/cell][cell][left]   Crt.lv: [/left][/cell][cell][center][bgcolor=%s][color=%s]%s[/color][/bgcolor][/center][/cell][/table][center]Cooldown: [bgcolor=%s][color=%s]%0.2fs[/color][/bgcolor]/[bgcolor=%s][color=%s]%0.2fs[/color][/bgcolor][/center]"
 const _WEAPON_NO_STATS_MASK : String = "[center] - - - - - [/center]"
 const _WEAPON_STATS_MASK_MOVE : String = "\n[center]----------------------------[/center]\n>%s (%s)[table=4][cell][center]CD: [/center][/cell][cell]%0.2fs/%0.2fs[/cell][cell]   SCL:[/cell][cell]%s%%[/cell][/table]\n[table=4][cell][center]SLF:[/center][/cell][cell]%d/%d/%d[/cell][cell]      FOE:[/cell][cell]%d/%d/%d[/cell][/table]"
 const _WEAPON_STATS_MASK_NO_MOVE : String = "\n[center]----------------------------[/center]\n>N/A\n \n "
+
+var currentWpn : Weapon
+var newWpn : Weapon
 
 var character : Character
 var inventorySummary : InventorySummary
@@ -79,10 +82,11 @@ func _on_wpn_list_item_selected(index: int) -> void:
 func updateLabels() -> void:
 	var index = $wpnList.get_selected_items()[0] if ($wpnList.get_selected_items().size() > 0) else ($wpnList.item_count - 1)
 	
-	setWpnData(character.inventory.weapon, true)
-	setWpnData(
-		inventorySummary.summary[index].item,
-		false)
+	currentWpn = character.inventory.weapon
+	newWpn = inventorySummary.summary[index].item
+	
+	setWpnData(currentWpn, true)
+	setWpnData(newWpn, false)
 	
 	$info.position = position + Vector2i(size.x + 10, 0)
 	$info.popup()
@@ -98,10 +102,20 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 			weapon.name.substr(0, 20),
 			_EQUIPED_MASK if current else _NOT_EQUIPED_MASK,
 			Enums.CharacterModifier.keys()[weapon.modifier],
+			comparisonBgColor(newWpn.damage, currentWpn.damage),
+			comparisonTextColor(newWpn.damage, currentWpn.damage, current),
 			weapon.damage,
+			comparisonBgColor(newWpn.modifierRollType, currentWpn.modifierRollType),
+			comparisonTextColor(newWpn.modifierRollType, currentWpn.modifierRollType, current),
 			critRateStr(weapon.modifierRollType),
+			comparisonBgColor(newWpn.modifierDice, currentWpn.modifierDice),
+			comparisonTextColor(newWpn.modifierDice, currentWpn.modifierDice, current),
 			critLevelStr(weapon.modifierDice),
+			comparisonBgColor(newWpn.cdPre, currentWpn.cdPre),
+			comparisonTextColor(newWpn.cdPre, currentWpn.cdPre, current),
 			1000.0 * GameParameters.GCD * weapon.cdPre / 1000.0,
+			comparisonBgColor(newWpn.cdPos, currentWpn.cdPos),
+			comparisonTextColor(newWpn.cdPos, currentWpn.cdPos, current),
 			1000.0 * GameParameters.GCD * weapon.cdPos / 1000.0
 		]
 		
@@ -127,6 +141,25 @@ func setWpnData(weapon : Weapon, current : bool) -> void:
 	
 	lbl.bbcode_enabled = true
 	lbl.text = text
+
+
+func comparisonTextColor(input1, input2, current) -> String:
+	var value1 = input1 if !current else input2
+	var value2 = input2 if !current else input1
+	
+	if value1 == value2:
+		return '#' + GuiTheme.TEXT_COLOR_NORMAL.to_html()
+	elif value1 > value2:
+		return '#' + GuiTheme.TEXT_COLOR_HIGH.to_html()
+	else:
+		return '#' + GuiTheme.TEXT_COLOR_LOW.to_html()
+
+
+func comparisonBgColor(value1, value2) -> String:
+	if value1 != value2:
+		return '#' + GuiTheme.TEXT_BG_ACCENT.to_html()
+	
+	return '#' + GuiTheme.TEXT_BG_NORMAL.to_html()
 
 
 func critRateStr(modifierRollType : int) -> String:

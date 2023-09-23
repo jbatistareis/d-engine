@@ -6,6 +6,13 @@ const BG_COLOR : Color = Color.DODGER_BLUE
 const HOVER_COLOR : Color = Color.DARK_SLATE_GRAY
 const UNSELECTED_COLOR : Color = Color.TRANSPARENT
 
+const TEXT_COLOR_NORMAL : Color = Color.WHITE
+const TEXT_COLOR_HIGH : Color = Color.MEDIUM_SPRING_GREEN
+const TEXT_COLOR_LOW : Color = Color.ORANGE_RED
+
+const TEXT_BG_NORMAL : Color = Color.TRANSPARENT
+const TEXT_BG_ACCENT : Color = Color.STEEL_BLUE
+
 var hoveStyle : StyleBoxFlat = StyleBoxFlat.new()
 
 const COMMAND_PRG_PRE = Color.TOMATO
