@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://da7f8qpmn1vs3"]
+[gd_scene load_steps=7 format=3 uid="uid://da7f8qpmn1vs3"]
 
 [ext_resource type="Theme" uid="uid://bjt62ksx5eyj0" path="res://assets/theme/default/default.theme" id="3"]
+[ext_resource type="LabelSettings" uid="uid://q2nrnsqtnc7l" path="res://assets/theme/default/labelSettings_default_shadow.tres" id="3_gsdq1"]
 [ext_resource type="Script" path="res://ui/gui/battle/timerBar.gd" id="4"]
 
 [sub_resource type="Animation" id="Animation_34vnk"]
@@ -54,3 +55,10 @@ libraries = {
 layout_mode = 2
 size_flags_vertical = 1
 theme = ExtResource("3")
+
+[node name="condition" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+label_settings = ExtResource("3_gsdq1")
+horizontal_alignment = 1
+vertical_alignment = 1

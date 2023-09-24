@@ -1,6 +1,6 @@
 extends Control
 
-const _MOVE_DESC : String = '%s\n[SLF] AT:%2d, DF:%2d, CD:%2d | [TGT] AT:%2d, DF:%2d, CD:%2d'
+const _MOVE_DESC : String = '%s\n[SLF] AT:%2d DF:%2d CD:%2d | [TGT] AT:%2d DF:%2d CD:%2d'
 
 var moveCardPackedScene : PackedScene = preload("res://ui/gui/battle/moveCard.tscn")
 var inventoryCardPackedScene : PackedScene = preload("res://ui/gui/battle/inventoryCard.tscn")
