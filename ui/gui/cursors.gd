@@ -13,6 +13,11 @@ func _ready() -> void:
 
 
 func setCursorPosition(target : Character, pos : Vector2) -> void:
+	for cursor in $foes.get_children():
+		if cursor.target == target:
+			cursor.position = pos
+			return
+	
 	var cursor = cursorPackedScene.instantiate()
 	cursor.target = target
 	$foes.add_child(cursor)

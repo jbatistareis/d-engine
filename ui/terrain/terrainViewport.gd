@@ -17,10 +17,9 @@ func loadMap(location : Location, x : int, y : int, _direction : int) -> void:
 	
 	for room in location.rooms:
 		var block = SceneLoadManager.scenes[room.model].instantiate()
-		block.transform.origin.x = room.x * 2 + 1
-		block.transform.origin.y = 1
-		block.transform.origin.z = room.y * 2 + 1
 		block.rotation.y = _ROTATE_90 * -room.orientation
+		block.transform.origin = Vector3(room.x * 2 + 1, 1, room.y * 2 + 1).snapped(Vector3.ONE)
+		block.transform.orthonormalized()
 		
 		$viewport/blocks.add_child(block)
 

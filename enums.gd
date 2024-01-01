@@ -4,8 +4,8 @@ enum EntityType { CHARACTER, MOVE, VERDICT, INVENTORY, ITEM, WEAPON, ARMOR, LOCA
 enum States { BOOT, TITLE, MAIN_MENU, EXPLORING, EXPLORING_MENU, BATTLE, INVENTORY, EQUIPMENT }
 
 enum DiceType { NONE = 0, D4 = 4, D6 = 6, D8 = 8, D10 = 10, D12 = 12, D20 = 20, D100 = 100 }
-enum DiceOutcome { BEST, WITH_CONSEQUENCE, WORST }
-enum DiceRollType { NONE, BEST, NORMAL, WORST }
+enum DiceOutcome { WORST, WITH_CONSEQUENCE, BEST }
+enum DiceRollType { NONE, WORST, NORMAL, BEST }
 
 # used to set character class stats
 enum CharacterAbility { NONE, CONSTITUTION, STRENGTH, DEXTERITY }
