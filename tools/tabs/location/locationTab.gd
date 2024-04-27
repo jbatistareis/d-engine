@@ -83,11 +83,13 @@ func fillRooms() -> void:
 	for child in $map/grid.get_children():
 		child.queue_free()
 	
-	for i in range(pow($map/grid.columns, 2)):
+	var columns = $map/grid.columns
+	
+	for i in range(pow(columns, 2)):
 		var cell = _cellScene.instantiate()
 		cell.room.id = i
-		cell.room.x = (i % $map/grid.columns)
-		cell.room.y = (i / $map/grid.columns)
+		cell.room.x = (i % columns)
+		cell.room.y = (i / columns)
 		
 		for room in location.rooms:
 			if room.id == i:
