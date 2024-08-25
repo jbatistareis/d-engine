@@ -36,4 +36,3 @@ func handleInput() -> void:
 			elif Input.is_action_pressed("ui_right"):
 				GameManager.direction += 1
 				Signals.cameraRotatedRight.emit()
-

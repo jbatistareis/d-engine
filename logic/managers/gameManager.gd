@@ -109,4 +109,3 @@ func getState(id : int) -> State:
 func _process(_delta) -> void:
 	currentState.handleInput()
 	currentState = currentState.next
-

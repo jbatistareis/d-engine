@@ -41,4 +41,3 @@ func toDTO() -> ItemDTO:
 	itemDto.actionExpression = self.actionExpression
 	
 	return itemDto
-

@@ -96,4 +96,3 @@ func setOrientation(value : int) -> void:
 
 func getExit(direction : int) -> int:
 	return exits[direction]
-

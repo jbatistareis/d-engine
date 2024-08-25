@@ -228,4 +228,3 @@ func gainExperience(amount : int) -> void:
 # TODO a better curve
 func getExperienceToNextLevel() -> int:
 	return int(round(7 * pow(currentLevel, 1.3)))
-

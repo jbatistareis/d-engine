@@ -147,7 +147,6 @@ theme = ExtResource("2")
 hide_on_item_selection = false
 item_count = 4
 item_0/text = "Map"
-item_0/id = 0
 item_1/text = "Inventory"
 item_1/id = 1
 item_2/text = "Weapons"
@@ -169,8 +168,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -187,8 +186,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -204,7 +203,6 @@ theme = ExtResource("2")
 hide_on_item_selection = false
 item_count = 3
 item_0/text = "Use"
-item_0/id = 0
 item_1/text = "Drop"
 item_1/id = 1
 item_2/text = "< Back"
@@ -240,8 +238,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 281.0
-offset_bottom = 281.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -254,7 +252,6 @@ icon_mode = 0
 size = Vector2i(84, 80)
 item_count = 3
 item_0/text = "Equip"
-item_0/id = 0
 item_1/text = "Drop"
 item_1/id = 1
 item_2/text = "< Back"
@@ -269,8 +266,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 1.0
 offset_top = 1.0
-offset_right = 563.0
-offset_bottom = 639.0
+offset_right = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -414,14 +411,12 @@ size = Vector2i(134, 34)
 theme = ExtResource("2")
 item_count = 1
 item_0/text = "All enemies"
-item_0/id = 0
 
 [node name="allParty" type="PopupMenu" parent="battle/cursors"]
 size = Vector2i(134, 34)
 theme = ExtResource("2")
 item_count = 1
 item_0/text = "Entire party"
-item_0/id = 0
 
 [node name="party" type="PopupMenu" parent="battle/cursors"]
 size = Vector2i(134, 34)
@@ -436,10 +431,10 @@ grow_horizontal = 2
 script = ExtResource("11")
 
 [node name="animation" type="AnimationPlayer" parent="toast"]
-autoplay = "RESET"
 libraries = {
 "": SubResource("AnimationLibrary_qil61")
 }
+autoplay = "RESET"
 
 [node name="container" type="MarginContainer" parent="toast"]
 modulate = Color(1, 1, 1, 0)
@@ -447,9 +442,9 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 428.0
+offset_left = -212.0
 offset_top = -40.0
-offset_right = 938.0
+offset_right = 298.0
 offset_bottom = -10.0
 grow_horizontal = 2
 

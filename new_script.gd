@@ -113,4 +113,3 @@ func printTraveling(direction : int) -> void:
 			directionStr = ''
 	
 	print('moving to the ' + directionStr)
-

@@ -9,14 +9,13 @@ func setShortName(value : String) -> void:
 	shortName = value.substr(0, 10).to_upper()
 
 
-func fromShortName(_shortName : String):
+func fromShortName(_shortName : String) -> Entity:
 	return null
 
 
-func fromDTO(_dto):
+func fromDTO(_dto) -> Entity:
 	return null
 
 
-func toDTO():
+func toDTO() -> DTO:
 	return null
-

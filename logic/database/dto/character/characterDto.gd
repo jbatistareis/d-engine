@@ -28,4 +28,3 @@ var verdictActive : bool = true
 
 var currentLocation : String = 'BSELOC'
 var currentRoom : int = 0
-
